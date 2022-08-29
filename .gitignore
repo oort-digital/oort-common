@@ -2,3 +2,4 @@
 
 # dependencies
 /node_modules
+/packages/my-lib/node_modules
