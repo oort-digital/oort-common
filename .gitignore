@@ -4,5 +4,6 @@
 /node_modules
 /packages/my-lib/node_modules
 /packages/my-lib/dist
+/packages/my-lib/storybook-static
 /sites/my-site/node_modules
 /sites/my-site/dist
