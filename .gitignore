@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/packages/my-lib/node_modules
-/packages/my-lib/storybook-static
+/packages/common/node_modules
+/packages/common/storybook-static
 /sites/my-site/node_modules
 /sites/my-site/dist

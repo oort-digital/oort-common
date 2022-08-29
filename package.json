@@ -1,5 +1,5 @@
 {
-  "name": "lib-example",
+  "name": "oort",
   "version": "0.0.1",
   "private": true,
   "workspaces": {
