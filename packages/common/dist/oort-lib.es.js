@@ -15,4 +15,17 @@ const MyButton = styled.button`
         background-color: #0a558c;
     }
 `;
-export { MyButton };
+var ChainEnum = /* @__PURE__ */ ((ChainEnum2) => {
+  ChainEnum2[ChainEnum2["EthereumMainnet"] = 1] = "EthereumMainnet";
+  ChainEnum2[ChainEnum2["EthereumRopsten"] = 3] = "EthereumRopsten";
+  ChainEnum2[ChainEnum2["EthereumRinkeby"] = 4] = "EthereumRinkeby";
+  ChainEnum2[ChainEnum2["EthereumGoerli"] = 5] = "EthereumGoerli";
+  ChainEnum2[ChainEnum2["EthereumKovan"] = 42] = "EthereumKovan";
+  ChainEnum2[ChainEnum2["MaticMumbai"] = 80001] = "MaticMumbai";
+  ChainEnum2[ChainEnum2["MaticMainnet"] = 137] = "MaticMainnet";
+  ChainEnum2[ChainEnum2["BSCTestnet"] = 97] = "BSCTestnet";
+  ChainEnum2[ChainEnum2["BSCMainnet"] = 56] = "BSCMainnet";
+  ChainEnum2[ChainEnum2["SolanaTestnet"] = 245022940] = "SolanaTestnet";
+  return ChainEnum2;
+})(ChainEnum || {});
+export { ChainEnum, MyButton };
