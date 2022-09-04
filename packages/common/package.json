@@ -1,5 +1,5 @@
 {
-  "name": "my-lib",
+  "name": "oort-lib",
   "version": "0.0.1",
   "scripts": {
     "dev": "vite",
@@ -44,13 +44,13 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/my-lib.umd.js",
-  "module": "./dist/my-lib.es.js",
+  "main": "./dist/oort-lib.umd.js",
+  "module": "./dist/oort-lib.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.es.js",
-      "require": "./dist/my-lib.umd.js"
+      "import": "./dist/oort-lib.es.js",
+      "require": "./dist/oort-lib.umd.js"
     }
   }
 }

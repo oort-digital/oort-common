@@ -15,7 +15,7 @@ export default defineConfig({
             entry: path.resolve(__dirname, 'src/lib/index.ts'),
             name: 'MyLib',
             formats: ['es', 'umd'],
-            fileName: (format) => `my-lib.${format}.js`,
+            fileName: (format) => `oort-lib.${format}.js`,
         },
         rollupOptions: {
             external: ['react', 'react-dom', 'styled-components'],
