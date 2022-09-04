@@ -1,13 +1,13 @@
-@import "../styles/themeVars.less";
+@import "../styles/theme/vars.less";
 @import "../styles/typography.less";
 
 .oort-modal-mobile > .ant-drawer-content-wrapper > .ant-drawer-content {
-    background-color: @modal-mobile-bg;
+    background-color: @theme-bg-2;
 
     & > .ant-drawer-wrapper-body {
         
         & > .ant-drawer-header {
-            background-color: @modal-mobile-bg;
+            background-color: @theme-bg-2;
             padding-top: 32px;
             padding-bottom: 23px;
             
@@ -15,14 +15,14 @@
             
                 justify-content: end;
                 .ant-drawer-title {
-                    color: @modal-mobile-title-color;
+                    color: @theme-color-10;
                     .h3-semibold-mixin();
                 }
             
                 .ant-drawer-close {
                     margin: 0;
                     padding: 0;
-                    color: @modal-mobile-title-color;
+                    color: @theme-color-10;
                     display: flex;
                     order: 2;
                 }
@@ -36,7 +36,7 @@
                 text-align: center;
                 .h3-semibold-mixin;
                 margin-bottom: 24px;
-                color: @modal-mobile-title-color;
+                color: @theme-color-10;
             }
         }
     

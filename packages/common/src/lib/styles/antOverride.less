@@ -1,0 +1,166 @@
+// This file will contain all variables, our custom variables and
+// those from Ant Design which we want to override.
+@import '~antd/dist/antd.less';
+@import "~antd/lib/style/themes/default.less";
+@import "./palette.less";
+@import "./typography.less";
+@import "./theme/vars.less";
+
+@font-family: 'Inter';
+@primary-color: @primary-6;
+@border-radius-base: 4px;
+@height-lg: 50px;
+
+// Button
+@btn-height-base: 40px;
+@btn-height-lg: 52px;
+.ant-btn-lg { .body-16-medium-mixin }
+.ant-btn-link { .body-16-medium-mixin }
+
+// Input
+@input-height-lg: 52px;
+@input-number-handler-border-color: @input-border-color;
+@input-number-handler-active-bg: @input-bg;
+@input-number-handler-bg: @input-bg;
+@input-disabled-bg: @input-bg;
+
+.ant-input-number {
+    border-color: @input-border-color;
+    .ant-input-number-handler-wrap {
+        opacity: 1;
+        width: 28px;
+        .ant-input-number-handler-down {
+            border-color: @input-border-color;
+        }
+
+        .ant-input-number-handler-down-inner,
+        .ant-input-number-handler-up-inner {
+            left: 7px;
+        }
+
+        .ant-input-number-handler-up-inner,
+        .ant-input-number-handler-down-inner {
+            color: @input-color;
+        }
+    }
+}
+
+.ant-input-number-wrapper {
+    .ant-input-number-group-addon {
+        padding-left: 16px;
+        padding-right: 16px;
+        .anticon {
+            vertical-align: middle;
+        }
+    }
+}
+
+.ant-modal-confirm-body .ant-modal-confirm-title  {
+    color: @theme-color-13;
+}
+.ant-modal-confirm-body .ant-modal-confirm-content {
+    color: @theme-color-13;
+}
+
+// Progress
+@progress-radius: 4px;
+
+
+// Modal
+// @modal-content-bg: @theme-bg-2;
+@modal-header-bg: none;
+@modal-mask-bg: fade(@black, 80%);
+
+.ant-modal {
+    .ant-modal-content {
+        background: @theme-bg-dark-gradient;
+        border-radius: 8px;
+        padding-top: 32px;
+        // padding-bottom: 46px;
+        .ant-modal-header {
+            .ant-modal-title {
+                h4 {
+                    .h3-semibold-mixin;
+                    text-align: center;
+                    color: @theme-color-13;
+                }
+            }
+        }
+
+        .ant-modal-footer {
+            text-align: center;
+            border: none;
+        }
+    }
+}
+
+// dropdown
+@dropdown-menu-bg: @btn-default-bg;
+
+.ant-dropdown-menu {
+
+    .ant-dropdown-menu-item {
+        color: @btn-default-color;
+    }
+
+    .ant-dropdown-menu-item-active {
+        background-color: @theme-color-5;
+        // color: @btn-default-color;
+    }
+}
+
+// List
+.ant-list {
+    .ant-list-items {
+        .ant-list-item {
+            border-bottom: 1px solid @theme-color-4;
+        }
+    }
+}
+
+
+.ant-upload.ant-upload-drag {
+    background: @theme-color-1;
+
+    p.ant-upload-text {
+        color: @theme-color-13;
+    }
+}
+
+// Checkbox
+@checkbox-border-radius: 2px;
+
+// Popover
+@popover-bg: @theme-color-1;
+
+// Select
+
+@select-background: @btn-default-bg;
+@select-dropdown-bg: @btn-default-bg;
+@select-item-selected-color: @btn-primary-color;
+@select-item-selected-bg: @primary-color;
+@select-item-active-bg: @theme-color-3;
+
+@select-single-item-height-lg: 52px;
+
+// to apply this styles do <Select dropdownClassName='ant-select-dropdown-lg'
+.ant-select-dropdown-lg .ant-select-item > .ant-select-item-option-content { line-height: 40px; }
+
+// .ant-select-lg > .ant-select-selector > .ant-select-selection-item > .currency-select-option {
+//   line-height: 50px;
+// }
+
+.ant-select {
+    color: @btn-default-color;
+    background-color: @btn-default-bg;
+    border-radius: 4px;
+    .ant-select-arrow {
+        color: @btn-default-color;
+    }
+}
+
+.ant-select-item-option, .ant-select-item-option-active {
+    color: @btn-default-color;
+}
+
+// @component-background: red;
