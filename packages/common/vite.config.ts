@@ -18,7 +18,7 @@ export default defineConfig({
             fileName: (format) => `oort-lib.${format}.js`,
         },
         rollupOptions: {
-            external: ['react', 'react-dom', 'styled-components'],
+            external: ['react', 'react-dom', 'styled-components', 'antd'],
             output: {
                 globals: {
                     react: 'React',

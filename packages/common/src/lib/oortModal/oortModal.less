@@ -1,0 +1,27 @@
+@import '../less/typography.less';
+@import '../less/themeVars.less';
+
+.oort-modal {
+
+    .ant-modal-body {
+        padding: 36px;
+        .body-16-regular-mixin;
+    }
+
+    .ant-modal-header {
+        margin-top: 20px;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-style: none;
+    }
+
+    .ant-modal-footer {
+        background-color: @modal-footer-bg;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        .footer-buttons {
+            padding-top: 31.5px;
+            padding-bottom: 31.5px;
+        }
+    }
+}
