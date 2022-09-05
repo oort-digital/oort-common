@@ -1,0 +1,40 @@
+.root { padding: 0; margin: 0; }
+
+.root > li {
+    list-style-type: none;
+    padding: 16px 24px;
+    /* Dark / 4 */
+    border-bottom: 1px solid #252E36;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.root > li > a {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    /* Dark / 7 */
+    color: #6E7882;
+    text-transform: capitalize;
+}
+
+.root > li > .btn_caption {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    /* Dark / 7 */
+    color: #6E7882;
+}
+
+.root > li > .btn_icon_after {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

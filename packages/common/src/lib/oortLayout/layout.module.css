@@ -1,0 +1,26 @@
+
+.root {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+}
+
+.root > .sider {
+    flex-direction: column;
+    background: #1A1F26;
+    width: 300px;
+}
+
+.root > .sider > .logo {
+    margin-top: 34px;
+    margin-bottom: 195px;
+    margin-left: 24px;
+}
+
+.root > .sider > .footer {
+    margin-top: 140px;
+}
+
+.root .content {
+    width: 100%;
+}
