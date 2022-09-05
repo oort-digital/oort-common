@@ -75,6 +75,4 @@ function getCurLogLevel(): LogLevel {
     return result
 }
 
-const logger: ILogger = new ConsoleLogger(getCurLogLevel())
-
-export default logger;
+export const logger: ILogger = new ConsoleLogger(getCurLogLevel())

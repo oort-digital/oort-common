@@ -13,5 +13,4 @@ export interface ILogger {
     warn: (message: string) => void;
     error: (message: any) => void;
 }
-declare const logger: ILogger;
-export default logger;
+export declare const logger: ILogger;

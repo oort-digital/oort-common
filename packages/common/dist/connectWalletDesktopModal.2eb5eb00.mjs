@@ -1,9 +1,8 @@
 import { useState as O } from "react";
 import { Row as g, Col as u } from "antd";
-import { j as e, O as T, a as t, F as i } from "./index.eda16f3d.mjs";
-import { C as y, a as p, b as B, M as S, W as _ } from "./index.b6df85f9.mjs";
+import { j as e, O as T, a as t, F as i } from "./index.929a9f52.mjs";
+import { C as y, a as p, b as B, M as S, W as _ } from "./index.4daa294f.mjs";
 import "ethers";
-import "styled-components";
 var D = /* @__PURE__ */ ((a) => (a[a.WALLET_METAMASK = 0] = "WALLET_METAMASK", a[a.WALLET_CONNECT = 1] = "WALLET_CONNECT", a))(D || {});
 const F = (a, c, r) => a ? r.some((o) => o.name === c.name) ? /* @__PURE__ */ t(i, {
   children: ["You are currently using ", /* @__PURE__ */ e("span", {
@@ -19,7 +18,7 @@ const F = (a, c, r) => a ? r.some((o) => o.name === c.name) ? /* @__PURE__ */ t(
       children: r.map((o) => o.name).join(", ")
     })]
   })]
-}) : null, q = (a) => {
+}) : null, U = (a) => {
   const [c, r] = O(!1), {
     onCancel: o,
     visible: k,
@@ -132,5 +131,5 @@ const F = (a, c, r) => a ? r.some((o) => o.name === c.name) ? /* @__PURE__ */ t(
 };
 export {
   D as WALLETTYPE,
-  q as default
+  U as default
 };

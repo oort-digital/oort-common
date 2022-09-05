@@ -1,26 +1,25 @@
 import { useState as T } from "react";
 import { Row as M, Col as u } from "antd";
-import { C as b, a as m, b as x, M as B, W as S } from "./index.b6df85f9.mjs";
+import { C as b, a as m, b as x, M as B, W as S } from "./index.4daa294f.mjs";
 import "ethers";
-import { j as n, b as _, a as o, F as i } from "./index.eda16f3d.mjs";
-import "styled-components";
+import { j as n, b as _, a, F as i } from "./index.929a9f52.mjs";
 var D = /* @__PURE__ */ ((t) => (t[t.WALLET_METAMASK = 0] = "WALLET_METAMASK", t[t.WALLET_CONNECT = 1] = "WALLET_CONNECT", t))(D || {});
-const F = (t, c, a) => t ? a.some((r) => r.name === c.name) ? /* @__PURE__ */ o(i, {
+const F = (t, c, o) => t ? o.some((r) => r.name === c.name) ? /* @__PURE__ */ a(i, {
   children: ["You are currently using ", /* @__PURE__ */ n("span", {
     children: "Oort Digital"
   }), " on the ", /* @__PURE__ */ n("span", {
     children: c.name
   }), " network"]
-}) : /* @__PURE__ */ o(i, {
-  children: ["You connected to ", /* @__PURE__ */ o("span", {
+}) : /* @__PURE__ */ a(i, {
+  children: ["You connected to ", /* @__PURE__ */ a("span", {
     children: [c.name, "."]
-  }), /* @__PURE__ */ o("div", {
+  }), /* @__PURE__ */ a("div", {
     children: ["Please connect to the appropriate network. ", /* @__PURE__ */ n("span", {
-      children: a.map((r) => r.name).join(", ")
+      children: o.map((r) => r.name).join(", ")
     })]
   })]
-}) : null, q = (t) => {
-  const [c, a] = T(!1), {
+}) : null, U = (t) => {
+  const [c, o] = T(!1), {
     onCancel: r,
     visible: g,
     supportedChains: p,
@@ -32,20 +31,20 @@ const F = (t, c, a) => t ? a.some((r) => r.name === c.name) ? /* @__PURE__ */ o(
     connectorName: k,
     supportedConnectors: A
   } = t, v = async (e) => {
-    a(!0);
+    o(!0);
     try {
       await W(e), r();
     } finally {
-      a(!1);
+      o(!1);
     }
   }, N = async (e) => {
-    a(!0);
+    o(!0);
     try {
       await y(e), r();
     } finally {
-      a(!1);
+      o(!1);
     }
-  }, j = /* @__PURE__ */ o(i, {
+  }, j = /* @__PURE__ */ a(i, {
     children: ["By connecting, I accept Oort Digital\u2019s ", /* @__PURE__ */ n("a", {
       href: "https://oort.digital/terms",
       children: "Terms of Service"
@@ -96,8 +95,8 @@ const F = (t, c, a) => t ? a.some((r) => r.name === c.name) ? /* @__PURE__ */ o(
     title: "Network & Wallet",
     visible: g,
     onCancel: r,
-    children: /* @__PURE__ */ o(i, {
-      children: [s && /* @__PURE__ */ o(i, {
+    children: /* @__PURE__ */ a(i, {
+      children: [s && /* @__PURE__ */ a(i, {
         children: [/* @__PURE__ */ n("div", {
           className: "description",
           children: F(d, s, p)
@@ -106,12 +105,12 @@ const F = (t, c, a) => t ? a.some((r) => r.name === c.name) ? /* @__PURE__ */ o(
           className: "chain-buttons",
           children: p.map((e) => O(e))
         })]
-      }), /* @__PURE__ */ o("div", {
+      }), /* @__PURE__ */ a("div", {
         className: "description",
         children: [/* @__PURE__ */ n("span", {
           children: "Connect your Wallet"
         }), " and jump into the world of NFT's"]
-      }), /* @__PURE__ */ o(M, {
+      }), /* @__PURE__ */ a(M, {
         gutter: f,
         children: [window.ethereum && /* @__PURE__ */ n(u, {
           span: "24",
@@ -126,5 +125,5 @@ const F = (t, c, a) => t ? a.some((r) => r.name === c.name) ? /* @__PURE__ */ o(
 };
 export {
   D as WALLETTYPE,
-  q as default
+  U as default
 };

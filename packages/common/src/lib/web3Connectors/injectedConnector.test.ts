@@ -1,5 +1,5 @@
 import { InjectedConnector } from ".";
-import logger, { ILogger } from "../logger";
+import { logger, ILogger } from "../logger";
 import { delayAsync } from "./utils";
 import { IChainInfo } from "./baseConnector";
 
