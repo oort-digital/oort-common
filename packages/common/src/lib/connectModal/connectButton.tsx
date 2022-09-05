@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "./connectWalletButton.less"
+import "./connectButton.less"
 
 
 interface IProps {
@@ -11,7 +11,7 @@ interface IProps {
 	onClick?: () => void;
 }
 
-export const ConnectWalletButton = ({ account, onClick, walletIcon, walletName, disabled, labelText }:IProps) => {
+export const ConnectButton = ({ account, onClick, walletIcon, walletName, disabled, labelText }:IProps) => {
 
 	let acc = <span className="cnn">{labelText}</span>
 	let className = 'connect-wallet-button'

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from "antd"
-import {IChain} from "../../typesAndInterfaces"
+import {IChain} from "../typesAndInterfaces"
 import "./chainButton.less"
-import { getChainIcon } from '../../utils';
+import { getChainIcon } from '../utils';
 
 
 interface IProps {

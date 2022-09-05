@@ -1,11 +1,10 @@
 import React, { lazy } from 'react'
-import "./connectWalletDesktopModal.less"
-import { LazyLoader } from '../../lazyLoader';
-import { ConnectorNames, IConnector } from '../../web3Connectors';
-import { IChain } from '../../typesAndInterfaces';
+import { LazyLoader } from '../lazyLoader';
+import { ConnectorNames, IConnector } from '../web3Connectors';
+import { IChain } from '../typesAndInterfaces';
 
-const Desktop = lazy(() => import("./connectWalletDesktopModal"));
-const Mobile = lazy(() => import("./connectWalletMobileModal"));
+const Desktop = lazy(() => import("./connectModalDesktop"));
+const Mobile = lazy(() => import("./connectModalMobile"));
 
 interface IProps {
 	chain: IChain
@@ -20,7 +19,7 @@ interface IProps {
 	connectAsync: (connectorName: ConnectorNames) => Promise<void>
 }
 
-export const ConnectWalletModal = (props: IProps) => {
+export const ConnectModal = (props: IProps) => {
 
 	const { onCancel, visible, supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = props
 

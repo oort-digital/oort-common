@@ -5,7 +5,7 @@ import BscSvg from './bscSvg';
 import EthSvg from './ethSvg';
 import MaticSvg from './maticSvg';
 import SolanaSvg from './solanaSvg';
-import { IChain, ChainEnum } from '../../typesAndInterfaces';
+import { IChain, ChainEnum } from '../typesAndInterfaces';
 
 const { Option } = Select
 

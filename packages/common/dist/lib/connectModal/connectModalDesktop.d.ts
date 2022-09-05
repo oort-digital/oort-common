@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import { ConnectorNames, IConnector } from "../../web3Connectors";
-import { IChain } from '../../typesAndInterfaces';
+import { IChain } from "../typesAndInterfaces";
+import { ConnectorNames, IConnector } from '../web3Connectors';
 export declare enum WALLETTYPE {
     WALLET_METAMASK = 0,
     WALLET_CONNECT = 1
@@ -19,5 +19,5 @@ interface IProps {
     switchChain: (newChainId: number) => Promise<void>;
     connectAsync: (connectorName: ConnectorNames) => Promise<void>;
 }
-declare const ConnectWalletMobileModal: (props: IProps) => JSX.Element;
-export default ConnectWalletMobileModal;
+declare const ConnectModalDesktop: (props: IProps) => JSX.Element;
+export default ConnectModalDesktop;

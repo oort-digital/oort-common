@@ -1974,7 +1974,7 @@ const Ql = ({
     fallback: /* @__PURE__ */ j("span", {}),
     children: [" ", (() => n === qn.Desktop ? t : n === qn.Phone ? e : r)(), " "]
   });
-}, Xl = na(() => import("./connectWalletDesktopModal.747e3e49.mjs")), eu = na(() => import("./connectWalletMobileModal.3fa10718.mjs")), tu = (t) => {
+}, Xl = na(() => import("./connectModalDesktop.6a570051.mjs")), eu = na(() => import("./connectModalMobile.70c2c4f3.mjs")), tu = (t) => {
   const {
     onCancel: e,
     visible: r,

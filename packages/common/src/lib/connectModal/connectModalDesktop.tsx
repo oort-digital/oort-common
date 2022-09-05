@@ -1,16 +1,15 @@
 import React, { ReactNode, useState } from 'react'
+import { IChain } from "../typesAndInterfaces"
 import { Col, Row } from 'antd'
-import "./connectWalletMobileModal.less"
-
-import { ConnectWalletButton } from './connectWalletButton';
+import "./connectModalDesktop.less"
+import { ConnectButton } from './connectButton';
 import { MetamaskIcon } from './metamaskIcon';
 import { WalletConnectIcon } from './walletConnectIcon';
 import { Gutter } from 'antd/lib/grid/row';
 import { ChainButton } from './chainButton';
-import { ConnectorNames, IConnector } from "../../web3Connectors";
-import { IChain } from '../../typesAndInterfaces';
-import { OortModalMobile } from '../../oortModal';
-
+import { ConnectorNames, IConnector } from '../web3Connectors';
+import { OortModal } from '../oortModal';
+import { ConnectModal } from './connectModal';
 
 export enum WALLETTYPE {
 	WALLET_METAMASK,
@@ -37,7 +36,6 @@ const renderAlert = (account: string, chain: IChain, supportedChains: IChain[]) 
 	</>
 };
 
-
 interface IProps {
 	chain: IChain
 	supportedChains: IChain[]
@@ -51,12 +49,11 @@ interface IProps {
 	connectAsync: (connectorName: ConnectorNames) => Promise<void>
 }
 
-const ConnectWalletMobileModal = (props: IProps) => {
+const ConnectModalDesktop = (props: IProps) => {
 
 	const [ loading, setLoading ] = useState(false)
-	
 	const { onCancel, visible, supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = props
-
+	
 	const connectAndClose = async (cnnName: ConnectorNames) => {
 		setLoading(true)
         try {
@@ -80,13 +77,14 @@ const ConnectWalletMobileModal = (props: IProps) => {
     }
 
 	const footer = <>
-		By connecting, I accept Oort Digital’s <a href='https://oort.digital/terms'>Terms of Service</a> and acknowledge that you have read and understand the <a href='https://oort.digital/terms#disclaimer'>Oort Digital protocol disclaimer</a>
+		<div>By connecting, I accept Oort Digital’s <a href='https://oort.digital/terms'>Terms of Service</a> and acknowledge</div>
+		<div>that you have read and understand the <a href='https://oort.digital/terms#disclaimer'>Oort Digital protocol disclaimer</a></div>
 	</>
 
 	const renderWalletBtn = (walletName: string, cnnName: ConnectorNames, icon: ReactNode) => {
 
 		if(account && cnnName === connectorName) {
-			return <ConnectWalletButton
+			return <ConnectButton
 					disabled={true}
 					walletName={walletName}
 					walletIcon={icon}
@@ -95,7 +93,7 @@ const ConnectWalletMobileModal = (props: IProps) => {
 
 		const connector = supportedConnectors[cnnName]
 		if(!connector.isInstalled) {
-			return <ConnectWalletButton
+			return <ConnectButton
 				walletName={walletName}
 				onClick={() => window.open(connector.installUrl, '_blank')!.focus()}
 				walletIcon={icon}
@@ -103,7 +101,7 @@ const ConnectWalletMobileModal = (props: IProps) => {
 			/>
 		}
 
-		return <ConnectWalletButton
+		return <ConnectButton
 			walletName={walletName}
 			onClick={() => connectAndClose(cnnName)}
 			walletIcon={icon}
@@ -116,7 +114,7 @@ const ConnectWalletMobileModal = (props: IProps) => {
 
 		const { chainId } = supportedChain
 	
-		return <Col span="24" key={chainId}>
+		return <Col flex={3} key={chainId}>
 			<ChainButton
 				onClick={() => switchChainAndClose(chainId)}
 				loading={loading}
@@ -127,16 +125,16 @@ const ConnectWalletMobileModal = (props: IProps) => {
 	
 	}
 
-	const btnGutter: [Gutter, Gutter] = [0, 12]
+	const btnGutter: [Gutter, Gutter] = [10, 0]
 	
-	return <OortModalMobile viewMode="topGap" loading={loading} footer={footer} className='connect-wallet-mobile-modal' title='Network & Wallet' visible={visible} onCancel={onCancel}>
+	return <OortModal loading={loading} footer={footer} className='connect-wallet-desktop-modal' title='Network & Wallet' width="690px" visible={visible} onCancel={onCancel}>
 		<>
 			{
 				chain && <>
 					<div className="description">
 						{renderAlert(account, chain, supportedChains)}
 					</div>
-					<Row gutter={btnGutter} className='chain-buttons'>
+					<Row gutter={btnGutter} className='chain-buttons' justify='space-between'>
 						{supportedChains.map(x => renderChainBtn(x))}
 					</Row>
 				</>
@@ -144,14 +142,14 @@ const ConnectWalletMobileModal = (props: IProps) => {
 			<div className="description">
 				<span>Connect your Wallet</span> and jump into the world of NFT's
 			</div>
-			<Row gutter={btnGutter}>
-				{window.ethereum && <Col span="24">{renderWalletBtn("Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>}
-				<Col span="24">{renderWalletBtn("WalletConnect", ConnectorNames.WalletConnect, WalletConnectIcon)}</Col>
+			<Row gutter={btnGutter} justify='space-between'>
+				<Col span={12}>{renderWalletBtn("Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>
+				<Col span={12}>{renderWalletBtn("WalletConnect", ConnectorNames.WalletConnect, WalletConnectIcon)}</Col>
 			</Row>
 		</>
-	</OortModalMobile>
+	</OortModal>
 		
 	
 };
 
-export default ConnectWalletMobileModal
+export default ConnectModalDesktop

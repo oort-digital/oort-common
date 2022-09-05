@@ -5,7 +5,7 @@ import { getChainIcon } from '../utils';
 import { ChevronSortIcon, DiscordIcon, TelegramIcon, TwitterIcon } from '../icons';
 import { ThemeSwitch } from './themeSwitch';
 import { IChain } from '../typesAndInterfaces';
-import { ConnectWalletModal } from './connectModal';
+import { ConnectModal } from '../connectModal';
 import { ConnectorNames, IConnector } from '../web3Connectors';
 import { BlockieAddress } from '../blockieAddress';
 
@@ -43,7 +43,7 @@ export const FooterMenu = (props: IProps) => {
 
     const showConnectModal = () => {
         const { supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = props
-        return <ConnectWalletModal
+        return <ConnectModal
             onCancel={() => setConnectModalVisible(false)}
             visible={connectModalVisible}
             supportedChains={supportedChains}

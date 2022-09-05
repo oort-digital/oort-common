@@ -7,5 +7,5 @@ interface IProps {
     labelText?: string;
     onClick?: () => void;
 }
-export declare const ConnectWalletButton: ({ account, onClick, walletIcon, walletName, disabled, labelText }: IProps) => JSX.Element;
+export declare const ConnectButton: ({ account, onClick, walletIcon, walletName, disabled, labelText }: IProps) => JSX.Element;
 export {};
