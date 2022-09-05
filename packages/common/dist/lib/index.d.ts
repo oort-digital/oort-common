@@ -5,3 +5,4 @@ export * from "./logger";
 export * from "./utils";
 export * from "./lazyLoader";
 export * from "./effects";
+export * from "./web3Connectors";

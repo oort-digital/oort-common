@@ -1,7 +1,7 @@
 import { useState as O } from "react";
 import { Row as g, Col as u } from "antd";
-import { j as e, O as T, a as t, F as i } from "./index.929a9f52.mjs";
-import { C as y, a as p, b as B, M as S, W as _ } from "./index.4daa294f.mjs";
+import { j as e, O as T, a as t, F as i, C as y } from "./index.1377daca.mjs";
+import { C as p, a as B, M as S, W as _ } from "./chainButton.adaee864.mjs";
 import "ethers";
 var D = /* @__PURE__ */ ((a) => (a[a.WALLET_METAMASK = 0] = "WALLET_METAMASK", a[a.WALLET_CONNECT = 1] = "WALLET_CONNECT", a))(D || {});
 const F = (a, c, r) => a ? r.some((o) => o.name === c.name) ? /* @__PURE__ */ t(i, {
@@ -25,15 +25,15 @@ const F = (a, c, r) => a ? r.some((o) => o.name === c.name) ? /* @__PURE__ */ t(
     supportedChains: m,
     chain: s,
     switchChain: I,
-    canSwitchChain: b,
-    connectAsync: v,
+    canSwitchChain: v,
+    connectAsync: A,
     account: d,
-    connectorName: A,
-    supportedConnectors: W
+    connectorName: W,
+    supportedConnectors: b
   } = a, M = async (n) => {
     r(!0);
     try {
-      await v(n), o();
+      await A(n), o();
     } finally {
       r(!1);
     }
@@ -57,14 +57,14 @@ const F = (a, c, r) => a ? r.some((o) => o.name === c.name) ? /* @__PURE__ */ t(
       })]
     })]
   }), C = (n, l, h) => {
-    if (d && l === A)
+    if (d && l === W)
       return /* @__PURE__ */ e(p, {
         disabled: !0,
         walletName: n,
         walletIcon: h,
         account: d
       });
-    const w = W[l];
+    const w = b[l];
     return w.isInstalled ? /* @__PURE__ */ e(p, {
       walletName: n,
       onClick: () => M(l),
@@ -86,7 +86,7 @@ const F = (a, c, r) => a ? r.some((o) => o.name === c.name) ? /* @__PURE__ */ t(
         onClick: () => j(l),
         loading: c,
         isActive: l === s.chainId,
-        canSwitchChain: b,
+        canSwitchChain: v,
         chain: n
       })
     }, l);
