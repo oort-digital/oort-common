@@ -6,3 +6,4 @@ export * from "./utils";
 export * from "./lazyLoader";
 export * from "./effects";
 export * from "./web3Connectors";
+export * from "./blockieAddress";

@@ -3,11 +3,11 @@ import styles from './footerMenu.module.css';
 import { Menu, MenuItem, MenuItemBtn } from './menu';
 import { getChainIcon } from '../utils';
 import { ChevronSortIcon, DiscordIcon, TelegramIcon, TwitterIcon } from '../icons';
-import * as blockies from 'blockies-ts'
 import { ThemeSwitch } from './themeSwitch';
 import { IChain } from '../typesAndInterfaces';
 import { ConnectWalletModal } from './connectModal';
 import { ConnectorNames, IConnector } from '../web3Connectors';
+import { BlockieAddress } from '../blockieAddress';
 
 export const TWITTER = "https://twitter.com/OortDigital";
 export const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
@@ -63,11 +63,9 @@ export const FooterMenu = (props: IProps) => {
     const { chainId, name } = chain
 
     const chainIcon = <span className={styles.icon_before}>{getChainIcon(chainId, 20, 20)}</span>
-    const imgSrc = blockies.create({seed: account}).toDataURL()
-    const accountImg = <img alt={account} className={styles.account_img} src={imgSrc}/>
+    const accountImg = <BlockieAddress address={account} className={styles.account_img}/>
     const afterIcon = <span className={styles.icon_after}><ChevronSortIcon /></span>
     
-
     return <>
         {showConnectModal()}
         <Menu className={cssClass}>
