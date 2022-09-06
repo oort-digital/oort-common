@@ -16,7 +16,9 @@ function ci(t) {
     r.prototype = e.prototype;
   } else
     r = {};
-  return Object.defineProperty(r, "__esModule", { value: !0 }), Object.keys(t).forEach(function(n) {
+  return Object.defineProperty(r, "__esModule", {
+    value: !0
+  }), Object.keys(t).forEach(function(n) {
     var o = Object.getOwnPropertyDescriptor(t, n);
     Object.defineProperty(r, n, o.get ? o : {
       enumerable: !0,
@@ -1897,11 +1899,26 @@ class jl {
         }
       }
     });
-    je(this, "trace", (e) => this.log(0, e));
-    je(this, "debug", (e) => this.log(1, e));
-    je(this, "info", (e) => this.log(2, e));
-    je(this, "warn", (e) => this.log(3, e));
-    je(this, "error", (e) => this.log(4, e));
+    je(this, "trace", (e) => this.log(
+      0,
+      e
+    ));
+    je(this, "debug", (e) => this.log(
+      1,
+      e
+    ));
+    je(this, "info", (e) => this.log(
+      2,
+      e
+    ));
+    je(this, "warn", (e) => this.log(
+      3,
+      e
+    ));
+    je(this, "error", (e) => this.log(
+      4,
+      e
+    ));
     this._curLogLevel = e;
   }
 }
@@ -1974,7 +1991,7 @@ const Gl = ({
     fallback: /* @__PURE__ */ j("span", {}),
     children: [" ", (() => n === qn.Desktop ? t : n === qn.Phone ? e : r)(), " "]
   });
-}, Zl = ra(() => import("./connectModalDesktop.f2703179.mjs")), Ql = ra(() => import("./connectModalMobile.3f703dd9.mjs")), Xl = (t) => {
+}, Zl = ra(() => import("./connectModalDesktop.430cef98.mjs")), Ql = ra(() => import("./connectModalMobile.50c195c1.mjs")), Xl = (t) => {
   const {
     onCancel: e,
     visible: r,
@@ -2412,7 +2429,9 @@ class lp extends ga {
         throw new Error(`Chain ${r} not supported`);
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: n }]
+        params: [{
+          chainId: n
+        }]
       });
     } catch (o) {
       if (o.code === 4902)
@@ -2435,7 +2454,9 @@ class lp extends ga {
   }
   async prvEnable() {
     try {
-      await this.rawProvider.request({ method: "eth_requestAccounts" });
+      await this.rawProvider.request({
+        method: "eth_requestAccounts"
+      });
     } catch (r) {
       return r.code === 4001 ? this.logger.warn("Please connect to MetaMask.") : this.logger.error(r), !1;
     }
@@ -2449,7 +2470,9 @@ class lp extends ga {
     return this._ethRequestAccounts = void 0, r;
   }
   async isConnectedAsync() {
-    return (await window.ethereum.request({ method: "eth_accounts" })).length > 0;
+    return (await window.ethereum.request({
+      method: "eth_accounts"
+    })).length > 0;
   }
   get isConnected() {
     return this.isConnectedAsync();
@@ -11287,7 +11310,9 @@ class up extends ga {
     super(r, hi.WalletConnect, n);
     je(this, "_walletConnect");
     je(this, "_rpc");
-    this._rpc = {}, n.forEach((o) => this._rpc[o.chainId] = o.rpcUrl), this._walletConnect = new Xo({ rpc: this._rpc }), this.initListeners(this._walletConnect);
+    this._rpc = {}, n.forEach((o) => this._rpc[o.chainId] = o.rpcUrl), this._walletConnect = new Xo({
+      rpc: this._rpc
+    }), this.initListeners(this._walletConnect);
   }
   async disconnect() {
     await super.disconnect(), await this._walletConnect.disconnect();
@@ -11315,7 +11340,9 @@ class up extends ga {
     try {
       return await this._walletConnect.enable();
     } catch (r) {
-      return this._walletConnect = new Xo({ rpc: this._rpc }), Promise.reject(r);
+      return this._walletConnect = new Xo({
+        rpc: this._rpc
+      }), Promise.reject(r);
     }
   }
 }

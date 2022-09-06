@@ -14,7 +14,7 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, 'src/lib/index.ts'),
             name: 'MyLib',
-            formats: ['es', 'umd'],
+            formats: ['es'],
             fileName: (format) => `oort-lib.${format}.js`,
         },
         rollupOptions: {
