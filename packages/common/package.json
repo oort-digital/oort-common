@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.17.8",
+    "@rollup/plugin-commonjs": "^22.0.2",
     "@storybook/addon-a11y": "6.5.0-alpha.50",
     "@storybook/addon-actions": "6.5.0-alpha.50",
     "@storybook/addon-docs": "6.5.0-alpha.50",
@@ -41,8 +42,7 @@
     "storybook-builder-vite": "0.1.21",
     "typescript": "4.8.2",
     "vite": "3.1.0",
-    "vite-plugin-dts": "1.4.1",
-    "vite-plugin-require": "^1.0.1"
+    "vite-plugin-dts": "1.4.1"
   },
   "license": "UNLICENSED",
   "peerDependencies": {
