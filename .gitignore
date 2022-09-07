@@ -2,8 +2,11 @@
 
 # dependencies
 /node_modules
-/packages/web3Connectors/node_modules
 /packages/common/node_modules
 /packages/common/storybook-static
+/packages/logger/node_modules
+/packages/web3Connectors/node_modules
+
 /sites/my-site/node_modules
 /sites/my-site/dist
+/sites/cra-test-app/node_modules
