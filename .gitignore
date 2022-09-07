@@ -7,6 +7,4 @@
 /packages/logger/node_modules
 /packages/web3Connectors/node_modules
 
-/sites/my-site/node_modules
-/sites/my-site/dist
 /sites/cra-test-app/node_modules
