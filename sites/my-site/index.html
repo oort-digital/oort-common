@@ -9,17 +9,17 @@
   <body>
     <div id="root"></div>
     <script>
-      // window.global = window;
+      window.global = window;
     </script>
 
     <script type="module">
-      // import process from "process";
-      // import EventEmitter from "events";
-      // import {Buffer} from "buffer";
+      import process from "process";
+      import EventEmitter from "events";
+      import {Buffer} from "buffer";
 
-      // window.Buffer = Buffer;
-      // window.process = process;
-      // window.EventEmitter = EventEmitter;
+      window.Buffer = Buffer;
+      window.process = process;
+      window.EventEmitter = EventEmitter;
     </script>
 
     <script type="module" src="/src/main.tsx"></script>
