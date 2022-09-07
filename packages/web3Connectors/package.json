@@ -1,0 +1,56 @@
+{
+  "name": "oort-web3-connectors",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "rimraf ./dist && tsc"
+  },
+  "dependencies": {
+    "@walletconnect/web3-provider": "^1.8.0",
+    "ethers": "^5.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.17.8",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@storybook/addon-a11y": "6.5.0-alpha.50",
+    "@storybook/addon-actions": "6.5.0-alpha.50",
+    "@storybook/addon-docs": "6.5.0-alpha.50",
+    "@storybook/addon-essentials": "6.5.0-alpha.50",
+    "@storybook/addon-links": "6.5.0-alpha.50",
+    "@storybook/react": "6.5.0-alpha.49",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/node": "18.7.14",
+    "@types/react": "18.0.18",
+    "@types/react-dom": "18.0.6",
+    "@types/styled-components": "5.1.24",
+    "@vitejs/plugin-react": "1.2.0",
+    "acorn-jsx": "5.3.2",
+    "babel-loader": "8.2.4",
+    "json": "11.0.0",
+    "less": "^4.1.3",
+    "storybook-builder-vite": "0.1.21",
+    "typescript": "4.8.2",
+    "vite": "3.1.0",
+    "vite-plugin-dts": "1.4.1"
+  },
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "react": "^16.8.0 || 17.x",
+    "react-dom": "^16.8.0 || 17.x",
+    "styled-components": "^5.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/oort-lib.umd.js",
+  "module": "./dist/oort-lib.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/oort-lib.es.js",
+      "require": "./dist/oort-lib.umd.js"
+    }
+  }
+}

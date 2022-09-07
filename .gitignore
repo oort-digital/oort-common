@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/packages/web3Connectors/node_modules
 /packages/common/node_modules
 /packages/common/storybook-static
 /sites/my-site/node_modules
