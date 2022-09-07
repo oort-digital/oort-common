@@ -1,6 +1,6 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { IRPCMap } from "@walletconnect/types";
-import { ILogger } from "../logger";
+import { ILogger } from "./logger";
 import { BaseConnector, IChainInfo } from "./baseConnector";
 import { ConnectorNames } from "./connectorNames";
 import { IConnector } from "./iConnector";

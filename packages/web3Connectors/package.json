@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "vite",
-    "build": "rimraf ./dist && tsc"
+    "build": "rimraf ./dist && tsc ./src/index.ts"
   },
   "dependencies": {
     "@walletconnect/web3-provider": "^1.8.0",

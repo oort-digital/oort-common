@@ -1,5 +1,5 @@
 import { providers, Signer } from "ethers";
-import { ILogger } from "../logger";
+import { ILogger } from "./logger";
 import { ConnectorNames } from "./connectorNames";
 
 type AccountChangedHandlerType = (accounts: Array<string>) => void
