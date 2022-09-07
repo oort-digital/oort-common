@@ -1,4 +1,5 @@
-import { IChain, logger, WalletConnectConnector } from 'oort-lib';
+import { WalletConnectConnector } from 'oort-web3-connectors';
+import { logger } from 'oort-lib';
 
   try {
     const wc = new WalletConnectConnector(logger, [{
