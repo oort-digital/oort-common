@@ -7,7 +7,7 @@ import { MetamaskIcon } from './metamaskIcon';
 import { WalletConnectIcon } from './walletConnectIcon';
 import { Gutter } from 'antd/lib/grid/row';
 import { ChainButton } from './chainButton';
-import { ConnectorNames, IConnector } from "../web3Connectors";
+import { ConnectorNames, IConnector } from "@oort/web3-connectors";
 import { IChain } from '../typesAndInterfaces';
 import { OortModalMobile } from '../oortModal';
 

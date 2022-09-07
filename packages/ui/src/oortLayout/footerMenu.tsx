@@ -6,7 +6,7 @@ import { ChevronSortIcon, DiscordIcon, TelegramIcon, TwitterIcon } from '../icon
 import { ThemeSwitch } from './themeSwitch';
 import { IChain } from '../typesAndInterfaces';
 import { ConnectModal } from '../connectModal';
-import { ConnectorNames, IConnector } from '../web3Connectors';
+import { ConnectorNames, IConnector } from '@oort/web3-connectors';
 import { BlockieAddress } from '../blockieAddress';
 
 export const TWITTER = "https://twitter.com/OortDigital";

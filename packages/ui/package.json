@@ -1,15 +1,19 @@
 {
-  "name": "oort-lib",
+  "name": "@oort/ui",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite",
-    "build_22": "rimraf ./dist && tsc && vite build",
-    "preview": "vite preview",
+    "clean": "rimraf dist",
+    "build:types": "tsc",
+    "build:source": "vite build",
+    "build": "yarn clean && vite build",
     "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "rm": "rimraf node_modules"
   },
   "dependencies": {
+    "@oort/logger": "*",
+    "@oort/web3-connectors": "*",
     "antd": "4.23.0",
     "blockies-ts": "^1.0.0",
     "ethers": "^5.7.0",
@@ -52,13 +56,9 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/oort-lib.umd.js",
-  "module": "./dist/oort-lib.es.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/oort-lib.es.js",
-      "require": "./dist/oort-lib.umd.js"
-    }
-  }
+
+
+  "main": "dist/ui.cjs.js",
+  "module": "dist/ui.es.js",
+  "types": "dist/index.d.ts"
 }

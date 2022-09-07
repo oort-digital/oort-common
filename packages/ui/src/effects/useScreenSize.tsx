@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { logger } from '../logger';
+import { logger } from '@oort/logger';
 
 export interface IScreenBrakepoints {
 	xs: number

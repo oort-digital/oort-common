@@ -13,10 +13,10 @@ export default defineConfig({
     ],
     build: {
         lib: {
-            entry: path.resolve(__dirname, 'src/lib/index.ts'),
-            name: 'MyLib',
-            formats: ['es'],
-            fileName: (format) => `oort-lib.${format}.js`,
+            entry: path.resolve(__dirname, 'src/index.ts'),
+            // name: 'MyLib',
+            formats: ['es', 'cjs'],
+            fileName: (format) => `ui.${format}.js`,
         },
         rollupOptions: {
             external: ['react', 'react-dom', 'styled-components', 'antd', "ethers"],

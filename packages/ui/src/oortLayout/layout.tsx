@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { IChain } from "../typesAndInterfaces";
-import { ConnectorNames, IConnector } from "../web3Connectors";
+import { ConnectorNames, IConnector } from "@oort/web3-connectors";
 import { FooterMenu } from "./footerMenu";
 import styles from './layout.module.css';
 import { LogoLink } from "./logoLink";
