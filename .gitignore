@@ -2,8 +2,8 @@
 
 # dependencies
 /node_modules
-/packages/common/node_modules
-/packages/common/storybook-static
+/packages/ui/node_modules
+/packages/ui/storybook-static
 /packages/logger/node_modules
 /packages/web3Connectors/node_modules
 
