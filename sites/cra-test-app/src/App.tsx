@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { WalletConnectConnector } from '@oort/web3-connectors';
 import { logger } from '@oort/logger';
+import { BlockieAddress } from '@oort/ui';
 
 try {
   const wc = new WalletConnectConnector(logger, [{
@@ -12,7 +13,6 @@ try {
         blockExplorer: 'https://rinkeby.etherscan.io',
   }])
 
-  debugger
   wc.enable()
 }
 catch(e) {
@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <BlockieAddress address='test_123' />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>

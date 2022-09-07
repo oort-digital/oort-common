@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.5",
+    "@oort/ui": "*",
     "@oort/logger": "*",
     "@oort/web3-connectors": "*",
     "@testing-library/jest-dom": "^5.16.5",
