@@ -1,6 +1,6 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { IRPCMap } from "@walletconnect/types";
-import { ILogger } from "./logger";
+import { ILogger } from "@oort/logger";
 import { BaseConnector, IChainInfo } from "./baseConnector";
 import { ConnectorNames } from "./connectorNames";
 import { IConnector } from "./iConnector";
@@ -25,6 +25,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     
     get canSwitchChain() { return false }
 
+    // @ts-ignore
     switchChain(chainId: number): Promise<void> {
         throw new Error("Method not implemented.");
     }

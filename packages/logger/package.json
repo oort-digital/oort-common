@@ -1,5 +1,5 @@
 {
-  "name": "@oort/web3-connectors",
+  "name": "@oort/logger",
   "version": "0.0.1",
   "scripts": {
     "clean": "rimraf dist",
@@ -8,11 +8,10 @@
     "build": "yarn clean && yarn build:source && yarn build:types",
     "rm": "rimraf node_modules"
   },
-  "dependencies": {
-    "@oort/logger": "*",
-    "@walletconnect/web3-provider": "^1.8.0",
-    "ethers": "^5.7.0"
+  "dependencies":{
+    
   },
+ 
   "devDependencies": {
     "@rollup/plugin-commonjs": "22.0.2",
     "@rollup/plugin-node-resolve": "13.3.0",

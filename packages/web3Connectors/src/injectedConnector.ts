@@ -1,4 +1,4 @@
-import { ILogger } from "./logger";
+import { ILogger } from "@oort/logger";
 import { BaseConnector, IChainInfo } from "./baseConnector";
 import { ConnectorNames } from "./connectorNames";
 import { IConnector } from "./iConnector";

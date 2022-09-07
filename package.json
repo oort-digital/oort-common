@@ -10,6 +10,7 @@
   },
 
   "scripts": {
-    "rm": "rimraf node_modules && rimraf ./packages/common/node_modules && rimraf ./sites/my-site/node_modules"
+    "build": "npm run build --workspaces --if-present",
+    "rm": "rimraf node_modules && npm run rm --workspaces --if-present"
   }
 }

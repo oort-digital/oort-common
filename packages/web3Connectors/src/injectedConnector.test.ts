@@ -1,5 +1,5 @@
 import { InjectedConnector } from ".";
-import { logger, ILogger } from "./logger";
+import { logger, ILogger } from "@oort/logger";
 import { delayAsync } from "./utils";
 import { IChainInfo } from "./baseConnector";
 
@@ -10,7 +10,7 @@ class TestRawProvider {
   constructor(requestCallback: () => Promise<any>) {
     this._requestCallback = requestCallback
   }
-
+// @ts-ignore
   request(params: any): Promise<any> {
     return this._requestCallback()
   }
