@@ -1,5 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ConnectorNames, IConnector, InjectedConnector, WalletConnectConnector } from "@oort/web3-connectors";
+import { logger } from "@oort/logger";
 
 import { Layout } from './layout';
 import { ZERO_ADDR } from '../extensions';
@@ -23,11 +25,41 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Layout> = (args) => <Layout {...args} />;
 
+
+
+const supportedChains = [
+{
+  name: "rinkeby",
+  chainId: 4,
+  rpcUrl: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+  blockExplorer: 'https://rinkeby.etherscan.io'
+},
+
+{
+  name: 'mumbai',
+  chainId: 80001,
+  rpcUrl: 'https://rpc-mumbai.maticvigil.com',
+  blockExplorer: 'https://mumbai.polygonscan.com',
+
+  nativeCurrency: {
+      name: 'MATIC',
+      symbol: 'MATIC',
+      decimals: 18,
+  }
+}]
+
+const supportedConnectors: { [name: string]: IConnector } = {}
+supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
+debugger
+supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)//new WalletConnectConnector(logger, supportedChains)
+
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  chain: { name: 'Rinkeby', chainId: 4 },
-  account: ZERO_ADDR//'0xd6ae8250b8348c94847280928c79fb3b63ca453e'
+  chain: supportedChains[0],
+  account: ZERO_ADDR,
+  supportedChains: supportedChains,
+  supportedConnectors: supportedConnectors
 };
 /*
 export const Secondary = Template.bind({});

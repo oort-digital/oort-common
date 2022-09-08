@@ -12,6 +12,7 @@
     "rm": "rimraf node_modules"
   },
   "dependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@oort/logger": "*",
     "@oort/web3-connectors": "*",
     "antd": "4.23.0",
