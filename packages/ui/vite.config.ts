@@ -2,7 +2,6 @@ import react from '@vitejs/plugin-react';
 import path from 'node:path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
-import commonjs from '@rollup/plugin-commonjs';
 
 export default defineConfig({
     plugins: [
@@ -19,18 +18,14 @@ export default defineConfig({
             fileName: (format) => `ui.${format}.js`,
         },
         rollupOptions: {
-            external: ['react', 'react-dom', 'styled-components', 'antd', "ethers"],
+            external: ['react', 'react-dom', 'antd', "ethers"],
             output: {
                 globals: {
                     react: 'React',
-                    'react-dom': 'ReactDOM',
-                    'styled-components': 'styled',
+                    'react-dom': 'ReactDOM'
                 },
                 sourcemap: true
-            },
-            plugins: [
-                //commonjs({ transformMixedEsModules: true})
-            ]
+            }
         },
     },
 });
