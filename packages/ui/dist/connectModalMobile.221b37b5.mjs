@@ -1,7 +1,7 @@
 import { useState as T } from "react";
 import { Row as M, Col as u } from "antd";
-import { a as g, C as m, b as x, M as B, W as S } from "./index.es.cf654ae9.mjs";
-import { j as n, e as _, a as o, F as i } from "./index.e847c3b3.mjs";
+import { a as b, C as m, b as x, M as B, W as S } from "./index.es.32fd4518.mjs";
+import { j as n, b as _, a as o, F as i } from "./index.6f27086b.mjs";
 import "ethers";
 var D = /* @__PURE__ */ ((t) => (t[t.WALLET_METAMASK = 0] = "WALLET_METAMASK", t[t.WALLET_CONNECT = 1] = "WALLET_CONNECT", t))(D || {});
 const F = (t, c, a) => t ? a.some((r) => r.name === c.name) ? /* @__PURE__ */ o(i, {
@@ -21,7 +21,7 @@ const F = (t, c, a) => t ? a.some((r) => r.name === c.name) ? /* @__PURE__ */ o(
 }) : null, U = (t) => {
   const [c, a] = T(!1), {
     onCancel: r,
-    visible: b,
+    visible: g,
     supportedChains: p,
     chain: s,
     switchChain: y,
@@ -93,7 +93,7 @@ const F = (t, c, a) => t ? a.some((r) => r.name === c.name) ? /* @__PURE__ */ o(
     footer: j,
     className: "connect-wallet-mobile-modal",
     title: "Network & Wallet",
-    visible: b,
+    visible: g,
     onCancel: r,
     children: /* @__PURE__ */ o(i, {
       children: [s && /* @__PURE__ */ o(i, {
@@ -114,10 +114,10 @@ const F = (t, c, a) => t ? a.some((r) => r.name === c.name) ? /* @__PURE__ */ o(
         gutter: f,
         children: [window.ethereum && /* @__PURE__ */ n(u, {
           span: "24",
-          children: C("Metamask", g.Injected, B)
+          children: C("Metamask", b.Injected, B)
         }), /* @__PURE__ */ n(u, {
           span: "24",
-          children: C("WalletConnect", g.WalletConnect, S)
+          children: C("WalletConnect", b.WalletConnect, S)
         })]
       })]
     })
@@ -127,3 +127,4 @@ export {
   D as WALLETTYPE,
   U as default
 };
+//# sourceMappingURL=connectModalMobile.221b37b5.mjs.map

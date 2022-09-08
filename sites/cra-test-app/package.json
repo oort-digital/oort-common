@@ -23,9 +23,10 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build_site": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "rm": "rimraf node_modules"
   },
   "eslintConfig": {
     "extends": [

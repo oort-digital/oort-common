@@ -26,10 +26,11 @@ export default defineConfig({
                     'react-dom': 'ReactDOM',
                     'styled-components': 'styled',
                 },
+                sourcemap: true
             },
-            plugins: [commonjs({
-                transformMixedEsModules: true
-            })]
+            plugins: [
+                //commonjs({ transformMixedEsModules: true})
+            ]
         },
     },
 });
