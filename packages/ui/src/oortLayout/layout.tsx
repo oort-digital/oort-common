@@ -4,7 +4,7 @@ import { ConnectorNames, IConnector } from "@oort/web3-connectors";
 import { FooterMenu } from "./footerMenu";
 import styles from './layout.module.css';
 import { LogoLink } from "./logoLink";
-import { NavMenu } from "./navMenu";
+import { IMenuItemHref, NavMenu } from "./navMenu";
 
 interface IProps {
     chain: IChain | undefined
@@ -13,6 +13,7 @@ interface IProps {
     isDarkMode: boolean
     onThemeChange: (isDarkMode: boolean) => void
     supportedChains: IChain[]
+    menuHrefs: IMenuItemHref[]
     canSwitchChain: boolean
     connectorName: ConnectorNames
     supportedConnectors: { [name: string]: IConnector }
@@ -22,7 +23,7 @@ interface IProps {
 
 export const Layout = (props: IProps) => {
 
-    const { children, chain, account, isDarkMode, onThemeChange, supportedChains, switchChain, canSwitchChain, connectAsync, connectorName, supportedConnectors } = props
+    const { menuHrefs, children, chain, account, isDarkMode, onThemeChange, supportedChains, switchChain, canSwitchChain, connectAsync, connectorName, supportedConnectors } = props
 
     const renderFooter = () => {
         if(!chain || !account) { return null }
@@ -45,7 +46,7 @@ export const Layout = (props: IProps) => {
 
         <div className={styles.sider}>
             <LogoLink className={styles.logo} v="3.0" />
-            <NavMenu />
+            <NavMenu menuHrefs={menuHrefs}/>
 
             {renderFooter()}
         </div>

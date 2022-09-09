@@ -1,9 +1,10 @@
 import React from 'react';
+// import './layout.stories.less';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectorNames, IConnector, InjectedConnector, WalletConnectConnector } from "@oort/web3-connectors";
 import { logger } from "@oort/logger";
-
 import { Layout } from './layout';
+import { IMenuItemHref, MenuItemId } from "./navMenu";
 import { ZERO_ADDR } from '../extensions';
 
 
@@ -26,6 +27,22 @@ export default {
 const Template: ComponentStory<typeof Layout> = (args) => <Layout {...args} />;
 
 
+const menuHrefs: IMenuItemHref[] = [
+{
+  id: MenuItemId.Dasboard,
+  href: 'https://localhost'
+},
+
+{
+  id: MenuItemId.Rent,
+  href: 'https://app.oort.digital'
+},
+
+{
+  id: MenuItemId.Mint,
+  href: 'https://mint.oort.digital'
+}
+]
 
 const supportedChains = [
 {
@@ -50,7 +67,7 @@ const supportedChains = [
 
 const supportedConnectors: { [name: string]: IConnector } = {}
 supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
-debugger
+
 supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)//new WalletConnectConnector(logger, supportedChains)
 
 export const Primary = Template.bind({});
@@ -59,7 +76,8 @@ Primary.args = {
   chain: supportedChains[0],
   account: ZERO_ADDR,
   supportedChains: supportedChains,
-  supportedConnectors: supportedConnectors
+  supportedConnectors: supportedConnectors,
+  menuHrefs: menuHrefs
 };
 /*
 export const Secondary = Template.bind({});
