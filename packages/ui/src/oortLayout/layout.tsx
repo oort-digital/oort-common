@@ -1,10 +1,10 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { IChain } from "../typesAndInterfaces";
 import { ConnectorNames, IConnector } from "@oort/web3-connectors";
 import { FooterMenu } from "./footerMenu";
 import styles from './layout.module.css';
 import { LogoLink } from "./logoLink";
-import { IMenuItemHref, NavMenu } from "./navMenu";
+import { INavItems, NavMenu } from "./navMenu";
 
 interface IProps {
     chain: IChain | undefined
@@ -13,7 +13,7 @@ interface IProps {
     isDarkMode: boolean
     onThemeChange: (isDarkMode: boolean) => void
     supportedChains: IChain[]
-    menuHrefs: IMenuItemHref[]
+    navItems: INavItems
     canSwitchChain: boolean
     connectorName: ConnectorNames
     supportedConnectors: { [name: string]: IConnector }
@@ -23,7 +23,7 @@ interface IProps {
 
 export const Layout = (props: IProps) => {
 
-    const { menuHrefs, children, chain, account, isDarkMode, onThemeChange, supportedChains, switchChain, canSwitchChain, connectAsync, connectorName, supportedConnectors } = props
+    const { navItems, children, chain, account, isDarkMode, onThemeChange, supportedChains, switchChain, canSwitchChain, connectAsync, connectorName, supportedConnectors } = props
 
     const renderFooter = () => {
         if(!chain || !account) { return null }
@@ -46,7 +46,7 @@ export const Layout = (props: IProps) => {
 
         <div className={styles.sider}>
             <LogoLink className={styles.logo} v="3.0" />
-            <NavMenu menuHrefs={menuHrefs}/>
+            <NavMenu navItems={navItems}/>
 
             {renderFooter()}
         </div>

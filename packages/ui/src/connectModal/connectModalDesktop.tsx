@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { IChain } from "../typesAndInterfaces"
 import { Col, Row } from 'antd'
 import "./connectModalDesktop.less"
@@ -9,7 +9,6 @@ import { Gutter } from 'antd/lib/grid/row';
 import { ChainButton } from './chainButton';
 import { ConnectorNames, IConnector } from '@oort/web3-connectors';
 import { OortModal } from '../oortModal';
-import { ConnectModal } from './connectModal';
 
 export enum WALLETTYPE {
 	WALLET_METAMASK,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './footerMenu.module.css';
 import { Menu, MenuItem, MenuItemBtn } from './menu';
 import { getChainIcon } from '../utils';

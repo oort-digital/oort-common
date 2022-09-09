@@ -1,4 +1,3 @@
-import React from "react";
 import { OortLogoIcon } from "../icons";
 import styles from './logoLink.module.css';
 

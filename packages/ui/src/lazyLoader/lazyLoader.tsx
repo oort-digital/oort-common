@@ -1,4 +1,3 @@
-import React from 'react';
 import { ReactNode, Suspense } from "react"
 import { DeviceType, useDeviceType } from "../effects"
 

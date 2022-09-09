@@ -1,4 +1,3 @@
-import React from 'react'
 import * as blockies from 'blockies-ts'
 
 interface IProps {

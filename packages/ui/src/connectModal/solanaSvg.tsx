@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react"
+import { CSSProperties } from "react"
 
 const st0: CSSProperties = { fill: 'url(#SVGID_1_)' }
 const st1: CSSProperties = { fill: 'url(#SVGID_2_)' }

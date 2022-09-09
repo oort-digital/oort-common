@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import { ReactNode } from "react"
 import { Drawer } from "antd"
 import "./oortModalMobile.less"
 import { CloseCircleIcon } from "../icons"

@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import { lazy } from 'react'
 import { LazyLoader } from '../lazyLoader';
 import { ConnectorNames, IConnector } from '@oort/web3-connectors';
 import { IChain } from '../typesAndInterfaces';

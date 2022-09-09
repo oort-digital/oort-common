@@ -1,6 +1,5 @@
 import './chainSelect.less';
 import { Select } from "antd";
-import React from "react";
 import BscSvg from './bscSvg';
 import EthSvg from './ethSvg';
 import MaticSvg from './maticSvg';

@@ -1,10 +1,10 @@
-import React from 'react';
+
 // import './layout.stories.less';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ConnectorNames, IConnector, InjectedConnector, WalletConnectConnector } from "@oort/web3-connectors";
+import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
 import { logger } from "@oort/logger";
 import { Layout } from './layout';
-import { IMenuItemHref, MenuItemId } from "./navMenu";
+import { INavItems } from "./navMenu";
 import { ZERO_ADDR } from '../extensions';
 
 
@@ -26,24 +26,20 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Layout> = (args) => <Layout {...args} />;
 
+const navItems: INavItems = {
 
-const menuHrefs: IMenuItemHref[] = [
-{
-  id: MenuItemId.Dasboard,
-  href: 'https://localhost'
-},
-
-{
-  id: MenuItemId.Rent,
-  href: 'https://app.oort.digital',
-  isActive: true
-},
-
-{
-  id: MenuItemId.Mint,
-  href: 'https://mint.oort.digital'
+  dashboard: {
+    href: 'https://localhost'
+  },
+  mint: {
+    href: 'https://mint.oort.digital'
+  },
+  rent: {
+    href: 'https://app.oort.digital',
+    isActive: true
+  }
 }
-]
+
 
 const supportedChains = [
 {
@@ -78,7 +74,7 @@ Primary.args = {
   account: ZERO_ADDR,
   supportedChains: supportedChains,
   supportedConnectors: supportedConnectors,
-  menuHrefs: menuHrefs
+  navItems: navItems
 };
 /*
 export const Secondary = Template.bind({});

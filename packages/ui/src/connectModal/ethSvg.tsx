@@ -1,4 +1,3 @@
-import React from "react"
 
 const EthSvg = (props: { size: number }) => <svg
 x="0px"

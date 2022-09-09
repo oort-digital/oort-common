@@ -1,5 +1,4 @@
 import Icon from '@ant-design/icons';
-import React from 'react';
 
 interface IProps {
     height?: number | string | undefined

@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "typings.d.ts"],
+  "exclude": ["**/*.stories.tsx"],
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "./dist",

@@ -1,7 +1,6 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { DashboardIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
-import { logger } from "@oort/logger";
 import styles from './navMenu.module.css';
 
 export enum MenuItemId {
@@ -10,61 +9,50 @@ export enum MenuItemId {
     Mint = 'mint'
 }
 
-export interface IMenuItemHref {
-    id: MenuItemId
+export interface INavItem {
     href: string
     isActive?: boolean
 }
 
-interface IProps {
-    className?: string,
-    menuHrefs: IMenuItemHref[]
-}
-
-interface IMenuItem {
-    id: MenuItemId
+interface INavItemInternal {
     caption: string
     icon: ReactNode
 }
 
-var MenuItemsMap: { [id: string]: IMenuItem; } = { }
-
-MenuItemsMap[MenuItemId.Dasboard] = {
-    id: MenuItemId.Dasboard,
-    caption: 'dashboard',
-    icon: <DashboardIcon />
+export interface INavItems {
+    dashboard: INavItem
+    rent: INavItem
+    mint: INavItem
 }
 
-MenuItemsMap[MenuItemId.Rent] = {
-    id: MenuItemId.Rent,
-    caption: 'rent app',
-    icon: <RentAppIcon />
-}
-MenuItemsMap[MenuItemId.Mint] = {
-    id: MenuItemId.Mint,
-    caption: 'mint',
-    icon: <MintIcon />
+interface IProps {
+    className?: string,
+    navItems: INavItems
 }
 
-const RenderMenuItem = (miHref: IMenuItemHref) => {
-
-    const { id, href, isActive } = miHref
-
-    const item = MenuItemsMap[id]
-
-    if(!item) {
-        logger.warn(`Item ${id} not found`)
-        return null
+var navItemsInternal = {
+    dashboard: {
+        caption: 'dashboard',
+        icon: <DashboardIcon />
+    },
+    rent: {
+        caption: 'rent app',
+        icon: <RentAppIcon />
+    },
+    mint: {
+        caption: 'mint',
+        icon: <MintIcon />
     }
+}
 
+const RenderMenuItem = ({ href, isActive }: INavItem, { caption, icon }: INavItemInternal) => {
     const activeCss = isActive ? styles.active : ''
-
-    const { caption, icon } = item
-
     const i = <span className={styles.icon}>{icon}</span>
     return <MenuItemLink key={caption} className={activeCss} href={href} caption={caption} icon={i} />
 }
 
-export const NavMenu = ({ className, menuHrefs }: IProps) => <Menu className={`${styles.root} ${className || ''}`}>
-    {menuHrefs.map(it => RenderMenuItem(it))}
+export const NavMenu = ({ className, navItems }: IProps) => <Menu className={`${styles.root} ${className || ''}`}>
+    {RenderMenuItem(navItems.dashboard, navItemsInternal.dashboard)}
+    {RenderMenuItem(navItems.rent, navItemsInternal.rent)}
+    {RenderMenuItem(navItems.mint, navItemsInternal.mint)}
 </Menu>

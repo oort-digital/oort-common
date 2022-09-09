@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from "antd"
 import {IChain} from "../typesAndInterfaces"
 import "./chainButton.less"

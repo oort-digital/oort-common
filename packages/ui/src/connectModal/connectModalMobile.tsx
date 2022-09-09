@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { Col, Row } from 'antd'
 import "./connectModalMobile.less"
 

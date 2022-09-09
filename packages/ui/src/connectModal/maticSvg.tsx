@@ -1,4 +1,3 @@
-import React from "react"
 
 const MaticSvg = (props: { size: number }) => <svg version="1.1"
 height={props.size}
