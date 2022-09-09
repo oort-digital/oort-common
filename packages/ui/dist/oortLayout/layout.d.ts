@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { IChain } from "../typesAndInterfaces";
 import { ConnectorNames, IConnector } from "@oort/web3-connectors";
+import { IMenuItemHref } from "./navMenu";
 interface IProps {
     chain: IChain | undefined;
     account: string;
@@ -8,6 +9,7 @@ interface IProps {
     isDarkMode: boolean;
     onThemeChange: (isDarkMode: boolean) => void;
     supportedChains: IChain[];
+    menuHrefs: IMenuItemHref[];
     canSwitchChain: boolean;
     connectorName: ConnectorNames;
     supportedConnectors: {

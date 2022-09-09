@@ -1,7 +1,17 @@
 /// <reference types="react" />
+export declare enum MenuItemId {
+    Dasboard = "dasboard",
+    Rent = "rent",
+    Mint = "mint"
+}
+export interface IMenuItemHref {
+    id: MenuItemId;
+    href: string;
+}
 interface IProps {
     className?: string;
+    menuHrefs: IMenuItemHref[];
 }
-export declare const NavMenu: ({ className }: IProps) => JSX.Element;
+export declare const NavMenu: ({ className, menuHrefs }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=navMenu.d.ts.map
