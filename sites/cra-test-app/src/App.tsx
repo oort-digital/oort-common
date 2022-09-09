@@ -3,7 +3,15 @@ import logo from './logo.svg';
 import './App.css';
 import { WalletConnectConnector } from '@oort/web3-connectors';
 import { logger } from '@oort/logger';
-import { BlockieAddress } from '@oort/ui';
+import { BlockieAddress, MenuItemId, IMenuItemHref } from '@oort/ui';
+
+
+
+const menuItemId = MenuItemId.Rent
+const menuItemHref: IMenuItemHref = {
+  id: MenuItemId.Rent,
+  href: ''
+}
 
 try {
   const wc = new WalletConnectConnector(logger, [{

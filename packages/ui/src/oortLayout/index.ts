@@ -1,2 +1,3 @@
 export { Layout } from "./layout"
-export type { IMenuItemHref, MenuItemId } from "./navMenu"
+export type { IMenuItemHref } from "./navMenu"
+export { MenuItemId } from "./navMenu"
