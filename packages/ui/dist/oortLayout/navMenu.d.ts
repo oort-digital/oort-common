@@ -7,6 +7,7 @@ export declare enum MenuItemId {
 export interface IMenuItemHref {
     id: MenuItemId;
     href: string;
+    isActive?: boolean;
 }
 interface IProps {
     className?: string;
