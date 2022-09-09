@@ -13,6 +13,7 @@ export enum MenuItemId {
 export interface IMenuItemHref {
     id: MenuItemId
     href: string
+    isActive?: boolean
 }
 
 interface IProps {
@@ -45,10 +46,9 @@ MenuItemsMap[MenuItemId.Mint] = {
     icon: <MintIcon />
 }
 
-const RenderMenuItem = (miHref: IMenuItemHref, curHost: string) => {
+const RenderMenuItem = (miHref: IMenuItemHref) => {
 
-    debugger
-    const { id, href } = miHref
+    const { id, href, isActive } = miHref
 
     const item = MenuItemsMap[id]
 
@@ -57,9 +57,7 @@ const RenderMenuItem = (miHref: IMenuItemHref, curHost: string) => {
         return null
     }
 
-    const url = new URL(href)
-
-    const activeCss = url.hostname === curHost ? styles.active : ''
+    const activeCss = isActive ? styles.active : ''
 
     const { caption, icon } = item
 
@@ -67,10 +65,6 @@ const RenderMenuItem = (miHref: IMenuItemHref, curHost: string) => {
     return <MenuItemLink key={caption} className={activeCss} href={href} caption={caption} icon={i} />
 }
 
-export const NavMenu = ({ className, menuHrefs }: IProps) => {
-
-    const curHost = window.location.hostname
-    return <Menu className={`${styles.root} ${className || ''}`}>
-    {menuHrefs.map(it => RenderMenuItem(it, curHost))}
-    </Menu>
-}
+export const NavMenu = ({ className, menuHrefs }: IProps) => <Menu className={`${styles.root} ${className || ''}`}>
+    {menuHrefs.map(it => RenderMenuItem(it))}
+</Menu>

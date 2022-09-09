@@ -35,7 +35,8 @@ const menuHrefs: IMenuItemHref[] = [
 
 {
   id: MenuItemId.Rent,
-  href: 'https://app.oort.digital'
+  href: 'https://app.oort.digital',
+  isActive: true
 },
 
 {
