@@ -1,16 +1,7 @@
 /// <reference types="react" />
 import { IChain } from '../typesAndInterfaces';
 import { ConnectorNames, IConnector } from '@oort/web3-connectors';
-export declare const TWITTER = "https://twitter.com/OortDigital";
-export declare const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
-export declare const TELEGRAM = "https://t.me/oortdigital";
-interface IProps {
-    className?: string;
-    isDarkMode: boolean;
-    onThemeChange: (isDarkMode: boolean) => void;
-    chain: IChain;
-    supportedChains: IChain[];
-    account: string;
+export interface IWeb3 {
     canSwitchChain: boolean;
     connectorName: ConnectorNames;
     supportedConnectors: {
@@ -18,7 +9,14 @@ interface IProps {
     };
     switchChain: (newChainId: number) => Promise<void>;
     connectAsync: (connectorName: ConnectorNames) => Promise<void>;
+    supportedChains: IChain[];
+    chain: IChain;
+    account: string;
 }
-export declare const FooterMenu: (props: IProps) => JSX.Element;
+interface IProps {
+    className?: string;
+    web3?: IWeb3;
+}
+export declare const FooterMenu: ({ className, web3 }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=footerMenu.d.ts.map

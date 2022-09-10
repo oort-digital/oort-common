@@ -1,23 +1,11 @@
 import { ReactNode } from "react";
-import { IChain } from "../typesAndInterfaces";
-import { ConnectorNames, IConnector } from "@oort/web3-connectors";
+import { IWeb3 } from "./footerMenu";
 import { INavItems } from "./navMenu";
 interface IProps {
-    chain: IChain | undefined;
-    account: string;
     children: ReactNode;
-    isDarkMode: boolean;
-    onThemeChange: (isDarkMode: boolean) => void;
-    supportedChains: IChain[];
     navItems: INavItems;
-    canSwitchChain: boolean;
-    connectorName: ConnectorNames;
-    supportedConnectors: {
-        [name: string]: IConnector;
-    };
-    switchChain: (newChainId: number) => Promise<void>;
-    connectAsync: (connectorName: ConnectorNames) => Promise<void>;
+    web3?: IWeb3;
 }
-export declare const Layout: (props: IProps) => JSX.Element;
+export declare const Layout: ({ navItems, children, web3 }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=layout.d.ts.map
