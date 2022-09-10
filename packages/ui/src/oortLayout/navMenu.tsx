@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { DashboardIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
-import styles from './navMenu.module.css';
+import styles from './navMenu.module.less';
 
 export enum MenuItemId {
     Dasboard = 'dasboard',

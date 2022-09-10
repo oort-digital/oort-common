@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './footerMenu.module.css';
+import styles from './footerMenu.module.less';
 import { Menu, MenuItem, MenuItemBtn } from './menu';
 import { getChainIcon } from '../utils';
 import { ChevronSortIcon, DiscordIcon, TelegramIcon, TwitterIcon } from '../icons';

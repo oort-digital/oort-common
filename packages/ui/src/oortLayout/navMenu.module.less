@@ -1,8 +1,11 @@
+@import "../styles/palette.less";
+@import "../styles/theme/vars.less";
+
 .root > li.active {
     padding-left: 16px;
-    border-left: 8px solid #2fb4ac;
+    border-left: 8px solid @primary-6;
     /* Dark / 3 */
-    background: #222831;
+    background: @theme-color-3;
     box-shadow: inset 4px 0px 0px #2FB4AC;
 }
 
@@ -11,7 +14,7 @@
     font-weight: 500;
     line-height: 22px;
     /* Dark/13 */
-    color: #F2F3F5;
+    color: @theme-color-13;
 }
 
 .root > li > a > .icon {
@@ -21,5 +24,5 @@
 }
 
 .root > li.active > a > .icon {
-    color: #2fb4ac;
+    color: @primary-6;
 }

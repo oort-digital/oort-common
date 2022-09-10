@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import styles from './menu.module.css';
+import styles from './menu.module.less';
 
 
 interface IMenuItemBtnProps {

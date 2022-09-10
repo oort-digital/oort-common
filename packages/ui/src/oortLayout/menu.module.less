@@ -1,10 +1,12 @@
+@import "../styles/theme/vars.less";
+
 .root { padding: 0; margin: 0; }
 
 .root > li {
     list-style-type: none;
     padding: 16px 24px;
     /* Dark / 4 */
-    border-bottom: 1px solid #252E36;
+    border-bottom: 1px solid @theme-color-4;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -18,8 +20,7 @@
     line-height: 16px;
     display: flex;
     align-items: center;
-    /* Dark / 7 */
-    color: #6E7882;
+    color: @theme-color-7;
     text-transform: capitalize;
 }
 
@@ -29,8 +30,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;
-    /* Dark / 7 */
-    color: #6E7882;
+    color: @theme-color-7;
 }
 
 .root > li > .btn_icon_after {
