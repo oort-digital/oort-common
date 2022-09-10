@@ -1,5 +1,9 @@
 
-// import './layout.stories.less';
+import "../styles/antOverride.less";
+import "../styles/fonts.css";
+import '@oort/ui/dist/style.css';
+// import '../oortLib.less';
+
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
 import { logger } from "@oort/logger";
@@ -70,11 +74,19 @@ supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  chain: supportedChains[0],
-  account: ZERO_ADDR,
-  supportedChains: supportedChains,
-  supportedConnectors: supportedConnectors,
-  navItems: navItems
+
+  navItems: navItems,
+  web3: {
+    canSwitchChain: true,
+    connectorName: ConnectorNames.Injected,
+    switchChain: async (newChainId: number) => {},
+    connectAsync: async (connectorName: ConnectorNames) => {},
+    chain: supportedChains[0],
+    account: ZERO_ADDR,
+    supportedChains: supportedChains,
+    supportedConnectors: supportedConnectors,
+
+  }
 };
 /*
 export const Secondary = Template.bind({});

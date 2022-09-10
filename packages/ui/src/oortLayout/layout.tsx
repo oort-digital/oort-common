@@ -6,27 +6,30 @@ import styles from './layout.module.css';
 import { LogoLink } from "./logoLink";
 import { INavItems, NavMenu } from "./navMenu";
 
-interface IProps {
-    chain: IChain | undefined
-    account: string
-    children: ReactNode
-    isDarkMode: boolean
-    onThemeChange: (isDarkMode: boolean) => void
-    supportedChains: IChain[]
-    navItems: INavItems
+export interface IWeb3 {
     canSwitchChain: boolean
     connectorName: ConnectorNames
     supportedConnectors: { [name: string]: IConnector }
     switchChain: (newChainId: number) => Promise<void>
     connectAsync: (connectorName: ConnectorNames) => Promise<void>
+    supportedChains: IChain[]
+    chain: IChain
+    account: string
 }
 
-export const Layout = (props: IProps) => {
+interface IProps {
+    children: ReactNode
+    isDarkMode: boolean
+    onThemeChange: (isDarkMode: boolean) => void
+    navItems: INavItems
+    web3?: IWeb3
+}
 
-    const { navItems, children, chain, account, isDarkMode, onThemeChange, supportedChains, switchChain, canSwitchChain, connectAsync, connectorName, supportedConnectors } = props
+export const Layout = ({ navItems, children, web3, isDarkMode, onThemeChange }: IProps) => {
 
     const renderFooter = () => {
-        if(!chain || !account) { return null }
+        if(!web3) { return null }
+        const { chain, account, supportedChains, switchChain, canSwitchChain, connectAsync, connectorName, supportedConnectors } = web3
         return <FooterMenu
             isDarkMode={isDarkMode}
             onThemeChange={onThemeChange}
