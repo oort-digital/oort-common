@@ -8,6 +8,7 @@ import { IChain } from '../typesAndInterfaces';
 import { ConnectModal } from '../connectModal';
 import { ConnectorNames, IConnector } from '@oort/web3-connectors';
 import { BlockieAddress } from '../blockieAddress';
+import { useTheme } from '../effects';
 
 const TWITTER = "https://twitter.com/OortDigital";
 const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
@@ -26,8 +27,6 @@ export interface IWeb3 {
 
 interface IProps {
     className?: string
-    isDarkMode: boolean
-    onThemeChange: (isDarkMode: boolean) => void
     web3?: IWeb3
 }
 
@@ -39,9 +38,11 @@ const social = <>
 
 
 
-export const FooterMenu = ({ className, web3, isDarkMode, onThemeChange }: IProps) => {
+export const FooterMenu = ({ className, web3 }: IProps) => {
 
     const [ connectModalVisible, setConnectModalVisible ] = useState(false)
+
+    const [ isDarkMode, setDarkMode ] = useTheme()
 
     const renderConnectModal = () => {
         const { supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = web3!
@@ -81,7 +82,7 @@ export const FooterMenu = ({ className, web3, isDarkMode, onThemeChange }: IProp
             <MenuItem key="social" className={styles.social}>{social}</MenuItem>
             {renderWeb3()}
             <MenuItem key="theme-switch">
-                <ThemeSwitch isDarkMode={isDarkMode} onChange={onThemeChange} />
+                <ThemeSwitch isDarkMode={isDarkMode} onChange={() => setDarkMode(!isDarkMode)} />
                 <span className={styles.theme_name}>{isDarkMode ? 'light' : 'dark'}</span>
             </MenuItem>
         </Menu>

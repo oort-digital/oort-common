@@ -10,7 +10,11 @@ import { logger } from "@oort/logger";
 import { Layout } from './layout';
 import { INavItems } from "./navMenu";
 import { ZERO_ADDR } from '../extensions';
+import { lazy } from "react";
+import { useTheme } from "../effects";
 
+const DarkTheme = lazy(() => import("../styles/theme/darkTheme"));
+const LightTheme = lazy(() => import("../styles/theme/lightTheme"));
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -28,7 +32,15 @@ export default {
 } as ComponentMeta<typeof Layout>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Layout> = (args) => <Layout {...args} />;
+const Template: ComponentStory<typeof Layout> = (args) => {
+
+  const [isDark] = useTheme()
+
+  return <>
+    { isDark ? <DarkTheme /> : <LightTheme /> }
+    <Layout {...args} />
+  </>
+}
 
 const navItems: INavItems = {
 
@@ -43,7 +55,6 @@ const navItems: INavItems = {
     isActive: true
   }
 }
-
 
 const supportedChains = [
 {
@@ -66,8 +77,6 @@ const supportedChains = [
   }
 }]
 
-
-
 const supportedConnectors: { [name: string]: IConnector } = {}
 supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
 supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)
@@ -86,7 +95,7 @@ const web3 = {
 export const WithWeb3 = Template.bind({});
 WithWeb3.args = {
   navItems: navItems,
-  web3: web3
+  web3: web3,
 };
 
 export const WithoutWeb3 = Template.bind({});
