@@ -9,22 +9,26 @@ import { ConnectModal } from '../connectModal';
 import { ConnectorNames, IConnector } from '@oort/web3-connectors';
 import { BlockieAddress } from '../blockieAddress';
 
-export const TWITTER = "https://twitter.com/OortDigital";
-export const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
-export const TELEGRAM = "https://t.me/oortdigital";
+const TWITTER = "https://twitter.com/OortDigital";
+const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
+const TELEGRAM = "https://t.me/oortdigital";
 
-interface IProps {
-    className?: string
-    isDarkMode: boolean
-    onThemeChange: (isDarkMode: boolean) => void
-    chain: IChain
-    supportedChains: IChain[]
-    account: string
+export interface IWeb3 {
     canSwitchChain: boolean
     connectorName: ConnectorNames
     supportedConnectors: { [name: string]: IConnector }
     switchChain: (newChainId: number) => Promise<void>
     connectAsync: (connectorName: ConnectorNames) => Promise<void>
+    supportedChains: IChain[]
+    chain: IChain
+    account: string
+}
+
+interface IProps {
+    className?: string
+    isDarkMode: boolean
+    onThemeChange: (isDarkMode: boolean) => void
+    web3?: IWeb3
 }
 
 const social = <>
@@ -35,14 +39,12 @@ const social = <>
 
 
 
-export const FooterMenu = (props: IProps) => {
-
-    const { className, chain, account, isDarkMode, onThemeChange } = props
+export const FooterMenu = ({ className, web3, isDarkMode, onThemeChange }: IProps) => {
 
     const [ connectModalVisible, setConnectModalVisible ] = useState(false)
 
-    const showConnectModal = () => {
-        const { supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = props
+    const renderConnectModal = () => {
+        const { supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = web3!
         return <ConnectModal
             onCancel={() => setConnectModalVisible(false)}
             visible={connectModalVisible}
@@ -57,21 +59,27 @@ export const FooterMenu = (props: IProps) => {
         />
     }
 
+    const renderWeb3 = () => {
+        if(!web3) { return null }
+
+        const { account, chain } = web3
+        const { chainId, name } = chain
+        const chainIcon = <span className={styles.icon_before}>{getChainIcon(chainId, 20, 20)}</span>
+        const accountImg = <BlockieAddress address={account} className={styles.account_img}/>
+        const afterIcon = <span className={styles.icon_after}><ChevronSortIcon /></span>
+        return <>
+            {renderConnectModal()}
+            <MenuItemBtn key="chain" iconBefore={chainIcon} iconAfter={afterIcon} caption={name} />
+            <MenuItemBtn key="account" onClick={() => setConnectModalVisible(true)} iconBefore={accountImg} iconAfter={afterIcon} caption={account.toMasskedAddress()} />
+        </>
+    }
 
     const cssClass = className ? `${className} ${styles.root}`: styles.root
 
-    const { chainId, name } = chain
-
-    const chainIcon = <span className={styles.icon_before}>{getChainIcon(chainId, 20, 20)}</span>
-    const accountImg = <BlockieAddress address={account} className={styles.account_img}/>
-    const afterIcon = <span className={styles.icon_after}><ChevronSortIcon /></span>
-    
     return <>
-        {showConnectModal()}
         <Menu className={cssClass}>
             <MenuItem key="social" className={styles.social}>{social}</MenuItem>
-            <MenuItemBtn key="chain" iconBefore={chainIcon} iconAfter={afterIcon} caption={name} />
-            <MenuItemBtn key="account" onClick={() => setConnectModalVisible(true)} iconBefore={accountImg} iconAfter={afterIcon} caption={account.toMasskedAddress()} />
+            {renderWeb3()}
             <MenuItem key="theme-switch">
                 <ThemeSwitch isDarkMode={isDarkMode} onChange={onThemeChange} />
                 <span className={styles.theme_name}>{isDarkMode ? 'light' : 'dark'}</span>
