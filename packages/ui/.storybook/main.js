@@ -1,45 +1,47 @@
-const { mergeConfig } = require('vite');
-
-const { NodeGlobalsPolyfillPlugin } = require('@esbuild-plugins/node-globals-polyfill')
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
 module.exports = {
+
+  webpackFinal: async (config, { configType }) => {
+    // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
+    // You can change the configuration based on that.
+    // 'PRODUCTION' is used when building the static version of storybook.
+
+    // Make whatever fine-grained changes you need
+    config.plugins.push(new NodePolyfillPlugin());
+
+    // Return the altered config
+    return config;
+  },
+
   "stories": [
     "../src/**/*.stories.mdx",
     "../src/**/*.stories.@(js|jsx|ts|tsx)"
   ],
   "addons": [
+    {
+      name: 'storybook-preset-less',
+      options: {
+        // cssLoaderOptions: {
+        //    modules: true,
+        //    localIdentName: '[name]__[local]--[hash:base64:5]',
+        // },
+        lessLoaderOptions: {
+          lessOptions: {
+            // strictMath: false,
+            // noIeCompat: true,
+            // relativeUrls: false,
+            javascriptEnabled: true,
+          },
+        },
+      },
+    },
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions"
   ],
   "framework": "@storybook/react",
   "core": {
-    "builder": "@storybook/builder-vite"
-  },
-  "features": {
-    "storyStoreV7": true
-  },
-
-  async viteFinal(config) {
-    // Merge custom configuration into the default config
-    return mergeConfig(config, {
-      // Use the same "resolve" configuration as your app
-      //resolve: (await import('../vite.config.js')).default.resolve,
-      // Add dependencies to pre-optimization
-      optimizeDeps: {
-        esbuildOptions: {
-          // Node.js global to browser globalThis
-          define: {
-              global: 'globalThis'
-          },
-          // Enable esbuild polyfill plugins
-          plugins: [
-              NodeGlobalsPolyfillPlugin({
-                  buffer: true
-              })
-          ]
-      }
-      },
-    });
-  },
+    "builder": "@storybook/builder-webpack5"
+  }
 }
