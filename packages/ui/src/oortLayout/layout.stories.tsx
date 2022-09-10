@@ -66,43 +66,30 @@ const supportedChains = [
   }
 }]
 
+
+
 const supportedConnectors: { [name: string]: IConnector } = {}
 supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
+supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)
 
-supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)//new WalletConnectConnector(logger, supportedChains)
+const web3 = {
+  canSwitchChain: true,
+  connectorName: ConnectorNames.Injected,
+  switchChain: async (newChainId: number) => {},
+  connectAsync: async (connectorName: ConnectorNames) => {},
+  chain: supportedChains[0],
+  account: ZERO_ADDR,
+  supportedChains: supportedChains,
+  supportedConnectors: supportedConnectors,
+}
 
-export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-
+export const WithWeb3 = Template.bind({});
+WithWeb3.args = {
   navItems: navItems,
-  web3: {
-    canSwitchChain: true,
-    connectorName: ConnectorNames.Injected,
-    switchChain: async (newChainId: number) => {},
-    connectAsync: async (connectorName: ConnectorNames) => {},
-    chain: supportedChains[0],
-    account: ZERO_ADDR,
-    supportedChains: supportedChains,
-    supportedConnectors: supportedConnectors,
-
-  }
-};
-/*
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'Button',
+  web3: web3
 };
 
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
+export const WithoutWeb3 = Template.bind({});
+WithoutWeb3.args = {
+  navItems: navItems
 };
-
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button',
-};
-*/
