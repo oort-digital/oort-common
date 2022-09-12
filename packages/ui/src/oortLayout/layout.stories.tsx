@@ -45,17 +45,17 @@ const Template: ComponentStory<typeof Layout> = (args) => {
 const navItems: INavItems = {
 
   dashboard: {
-    href: 'https://localhost'
+    href: 'https://localhost',
   },
   mint: {
-    href: 'https://mint.oort.digital'
+    href: 'https://mint.oort.digital',
+    isActive: true
   },
   rent: {
     href: 'https://app.oort.digital',
-    isActive: true
   },
   gameHub: {
-    href: 'https://app.oort.digital'
+    href: 'https://app.oort.digital',
   }
 }
 

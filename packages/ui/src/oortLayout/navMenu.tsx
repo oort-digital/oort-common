@@ -59,6 +59,6 @@ const RenderMenuItem = ({ href, isActive }: INavItem, { caption, icon }: INavIte
 export const NavMenu = ({ className, navItems }: IProps) => <Menu className={`${styles.root} ${className || ''}`}>
     {RenderMenuItem(navItems.dashboard, navItemsInternal.dashboard)}
     {RenderMenuItem(navItems.rent, navItemsInternal.rent)}
-    {RenderMenuItem(navItems.rent, navItemsInternal.gameHub)}
+    {RenderMenuItem(navItems.gameHub, navItemsInternal.gameHub)}
     {RenderMenuItem(navItems.mint, navItemsInternal.mint)}
 </Menu>
