@@ -53,6 +53,9 @@ const navItems: INavItems = {
   rent: {
     href: 'https://app.oort.digital',
     isActive: true
+  },
+  gameHub: {
+    href: 'https://app.oort.digital'
   }
 }
 

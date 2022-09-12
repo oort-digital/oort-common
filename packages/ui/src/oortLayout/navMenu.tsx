@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { DashboardIcon, MintIcon, RentAppIcon } from "../icons";
+import { DashboardIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
 import styles from './navMenu.module.less';
 
@@ -23,6 +23,7 @@ export interface INavItems {
     dashboard: INavItem
     rent: INavItem
     mint: INavItem
+    gameHub: INavItem
 }
 
 interface IProps {
@@ -42,6 +43,10 @@ var navItemsInternal = {
     mint: {
         caption: 'mint',
         icon: <MintIcon />
+    },
+    gameHub: {
+        caption: 'game hub',
+        icon: <GameHubIcon />
     }
 }
 
@@ -54,5 +59,6 @@ const RenderMenuItem = ({ href, isActive }: INavItem, { caption, icon }: INavIte
 export const NavMenu = ({ className, navItems }: IProps) => <Menu className={`${styles.root} ${className || ''}`}>
     {RenderMenuItem(navItems.dashboard, navItemsInternal.dashboard)}
     {RenderMenuItem(navItems.rent, navItemsInternal.rent)}
+    {RenderMenuItem(navItems.rent, navItemsInternal.gameHub)}
     {RenderMenuItem(navItems.mint, navItemsInternal.mint)}
 </Menu>
