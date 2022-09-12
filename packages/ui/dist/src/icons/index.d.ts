@@ -10,4 +10,5 @@ export { TwitterIcon } from "./twitterIcon";
 export { BscIcon } from "./bscIcon";
 export { PolygonIcon } from "./polygonIcon";
 export { EthIcon } from "./ethIcon";
+export { GameHubIcon } from "./gameHubIcon";
 //# sourceMappingURL=index.d.ts.map

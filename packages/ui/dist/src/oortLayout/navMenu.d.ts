@@ -12,6 +12,7 @@ export interface INavItems {
     dashboard: INavItem;
     rent: INavItem;
     mint: INavItem;
+    gameHub: INavItem;
 }
 interface IProps {
     className?: string;
