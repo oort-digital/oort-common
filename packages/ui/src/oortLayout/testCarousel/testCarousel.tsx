@@ -1,4 +1,3 @@
-// import { Carousel } from "antd";
 import imgSrc from "./topRatedImage.png"
 
 import { Carousel } from "./carousel"
