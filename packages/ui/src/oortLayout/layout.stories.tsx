@@ -12,6 +12,8 @@ import { INavItems } from "./navMenu";
 import { ZERO_ADDR } from '../extensions';
 import { lazy } from "react";
 import { useTheme } from "../effects";
+import { TestCarousel } from "./testCarousel";
+import { Col, Row } from "antd";
 
 const DarkTheme = lazy(() => import("../styles/theme/darkTheme"));
 const LightTheme = lazy(() => import("../styles/theme/lightTheme"));
@@ -95,10 +97,19 @@ const web3 = {
   supportedConnectors: supportedConnectors,
 }
 
+const content = <Row>
+  <Col span={24}>
+    <TestCarousel />
+  </Col>
+</Row>
+
 export const WithWeb3 = Template.bind({});
 WithWeb3.args = {
   navItems: navItems,
   web3: web3,
+  children: content
+  
+  
 };
 
 export const WithoutWeb3 = Template.bind({});
