@@ -13,15 +13,13 @@ interface IProps {
 export const Layout = ({ navItems, children, web3 }: IProps) => {
 
     return <div className={styles.root}>
-
-        <div className={styles.sider}>
-            <LogoLink className={styles.logo} v="3.0" />
-            <NavMenu navItems={navItems}/>
-            <FooterMenu
-                className={styles.footer}
-                web3={web3}
-                />
-        </div>
+        <aside className={styles.sider}>
+            <div>
+                <LogoLink className={styles.logo} v="3.0" />
+                <NavMenu navItems={navItems}/>
+                <FooterMenu className={styles.footer} web3={web3} />
+            </div>
+        </aside>
         
         <div className={styles.content}>
             {children}
