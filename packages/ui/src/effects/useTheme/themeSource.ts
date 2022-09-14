@@ -23,11 +23,31 @@ class LocalStorageSource implements IThemeSource {
 }
 
 
+class CookiesSource implements IThemeSource {
+    get isDarkMode(): boolean {
+      const json = localStorage.getItem(DARK_MODE)
+      if(!json) {
+        return false
+      }
+    
+      return JSON.parse(json) || false;
+    }
+    setDarkMode = (isDark: boolean) => {
+      localStorage.setItem(DARK_MODE, isDark.toString());
+    }
+}
+
+let cookiesSource: CookiesSource | undefined
+let localStorageSource: LocalStorageSource | undefined
+
 export function getThemeSource(sourceType: ThemeSourceType): IThemeSource {
 
   if(sourceType === "cookies") {
-
+    if(!cookiesSource) { cookiesSource = new CookiesSource() }
+    return cookiesSource
   }
 
-  return new LocalStorageSource()
+  if(!localStorageSource) { localStorageSource = new LocalStorageSource() }
+
+  return localStorageSource
 }
