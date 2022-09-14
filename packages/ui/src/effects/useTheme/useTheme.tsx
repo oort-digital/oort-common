@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getThemeSource, IThemeSource, ThemeSourceType } from "./themeSource";
 
-export const useTheme = (sourceType: ThemeSourceType = 'localstorage') => {
+export const useTheme = (sourceType: ThemeSourceType = 'cookies') => {
 
   const themeSource: IThemeSource = getThemeSource(sourceType)
 
