@@ -1,7 +1,7 @@
 import { useState as O } from "react";
 import { Row as g, Col as u } from "antd";
-import { a as k, C as p, b as T, M as B, W as D } from "./index.es.ae079b8b.mjs";
-import { j as n, O as S, a as t, F as i } from "./index.1dd0e1e4.mjs";
+import { a as k, C as p, b as T, M as B, W as D } from "./index.es.e0e81f78.mjs";
+import { j as n, O as S, a as t, F as i } from "./index.7acc1d01.mjs";
 import "ethers";
 var _ = /* @__PURE__ */ ((a) => (a[a.WALLET_METAMASK = 0] = "WALLET_METAMASK", a[a.WALLET_CONNECT = 1] = "WALLET_CONNECT", a))(_ || {});
 const F = (a, l, o) => a ? o.some((r) => r.name === l.name) ? /* @__PURE__ */ t(i, {
@@ -133,4 +133,4 @@ export {
   _ as WALLETTYPE,
   U as default
 };
-//# sourceMappingURL=connectModalDesktop.5f38f3f4.mjs.map
+//# sourceMappingURL=connectModalDesktop.cc71c672.mjs.map

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { getThemeSource, IThemeSource, ThemeSourceType } from "./themeSource";
 
-export const useTheme = (sourceType: ThemeSourceType = 'cookies') => {
 
+type SetFuncType = (isDark: boolean) => void
+
+export const useTheme = (sourceType: ThemeSourceType = 'cookies'): [boolean, SetFuncType] => {
   const themeSource: IThemeSource = getThemeSource(sourceType)
-
   const [darkMode, setDarkMode] = useState(themeSource.isDarkMode);
 
   useEffect(() => {
