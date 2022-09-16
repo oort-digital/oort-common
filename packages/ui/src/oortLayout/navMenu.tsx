@@ -98,8 +98,10 @@ export const NavMenu = ({ className, navItems }: IProps) => {
         {/* {RenderMenuItem(navItems.rent, navItemsInternal.rent)} */}
             <Collapse ghost expandIconPosition="right">
                 <Panel key="1" className={styles.collapse_panel} header={RenderPanelHeader(navItemsInternal.gameHub)}>
-                    {RenderItem(navItems.gameHub.games, navItemsInternal.gameHub.games)}
-                    {RenderItem(navItems.gameHub.nfts, navItemsInternal.gameHub.nfts)}
+                    <Menu isSubMenu={true}>
+                        {RenderItem(navItems.gameHub.games, navItemsInternal.gameHub.games)}
+                        {RenderItem(navItems.gameHub.nfts, navItemsInternal.gameHub.nfts)}
+                    </Menu>
                 </Panel>
             </Collapse>
 

@@ -56,10 +56,12 @@ export const MenuItem = ({ className, children }: IMenuItemProps) => {
 interface IProps {
     className?: string
     children: ReactNode[]
+    isSubMenu: boolean
 }
 
-export const Menu = ({ children, className }: IProps) => {
-    const cssClass = className ? `${styles.root} ${className}` : styles.root
+export const Menu = ({ children, className, isSubMenu = false }: IProps) => {
+    const rootClass = isSubMenu ? styles.sub_menu : styles.menu
+    const cssClass = className ? `${rootClass} ${className}` : rootClass
     return <ul className={cssClass}>
         {children.map(c => c)}
     </ul>
