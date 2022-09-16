@@ -1,7 +1,10 @@
+import { Collapse } from "antd";
 import { ReactNode } from "react";
 import { DashboardIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
 import styles from './navMenu.module.less';
+
+const { Panel } = Collapse;
 
 export enum MenuItemId {
     Dasboard = 'dasboard',
@@ -14,16 +17,26 @@ export interface INavItem {
     isActive?: boolean
 }
 
-interface INavItemInternal {
-    caption: string
-    icon: ReactNode
+export interface IRentNav {
+    lend: string
+    borrow: string
+    heroes: string
+    activities: string
+}
+
+export interface IGameHubNav {
+    games: string
+    nfts: string
 }
 
 export interface INavItems {
-    dashboard: INavItem
-    rent: INavItem
-    mint: INavItem
-    gameHub: INavItem
+    dashboard: string
+    rent: IRentNav
+    mint: string
+    gameHub: {
+        games: string
+        nfts: string
+    }
 }
 
 interface IProps {
@@ -31,14 +44,20 @@ interface IProps {
     navItems: INavItems
 }
 
+interface INavItemInternal {
+    caption: string
+    icon?: ReactNode
+}
+
 var navItemsInternal = {
     dashboard: {
         caption: 'dashboard',
-        icon: <DashboardIcon />
+        icon: <DashboardIcon />,
     },
     rent: {
         caption: 'rent app',
-        icon: <RentAppIcon />
+        icon: <RentAppIcon />,
+        subItems: []
     },
     mint: {
         caption: 'mint',
@@ -46,19 +65,45 @@ var navItemsInternal = {
     },
     gameHub: {
         caption: 'game hub',
-        icon: <GameHubIcon />
+        icon: <GameHubIcon />,
+        games: {
+            caption: 'games'
+        },
+        nfts: {
+            caption: 'Nfts'
+        }
+        
     }
 }
 
-const RenderMenuItem = ({ href, isActive }: INavItem, { caption, icon }: INavItemInternal) => {
-    const activeCss = isActive ? styles.active : ''
+const isHrefActive = (href: string) => {
+    return false
+}
+
+const RenderItem = (href: string, { caption, icon }: INavItemInternal) => {
+    const activeCss = isHrefActive(href) ? styles.active : ''
     const i = <span className={styles.icon}>{icon}</span>
     return <MenuItemLink key={caption} className={activeCss} href={href} caption={caption} icon={i} />
 }
 
-export const NavMenu = ({ className, navItems }: IProps) => <Menu className={`${styles.root} ${className || ''}`}>
-    {RenderMenuItem(navItems.dashboard, navItemsInternal.dashboard)}
-    {RenderMenuItem(navItems.rent, navItemsInternal.rent)}
-    {RenderMenuItem(navItems.gameHub, navItemsInternal.gameHub)}
-    {RenderMenuItem(navItems.mint, navItemsInternal.mint)}
-</Menu>
+const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
+    const i = <span className={styles.icon}>{icon}</span>
+    return <div className={styles.header}>{i}{caption}</div>
+
+}
+
+export const NavMenu = ({ className, navItems }: IProps) => {
+
+    return <Menu className={`${styles.root} ${className || ''}`}>
+        {RenderItem(navItems.dashboard, navItemsInternal.dashboard)}
+        {/* {RenderMenuItem(navItems.rent, navItemsInternal.rent)} */}
+            <Collapse ghost expandIconPosition="right">
+                <Panel key="1" className={styles.collapse_panel} header={RenderPanelHeader(navItemsInternal.gameHub)}>
+                    {RenderItem(navItems.gameHub.games, navItemsInternal.gameHub.games)}
+                    {RenderItem(navItems.gameHub.nfts, navItemsInternal.gameHub.nfts)}
+                </Panel>
+            </Collapse>
+
+        {/* {RenderMenuItem(navItems.mint, navItemsInternal.mint)} */}
+    </Menu>
+}
