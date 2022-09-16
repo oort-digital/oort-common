@@ -31,24 +31,21 @@
             padding: 0;
         }
     }
-    
-    .collapse_panel.active {
-        box-shadow: inset 4px 0px 0px #2FB4AC;
-    }
 
-    li.active {
-        /* Dark / 3 */
+    .active {
+
         background: @theme-color-3;
-        box-shadow: inset 4px 0px 0px #2FB4AC;
+        box-shadow: inset 4px 0px 0px @primary-6;
     
         & > a {
             .font-mixin;
-            /* Dark/13 */
             color: @theme-color-13;
-    
-            & > .icon {
-                color: @primary-6;
-            }
+        }
+
+        .icon {
+            color: @primary-6;
         }
     }
+
+    
 }
