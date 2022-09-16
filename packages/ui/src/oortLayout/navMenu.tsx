@@ -89,7 +89,6 @@ const RenderItem = (href: string, { caption, icon }: INavItemInternal) => {
 const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
     const i = <span className={styles.icon}>{icon}</span>
     return <div className={styles.header}>{i}{caption}</div>
-
 }
 
 export const NavMenu = ({ className, navItems }: IProps) => {

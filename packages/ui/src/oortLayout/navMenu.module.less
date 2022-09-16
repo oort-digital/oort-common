@@ -1,14 +1,14 @@
 @import "../styles/palette.less";
 @import "../styles/theme/vars.less";
 
-
-.font-mixin {
-    /* Body 14 – Medium */
-    font-weight: 500;
-    line-height: 22px;
-}
-
 .root {
+
+    .font-mixin {
+        /* Body 14 – Medium */
+        font-weight: 500;
+        line-height: 22px;
+    }
+    
 
     .icon {
         margin-right: 15px;
@@ -17,39 +17,33 @@
     }
 
     .collapse_panel {
-
         :global(.ant-collapse-header) {
-
             padding: 16px 24px;
             color: @theme-color-7;
-
             .header {
                 .font-mixin;
-                
                 display: inline-flex;
                 align-items: center;
                 text-transform: capitalize;
             }
         }
-        
-        
     }
-}
 
-.root > li.active {
-    padding-left: 16px;
-    border-left: 8px solid @primary-6;
-    /* Dark / 3 */
-    background: @theme-color-3;
-    box-shadow: inset 4px 0px 0px #2FB4AC;
-}
-
-.root > li.active > a {
-    .font-mixin;
-    /* Dark/13 */
-    color: @theme-color-13;
-}
-
-.root > li.active > a > .icon {
-    color: @primary-6;
+    & > li.active {
+        padding-left: 16px;
+        border-left: 8px solid @primary-6;
+        /* Dark / 3 */
+        background: @theme-color-3;
+        box-shadow: inset 4px 0px 0px #2FB4AC;
+    
+        & > a {
+            .font-mixin;
+            /* Dark/13 */
+            color: @theme-color-13;
+    
+            & > .icon {
+                color: @primary-6;
+            }
+        }
+    }
 }
