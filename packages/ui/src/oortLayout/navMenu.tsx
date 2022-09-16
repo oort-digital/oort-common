@@ -40,6 +40,8 @@ export interface INavItems {
 }
 
 interface IProps {
+    //for testing
+    isActiveFunc?: (href: string) => boolean
     className?: string,
     navItems: INavItems
 }
@@ -80,25 +82,29 @@ const isHrefActive = (href: string) => {
     return false
 }
 
-const RenderItem = (href: string, { caption, icon }: INavItemInternal) => {
-    const activeCss = isHrefActive(href) ? styles.active : ''
-    const i = <span className={styles.icon}>{icon}</span>
-    return <MenuItemLink key={caption} className={activeCss} href={href} caption={caption} icon={i} />
-}
+
 
 const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
     const i = <span className={styles.icon}>{icon}</span>
     return <div className={styles.header}>{i}{caption}</div>
 }
 
-export const NavMenu = ({ className, navItems }: IProps) => {
+export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
+
+    const isActive = isActiveFunc || isHrefActive;
+
+    const RenderItem = (href: string, { caption, icon }: INavItemInternal) => {
+        const activeCss = isActive(href) ? styles.active : ''
+        const i = <span className={styles.icon}>{icon}</span>
+        return <MenuItemLink key={caption} className={activeCss} href={href} caption={caption} icon={i} />
+    }
 
     return <Menu className={`${styles.root} ${className || ''}`}>
         {RenderItem(navItems.dashboard, navItemsInternal.dashboard)}
         {/* {RenderMenuItem(navItems.rent, navItemsInternal.rent)} */}
             <Collapse ghost expandIconPosition="right">
                 <Panel key="1" className={styles.collapse_panel} header={RenderPanelHeader(navItemsInternal.gameHub)}>
-                    <Menu isSubMenu={true}>
+                    <Menu>
                         {RenderItem(navItems.gameHub.games, navItemsInternal.gameHub.games)}
                         {RenderItem(navItems.gameHub.nfts, navItemsInternal.gameHub.nfts)}
                     </Menu>
