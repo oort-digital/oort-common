@@ -1,5 +1,4 @@
 import { Collapse } from "antd";
-import { ReactNode } from "react";
 import { DashboardIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
 import styles from './navMenu.module.less';
@@ -24,7 +23,7 @@ export interface INavItems {
         lend: string
         borrow: string
         heroes: string
-        activities: string
+        activity: string
     }
     gameHub: {
         games: string
@@ -41,7 +40,7 @@ interface IProps {
 
 interface INavItemInternal {
     caption: string
-    icon?: ReactNode
+    icon?: JSX.Element
 }
 
 const dashboardInternal = {
@@ -51,7 +50,12 @@ const dashboardInternal = {
 
 const rentInternal = {
     caption: 'rent app',
-    icon: <RentAppIcon />
+    icon: <RentAppIcon />,
+    lend: 'Lend',
+    borrow: 'Borrow',
+    heroes: 'Our own NFTs',
+    activity: 'Activity'
+
 }
 
 const mintInternal = {
@@ -62,12 +66,25 @@ const mintInternal = {
 const gameHubInternal = {
     caption: 'game hub',
     icon: <GameHubIcon />,
-    games: {
-        caption: 'games'
-    },
-    nfts: {
-        caption: 'Nfts'
-    }
+    games: 'Games',
+    nfts: "NFTs"
+}
+
+type StringMap = { [id: string]: string; } 
+const getChildCaptions = (item: INavItemInternal): StringMap => {
+
+    const map: StringMap = {}
+
+    Object.entries(item).forEach(kvp => {
+
+        const [ key, value ] = kvp
+
+        if(key !== 'caption' || kvp[0] !== 'icon') {
+            map[key] = value
+        }
+    })
+
+    return map
 }
 
 const isHrefActive = (href: string) => {
@@ -107,20 +124,31 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         return <MenuItemLink key={caption} className={activeCss} href={href} caption={caption} icon={i} />
     }
 
-    const { dashboard, gameHub } = navItems
+    const RenderCollapse = (rootItem: INavItemInternal, hrefMap: StringMap) => {
+        const childCaptionsMap = getChildCaptions(rootItem)
+        const hrefEntries = Object.entries(hrefMap)
+        const hrefs = hrefEntries.map(kvp => kvp[1])
 
-    return <Menu className={`${styles.root} ${className || ''}`}>
-        {RenderItem(dashboard, dashboardInternal)}
-        {/* {RenderMenuItem(navItems.rent, navItemsInternal.rent)} */}
-            <Collapse ghost expandIconPosition="end">
-                <Panel key="1" className={getPanelClass([gameHub.games, gameHub.nfts])} header={RenderPanelHeader(gameHubInternal)}>
+        return <Collapse ghost expandIconPosition="end">
+                <Panel key="1" className={getPanelClass(hrefs)} header={RenderPanelHeader(rootItem)}>
                     <Menu>
-                        {RenderItem(gameHub.games, gameHubInternal.games)}
-                        {RenderItem(gameHub.nfts, gameHubInternal.nfts)}
+                        {
+                            hrefEntries.map(kvp => {
+                                const [key, href] = kvp
+                                return RenderItem(href, { caption: childCaptionsMap[key] } )
+                            })
+                        }
                     </Menu>
                 </Panel>
             </Collapse>
+    }
 
-        {/* {RenderMenuItem(navItems.mint, navItemsInternal.mint)} */}
+    const { dashboard, rent, gameHub, mint } = navItems
+
+    return <Menu className={`${styles.root} ${className || ''}`}>
+        {RenderItem(dashboard, dashboardInternal)}
+        {RenderCollapse(rentInternal, rent)}
+        {RenderCollapse(gameHubInternal, gameHub)}
+        {RenderItem(mint, mintInternal)}
     </Menu>
 }
