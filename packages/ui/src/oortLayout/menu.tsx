@@ -59,7 +59,7 @@ interface IProps {
 }
 
 export const Menu = ({ children, className }: IProps) => {
-    const cssClass = className ? `${styles.root} ${className}` : styles.root
+    const cssClass = className ? `${styles.menu} ${className}` : styles.menu
     return <ul className={cssClass}>
         {children.map(c => c)}
     </ul>

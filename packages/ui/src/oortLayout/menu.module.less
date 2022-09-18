@@ -1,40 +1,42 @@
 @import "../styles/theme/vars.less";
 
-.root { padding: 0; margin: 0; }
+.menu {
+    padding: 0; margin: 0;
 
-.root > li {
-    list-style-type: none;
-    padding: 16px 24px;
-    /* Dark / 4 */
-    border-bottom: 1px solid @theme-color-4;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
+    & > li {
+        list-style-type: none;
+        padding: 16px 24px;
+        /* Dark / 4 */
+        border-bottom: 1px solid @theme-color-4;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
 
-.root > li > a {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    display: flex;
-    align-items: center;
-    color: @theme-color-7;
-    text-transform: capitalize;
-}
+        & > a {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16px;
+            display: flex;
+            align-items: center;
+            color: @theme-color-7;
+            text-transform: capitalize;
+        }
 
-.root > li > .btn_caption {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-    color: @theme-color-7;
-}
+        & > .btn_caption {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            color: @theme-color-7;
+        }
 
-.root > li > .btn_icon_after {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+        & > .btn_icon_after {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
 }

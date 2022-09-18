@@ -45,18 +45,17 @@ const Template: ComponentStory<typeof Layout> = (args) => {
 
 const navItems: INavItems = {
 
-  dashboard: {
-    href: 'https://localhost',
-  },
-  mint: {
-    href: 'https://mint.oort.digital',
-    isActive: true
-  },
+  dashboard: 'http://dashboard.oort.local',
+  mint: 'https://mint.oort.digital',
   rent: {
-    href: 'https://app.oort.digital',
+    activities: 'http://rent.oort.local/avtivities',
+    borrow: 'http://rent.oort.local/borrow',
+    heroes: 'http://rent.oort.local/heroes',
+    lend: 'http://rent.oort.local/lend'
   },
   gameHub: {
-    href: 'https://app.oort.digital',
+    games: 'http://game-hub.oort.local/games',
+    nfts: 'http://game-hub.oort.local/nfts'
   }
 }
 
@@ -105,11 +104,23 @@ WithWeb3.args = {
   navItems: navItems,
   web3: web3,
   children: content
-  
-  
 };
 
 export const WithoutWeb3 = Template.bind({});
 WithoutWeb3.args = {
-  navItems: navItems
+  navItems: navItems,
+  children: content
 };
+
+const isActiveFunc = (href: string) => {
+  return href.includes('game-hub.oort.local/nfts');
+}
+
+export const ActiveCollapse = Template.bind({});
+ActiveCollapse.args = {
+  navItems: navItems,
+  children: content,
+  isActiveFunc: isActiveFunc
+};
+
+
