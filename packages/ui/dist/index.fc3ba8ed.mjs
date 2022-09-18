@@ -2090,7 +2090,7 @@ const So = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => o === Ve.Desktop ? e : o === Ve.Phone ? t : r)(), " "]
   });
-}, Ro = Zr(() => import("./connectModalDesktop.6ef88cec.mjs")), Oo = Zr(() => import("./connectModalMobile.26f42297.mjs")), To = (e) => {
+}, Ro = Zr(() => import("./connectModalDesktop.32318734.mjs")), Oo = Zr(() => import("./connectModalMobile.660aabd6.mjs")), To = (e) => {
   const {
     onCancel: t,
     visible: r,
@@ -2346,9 +2346,9 @@ const Po = ({
     className: ge.version,
     children: ["v", t]
   })]
-}), qo = "_root_1k657_1", Go = "_icon_1k657_6", Ko = "_collapse_panel_1k657_11", Jo = "_header_1k657_19", Xo = "_active_header_1k657_30", Qo = "_active_1k657_30", W = {
+}), qo = "_root_1pqa3_1", Go = "_icon_1pqa3_6", Ko = "_collapse_panel_1pqa3_11", Jo = "_header_1pqa3_19", Xo = "_active_header_1pqa3_30", Qo = "_active_1pqa3_30", W = {
   root: qo,
-  "font-mixin": "_font-mixin_1k657_1",
+  "font-mixin": "_font-mixin_1pqa3_1",
   icon: Go,
   collapse_panel: Ko,
   header: Jo,
@@ -2493,4 +2493,4 @@ export {
   To as k,
   Co as u
 };
-//# sourceMappingURL=index.616a817a.mjs.map
+//# sourceMappingURL=index.fc3ba8ed.mjs.map
