@@ -6,7 +6,7 @@
     .font-mixin {
         /* Body 14 – Medium */
         font-weight: 500;
-        line-height: 22px;
+        line-height: 22px !important;
     }
     
     .icon {
@@ -20,6 +20,9 @@
             padding: 16px 24px !important;
             color: @theme-color-7 !important;
             border-radius: 0 !important;
+            :global(.ant-collapse-header-text) {
+                height: 23px;
+            }
             .header {
                 .font-mixin;
                 display: inline-flex;
