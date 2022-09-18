@@ -33,19 +33,18 @@
 
         :global(.ant-collapse-content > .ant-collapse-content-box) {
             padding: 0 !important;
+            li { border: 0; }
         }
     }
 
     .collapse_panel.active_header {
 
         :global(.ant-collapse-header) {
-            color: @theme-color-13;
+            color: @theme-color-13 !important;
             background-color: @theme-color-1;
             box-shadow: inset 4px 0px 0px @primary-6;
             
-            .icon {
-                color: @primary-6;
-            }
+            .icon { color: @primary-6; }
         }
 
         li {
@@ -54,7 +53,6 @@
     }
 
     li.active {
-
         background: @theme-color-1;
         box-shadow: inset 4px 0px 0px @primary-6;
     
@@ -63,10 +61,7 @@
             color: @theme-color-13;
         }
 
-        .icon {
-            color: @primary-6;
-        }
+        .icon { color: @primary-6; }
     }
-
     
 }

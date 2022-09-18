@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import styles from './menu.module.less';
 
-
 interface IMenuItemBtnProps {
     className?: string
     onClick?: () => void
@@ -11,16 +10,11 @@ interface IMenuItemBtnProps {
     iconAfter: ReactNode
 }
 
-export const MenuItemBtn = ({ className, onClick, caption, iconBefore, iconAfter }: IMenuItemBtnProps) => {
-
-
-    return <li onClick={onClick} className={className}>
-            {iconBefore}
-            <span className={styles.btn_caption}>{caption}</span>
-            <span className={styles.btn_icon_after}>{iconAfter}</span>
-            
-    </li>
-}
+export const MenuItemBtn = ({ className, onClick, caption, iconBefore, iconAfter }: IMenuItemBtnProps) => <li onClick={onClick} className={className}>
+    {iconBefore}
+    <span className={styles.btn_caption}>{caption}</span>
+    <span className={styles.btn_icon_after}>{iconAfter}</span>
+</li>
 
 interface IMenuItemLinkProps {
     className?: string
@@ -30,15 +24,7 @@ interface IMenuItemLinkProps {
     icon: ReactNode
 }
 
-export const MenuItemLink = ({ className, href, caption, icon }: IMenuItemLinkProps) => {
-
-    return <li className={className}>
-        <a href={href}>
-            {icon}
-            <span>{caption}</span>
-        </a>
-    </li>
-}
+export const MenuItemLink = ({ className, href, caption, icon }: IMenuItemLinkProps) => <li className={className}><a href={href}>{icon}<span>{caption}</span></a></li>
 
 interface IMenuItemProps {
     className?: string
@@ -46,12 +32,7 @@ interface IMenuItemProps {
     key: string
 }
 
-export const MenuItem = ({ className, children }: IMenuItemProps) => {
-
-    return <li className={className}>
-        {children}
-    </li>
-}
+export const MenuItem = ({ className, children }: IMenuItemProps) => <li className={className}>{children}</li>
 
 interface IProps {
     className?: string
