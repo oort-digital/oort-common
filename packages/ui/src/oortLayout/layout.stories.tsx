@@ -48,7 +48,7 @@ const navItems: INavItems = {
   dashboard: 'http://dashboard.oort.local',
   mint: 'https://mint.oort.digital',
   rent: {
-    activities: 'http://rent.oort.local/avtivities',
+    activity: 'http://rent.oort.local/avtivities',
     borrow: 'http://rent.oort.local/borrow',
     heroes: 'http://rent.oort.local/heroes',
     lend: 'http://rent.oort.local/lend'
