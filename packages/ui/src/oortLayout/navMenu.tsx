@@ -109,6 +109,8 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
 
     const isActive = isActiveFunc || isHrefActive;
 
+    const getPanelActive = (hrefs: string[]): boolean => hrefs.some(isActive)
+
     const getPanelClass = (hrefs: string[]): string => {
         
         if(hrefs.some(isActive)) {
@@ -125,12 +127,23 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     }
 
     const RenderCollapse = (rootItem: INavItemInternal, hrefMap: StringMap) => {
+        const key = 1;
         const childCaptionsMap = getChildCaptions(rootItem)
         const hrefEntries = Object.entries(hrefMap)
         const hrefs = hrefEntries.map(kvp => kvp[1])
 
-        return <Collapse ghost expandIconPosition="end">
-                <Panel key="1" className={getPanelClass(hrefs)} header={RenderPanelHeader(rootItem)}>
+        const isPanelActive = getPanelActive(hrefs)
+
+        let defaultActiveKey: number | undefined
+        let panelClass = styles.collapse_panel
+        
+        if(isPanelActive) {
+            panelClass = `${styles.active_header} ${panelClass}`
+            defaultActiveKey = key
+        }
+
+        return <Collapse defaultActiveKey={defaultActiveKey} ghost expandIconPosition="end">
+                <Panel key={key} className={panelClass} header={RenderPanelHeader(rootItem)}>
                     <Menu>
                         {
                             hrefEntries.map(kvp => {
