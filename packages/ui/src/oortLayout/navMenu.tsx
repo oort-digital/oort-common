@@ -111,15 +111,6 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
 
     const getPanelActive = (hrefs: string[]): boolean => hrefs.some(isActive)
 
-    const getPanelClass = (hrefs: string[]): string => {
-        
-        if(hrefs.some(isActive)) {
-            return `${styles.collapse_panel} ${styles.active_header}`
-        }
-
-        return styles.collapse_panel
-    }
-
     const RenderItem = (href: string, { caption, icon }: INavItemInternal) => {
         const activeCss = isActive(href) ? styles.active : ''
         const i = <span className={styles.icon}>{icon}</span>
