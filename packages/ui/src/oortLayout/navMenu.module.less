@@ -19,6 +19,7 @@
         :global(.ant-collapse-header) {
             padding: 16px 24px ;
             color: @theme-color-7;
+            border-radius: 0 !important;
             .header {
                 .font-mixin;
                 display: inline-flex;
@@ -32,9 +33,26 @@
         }
     }
 
-    .active {
+    .collapse_panel.active_header {
 
-        background: @theme-color-3;
+        :global(.ant-collapse-header) {
+            color: @theme-color-13;
+            background-color: @theme-color-1;
+            box-shadow: inset 4px 0px 0px @primary-6;
+            
+            .icon {
+                color: @primary-6;
+            }
+        }
+
+        li {
+            box-shadow: inset 4px 0px 0px @primary-6;
+        }
+    }
+
+    li.active {
+
+        background: @theme-color-1;
         box-shadow: inset 4px 0px 0px @primary-6;
     
         & > a {

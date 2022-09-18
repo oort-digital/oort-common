@@ -93,7 +93,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     const getPanelClass = (hrefs: string[]): string => {
         
         if(hrefs.some(isActive)) {
-            return `${styles.collapse_panel} ${styles.active}`
+            return `${styles.collapse_panel} ${styles.active_header}`
         }
 
         return styles.collapse_panel
