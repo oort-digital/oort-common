@@ -17,22 +17,15 @@ export interface INavItem {
     isActive?: boolean
 }
 
-export interface IRentNav {
-    lend: string
-    borrow: string
-    heroes: string
-    activities: string
-}
-
-export interface IGameHubNav {
-    games: string
-    nfts: string
-}
-
 export interface INavItems {
     dashboard: string
-    rent: IRentNav
     mint: string
+    rent: {
+        lend: string
+        borrow: string
+        heroes: string
+        activities: string
+    }
     gameHub: {
         games: string
         nfts: string
@@ -78,7 +71,16 @@ const gameHubInternal = {
 }
 
 const isHrefActive = (href: string) => {
-    return true
+    const curLocation = window.location
+    const location = new URL(href)
+
+    if(curLocation.origin === location.origin) {
+        if(curLocation.pathname === '/' || curLocation.pathname === location.pathname) {
+            return true
+        }
+    }
+
+    return false
 }
 
 const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
@@ -97,7 +99,6 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         }
 
         return styles.collapse_panel
-        
     }
 
     const RenderItem = (href: string, { caption, icon }: INavItemInternal) => {
@@ -111,7 +112,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     return <Menu className={`${styles.root} ${className || ''}`}>
         {RenderItem(dashboard, dashboardInternal)}
         {/* {RenderMenuItem(navItems.rent, navItemsInternal.rent)} */}
-            <Collapse ghost expandIconPosition="right">
+            <Collapse ghost expandIconPosition="end">
                 <Panel key="1" className={getPanelClass([gameHub.games, gameHub.nfts])} header={RenderPanelHeader(gameHubInternal)}>
                     <Menu>
                         {RenderItem(gameHub.games, gameHubInternal.games)}
