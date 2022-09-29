@@ -1,0 +1,71 @@
+@import "../../styles/typography.less";
+@import "../../styles/theme/vars.less";
+
+.popover-content {
+    .popover-title {
+        .body-16-medium-mixin();
+        color: @theme-color-10;
+        margin-bottom: 32px;
+    }
+
+    .cancel-btn {
+        margin-right: 16px;
+        width: 110px;
+        color:@theme-color-9
+    }
+    .apply-btn  { width: 195px; color:@theme-color-1 }
+}
+
+.trigger-btn {
+
+    color: @trigger-btn-color !important;
+    background: @theme-bg-1 !important;
+    .single-title {
+        .body-14-regular-mixin() !important;
+    }
+
+    .title-outer {
+        font-family: Inter;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    .sub-title-outer {
+        margin-top: -5px;
+    }
+
+    .icon {
+        margin-left: 15px;
+    }
+
+    .anticon {
+        vertical-align: middle;
+    }
+}
+
+.trigger-btn.filled {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.ant-popover {
+    border: 1px solid @theme-color-6;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 0 !important;
+
+    .ant-popover-content {
+        .ant-popover-inner {
+            .ant-popover-inner-content {
+                padding: 24px 36px;
+            }
+        }
+        .ant-popover-arrow {
+            display: none;
+        }
+    }
+}

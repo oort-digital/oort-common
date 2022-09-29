@@ -13,3 +13,8 @@ export { BscIcon } from "./bscIcon"
 export { PolygonIcon } from "./polygonIcon"
 export { EthIcon } from "./ethIcon"
 export { GameHubIcon } from "./gameHubIcon"
+
+export { NoDataIcon } from "./noDataIcon"
+export { ArrowDownIcon } from "./arrowDownIcon"
+export { CloseIcon } from "./closeIcon"
+export { ChevronDownOutlineIcon } from "./chevronDownOutlineIcon"

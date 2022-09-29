@@ -1,0 +1,200 @@
+import { ZERO_ADDR } from "../../../extensions";
+import { logger } from "oort/packages/logger"
+import { ICollection, ICollectionStore } from "../../../stores";
+import { CollectionFilterStore } from "./collectionFilterStore";
+import { ICollectionFilterItem } from "./itemSource";
+
+//tree shaking cheat to import extensions
+logger.trace(ZERO_ADDR)
+
+class CollectionStoreStub implements ICollectionStore {
+    setItems(items: ICollection[]): void {
+       throw new Error("Method not implemented.");
+    }
+    items: ICollection[] = []
+    term: string = ''
+    state: StoreState = StoreState.Done
+    hasLoadMore: boolean = false
+
+    loadNextPage(reset: boolean, signal: AbortSignal): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
+    setTerm(term: string): void {
+        throw new Error("Method not implemented.");
+    }
+    clear(): void {
+        throw new Error("Method not implemented.");
+    }
+}
+
+class ItemStub implements ICollectionFilterItem {
+    tokenAddress: string;
+    tokenName: string;
+    count?: number | undefined;
+
+    toCollection = (): ICollection => ({ tokenAddress: this.tokenAddress, tokenName: this.tokenName, count: 0 })
+
+    constructor(n: number) {
+        this.tokenAddress = `${n}`
+        this.tokenName = `${n}`
+    }
+
+}
+
+const one = new ItemStub(1)
+const two = new ItemStub(2)
+const three = new ItemStub(3)
+
+const create = (favoriteMaxSize: number, recentMaxSize: number, collectionStore?: CollectionStoreStub) => {
+    collectionStore = collectionStore || new CollectionStoreStub()
+
+    return new CollectionFilterStore({
+        cacheKeyPrefixFunc: () => '',
+        itemSource: collectionStore,
+        favoriteMaxSize: favoriteMaxSize,
+        recentMaxSize: recentMaxSize
+    })
+}
+
+test('must add favorites in right order', async () => {
+    const store = create(2, 1)
+
+    store.setFavorites(one, true)
+    store.setFavorites(two, true)
+
+    expect(store.favorites.length).toEqual(2)
+    expect(store.favorites[0].tokenAddress).toEqual(two.tokenAddress)
+    expect(store.favorites[1].tokenAddress).toEqual(one.tokenAddress)
+ });
+
+ test('must remove old favorite items if max size excided', async () => {
+    const store = create(2, 1)
+
+    store.setFavorites(one, true)
+    store.setFavorites(two, true)
+    store.setFavorites(three, true)
+
+    expect(store.favorites.length).toEqual(2)
+    expect(store.favorites[0].tokenAddress).toEqual(three.tokenAddress)
+    expect(store.favorites[1].tokenAddress).toEqual(two.tokenAddress)
+ });
+
+ test('must remove old recent items if max size excided', async () => {
+    const collectionStore = new CollectionStoreStub()
+    collectionStore.items.push(one.toCollection())
+    collectionStore.items.push(two.toCollection())
+    collectionStore.items.push(three.toCollection())
+    const store = create(1, 2, collectionStore)
+
+    store.select(one.tokenAddress, true)
+    store.select(two.tokenAddress, true)
+    store.copyNotAppliedToRecent()
+
+    expect(store.recent.length).toEqual(2)
+    expect(store.recent[0].tokenAddress).toEqual(one.tokenAddress)
+    expect(store.recent[1].tokenAddress).toEqual(two.tokenAddress)
+
+    store.clearNotApplied()
+    store.select(three.tokenAddress, true)
+    store.copyNotAppliedToRecent()
+
+    expect(store.recent.length).toEqual(2)
+    expect(store.recent[0].tokenAddress).toEqual(three.tokenAddress)
+    expect(store.recent[1].tokenAddress).toEqual(one.tokenAddress)
+ });
+
+ test('must copyNotAppliedToRecent from favorites', async () => {
+    const store = create(1, 1)
+
+    store.favorites.push(one)
+    store.select(one.tokenAddress, true)
+    store.copyNotAppliedToRecent()
+
+    expect(store.recent.length).toEqual(1)
+    expect(store.recent[0].tokenAddress).toEqual(one.tokenAddress)
+ });
+
+ test('must copyNotAppliedToRecent from items', async () => {
+    const collectionStore = new CollectionStoreStub()
+    collectionStore.items.push(one.toCollection())
+    const store = create(1, 1, collectionStore)
+
+    store.select(one.tokenAddress, true)
+    store.copyNotAppliedToRecent()
+
+    expect(store.recent.length).toEqual(1)
+    expect(store.recent[0].tokenAddress).toEqual(one.tokenAddress)
+ });
+
+ test('must copy not applied to recent without duplicated', async () => {
+    const collectionStore = new CollectionStoreStub()
+    collectionStore.items.push(one.toCollection())
+    const store = create(1, 3, collectionStore)
+
+    store.select(one.tokenAddress, true)
+
+    store.copyNotAppliedToRecent()
+    store.copyNotAppliedToRecent()
+
+    expect(store.recent.length).toEqual(1)
+    expect(store.recent[0].tokenAddress).toEqual(one.tokenAddress)
+ });
+
+ test('clearNotApplied must clean selected if no applied', async () => {
+    const store = create(1, 1)
+
+    store.select('1', true)
+    store.clearNotApplied()
+
+    expect(store.selected.length).toEqual(0)
+ });
+
+ test('clearNotApplied must not clean applied', async () => {
+
+    const applied = 'applied'
+    const store = create(1, 1)
+
+    store.setApplied([applied])
+    store.select('1', true)
+    store.clearNotApplied()
+
+    expect(store.selected.length).toEqual(1)
+    expect(store.selected[0]).toEqual(applied)
+ });
+
+ test('selected must contain one item if selectSingle', async () => {
+    const store = create(1, 1)
+
+    store.selectSingle('1', true)
+    store.selectSingle('2', true)
+
+    expect(store.selected.length).toEqual(1)
+    expect(store.selected[0]).toEqual('2')
+ });
+
+ test('selected must be empty', async () => {
+    const store = create(1, 1)
+    
+    store.selectSingle('1', true)
+    store.selectSingle('1', false)
+
+    expect(store.selected.length).toEqual(0)
+ });
+
+ test('must select allAppliedItems from items recent and favorites', async () => {
+   const collectionStore = new CollectionStoreStub()
+   const store = create(1, 1, collectionStore)
+
+   store.setApplied([one.tokenAddress, two.tokenAddress, three.tokenAddress])
+   collectionStore.items.push(one.toCollection())
+   store.recent.push(two)
+   store.favorites.push(three)
+  
+   expect(store.allAppliedItems.length).toEqual(3)
+   const allAppliedItemAddresses = store.allAppliedItems.map(x => x.tokenAddress)
+   expect(allAppliedItemAddresses).toContain(one.tokenAddress)
+   expect(allAppliedItemAddresses).toContain(two.tokenAddress)
+   expect(allAppliedItemAddresses).toContain(three.tokenAddress)
+});
+
+ 

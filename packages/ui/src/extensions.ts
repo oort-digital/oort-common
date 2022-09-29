@@ -6,6 +6,7 @@ declare global {
     isNonZeroAddress(): boolean
     isZeroAddress(): boolean
     toMasskedAddress(): string
+    cutLongString(maxLen: number): string
   }
 
 
@@ -34,5 +35,11 @@ String.prototype.toMasskedAddress = function(chunkLength?: number): string {
   const end = this.substring(this.length - cLen);
   return `${start}...${end}`
 };
+
+// eslint-disable-next-line
+String.prototype.cutLongString = function(maxLen: number): string {
+  if(this.length <= maxLen) { return this as string }
+  return `${this.substring(0, maxLen - 3)}...`  
+}
 
 export { ZERO_ADDR }

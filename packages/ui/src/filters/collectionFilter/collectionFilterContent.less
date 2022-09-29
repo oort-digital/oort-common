@@ -1,0 +1,59 @@
+@import "../../styles/palette.less";
+@import "../../styles/theme/vars.less";
+
+.collection-filter-content {
+
+	.callout-medium-mixin() {
+		width: 100%;
+		/* Callout Medium */
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 21px;
+		/* identical to box height, or 131% */
+		letter-spacing: -0.0031em;
+	}
+
+	.check-box-bg-mixin(@bg) {
+		.ant-checkbox-inner {
+			background-color: @bg;
+			border-color: @theme-color-5;
+		}
+	}
+
+	.ant-tabs {
+		.ant-tabs-nav::before {
+			border-bottom: 1px solid @theme-color-4;
+		}
+		.ant-tabs-tab {
+			.callout-medium-mixin();
+			color: @theme-color-7;
+		}
+	}
+
+	.collection-list {
+		margin-top: 16px;
+		margin-bottom: 24px;
+		max-height: 400px;
+		overflow: auto;
+
+		.ant-list-item {
+
+			padding-top: 8px;
+			padding-bottom: 8px;
+
+			.collection-list-item {
+				width: 100%;
+				.callout-medium-mixin();
+
+				.collection-name { color: @theme-color-9; }
+
+				.check-box-bg-mixin(@theme-color-1);
+
+				.ant-checkbox-checked { .check-box-bg-mixin(@primary-6); }
+			}
+		}
+
+	}
+}
