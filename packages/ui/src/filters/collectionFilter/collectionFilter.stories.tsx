@@ -1,6 +1,6 @@
 
 import "../../styles/antOverride.less";
-// import "../../styles/fonts.css";
+import "../../styles/fonts.css";
 // import '@oort/ui/dist/style.css';
 // import '../oortLib.less';
 

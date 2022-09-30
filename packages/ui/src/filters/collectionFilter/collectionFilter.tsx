@@ -1,4 +1,4 @@
-import "./collectionFilter.less"
+import styles from "./collectionFilter.module.less"
 import { PopoverFilter } from "../popover"
 import { CollectionFilterStore } from "./collectionFilterStore"
 import { observer } from "mobx-react"
@@ -52,8 +52,10 @@ const Impl = ({ chainId, title, popoverTitle, collectionFilterStore, onChange, a
 	}
 
     return <PopoverFilter
-		triggerBtnClassName="collection-trigger-btn"
-		popoverClassName="collection-popover-content"
+		triggerBtnClassName={styles.collection_trigger_btn}
+		popoverClassName={styles.collection_popover_content}
+		popoverTitleClassName={styles.title}
+		applyButtonClassName={styles.apply}
 		onVisibleChange={onVisibleChange}
 		onSubmit={onSubmit}
 		title={title}

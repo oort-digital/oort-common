@@ -2,11 +2,11 @@
 @import "../../styles/palette.less";
 @import "../../styles/theme/vars.less";
 
-.collection-trigger-btn {
-	.sub-title {
+.collection_trigger_btn {
+	:global(.sub-title) {
 		.body-14-regular-mixin();
 		color: @btn-default-color;
-		.tag {
+		:global(.tag) {
 			background-color: @neutral-5;
 			.footnote-12-description-mixin();
 			border-radius: 64px;
@@ -15,16 +15,16 @@
 	}
 }
 
-.collection-popover-content {
+.collection_popover_content {
 
 	max-width: 378px;
 	width: 378px;
 
-	.apply-btn {
+	.apply {
 		width: 252px;
 	}
 
-	.popover-title {
+	.title {
 		font-style: normal;
 		font-weight: 600;
 		font-size: 20px;

@@ -10,6 +10,9 @@ interface IProps {
     subTitle?: ReactNode
     triggerBtnClassName?: string
     popoverClassName?: string
+    popoverTitleClassName?: string
+    applyButtonClassName?: string
+    cancelButtonClassName?: string
     isClear: boolean
     onClear: () => void
     popoverTitle: string
@@ -19,7 +22,10 @@ interface IProps {
     onVisibleChange?: (isVisible: boolean) => void
 }
 
-export const PopoverFilter = ({title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName, isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled}: IProps) => {
+export const PopoverFilter = ({
+    title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName,
+    popoverTitleClassName, applyButtonClassName, cancelButtonClassName,
+    isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled}: IProps) => {
 
     const [visible, setVisible] = useState(false)
 
@@ -36,11 +42,11 @@ export const PopoverFilter = ({title, subTitle, triggerBtnClassName, popoverTitl
     }
 
     const renderContent = () => <div className={`${styles.popover_content} ${popoverClassName || ''}`}>
-        <div className={styles.title}>{popoverTitle}</div>
+        <div className={`${styles.title} ${popoverTitleClassName}`}>{popoverTitle}</div>
         {children}
         <div>
-            <Button className={styles.cancel} onClick={() => setVisible(false)}>Cancel</Button>
-            <Button className={styles.apply} onClick={submit} disabled={submitDisabled} type='primary'>Apply</Button>
+            <Button className={`${styles.cancel} ${cancelButtonClassName}`} onClick={() => setVisible(false)}>Cancel</Button>
+            <Button className={`${styles.apply} ${applyButtonClassName}`} onClick={submit} disabled={submitDisabled} type='primary'>Apply</Button>
         </div>
     </div>
 
