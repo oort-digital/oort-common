@@ -14,9 +14,10 @@ interface IProps {
 	onChange: (collections: ICollection[]) => void
 	searchable: boolean
 	selectSingle: boolean
+	searchPlaceholder: string
 }
 
-const Impl = ({ chainId, title, popoverTitle, collectionFilterStore, onChange, applied, searchable, selectSingle }: IProps) => {
+const Impl = ({ chainId, title, popoverTitle, collectionFilterStore, onChange, applied, searchable, selectSingle, searchPlaceholder }: IProps) => {
 	
 	const { selected } = collectionFilterStore
 
@@ -67,6 +68,7 @@ const Impl = ({ chainId, title, popoverTitle, collectionFilterStore, onChange, a
 
 
         <CollectionFilterContent
+			searchPlaceholder={searchPlaceholder}
 			selectSingle={selectSingle}
 			searchable={searchable}
 			applied={applied}

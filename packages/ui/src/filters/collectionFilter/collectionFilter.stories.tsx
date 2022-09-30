@@ -47,6 +47,7 @@ Main.args = {
   chainId: 1,
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
+  searchPlaceholder: 'Enter text',
 	applied: [collection],
 	collectionFilterStore: store,
 	onChange: onChange,

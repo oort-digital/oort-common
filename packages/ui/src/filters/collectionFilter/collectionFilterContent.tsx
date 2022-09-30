@@ -19,10 +19,11 @@ interface IProps {
     collectionFilterStore: CollectionFilterStore
     applied: ICollection[],
     searchable: boolean,
-    selectSingle: boolean
+    selectSingle: boolean,
+    searchPlaceholder: string
 }
 
-const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle}: IProps) => {
+const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle, searchPlaceholder}: IProps) => {
 
     const {selected, isLoading, items, favorites, recent, hasLoadMore} = collectionFilterStore
 
@@ -113,7 +114,7 @@ const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle
         {
             searchable && <SearchInput value={collectionFilterStore.term}
                                        onChange={e => onTermChange(e)}
-                                       placeholder="Search collections"/>
+                                       placeholder={searchPlaceholder} />
         }
 
         <Tabs defaultActiveKey="all" items={tabs} />
