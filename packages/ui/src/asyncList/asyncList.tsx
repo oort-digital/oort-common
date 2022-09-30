@@ -1,7 +1,7 @@
 import React from "react"
 import {Button, List, ConfigProvider} from "antd"
 import {ListGridType} from "antd/lib/list"
-import "./asyncList.less"
+import styles from "./asyncList.module.less"
 import {ArrowDownIcon, NoDataIcon} from "../icons"
 
 interface IProps<TItem> {
@@ -22,15 +22,15 @@ export const AsyncList = <TItem, >({hasLoadMore, itemRenderer, onLoadMore, items
         if (!hasLoadMore || !items.length) {
             return null
         }
-        return <div className="load-more-btn-container">
-            <Button className="load-more-btn" loading={loading} size="large" onClick={onLoadMore}>
+        return <div className={styles.load_more_btn_container}>
+            <Button className={styles.load_more_btn} loading={loading} size="large" onClick={onLoadMore}>
                 More <ArrowDownIcon />
             </Button>
         </div>
     }
 
     const customizeRenderEmpty = () => (
-        <div className="empty-hint">
+        <div className={styles.empty_hint}>
 			<NoDataIcon></NoDataIcon>
 			<div>{ noDataText || 'No data' }</div>
         </div>
@@ -39,7 +39,7 @@ export const AsyncList = <TItem, >({hasLoadMore, itemRenderer, onLoadMore, items
     return (
         <ConfigProvider renderEmpty={customizeRenderEmpty}>
             <List
-                className={`async-list ${className || ''}`}
+                className={`${styles.async_list} ${className || ''}`}
                 // if set loading=true, Ant List hide already loaded items, until loading not finished
                 // thats why set loading only for first page
                 loading={loadFirstPage}
