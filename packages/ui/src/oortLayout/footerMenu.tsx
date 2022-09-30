@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './footerMenu.module.less';
 import { Menu, MenuItem, MenuItemBtn } from './menu';
-import { getChainIcon } from '../utils';
+import { getChainIcon, toMasskedAddress } from '../utils';
 import { ChevronSortIcon, DiscordIcon, TelegramIcon, TwitterIcon } from '../icons';
 import { ThemeSwitch } from './themeSwitch';
 import { IChain } from '../typesAndInterfaces';
@@ -71,7 +71,7 @@ export const FooterMenu = ({ className, web3 }: IProps) => {
         return <>
             {renderConnectModal()}
             <MenuItemBtn key="chain" iconBefore={chainIcon} iconAfter={afterIcon} caption={name} />
-            <MenuItemBtn key="account" onClick={() => setConnectModalVisible(true)} iconBefore={accountImg} iconAfter={afterIcon} caption={account.toMasskedAddress()} />
+            <MenuItemBtn key="account" onClick={() => setConnectModalVisible(true)} iconBefore={accountImg} iconAfter={afterIcon} caption={toMasskedAddress(account)} />
         </>
     }
 

@@ -1,5 +1,6 @@
 import { Avatar, Checkbox, Col, Row } from "antd"
 import { BlockieAddress } from "../../blockieAddress"
+import { cutLongString } from "../../utils"
 import { FavoriteCheckBox } from "./favoriteCheckBox"
 import { ICollectionFilterItem } from "./itemSource"
 
@@ -17,7 +18,7 @@ export const collectionItemRenderer = (isMobile: boolean, selected: ISelectedPar
 		const isSelected = selected.selected.has(tokenAddress)
 		const isFavorite = favorite.selected.has(tokenAddress)
 
-		let collectionName = `${tokenName.cutLongString(tokenNameMaxLen)}`
+		let collectionName = `${cutLongString(tokenName, tokenNameMaxLen)}`
 		if(count) {
 			collectionName = `${collectionName} (${count})`
 		}

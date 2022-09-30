@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { toMasskedAddress } from "../utils";
 import "./connectButton.less"
 
 
@@ -17,7 +18,7 @@ export const ConnectButton = ({ account, onClick, walletIcon, walletName, labelT
 	let className = 'connect-wallet-button'
 
 	if(account) {
-		acc = <span className="acc">{account.toMasskedAddress()}</span>
+		acc = <span className="acc">{toMasskedAddress(account)}</span>
 		className = `${className} active`
 	}
 

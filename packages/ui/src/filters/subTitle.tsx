@@ -1,3 +1,5 @@
+import { cutLongString } from "../utils";
+
 interface IProps {
 	names: string[]
 	len?: number
@@ -11,7 +13,7 @@ export const SubTitle = ({ names, len = 20 }: IProps) => {
 		subTitleText = `${subTitleText}${names[i]}, `
 		hidenCount--
 		if(subTitleText.length > len) {
-			subTitleText = subTitleText.cutLongString(len)
+			subTitleText = cutLongString(subTitleText, len)
 			break;
 		}
 	}

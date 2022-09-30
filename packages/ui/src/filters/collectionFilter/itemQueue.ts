@@ -1,3 +1,5 @@
+import { distinct } from "../../utils"
+
 export class ItemQueue<T> {
 
     get items() {
@@ -25,7 +27,7 @@ export class ItemQueue<T> {
         }
 
         if(unique) {
-            result = result.distinct(this._keyFunc)
+            result = distinct(result, this._keyFunc)
         }
 
         this._items = result

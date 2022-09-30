@@ -7,3 +7,6 @@ export { toErrorWithMessage } from "./error"
 export type { ErrorWithMessage } from './error'
 
 export * from "./vars"
+
+export * from "./array"
+export * from "./string"

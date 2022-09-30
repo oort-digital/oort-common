@@ -1,5 +1,6 @@
 import { action, computed, makeObservable, observable } from "mobx"
 import { LocalStorageCacheProvider } from "../../cache"
+import { distinct } from "../../utils"
 import { ItemQueue } from "./itemQueue"
 import { ICollectionFilterItem, IItemSource } from "./itemSource"
 import { StoreState } from "./storeState"
@@ -82,7 +83,8 @@ export class CollectionFilterStore {
             const appliedItems = this.items.filter(x => _appliedSet.has(x.tokenAddress))
             const appliedFavorites = this.favorites.filter(x => _appliedSet.has(x.tokenAddress))
             const recent = this.recent.filter(x => _appliedSet.has(x.tokenAddress))
-            return appliedItems.concat(appliedFavorites).concat(recent).distinct(itemKeyFunc)
+            const arr = appliedItems.concat(appliedFavorites).concat(recent)
+            return distinct(arr, itemKeyFunc)
         }
         return []
     }
