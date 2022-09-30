@@ -1,4 +1,4 @@
-import {action, makeObservable, observable } from 'mobx'
+import {action, makeObservable, observable, runInAction } from 'mobx'
 import { delayAsync } from '../../utils';
 import { ICollection } from './collectionFilterContent';
 import { ICollectionFilterItem, IItemSource } from './itemSource'
@@ -14,7 +14,7 @@ const numberToAddress = (value: number): string => {
     return `${prefix}${valStr}`
 }
 
-class CollectionSource {
+class Source {
 
     private _collections: ICollection[] = []
 
@@ -32,7 +32,7 @@ class CollectionSource {
         for(let i = 0; i < len; i++) {
             this._collections.push({
                 tokenAddress: numberToAddress(i),
-                tokenName: CollectionSource.generateName(i)
+                tokenName: Source.generateName(i)
             })
         }
     }
@@ -79,7 +79,10 @@ export class ItemSourceStub implements IItemSource {
             skip: this.offset,
             term: this.term })
 
-        this.addNewPage(page)
+        runInAction(() => {
+            this.addNewPage(page)
+        })
+
         return true
     }
 
@@ -92,10 +95,10 @@ export class ItemSourceStub implements IItemSource {
             hasLoadMore: observable
         })
 
-        this._collectionSource = new CollectionSource(100)
+        this._collectionSource = new Source(100)
     }
 
-    private _collectionSource: CollectionSource
+    private _collectionSource: Source
     private _delay = 1000
     private _curPage: number = 1
     

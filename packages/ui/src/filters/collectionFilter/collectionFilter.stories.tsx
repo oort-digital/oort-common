@@ -17,11 +17,11 @@ export default {
 
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-    layout: 'fullscreen',
+    // layout: 'fullscreen',
   },
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    //backgroundColor: { control: 'color' },
+    backgroundColor: { control: 'color' },
   },
 } as ComponentMeta<typeof CollectionFilter>;
 

@@ -104,6 +104,13 @@ const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle
     }
 
     const favTabTitle = favorites.length ? `Favorites(${favorites.length})` : 'Favorites'
+
+    const tabs = [
+        { label: 'All', key: 'all', children: renderList(items, true) },
+        { label: 'Recent', key: 'recent', children: renderList(recent, false) },
+        { label: favTabTitle, key: 'favorites', children: renderList(favorites, false) }
+      ];
+
     return <div className="collection-filter-content">
         {
             searchable && <SearchInput value={collectionFilterStore.term}
@@ -111,11 +118,7 @@ const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle
                                        placeholder="Search collections"/>
         }
 
-        <Tabs defaultActiveKey="all">
-            <TabPane tab="All" key="all">{renderList(items, true)}</TabPane>
-            <TabPane tab="Recent" key="recent">{renderList(recent, false)}</TabPane>
-            <TabPane tab={favTabTitle} key="favorites">{renderList(favorites, false)}</TabPane>
-        </Tabs>
+        <Tabs defaultActiveKey="all" items={tabs} />
     </div>
 }
 
