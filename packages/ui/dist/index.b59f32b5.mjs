@@ -2393,7 +2393,7 @@ const Yo = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Fe.Desktop ? e : r === Fe.Phone ? n : t)(), " "]
   });
-}, Go = Tn(() => import("./connectModalDesktop.73cd44fe.mjs")), Jo = Tn(() => import("./connectModalMobile.6ce2d1b0.mjs")), Qo = (e) => {
+}, Go = Tn(() => import("./connectModalDesktop.174f8fea.mjs")), Jo = Tn(() => import("./connectModalMobile.1f21e486.mjs")), Qo = (e) => {
   const {
     onCancel: n,
     visible: t,
@@ -2970,7 +2970,9 @@ const Sa = {
       }), /* @__PURE__ */ i(Se, {
         children: /* @__PURE__ */ i(jr, {
           size: 32,
-          icon: d
+          icon: /* @__PURE__ */ i("img", {
+            src: d
+          })
         })
       }), /* @__PURE__ */ i(Se, {
         flex: "auto",
@@ -3428,4 +3430,4 @@ export {
   Ya as y,
   xi as z
 };
-//# sourceMappingURL=index.de44c158.mjs.map
+//# sourceMappingURL=index.b59f32b5.mjs.map

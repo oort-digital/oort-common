@@ -1,7 +1,7 @@
 import { useState as O } from "react";
 import { Row as g, Col as p } from "antd";
-import { a as k, C as u, b as T, M as B, W as D } from "./index.es.2f9f2acd.mjs";
-import { j as n, O as S, a as t, F as i } from "./index.de44c158.mjs";
+import { a as k, C as u, b as T, M as B, W as D } from "./index.es.da345340.mjs";
+import { j as n, O as S, a as t, F as i } from "./index.b59f32b5.mjs";
 import "ethers";
 import "mobx-react";
 import "mobx";
@@ -135,4 +135,4 @@ export {
   _ as WALLETTYPE,
   z as default
 };
-//# sourceMappingURL=connectModalDesktop.73cd44fe.mjs.map
+//# sourceMappingURL=connectModalDesktop.174f8fea.mjs.map
