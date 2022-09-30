@@ -22,7 +22,7 @@ export declare class CollectionFilterStore {
     loadRecentFromCache: () => void;
     loadNextPage(reset: boolean, signal: AbortSignal): Promise<boolean>;
     setTerm(term: string): void;
-    get allAppliedItems(): any;
+    get allAppliedItems(): any[];
     get hasLoadMore(): boolean;
     get isLoading(): boolean;
     get term(): string;
