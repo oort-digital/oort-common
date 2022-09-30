@@ -46,6 +46,7 @@ export class CollectionFilterStore {
             clearNotApplied: action,
             loadFavoritesFromCache: action,
             loadRecentFromCache: action,
+            copyNotAppliedToRecent: action,
             setApplied: action,
             selectSingle: action
         })
@@ -173,6 +174,9 @@ export class CollectionFilterStore {
         }
 
         const key = this.getRecentKey()
+        debugger
+        const t = JSON.stringify(this.recent)
+        debugger
         this._cache.setItem(key, this.recent)
     }
 
