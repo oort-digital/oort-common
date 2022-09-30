@@ -1,5 +1,4 @@
-import React from 'react'
-import "./searchInput.less"
+import styles from "./searchInput.module.less"
 import { Input } from "antd";
 import { SearchOutlined } from '@ant-design/icons';
 
@@ -11,7 +10,7 @@ interface IProps {
 }
 
 export const SearchInputSubmit = ({ value, placeholder, onChange, onSubmit }: IProps) => <Input
-	className="search-input"
+	className={styles.search_input}
 	value={value}
 	onPressEnter={onSubmit}
 	onChange={e => onChange(e.target.value)}

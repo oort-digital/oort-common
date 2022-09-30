@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import "./searchInput.less"
+import styles from "./searchInput.module.less"
 import { Input } from "antd"
 import { SearchOutlined } from '@ant-design/icons'
 import { debounceFunction } from "../../utils"
@@ -22,7 +22,7 @@ export const SearchInput = ({ value, placeholder, onChange }: IProps) => {
 	} 
 
 	return <Input
-		className="search-input"
+		className={styles.search_input}
 		value={internalVal}
 		onChange={e => onChangeInternal(e.target.value)}
 		prefix={<SearchOutlined />}
