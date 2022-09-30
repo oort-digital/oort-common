@@ -1,4 +1,3 @@
-// export { MyButton } from './MyButton';
 export * from "./typesAndInterfaces"
 export * from "./oortModal"
 export * from "./oortLayout"
@@ -9,3 +8,4 @@ export * from "./blockieAddress"
 export * from "./connectModal"
 export * from "./filters"
 export * from "./asyncList"
+export * from "./icons"
