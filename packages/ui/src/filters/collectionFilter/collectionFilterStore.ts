@@ -130,7 +130,7 @@ export class CollectionFilterStore {
         this.favorites = this._favoritesQueue.items
 
         const key = this.getFavoritesKey()
-        this._cache.setItem(key, this.favorites)
+        this._cache.setItem(key, this._favoritesQueue.items)
     }
 
     private _appliedSet: Set<string> | undefined
@@ -175,10 +175,10 @@ export class CollectionFilterStore {
 
         const key = this.getRecentKey()
         debugger
-        const t = JSON.stringify(this.recent)
+        const t = JSON.stringify(this._recentQueue.items)
         console.log(t)
         debugger
-        this._cache.setItem(key, this.recent)
+        this._cache.setItem(key, this._recentQueue.items)
     }
 
 }
