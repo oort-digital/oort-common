@@ -34,7 +34,7 @@ class Source {
             this._collections.push({
                 key: numberToAddress(i),
                 title: Source.generateName(i),
-                icon: iconBase64,
+                iconUrl: iconBase64,
                 count: i
             })
         }

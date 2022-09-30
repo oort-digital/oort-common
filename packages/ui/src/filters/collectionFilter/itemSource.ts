@@ -1,9 +1,8 @@
-import { ReactNode } from "react";
 import { StoreState } from "./storeState";
 
 export interface ICollectionFilterItem {
 	key: string
-	icon: ReactNode,
+	iconUrl: string,
 	title: string
 	count?: number
 }
