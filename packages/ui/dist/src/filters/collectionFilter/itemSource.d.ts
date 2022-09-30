@@ -1,7 +1,9 @@
+import { ReactNode } from "react";
 import { StoreState } from "./storeState";
 export interface ICollectionFilterItem {
-    tokenAddress: string;
-    tokenName: string;
+    key: string;
+    icon: ReactNode;
+    title: string;
     count?: number;
 }
 export interface IItemSource {

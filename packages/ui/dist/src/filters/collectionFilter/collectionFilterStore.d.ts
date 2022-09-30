@@ -34,7 +34,7 @@ export declare class CollectionFilterStore {
     private get notApplied();
     setApplied(applied: string[]): void;
     select(tokenAddress: string, checked: boolean): void;
-    selectSingle(tokenAddress: string, checked: boolean): void;
+    selectSingle(key: string, checked: boolean): void;
     copyNotAppliedToRecent(): void;
 }
 //# sourceMappingURL=collectionFilterStore.d.ts.map

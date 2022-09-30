@@ -1,14 +1,15 @@
 /// <reference types="react" />
-import { ICollection } from "./collectionFilterContent";
 import { CollectionFilterStore } from "./collectionFilterStore";
+import { ICollectionFilterItem } from "./itemSource";
 interface IProps {
     title: string;
     collectionFilterStore: CollectionFilterStore;
     chainId: number;
-    applied: ICollection[];
+    applied: ICollectionFilterItem[];
     searchable: boolean;
     selectSingle: boolean;
+    searchPlaceholder: string;
 }
-export declare const CollectionFilterMobile: ({ collectionFilterStore, chainId, applied, searchable, selectSingle }: IProps) => JSX.Element;
+export declare const CollectionFilterMobile: ({ collectionFilterStore, chainId, applied, searchable, selectSingle, searchPlaceholder }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=collectionFilterMobile.d.ts.map

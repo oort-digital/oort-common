@@ -4,5 +4,5 @@ export interface ISelectedParameter {
     selected: Set<string>;
     onChange: (item: ICollectionFilterItem, checked: boolean) => void;
 }
-export declare const collectionItemRenderer: (isMobile: boolean, selected: ISelectedParameter, favorite: ISelectedParameter) => (item: ICollectionFilterItem) => JSX.Element;
+export declare const collectionItemRenderer: (className: string, isMobile: boolean, selected: ISelectedParameter, favorite: ISelectedParameter) => (item: ICollectionFilterItem) => JSX.Element;
 //# sourceMappingURL=collectionFilterItemRenderer.d.ts.map
