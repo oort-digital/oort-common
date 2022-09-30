@@ -35,7 +35,7 @@ export const PopoverFilter = ({title, subTitle, triggerBtnClassName, popoverTitl
         }
     }
 
-    const renderContent = () => <div className={`hello ${styles.popover_content} ${popoverClassName || ''}`}>
+    const renderContent = () => <div className={`${styles.popover_content} ${popoverClassName || ''}`}>
         <div className={styles.title}>{popoverTitle}</div>
         {children}
         <div>
@@ -70,8 +70,6 @@ export const PopoverFilter = ({title, subTitle, triggerBtnClassName, popoverTitl
 
     return <Popover
         style={{"backgroundColor":"#11151A"}}
-        className="qwerty"
-        openClassName='qwerty123'
         onOpenChange={onVisibleChange_}
         open={visible}
         placement="bottomRight"
