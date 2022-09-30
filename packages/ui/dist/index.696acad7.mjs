@@ -2393,7 +2393,7 @@ const Ko = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Fe.Desktop ? e : r === Fe.Phone ? n : t)(), " "]
   });
-}, qo = Tn(() => import("./connectModalDesktop.2857b206.mjs")), Go = Tn(() => import("./connectModalMobile.401e1962.mjs")), Jo = (e) => {
+}, qo = Tn(() => import("./connectModalDesktop.84c8d3e0.mjs")), Go = Tn(() => import("./connectModalMobile.ffed05bd.mjs")), Jo = (e) => {
   const {
     onCancel: n,
     visible: t,
@@ -3385,6 +3385,8 @@ export {
   v as a,
   so as a0,
   lo as a1,
+  nr as a2,
+  U as a3,
   di as b,
   ui as c,
   hi as d,
@@ -3411,4 +3413,4 @@ export {
   pi as y,
   Xa as z
 };
-//# sourceMappingURL=index.f61c67c0.mjs.map
+//# sourceMappingURL=index.696acad7.mjs.map

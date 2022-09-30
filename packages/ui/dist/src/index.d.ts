@@ -9,4 +9,5 @@ export * from "./connectModal";
 export * from "./filters";
 export * from "./asyncList";
 export * from "./icons";
+export * from "./cache";
 //# sourceMappingURL=index.d.ts.map
