@@ -14,18 +14,18 @@ export const collectionItemRenderer = (className: string, isMobile: boolean, sel
 	const tokenNameMaxLen = isMobile ? 16 : 20
 
 	return (item: ICollectionFilterItem) => {
-		const { tokenAddress, tokenName, count } = item
-		const isSelected = selected.selected.has(tokenAddress)
-		const isFavorite = favorite.selected.has(tokenAddress)
+		const { key, title, count } = item
+		const isSelected = selected.selected.has(key)
+		const isFavorite = favorite.selected.has(key)
 
-		let collectionName = `${cutLongString(tokenName, tokenNameMaxLen)}`
+		let collectionName = `${cutLongString(title, tokenNameMaxLen)}`
 		if(count) {
 			collectionName = `${collectionName} (${count})`
 		}
 
 		return <Row gutter={[16, 0]} justify="space-between" align="middle" onClick={() => selected.onChange(item, !isSelected)} className={className}>
 			<Col><Checkbox checked={isSelected}></Checkbox></Col>
-			<Col><Avatar size={32} icon={<BlockieAddress address={tokenAddress}/>} /></Col>
+			<Col><Avatar size={32} icon={<BlockieAddress address={key}/>} /></Col>
 			<Col flex="auto"><span className="collection-name">{collectionName}</span></Col>
 			<Col><FavoriteCheckBox checked={isFavorite} onChange={checked => favorite.onChange(item, checked)} /></Col>
 		</Row>

@@ -2,16 +2,17 @@ import styles from "./collectionFilter.module.less"
 import { PopoverFilter } from "../popover"
 import { CollectionFilterStore } from "./collectionFilterStore"
 import { observer } from "mobx-react"
-import { CollectionFilterContent, ICollection } from "./collectionFilterContent"
+import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
+import { ICollectionFilterItem } from "./itemSource"
 
 interface IProps {
 	chainId: number
 	title: string
 	popoverTitle: string
-	applied: ICollection[]
+	applied: ICollectionFilterItem[]
 	collectionFilterStore: CollectionFilterStore
-	onChange: (collections: ICollection[]) => void
+	onChange: (collections: ICollectionFilterItem[]) => void
 	searchable: boolean
 	selectSingle: boolean
 	searchPlaceholder: string
@@ -28,12 +29,12 @@ const Impl = ({ chainId, title, popoverTitle, collectionFilterStore, onChange, a
 			return null
 		}
 
-		return <SubTitle names={applied.map(x => x.tokenName)} />
+		return <SubTitle names={applied.map(x => x.title)} />
 	}
 
 	const onSubmit = () => {
 		collectionFilterStore.copyNotAppliedToRecent()
-		const selectedCollections = collectionFilterStore.items.filter(x => selected.some(s => s === x.tokenAddress))
+		const selectedCollections = collectionFilterStore.items.filter(x => selected.some(s => s === x.key))
 		onChange(selectedCollections)
 		collectionFilterStore.clearNotApplied()
 	}

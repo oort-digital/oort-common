@@ -12,7 +12,7 @@ export interface ICollectionFilterStoreParams {
     favoriteMaxSize?: number
 }
 
-const itemKeyFunc = (item: ICollectionFilterItem) => item.tokenAddress
+const itemKeyFunc = (item: ICollectionFilterItem) => item.key
 
 export class CollectionFilterStore {
     
@@ -80,9 +80,9 @@ export class CollectionFilterStore {
     get allAppliedItems() {
         const { _appliedSet } = this
         if(_appliedSet) {
-            const appliedItems = this.items.filter(x => _appliedSet.has(x.tokenAddress))
-            const appliedFavorites = this.favorites.filter(x => _appliedSet.has(x.tokenAddress))
-            const recent = this.recent.filter(x => _appliedSet.has(x.tokenAddress))
+            const appliedItems = this.items.filter(x => _appliedSet.has(x.key))
+            const appliedFavorites = this.favorites.filter(x => _appliedSet.has(x.key))
+            const recent = this.recent.filter(x => _appliedSet.has(x.key))
             const arr = appliedItems.concat(appliedFavorites).concat(recent)
             return distinct(arr, itemKeyFunc)
         }
@@ -155,9 +155,9 @@ export class CollectionFilterStore {
         }
     }
 
-    selectSingle(tokenAddress: string, checked: boolean): void {
+    selectSingle(key: string, checked: boolean): void {
         if(checked) {
-            this.selected = [tokenAddress]
+            this.selected = [key]
         }
         else {
             this.selected = []
@@ -166,8 +166,8 @@ export class CollectionFilterStore {
 
     copyNotAppliedToRecent(): void {
         if(this.selected.length) {
-            const notAppliedItems = this.items.filter(x => this.notApplied.has(x.tokenAddress))
-            const notAppliedfavorites = this.favorites.filter(x => this.notApplied.has(x.tokenAddress))
+            const notAppliedItems = this.items.filter(x => this.notApplied.has(x.key))
+            const notAppliedfavorites = this.favorites.filter(x => this.notApplied.has(x.key))
             this._recentQueue.enqueue(notAppliedItems.concat(notAppliedfavorites), true)
             this.recent = this._recentQueue.items
         }

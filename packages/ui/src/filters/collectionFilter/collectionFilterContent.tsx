@@ -7,17 +7,13 @@ import {CollectionFilterStore} from "./collectionFilterStore"
 import {observer} from "mobx-react"
 import {Tabs} from "antd"
 
-import {ICollectionFilterItem} from "./itemSource"
+import { ICollectionFilterItem } from "./itemSource"
 
-export interface ICollection {
-	tokenAddress: string,
-	tokenName: string,
-}
 
 interface IProps {
     chainId: number
     collectionFilterStore: CollectionFilterStore
-    applied: ICollection[],
+    applied: ICollectionFilterItem[],
     searchable: boolean,
     selectSingle: boolean,
     searchPlaceholder: string
@@ -55,17 +51,17 @@ const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle
     }, [chainId]);// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        collectionFilterStore.setApplied(applied.map(x => x.tokenAddress))
+        collectionFilterStore.setApplied(applied.map(x => x.key))
     }, [applied, collectionFilterStore])
 
     const isMobile = useDeviceType() === DeviceType.Phone
 
     const select = (item: ICollectionFilterItem, isChecked: boolean) => {
         if (selectSingle) {
-            collectionFilterStore.selectSingle(item.tokenAddress, isChecked)
+            collectionFilterStore.selectSingle(item.key, isChecked)
         }
         else {
-            collectionFilterStore.select(item.tokenAddress, isChecked)
+            collectionFilterStore.select(item.key, isChecked)
         }
     }
 
@@ -74,7 +70,7 @@ const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle
         selected: new Set([...selected])
     }
 
-    const favoritesSet = new Set(favorites.map(x => x.tokenAddress))
+    const favoritesSet = new Set(favorites.map(x => x.key))
     const favoriteParam: ISelectedParameter = {
         onChange: (item: ICollectionFilterItem, isChecked: boolean) => collectionFilterStore.setFavorites(item, isChecked),
         selected: favoritesSet
