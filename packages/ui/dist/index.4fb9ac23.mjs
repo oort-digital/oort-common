@@ -2393,7 +2393,7 @@ const qo = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === De.Desktop ? e : r === De.Phone ? n : t)(), " "]
   });
-}, Jo = Tn(() => import("./connectModalDesktop.73e9cea2.mjs")), Qo = Tn(() => import("./connectModalMobile.a0f206c7.mjs")), Xo = (e) => {
+}, Jo = Tn(() => import("./connectModalDesktop.a1e05e23.mjs")), Qo = Tn(() => import("./connectModalMobile.f2e540dd.mjs")), Xo = (e) => {
   const {
     onCancel: n,
     visible: t,
@@ -3297,7 +3297,7 @@ class Si {
   setFavorites(n, t) {
     t ? this._favoritesQueue.enqueue([n]) : this._favoritesQueue.remove(n), this.favorites = this._favoritesQueue.items;
     const r = this.getFavoritesKey();
-    this._cache.setItem(r, this.favorites);
+    this._cache.setItem(r, this._favoritesQueue.items);
   }
   get notApplied() {
     return this._appliedSet ? new Set(this.selected.filter((n) => !this._appliedSet.has(n))) : new Set(this.selected);
@@ -3318,10 +3318,10 @@ class Si {
     }
     const n = this.getRecentKey();
     debugger;
-    const t = JSON.stringify(this.recent);
+    const t = JSON.stringify(this._recentQueue.items);
     console.log(t);
     debugger;
-    this._cache.setItem(n, this.recent);
+    this._cache.setItem(n, this._recentQueue.items);
   }
 }
 const si = "_async_list_1g1vl_1", ci = "_load_more_btn_container_1g1vl_1", li = "_load_more_btn_1g1vl_1", ui = "_empty_hint_1g1vl_8", Ae = {
@@ -3428,4 +3428,4 @@ export {
   wi as y,
   oi as z
 };
-//# sourceMappingURL=index.181cf9f8.mjs.map
+//# sourceMappingURL=index.4fb9ac23.mjs.map
