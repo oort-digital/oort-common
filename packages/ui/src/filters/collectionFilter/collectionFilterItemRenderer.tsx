@@ -9,7 +9,7 @@ export interface ISelectedParameter {
 	onChange: (item: ICollectionFilterItem, checked: boolean) => void
 }
 
-export const collectionItemRenderer = (isMobile: boolean, selected: ISelectedParameter, favorite: ISelectedParameter) => {
+export const collectionItemRenderer = (className: string, isMobile: boolean, selected: ISelectedParameter, favorite: ISelectedParameter) => {
 
 	const tokenNameMaxLen = isMobile ? 16 : 20
 
@@ -23,7 +23,7 @@ export const collectionItemRenderer = (isMobile: boolean, selected: ISelectedPar
 			collectionName = `${collectionName} (${count})`
 		}
 
-		return <Row gutter={[16, 0]} justify="space-between" align="middle" onClick={() => selected.onChange(item, !isSelected)} className="collection-list-item">
+		return <Row gutter={[16, 0]} justify="space-between" align="middle" onClick={() => selected.onChange(item, !isSelected)} className={className}>
 			<Col><Checkbox checked={isSelected}></Checkbox></Col>
 			<Col><Avatar size={32} icon={<BlockieAddress address={tokenAddress}/>} /></Col>
 			<Col flex="auto"><span className="collection-name">{collectionName}</span></Col>

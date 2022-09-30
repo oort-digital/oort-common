@@ -2,14 +2,12 @@ import {useEffect, useRef} from "react"
 import {AsyncList, DeviceType, EMPTY_ABORT_SIGNAL, useDeviceType} from "../.."
 import {SearchInput} from "../searchInput"
 import {collectionItemRenderer, ISelectedParameter} from "./collectionFilterItemRenderer"
-import "./collectionFilterContent.less"
+import styles from "./collectionFilterContent.module.less"
 import {CollectionFilterStore} from "./collectionFilterStore"
 import {observer} from "mobx-react"
 import {Tabs} from "antd"
 
 import {ICollectionFilterItem} from "./itemSource"
-
-const {TabPane} = Tabs;
 
 export interface ICollection {
 	tokenAddress: string,
@@ -85,20 +83,20 @@ const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle
 
         if (showLoadMore) {
             return <AsyncList
-                className="collection-list"
+                className={styles.list}
                 hasLoadMore={hasLoadMore}
                 onLoadMore={() => collectionFilterStore.loadNextPage(false, EMPTY_ABORT_SIGNAL)}
                 loading={isLoading}
-                itemRenderer={collectionItemRenderer(isMobile, selectedParam, favoriteParam)}
+                itemRenderer={collectionItemRenderer(styles.list_item, isMobile, selectedParam, favoriteParam)}
                 items={items}
             />
         }
 
         return <AsyncList
-            className="collection-list"
+            className={styles.list}
             hasLoadMore={false}
             loading={isLoading}
-            itemRenderer={collectionItemRenderer(isMobile, selectedParam, favoriteParam)}
+            itemRenderer={collectionItemRenderer(styles.list_item, isMobile, selectedParam, favoriteParam)}
             items={items}
         />
     }
@@ -111,7 +109,7 @@ const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle
         { label: favTabTitle, key: 'favorites', children: renderList(favorites, false) }
       ];
 
-    return <div className="collection-filter-content">
+    return <div className={styles.content}>
         {
             searchable && <SearchInput value={collectionFilterStore.term}
                                        onChange={e => onTermChange(e)}
