@@ -176,6 +176,7 @@ export class CollectionFilterStore {
         const key = this.getRecentKey()
         debugger
         const t = JSON.stringify(this.recent)
+        console.log(t)
         debugger
         this._cache.setItem(key, this.recent)
     }
