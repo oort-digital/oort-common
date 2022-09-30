@@ -1,4 +1,4 @@
-import { Button as Y, Modal as Ar, Typography as Mr, Drawer as Rr, Switch as Or, Collapse as kn, Popover as Nr, Input as Sn, Row as Ir, Col as ke, Checkbox as $r, Avatar as Pr, Tabs as Ln, ConfigProvider as Fr, List as qt } from "antd";
+import { Button as K, Modal as Ar, Typography as Mr, Drawer as Rr, Switch as Or, Collapse as kn, Popover as Nr, Input as Sn, Row as Ir, Col as ke, Checkbox as $r, Avatar as Pr, Tabs as Ln, ConfigProvider as Fr, List as qt } from "antd";
 import * as P from "react";
 import Ne, { createContext as Dr, useContext as jr, useEffect as pe, useState as ce, Suspense as Vr, lazy as Tn, useRef as En } from "react";
 import { observer as mt } from "mobx-react";
@@ -279,8 +279,8 @@ function Hr() {
       } finally {
         ze = !1, We.current = T, ar(), Error.prepareStackTrace = k;
       }
-      var ae = o ? o.displayName || o.name : "", Kt = ae ? be(ae) : "";
-      return typeof o == "function" && _e.set(o, Kt), Kt;
+      var ae = o ? o.displayName || o.name : "", Yt = ae ? be(ae) : "";
+      return typeof o == "function" && _e.set(o, Yt), Yt;
     }
     function sr(o, u, h) {
       return $t(o, !1);
@@ -464,7 +464,7 @@ function Hr() {
         return br(o, b, $, k, p, fe.current, w);
       }
     }
-    var Ye = A.ReactCurrentOwner, Wt = A.ReactDebugCurrentFrame;
+    var Ke = A.ReactCurrentOwner, Wt = A.ReactDebugCurrentFrame;
     function oe(o) {
       if (o) {
         var u = o._owner, h = ye(o.type, o._source, u ? u.type : null);
@@ -472,15 +472,15 @@ function Hr() {
       } else
         Wt.setExtraStackFrame(null);
     }
-    var Ke;
-    Ke = !1;
+    var Ye;
+    Ye = !1;
     function qe(o) {
       return typeof o == "object" && o !== null && o.$$typeof === n;
     }
     function Ht() {
       {
-        if (Ye.current) {
-          var o = H(Ye.current.type);
+        if (Ke.current) {
+          var o = H(Ke.current.type);
           if (o)
             return `
 
@@ -523,7 +523,7 @@ Check the top-level render call using <` + h + ">.");
           return;
         zt[h] = !0;
         var p = "";
-        o && o._owner && o._owner !== Ye.current && (p = " It was passed a child from " + H(o._owner.type) + "."), oe(o), x('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', h, p), oe(null);
+        o && o._owner && o._owner !== Ke.current && (p = " It was passed a child from " + H(o._owner.type) + "."), oe(o), x('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', h, p), oe(null);
       }
     }
     function Ut(o, u) {
@@ -560,8 +560,8 @@ Check the top-level render call using <` + h + ">.");
         if (h) {
           var p = H(u);
           lr(h, o.props, "prop", p, o);
-        } else if (u.PropTypes !== void 0 && !Ke) {
-          Ke = !0;
+        } else if (u.PropTypes !== void 0 && !Ye) {
+          Ye = !0;
           var k = H(u);
           x("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", k || "Unknown");
         }
@@ -580,7 +580,7 @@ Check the top-level render call using <` + h + ">.");
         o.ref !== null && (oe(o), x("Invalid attribute `ref` supplied to `React.Fragment`."), oe(null));
       }
     }
-    function Yt(o, u, h, p, k, T) {
+    function Kt(o, u, h, p, k, T) {
       {
         var w = nr(o);
         if (!w) {
@@ -611,10 +611,10 @@ Check the top-level render call using <` + h + ">.");
       }
     }
     function Sr(o, u, h) {
-      return Yt(o, u, h, !0);
+      return Kt(o, u, h, !0);
     }
     function Lr(o, u, h) {
-      return Yt(o, u, h, !1);
+      return Kt(o, u, h, !1);
     }
     var Tr = Lr, Er = Sr;
     he.Fragment = r, he.jsx = Tr, he.jsxs = Er;
@@ -640,28 +640,28 @@ function ai({
   let d = "footer-buttons";
   return s && (d = `${d} ${s}`), n && e ? d = `${d} two-buttons` : d = `${d} single-button`, c && l && (d = `${d} two-buttons`), /* @__PURE__ */ v("div", {
     className: d,
-    children: [n ? /* @__PURE__ */ i(Y, {
+    children: [n ? /* @__PURE__ */ i(K, {
       className: "cancel-btn",
       disabled: a,
       size: (C = n.size) != null ? C : "large",
       type: n.type,
       onClick: t,
       children: n.text
-    }) : null, e ? /* @__PURE__ */ i(Y, {
+    }) : null, e ? /* @__PURE__ */ i(K, {
       className: "ok-btn",
       loading: a,
       size: (m = e.size) != null ? m : "large",
       type: (_ = e.type) != null ? _ : "primary",
       onClick: r,
       children: e.text
-    }) : null, c ? /* @__PURE__ */ i(Y, {
+    }) : null, c ? /* @__PURE__ */ i(K, {
       className: "first-btn",
       loading: a,
       size: (S = c.size) != null ? S : "large",
       type: (y = c.type) != null ? y : "primary",
       onClick: f,
       children: c.text
-    }) : null, l ? /* @__PURE__ */ i(Y, {
+    }) : null, l ? /* @__PURE__ */ i(K, {
       className: "second-btn",
       loading: a,
       size: (E = l.size) != null ? E : "large",
@@ -744,11 +744,11 @@ function O(e) {
   }
   return e;
 }
-function Yr(e) {
+function Kr(e) {
   if (Array.isArray(e))
     return e;
 }
-function Kr(e, n) {
+function Yr(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var r = [], a = !0, s = !1, c, l;
@@ -790,7 +790,7 @@ function Gr() {
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function An(e, n) {
-  return Yr(e) || Kr(e, n) || qr(e, n) || Gr();
+  return Kr(e) || Yr(e, n) || qr(e, n) || Gr();
 }
 function Jr(e, n) {
   if (e == null)
@@ -1793,7 +1793,7 @@ const D = Bn, N1 = () => /* @__PURE__ */ v("svg", {
     points: `77.271,63.298 77.277,63.298 62.759,48.78 52.03,59.509 52.029,59.509 50.797,60.742 48.254,63.285 \r
 48.254,63.285 48.234,63.305 48.254,63.326 62.759,77.831 77.277,63.313 77.284,63.305 `
   })]
-}), Y1 = ({
+}), K1 = ({
   height: e,
   width: n
 }) => /* @__PURE__ */ i(D, {
@@ -1801,7 +1801,7 @@ const D = Bn, N1 = () => /* @__PURE__ */ v("svg", {
     width: n,
     height: e
   })
-}), K1 = ({
+}), Y1 = ({
   width: e,
   height: n
 }) => /* @__PURE__ */ i("svg", {
@@ -1822,7 +1822,7 @@ const D = Bn, N1 = () => /* @__PURE__ */ v("svg", {
   height: e,
   width: n
 }) => /* @__PURE__ */ i(D, {
-  component: () => /* @__PURE__ */ i(K1, {
+  component: () => /* @__PURE__ */ i(Y1, {
     width: n,
     height: e
   })
@@ -2026,7 +2026,7 @@ function hn(e, n, t, r, a, s, c) {
     size: l,
     text: f,
     href: g
-  } = n, d = /* @__PURE__ */ i(Y, {
+  } = n, d = /* @__PURE__ */ i(K, {
     className: e,
     disabled: r,
     loading: a,
@@ -2129,7 +2129,7 @@ const lo = "_root_v6f9y_1", uo = "_icon_before_v6f9y_1", fo = "_icon_after_v6f9y
       });
     case W.BSCTestnet:
     case W.BSCMainnet:
-      return /* @__PURE__ */ i(Y1, {
+      return /* @__PURE__ */ i(K1, {
         height: n,
         width: t
       });
@@ -2278,7 +2278,7 @@ const bn = Object.freeze({
 function kt(e, n, t = xt, { encodeValue: r = Zn, encodeName: a = zn } = {}) {
   return document.cookie = `${a(e)}=${r(n, e)}${Po(t)}`;
 }
-function Yn(e, { decodeValue: n = wt, decodeName: t = yt } = {}) {
+function Kn(e, { decodeValue: n = wt, decodeName: t = yt } = {}) {
   return Un(e, n, t);
 }
 function Fo({ decodeValue: e = wt, decodeName: n = yt } = {}) {
@@ -2300,7 +2300,7 @@ function Ct(e, n) {
       if (arguments.length === 0)
         return Fo(this.converter.read);
       if (a != null)
-        return Yn(a, this.converter.read);
+        return Kn(a, this.converter.read);
     },
     remove: function(a, s) {
       Do(a, Object.assign({}, this.attributes, s));
@@ -2345,7 +2345,7 @@ class Vo {
     };
   }
   get isDarkMode() {
-    const n = Yn(De);
+    const n = Kn(De);
     return n && JSON.parse(n) || !1;
   }
 }
@@ -2368,7 +2368,7 @@ const Wo = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Fe.Desktop ? e : r === Fe.Phone ? n : t)(), " "]
   });
-}, zo = Tn(() => import("./connectModalDesktop.e581f67a.mjs")), Zo = Tn(() => import("./connectModalMobile.39ba3de5.mjs")), Uo = (e) => {
+}, zo = Tn(() => import("./connectModalDesktop.7b5797d5.mjs")), Zo = Tn(() => import("./connectModalMobile.73707f9e.mjs")), Uo = (e) => {
   const {
     onCancel: n,
     visible: t,
@@ -2409,7 +2409,7 @@ const Wo = (e = "cookies") => {
     })
   });
 };
-var Kn = {}, le = {}, qn = {};
+var Yn = {}, le = {}, qn = {};
 (function(e) {
   Object.defineProperty(e, "__esModule", { value: !0 }), e.randArr = new Array(4);
   function n(r) {
@@ -2437,7 +2437,7 @@ function Re() {
   return "hsl(" + e + "," + n + "," + t + ")";
 }
 le.createColor = Re;
-function Yo(e) {
+function Ko(e) {
   let n = e, t = e, r = Math.ceil(n / 2), a = n - r, s = [];
   for (let c = 0; c < t; c++) {
     let l = [];
@@ -2450,8 +2450,8 @@ function Yo(e) {
   }
   return s;
 }
-le.createImageData = Yo;
-function Ko(e) {
+le.createImageData = Ko;
+function Yo(e) {
   const n = e.seed || Math.floor(Math.random() * Math.pow(10, 16)).toString(16);
   return q.seedRandomness(n), {
     seed: n,
@@ -2462,7 +2462,7 @@ function Ko(e) {
     spotcolor: e.spotcolor || Re()
   };
 }
-le.parseOptions = Ko;
+le.parseOptions = Yo;
 (function(e) {
   function n(s) {
     for (var c in s)
@@ -2493,14 +2493,14 @@ le.parseOptions = Ko;
     create: a,
     render: r
   };
-})(Kn);
+})(Yn);
 const Gn = ({
   address: e,
   className: n
 }) => {
   if (!e)
     return null;
-  const t = Kn.create({
+  const t = Yn.create({
     seed: e
   }).toDataURL();
   return /* @__PURE__ */ i("img", {
@@ -2754,7 +2754,7 @@ const pa = {
   collection_popover_content: La,
   apply: Ta,
   title: Ea
-}, Aa = "_popover_content_17el8_5", Ma = "_title_17el8_5", Ra = "_cancel_17el8_15", Oa = "_apply_17el8_20", Na = "_trigger_btn_17el8_24", Ia = "_single_title_17el8_28", $a = "_title_outer_17el8_36", Pa = "_sub_title_outer_17el8_45", Fa = "_filled_17el8_54", K = {
+}, Aa = "_popover_content_17el8_5", Ma = "_title_17el8_5", Ra = "_cancel_17el8_15", Oa = "_apply_17el8_20", Na = "_trigger_btn_17el8_24", Ia = "_single_title_17el8_28", $a = "_title_outer_17el8_36", Pa = "_sub_title_outer_17el8_45", Fa = "_filled_17el8_54", Y = {
   popover_content: Aa,
   title: Ma,
   cancel: Ra,
@@ -2785,17 +2785,17 @@ const pa = {
   }, A = (re) => {
     y(re), m && m(re);
   }, x = () => /* @__PURE__ */ v("div", {
-    className: `${K.popover_content} ${a || ""}`,
+    className: `${Y.popover_content} ${a || ""}`,
     children: [/* @__PURE__ */ i("div", {
-      className: `${K.title} ${s}`,
+      className: `${Y.title} ${s}`,
       children: r
     }), d, /* @__PURE__ */ v("div", {
-      children: [/* @__PURE__ */ i(Y, {
-        className: `${K.cancel} ${l}`,
+      children: [/* @__PURE__ */ i(K, {
+        className: `${Y.cancel} ${l}`,
         onClick: () => y(!1),
         children: "Cancel"
-      }), /* @__PURE__ */ i(Y, {
-        className: `${K.apply} ${c}`,
+      }), /* @__PURE__ */ i(K, {
+        className: `${Y.apply} ${c}`,
         onClick: E,
         disabled: _,
         type: "primary",
@@ -2817,19 +2817,19 @@ const pa = {
     })]
   }), L = () => /* @__PURE__ */ v(ne, {
     children: [/* @__PURE__ */ i("div", {
-      className: K.title_outer,
+      className: Y.title_outer,
       children: e
     }), /* @__PURE__ */ v("div", {
-      className: K.sub_title_outer,
+      className: Y.sub_title_outer,
       children: [n, N]
     })]
   }), I = () => /* @__PURE__ */ v(ne, {
     children: [/* @__PURE__ */ i("span", {
-      className: K.single_title,
+      className: Y.single_title,
       children: e
     }), N]
   });
-  let J = `${K.trigger_btn} ${t != null ? t : ""}`;
+  let J = `${Y.trigger_btn} ${t != null ? t : ""}`;
   return J = `${J} ${f ? "" : "filled"}`, /* @__PURE__ */ i(Nr, {
     style: {
       backgroundColor: "#11151A"
@@ -2839,7 +2839,7 @@ const pa = {
     placement: "bottomRight",
     content: x,
     trigger: "click",
-    children: /* @__PURE__ */ i(Y, {
+    children: /* @__PURE__ */ i(K, {
       className: J,
       size: "large",
       children: n ? L() : I()
@@ -2965,7 +2965,7 @@ const pa = {
 };
 const {
   TabPane: st
-} = Ln, Ya = ({
+} = Ln, Ka = ({
   collectionFilterStore: e,
   chainId: n,
   applied: t,
@@ -3034,7 +3034,7 @@ const {
       }, "favorites")]
     })]
   });
-}, Qn = mt(Ya), Ka = ({
+}, Qn = mt(Ka), Ya = ({
   names: e,
   len: n = 20
 }) => {
@@ -3063,7 +3063,7 @@ const {
 }) => {
   const {
     selected: f
-  } = r, g = !s.length, d = () => g ? null : /* @__PURE__ */ i(Ka, {
+  } = r, g = !s.length, d = () => g ? null : /* @__PURE__ */ i(Ya, {
     names: s.map((S) => S.tokenName)
   }), C = () => {
     r.copyNotAppliedToRecent();
@@ -3301,7 +3301,7 @@ const Ja = "_async_list_1g1vl_1", Qa = "_load_more_btn_container_1g1vl_1", Xa = 
 }) => {
   const f = a && r.length === 0, g = () => !e || !r.length ? null : /* @__PURE__ */ i("div", {
     className: Me.load_more_btn_container,
-    children: /* @__PURE__ */ v(Y, {
+    children: /* @__PURE__ */ v(K, {
       className: Me.load_more_btn,
       loading: a,
       size: "large",
@@ -3335,12 +3335,24 @@ export {
   Fe as D,
   wo as E,
   ne as F,
+  B1 as G,
+  Z1 as H,
   D as I,
+  K1 as J,
+  q1 as K,
   li as L,
   ma as M,
+  J1 as N,
   ii as O,
   Da as P,
+  Q1 as Q,
+  $1 as R,
   Io as S,
+  H1 as T,
+  eo as U,
+  no as V,
+  oo as W,
+  io as X,
   v as a,
   si as b,
   ai as c,
@@ -3359,8 +3371,13 @@ export {
   hi as p,
   Va as q,
   ui as r,
-  Ka as s,
+  Ya as s,
   Lo as t,
-  $o as u
+  $o as u,
+  I1 as v,
+  P1 as w,
+  F1 as x,
+  D1 as y,
+  j1 as z
 };
-//# sourceMappingURL=index.650350c8.mjs.map
+//# sourceMappingURL=index.d6d06e32.mjs.map

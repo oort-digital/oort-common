@@ -8,4 +8,5 @@ export * from "./blockieAddress";
 export * from "./connectModal";
 export * from "./filters";
 export * from "./asyncList";
+export * from "./icons";
 //# sourceMappingURL=index.d.ts.map
