@@ -1,10 +1,12 @@
 import { useState as O } from "react";
-import { Row as g, Col as u } from "antd";
-import { a as k, C as p, b as T, M as B, W as D } from "./index.es.2e684e38.mjs";
-import { j as n, O as S, a as t, F as i } from "./index.0b52f02e.mjs";
+import { Row as g, Col as p } from "antd";
+import { a as k, C as u, b as T, M as B, W as D } from "./index.es.1cf300e9.mjs";
+import { j as n, O as S, a as t, F as i } from "./index.650350c8.mjs";
 import "ethers";
-var _ = /* @__PURE__ */ ((a) => (a[a.WALLET_METAMASK = 0] = "WALLET_METAMASK", a[a.WALLET_CONNECT = 1] = "WALLET_CONNECT", a))(_ || {});
-const F = (a, l, o) => a ? o.some((r) => r.name === l.name) ? /* @__PURE__ */ t(i, {
+import "mobx-react";
+import "mobx";
+var _ = /* @__PURE__ */ ((o) => (o[o.WALLET_METAMASK = 0] = "WALLET_METAMASK", o[o.WALLET_CONNECT = 1] = "WALLET_CONNECT", o))(_ || {});
+const F = (o, l, a) => o ? a.some((r) => r.name === l.name) ? /* @__PURE__ */ t(i, {
   children: ["You are currently using ", /* @__PURE__ */ n("span", {
     children: "Oort Digital"
   }), " on the ", /* @__PURE__ */ n("span", {
@@ -15,11 +17,11 @@ const F = (a, l, o) => a ? o.some((r) => r.name === l.name) ? /* @__PURE__ */ t(
     children: [l.name, "."]
   }), /* @__PURE__ */ t("div", {
     children: ["Please connect to the appropriate network. ", /* @__PURE__ */ n("span", {
-      children: o.map((r) => r.name).join(", ")
+      children: a.map((r) => r.name).join(", ")
     })]
   })]
-}) : null, U = (a) => {
-  const [l, o] = O(!1), {
+}) : null, z = (o) => {
+  const [l, a] = O(!1), {
     onCancel: r,
     visible: y,
     supportedChains: m,
@@ -30,19 +32,19 @@ const F = (a, l, o) => a ? o.some((r) => r.name === l.name) ? /* @__PURE__ */ t(
     account: d,
     connectorName: A,
     supportedConnectors: M
-  } = a, j = async (e) => {
-    o(!0);
+  } = o, j = async (e) => {
+    a(!0);
     try {
       await v(e), r();
     } finally {
-      o(!1);
+      a(!1);
     }
   }, W = async (e) => {
-    o(!0);
+    a(!0);
     try {
       await I(e), r();
     } finally {
-      o(!1);
+      a(!1);
     }
   }, x = /* @__PURE__ */ t(i, {
     children: [/* @__PURE__ */ t("div", {
@@ -58,19 +60,19 @@ const F = (a, l, o) => a ? o.some((r) => r.name === l.name) ? /* @__PURE__ */ t(
     })]
   }), C = (e, c, h) => {
     if (d && c === A)
-      return /* @__PURE__ */ n(p, {
+      return /* @__PURE__ */ n(u, {
         disabled: !0,
         walletName: e,
         walletIcon: h,
         account: d
       });
     const w = M[c];
-    return w.isInstalled ? /* @__PURE__ */ n(p, {
+    return w.isInstalled ? /* @__PURE__ */ n(u, {
       walletName: e,
       onClick: () => j(c),
       walletIcon: h,
       labelText: "Connect"
-    }) : /* @__PURE__ */ n(p, {
+    }) : /* @__PURE__ */ n(u, {
       walletName: e,
       onClick: () => window.open(w.installUrl, "_blank").focus(),
       walletIcon: h,
@@ -80,7 +82,7 @@ const F = (a, l, o) => a ? o.some((r) => r.name === l.name) ? /* @__PURE__ */ t(
     const {
       chainId: c
     } = e;
-    return /* @__PURE__ */ n(u, {
+    return /* @__PURE__ */ n(p, {
       flex: 3,
       children: /* @__PURE__ */ n(T, {
         onClick: () => W(c),
@@ -118,10 +120,10 @@ const F = (a, l, o) => a ? o.some((r) => r.name === l.name) ? /* @__PURE__ */ t(
       }), /* @__PURE__ */ t(g, {
         gutter: f,
         justify: "space-between",
-        children: [/* @__PURE__ */ n(u, {
+        children: [/* @__PURE__ */ n(p, {
           span: 12,
           children: C("Metamask", k.Injected, B)
-        }), /* @__PURE__ */ n(u, {
+        }), /* @__PURE__ */ n(p, {
           span: 12,
           children: C("WalletConnect", k.WalletConnect, D)
         })]
@@ -131,6 +133,6 @@ const F = (a, l, o) => a ? o.some((r) => r.name === l.name) ? /* @__PURE__ */ t(
 };
 export {
   _ as WALLETTYPE,
-  U as default
+  z as default
 };
-//# sourceMappingURL=connectModalDesktop.d76e9ebb.mjs.map
+//# sourceMappingURL=connectModalDesktop.e581f67a.mjs.map

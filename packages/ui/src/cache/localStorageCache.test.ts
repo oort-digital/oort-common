@@ -1,4 +1,4 @@
-import { delayAsync } from "../../utils";
+import { delayAsync } from "../utils";
 import { ExpirationType, ICacheItemPolicy } from "./icacheProvider";
 import { LocalStorageCacheProvider } from "./localStorageCache";
 

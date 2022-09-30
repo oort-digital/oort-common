@@ -1,4 +1,3 @@
-import React from "react"
 import { StarIcon } from "./startIcon"
 import { StarFilledIcon } from "./startFilledIcon"
 

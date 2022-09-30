@@ -31,7 +31,6 @@ class CollectionSource {
     constructor(len: number) {
         for(let i = 0; i < len; i++) {
             this._collections.push({
-                count: i,
                 tokenAddress: numberToAddress(i),
                 tokenName: CollectionSource.generateName(i)
             })
@@ -69,7 +68,7 @@ export class ItemSourceStub implements IItemSource {
     }
 
     // Use in ant.select. It shouldn't be an action
-    async loadNextPage(reset: boolean, signal: AbortSignal): Promise<boolean> {
+    async loadNextPage(_reset: boolean, _signal: AbortSignal): Promise<boolean> {
 
         this.state = StoreState.Pending
 
