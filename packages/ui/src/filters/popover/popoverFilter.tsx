@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react'
-import "./popoverFilter.less"
+import styles from "./popoverFilter.module.less"
 import { Button, Popover } from "antd"
 import { ChevronDownOutlineIcon, CloseIcon } from '../../icons'
 
@@ -35,12 +35,12 @@ export const PopoverFilter = ({title, subTitle, triggerBtnClassName, popoverTitl
         }
     }
 
-    const renderContent = () => <div className={`popover-content ${popoverClassName || ''}`}>
-        <div className='popover-title'>{popoverTitle}</div>
+    const renderContent = () => <div className={`hello ${styles.popover_content} ${popoverClassName || ''}`}>
+        <div className={styles.title}>{popoverTitle}</div>
         {children}
         <div>
-            <Button className='cancel-btn' onClick={() => setVisible(false)}>Cancel</Button>
-            <Button className='apply-btn' onClick={submit} disabled={submitDisabled} type='primary'>Apply</Button>
+            <Button className={styles.cancel} onClick={() => setVisible(false)}>Cancel</Button>
+            <Button className={styles.apply} onClick={submit} disabled={submitDisabled} type='primary'>Apply</Button>
         </div>
     </div>
 
@@ -56,20 +56,22 @@ export const PopoverFilter = ({title, subTitle, triggerBtnClassName, popoverTitl
 
 
     const renderTitleAndSubTitle = () => <>
-        <div className='title-outer'>{title}</div>
-        <div className='sub-title-outer'>{subTitle}{btnIcons}</div>
+        <div className={styles.title_outer}>{title}</div>
+        <div className={styles.sub_title_outer}>{subTitle}{btnIcons}</div>
     </>
 
     const renderSingleTitle = () => <>
-        <span className='single-title'>{title}</span>
+        <span className={styles.single_title}>{title}</span>
         {btnIcons}
     </>
 
-    let btnClassName = `trigger-btn ${triggerBtnClassName ?? ''}`
+    let btnClassName = `${styles.trigger_btn} ${triggerBtnClassName ?? ''}`
     btnClassName = `${btnClassName} ${isClear ? '' : 'filled'}`
 
     return <Popover
         style={{"backgroundColor":"#11151A"}}
+        className="qwerty"
+        openClassName='qwerty123'
         onOpenChange={onVisibleChange_}
         open={visible}
         placement="bottomRight"
