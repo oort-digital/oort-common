@@ -1,18 +1,11 @@
 
-const ZERO_ADDR = '0x0000000000000000000000000000000000000000'
+import "./global.vars"
 
-declare global {
-  interface String {
-    isNonZeroAddress(): boolean
-    isZeroAddress(): boolean
-    toMasskedAddress(): string
-    cutLongString(maxLen: number): string
-  }
-
-  interface Array<T> {
-    distinct(keyFunc: (item: T) => string): Array<T>;
-  }
-
+declare interface String {
+  isNonZeroAddress(): boolean
+  isZeroAddress(): boolean
+  toMasskedAddress(): string
+  cutLongString(maxLen: number): string
 }
 // eslint-disable-next-line
 String.prototype.isNonZeroAddress = function(): boolean {
@@ -44,21 +37,3 @@ String.prototype.cutLongString = function(maxLen: number): string {
   if(this.length <= maxLen) { return this as string }
   return `${this.substring(0, maxLen - 3)}...`  
 }
-
-// eslint-disable-next-line
-Array.prototype.distinct = function(keyFunc: (item: any) => string) {
-  const set = new Set<string>()
-  const result: any[] = []
-
-  this.forEach(x => {
-    const key = keyFunc(x)
-    if(!set.has(key)) {
-      result.push(x)
-      set.add(key)
-    }
-  })
-
-  return result
-}
-
-export { ZERO_ADDR }

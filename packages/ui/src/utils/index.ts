@@ -4,4 +4,6 @@ export { debounceFunction } from "./debounce"
 export { delayAsync } from "./delayAsync"
 
 export { toErrorWithMessage } from "./error"
-export type { ErrorWithMessage } from './error';
+export type { ErrorWithMessage } from './error'
+
+export * from "./vars"

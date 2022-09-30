@@ -1,6 +1,6 @@
-
 import "../styles/antOverride.less";
 import "../styles/fonts.css";
+
 // import '@oort/ui/dist/style.css';
 // import '../oortLib.less';
 
@@ -9,10 +9,10 @@ import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connec
 import { logger } from "@oort/logger";
 import { Layout } from './layout';
 import { INavItems } from "./navMenu";
-import { ZERO_ADDR } from '../extensions';
 import { lazy } from "react";
 import { useTheme } from "../effects";
 import { TestCarousel } from "./testCarousel";
+import { ZERO_ADDR } from "../utils";
 
 const DarkTheme = lazy(() => import("../styles/theme/darkTheme"));
 const LightTheme = lazy(() => import("../styles/theme/lightTheme"));
