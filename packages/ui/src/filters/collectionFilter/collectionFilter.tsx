@@ -7,7 +7,6 @@ import { SubTitle } from "../subTitle"
 import { ICollectionFilterItem } from "./itemSource"
 
 interface IProps {
-	chainId: number
 	title: string
 	popoverTitle: string
 	applied: ICollectionFilterItem[]
@@ -18,7 +17,7 @@ interface IProps {
 	searchPlaceholder: string
 }
 
-const Impl = ({ chainId, title, popoverTitle, collectionFilterStore, onChange, applied, searchable, selectSingle, searchPlaceholder }: IProps) => {
+const Impl = ({ title, popoverTitle, collectionFilterStore, onChange, applied, searchable, selectSingle, searchPlaceholder }: IProps) => {
 	
 	const { selected } = collectionFilterStore
 
@@ -74,7 +73,6 @@ const Impl = ({ chainId, title, popoverTitle, collectionFilterStore, onChange, a
 			searchable={searchable}
 			applied={applied}
 			collectionFilterStore={collectionFilterStore}
-			chainId={chainId}
 		/>
   </PopoverFilter>
 }

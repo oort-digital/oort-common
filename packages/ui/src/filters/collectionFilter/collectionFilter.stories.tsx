@@ -43,7 +43,6 @@ const store = new CollectionFilterStore({
 
 export const Main = Template.bind({});
 Main.args = {
-  chainId: 1,
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
   searchPlaceholder: 'Enter text',

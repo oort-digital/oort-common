@@ -11,7 +11,6 @@ import { ICollectionFilterItem } from "./itemSource"
 
 
 interface IProps {
-    chainId: number
     collectionFilterStore: CollectionFilterStore
     applied: ICollectionFilterItem[],
     searchable: boolean,
@@ -19,7 +18,7 @@ interface IProps {
     searchPlaceholder: string
 }
 
-const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle, searchPlaceholder}: IProps) => {
+const Impl = ({collectionFilterStore, applied, searchable, selectSingle, searchPlaceholder}: IProps) => {
 
     const {selected, isLoading, items, favorites, recent, hasLoadMore} = collectionFilterStore
 
@@ -48,7 +47,7 @@ const Impl = ({collectionFilterStore, chainId, applied, searchable, selectSingle
             abortController.abort()
         }
 
-    }, [chainId]);// eslint-disable-line react-hooks/exhaustive-deps
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         collectionFilterStore.setApplied(applied.map(x => x.key))
