@@ -1,20 +1,21 @@
-import { ICollectionFilterItem, IItemSource } from "./itemSource";
+import { IItemSource } from "./itemSource";
+import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
 export interface ICollectionFilterStoreParams {
     cacheKeyPrefixFunc: () => string;
-    itemSource: IItemSource;
+    itemSourceFunc: () => IItemSource;
     recentMaxSize?: number;
     favoriteMaxSize?: number;
 }
 export declare class CollectionFilterStore {
-    selected: string[];
+    selected: ItemKeyType[];
     favorites: ICollectionFilterItem[];
     recent: ICollectionFilterItem[];
-    private readonly _collectionStore;
+    private readonly _itemSource;
     private readonly _cache;
     private readonly _cacheKeyPrefixFunc;
     private readonly _favoritesQueue;
     private readonly _recentQueue;
-    constructor({ cacheKeyPrefixFunc, itemSource: collectionStore, recentMaxSize, favoriteMaxSize }: ICollectionFilterStoreParams);
+    constructor({ cacheKeyPrefixFunc, itemSourceFunc, recentMaxSize, favoriteMaxSize }: ICollectionFilterStoreParams);
     private getFavoritesKey;
     private getRecentKey;
     private loadFromCache;
@@ -32,9 +33,9 @@ export declare class CollectionFilterStore {
     setFavorites(item: ICollectionFilterItem, checked: boolean): void;
     private _appliedSet;
     private get notApplied();
-    setApplied(applied: string[]): void;
-    select(tokenAddress: string, checked: boolean): void;
-    selectSingle(key: string, checked: boolean): void;
+    setApplied(applied: ItemKeyType[]): void;
+    select(key: ItemKeyType, checked: boolean): void;
+    selectSingle(key: ItemKeyType, checked: boolean): void;
     copyNotAppliedToRecent(): void;
 }
 //# sourceMappingURL=collectionFilterStore.d.ts.map

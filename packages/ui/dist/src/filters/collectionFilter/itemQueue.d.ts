@@ -1,3 +1,4 @@
+import { ItemKeyType } from "./typesAndInterfaces";
 export declare class ItemQueue<T> {
     get items(): T[];
     enqueue(newItems: T[], unique?: boolean): void;
@@ -9,6 +10,6 @@ export declare class ItemQueue<T> {
     private readonly _maxSize;
     private _items;
     private readonly _keyFunc;
-    constructor(keyFunc: (item: T) => string, maxSize: number, initialArr: T[]);
+    constructor(keyFunc: (item: T) => ItemKeyType, maxSize: number, initialArr: T[]);
 }
 //# sourceMappingURL=itemQueue.d.ts.map

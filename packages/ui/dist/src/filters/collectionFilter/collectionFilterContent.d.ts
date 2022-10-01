@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { CollectionFilterStore } from "./collectionFilterStore";
-import { ICollectionFilterItem } from "./itemSource";
+import { ICollectionFilterItem } from "./typesAndInterfaces";
 interface IProps {
     collectionFilterStore: CollectionFilterStore;
     applied: ICollectionFilterItem[];
