@@ -1,11 +1,5 @@
 import { StoreState } from "./storeState";
-
-export interface ICollectionFilterItem {
-	key: string
-	iconUrl: string,
-	title: string
-	count?: number
-}
+import { ICollectionFilterItem } from "./typesAndInterfaces";
 
 export interface IItemSource {
 	items: ICollectionFilterItem[];

@@ -38,7 +38,7 @@ const onChange = (collections: ICollection[]) => {}
 
 const store = new CollectionFilterStore({
   cacheKeyPrefixFunc: () => 'storybook_collection_filter',
-  itemSource: new ItemSourceStub()
+  itemSourceFunc: () => new ItemSourceStub()
 })
 
 export const Main = Template.bind({});

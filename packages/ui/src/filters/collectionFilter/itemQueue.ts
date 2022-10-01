@@ -1,4 +1,5 @@
 import { distinct } from "../../utils"
+import { ItemKeyType } from "./typesAndInterfaces"
 
 export class ItemQueue<T> {
 
@@ -50,9 +51,9 @@ export class ItemQueue<T> {
 
     private readonly _maxSize: number
     private _items: T[]
-    private readonly _keyFunc: (item:T) => string
+    private readonly _keyFunc: (item:T) => ItemKeyType
 
-    constructor(keyFunc: (item:T) => string, maxSize: number, initialArr: T[]) {
+    constructor(keyFunc: (item:T) => ItemKeyType, maxSize: number, initialArr: T[]) {
         this._keyFunc = keyFunc
         this._maxSize = maxSize
         this._items = initialArr

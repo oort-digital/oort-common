@@ -1,5 +1,5 @@
-export function distinct<T>(arr: Array<T>, keyFunc: (item: T) => string) {
-  const set = new Set<string>()
+export function distinct<T>(arr: Array<T>, keyFunc: (item: T) => string | number) {
+  const set = new Set<string | number>()
   const result: any[] = []
 
   arr.forEach(x => {

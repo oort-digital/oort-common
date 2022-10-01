@@ -1,7 +1,7 @@
 import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { CollectionFilterStore } from "./collectionFilterStore"
-import { ICollectionFilterItem } from "./itemSource"
+import { ICollectionFilterItem } from "./typesAndInterfaces"
 
 interface IProps {
 	title: string

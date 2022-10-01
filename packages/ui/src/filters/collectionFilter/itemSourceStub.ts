@@ -1,8 +1,9 @@
 import {action, makeObservable, observable, runInAction } from 'mobx'
 import { addressToDataURL } from '../../blockieAddress';
 import { delayAsync } from '../../utils';
-import { ICollectionFilterItem, IItemSource } from './itemSource'
+import { IItemSource } from './itemSource'
 import { StoreState } from './storeState';
+import { ICollectionFilterItem } from './typesAndInterfaces';
 
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const nameLen = 5;

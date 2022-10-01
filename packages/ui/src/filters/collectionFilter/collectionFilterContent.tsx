@@ -6,9 +6,7 @@ import styles from "./collectionFilterContent.module.less"
 import {CollectionFilterStore} from "./collectionFilterStore"
 import {observer} from "mobx-react"
 import {Tabs} from "antd"
-
-import { ICollectionFilterItem } from "./itemSource"
-
+import { ICollectionFilterItem } from "./typesAndInterfaces"
 
 interface IProps {
     collectionFilterStore: CollectionFilterStore
