@@ -5,22 +5,24 @@ import { ICollectionFilterItem } from "./typesAndInterfaces";
 
 
 class ItemSourceStub implements IItemSource {
-    setItems(items: ICollectionFilterItem[]): void {
-       throw new Error("Method not implemented.");
+    setItems(_items: ICollectionFilterItem[]): void {
+       //throw new Error("Method not implemented.");
     }
     items: ICollectionFilterItem[] = []
     term: string = ''
     state: StoreState = StoreState.Done
     hasLoadMore: boolean = false
 
-    loadNextPage(reset: boolean, signal: AbortSignal): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    loadNextPage(_reset: boolean, _signal: AbortSignal): Promise<boolean> {
+        //throw new Error("Method not implemented.");
+
+        return Promise.resolve(true)
     }
-    setTerm(term: string): void {
-        throw new Error("Method not implemented.");
+    setTerm(_term: string): void {
+        //throw new Error("Method not implemented.");
     }
     clear(): void {
-        throw new Error("Method not implemented.");
+        //throw new Error("Method not implemented.");
     }
 }
 
@@ -29,8 +31,6 @@ class ItemStub implements ICollectionFilterItem {
     title: string
     iconUrl: string = 'fake_icon_url'
     count?: number | undefined
-
-    //toCollection = (): ICollection => ({ tokenAddress: this.tokenAddress, tokenName: this.tokenName, count: 0 })
 
     constructor(n: number) {
         this.key = `${n}`
@@ -54,27 +54,27 @@ const create = (favoriteMaxSize: number, recentMaxSize: number, itemSource?: Ite
 }
 
 test('must add favorites in right order', async () => {
-    const store = create(2, 1)
+   const store = create(2, 1)
 
-    store.setFavorites(one, true)
-    store.setFavorites(two, true)
+   store.setFavorites(one, true)
+   store.setFavorites(two, true)
 
-    expect(store.favorites.length).toEqual(2)
-    expect(store.favorites[0].key).toEqual(two.key)
-    expect(store.favorites[1].key).toEqual(one.key)
- });
+   expect(store.favorites.length).toEqual(2)
+   expect(store.favorites[0].key).toEqual(two.key)
+   expect(store.favorites[1].key).toEqual(one.key)
+});
 
- test('must remove old favorite items if max size excided', async () => {
-    const store = create(2, 1)
+test('must remove old favorite items if max size excided', async () => {
+   const store = create(2, 1)
 
-    store.setFavorites(one, true)
-    store.setFavorites(two, true)
-    store.setFavorites(three, true)
+   store.setFavorites(one, true)
+   store.setFavorites(two, true)
+   store.setFavorites(three, true)
 
-    expect(store.favorites.length).toEqual(2)
-    expect(store.favorites[0].key).toEqual(three.key)
-    expect(store.favorites[1].key).toEqual(two.key)
- });
+   expect(store.favorites.length).toEqual(2)
+   expect(store.favorites[0].key).toEqual(three.key)
+   expect(store.favorites[1].key).toEqual(two.key)
+});
 
  test('must remove old recent items if max size excided', async () => {
     const itemSource = new ItemSourceStub()
@@ -100,85 +100,85 @@ test('must add favorites in right order', async () => {
     expect(store.recent[1].key).toEqual(one.key)
  });
 
- test('must copyNotAppliedToRecent from favorites', async () => {
-    const store = create(1, 1)
+test('must copyNotAppliedToRecent from favorites', async () => {
+   const store = create(1, 1)
 
-    store.favorites.push(one)
-    store.select(one.key, true)
-    store.copyNotAppliedToRecent()
+   store.favorites.push(one)
+   store.select(one.key, true)
+   store.copyNotAppliedToRecent()
 
-    expect(store.recent.length).toEqual(1)
-    expect(store.recent[0].key).toEqual(one.key)
- });
+   expect(store.recent.length).toEqual(1)
+   expect(store.recent[0].key).toEqual(one.key)
+});
 
- test('must copyNotAppliedToRecent from items', async () => {
-    const itemSource = new ItemSourceStub()
-    itemSource.items.push(one)
-    const store = create(1, 1, itemSource)
+test('must copyNotAppliedToRecent from items', async () => {
+   const itemSource = new ItemSourceStub()
+   itemSource.items.push(one)
+   const store = create(1, 1, itemSource)
 
-    store.select(one.key, true)
-    store.copyNotAppliedToRecent()
+   store.select(one.key, true)
+   store.copyNotAppliedToRecent()
 
-    expect(store.recent.length).toEqual(1)
-    expect(store.recent[0].key).toEqual(one.key)
- });
+   expect(store.recent.length).toEqual(1)
+   expect(store.recent[0].key).toEqual(one.key)
+});
 
- test('must copy not applied to recent without duplicated', async () => {
-    const itemSource = new ItemSourceStub()
-    itemSource.items.push(one)
-    const store = create(1, 3, itemSource)
+test('must copy not applied to recent without duplicated', async () => {
+   const itemSource = new ItemSourceStub()
+   itemSource.items.push(one)
+   const store = create(1, 3, itemSource)
 
-    store.select(one.key, true)
+   store.select(one.key, true)
 
-    store.copyNotAppliedToRecent()
-    store.copyNotAppliedToRecent()
+   store.copyNotAppliedToRecent()
+   store.copyNotAppliedToRecent()
 
-    expect(store.recent.length).toEqual(1)
-    expect(store.recent[0].key).toEqual(one.key)
- });
+   expect(store.recent.length).toEqual(1)
+   expect(store.recent[0].key).toEqual(one.key)
+});
 
- test('clearNotApplied must clean selected if no applied', async () => {
-    const store = create(1, 1)
+test('clearNotApplied must clean selected if no applied', async () => {
+   const store = create(1, 1)
 
-    store.select('1', true)
-    store.clearNotApplied()
+   store.select('1', true)
+   store.clearNotApplied()
 
-    expect(store.selected.length).toEqual(0)
- });
+   expect(store.selected.length).toEqual(0)
+});
 
- test('clearNotApplied must not clean applied', async () => {
+test('clearNotApplied must not clean applied', async () => {
 
-    const applied = 'applied'
-    const store = create(1, 1)
+   const applied = 'applied'
+   const store = create(1, 1)
 
-    store.setApplied([applied])
-    store.select('1', true)
-    store.clearNotApplied()
+   store.setApplied([applied])
+   store.select('1', true)
+   store.clearNotApplied()
 
-    expect(store.selected.length).toEqual(1)
-    expect(store.selected[0]).toEqual(applied)
- });
+   expect(store.selected.length).toEqual(1)
+   expect(store.selected[0]).toEqual(applied)
+});
 
- test('selected must contain one item if selectSingle', async () => {
-    const store = create(1, 1)
+test('selected must contain one item if selectSingle', async () => {
+   const store = create(1, 1)
 
-    store.selectSingle('1', true)
-    store.selectSingle('2', true)
+   store.selectSingle('1', true)
+   store.selectSingle('2', true)
 
-    expect(store.selected.length).toEqual(1)
-    expect(store.selected[0]).toEqual('2')
- });
+   expect(store.selected.length).toEqual(1)
+   expect(store.selected[0]).toEqual('2')
+});
 
- test('selected must be empty', async () => {
-    const store = create(1, 1)
-    
-    store.selectSingle('1', true)
-    store.selectSingle('1', false)
+test('selected must be empty', async () => {
+   const store = create(1, 1)
+   
+   store.selectSingle('1', true)
+   store.selectSingle('1', false)
 
-    expect(store.selected.length).toEqual(0)
- });
+   expect(store.selected.length).toEqual(0)
+});
 
- test('must select allAppliedItems from items recent and favorites', async () => {
+test('must select allAppliedItems from items recent and favorites', async () => {
    const itemSource = new ItemSourceStub()
    const store = create(1, 1, itemSource)
 
@@ -193,5 +193,6 @@ test('must add favorites in right order', async () => {
    expect(allAppliedItemAddresses).toContain(two.key)
    expect(allAppliedItemAddresses).toContain(three.key)
 });
+
 
  
