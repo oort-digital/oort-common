@@ -1,14 +1,17 @@
 /// <reference types="react" />
-import { CollectionFilterStore } from "./collectionFilterStore";
-import { ICollectionFilterItem } from "./typesAndInterfaces";
+import { IItemSource } from "./itemSource";
+import { ItemKeyType } from "./typesAndInterfaces";
 interface IProps {
     title: string;
-    collectionFilterStore: CollectionFilterStore;
-    applied: ICollectionFilterItem[];
+    applied: ItemKeyType[];
     searchable: boolean;
     selectSingle: boolean;
     searchPlaceholder: string;
+    cacheKeyPrefixFunc: () => string;
+    itemSource: IItemSource;
+    recentMaxSize?: number;
+    favoriteMaxSize?: number;
 }
-export declare const CollectionFilterMobile: ({ collectionFilterStore, applied, searchable, selectSingle, searchPlaceholder }: IProps) => JSX.Element;
+export declare const CollectionFilterMobile: ({ applied, searchable, selectSingle, searchPlaceholder, cacheKeyPrefixFunc, itemSource, favoriteMaxSize, recentMaxSize }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=collectionFilterMobile.d.ts.map

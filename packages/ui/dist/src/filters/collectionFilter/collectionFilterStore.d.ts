@@ -2,7 +2,7 @@ import { IItemSource } from "./itemSource";
 import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
 export interface ICollectionFilterStoreParams {
     cacheKeyPrefixFunc: () => string;
-    itemSourceFunc: () => IItemSource;
+    itemSource: IItemSource;
     recentMaxSize?: number;
     favoriteMaxSize?: number;
 }
@@ -10,12 +10,13 @@ export declare class CollectionFilterStore {
     selected: ItemKeyType[];
     favorites: ICollectionFilterItem[];
     recent: ICollectionFilterItem[];
+    appliedItems: ICollectionFilterItem[];
     private readonly _itemSource;
     private readonly _cache;
     private readonly _cacheKeyPrefixFunc;
     private readonly _favoritesQueue;
     private readonly _recentQueue;
-    constructor({ cacheKeyPrefixFunc, itemSourceFunc, recentMaxSize, favoriteMaxSize }: ICollectionFilterStoreParams);
+    constructor({ cacheKeyPrefixFunc, itemSource, recentMaxSize, favoriteMaxSize }: ICollectionFilterStoreParams);
     private getFavoritesKey;
     private getRecentKey;
     private loadFromCache;
@@ -33,7 +34,7 @@ export declare class CollectionFilterStore {
     setFavorites(item: ICollectionFilterItem, checked: boolean): void;
     private _appliedSet;
     private get notApplied();
-    setApplied(applied: ItemKeyType[]): void;
+    setApplied(appliedKeys: ItemKeyType[]): Promise<void>;
     select(key: ItemKeyType, checked: boolean): void;
     selectSingle(key: ItemKeyType, checked: boolean): void;
     copyNotAppliedToRecent(): void;

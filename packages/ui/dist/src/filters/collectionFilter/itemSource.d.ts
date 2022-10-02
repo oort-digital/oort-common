@@ -1,5 +1,5 @@
 import { StoreState } from "./storeState";
-import { ICollectionFilterItem } from "./typesAndInterfaces";
+import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
 export interface IItemSource {
     items: ICollectionFilterItem[];
     term: string;
@@ -8,5 +8,6 @@ export interface IItemSource {
     hasLoadMore: boolean;
     setTerm(term: string): void;
     setItems(items: ICollectionFilterItem[]): void;
+    getAppliedItems(appliedIds: ItemKeyType[]): Promise<ICollectionFilterItem[]>;
 }
 //# sourceMappingURL=itemSource.d.ts.map
