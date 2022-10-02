@@ -1,25 +1,35 @@
 import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
-import { CollectionFilterStore } from "./collectionFilterStore"
+import { IItemSource } from "./itemSource"
 import { ItemKeyType } from "./typesAndInterfaces"
+import { useFilterStore } from "./useFilterStore"
 
 interface IProps {
 	title: string
-	collectionFilterStore: CollectionFilterStore
 	applied: ItemKeyType[]
 	searchable: boolean
 	selectSingle: boolean
 	searchPlaceholder: string
+	cacheKeyPrefixFunc: () => string
+    itemSource: IItemSource
+    recentMaxSize?: number
+    favoriteMaxSize?: number
 }
 
-const Impl = ({ collectionFilterStore, applied, searchable, selectSingle, searchPlaceholder }: IProps) => {
+const Impl = ({ applied, searchable, selectSingle, searchPlaceholder, cacheKeyPrefixFunc, itemSource, favoriteMaxSize, recentMaxSize }: IProps) => {
 
+	const filterStore = useFilterStore({
+		cacheKeyPrefixFunc: cacheKeyPrefixFunc,
+		itemSource: itemSource,
+		favoriteMaxSize: favoriteMaxSize,
+		recentMaxSize: recentMaxSize
+	}, applied)
+	
     return <CollectionFilterContent
 			searchPlaceholder={searchPlaceholder}
 			selectSingle={selectSingle}
 			searchable={searchable}
-			applied={applied}
-			collectionFilterStore={collectionFilterStore}
+			filterStore={filterStore}
 		/>
 }
 

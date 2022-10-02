@@ -6,9 +6,8 @@ import "../../styles/fonts.css";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { CollectionFilter } from "./collectionFilter";
-import { ICollection } from "./collectionFilterContent";
-import { CollectionFilterStore } from "./collectionFilterStore";
 import { ItemSourceStub } from "./itemSourceStub";
+import { ICollectionFilterItem } from "./typesAndInterfaces";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -28,18 +27,7 @@ export default {
 const Template: ComponentStory<typeof CollectionFilter> = (args) => <CollectionFilter {...args} />
 
 
-// const collection: ICollection = {
-// 	tokenAddress: 'testAddr',
-// 	tokenName: 'test tocken',
-// }
-
-const onChange = (collections: ICollection[]) => {}
-
-
-const store = new CollectionFilterStore({
-  cacheKeyPrefixFunc: () => 'storybook_collection_filter',
-  itemSourceFunc: () => new ItemSourceStub()
-})
+const onChange = (collections: ICollectionFilterItem[]) => {}
 
 export const Main = Template.bind({});
 Main.args = {
@@ -47,8 +35,9 @@ Main.args = {
 	popoverTitle: 'PopoverTitle',
   searchPlaceholder: 'Enter text',
 	applied: [1, 2],
-	collectionFilterStore: store,
+	cacheKeyPrefixFunc: () => 'storybook_collection_filter',
+  itemSource: new ItemSourceStub(),
 	onChange: onChange,
 	searchable: true,
-	selectSingle: true
+	selectSingle: false
 };

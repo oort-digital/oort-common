@@ -6,19 +6,18 @@ import styles from "./collectionFilterContent.module.less"
 import {CollectionFilterStore} from "./collectionFilterStore"
 import {observer} from "mobx-react"
 import {Tabs} from "antd"
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
+import { ICollectionFilterItem } from "./typesAndInterfaces"
 
 interface IProps {
-    collectionFilterStore: CollectionFilterStore
-    applied: ItemKeyType[],
+    filterStore: CollectionFilterStore
     searchable: boolean,
     selectSingle: boolean,
     searchPlaceholder: string
 }
 
-const Impl = ({collectionFilterStore, applied, searchable, selectSingle, searchPlaceholder}: IProps) => {
+const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder}: IProps) => {
 
-    const {selected, isLoading, items, favorites, recent, hasLoadMore} = collectionFilterStore
+    const {selected, isLoading, items, favorites, recent, hasLoadMore} = filterStore
 
     const onTermChangeAbortController = useRef<AbortController | undefined>()
     const onTermChange = (term: string) => {
@@ -30,16 +29,16 @@ const Impl = ({collectionFilterStore, applied, searchable, selectSingle, searchP
         const abortController = new AbortController()
         onTermChangeAbortController.current = abortController
 
-        collectionFilterStore.clearNotApplied()
-        collectionFilterStore.setTerm(term)
-        collectionFilterStore.loadNextPage(false, abortController.signal);
+        filterStore.clearNotApplied()
+        filterStore.setTerm(term)
+        filterStore.loadNextPage(false, abortController.signal);
     }
 
     useEffect(() => {
         const abortController = new AbortController()
-        collectionFilterStore.loadFavoritesFromCache()
-        collectionFilterStore.loadRecentFromCache()
-        collectionFilterStore.loadNextPage(true, abortController.signal)
+        filterStore.loadFavoritesFromCache()
+        filterStore.loadRecentFromCache()
+        filterStore.loadNextPage(true, abortController.signal)
 
         return () => {
             abortController.abort()
@@ -47,18 +46,14 @@ const Impl = ({collectionFilterStore, applied, searchable, selectSingle, searchP
 
     }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
-    useEffect(() => {
-        collectionFilterStore.setApplied(applied)
-    }, [applied, collectionFilterStore])
-
     const isMobile = useDeviceType() === DeviceType.Phone
 
     const select = (item: ICollectionFilterItem, isChecked: boolean) => {
         if (selectSingle) {
-            collectionFilterStore.selectSingle(item.key, isChecked)
+            filterStore.selectSingle(item.key, isChecked)
         }
         else {
-            collectionFilterStore.select(item.key, isChecked)
+            filterStore.select(item.key, isChecked)
         }
     }
 
@@ -69,7 +64,7 @@ const Impl = ({collectionFilterStore, applied, searchable, selectSingle, searchP
 
     const favoritesSet = new Set(favorites.map(x => x.key))
     const favoriteParam: ISelectedParameter = {
-        onChange: (item: ICollectionFilterItem, isChecked: boolean) => collectionFilterStore.setFavorites(item, isChecked),
+        onChange: (item: ICollectionFilterItem, isChecked: boolean) => filterStore.setFavorites(item, isChecked),
         selected: favoritesSet
     }
 
@@ -79,7 +74,7 @@ const Impl = ({collectionFilterStore, applied, searchable, selectSingle, searchP
             return <AsyncList
                 className={styles.list}
                 hasLoadMore={hasLoadMore}
-                onLoadMore={() => collectionFilterStore.loadNextPage(false, EMPTY_ABORT_SIGNAL)}
+                onLoadMore={() => filterStore.loadNextPage(false, EMPTY_ABORT_SIGNAL)}
                 loading={isLoading}
                 itemRenderer={collectionItemRenderer(styles.list_item, isMobile, selectedParam, favoriteParam)}
                 items={items}
@@ -105,7 +100,7 @@ const Impl = ({collectionFilterStore, applied, searchable, selectSingle, searchP
 
     return <div className={styles.content}>
         {
-            searchable && <SearchInput value={collectionFilterStore.term}
+            searchable && <SearchInput value={filterStore.term}
                                        onChange={e => onTermChange(e)}
                                        placeholder={searchPlaceholder} />
         }

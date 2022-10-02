@@ -1,25 +1,37 @@
 import styles from "./collectionFilter.module.less"
 import { PopoverFilter } from "../popover"
-import { CollectionFilterStore } from "./collectionFilterStore"
 import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
 import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
+import { IItemSource } from "./itemSource"
+import { useFilterStore } from "./useFilterStore"
 
 interface IProps {
 	title: string
 	popoverTitle: string
 	applied: ItemKeyType[]
-	collectionFilterStore: CollectionFilterStore
 	onChange: (collections: ICollectionFilterItem[]) => void
 	searchable: boolean
 	selectSingle: boolean
 	searchPlaceholder: string
+	cacheKeyPrefixFunc: () => string
+    itemSource: IItemSource
+    recentMaxSize?: number
+    favoriteMaxSize?: number
 }
 
-const Impl = ({ title, popoverTitle, collectionFilterStore, onChange, applied, searchable, selectSingle, searchPlaceholder }: IProps) => {
-	
-	const { selected, appliedItems } = collectionFilterStore
+const Impl = ({ title, popoverTitle, onChange, applied, searchable, selectSingle, searchPlaceholder,
+	cacheKeyPrefixFunc, itemSource, favoriteMaxSize, recentMaxSize }: IProps) => {
+
+	const filterStore = useFilterStore({
+		cacheKeyPrefixFunc: cacheKeyPrefixFunc,
+		itemSource: itemSource,
+		favoriteMaxSize: favoriteMaxSize,
+		recentMaxSize: recentMaxSize
+	}, applied)
+
+	const { selected, appliedItems } = filterStore
 
 	const isClear = !applied.length
 
@@ -32,21 +44,21 @@ const Impl = ({ title, popoverTitle, collectionFilterStore, onChange, applied, s
 	}
 
 	const onSubmit = () => {
-		collectionFilterStore.copyNotAppliedToRecent()
-		const selectedItems = collectionFilterStore.items.filter(x => selected.some(s => s === x.key))
+		filterStore.copyNotAppliedToRecent()
+		const selectedItems = filterStore.items.filter(x => selected.some(s => s === x.key))
 		onChange(selectedItems)
-		collectionFilterStore.clearNotApplied()
+		filterStore.clearNotApplied()
 	}
 
 	const onVisibleChange = (isVisible: boolean) => {
 		if(!isVisible) {
-			collectionFilterStore.clearNotApplied()
+			filterStore.clearNotApplied()
 		}
 	}
 
 	const onClear = () => {
 		onChange([])
-		collectionFilterStore.clearNotApplied()
+		filterStore.clearNotApplied()
 		// if (onChangeClear){
         //     onChangeClear();
 		// }
@@ -71,8 +83,7 @@ const Impl = ({ title, popoverTitle, collectionFilterStore, onChange, applied, s
 			searchPlaceholder={searchPlaceholder}
 			selectSingle={selectSingle}
 			searchable={searchable}
-			applied={applied}
-			collectionFilterStore={collectionFilterStore}
+			filterStore={filterStore}
 		/>
   </PopoverFilter>
 }

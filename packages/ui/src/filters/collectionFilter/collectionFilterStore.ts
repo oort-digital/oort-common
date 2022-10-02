@@ -8,7 +8,7 @@ import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
 
 export interface ICollectionFilterStoreParams {
     cacheKeyPrefixFunc: () => string
-    itemSourceFunc: () => IItemSource
+    itemSource: IItemSource
     recentMaxSize?: number
     favoriteMaxSize?: number
 }
@@ -28,9 +28,9 @@ export class CollectionFilterStore {
     private readonly _favoritesQueue: ItemQueue<ICollectionFilterItem>
     private readonly _recentQueue: ItemQueue<ICollectionFilterItem>
 
-    constructor({cacheKeyPrefixFunc, itemSourceFunc, recentMaxSize = 20, favoriteMaxSize = 20}: ICollectionFilterStoreParams) {
+    constructor({cacheKeyPrefixFunc, itemSource, recentMaxSize = 20, favoriteMaxSize = 20}: ICollectionFilterStoreParams) {
 
-        this._itemSource = itemSourceFunc()
+        this._itemSource = itemSource
         this._cache = new LocalStorageCacheProvider()
         this._cacheKeyPrefixFunc = cacheKeyPrefixFunc
         this._favoritesQueue = new ItemQueue(itemKeyFunc, favoriteMaxSize, [])

@@ -1,10 +1,14 @@
 import { CollectionFilterStore } from "./collectionFilterStore";
 import { IItemSource } from "./itemSource";
 import { StoreState } from "./storeState";
-import { ICollectionFilterItem } from "./typesAndInterfaces";
+import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
 
 
 class ItemSourceStub implements IItemSource {
+    async getAppliedItems(_appliedIds: ItemKeyType[]): Promise<ICollectionFilterItem[]> {
+      //  throw new Error("Method not implemented.");
+      return []
+    }
     setItems(_items: ICollectionFilterItem[]): void {
        //throw new Error("Method not implemented.");
     }
@@ -47,7 +51,7 @@ const create = (favoriteMaxSize: number, recentMaxSize: number, itemSource?: Ite
 
     return new CollectionFilterStore({
         cacheKeyPrefixFunc: () => '',
-        itemSourceFunc: () => itemSource || new ItemSourceStub(),
+        itemSource: itemSource || new ItemSourceStub(),
         favoriteMaxSize: favoriteMaxSize,
         recentMaxSize: recentMaxSize
     })
@@ -151,7 +155,7 @@ test('clearNotApplied must not clean applied', async () => {
    const applied = 'applied'
    const store = create(1, 1)
 
-   store.setApplied([applied])
+   await store.setApplied([applied])
    store.select('1', true)
    store.clearNotApplied()
 
@@ -182,7 +186,7 @@ test('must select allAppliedItems from items recent and favorites', async () => 
    const itemSource = new ItemSourceStub()
    const store = create(1, 1, itemSource)
 
-   store.setApplied([one.key, two.key, three.key])
+   await store.setApplied([one.key, two.key, three.key])
    itemSource.items.push(one)
    store.recent.push(two)
    store.favorites.push(three)
