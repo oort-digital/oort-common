@@ -1,12 +1,12 @@
 import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { CollectionFilterStore } from "./collectionFilterStore"
-import { ICollectionFilterItem } from "./typesAndInterfaces"
+import { ItemKeyType } from "./typesAndInterfaces"
 
 interface IProps {
 	title: string
 	collectionFilterStore: CollectionFilterStore
-	applied: ICollectionFilterItem[]
+	applied: ItemKeyType[]
 	searchable: boolean
 	selectSingle: boolean
 	searchPlaceholder: string

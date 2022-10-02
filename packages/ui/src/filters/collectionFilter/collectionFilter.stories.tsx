@@ -28,10 +28,10 @@ export default {
 const Template: ComponentStory<typeof CollectionFilter> = (args) => <CollectionFilter {...args} />
 
 
-const collection: ICollection = {
-	tokenAddress: 'testAddr',
-	tokenName: 'test tocken',
-}
+// const collection: ICollection = {
+// 	tokenAddress: 'testAddr',
+// 	tokenName: 'test tocken',
+// }
 
 const onChange = (collections: ICollection[]) => {}
 
@@ -46,7 +46,7 @@ Main.args = {
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
   searchPlaceholder: 'Enter text',
-	applied: [collection],
+	applied: [1, 2],
 	collectionFilterStore: store,
 	onChange: onChange,
 	searchable: true,

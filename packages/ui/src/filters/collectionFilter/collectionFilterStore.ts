@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable } from "mobx"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { LocalStorageCacheProvider } from "../../cache"
 import { distinct } from "../../utils"
 import { ItemQueue } from "./itemQueue"
@@ -20,6 +20,7 @@ export class CollectionFilterStore {
     selected: ItemKeyType[] = []
     favorites: ICollectionFilterItem[] = []
     recent: ICollectionFilterItem[] = []
+    appliedItems: ICollectionFilterItem[] = []
 
     private readonly _itemSource: IItemSource
     private readonly _cache: LocalStorageCacheProvider
@@ -36,6 +37,7 @@ export class CollectionFilterStore {
         this._recentQueue = new ItemQueue(itemKeyFunc, recentMaxSize, [])
        
         makeObservable(this, {
+            appliedItems: observable,
             selected: observable,
             favorites: observable,
             recent: observable,
@@ -143,9 +145,36 @@ export class CollectionFilterStore {
         return new Set(this.selected)
     }
 
-    setApplied(appliedIds: ItemKeyType[]): void {
-        this._appliedSet = new Set(appliedIds)
-        this.selected = [...appliedIds]
+    async setApplied(appliedKeys: ItemKeyType[]): Promise<void> {
+        this._appliedSet = new Set(appliedKeys)
+        this.selected = [...appliedKeys]
+
+        let loadFromSource: ItemKeyType[] = appliedKeys
+        const appliedItems: ICollectionFilterItem[] = []
+
+        //try to find in already loaded items
+        if(this.items.length) {
+            loadFromSource = []
+            this.items.forEach(it => {
+                if(this._appliedSet!.has(it.key)) {
+                    appliedItems.push(it)
+                }
+                else {
+                    loadFromSource.push(it.key)
+                }
+            })
+        }
+
+        if(!loadFromSource.length) {
+            this.appliedItems = appliedItems
+            return;
+        }
+
+        const loadedFromSourceItems = await this._itemSource.getAppliedItems(appliedKeys)
+
+        runInAction(() => {
+            this.appliedItems = [ ...appliedItems, ...loadedFromSourceItems ]
+        })
     }
 
     select(key: ItemKeyType, checked: boolean): void {

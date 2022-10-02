@@ -3,21 +3,21 @@ import { addressToDataURL } from '../../blockieAddress';
 import { delayAsync } from '../../utils';
 import { IItemSource } from './itemSource'
 import { StoreState } from './storeState';
-import { ICollectionFilterItem } from './typesAndInterfaces';
+import { ICollectionFilterItem, ItemKeyType } from './typesAndInterfaces';
 
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const nameLen = 5;
 
-const addrTemplate = '0x0000000000000000000000000000000000000000'
-const numberToAddress = (value: number): string => {
-    const valStr = value.toString()
-    const prefix = addrTemplate.substring(0, addrTemplate.length - valStr.length)
-    return `${prefix}${valStr}`
-}
+// const addrTemplate = '0x0000000000000000000000000000000000000000'
+// const numberToAddress = (value: number): string => {
+//     const valStr = value.toString()
+//     const prefix = addrTemplate.substring(0, addrTemplate.length - valStr.length)
+//     return `${prefix}${valStr}`
+// }
 
 class Source {
 
-    private _collections: ICollectionFilterItem[] = []
+    private _items: ICollectionFilterItem[] = []
 
     private static generateName(idx: number): string {
         const alphaIdx = idx % alpha.length
@@ -31,10 +31,10 @@ class Source {
 
     constructor(len: number) {
         for(let i = 0; i < len; i++) {
-            this._collections.push({
-                key: numberToAddress(i),
+            this._items.push({
+                key: i,
                 title: Source.generateName(i),
-                iconUrl: addressToDataURL(numberToAddress(i)),
+                iconUrl: addressToDataURL(i.toString()),
                 count: i
             })
         }
@@ -42,8 +42,12 @@ class Source {
 
     featch(params: { skip: number, take: number, term: string }): ICollectionFilterItem[] {
         const { skip, take, term } = params
-        const filtred =  this._collections.filter(c => c.title.includes(term));
+        const filtred =  this._items.filter(c => c.title.includes(term));
         return filtred.slice(skip, take)
+    }
+
+    getByKey(key: ItemKeyType): ICollectionFilterItem {
+        return this._items.find(x => x.key === key)!
     }
 
 }
@@ -77,7 +81,7 @@ export class ItemSourceStub implements IItemSource {
 
         await delayAsync(this._delay)
 
-        const page = this._collectionSource.featch({
+        const page = this._source.featch({
             take: this.pageSize,
             skip: this.offset,
             term: this.term })
@@ -98,10 +102,15 @@ export class ItemSourceStub implements IItemSource {
             hasLoadMore: observable
         })
 
-        this._collectionSource = new Source(100)
+        this._source = new Source(100)
+    }
+    
+    async getAppliedItems(appliedIds: ItemKeyType[]): Promise<ICollectionFilterItem[]> {
+        await delayAsync(1000)
+        return appliedIds.map(key => this._source.getByKey(key))
     }
 
-    private _collectionSource: Source
+    private _source: Source
     private _delay = 1000
     private _curPage: number = 1
     

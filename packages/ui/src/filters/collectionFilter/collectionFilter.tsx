@@ -4,12 +4,12 @@ import { CollectionFilterStore } from "./collectionFilterStore"
 import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
-import { ICollectionFilterItem } from "./typesAndInterfaces"
+import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
 
 interface IProps {
 	title: string
 	popoverTitle: string
-	applied: ICollectionFilterItem[]
+	applied: ItemKeyType[]
 	collectionFilterStore: CollectionFilterStore
 	onChange: (collections: ICollectionFilterItem[]) => void
 	searchable: boolean
@@ -19,7 +19,7 @@ interface IProps {
 
 const Impl = ({ title, popoverTitle, collectionFilterStore, onChange, applied, searchable, selectSingle, searchPlaceholder }: IProps) => {
 	
-	const { selected } = collectionFilterStore
+	const { selected, appliedItems } = collectionFilterStore
 
 	const isClear = !applied.length
 
@@ -28,7 +28,7 @@ const Impl = ({ title, popoverTitle, collectionFilterStore, onChange, applied, s
 			return null
 		}
 
-		return <SubTitle names={applied.map(x => x.title)} />
+		return <SubTitle names={appliedItems.map(x => x.title)} />
 	}
 
 	const onSubmit = () => {

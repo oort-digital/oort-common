@@ -6,11 +6,11 @@ import styles from "./collectionFilterContent.module.less"
 import {CollectionFilterStore} from "./collectionFilterStore"
 import {observer} from "mobx-react"
 import {Tabs} from "antd"
-import { ICollectionFilterItem } from "./typesAndInterfaces"
+import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
 
 interface IProps {
     collectionFilterStore: CollectionFilterStore
-    applied: ICollectionFilterItem[],
+    applied: ItemKeyType[],
     searchable: boolean,
     selectSingle: boolean,
     searchPlaceholder: string
@@ -48,7 +48,7 @@ const Impl = ({collectionFilterStore, applied, searchable, selectSingle, searchP
     }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        collectionFilterStore.setApplied(applied.map(x => x.key))
+        collectionFilterStore.setApplied(applied)
     }, [applied, collectionFilterStore])
 
     const isMobile = useDeviceType() === DeviceType.Phone
