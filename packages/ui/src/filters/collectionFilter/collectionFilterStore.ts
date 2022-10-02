@@ -143,9 +143,9 @@ export class CollectionFilterStore {
         return new Set(this.selected)
     }
 
-    setApplied(applied: ItemKeyType[]): void {
-        this._appliedSet = new Set(applied)
-        this.selected = [...applied]
+    setApplied(appliedIds: ItemKeyType[]): void {
+        this._appliedSet = new Set(appliedIds)
+        this.selected = [...appliedIds]
     }
 
     select(key: ItemKeyType, checked: boolean): void {

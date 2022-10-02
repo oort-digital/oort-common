@@ -33,8 +33,8 @@ const Impl = ({ title, popoverTitle, collectionFilterStore, onChange, applied, s
 
 	const onSubmit = () => {
 		collectionFilterStore.copyNotAppliedToRecent()
-		const selectedCollections = collectionFilterStore.items.filter(x => selected.some(s => s === x.key))
-		onChange(selectedCollections)
+		const selectedItems = collectionFilterStore.items.filter(x => selected.some(s => s === x.key))
+		onChange(selectedItems)
 		collectionFilterStore.clearNotApplied()
 	}
 
