@@ -70,8 +70,8 @@ export const FooterMenu = ({ className, web3 }: IProps) => {
         const afterIcon = <span className={styles.icon_after}><ChevronSortIcon /></span>
         return <>
             {renderConnectModal()}
-            <MenuItemBtn key="chain" iconBefore={chainIcon} iconAfter={afterIcon} caption={name} />
-            <MenuItemBtn key="account" onClick={() => setConnectModalVisible(true)} iconBefore={accountImg} iconAfter={afterIcon} caption={toMasskedAddress(account)} />
+            <MenuItemBtn className={styles.menu_item_btn} key="chain" iconBefore={chainIcon} iconAfter={afterIcon} caption={name} />
+            <MenuItemBtn className={styles.menu_item_btn} key="account" onClick={() => setConnectModalVisible(true)} iconBefore={accountImg} iconAfter={afterIcon} caption={toMasskedAddress(account)} />
         </>
     }
 
