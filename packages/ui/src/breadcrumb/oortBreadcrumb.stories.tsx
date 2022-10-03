@@ -2,11 +2,8 @@ import "../styles/antOverride.less";
 import "../styles/fonts.css";
 import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useTheme } from "../effects";
 import { IBreadcrumbItem, OortBreadcrumb } from ".";
-import DarkTheme from "../styles/theme/darkTheme";
-import LightTheme from "../styles/theme/lightTheme";
-
+import { ThemeLoader } from "../internalHelpers";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -17,10 +14,9 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof OortBreadcrumb> = (args) => {
 
-  const [isDark] = useTheme()
-
   return <>
-    { isDark ? <DarkTheme /> : <LightTheme /> }
+    <ThemeLoader />
+
     <Router>
       <OortBreadcrumb {...args} />
     </Router>
