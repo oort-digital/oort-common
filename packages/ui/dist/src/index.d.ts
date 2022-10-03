@@ -10,4 +10,5 @@ export * from "./filters";
 export * from "./asyncList";
 export * from "./icons";
 export * from "./cache";
+export * from "./breadcrumb";
 //# sourceMappingURL=index.d.ts.map
