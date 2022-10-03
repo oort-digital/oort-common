@@ -14,8 +14,9 @@ interface IMenuItemLinkProps {
     key: string;
     caption: string;
     icon: ReactNode;
+    reactRouterLink: boolean;
 }
-export declare const MenuItemLink: ({ className, href, caption, icon }: IMenuItemLinkProps) => JSX.Element;
+export declare const MenuItemLink: ({ className, href, caption, icon, reactRouterLink }: IMenuItemLinkProps) => JSX.Element;
 interface IMenuItemProps {
     className?: string;
     children: ReactNode;

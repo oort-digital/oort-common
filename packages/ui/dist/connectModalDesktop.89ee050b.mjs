@@ -1,12 +1,13 @@
 import { useState as O } from "react";
 import { Row as g, Col as p } from "antd";
-import { a as k, C as u, b as T, M as B, W as D } from "./index.es.52394643.mjs";
-import { j as n, O as S, a as t, F as i } from "./index.c2f42eea.mjs";
+import { a as k, C as u, b as T, M as B, W as D } from "./index.es.1fb81d98.mjs";
+import { j as n, O as S, a as t, F as i } from "./index.d9de1dea.mjs";
 import "ethers";
+import "react-router-dom";
 import "mobx-react";
 import "mobx";
 var _ = /* @__PURE__ */ ((o) => (o[o.WALLET_METAMASK = 0] = "WALLET_METAMASK", o[o.WALLET_CONNECT = 1] = "WALLET_CONNECT", o))(_ || {});
-const F = (o, l, a) => o ? a.some((r) => r.name === l.name) ? /* @__PURE__ */ t(i, {
+const F = (o, l, r) => o ? r.some((a) => a.name === l.name) ? /* @__PURE__ */ t(i, {
   children: ["You are currently using ", /* @__PURE__ */ n("span", {
     children: "Oort Digital"
   }), " on the ", /* @__PURE__ */ n("span", {
@@ -17,12 +18,12 @@ const F = (o, l, a) => o ? a.some((r) => r.name === l.name) ? /* @__PURE__ */ t(
     children: [l.name, "."]
   }), /* @__PURE__ */ t("div", {
     children: ["Please connect to the appropriate network. ", /* @__PURE__ */ n("span", {
-      children: a.map((r) => r.name).join(", ")
+      children: r.map((a) => a.name).join(", ")
     })]
   })]
-}) : null, z = (o) => {
-  const [l, a] = O(!1), {
-    onCancel: r,
+}) : null, H = (o) => {
+  const [l, r] = O(!1), {
+    onCancel: a,
     visible: y,
     supportedChains: m,
     chain: s,
@@ -33,18 +34,18 @@ const F = (o, l, a) => o ? a.some((r) => r.name === l.name) ? /* @__PURE__ */ t(
     connectorName: A,
     supportedConnectors: M
   } = o, j = async (e) => {
-    a(!0);
+    r(!0);
     try {
-      await v(e), r();
+      await v(e), a();
     } finally {
-      a(!1);
+      r(!1);
     }
   }, W = async (e) => {
-    a(!0);
+    r(!0);
     try {
-      await I(e), r();
+      await I(e), a();
     } finally {
-      a(!1);
+      r(!1);
     }
   }, x = /* @__PURE__ */ t(i, {
     children: [/* @__PURE__ */ t("div", {
@@ -100,7 +101,7 @@ const F = (o, l, a) => o ? a.some((r) => r.name === l.name) ? /* @__PURE__ */ t(
     title: "Network & Wallet",
     width: "690px",
     visible: y,
-    onCancel: r,
+    onCancel: a,
     children: /* @__PURE__ */ t(i, {
       children: [s && /* @__PURE__ */ t(i, {
         children: [/* @__PURE__ */ n("div", {
@@ -133,6 +134,6 @@ const F = (o, l, a) => o ? a.some((r) => r.name === l.name) ? /* @__PURE__ */ t(
 };
 export {
   _ as WALLETTYPE,
-  z as default
+  H as default
 };
-//# sourceMappingURL=connectModalDesktop.2e30526b.mjs.map
+//# sourceMappingURL=connectModalDesktop.89ee050b.mjs.map
