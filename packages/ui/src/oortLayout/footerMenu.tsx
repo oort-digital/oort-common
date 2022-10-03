@@ -31,9 +31,9 @@ interface IProps {
 }
 
 const social = <>
-    <a href={TELEGRAM}><TelegramIcon/></a>
-    <a href={TWITTER}><TwitterIcon/></a>
-    <a href={DISCORD}><DiscordIcon/></a>
+    <a href={TELEGRAM}><span className={styles.icon}><TelegramIcon/></span></a>
+    <a href={TWITTER}><span className={styles.icon}><TwitterIcon/></span></a>
+    <a href={DISCORD}><span className={styles.icon}><DiscordIcon/></span></a>
 </>
 
 
