@@ -59,9 +59,6 @@ const Impl = ({ title, popoverTitle, onChange, applied, searchable, selectSingle
 	const onClear = () => {
 		onChange([])
 		filterStore.clearNotApplied()
-		// if (onChangeClear){
-        //     onChangeClear();
-		// }
 	}
 
     return <PopoverFilter
