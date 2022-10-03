@@ -17,7 +17,7 @@ export const Layout = ({ navItems, children, web3, isActiveFunc }: IProps) => {
     return <div className={styles.root}>
         <aside className={styles.sider}>
             <div>
-                <LogoLink className={styles.logo} v="3.0" />
+                <LogoLink className={styles.logo} />
                 <NavMenu isActiveFunc={isActiveFunc} navItems={navItems}/>
                 <FooterMenu className={styles.footer} web3={web3} />
             </div>

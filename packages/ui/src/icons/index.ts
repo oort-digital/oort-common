@@ -1,6 +1,5 @@
 export { CloseCircleIcon } from "./closeCircleIcon"
 export { RentAppIcon } from './rentAppIcon'
-export { OortLogoIcon } from './oortLogoIcon'
 export { DashboardIcon } from "./dashboardIcon"
 export { MintIcon } from "./mintIcon"
 export { ChevronSortIcon } from "./chevronSortIcon"
