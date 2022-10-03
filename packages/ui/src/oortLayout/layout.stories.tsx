@@ -104,7 +104,10 @@ const web3 = {
   supportedConnectors: supportedConnectors,
 }
 
-const content = <div style={{ background: 'red' }}>
+const style = { 
+  // background: 'red'
+}
+const content = <div style={style}>
   <TestCarousel />
 </div>
 
