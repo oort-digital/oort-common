@@ -30,13 +30,12 @@ export const MenuItemLink = ({ className, href, caption, icon, reactRouterLink }
 
     const captionElement = <>{icon}<span>{caption}</span></>
 
-    return <li className={className}>
-        {
-            reactRouterLink ? 
-                <Link to={href}>{captionElement}</Link> :
-                <a href={href}>{captionElement}</a>
-        }
-    </li>
+    if(reactRouterLink) {
+        const path = new URL(href).pathname
+        return <li className={className}><Link to={path}>{captionElement}</Link></li>
+    }
+
+    return <li className={className}><a href={href}>{captionElement}</a></li>
 }
 
 interface IMenuItemProps {
