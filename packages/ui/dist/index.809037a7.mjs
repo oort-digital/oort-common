@@ -2335,7 +2335,8 @@ class Ko {
       const t = this.getCookieDomain(), r = new Date();
       r.setFullYear(r.getFullYear() + 10), S1(De, n, {
         domain: t,
-        expires: r
+        expires: r,
+        path: "/"
       });
     }, this.getCookieDomain = () => {
       const t = window.location.hostname.split(".");
@@ -2367,7 +2368,7 @@ const Jo = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Ve.Desktop ? e : r === Ve.Phone ? n : t)(), " "]
   });
-}, Xo = Tt(() => import("./connectModalDesktop.76e7fb8e.mjs")), e2 = Tt(() => import("./connectModalMobile.03770efc.mjs")), t2 = (e) => {
+}, Xo = Tt(() => import("./connectModalDesktop.8fcab0e6.mjs")), e2 = Tt(() => import("./connectModalMobile.8a314bcd.mjs")), t2 = (e) => {
   const {
     onCancel: n,
     visible: t,
@@ -3520,4 +3521,4 @@ export {
   T6 as y,
   a6 as z
 };
-//# sourceMappingURL=index.b010b15f.mjs.map
+//# sourceMappingURL=index.809037a7.mjs.map
