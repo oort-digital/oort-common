@@ -81,7 +81,7 @@ export const FooterMenu = ({ className, web3 }: IProps) => {
         <Menu className={cssClass}>
             <MenuItem key="social" className={styles.social}>{social}</MenuItem>
             {renderWeb3()}
-            <MenuItem key="theme-switch">
+            <MenuItem className={styles.theme_switch} key="theme-switch">
                 <ThemeSwitch isDarkMode={isDarkMode} onChange={() => setDarkMode(!isDarkMode)} />
                 <span className={styles.theme_name}>{isDarkMode ? 'light' : 'dark'}</span>
             </MenuItem>
