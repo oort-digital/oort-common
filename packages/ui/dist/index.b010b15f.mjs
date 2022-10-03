@@ -2052,12 +2052,19 @@ const Co = "_root_inkyy_1", mo = "_icon_before_inkyy_1", go = "_icon_after_inkyy
       children: t
     })]
   });
+  if (o) {
+    const c = new URL(n).pathname;
+    return /* @__PURE__ */ i("li", {
+      className: e,
+      children: /* @__PURE__ */ i(Et, {
+        to: c,
+        children: s
+      })
+    });
+  }
   return /* @__PURE__ */ i("li", {
     className: e,
-    children: o ? /* @__PURE__ */ i(Et, {
-      to: n,
-      children: s
-    }) : /* @__PURE__ */ i("a", {
+    children: /* @__PURE__ */ i("a", {
       href: n,
       children: s
     })
@@ -2360,7 +2367,7 @@ const Jo = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Ve.Desktop ? e : r === Ve.Phone ? n : t)(), " "]
   });
-}, Xo = Tt(() => import("./connectModalDesktop.ed39efe8.mjs")), e2 = Tt(() => import("./connectModalMobile.95a004ed.mjs")), t2 = (e) => {
+}, Xo = Tt(() => import("./connectModalDesktop.76e7fb8e.mjs")), e2 = Tt(() => import("./connectModalMobile.03770efc.mjs")), t2 = (e) => {
   const {
     onCancel: n,
     visible: t,
@@ -3513,4 +3520,4 @@ export {
   T6 as y,
   a6 as z
 };
-//# sourceMappingURL=index.1d40f8e2.mjs.map
+//# sourceMappingURL=index.b010b15f.mjs.map

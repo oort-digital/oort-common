@@ -1,7 +1,7 @@
 import { useState as O } from "react";
 import { Row as g, Col as p } from "antd";
-import { a as k, C as u, b as T, M as B, W as D } from "./index.es.dcddb402.mjs";
-import { j as n, O as S, a as t, F as i } from "./index.1d40f8e2.mjs";
+import { a as k, C as u, b as T, M as B, W as D } from "./index.es.f1e60acf.mjs";
+import { j as n, O as S, a as t, F as i } from "./index.b010b15f.mjs";
 import "ethers";
 import "react-router-dom";
 import "mobx-react";
@@ -136,4 +136,4 @@ export {
   _ as WALLETTYPE,
   H as default
 };
-//# sourceMappingURL=connectModalDesktop.ed39efe8.mjs.map
+//# sourceMappingURL=connectModalDesktop.76e7fb8e.mjs.map
