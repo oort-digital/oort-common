@@ -35,7 +35,7 @@ const bcItems: IBreadcrumbItem[] = [
   },
   {
     name: 'Oort heroes',
-    path: '/games/heroes'
+    // path: '/games/heroes'
   }
 ]
 
