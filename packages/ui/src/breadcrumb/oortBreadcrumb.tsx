@@ -18,12 +18,12 @@ export const OortBreadcrumb = ({ items, className } : IPros) => {
     const renderItem = ({ path, name }: IBreadcrumbItem) => {
 
         if(path) {
-            return <Breadcrumb.Item key={path}>
+            return <Breadcrumb.Item key={name}>
                 <Link to={path}>{name}</Link>
             </Breadcrumb.Item>
         }
 
-        return <Breadcrumb.Item key={path}>{name}</Breadcrumb.Item>
+        return <Breadcrumb.Item key={name}>{name}</Breadcrumb.Item>
     }
 
     const cssClass = className ? `${styles.root} ${className}` : styles.root
