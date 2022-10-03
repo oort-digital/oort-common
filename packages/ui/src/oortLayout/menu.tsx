@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styles from './menu.module.less';
+import { Link } from "react-router-dom";
 
 interface IMenuItemBtnProps {
     className?: string
@@ -22,9 +23,21 @@ interface IMenuItemLinkProps {
     key: string
     caption: string
     icon: ReactNode
+    reactRouterLink: boolean
 }
 
-export const MenuItemLink = ({ className, href, caption, icon }: IMenuItemLinkProps) => <li className={className}><a href={href}>{icon}<span>{caption}</span></a></li>
+export const MenuItemLink = ({ className, href, caption, icon, reactRouterLink }: IMenuItemLinkProps) => {
+
+    const captionElement = <>{icon}<span>{caption}</span></>
+
+    return <li className={className}>
+        {
+            reactRouterLink ? 
+                <Link to={href}>{captionElement}</Link> :
+                <a href={href}>{captionElement}</a>
+        }
+    </li>
+}
 
 interface IMenuItemProps {
     className?: string

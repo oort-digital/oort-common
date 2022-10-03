@@ -3,7 +3,7 @@ import "../styles/fonts.css";
 
 // import '@oort/ui/dist/style.css';
 // import '../oortLib.less';
-
+import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
 import { logger } from "@oort/logger";
@@ -39,7 +39,10 @@ const Template: ComponentStory<typeof Layout> = (args) => {
 
   return <>
     { isDark ? <DarkTheme /> : <LightTheme /> }
-    <Layout {...args} />
+    <Router>
+      <Layout {...args} />
+    </Router>
+    
   </>
 }
 
@@ -54,8 +57,14 @@ const navItems: INavItems = {
     lend: 'http://rent.oort.local/lend'
   },
   gameHub: {
-    games: 'http://game-hub.oort.local/games',
-    nfts: 'http://game-hub.oort.local/nfts'
+    games: {
+      href: 'http://game-hub.oort.local/games',
+      reactRouterLink: true
+    },
+    nfts: {
+      href: 'http://game-hub.oort.local/nfts',
+      reactRouterLink: true
+    }
   }
 }
 
