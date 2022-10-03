@@ -3,6 +3,9 @@
 
 .root {
 
+    @active-bg: @theme-color-1;
+    @active-color: @theme-color-10;
+
     .font-mixin {
         /* Body 14 – Medium */
         font-weight: 500;
@@ -40,8 +43,8 @@
     .collapse_panel.active_header {
 
         :global(.ant-collapse-header) {
-            color: @theme-color-13 !important;
-            background-color: @theme-color-1;
+            color: @active-color !important;
+            background-color: @active-bg;
             box-shadow: inset 4px 0px 0px @primary-6;
             
             .icon { color: @primary-6; }
@@ -53,12 +56,12 @@
     }
 
     li.active {
-        background: @theme-color-1;
+        background: @active-bg;
         box-shadow: inset 4px 0px 0px @primary-6;
     
         & > a {
             .font-mixin;
-            color: @theme-color-13;
+            color: @active-color;
         }
 
         .icon { color: @primary-6; }
