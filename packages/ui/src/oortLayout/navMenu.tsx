@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { DashboardIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
 import styles from './navMenu.module.less';
+import { isHrefActive } from "./utils";
 
 const { Panel } = Collapse;
 
@@ -90,18 +91,7 @@ const getChildCaptions = (item: INavItemInternal): StringMap => {
     return map
 }
 
-const isHrefActive = (href: string) => {
-    const curLocation = window.location
-    const location = new URL(href)
-
-    if(curLocation.origin === location.origin) {
-        if(curLocation.pathname === '/' || curLocation.pathname === location.pathname) {
-            return true
-        }
-    }
-
-    return false
-}
+const _isHrefActive = (href: string) => isHrefActive(window.location, href)
 
 const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
     const i = <span className={styles.icon}>{icon}</span>
@@ -113,7 +103,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     // to trigger rerendering on react-router pathchange
     useLocation()
 
-    const isActive = isActiveFunc || isHrefActive;
+    const isActive = isActiveFunc || _isHrefActive;
 
     const getPanelActive = (hrefs: string[]): boolean => hrefs.some(isActive)
 
