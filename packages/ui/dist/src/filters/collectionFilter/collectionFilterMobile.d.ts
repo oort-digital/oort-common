@@ -1,8 +1,6 @@
 /// <reference types="react" />
 import { IItemSource } from "./itemSource";
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
-export declare type FilterListenerType = () => void;
-export declare type CollectionFilterEventTypes = 'submit' | 'clear' | 'close';
+import { FilterListenerActionType, ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
 export interface ICollectionFilterMobileProps {
     title: string;
     applied: ItemKeyType[];
@@ -12,10 +10,10 @@ export interface ICollectionFilterMobileProps {
     searchPlaceholder: string;
     cacheKeyPrefixFunc: () => string;
     itemSource: IItemSource;
-    addFilterEventListener: (eventType: CollectionFilterEventTypes, listener: FilterListenerType) => void;
-    removeFilterEventListener: (eventType: CollectionFilterEventTypes, listener: FilterListenerType) => void;
+    addFilterEventListeners?: FilterListenerActionType;
+    removeFilterEventListeners?: FilterListenerActionType;
     recentMaxSize?: number;
     favoriteMaxSize?: number;
 }
-export declare const CollectionFilterMobile: ({ applied, searchable, selectSingle, searchPlaceholder, cacheKeyPrefixFunc, itemSource, favoriteMaxSize, recentMaxSize, addFilterEventListener, removeFilterEventListener, onChange }: ICollectionFilterMobileProps) => JSX.Element;
+export declare const CollectionFilterMobile: ({ applied, searchable, selectSingle, searchPlaceholder, cacheKeyPrefixFunc, itemSource, favoriteMaxSize, recentMaxSize, addFilterEventListeners, removeFilterEventListeners, onChange }: ICollectionFilterMobileProps) => JSX.Element;
 //# sourceMappingURL=collectionFilterMobile.d.ts.map
