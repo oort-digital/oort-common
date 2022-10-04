@@ -5,8 +5,9 @@ import "../../styles/fonts.css";
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ItemSourceStub } from "./itemSourceStub";
 import { ICollectionFilterItem } from "./typesAndInterfaces";
-import { CollectionFilterEventTypes, CollectionFilterMobile, FilterListenerType, ICollectionFilterMobileProps } from "./collectionFilterMobile";
+import { CollectionFilterMobile, ICollectionFilterMobileProps } from "./collectionFilterMobile";
 import { Row, Col } from "antd";
+import { useFilterListeners } from "./useFilterListeners";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -22,38 +23,17 @@ const onChange = (collections: ICollectionFilterItem[]) => {
 }
 
 
-let onSubmit: FilterListenerType
-let onClear: FilterListenerType
-let onClose: FilterListenerType
-
-function addFilterEventListener(eventType: CollectionFilterEventTypes, listener: FilterListenerType) {
-  if(eventType === "submit") {
-    onSubmit = listener
-  }
-  switch(eventType) {
-    case 'submit':
-      onSubmit = listener
-      break
-
-    case 'clear':
-      onClear = listener
-      break
-
-    case 'close':
-      onClose = listener
-      break
-  }
-}
-
-const removeFilterEventListener = (eventType: CollectionFilterEventTypes, listener: FilterListenerType) => {
-  console.log(`collectionMobile.removeFilterEventListener: ${eventType}`)
-}
-
 const Template: ComponentStory<typeof CollectionFilterMobile> = (args: ICollectionFilterMobileProps) => {
+
+  const [add, remove, listeners] = useFilterListeners()
+
+  args.addFilterEventListeners = add
+  args.removeFilterEventListeners = remove
+
   return <>
-    <button onClick={() => onSubmit()}>submit</button>
-    <button onClick={() => onClear()}>clear</button>
-    <button onClick={() => onClose()}>close</button>
+    <button onClick={() => listeners!.submit()}>submit</button>
+    <button onClick={() => listeners!.clear()}>clear</button>
+    <button onClick={() => listeners!.close()}>close</button>
 
     <Row style={{ marginTop: '20px' }}>
       <Col span={6}>
@@ -73,6 +53,4 @@ Main.args = {
   onChange: onChange,
   searchable: true,
   selectSingle: false,
-  addFilterEventListener: addFilterEventListener,
-  removeFilterEventListener: removeFilterEventListener
 }

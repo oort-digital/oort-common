@@ -2,11 +2,8 @@ import { observer } from "mobx-react"
 import { useEffect } from "react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { IItemSource } from "./itemSource"
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
+import { FilterListenerActionType, ICollectionFilterItem, IFilterListeners, ItemKeyType } from "./typesAndInterfaces"
 import { useFilterStore } from "./useFilterStore"
-
-export type FilterListenerType = () => void
-export type CollectionFilterEventTypes = 'submit' | 'clear' | 'close'
 
 export interface ICollectionFilterMobileProps {
 	title: string
@@ -17,14 +14,14 @@ export interface ICollectionFilterMobileProps {
 	searchPlaceholder: string
 	cacheKeyPrefixFunc: () => string
     itemSource: IItemSource
-	addFilterEventListener: (eventType: CollectionFilterEventTypes, listener: FilterListenerType) => void
-	removeFilterEventListener: (eventType: CollectionFilterEventTypes, listener: FilterListenerType) => void
+	addFilterEventListeners?: FilterListenerActionType
+	removeFilterEventListeners?: FilterListenerActionType
     recentMaxSize?: number
     favoriteMaxSize?: number
 }
 
 const Impl = ({ applied, searchable, selectSingle, searchPlaceholder, cacheKeyPrefixFunc, itemSource, favoriteMaxSize, recentMaxSize, 
-	addFilterEventListener, removeFilterEventListener, onChange }: ICollectionFilterMobileProps) => {
+	addFilterEventListeners, removeFilterEventListeners, onChange }: ICollectionFilterMobileProps) => {
 
 	const filterStore = useFilterStore({
 		cacheKeyPrefixFunc: cacheKeyPrefixFunc,
@@ -49,16 +46,16 @@ const Impl = ({ applied, searchable, selectSingle, searchPlaceholder, cacheKeyPr
 		filterStore.clearNotApplied()
 	}
 
-	useEffect(() => {
+	const listeners: IFilterListeners = {
+		submit: onSubmit,
+		clear: onClear,
+		close: onClose
+	}
 
-		addFilterEventListener('submit', onSubmit);
-		addFilterEventListener('clear', onClear);
-		addFilterEventListener('close', onClose);
-	
+	useEffect(() => {
+		addFilterEventListeners && addFilterEventListeners(listeners)
 		return () => {
-			removeFilterEventListener('submit', onSubmit);
-			removeFilterEventListener('clear', onClear);
-			removeFilterEventListener('close', onClose);
+			removeFilterEventListeners && removeFilterEventListeners(listeners)
 		};
 	  }, []);
 	
