@@ -1,4 +1,5 @@
 import { Collapse } from "antd";
+import { useLocation } from "react-router-dom";
 import { DashboardIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
 import styles from './navMenu.module.less';
@@ -108,6 +109,9 @@ const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
 }
 
 export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
+
+    // to trigger rerendering on react-router pathchange
+    useLocation()
 
     const isActive = isActiveFunc || isHrefActive;
 
