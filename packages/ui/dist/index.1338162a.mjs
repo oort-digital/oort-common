@@ -2368,7 +2368,7 @@ const Jo = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Ve.Desktop ? e : r === Ve.Phone ? n : t)(), " "]
   });
-}, Xo = Tt(() => import("./connectModalDesktop.a9643f45.mjs")), e2 = Tt(() => import("./connectModalMobile.ef350b5c.mjs")), t2 = (e) => {
+}, Xo = Tt(() => import("./connectModalDesktop.bdfc646f.mjs")), e2 = Tt(() => import("./connectModalMobile.e9073d2a.mjs")), t2 = (e) => {
   const {
     onCancel: n,
     visible: t,
@@ -3464,7 +3464,7 @@ const l6 = "_async_list_1g1vl_1", u6 = "_load_more_btn_container_1g1vl_1", f6 = 
     d: "M8.64 5L11.14 7.5V8.2L8.64 10.7L7.93 10L9.57 8.35H4V7.35H9.57L7.92 5.7L8.64 5Z",
     fill: "currentColor"
   })
-}), C6 = h6, m6 = "_root_6oo63_5", St = {
+}), C6 = h6, m6 = "_root_1tyde_5", St = {
   root: m6
 }, O6 = ({
   items: e,
@@ -3548,4 +3548,4 @@ export {
   Y2 as y,
   T6 as z
 };
-//# sourceMappingURL=index.597ec722.mjs.map
+//# sourceMappingURL=index.1338162a.mjs.map
