@@ -625,7 +625,7 @@ Check the top-level render call using <` + C + ">.");
   process.env.NODE_ENV === "production" ? e.exports = Jn() : e.exports = Qn();
 })(je);
 const i = je.exports.jsx, _ = je.exports.jsxs, ee = je.exports.Fragment;
-function w6({
+function x6({
   okBtn: e,
   cancelBtn: n,
   onCancel: t,
@@ -684,7 +684,7 @@ function er(e) {
     children: e.title
   });
 }
-function k6({
+function S6({
   className: e,
   title: n,
   onCancel: t,
@@ -1947,7 +1947,7 @@ const B = Zt, Zr = () => /* @__PURE__ */ _("svg", {
   return [/* @__PURE__ */ i(ee, {
     children: e
   }), null];
-}, x6 = ({
+}, L6 = ({
   children: e,
   visible: n,
   footer: t,
@@ -1995,7 +1995,7 @@ function ht(e, n, t, r, o, s, c) {
     children: d
   }) : d;
 }
-function S6({
+function M6({
   okBtn: e,
   cancelBtn: n,
   onCancel: t,
@@ -2135,10 +2135,10 @@ function Wt(e, n) {
     t.has(s) || (r.push(o), t.add(s));
   }), r;
 }
-function L6(e) {
+function T6(e) {
   return !(!e || e === Bt);
 }
-function M6(e) {
+function E6(e) {
   return e === Bt;
 }
 const Fo = 4;
@@ -2368,7 +2368,7 @@ const Qo = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Ve.Desktop ? e : r === Ve.Phone ? n : t)(), " "]
   });
-}, e2 = Tt(() => import("./connectModalDesktop.808270d2.mjs")), t2 = Tt(() => import("./connectModalMobile.8100ed85.mjs")), n2 = (e) => {
+}, e2 = Tt(() => import("./connectModalDesktop.88bfdd9c.mjs")), t2 = Tt(() => import("./connectModalMobile.95d9b678.mjs")), n2 = (e) => {
   const {
     onCancel: n,
     visible: t,
@@ -2691,38 +2691,40 @@ const a2 = ({
   header: y2,
   active_header: w2,
   active: k2
-}, {
-  Panel: x2
+}, x2 = (e) => e[e.length - 1] === "/" ? e.substring(0, e.length - 1) : e;
+function S2(e, n) {
+  const t = new URL(x2(n));
+  return !!(e.origin === t.origin && (e.pathname === "/" || e.pathname.includes(t.pathname)));
+}
+const {
+  Panel: L2
 } = Lt;
-var S2 = /* @__PURE__ */ ((e) => (e.Dasboard = "dasboard", e.Rent = "rent", e.Mint = "mint", e))(S2 || {});
-const L2 = {
+var M2 = /* @__PURE__ */ ((e) => (e.Dasboard = "dasboard", e.Rent = "rent", e.Mint = "mint", e))(M2 || {});
+const T2 = {
   caption: "dashboard",
   icon: /* @__PURE__ */ i(zr, {})
-}, M2 = {
+}, E2 = {
   caption: "rent app",
   icon: /* @__PURE__ */ i(Wr, {}),
   lend: "Lend",
   borrow: "Borrow",
   heroes: "Our own NFTs",
   activity: "Activity"
-}, T2 = {
+}, R2 = {
   caption: "mint",
   icon: /* @__PURE__ */ i(Ur, {})
-}, E2 = {
+}, A2 = {
   caption: "game hub",
   icon: /* @__PURE__ */ i(ro, {}),
   games: "Games",
   nfts: "NFTs"
-}, R2 = (e) => {
+}, O2 = (e) => {
   const n = {};
   return Object.entries(e).forEach((t) => {
     const [r, o] = t;
     (r !== "caption" || t[0] !== "icon") && (n[r] = o);
   }), n;
-}, A2 = (e) => {
-  const n = window.location, t = new URL(e);
-  return n.origin === t.origin && (n.pathname === "/" || n.pathname === t.pathname);
-}, O2 = ({
+}, I2 = (e) => S2(window.location, e), N2 = ({
   caption: e,
   icon: n
 }) => {
@@ -2734,13 +2736,13 @@ const L2 = {
     className: re.header,
     children: [t, e]
   });
-}, I2 = ({
+}, F2 = ({
   className: e,
   navItems: n,
   isActiveFunc: t
 }) => {
   Yn();
-  const r = t || A2, o = (m) => m.some(r), s = (m) => typeof m == "string" ? m : m.href, c = (m, {
+  const r = t || I2, o = (m) => m.some(r), s = (m) => typeof m == "string" ? m : m.href, c = (m, {
     caption: b,
     icon: T
   }) => {
@@ -2758,15 +2760,15 @@ const L2 = {
       icon: w
     }, b);
   }, l = (m, b) => {
-    const v = R2(m), x = Object.entries(b), S = x.map((I) => s(I[1])), w = o(S);
+    const v = O2(m), x = Object.entries(b), S = x.map((I) => s(I[1])), w = o(S);
     let R, M = re.collapse_panel;
     return w && (M = `${re.active_header} ${M}`, R = 1), /* @__PURE__ */ i(Lt, {
       defaultActiveKey: R,
       ghost: !0,
       expandIconPosition: "end",
-      children: /* @__PURE__ */ i(x2, {
+      children: /* @__PURE__ */ i(L2, {
         className: M,
-        header: O2(m),
+        header: N2(m),
         children: /* @__PURE__ */ i(C1, {
           children: x.map((I) => {
             const [te, K] = I;
@@ -2785,9 +2787,9 @@ const L2 = {
   } = n;
   return /* @__PURE__ */ _(C1, {
     className: `${re.root} ${e || ""}`,
-    children: [c(f, L2), l(M2, h), l(E2, d), c(p, T2)]
+    children: [c(f, T2), l(E2, h), l(A2, d), c(p, R2)]
   });
-}, T6 = ({
+}, R6 = ({
   navItems: e,
   children: n,
   web3: t,
@@ -2799,7 +2801,7 @@ const L2 = {
     children: /* @__PURE__ */ _("div", {
       children: [/* @__PURE__ */ i(g2, {
         className: ge.logo
-      }), /* @__PURE__ */ i(I2, {
+      }), /* @__PURE__ */ i(F2, {
         isActiveFunc: r,
         navItems: e
       }), /* @__PURE__ */ i(f2, {
@@ -2811,22 +2813,22 @@ const L2 = {
     className: ge.content,
     children: n
   })]
-}), N2 = "_collection_trigger_btn_1ebc0_5", F2 = "_collection_popover_content_1ebc0_25", $2 = "_apply_1ebc0_29", P2 = "_title_1ebc0_32", Re = {
-  collection_trigger_btn: N2,
-  collection_popover_content: F2,
-  apply: $2,
-  title: P2
-}, V2 = "_popover_content_17el8_5", D2 = "_title_17el8_5", j2 = "_cancel_17el8_15", H2 = "_apply_17el8_20", Z2 = "_trigger_btn_17el8_24", B2 = "_single_title_17el8_28", W2 = "_title_outer_17el8_36", z2 = "_sub_title_outer_17el8_45", U2 = "_filled_17el8_54", J = {
-  popover_content: V2,
-  title: D2,
-  cancel: j2,
-  apply: H2,
-  trigger_btn: Z2,
-  single_title: B2,
-  title_outer: W2,
-  sub_title_outer: z2,
-  filled: U2
-}, q2 = ({
+}), $2 = "_collection_trigger_btn_1ebc0_5", P2 = "_collection_popover_content_1ebc0_25", V2 = "_apply_1ebc0_29", D2 = "_title_1ebc0_32", Re = {
+  collection_trigger_btn: $2,
+  collection_popover_content: P2,
+  apply: V2,
+  title: D2
+}, j2 = "_popover_content_17el8_5", H2 = "_title_17el8_5", Z2 = "_cancel_17el8_15", B2 = "_apply_17el8_20", W2 = "_trigger_btn_17el8_24", z2 = "_single_title_17el8_28", U2 = "_title_outer_17el8_36", q2 = "_sub_title_outer_17el8_45", Y2 = "_filled_17el8_54", J = {
+  popover_content: j2,
+  title: H2,
+  cancel: Z2,
+  apply: B2,
+  trigger_btn: W2,
+  single_title: z2,
+  title_outer: U2,
+  sub_title_outer: q2,
+  filled: Y2
+}, K2 = ({
   title: e,
   subTitle: n,
   triggerBtnClassName: t,
@@ -2907,11 +2909,11 @@ const L2 = {
       children: n ? M() : I()
     })
   });
-}, Y2 = "_search_input_6x5d9_5", tn = {
-  search_input: Y2,
+}, G2 = "_search_input_6x5d9_5", tn = {
+  search_input: G2,
   "ant-input-prefix": "_ant-input-prefix_6x5d9_5",
   "ant-input": "_ant-input_6x5d9_5"
-}, K2 = ({
+}, J2 = ({
   value: e,
   placeholder: n,
   onChange: t
@@ -2928,7 +2930,7 @@ const L2 = {
     allowClear: !0,
     size: "large"
   });
-}, G2 = ({
+}, Q2 = ({
   value: e,
   placeholder: n,
   onChange: t,
@@ -2942,17 +2944,17 @@ const L2 = {
   placeholder: n,
   allowClear: !0,
   size: "large"
-}), E6 = ({
+}), A6 = ({
   value: e,
   placeholder: n,
   onChange: t
-}) => /* @__PURE__ */ i(G2, {
+}) => /* @__PURE__ */ i(Q2, {
   value: e,
   placeholder: n,
   onSubmit: () => {
   },
   onChange: t
-}), J2 = () => /* @__PURE__ */ i("svg", {
+}), X2 = () => /* @__PURE__ */ i("svg", {
   width: "20",
   height: "20",
   viewBox: "0 0 20 20",
@@ -2962,9 +2964,9 @@ const L2 = {
     d: "M19.2836 7.27578L13.3328 6.41094L10.6727 1.01797C10.6 0.870309 10.4805 0.750778 10.3328 0.678122C9.96249 0.495309 9.51249 0.647653 9.32734 1.01797L6.66718 6.41094L0.71639 7.27578C0.552327 7.29922 0.402327 7.37656 0.287483 7.49375C0.148643 7.63645 0.0721361 7.82844 0.074773 8.02752C0.0774098 8.2266 0.158975 8.4165 0.301546 8.55547L4.60702 12.7531L3.58983 18.6805C3.56598 18.8184 3.58124 18.9602 3.63387 19.0898C3.68651 19.2195 3.77443 19.3318 3.88765 19.414C4.00087 19.4962 4.13486 19.5451 4.27444 19.5551C4.41402 19.565 4.55359 19.5357 4.67733 19.4703L9.99999 16.6719L15.3227 19.4703C15.468 19.5477 15.6367 19.5734 15.7984 19.5453C16.2063 19.475 16.4805 19.0883 16.4102 18.6805L15.393 12.7531L19.6984 8.55547C19.8156 8.44063 19.893 8.29063 19.9164 8.12656C19.9797 7.71641 19.6938 7.33672 19.2836 7.27578ZM13.5812 12.1625L14.4273 17.0914L9.99999 14.7664L5.57265 17.0938L6.41874 12.1648L2.83749 8.67266L7.78749 7.95313L9.99999 3.46953L12.2125 7.95313L17.1625 8.67266L13.5812 12.1625Z",
     fill: "#D9D9D9"
   })
-}), Q2 = () => /* @__PURE__ */ i(B, {
-  component: J2
-}), X2 = () => /* @__PURE__ */ i("svg", {
+}), e6 = () => /* @__PURE__ */ i(B, {
+  component: X2
+}), t6 = () => /* @__PURE__ */ i("svg", {
   width: "20",
   height: "21",
   viewBox: "0 0 20 21",
@@ -2974,16 +2976,16 @@ const L2 = {
     d: "M19.947 8.17901C19.8842 7.99388 19.7685 7.83121 19.6142 7.71107C19.46 7.59094 19.2739 7.51861 19.079 7.50301L13.378 7.05001L10.911 1.58901C10.8325 1.41313 10.7047 1.26374 10.5431 1.15887C10.3815 1.05401 10.193 0.998153 10.0004 0.998047C9.80771 0.997941 9.61916 1.05359 9.45745 1.15828C9.29574 1.26296 9.16779 1.41221 9.08903 1.58801L6.62203 7.05001L0.921026 7.50301C0.729482 7.51819 0.546364 7.58822 0.393581 7.70475C0.240798 7.82127 0.124819 7.97934 0.0595194 8.16004C-0.00578038 8.34075 -0.0176359 8.53645 0.0253712 8.72372C0.0683784 8.91099 0.164427 9.0819 0.302026 9.21601L4.51503 13.323L3.02503 19.775C2.97978 19.9703 2.99428 20.1747 3.06665 20.3617C3.13901 20.5486 3.26589 20.7095 3.43083 20.8235C3.59577 20.9374 3.79115 20.9991 3.99161 21.0007C4.19208 21.0022 4.38837 20.9434 4.55503 20.832L10 17.202L15.445 20.832C15.6154 20.9451 15.8162 21.0033 16.0207 20.9988C16.2251 20.9944 16.4232 20.9274 16.5884 20.8069C16.7536 20.6865 16.878 20.5183 16.9448 20.3251C17.0116 20.1318 17.0176 19.9228 16.962 19.726L15.133 13.326L19.669 9.24401C19.966 8.97601 20.075 8.55801 19.947 8.17901Z",
     fill: "#FFD666"
   })
-}), e6 = () => /* @__PURE__ */ i(B, {
-  component: X2
-}), t6 = ({
+}), n6 = () => /* @__PURE__ */ i(B, {
+  component: t6
+}), r6 = ({
   checked: e,
   onChange: n
 }) => /* @__PURE__ */ i("span", {
   onClick: (t) => {
     t.stopPropagation(), n(!e);
   },
-  children: e ? /* @__PURE__ */ i(e6, {}) : /* @__PURE__ */ i(Q2, {})
+  children: e ? /* @__PURE__ */ i(n6, {}) : /* @__PURE__ */ i(e6, {})
 }), wt = (e, n, t, r) => {
   const o = n ? 16 : 20;
   return (s) => {
@@ -3018,19 +3020,19 @@ const L2 = {
           children: m
         })
       }), /* @__PURE__ */ i(Se, {
-        children: /* @__PURE__ */ i(t6, {
+        children: /* @__PURE__ */ i(r6, {
           checked: p,
           onChange: (b) => r.onChange(s, b)
         })
       })]
     });
   };
-}, n6 = "_content_rdgkl_1", r6 = "_list_rdgkl_16", o6 = "_list_item_rdgkl_26", ve = {
-  content: n6,
-  list: r6,
-  list_item: o6,
+}, o6 = "_content_rdgkl_1", a6 = "_list_rdgkl_16", i6 = "_list_item_rdgkl_26", ve = {
+  content: o6,
+  list: a6,
+  list_item: i6,
   "ant-checkbox-inner": "_ant-checkbox-inner_rdgkl_40"
-}, a6 = ({
+}, s6 = ({
   filterStore: e,
   searchable: n,
   selectSingle: t,
@@ -3090,7 +3092,7 @@ const L2 = {
   }];
   return /* @__PURE__ */ _("div", {
     className: ve.content,
-    children: [n && /* @__PURE__ */ i(K2, {
+    children: [n && /* @__PURE__ */ i(J2, {
       value: e.term,
       onChange: (M) => p(M),
       placeholder: r
@@ -3099,7 +3101,7 @@ const L2 = {
       items: R
     })]
   });
-}, nn = g1(a6), i6 = ({
+}, nn = g1(s6), c6 = ({
   names: e,
   len: n = 20
 }) => {
@@ -3211,7 +3213,7 @@ class kt {
 }
 var on = /* @__PURE__ */ ((e) => (e[e.Pending = 0] = "Pending", e[e.Done = 1] = "Done", e[e.Error = 2] = "Error", e))(on || {});
 const c1 = (e) => e.key;
-class s6 {
+class l6 {
   constructor({ cacheKeyPrefixFunc: n, itemSource: t, recentMaxSize: r = 20, favoriteMaxSize: o = 20 }) {
     this.selected = [], this.favorites = [], this.recent = [], this.appliedItems = [], this.getFavoritesKey = () => `${this._cacheKeyPrefixFunc()}_FAV`, this.getRecentKey = () => `${this._cacheKeyPrefixFunc()}_RECENT`, this.loadFromCache = (s, c) => {
       const l = this._cache.getItem(s);
@@ -3310,11 +3312,11 @@ class s6 {
 }
 function an(e, n) {
   const t = p1();
-  return t.current || (t.current = new s6(e)), ue(() => {
+  return t.current || (t.current = new l6(e)), ue(() => {
     t.current.setApplied(n);
   }, [n, t.current]), t.current;
 }
-const c6 = ({
+const u6 = ({
   title: e,
   popoverTitle: n,
   onChange: t,
@@ -3335,7 +3337,7 @@ const c6 = ({
   }, r), {
     selected: m,
     appliedItems: b
-  } = p, T = !r.length, v = () => T ? null : /* @__PURE__ */ i(i6, {
+  } = p, T = !r.length, v = () => T ? null : /* @__PURE__ */ i(c6, {
     names: b.map((R) => R.title)
   }), x = () => {
     p.copyNotAppliedToRecent();
@@ -3346,7 +3348,7 @@ const c6 = ({
   }, w = () => {
     t([]), p.clearNotApplied();
   };
-  return /* @__PURE__ */ i(q2, {
+  return /* @__PURE__ */ i(K2, {
     triggerBtnClassName: Re.collection_trigger_btn,
     popoverClassName: Re.collection_popover_content,
     popoverTitleClassName: Re.title,
@@ -3365,7 +3367,7 @@ const c6 = ({
       filterStore: p
     })
   });
-}, R6 = g1(c6), l6 = ({
+}, O6 = g1(u6), f6 = ({
   applied: e,
   searchable: n,
   selectSingle: t,
@@ -3404,8 +3406,8 @@ const c6 = ({
     searchable: n,
     filterStore: p
   });
-}, A6 = g1(l6);
-function O6() {
+}, I6 = g1(f6);
+function N6() {
   const [e, n] = oe();
   return [(o) => {
     n(o);
@@ -3413,11 +3415,11 @@ function O6() {
     n(void 0);
   }, e];
 }
-const u6 = "_async_list_1g1vl_1", f6 = "_load_more_btn_container_1g1vl_1", d6 = "_load_more_btn_1g1vl_1", h6 = "_empty_hint_1g1vl_8", Ae = {
-  async_list: u6,
-  load_more_btn_container: f6,
-  load_more_btn: d6,
-  empty_hint: h6
+const d6 = "_async_list_1g1vl_1", h6 = "_load_more_btn_container_1g1vl_1", C6 = "_load_more_btn_1g1vl_1", m6 = "_empty_hint_1g1vl_8", Ae = {
+  async_list: d6,
+  load_more_btn_container: h6,
+  load_more_btn: C6,
+  empty_hint: m6
 }, xt = ({
   hasLoadMore: e,
   itemRenderer: n,
@@ -3456,7 +3458,7 @@ const u6 = "_async_list_1g1vl_1", f6 = "_load_more_btn_container_1g1vl_1", d6 = 
       })
     })
   });
-}, C6 = () => /* @__PURE__ */ i("svg", {
+}, p6 = () => /* @__PURE__ */ i("svg", {
   width: "100%",
   height: "100%",
   viewBox: "0 0 16 16",
@@ -3466,9 +3468,9 @@ const u6 = "_async_list_1g1vl_1", f6 = "_load_more_btn_container_1g1vl_1", d6 = 
     d: "M8.64 5L11.14 7.5V8.2L8.64 10.7L7.93 10L9.57 8.35H4V7.35H9.57L7.92 5.7L8.64 5Z",
     fill: "currentColor"
   })
-}), m6 = C6, p6 = "_root_1tyde_5", St = {
-  root: p6
-}, I6 = ({
+}), g6 = p6, v6 = "_root_1tyde_5", St = {
+  root: v6
+}, F6 = ({
   items: e,
   className: n
 }) => {
@@ -3485,13 +3487,13 @@ const u6 = "_async_list_1g1vl_1", f6 = "_load_more_btn_container_1g1vl_1", d6 = 
   }, s), r = n ? `${St.root} ${n}` : St.root;
   return /* @__PURE__ */ i(Je, {
     className: r,
-    separator: /* @__PURE__ */ i(m6, {}),
+    separator: /* @__PURE__ */ i(g6, {}),
     children: e.map(t)
   });
 };
 export {
   so as $,
-  i6 as A,
+  c6 as A,
   a2 as B,
   Z as C,
   Ve as D,
@@ -3502,11 +3504,11 @@ export {
   B as I,
   zr as J,
   Ur as K,
-  T6 as L,
-  S2 as M,
+  R6 as L,
+  M2 as M,
   qr as N,
-  k6 as O,
-  q2 as P,
+  S6 as O,
+  K2 as P,
   Yr as Q,
   Wr as R,
   Wo as S,
@@ -3523,18 +3525,18 @@ export {
   fo as a1,
   rn as a2,
   q as a3,
-  I6 as a4,
-  x6 as b,
-  w6 as c,
-  S6 as d,
+  F6 as a4,
+  L6 as b,
+  x6 as c,
+  M6 as d,
   Ao as e,
   Oo as f,
   To as g,
   No as h,
   Wt as i,
   i as j,
-  L6 as k,
-  M6 as l,
+  T6 as k,
+  E6 as l,
   zt as m,
   Xo as n,
   Bo as o,
@@ -3544,10 +3546,10 @@ export {
   n2 as s,
   $o as t,
   zo as u,
-  R6 as v,
-  A6 as w,
-  O6 as x,
-  K2 as y,
-  E6 as z
+  O6 as v,
+  I6 as w,
+  N6 as x,
+  J2 as y,
+  A6 as z
 };
-//# sourceMappingURL=index.d14ef8f9.mjs.map
+//# sourceMappingURL=index.b4015331.mjs.map
