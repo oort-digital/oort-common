@@ -17,6 +17,28 @@ export class StringSerializer implements ISerializer<string> {
     }
 }
 
+export class BoolSerializer implements ISerializer<boolean> {
+
+    readonly key: string
+    serialize = (paramVal: boolean) => [`${paramVal}`]
+    deserialize = (params: string[]) => params[0] === 'true'
+
+    constructor(key: string) {
+        this.key = key
+    }
+}
+
+export class IntSerializer implements ISerializer<number> {
+
+    readonly key: string
+    serialize = (paramVal: number) => [paramVal.toString()]
+    deserialize = (params: string[]) => parseInt(params[0])
+
+    constructor(key: string) {
+        this.key = key
+    }
+}
+
 export class NumRangeSerializer implements ISerializer<NumRange> {
 
     private static sep = '-'
@@ -58,4 +80,26 @@ export class NumRangeSerializer implements ISerializer<NumRange> {
         //null value happens too
         return val !== undefined && val !== null
     }
+}
+
+export class ArraySerializer<T> implements ISerializer<T[]> {
+
+    readonly key: string
+
+    constructor(key: string, parseFunc: (str: string) => T) {
+        this.key = key
+        this._parseFunc = parseFunc
+    }
+
+    serialize(arr: T[]): string[] {
+        const p =  arr.join(this._sep)
+        return [p]
+    }
+
+    deserialize(params: string[]): T[] {
+        return params[0].split(this._sep).map(x => this._parseFunc(x))
+    }
+
+    private readonly _sep = '-'
+    private readonly _parseFunc: (str: string) => T
 }

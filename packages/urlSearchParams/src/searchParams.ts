@@ -1,4 +1,4 @@
-import { ISerializer, NumRangeSerializer } from "./serializers";
+import { ArraySerializer, BoolSerializer, IntSerializer, ISerializer, NumRangeSerializer } from "./serializers";
 import { NumRange, URLSearchParamsSetter } from "./typesAndInterfaces";
 
 export abstract class BaseSearchParam<T> {
@@ -55,5 +55,29 @@ export class NumRangeSearchParam extends BaseSearchParam<NumRange> {
 
     constructor(key: string, searchParams: URLSearchParams, setter: URLSearchParamsSetter) {
         super(searchParams, setter, new NumRangeSerializer(key), [undefined, undefined])
+    }
+}
+
+export class IntArrSearchParam extends BaseSearchParam<number[]> {
+    constructor(key: string, searchParams: URLSearchParams, setter: URLSearchParamsSetter) {
+        super(searchParams, setter, new ArraySerializer<number>(key, parseInt), [])
+    }
+}
+
+export class StrArrSearchParam extends BaseSearchParam<string[]> {
+    constructor(key: string, searchParams: URLSearchParams, setter: URLSearchParamsSetter) {
+        super(searchParams, setter, new ArraySerializer<string>(key, x => x), [])
+    }
+}
+
+export class IntSearchParam extends BaseSearchParam<number> {
+    constructor(key: string, defaultValue: number, searchParams: URLSearchParams, setter: URLSearchParamsSetter) {
+        super(searchParams, setter, new IntSerializer(key), defaultValue)
+    }
+}
+
+export class BoolSearchParam extends BaseSearchParam<boolean> {
+    constructor(key: string, defaultValue: boolean, searchParams: URLSearchParams, setter: URLSearchParamsSetter) {
+        super(searchParams, setter, new BoolSerializer(key), defaultValue)
     }
 }
