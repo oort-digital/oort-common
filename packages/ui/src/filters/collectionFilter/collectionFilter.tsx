@@ -31,8 +31,6 @@ const Impl = ({ title, popoverTitle, onChange, applied, searchable, selectSingle
 		recentMaxSize: recentMaxSize
 	}, applied)
 
-	const { selected, appliedItems } = filterStore
-
 	const isClear = !applied.length
 
 	const renderSubTitle = () => {
@@ -40,12 +38,12 @@ const Impl = ({ title, popoverTitle, onChange, applied, searchable, selectSingle
 			return null
 		}
 
-		return <SubTitle names={appliedItems.map(x => x.title)} />
+		return <SubTitle names={filterStore.appliedItems.map(x => x.title)} />
 	}
 
 	const onSubmit = () => {
 		filterStore.copyNotAppliedToRecent()
-		const selectedItems = filterStore.items.filter(x => selected.some(s => s === x.key))
+		const selectedItems = filterStore.items.filter(x => filterStore.selected.some(s => s === x.key))
 		onChange(selectedItems)
 		filterStore.clearNotApplied()
 	}
@@ -73,7 +71,7 @@ const Impl = ({ title, popoverTitle, onChange, applied, searchable, selectSingle
 		popoverTitle={popoverTitle}
 		// submitDisabled={!notSubmited.length}
 		isClear={isClear}
-		onClear={onClear} >
+		onClear={onClear}>
 
 
         <CollectionFilterContent
@@ -82,7 +80,7 @@ const Impl = ({ title, popoverTitle, onChange, applied, searchable, selectSingle
 			searchable={searchable}
 			filterStore={filterStore}
 		/>
-  </PopoverFilter>
+	</PopoverFilter>
 }
 
 export const CollectionFilter = observer(Impl)
