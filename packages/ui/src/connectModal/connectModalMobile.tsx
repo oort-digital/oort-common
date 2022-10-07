@@ -7,9 +7,10 @@ import { MetamaskIcon } from './metamaskIcon';
 import { WalletConnectIcon } from './walletConnectIcon';
 import { Gutter } from 'antd/lib/grid/row';
 import { ChainButton } from './chainButton';
-import { ConnectorNames, IConnector } from "@oort/web3-connectors";
+import { ConnectorNames } from "@oort/web3-connectors";
 import { IChain } from '../typesAndInterfaces';
 import { OortModalMobile } from '../oortModal';
+import { IWeb3 } from './connectModal';
 
 
 export enum WALLETTYPE {
@@ -39,23 +40,16 @@ const renderAlert = (account: string, chain: IChain, supportedChains: IChain[]) 
 
 
 interface IProps {
-	chain: IChain
-	supportedChains: IChain[]
-	account: string
-	canSwitchChain: boolean
-	connectorName: ConnectorNames
-	supportedConnectors: { [name: string]: IConnector }
+	web3: IWeb3
 	visible: boolean
 	onCancel: () => void
-	switchChain: (newChainId: number) => Promise<void>
-	connectAsync: (connectorName: ConnectorNames) => Promise<void>
 }
 
-const ConnectModalMobile = (props: IProps) => {
+const ConnectModalMobile = ({ web3, visible, onCancel }: IProps) => {
 
 	const [ loading, setLoading ] = useState(false)
 	
-	const { onCancel, visible, supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = props
+	const { supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = web3
 
 	const connectAndClose = async (cnnName: ConnectorNames) => {
 		setLoading(true)

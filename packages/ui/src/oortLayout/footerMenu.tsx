@@ -4,9 +4,7 @@ import { Menu, MenuItem, MenuItemBtn } from './menu';
 import { getChainIcon, toMasskedAddress } from '../utils';
 import { ChevronSortIcon, DiscordIcon, TelegramIcon, TwitterIcon } from '../icons';
 import { ThemeSwitch } from './themeSwitch';
-import { IChain } from '../typesAndInterfaces';
-import { ConnectModal } from '../connectModal';
-import { ConnectorNames, IConnector } from '@oort/web3-connectors';
+import { ConnectModal, IWeb3 } from '../connectModal';
 import { BlockieAddress } from '../blockieAddress';
 import { useTheme } from '../effects';
 
@@ -14,16 +12,6 @@ const TWITTER = "https://twitter.com/OortDigital";
 const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
 const TELEGRAM = "https://t.me/oortdigital";
 
-export interface IWeb3 {
-    canSwitchChain: boolean
-    connectorName: ConnectorNames
-    supportedConnectors: { [name: string]: IConnector }
-    switchChain: (newChainId: number) => Promise<void>
-    connectAsync: (connectorName: ConnectorNames) => Promise<void>
-    supportedChains: IChain[]
-    chain: IChain
-    account: string
-}
 
 interface IProps {
     className?: string
@@ -36,8 +24,6 @@ const social = <>
     <a href={DISCORD}><span className={styles.icon}><DiscordIcon/></span></a>
 </>
 
-
-
 export const FooterMenu = ({ className, web3 }: IProps) => {
 
     const [ connectModalVisible, setConnectModalVisible ] = useState(false)
@@ -45,18 +31,10 @@ export const FooterMenu = ({ className, web3 }: IProps) => {
     const [ isDarkMode, setDarkMode ] = useTheme()
 
     const renderConnectModal = () => {
-        const { supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = web3!
         return <ConnectModal
             onCancel={() => setConnectModalVisible(false)}
             visible={connectModalVisible}
-            supportedChains={supportedChains}
-            chain={chain}
-            switchChain={switchChain}
-            canSwitchChain={canSwitchChain}
-            connectAsync={connectAsync}
-            account={account}
-            connectorName={connectorName}
-            supportedConnectors={supportedConnectors}
+            web3={web3!}
         />
     }
 

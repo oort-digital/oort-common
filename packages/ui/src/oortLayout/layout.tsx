@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { FooterMenu, IWeb3 } from "./footerMenu";
+import { IWeb3 } from "../connectModal";
+import { FooterMenu } from "./footerMenu";
 import styles from './layout.module.less';
 import { LogoLink } from "./logoLink";
 import { INavItems, NavMenu } from "./navMenu";
