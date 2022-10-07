@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IWeb3 } from "./footerMenu";
+import { IWeb3 } from "../connectModal";
 import { INavItems } from "./navMenu";
 interface IProps {
     children: ReactNode;
