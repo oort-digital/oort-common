@@ -42,10 +42,18 @@ const renderAlert = (account: string, chain: IChain, supportedChains: IChain[]) 
 interface IProps {
 	web3: IWeb3
 	visible: boolean
-	onCancel: () => void
+	/**
+	 * @deprecated Use onClose, afterConnect, afterChainSwitch
+	 */
+	onCancel?: () => void
+
+	/** executed when user click 'X' in the top right corner */
+	onClose?: () => void
+	afterConnect?: () => void
+	afterChainSwitch?: () => void
 }
 
-const ConnectModalMobile = ({ web3, visible, onCancel }: IProps) => {
+const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, afterChainSwitch }: IProps) => {
 
 	const [ loading, setLoading ] = useState(false)
 	
@@ -55,7 +63,8 @@ const ConnectModalMobile = ({ web3, visible, onCancel }: IProps) => {
 		setLoading(true)
         try {
             await connectAsync(cnnName)
-			onCancel()
+			onCancel && onCancel()
+			afterConnect && afterConnect()
         }
         finally {
             setLoading(false)
@@ -66,7 +75,8 @@ const ConnectModalMobile = ({ web3, visible, onCancel }: IProps) => {
         setLoading(true)
         try {
             await switchChain(newChainId)
-			onCancel()
+			onCancel && onCancel()
+			afterChainSwitch && afterChainSwitch()
         }
         finally {
             setLoading(false)
@@ -122,8 +132,15 @@ const ConnectModalMobile = ({ web3, visible, onCancel }: IProps) => {
 	}
 
 	const btnGutter: [Gutter, Gutter] = [0, 12]
+
+	const _onCancel = () => {
+		onClose && onClose()
+		onCancel && onCancel()
+	}
 	
-	return <OortModalMobile viewMode="topGap" loading={loading} footer={footer} className='connect-wallet-mobile-modal' title='Network & Wallet' visible={visible} onCancel={onCancel}>
+	return <OortModalMobile viewMode="topGap" loading={loading} footer={footer}
+		className='connect-wallet-mobile-modal' title='Network & Wallet' visible={visible}
+		onCancel={() => _onCancel()}>
 		<>
 			{
 				chain && <>

@@ -45,7 +45,7 @@ interface IProps {
 	onCancel?: () => void
 
 	/** executed when user click 'X' in the top right corner */
-	onClose: () => void
+	onClose?: () => void
 	afterConnect?: () => void
 	afterChainSwitch?: () => void
 }
