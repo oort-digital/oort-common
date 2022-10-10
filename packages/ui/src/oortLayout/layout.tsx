@@ -16,10 +16,10 @@ interface IProps {
 export const Layout = ({ navItems, children, web3, isActiveFunc }: IProps) => {
 
     return <div className={styles.root}>
-        <aside className={styles.sider}>
+        <aside>
             <div>
                 <LogoLink className={styles.logo} />
-                <NavMenu isActiveFunc={isActiveFunc} navItems={navItems}/>
+                <NavMenu className={styles.nav_menu} isActiveFunc={isActiveFunc} navItems={navItems}/>
                 <FooterMenu className={styles.footer} web3={web3} />
             </div>
         </aside>
