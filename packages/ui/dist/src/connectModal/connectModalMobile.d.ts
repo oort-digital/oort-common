@@ -7,8 +7,11 @@ export declare enum WALLETTYPE {
 interface IProps {
     web3: IWeb3;
     visible: boolean;
-    onCancel: () => void;
+    onCancel?: () => void;
+    onClose?: () => void;
+    afterConnect?: () => void;
+    afterChainSwitch?: () => void;
 }
-declare const ConnectModalMobile: ({ web3, visible, onCancel }: IProps) => JSX.Element;
+declare const ConnectModalMobile: ({ web3, visible, onCancel, onClose, afterConnect, afterChainSwitch }: IProps) => JSX.Element;
 export default ConnectModalMobile;
 //# sourceMappingURL=connectModalMobile.d.ts.map
