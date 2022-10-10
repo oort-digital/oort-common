@@ -2372,7 +2372,7 @@ const Jo = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => n === Ve.Desktop ? e : n === Ve.Phone ? r : t)(), " "]
   });
-}, Xo = Tt(() => import("./connectModalDesktop.47cccbd3.mjs")), e2 = Tt(() => import("./connectModalMobile.676044ef.mjs")), t2 = ({
+}, Xo = Tt(() => import("./connectModalDesktop.bc6daa5c.mjs")), e2 = Tt(() => import("./connectModalMobile.abc7d06c.mjs")), t2 = ({
   web3: e,
   visible: r,
   onCancel: t
@@ -2782,7 +2782,7 @@ const M2 = {
   collection_popover_content: $2,
   apply: P2,
   title: V2
-}, D2 = "_popover_content_kpvd4_5", j2 = "_title_kpvd4_5", H2 = "_cancel_kpvd4_14", Z2 = "_apply_kpvd4_19", B2 = "_trigger_btn_kpvd4_23", z2 = "_single_title_kpvd4_27", W2 = "_title_outer_kpvd4_34", U2 = "_sub_title_outer_kpvd4_43", Y2 = "_filled_kpvd4_52", J = {
+}, D2 = "_popover_content_1r3fz_5", j2 = "_title_1r3fz_5", H2 = "_cancel_1r3fz_14", Z2 = "_apply_1r3fz_19", B2 = "_trigger_btn_1r3fz_23", z2 = "_single_title_1r3fz_27", W2 = "_title_outer_1r3fz_34", U2 = "_sub_title_outer_1r3fz_42", Y2 = "_filled_1r3fz_51", J = {
   popover_content: D2,
   title: j2,
   cancel: H2,
@@ -3515,4 +3515,4 @@ export {
   O6 as y,
   N6 as z
 };
-//# sourceMappingURL=index.48bb6552.mjs.map
+//# sourceMappingURL=index.f843faf6.mjs.map
