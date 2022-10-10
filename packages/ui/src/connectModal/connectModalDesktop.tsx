@@ -39,10 +39,18 @@ const renderAlert = (account: string, chain: IChain, supportedChains: IChain[]) 
 interface IProps {
 	web3: IWeb3
 	visible: boolean
-	onCancel: () => void
+	 /**
+     * @deprecated Use onClose, afterConnect, afterChainSwitch
+     */
+	onCancel?: () => void
+
+	/** executed when user click 'X' in the top right corner */
+	onClose: () => void
+	afterConnect?: () => void
+	afterChainSwitch?: () => void
 }
 
-const ConnectModalDesktop = ({ web3, onCancel, visible }: IProps) => {
+const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitch, afterConnect }: IProps) => {
 
 	const [ loading, setLoading ] = useState(false)
 	const {  supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = web3
@@ -51,7 +59,8 @@ const ConnectModalDesktop = ({ web3, onCancel, visible }: IProps) => {
 		setLoading(true)
         try {
             await connectAsync(cnnName)
-			onCancel()
+			onCancel && onCancel()
+			afterConnect && afterConnect()
         }
         finally {
             setLoading(false)
@@ -62,7 +71,8 @@ const ConnectModalDesktop = ({ web3, onCancel, visible }: IProps) => {
         setLoading(true)
         try {
             await switchChain(newChainId)
-			onCancel()
+			onCancel && onCancel()
+			afterChainSwitch && afterChainSwitch()
         }
         finally {
             setLoading(false)
@@ -119,8 +129,19 @@ const ConnectModalDesktop = ({ web3, onCancel, visible }: IProps) => {
 	}
 
 	const btnGutter: [Gutter, Gutter] = [10, 0]
+
+	const _onCancel = () => {
+		onClose && onClose()
+		onCancel && onCancel()
+	}
 	
-	return <OortModal loading={loading} footer={footer} className='connect-wallet-desktop-modal' title='Network & Wallet' width="690px" visible={visible} onCancel={onCancel}>
+	return <OortModal 
+		loading={loading}
+		footer={footer}
+		className='connect-wallet-desktop-modal'
+		title='Network & Wallet'
+		width="690px"
+		visible={visible} onCancel={() => _onCancel()}>
 		<>
 			{
 				chain && <>
