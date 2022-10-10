@@ -17,11 +17,9 @@ export const Layout = ({ navItems, children, web3, isActiveFunc }: IProps) => {
 
     return <div className={styles.root}>
         <aside>
-            <div>
-                <LogoLink className={styles.logo} />
-                <NavMenu className={styles.nav_menu} isActiveFunc={isActiveFunc} navItems={navItems}/>
-                <FooterMenu className={styles.footer} web3={web3} />
-            </div>
+            <LogoLink className={styles.logo} />
+            <NavMenu className={styles.nav_menu} isActiveFunc={isActiveFunc} navItems={navItems}/>
+            <FooterMenu className={styles.footer} web3={web3} />
         </aside>
         
         <div className={styles.content}>
