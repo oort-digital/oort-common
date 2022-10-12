@@ -1,3 +1,4 @@
+import { logger } from "@oort/logger"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { LocalStorageCacheProvider } from "../../cache"
 import { distinct } from "../../utils"
@@ -30,6 +31,7 @@ export class CollectionFilterStore {
 
     constructor({cacheKeyPrefixFunc, itemSource, recentMaxSize = 20, favoriteMaxSize = 20}: ICollectionFilterStoreParams) {
 
+        logger.debug('CollectionFilterStore.constructor')
         this._itemSource = itemSource
         this._cache = new LocalStorageCacheProvider()
         this._cacheKeyPrefixFunc = cacheKeyPrefixFunc
