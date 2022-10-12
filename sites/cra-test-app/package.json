@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.5",
-    "@oort/ui": "*",
     "@oort/logger": "*",
+    "@oort/ui": "*",
     "@oort/web3-connectors": "*",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -14,9 +14,13 @@
     "@types/node": "^16.11.57",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
+    "@types/react-router-dom": "^5.3.3",
+    "antd": "^4.23.5",
+    "craco-less": "^2.0.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "typescript": "^4.8.2",
     "web-vitals": "^2.1.4"
