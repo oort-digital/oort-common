@@ -1,8 +1,7 @@
 import { observer } from 'mobx-react'
 import {Navigate, Route, Routes} from "react-router-dom"
 import { PATH } from './path'
-import { CollectionFilterPage } from './pages/collectionFilterPage'
-import { Web3ConnectorsPage } from './pages/walletConnectPage'
+import { CollectionFilterPage, Web3ConnectorsPage } from './pages'
 
 interface IProps {
 	// rootStore: IRootStore;
