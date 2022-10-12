@@ -18,6 +18,9 @@ export const NavMenu = ({ visible, onClose }: IProps) => {
 <SubMenu key="sub1" title="UI">
   {renderMenuItem('Collection filter', PATH.COLLECTION_FILTER)}
 </SubMenu>
+<SubMenu key="sub2" title="Web3">
+  {renderMenuItem('Web3 Connectors', PATH.WEB3_CONNECTORS)}
+</SubMenu>
 </Menu>
 
   return <Drawer

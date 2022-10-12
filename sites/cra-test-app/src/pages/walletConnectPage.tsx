@@ -1,8 +1,7 @@
 import { WalletConnectConnector } from '@oort/web3-connectors';
 import { logger } from '@oort/logger';
-import { BlockieAddress } from '@oort/ui';
 
-export const CollectionFilterPage = () => {
+export const Web3ConnectorsPage = () => {
 
     try {
         const wc = new WalletConnectConnector(logger, [{
