@@ -3,35 +3,31 @@ import { PopoverFilter } from "../popover"
 import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
-import { IItemSource } from "./itemSource"
-import { useFilterStore } from "./useFilterStore"
+import { ICollectionFilterItem } from "./typesAndInterfaces"
+import { CollectionFilterStore } from "./collectionFilterStore"
 
 interface IProps {
 	title: string
 	popoverTitle: string
-	applied: ItemKeyType[]
 	onChange: (collections: ICollectionFilterItem[]) => void
 	searchable: boolean
 	selectSingle: boolean
 	searchPlaceholder: string
-	cacheKeyPrefixFunc: () => string
-    itemSource: IItemSource
-    recentMaxSize?: number
-    favoriteMaxSize?: number
+    filterStore: CollectionFilterStore
 }
 
-const Impl = ({ title, popoverTitle, onChange, applied, searchable, selectSingle, searchPlaceholder,
-	cacheKeyPrefixFunc, itemSource, favoriteMaxSize, recentMaxSize }: IProps) => {
+const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchPlaceholder, filterStore }: IProps) => {
 
-	const filterStore = useFilterStore({
-		cacheKeyPrefixFunc: cacheKeyPrefixFunc,
-		itemSource: itemSource,
-		favoriteMaxSize: favoriteMaxSize,
-		recentMaxSize: recentMaxSize
-	}, applied)
+	// const filterStore = useFilterStore({
+	// 	cacheKeyPrefixFunc: cacheKeyPrefixFunc,
+	// 	itemSource: itemSource,
+	// 	favoriteMaxSize: favoriteMaxSize,
+	// 	recentMaxSize: recentMaxSize
+	// }, applied)
 
-	const isClear = !applied.length
+	// const isClear = !applied.length
+
+	const isClear = !filterStore.allAppliedItems.length
 
 	const renderSubTitle = () => {
 		if(isClear) {

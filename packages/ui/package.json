@@ -1,6 +1,6 @@
 {
   "name": "@oort/ui",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "scripts": {
     "clean": "rimraf dist",
     "build:types": "tsc",

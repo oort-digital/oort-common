@@ -1,34 +1,29 @@
 import { observer } from "mobx-react"
 import { useEffect } from "react"
 import { CollectionFilterContent } from "./collectionFilterContent"
-import { IItemSource } from "./itemSource"
-import { FilterListenerActionType, ICollectionFilterItem, IFilterListeners, ItemKeyType } from "./typesAndInterfaces"
-import { useFilterStore } from "./useFilterStore"
+import { CollectionFilterStore } from "./collectionFilterStore"
+import { FilterListenerActionType, ICollectionFilterItem, IFilterListeners } from "./typesAndInterfaces"
 
 export interface ICollectionFilterMobileProps {
 	title: string
-	applied: ItemKeyType[]
 	onChange: (collections: ICollectionFilterItem[]) => void
 	searchable: boolean
 	selectSingle: boolean
 	searchPlaceholder: string
-	cacheKeyPrefixFunc: () => string
-    itemSource: IItemSource
 	addFilterEventListeners?: FilterListenerActionType
 	removeFilterEventListeners?: FilterListenerActionType
-    recentMaxSize?: number
-    favoriteMaxSize?: number
+	filterStore: CollectionFilterStore
 }
 
-const Impl = ({ applied, searchable, selectSingle, searchPlaceholder, cacheKeyPrefixFunc, itemSource, favoriteMaxSize, recentMaxSize, 
+const Impl = ({ filterStore, searchable, selectSingle, searchPlaceholder, 
 	addFilterEventListeners, removeFilterEventListeners, onChange }: ICollectionFilterMobileProps) => {
 
-	const filterStore = useFilterStore({
-		cacheKeyPrefixFunc: cacheKeyPrefixFunc,
-		itemSource: itemSource,
-		favoriteMaxSize: favoriteMaxSize,
-		recentMaxSize: recentMaxSize
-	}, applied)
+	// const filterStore = useFilterStore({
+	// 	cacheKeyPrefixFunc: cacheKeyPrefixFunc,
+	// 	itemSource: itemSource,
+	// 	favoriteMaxSize: favoriteMaxSize,
+	// 	recentMaxSize: recentMaxSize
+	// }, applied)
 
 	const onClose = () => {
 		filterStore.clearNotApplied()
