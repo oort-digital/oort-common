@@ -2372,7 +2372,7 @@ const Go = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === je.Desktop ? e : r === je.Phone ? n : t)(), " "]
   });
-}, Qo = Tt(() => import("./connectModalDesktop.ec3992a5.mjs")), Xo = Tt(() => import("./connectModalMobile.3a033597.mjs")), e2 = ({
+}, Qo = Tt(() => import("./connectModalDesktop.ca7f12ed.mjs")), Xo = Tt(() => import("./connectModalMobile.633a825d.mjs")), e2 = ({
   web3: e,
   visible: n,
   onCancel: t,
@@ -3289,7 +3289,7 @@ class u6 {
     return this._itemSource.setTerm(n);
   }
   get allAppliedItems() {
-    const { _appliedSet: n } = this;
+    const n = this._appliedSet;
     if (n) {
       const t = this.items.filter((c) => n.has(c.key)), r = this.favorites.filter((c) => n.has(c.key)), o = this.recent.filter((c) => n.has(c.key)), s = t.concat(r).concat(o);
       return Wt(s, c1);
@@ -3443,44 +3443,45 @@ const f6 = "_async_list_1g1vl_1", d6 = "_load_more_btn_container_1g1vl_1", h6 = 
   children: [/* @__PURE__ */ i(Bt, {}), `${n != null ? n : "No data"}`]
 });
 export {
-  to as $,
+  Xr as $,
   P6 as A,
   r2 as B,
   H as C,
   je as D,
   J1 as E,
   X as F,
-  G2 as G,
-  O6 as H,
+  u6 as G,
+  G2 as H,
   Z as I,
-  s6 as J,
-  kt as K,
+  O6 as J,
+  s6 as K,
   I6 as L,
   S2 as M,
-  Zr as N,
+  kt as N,
   M6 as O,
   K2 as P,
-  zr as Q,
+  Zr as Q,
   Br as R,
   Zo as S,
-  Wr as T,
-  Ur as U,
-  Yr as V,
-  Kr as W,
-  qr as X,
-  Jr as Y,
+  zr as T,
+  Wr as U,
+  Ur as V,
+  Yr as W,
+  Kr as X,
+  qr as Y,
   zt as Z,
-  Xr as _,
+  Jr as _,
   y as a,
-  no as a0,
-  Bt as a1,
-  ao as a2,
-  so as a3,
-  lo as a4,
-  rn as a5,
-  U as a6,
-  j6 as a7,
-  V6 as a8,
+  to as a0,
+  no as a1,
+  Bt as a2,
+  ao as a3,
+  so as a4,
+  lo as a5,
+  rn as a6,
+  U as a7,
+  j6 as a8,
+  V6 as a9,
   T6 as b,
   S6 as c,
   E6 as d,
@@ -3507,4 +3508,4 @@ export {
   $6 as y,
   F6 as z
 };
-//# sourceMappingURL=index.d53f517a.mjs.map
+//# sourceMappingURL=index.bdacfa83.mjs.map

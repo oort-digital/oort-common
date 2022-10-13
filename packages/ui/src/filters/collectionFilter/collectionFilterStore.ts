@@ -84,11 +84,11 @@ export class CollectionFilterStore {
     }
 
     get allAppliedItems() {
-        const { _appliedSet } = this
-        if(_appliedSet) {
-            const appliedItems = this.items.filter(x => _appliedSet.has(x.key))
-            const appliedFavorites = this.favorites.filter(x => _appliedSet.has(x.key))
-            const recent = this.recent.filter(x => _appliedSet.has(x.key))
+        const appliedSet = this._appliedSet
+        if(appliedSet) {
+            const appliedItems = this.items.filter(x => appliedSet.has(x.key))
+            const appliedFavorites = this.favorites.filter(x => appliedSet.has(x.key))
+            const recent = this.recent.filter(x => appliedSet.has(x.key))
             const arr = appliedItems.concat(appliedFavorites).concat(recent)
             return distinct(arr, itemKeyFunc)
         }

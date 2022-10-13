@@ -38,18 +38,29 @@ export class NftsCollectionSource
         }
 
         const nextPageNum = this.curPage + 1
-        const response = await this._oortClient.getSearch({
-            url: SearchGameHubType.searchNFTCollections,
-            keywords: this.term,
-            pageNum: nextPageNum,
-            pageSize: this.pageSize
-        }, signal);
 
-        const page = response.dataList.map<ICollectionFilterItem>(x => ({
-            key: x.id,
-            title: x.name,
-            iconUrl: x.logo,
-        }))
+        let page: ICollectionFilterItem[] = []
+        try {
+            const response = await this._oortClient.getSearch({
+                url: SearchGameHubType.searchNFTCollections,
+                keywords: this.term,
+                pageNum: nextPageNum,
+                pageSize: this.pageSize
+            }, signal);
+    
+            page = response.dataList.map<ICollectionFilterItem>(x => ({
+                key: x.id,
+                title: x.name,
+                iconUrl: x.logo,
+            }))
+        }
+        catch(e: any) {
+            if(e.constructor.name === 'CanceledError') {
+                debugger
+            } 
+            debugger
+        }
+        
 
         if (!signal.aborted) {
             this.addNewPage(page, nextPageNum)
