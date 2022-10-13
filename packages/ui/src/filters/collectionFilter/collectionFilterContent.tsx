@@ -17,8 +17,6 @@ interface IProps {
 
 const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder}: IProps) => {
 
-    const {selected, isLoading, items, favorites, recent, hasLoadMore} = filterStore
-
     const onTermChangeAbortController = useRef<AbortController | undefined>()
     const onTermChange = (term: string) => {
 
@@ -59,10 +57,10 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder}: IProps
 
     const selectedParam: ISelectedParameter = {
         onChange: select,
-        selected: new Set([...selected])
+        selected: new Set([...filterStore.selected])
     }
 
-    const favoritesSet = new Set(favorites.map(x => x.key))
+    const favoritesSet = new Set(filterStore.favorites.map(x => x.key))
     const favoriteParam: ISelectedParameter = {
         onChange: (item: ICollectionFilterItem, isChecked: boolean) => filterStore.setFavorites(item, isChecked),
         selected: favoritesSet
@@ -73,9 +71,9 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder}: IProps
         if (showLoadMore) {
             return <AsyncList
                 className={styles.list}
-                hasLoadMore={hasLoadMore}
+                hasLoadMore={filterStore.hasLoadMore}
                 onLoadMore={() => filterStore.loadNextPage(false, EMPTY_ABORT_SIGNAL)}
-                loading={isLoading}
+                loading={filterStore.isLoading}
                 itemRenderer={collectionItemRenderer(styles.list_item, isMobile, selectedParam, favoriteParam)}
                 items={items}
             />
@@ -84,18 +82,18 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder}: IProps
         return <AsyncList
             className={styles.list}
             hasLoadMore={false}
-            loading={isLoading}
+            loading={filterStore.isLoading}
             itemRenderer={collectionItemRenderer(styles.list_item, isMobile, selectedParam, favoriteParam)}
             items={items}
         />
     }
 
-    const favTabTitle = favorites.length ? `Favorites(${favorites.length})` : 'Favorites'
+    const favTabTitle = filterStore.favorites.length ? `Favorites(${filterStore.favorites.length})` : 'Favorites'
 
     const tabs = [
-        { label: 'All', key: 'all', children: renderList(items, true) },
-        { label: 'Recent', key: 'recent', children: renderList(recent, false) },
-        { label: favTabTitle, key: 'favorites', children: renderList(favorites, false) }
+        { label: 'All', key: 'all', children: renderList(filterStore.items, true) },
+        { label: 'Recent', key: 'recent', children: renderList(filterStore.recent, false) },
+        { label: favTabTitle, key: 'favorites', children: renderList(filterStore.favorites, false) }
       ];
 
     return <div className={styles.content}>

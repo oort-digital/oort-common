@@ -5,15 +5,15 @@ import { ItemKeyType } from './typesAndInterfaces';
 
 export function useFilterStore(params: ICollectionFilterStoreParams, applied: ItemKeyType[]): CollectionFilterStore {
 	
-	const filterStoreRef = useRef<CollectionFilterStore>(new CollectionFilterStore(params))
+	const filterStoreRef = useRef<CollectionFilterStore>()
 
-    // if (!filterStoreRef.current) {
-    //     filterStoreRef.current = new CollectionFilterStore(params)
-    // }
+    if (!filterStoreRef.current) {
+        filterStoreRef.current = new CollectionFilterStore(params)
+    }
 
     useEffect(() => {
-        filterStoreRef.current.setApplied(applied)
+        filterStoreRef.current!.setApplied(applied)
     }, [applied, filterStoreRef.current])
 
-	return filterStoreRef.current
+	return filterStoreRef.current!
 }
