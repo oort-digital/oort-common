@@ -108,13 +108,10 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
 
         //try to find in already loaded items
         if(this.all.length) {
-            loadFromSource = []
             this.all.forEach(it => {
                 if(this._appliedSet!.has(it.key)) {
                     appliedItems.push(it)
-                }
-                else {
-                    loadFromSource.push(it.key)
+                    loadFromSource = loadFromSource.filter(x => x !== it.key)
                 }
             })
         }
@@ -125,7 +122,6 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         }
 
         const loadedFromSourceItems = await this.getAppliedItems(appliedKeys)
-
         runInAction(() => {
             this.appliedItems = [ ...appliedItems, ...loadedFromSourceItems ]
         })

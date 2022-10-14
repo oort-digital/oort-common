@@ -48,7 +48,8 @@ Main.args = {
 
 
 const nftsStore = new NftsCollectionStore()
-nftsStore.setApplied([1, 2])
+// nftsStore.setApplied([1, 2])
+// nftsStore.setApplied([30])
 
 const onChangeNfts = (collections: ICollectionFilterItem[]) => {
   nftsStore.setApplied(collections.map(x => x.key))
