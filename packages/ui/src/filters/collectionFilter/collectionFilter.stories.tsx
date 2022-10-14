@@ -6,9 +6,8 @@ import "../../styles/fonts.css";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { CollectionFilter } from "./collectionFilter";
-import { ItemSourceStub } from "./itemSourceStub";
+import { CollectionFilterStoreStub } from "./CollectionFilterStoreStub";
 import { ICollectionFilterItem } from "./typesAndInterfaces";
-import { CollectionFilterStore } from "./collectionFilterStore";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -26,10 +25,7 @@ export default {
 } as ComponentMeta<typeof CollectionFilter>;
 
 
-const filterStore = new CollectionFilterStore({
-  cacheKeyPrefixFunc: () => 'storybook_collection_filter',
-  itemSource: new ItemSourceStub(),
-})
+const filterStore = new CollectionFilterStoreStub()
 
 filterStore.setApplied([1, 2])
 

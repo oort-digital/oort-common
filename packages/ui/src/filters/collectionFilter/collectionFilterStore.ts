@@ -1,70 +1,52 @@
 import { logger } from "@oort/logger"
-import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { action, makeObservable, observable, runInAction } from "mobx"
 import { LocalStorageCacheProvider } from "../../cache"
 import { distinct } from "../../utils"
 import { ItemQueue } from "./itemQueue"
-import { IItemSource } from "./itemSource"
-import { StoreState } from "./storeState"
 import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
 
+export interface ICollectionFilterStore {
+    term: string
+    favorites: ICollectionFilterItem[]
+    appliedItems: ICollectionFilterItem[]
+    // allAppliedItems: ICollectionFilterItem[]
+    items: ICollectionFilterItem[]
+    recent: ICollectionFilterItem[]
+    selected: ItemKeyType[]
+    hasLoadMore: boolean
+    isLoading: boolean
+    clearNotApplied: () => void
+    copyNotAppliedToRecent: () => void
+    setTerm: (term: string) => void
+    setFavorites: (item: ICollectionFilterItem, checked: boolean) => void
+    loadNextPage: (reset: boolean, signal: AbortSignal) => Promise<void>
+    loadFavoritesFromCache: () => void
+    loadRecentFromCache: () => void
+    select: (key: ItemKeyType, checked: boolean) => void
+    selectSingle: (key: ItemKeyType, checked: boolean) => void
+
+    // getAppliedItems: (appliedKeys: ItemKeyType[]) => Promise<ICollectionFilterItem[]>
+}
+
 export interface ICollectionFilterStoreParams {
-    cacheKeyPrefixFunc: () => string
-    itemSource: IItemSource
+    pageSize?: number
     recentMaxSize?: number
     favoriteMaxSize?: number
+    cacheKeyPrefixFunc: () => string
 }
 
 const itemKeyFunc = (item: ICollectionFilterItem): ItemKeyType => item.key
 
-export class CollectionFilterStore {
+export abstract class CollectionFilterStore implements ICollectionFilterStore {
     
     selected: ItemKeyType[] = []
     favorites: ICollectionFilterItem[] = []
     recent: ICollectionFilterItem[] = []
     appliedItems: ICollectionFilterItem[] = []
-
-    private readonly _itemSource: IItemSource
-    private readonly _cache: LocalStorageCacheProvider
-    private readonly _cacheKeyPrefixFunc: () => string
-    private readonly _favoritesQueue: ItemQueue<ICollectionFilterItem>
-    private readonly _recentQueue: ItemQueue<ICollectionFilterItem>
-
-    constructor({cacheKeyPrefixFunc, itemSource, recentMaxSize = 20, favoriteMaxSize = 20}: ICollectionFilterStoreParams) {
-
-        logger.debug('CollectionFilterStore.constructor')
-        this._itemSource = itemSource
-        this._cache = new LocalStorageCacheProvider()
-        this._cacheKeyPrefixFunc = cacheKeyPrefixFunc
-        this._favoritesQueue = new ItemQueue(itemKeyFunc, favoriteMaxSize, [])
-        this._recentQueue = new ItemQueue(itemKeyFunc, recentMaxSize, [])
-       
-        makeObservable(this, {
-            appliedItems: observable,
-            selected: observable,
-            favorites: observable,
-            recent: observable,
-            isLoading: computed,
-            items: computed,
-            term: computed,
-            select: action,
-            setFavorites: action,
-            clearNotApplied: action,
-            loadFavoritesFromCache: action,
-            loadRecentFromCache: action,
-            copyNotAppliedToRecent: action,
-            setApplied: action,
-            selectSingle: action
-        })
-    }
-
-    private getFavoritesKey = () => `${this._cacheKeyPrefixFunc()}_FAV`
-    private getRecentKey = () => `${this._cacheKeyPrefixFunc()}_RECENT`
-
-    private loadFromCache = (key: string, q: ItemQueue<ICollectionFilterItem>) => {
-        const fromCache = this._cache.getItem<ICollectionFilterItem[]>(key)
-        if(fromCache) { q.enqueue(fromCache) }
-        return q.items
-    }
+    term: string = ''
+    items: ICollectionFilterItem[] = []
+    hasLoadMore: boolean = false
+    isLoading: boolean = false
 
     loadFavoritesFromCache = () => {
         this.favorites = this.loadFromCache(this.getFavoritesKey(), this._favoritesQueue)
@@ -74,13 +56,11 @@ export class CollectionFilterStore {
         this.recent = this.loadFromCache(this.getRecentKey(), this._recentQueue)
     }
 
-    // Use in ant.select. It shouldn't be an action
-    loadNextPage(reset: boolean, signal: AbortSignal): Promise<boolean> {    
-		return this._itemSource.loadNextPage(reset, signal)
-    }
+    abstract loadNextPage(reset: boolean, signal: AbortSignal): Promise<void>
+    protected abstract getAppliedItems(appliedKeys: ItemKeyType[]): Promise<ICollectionFilterItem[]> 
 
     setTerm(term: string): void {
-        return this._itemSource.setTerm(term)
+        this.term = term
     }
 
     get allAppliedItems() {
@@ -95,24 +75,8 @@ export class CollectionFilterStore {
         return []
     }
 
-    get hasLoadMore() {
-        return this._itemSource.hasLoadMore
-    }
-
-    get isLoading() {
-        return this._itemSource.state === StoreState.Pending
-    }
-
-    get term() {
-        return this._itemSource.term
-    }
-
-    get items() {
-        return this._itemSource.items
-    }
-
     setItems(items: ICollectionFilterItem[]): void {
-        this._itemSource.setItems(items);
+        this.items = items
     }
 
     clearNotApplied() {
@@ -136,15 +100,6 @@ export class CollectionFilterStore {
 
         const key = this.getFavoritesKey()
         this._cache.setItem(key, this._favoritesQueue.items)
-    }
-
-    private _appliedSet: Set<ItemKeyType> | undefined
-
-    private get notApplied() {
-        if(this._appliedSet) {
-            return new Set(this.selected.filter(x => !this._appliedSet!.has(x)))
-        }
-        return new Set(this.selected)
     }
 
     async setApplied(appliedKeys: ItemKeyType[]): Promise<void> {
@@ -172,7 +127,7 @@ export class CollectionFilterStore {
             return;
         }
 
-        const loadedFromSourceItems = await this._itemSource.getAppliedItems(appliedKeys)
+        const loadedFromSourceItems = await this.getAppliedItems(appliedKeys)
 
         runInAction(() => {
             this.appliedItems = [ ...appliedItems, ...loadedFromSourceItems ]
@@ -209,4 +164,82 @@ export class CollectionFilterStore {
         this._cache.setItem(key, this._recentQueue.items)
     }
 
+    protected get curPage(): number {
+        return this._curPage
+    }
+
+    protected readonly pageSize: number
+
+    protected addNewPage(page: ICollectionFilterItem[]) {
+        runInAction(() => {
+            if(this._curPage === 1) {
+                this.items = page
+            }
+            else {
+                this.items = this.items.concat(page)
+            }
+            this.isLoading = false
+            this.hasLoadMore = page.length === this.pageSize
+        })
+        this._curPage++
+    }
+
+    protected reset(): void {
+        this._curPage = 0
+        this.items = []
+    }
+
+    constructor({cacheKeyPrefixFunc, recentMaxSize = 20, favoriteMaxSize = 20, pageSize = 20}: ICollectionFilterStoreParams) {
+
+        logger.debug('CollectionFilterStore.constructor')
+        this.pageSize = pageSize
+        this._cache = new LocalStorageCacheProvider()
+        this._cacheKeyPrefixFunc = cacheKeyPrefixFunc
+        this._favoritesQueue = new ItemQueue(itemKeyFunc, favoriteMaxSize, [])
+        this._recentQueue = new ItemQueue(itemKeyFunc, recentMaxSize, [])
+       
+        makeObservable(this, {
+            appliedItems: observable,
+            selected: observable,
+            favorites: observable,
+            recent: observable,
+            isLoading: observable,
+            hasLoadMore: observable,
+            items: observable,
+            term: observable,
+            setItems: action,
+            setTerm: action,
+            select: action,
+            setFavorites: action,
+            clearNotApplied: action,
+            loadFavoritesFromCache: action,
+            loadRecentFromCache: action,
+            copyNotAppliedToRecent: action,
+            setApplied: action,
+            selectSingle: action
+        })
+    }
+
+    private _curPage: number = 0
+    private readonly _cache: LocalStorageCacheProvider
+    private readonly _cacheKeyPrefixFunc: () => string
+    private readonly _favoritesQueue: ItemQueue<ICollectionFilterItem>
+    private readonly _recentQueue: ItemQueue<ICollectionFilterItem>
+    private getFavoritesKey = () => `${this._cacheKeyPrefixFunc()}_FAV`
+    private getRecentKey = () => `${this._cacheKeyPrefixFunc()}_RECENT`
+
+    private loadFromCache = (key: string, q: ItemQueue<ICollectionFilterItem>) => {
+        const fromCache = this._cache.getItem<ICollectionFilterItem[]>(key)
+        if(fromCache) { q.enqueue(fromCache) }
+        return q.items
+    }
+
+    private _appliedSet: Set<ItemKeyType> | undefined
+
+    private get notApplied() {
+        if(this._appliedSet) {
+            return new Set(this.selected.filter(x => !this._appliedSet!.has(x)))
+        }
+        return new Set(this.selected)
+    }
 }

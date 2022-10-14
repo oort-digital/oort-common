@@ -1,33 +1,19 @@
-import { CollectionFilterStore } from "./collectionFilterStore";
-import { IItemSource } from "./itemSource";
-import { StoreState } from "./storeState";
+import { CollectionFilterStore, ICollectionFilterStoreParams } from "./collectionFilterStore";
 import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
 
-
-class ItemSourceStub implements IItemSource {
-    async getAppliedItems(_appliedIds: ItemKeyType[]): Promise<ICollectionFilterItem[]> {
-      //  throw new Error("Method not implemented.");
+class TestCollectionFilterStore extends CollectionFilterStore {
+   
+   loadNextPage(_reset: boolean, _signal: AbortSignal): Promise<void> {
+      return Promise.resolve()
+   }
+   protected async getAppliedItems(_appliedKeys: ItemKeyType[]): Promise<ICollectionFilterItem[]> {
       return []
-    }
-    setItems(_items: ICollectionFilterItem[]): void {
-       //throw new Error("Method not implemented.");
-    }
-    items: ICollectionFilterItem[] = []
-    term: string = ''
-    state: StoreState = StoreState.Done
-    hasLoadMore: boolean = false
+   }
 
-    loadNextPage(_reset: boolean, _signal: AbortSignal): Promise<boolean> {
-        //throw new Error("Method not implemented.");
+   constructor(params: ICollectionFilterStoreParams) {
+      super(params)
+   }
 
-        return Promise.resolve(true)
-    }
-    setTerm(_term: string): void {
-        //throw new Error("Method not implemented.");
-    }
-    clear(): void {
-        //throw new Error("Method not implemented.");
-    }
 }
 
 class ItemStub implements ICollectionFilterItem {
@@ -47,11 +33,10 @@ const one = new ItemStub(1)
 const two = new ItemStub(2)
 const three = new ItemStub(3)
 
-const create = (favoriteMaxSize: number, recentMaxSize: number, itemSource?: ItemSourceStub) => {
+const create = (favoriteMaxSize: number, recentMaxSize: number) => {
 
-    return new CollectionFilterStore({
+    return new TestCollectionFilterStore({
         cacheKeyPrefixFunc: () => '',
-        itemSource: itemSource || new ItemSourceStub(),
         favoriteMaxSize: favoriteMaxSize,
         recentMaxSize: recentMaxSize
     })
@@ -81,11 +66,11 @@ test('must remove old favorite items if max size excided', async () => {
 });
 
  test('must remove old recent items if max size excided', async () => {
-    const itemSource = new ItemSourceStub()
-    itemSource.items.push(one)
-    itemSource.items.push(two)
-    itemSource.items.push(three)
-    const store = create(1, 2, itemSource)
+
+    const store = create(1, 2)
+    store.items.push(one)
+    store.items.push(two)
+    store.items.push(three)
 
     store.select(one.key, true)
     store.select(two.key, true)
@@ -116,9 +101,9 @@ test('must copyNotAppliedToRecent from favorites', async () => {
 });
 
 test('must copyNotAppliedToRecent from items', async () => {
-   const itemSource = new ItemSourceStub()
-   itemSource.items.push(one)
-   const store = create(1, 1, itemSource)
+
+   const store = create(1, 1)
+   store.items.push(one)
 
    store.select(one.key, true)
    store.copyNotAppliedToRecent()
@@ -128,9 +113,9 @@ test('must copyNotAppliedToRecent from items', async () => {
 });
 
 test('must copy not applied to recent without duplicated', async () => {
-   const itemSource = new ItemSourceStub()
-   itemSource.items.push(one)
-   const store = create(1, 3, itemSource)
+
+   const store = create(1, 3)
+   store.items.push(one)
 
    store.select(one.key, true)
 
@@ -183,11 +168,11 @@ test('selected must be empty', async () => {
 });
 
 test('must select allAppliedItems from items recent and favorites', async () => {
-   const itemSource = new ItemSourceStub()
-   const store = create(1, 1, itemSource)
+
+   const store = create(1, 1)
 
    await store.setApplied([one.key, two.key, three.key])
-   itemSource.items.push(one)
+   store.items.push(one)
    store.recent.push(two)
    store.favorites.push(three)
   

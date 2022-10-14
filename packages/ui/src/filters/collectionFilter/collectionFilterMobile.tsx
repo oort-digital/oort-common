@@ -1,7 +1,7 @@
 import { observer } from "mobx-react"
 import { useEffect } from "react"
 import { CollectionFilterContent } from "./collectionFilterContent"
-import { CollectionFilterStore } from "./collectionFilterStore"
+import { ICollectionFilterStore } from "./collectionFilterStore"
 import { FilterListenerActionType, ICollectionFilterItem, IFilterListeners } from "./typesAndInterfaces"
 
 export interface ICollectionFilterMobileProps {
@@ -12,7 +12,7 @@ export interface ICollectionFilterMobileProps {
 	searchPlaceholder: string
 	addFilterEventListeners?: FilterListenerActionType
 	removeFilterEventListeners?: FilterListenerActionType
-	filterStore: CollectionFilterStore
+	filterStore: ICollectionFilterStore
 }
 
 const Impl = ({ filterStore, searchable, selectSingle, searchPlaceholder, 

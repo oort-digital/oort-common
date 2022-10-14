@@ -4,7 +4,7 @@ import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
 import { ICollectionFilterItem } from "./typesAndInterfaces"
-import { CollectionFilterStore } from "./collectionFilterStore"
+import { ICollectionFilterStore } from "./collectionFilterStore"
 
 interface IProps {
 	title: string
@@ -13,7 +13,7 @@ interface IProps {
 	searchable: boolean
 	selectSingle: boolean
 	searchPlaceholder: string
-    filterStore: CollectionFilterStore
+    filterStore: ICollectionFilterStore
 }
 
 const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchPlaceholder, filterStore }: IProps) => {
@@ -27,8 +27,8 @@ const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchP
 
 	// const isClear = !applied.length
 
-	const isClear = !filterStore.allAppliedItems.length
-
+	const isClear = !filterStore.appliedItems.length
+	debugger
 	const renderSubTitle = () => {
 		if(isClear) {
 			return null

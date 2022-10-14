@@ -3,7 +3,7 @@ import "../../styles/theme/light.less";
 import "../../styles/fonts.css";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ItemSourceStub } from "./itemSourceStub";
+import { ItemSourceStub } from "./CollectionFilterStoreStub";
 import { ICollectionFilterItem } from "./typesAndInterfaces";
 import { CollectionFilterMobile, ICollectionFilterMobileProps } from "./collectionFilterMobile";
 import { Row, Col } from "antd";

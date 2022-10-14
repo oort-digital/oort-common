@@ -3,13 +3,13 @@ import {AsyncList, DeviceType, EMPTY_ABORT_SIGNAL, useDeviceType} from "../.."
 import {SearchInput} from "../searchInput"
 import {collectionItemRenderer, ISelectedParameter} from "./collectionFilterItemRenderer"
 import styles from "./collectionFilterContent.module.less"
-import {CollectionFilterStore} from "./collectionFilterStore"
+import { ICollectionFilterStore } from "./collectionFilterStore"
 import {observer} from "mobx-react"
 import {Tabs} from "antd"
 import { ICollectionFilterItem } from "./typesAndInterfaces"
 
 interface IProps {
-    filterStore: CollectionFilterStore
+    filterStore: ICollectionFilterStore
     searchable: boolean,
     selectSingle: boolean,
     searchPlaceholder: string
