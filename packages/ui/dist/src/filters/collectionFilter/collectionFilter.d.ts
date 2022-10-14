@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { ICollectionFilterItem } from "./typesAndInterfaces";
-import { CollectionFilterStore } from "./collectionFilterStore";
+import { ICollectionFilterStore } from "./collectionFilterStore";
 interface IProps {
     title: string;
     popoverTitle: string;
@@ -8,7 +8,7 @@ interface IProps {
     searchable: boolean;
     selectSingle: boolean;
     searchPlaceholder: string;
-    filterStore: CollectionFilterStore;
+    filterStore: ICollectionFilterStore;
 }
 export declare const CollectionFilter: ({ title, popoverTitle, onChange, searchable, selectSingle, searchPlaceholder, filterStore }: IProps) => JSX.Element;
 export {};

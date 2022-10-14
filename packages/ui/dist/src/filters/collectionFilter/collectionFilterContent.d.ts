@@ -1,7 +1,7 @@
 /// <reference types="react" />
-import { CollectionFilterStore } from "./collectionFilterStore";
+import { ICollectionFilterStore } from "./collectionFilterStore";
 interface IProps {
-    filterStore: CollectionFilterStore;
+    filterStore: ICollectionFilterStore;
     searchable: boolean;
     selectSingle: boolean;
     searchPlaceholder: string;

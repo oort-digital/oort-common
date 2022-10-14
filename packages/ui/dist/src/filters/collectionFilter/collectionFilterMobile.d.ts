@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { CollectionFilterStore } from "./collectionFilterStore";
+import { ICollectionFilterStore } from "./collectionFilterStore";
 import { FilterListenerActionType, ICollectionFilterItem } from "./typesAndInterfaces";
 export interface ICollectionFilterMobileProps {
     title: string;
@@ -9,7 +9,7 @@ export interface ICollectionFilterMobileProps {
     searchPlaceholder: string;
     addFilterEventListeners?: FilterListenerActionType;
     removeFilterEventListeners?: FilterListenerActionType;
-    filterStore: CollectionFilterStore;
+    filterStore: ICollectionFilterStore;
 }
 export declare const CollectionFilterMobile: ({ filterStore, searchable, selectSingle, searchPlaceholder, addFilterEventListeners, removeFilterEventListeners, onChange }: ICollectionFilterMobileProps) => JSX.Element;
 //# sourceMappingURL=collectionFilterMobile.d.ts.map
