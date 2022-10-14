@@ -6,7 +6,7 @@ import "../../styles/fonts.css";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { CollectionFilter } from "./collectionFilter";
-import { CollectionFilterStoreStub } from "./collectionFilterStoreStub";
+import { InMemoryStoreStub, NftsCollectionStore } from "./testStores";
 import { ICollectionFilterItem } from "./typesAndInterfaces";
 import React from "react";
 
@@ -26,15 +26,13 @@ export default {
 } as ComponentMeta<typeof CollectionFilter>;
 
 
-const filterStore = new CollectionFilterStoreStub()
-
-filterStore.setApplied([1, 2])
+const inMemoryFilterStore = new InMemoryStoreStub()
+inMemoryFilterStore.setApplied([1, 2])
 
 const Template: ComponentStory<typeof CollectionFilter> = (args) => <CollectionFilter {...args} />
 
-
-const onChange = async (collections: ICollectionFilterItem[]) => {
-  await filterStore.setApplied(collections.map(x => x.key))
+const onChange = (collections: ICollectionFilterItem[]) => {
+  inMemoryFilterStore.setApplied(collections.map(x => x.key))
 }
 
 export const Main = Template.bind({}); 
@@ -42,8 +40,27 @@ Main.args = {
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
   searchPlaceholder: 'Enter text',
-	filterStore: filterStore,
+	filterStore: inMemoryFilterStore,
 	onChange: onChange,
+	searchable: true,
+	selectSingle: false
+}
+
+
+const nftsStore = new NftsCollectionStore()
+nftsStore.setApplied([1, 2])
+
+const onChangeNfts = (collections: ICollectionFilterItem[]) => {
+  nftsStore.setApplied(collections.map(x => x.key))
+}
+
+export const Nfts = Template.bind({}); 
+Nfts.args = {
+	title: 'Title',
+	popoverTitle: 'PopoverTitle',
+  searchPlaceholder: 'Enter text',
+	filterStore: nftsStore,
+	onChange: onChangeNfts,
 	searchable: true,
 	selectSingle: false
 }

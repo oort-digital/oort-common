@@ -1,8 +1,8 @@
 import { runInAction } from 'mobx'
-import { addressToDataURL } from '../../blockieAddress';
-import { delayAsync } from '../../utils';
-import { CollectionFilterStore } from './collectionFilterStore';
-import { ICollectionFilterItem, ItemKeyType } from './typesAndInterfaces';
+import { addressToDataURL } from '../../../blockieAddress';
+import { delayAsync } from '../../../utils';
+import { CollectionFilterStore } from '../collectionFilterStore';
+import { ICollectionFilterItem, ItemKeyType } from '../typesAndInterfaces';
 
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const nameLen = 5;
@@ -44,7 +44,7 @@ class Source {
 
 }
 
-export class CollectionFilterStoreStub extends CollectionFilterStore {
+export class InMemoryStoreStub extends CollectionFilterStore {
     
     async loadNextPage(_reset: boolean, _signal: AbortSignal): Promise<void> {
 

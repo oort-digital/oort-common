@@ -3,11 +3,12 @@ import "../../styles/theme/light.less";
 import "../../styles/fonts.css";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ItemSourceStub } from "./CollectionFilterStoreStub";
 import { ICollectionFilterItem } from "./typesAndInterfaces";
 import { CollectionFilterMobile, ICollectionFilterMobileProps } from "./collectionFilterMobile";
 import { Row, Col } from "antd";
 import { useFilterListeners } from "./useFilterListeners";
+import React from "react";
+import { InMemoryStoreStub } from "./testStores";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -15,13 +16,6 @@ export default {
   component: CollectionFilterMobile,
 
 } as ComponentMeta<typeof CollectionFilterMobile>;
-
-
-const onChange = (collections: ICollectionFilterItem[]) => {
-  debugger
-  collections.forEach(x => console.log(`collectionMobile.onChange: ${JSON.stringify(x)}`))
-}
-
 
 const Template: ComponentStory<typeof CollectionFilterMobile> = (args: ICollectionFilterMobileProps) => {
 
@@ -43,13 +37,19 @@ const Template: ComponentStory<typeof CollectionFilterMobile> = (args: ICollecti
   </>
 }
 
+const inMemoryFilterStore = new InMemoryStoreStub()
+inMemoryFilterStore.setApplied([1, 2])
+
+const onChange = (collections: ICollectionFilterItem[]) => {
+  inMemoryFilterStore.setApplied(collections.map(x => x.key))
+}
+
 export const Main = Template.bind({});
 Main.args = {
   title: 'Title',
   searchPlaceholder: 'Enter text',
-  applied: [1, 2],
   cacheKeyPrefixFunc: () => 'storybook_collection_filter',
-  itemSource: new ItemSourceStub(),
+  filterStore: inMemoryFilterStore,
   onChange: onChange,
   searchable: true,
   selectSingle: false,
