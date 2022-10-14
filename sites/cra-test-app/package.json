@@ -5,7 +5,7 @@
   "dependencies": {
     "@craco/craco": "^6.4.5",
     "@oort/logger": "*",
-    "@oort/ui": "0.0.9",
+    "@oort/ui": "0.1.7",
     "@oort/web3-connectors": "*",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
