@@ -1,7 +1,9 @@
 import {runInAction} from "mobx"
-import { EMPTY_ABORT_SIGNAL, ICollectionFilterItem, ItemKeyType } from "@oort/ui"
 import { OortClient } from "./oortClient";
 import { CollectionFilterStore } from "../collectionFilterStore";
+import { ICollectionFilterItem, ItemKeyType } from "../typesAndInterfaces";
+import { EMPTY_ABORT_SIGNAL } from "../../../utils";
+import { SearchGameHubType } from "./typesAndInterfaces";
 
 export class NftsCollectionStore extends CollectionFilterStore {
 
@@ -19,7 +21,7 @@ export class NftsCollectionStore extends CollectionFilterStore {
         let page: ICollectionFilterItem[] = []
         try {
             const response = await this._oortClient.getSearch({
-                url: 'search-nft-collections',
+                url: SearchGameHubType.searchNFTCollections,
                 keywords: this.term,
                 pageNum: nextPageNum,
                 pageSize: this.pageSize
