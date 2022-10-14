@@ -1,17 +1,22 @@
 import { logger } from "@oort/logger"
 import { action, makeObservable, observable, runInAction } from "mobx"
 import { LocalStorageCacheProvider } from "../../cache"
-import { distinct } from "../../utils"
+// import { distinct } from "../../utils"
 import { ItemQueue } from "./itemQueue"
 import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
 
 export interface ICollectionFilterStore {
-    term: string
+
+    //tabs items
+    all: ICollectionFilterItem[]
+    recent: ICollectionFilterItem[]
     favorites: ICollectionFilterItem[]
+
+    term: string
+    
     appliedItems: ICollectionFilterItem[]
     // allAppliedItems: ICollectionFilterItem[]
-    items: ICollectionFilterItem[]
-    recent: ICollectionFilterItem[]
+
     selected: ItemKeyType[]
     hasLoadMore: boolean
     isLoading: boolean
@@ -39,12 +44,16 @@ const itemKeyFunc = (item: ICollectionFilterItem): ItemKeyType => item.key
 
 export abstract class CollectionFilterStore implements ICollectionFilterStore {
     
-    selected: ItemKeyType[] = []
+    //tabs items
     favorites: ICollectionFilterItem[] = []
     recent: ICollectionFilterItem[] = []
+    all: ICollectionFilterItem[] = []
+
+    selected: ItemKeyType[] = []
+   
     appliedItems: ICollectionFilterItem[] = []
     term: string = ''
-    items: ICollectionFilterItem[] = []
+    
     hasLoadMore: boolean = false
     isLoading: boolean = false
 
@@ -63,20 +72,8 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         this.term = term
     }
 
-    get allAppliedItems() {
-        const appliedSet = this._appliedSet
-        if(appliedSet) {
-            const appliedItems = this.items.filter(x => appliedSet.has(x.key))
-            const appliedFavorites = this.favorites.filter(x => appliedSet.has(x.key))
-            const recent = this.recent.filter(x => appliedSet.has(x.key))
-            const arr = appliedItems.concat(appliedFavorites).concat(recent)
-            return distinct(arr, itemKeyFunc)
-        }
-        return []
-    }
-
     setItems(items: ICollectionFilterItem[]): void {
-        this.items = items
+        this.all = items
     }
 
     clearNotApplied() {
@@ -110,9 +107,9 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         const appliedItems: ICollectionFilterItem[] = []
 
         //try to find in already loaded items
-        if(this.items.length) {
+        if(this.all.length) {
             loadFromSource = []
-            this.items.forEach(it => {
+            this.all.forEach(it => {
                 if(this._appliedSet!.has(it.key)) {
                     appliedItems.push(it)
                 }
@@ -154,7 +151,7 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
 
     copyNotAppliedToRecent(): void {
         if(this.selected.length) {
-            const notAppliedItems = this.items.filter(x => this.notApplied.has(x.key))
+            const notAppliedItems = this.all.filter(x => this.notApplied.has(x.key))
             const notAppliedfavorites = this.favorites.filter(x => this.notApplied.has(x.key))
             this._recentQueue.enqueue(notAppliedItems.concat(notAppliedfavorites), true)
             this.recent = this._recentQueue.items
@@ -172,12 +169,7 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
 
     protected addNewPage(page: ICollectionFilterItem[]) {
         runInAction(() => {
-            if(this._curPage === 1) {
-                this.items = page
-            }
-            else {
-                this.items = this.items.concat(page)
-            }
+            this.all = this.all.concat(page)
             this.isLoading = false
             this.hasLoadMore = page.length === this.pageSize
         })
@@ -186,7 +178,7 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
 
     protected reset(): void {
         this._curPage = 0
-        this.items = []
+        this.all = []
     }
 
     constructor({cacheKeyPrefixFunc, recentMaxSize = 20, favoriteMaxSize = 20, pageSize = 20}: ICollectionFilterStoreParams) {
@@ -205,7 +197,7 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
             recent: observable,
             isLoading: observable,
             hasLoadMore: observable,
-            items: observable,
+            all: observable,
             term: observable,
             setItems: action,
             setTerm: action,

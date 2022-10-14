@@ -6,8 +6,9 @@ import "../../styles/fonts.css";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { CollectionFilter } from "./collectionFilter";
-import { CollectionFilterStoreStub } from "./CollectionFilterStoreStub";
+import { CollectionFilterStoreStub } from "./collectionFilterStoreStub";
 import { ICollectionFilterItem } from "./typesAndInterfaces";
+import React from "react";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -32,7 +33,9 @@ filterStore.setApplied([1, 2])
 const Template: ComponentStory<typeof CollectionFilter> = (args) => <CollectionFilter {...args} />
 
 
-const onChange = (collections: ICollectionFilterItem[]) => {}
+const onChange = async (collections: ICollectionFilterItem[]) => {
+  await filterStore.setApplied(collections.map(x => x.key))
+}
 
 export const Main = Template.bind({}); 
 Main.args = {
@@ -43,4 +46,4 @@ Main.args = {
 	onChange: onChange,
 	searchable: true,
 	selectSingle: false
-};
+}

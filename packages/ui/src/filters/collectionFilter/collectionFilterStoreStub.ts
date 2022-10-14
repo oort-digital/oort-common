@@ -47,8 +47,11 @@ class Source {
 export class CollectionFilterStoreStub extends CollectionFilterStore {
     
     async loadNextPage(_reset: boolean, _signal: AbortSignal): Promise<void> {
-        this.isLoading = true
 
+        runInAction(() => {
+            this.isLoading = true
+        })
+        
         await delayAsync(this._delay)
 
         const page = this._source.featch({
@@ -74,7 +77,7 @@ export class CollectionFilterStoreStub extends CollectionFilterStore {
     private _delay = 1000
      
     private get offset() {
-        return (this.curPage - 1) * this.pageSize
+        return this.curPage * this.pageSize
     }
 
 }

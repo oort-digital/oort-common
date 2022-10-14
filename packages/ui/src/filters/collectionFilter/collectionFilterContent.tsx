@@ -91,7 +91,7 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder}: IProps
     const favTabTitle = filterStore.favorites.length ? `Favorites(${filterStore.favorites.length})` : 'Favorites'
 
     const tabs = [
-        { label: 'All', key: 'all', children: renderList(filterStore.items, true) },
+        { label: 'All', key: 'all', children: renderList(filterStore.all, true) },
         { label: 'Recent', key: 'recent', children: renderList(filterStore.recent, false) },
         { label: favTabTitle, key: 'favorites', children: renderList(filterStore.favorites, false) }
       ];

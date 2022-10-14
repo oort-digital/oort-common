@@ -68,9 +68,9 @@ test('must remove old favorite items if max size excided', async () => {
  test('must remove old recent items if max size excided', async () => {
 
     const store = create(1, 2)
-    store.items.push(one)
-    store.items.push(two)
-    store.items.push(three)
+    store.all.push(one)
+    store.all.push(two)
+    store.all.push(three)
 
     store.select(one.key, true)
     store.select(two.key, true)
@@ -103,7 +103,7 @@ test('must copyNotAppliedToRecent from favorites', async () => {
 test('must copyNotAppliedToRecent from items', async () => {
 
    const store = create(1, 1)
-   store.items.push(one)
+   store.all.push(one)
 
    store.select(one.key, true)
    store.copyNotAppliedToRecent()
@@ -115,7 +115,7 @@ test('must copyNotAppliedToRecent from items', async () => {
 test('must copy not applied to recent without duplicated', async () => {
 
    const store = create(1, 3)
-   store.items.push(one)
+   store.all.push(one)
 
    store.select(one.key, true)
 
@@ -172,12 +172,17 @@ test('must select allAppliedItems from items recent and favorites', async () => 
    const store = create(1, 1)
 
    await store.setApplied([one.key, two.key, three.key])
-   store.items.push(one)
+   store.all.push(one)
    store.recent.push(two)
    store.favorites.push(three)
-  
+
+/*
    expect(store.allAppliedItems.length).toEqual(3)
    const allAppliedItemAddresses = store.allAppliedItems.map(x => x.key)
+*/
+   expect(store.appliedItems.length).toEqual(3)
+   const allAppliedItemAddresses = store.appliedItems.map(x => x.key)
+
    expect(allAppliedItemAddresses).toContain(one.key)
    expect(allAppliedItemAddresses).toContain(two.key)
    expect(allAppliedItemAddresses).toContain(three.key)

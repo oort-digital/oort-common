@@ -18,17 +18,7 @@ interface IProps {
 
 const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchPlaceholder, filterStore }: IProps) => {
 
-	// const filterStore = useFilterStore({
-	// 	cacheKeyPrefixFunc: cacheKeyPrefixFunc,
-	// 	itemSource: itemSource,
-	// 	favoriteMaxSize: favoriteMaxSize,
-	// 	recentMaxSize: recentMaxSize
-	// }, applied)
-
-	// const isClear = !applied.length
-
 	const isClear = !filterStore.appliedItems.length
-	debugger
 	const renderSubTitle = () => {
 		if(isClear) {
 			return null
@@ -39,7 +29,7 @@ const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchP
 
 	const onSubmit = () => {
 		filterStore.copyNotAppliedToRecent()
-		const selectedItems = filterStore.items.filter(x => filterStore.selected.some(s => s === x.key))
+		const selectedItems = filterStore.all.filter(x => filterStore.selected.some(s => s === x.key))
 		onChange(selectedItems)
 		filterStore.clearNotApplied()
 	}
