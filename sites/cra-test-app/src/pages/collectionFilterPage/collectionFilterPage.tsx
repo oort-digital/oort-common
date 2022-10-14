@@ -1,4 +1,5 @@
 import { CollectionFilter, ICollectionFilterItem } from "@oort/ui"
+import { Col, Row } from "antd"
 import { observer } from "mobx-react"
 import { useEffect, useState } from "react"
 import { NftsCollectionStore } from "./testStores"
@@ -17,15 +18,30 @@ const Impl = () => {
         filterStore.setApplied(applied)
     }, [applied])
 
-    return <CollectionFilter
-        title={'Title'}
-        popoverTitle={'PopoverTitle'}
-        searchPlaceholder={'Enter text'}
-        filterStore={filterStore}
-        onChange={onChange}
-        searchable={true}
-        selectSingle={false}
-    />
+    return <Row>
+        <Col span={12}>
+            <CollectionFilter
+                title={'Title'}
+                popoverTitle={'PopoverTitle'}
+                searchPlaceholder={'Enter text'}
+                filterStore={filterStore}
+                onChange={onChange}
+                searchable={true}
+                selectSingle={false}
+            />
+        </Col>
+        <Col span={12}>
+            <div>
+                isLoading: {`${filterStore.isLoading}`}
+            </div>
+            <div>
+                <div>applied:</div>
+                {JSON.stringify(applied)}
+            </div>
+        </Col>
+    </Row>
+    
+
 
 }
 

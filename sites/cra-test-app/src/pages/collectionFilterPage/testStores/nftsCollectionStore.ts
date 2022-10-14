@@ -18,7 +18,7 @@ export class NftsCollectionStore extends CollectionFilterStore {
         const nextPageNum = this.curPage + 1
 
         let page: ICollectionFilterItem[] = []
-        try {
+        // try {
             const response = await this._oortClient.getSearch({
                 url: SearchGameHubType.searchNFTCollections,
                 keywords: this.term,
@@ -31,13 +31,13 @@ export class NftsCollectionStore extends CollectionFilterStore {
                 title: x.name,
                 iconUrl: x.logo,
             }))
-        }
-        catch(e: any) {
-            if(e.constructor.name === 'CanceledError') {
-                debugger
-            } 
-            debugger
-        }
+        // }
+        // catch(e: any) {
+        //     if(e.constructor.name === 'CanceledError') {
+        //         debugger
+        //     } 
+        //     debugger
+        // }
         
 
         this.addNewPage(page)

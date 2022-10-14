@@ -4,6 +4,8 @@ import { action, makeObservable, observable, runInAction } from "mobx"
 
 const itemKeyFunc = (item: ICollectionFilterItem): ItemKeyType => item.key
 
+// copy original CollectionFilterStore to easy debug here
+// from /packages/ui/src/filters/collectionFilter
 export abstract class CollectionFilterStoreForDebug implements ICollectionFilterStore {
     
     //tabs items

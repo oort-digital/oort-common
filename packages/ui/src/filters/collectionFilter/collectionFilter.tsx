@@ -23,9 +23,6 @@ const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchP
 		if(isClear) {
 			return null
 		}
-
-		console.log(`applied items ${filterStore.appliedItems}`)
-
 		return <SubTitle names={filterStore.appliedItems.map(x => x.title)} />
 	}
 
