@@ -7,6 +7,7 @@ import { ThemeSwitch } from './themeSwitch';
 import { ConnectModal, IWeb3 } from '../connectModal';
 import { BlockieAddress } from '../blockieAddress';
 import { useTheme } from '../effects';
+import { isChainEmpty } from '../typesAndInterfaces';
 
 const TWITTER = "https://twitter.com/OortDigital";
 const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
@@ -42,6 +43,10 @@ export const FooterMenu = ({ className, web3 }: IProps) => {
         if(!web3) { return null }
 
         const { account, chain } = web3
+
+        if(isChainEmpty(chain)) { return null }
+        
+
         const { chainId, name } = chain
         const chainIcon = <span className={styles.icon_before}>{getChainIcon(chainId, 20, 20)}</span>
         const accountImg = <BlockieAddress address={account} className={styles.account_img}/>
