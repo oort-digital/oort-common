@@ -1,11 +1,9 @@
 import { useState as S } from "react";
-import { Row as I, Col as u } from "antd";
-import { a as k, C as p, b as D, M as F, W as L } from "./index.es.53c87f8b.mjs";
-import { j as n, b as E, a as r, F as i } from "./index.114bbab4.mjs";
+import { Row as I, Col as m } from "antd";
+import { a as k, C as p, b as D, M as F, W as L } from "./index.es.0b5b1396.mjs";
+import { j as n, b as E, a as r, F as i } from "./index.518514f1.mjs";
 import "ethers";
 import "react-router-dom";
-import "mobx-react";
-import "mobx";
 var G = /* @__PURE__ */ ((e) => (e[e.WALLET_METAMASK = 0] = "WALLET_METAMASK", e[e.WALLET_CONNECT = 1] = "WALLET_CONNECT", e))(G || {});
 const K = (e, l, o) => e ? o.some((c) => c.name === l.name) ? /* @__PURE__ */ r(i, {
   children: ["You are currently using ", /* @__PURE__ */ n("span", {
@@ -21,7 +19,7 @@ const K = (e, l, o) => e ? o.some((c) => c.name === l.name) ? /* @__PURE__ */ r(
       children: o.map((c) => c.name).join(", ")
     })]
   })]
-}) : null, X = ({
+}) : null, Q = ({
   web3: e,
   visible: l,
   onCancel: o,
@@ -60,31 +58,31 @@ const K = (e, l, o) => e ? o.some((c) => c.name === l.name) ? /* @__PURE__ */ r(
       href: "https://oort.digital/terms#disclaimer",
       children: "Oort Digital protocol disclaimer"
     })]
-  }), g = (t, a, m) => {
+  }), g = (t, a, u) => {
     if (h && a === N)
       return /* @__PURE__ */ n(p, {
         disabled: !0,
         walletName: t,
-        walletIcon: m,
+        walletIcon: u,
         account: h
       });
     const y = j[a];
     return y.isInstalled ? /* @__PURE__ */ n(p, {
       walletName: t,
       onClick: () => O(a),
-      walletIcon: m,
+      walletIcon: u,
       labelText: "Connect"
     }) : /* @__PURE__ */ n(p, {
       walletName: t,
       onClick: () => window.open(y.installUrl, "_blank").focus(),
-      walletIcon: m,
+      walletIcon: u,
       labelText: "Install"
     });
   }, x = (t) => {
     const {
       chainId: a
     } = t;
-    return /* @__PURE__ */ n(u, {
+    return /* @__PURE__ */ n(m, {
       span: "24",
       children: /* @__PURE__ */ n(D, {
         onClick: () => T(a),
@@ -122,10 +120,10 @@ const K = (e, l, o) => e ? o.some((c) => c.name === l.name) ? /* @__PURE__ */ r(
         }), " and jump into the world of NFT's"]
       }), /* @__PURE__ */ r(I, {
         gutter: b,
-        children: [window.ethereum && /* @__PURE__ */ n(u, {
+        children: [window.ethereum && /* @__PURE__ */ n(m, {
           span: "24",
           children: g("Metamask", k.Injected, F)
-        }), /* @__PURE__ */ n(u, {
+        }), /* @__PURE__ */ n(m, {
           span: "24",
           children: g("WalletConnect", k.WalletConnect, L)
         })]
@@ -135,6 +133,6 @@ const K = (e, l, o) => e ? o.some((c) => c.name === l.name) ? /* @__PURE__ */ r(
 };
 export {
   G as WALLETTYPE,
-  X as default
+  Q as default
 };
-//# sourceMappingURL=connectModalMobile.d5fbaee2.mjs.map
+//# sourceMappingURL=connectModalMobile.fde76b6f.mjs.map
