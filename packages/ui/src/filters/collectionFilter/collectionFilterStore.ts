@@ -161,18 +161,24 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         return this._curPage
     }
 
+    protected get nextPageCursor(): string | undefined {
+        return this._nextPageCursor
+    }
+
     protected readonly pageSize: number
 
-    protected addNewPage(page: ICollectionFilterItem[]) {
+    protected addNewPage(page: ICollectionFilterItem[], nextPageCursor?: string) {
         runInAction(() => {
             this.all = this.all.concat(page)
             this.isLoading = false
             this.hasLoadMore = page.length === this.pageSize
         })
+        this._nextPageCursor = nextPageCursor
         this._curPage++
     }
 
     protected reset(): void {
+        this._nextPageCursor = undefined
         this._curPage = 0
         this.all = []
     }
@@ -208,6 +214,7 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         })
     }
 
+    private _nextPageCursor: string | undefined
     private _curPage: number = 0
     private readonly _cache: LocalStorageCacheProvider
     private readonly _cacheKeyPrefixFunc: () => string
