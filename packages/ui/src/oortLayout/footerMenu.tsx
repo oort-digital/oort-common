@@ -46,7 +46,6 @@ export const FooterMenu = ({ className, web3 }: IProps) => {
 
         if(isChainEmpty(chain)) { return null }
         
-
         const { chainId, name } = chain
         const chainIcon = <span className={styles.icon_before}>{getChainIcon(chainId, 20, 20)}</span>
         const accountImg = <BlockieAddress address={account} className={styles.account_img}/>
