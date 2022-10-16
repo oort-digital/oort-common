@@ -46,10 +46,12 @@ export declare abstract class CollectionFilterStore implements ICollectionFilter
     selectSingle(key: ItemKeyType, checked: boolean): void;
     copyNotAppliedToRecent(): void;
     protected get curPage(): number;
+    protected get nextPageCursor(): string | undefined;
     protected readonly pageSize: number;
-    protected addNewPage(page: ICollectionFilterItem[]): void;
+    protected addNewPage(page: ICollectionFilterItem[], nextPageCursor?: string): void;
     protected reset(): void;
     constructor({ cacheKeyPrefixFunc, recentMaxSize, favoriteMaxSize, pageSize }: ICollectionFilterStoreParams);
+    private _nextPageCursor;
     private _curPage;
     private readonly _cache;
     private readonly _cacheKeyPrefixFunc;
