@@ -1,25 +1,25 @@
 import { ReactNode, useState } from "react"
 import { Drawer } from "antd"
 import { CloseCircleIcon } from "../../icons"
-import "./sideMenu.less"
+import styles from "./sider.module.less"
 import { BurgerMenuIcon } from "./burgerMenuIcon"
 
 interface IProps {
     children: ReactNode
 }
 
-export const SideMenu = ({ children }: IProps) => {
+export const Sider = ({ children }: IProps) => {
 
     const [ isMenuVisible, setMenuVisible ] = useState(false)
 
     const RenderDrawer = () => {
         return <Drawer
             title="Menu"
-            className='top-header-menu'
+            className={styles.top_header_menu}
             closeIcon={<CloseCircleIcon />}
             placement='left'
             onClose={() => setMenuVisible(false)}
-            visible={isMenuVisible}
+            open={isMenuVisible}
           >
              {children}
           </Drawer>
@@ -27,6 +27,6 @@ export const SideMenu = ({ children }: IProps) => {
 
     return <>
         {RenderDrawer()}
-        <div onClick={() => setMenuVisible(true)}><BurgerMenuIcon className='burger-icon'/></div>
+        <div onClick={() => setMenuVisible(true)}><BurgerMenuIcon className={styles.burger_icon}/></div>
     </>
 }

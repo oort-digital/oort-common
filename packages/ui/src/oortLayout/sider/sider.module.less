@@ -1,24 +1,24 @@
 @import "../../styles/theme/vars.less";
 @import "../../styles/typography.less";
 
-.top-header-menu {
-    .ant-drawer-content-wrapper {
+.top_header_menu {
+    :global(.ant-drawer-content-wrapper) {
       width: 95% !important;
       max-width: 400px;
-      .ant-drawer-content {
+      :global(.ant-drawer-content) {
         background-color: @theme-bg-2;
-        .ant-drawer-header {
+        :global(.ant-drawer-header) {
           background-color: @theme-bg-2;
           border-bottom: none;
-          .ant-drawer-header-title {
+          :global(.ant-drawer-header-title) {
             
             justify-content: end;
-            .ant-drawer-title {
+            :global(.ant-drawer-title) {
               color: @theme-color-10;
               .h3-semibold-mixin();
             }
         
-            .ant-drawer-close {
+            :global(.ant-drawer-close) {
               margin: 0;
               padding: 0;
               color: @theme-color-10;
@@ -28,11 +28,11 @@
           }
         }
   
-        .ant-drawer-body {
+        :global(.ant-drawer-body) {
           padding-left: 0;
           padding-right: 0;
           padding-bottom: 0;
-  
+  /*
           .menu-footer {
             padding: 22px 0;
             background-color: @theme-color-3;
@@ -52,13 +52,14 @@
               }
             }
           }
+          */
         }
   
       }
     }
 }
 
-.burger-icon {
+.burger_icon {
   padding-right: 16px;
   cursor: pointer;
   display: flex;
