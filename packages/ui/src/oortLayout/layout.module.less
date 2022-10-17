@@ -1,47 +1,11 @@
 
-@import "../styles/theme/vars.less";
+@import "./aside/oortAside.module.less";
 
 .root {
     display: flex;
     flex-direction: row;
     background: @theme-color-2;
     height: 100vh;
-}
-
-@aside-width: 230px;
-
-.root > aside { 
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    height: 100vh;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    bottom: 0px;
-    flex: 0 0 @aside-width;
-    max-width: @aside-width;
-    min-width: @aside-width;
-    width: @aside-width;
-
-    & > .nav_menu {
-        margin-top: 70px;
-        margin-bottom: 70px;
-    }
-
-    & > .footer {
-        height: 100%;
-        flex-direction: column;
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    & > .logo {
-        margin-top: 34px;
-        margin-left: 24px;
-        display: flex;
-        color: @theme-color-8;
-    }
 }
 
 .root > .content {

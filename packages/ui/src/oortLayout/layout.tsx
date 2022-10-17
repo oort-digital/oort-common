@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { IWeb3 } from "../connectModal";
+import { OortAside } from "./aside";
 import { FooterMenu } from "./footerMenu";
 import styles from './layout.module.less';
 import { LogoLink } from "./logoLink";
@@ -16,11 +17,7 @@ interface IProps {
 export const Layout = ({ navItems, children, web3, isActiveFunc }: IProps) => {
 
     return <div className={styles.root}>
-        <aside>
-            <LogoLink className={styles.logo} />
-            <NavMenu className={styles.nav_menu} isActiveFunc={isActiveFunc} navItems={navItems}/>
-            <FooterMenu className={styles.footer} web3={web3} />
-        </aside>
+        <OortAside navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
         
         <div className={styles.content}>
             {children}
