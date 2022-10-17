@@ -19,7 +19,7 @@ export const LayoutMobile = ({ navItems, children, web3, isActiveFunc }: IProps)
         
         <div className={styles.top_header}>
             <Sider>
-                <OortAside navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
+                <OortAside showLogo={false} navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
             </Sider>
         </div>
        
