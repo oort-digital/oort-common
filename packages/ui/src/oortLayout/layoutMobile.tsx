@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { IWeb3 } from "../connectModal";
 import { AsideMobile } from "./aside";
 import styles from './layoutMobile.module.less';
-import { LogoLink, LogoLinkDesktop } from "./logoLink/logoLinkDesktop";
+import { LogoLink, LogoLinkDesktop } from "./logoLink/logoLink";
 import { INavItems } from "./navMenu";
 import { Sider } from "./sider";
 
@@ -22,7 +22,7 @@ export const LayoutMobile = ({ navItems, children, web3, isActiveFunc }: IProps)
             <Sider>
                 <AsideMobile navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
             </Sider>
-            <LogoLinkDesktop />
+            <LogoLink />
         </div>
        
         <div className={styles.content}>

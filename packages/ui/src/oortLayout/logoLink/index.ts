@@ -1,2 +1,1 @@
-export {LogoLinkDesktop} from "./logoLinkDesktop"
-export {LogoLinkMobile} from "./logoLinkMobile"
+export {LogoLink} from "./logoLink"
