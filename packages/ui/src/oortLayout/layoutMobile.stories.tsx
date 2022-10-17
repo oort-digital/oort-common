@@ -107,7 +107,7 @@ const web3 = {
 }
 
 const style = { 
-  // background: 'red'
+  background: 'red'
 }
 const content = <div style={style}>
   <TestCarousel />

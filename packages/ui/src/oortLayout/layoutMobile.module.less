@@ -1,0 +1,21 @@
+
+@import "../styles/theme/vars.less";
+@top-header-h: 40px;
+
+.root {
+    display: flex;
+    flex-direction: column;
+}
+
+@aside-width: 230px;
+
+.root > .top_header {
+    height: @top-header-h;
+    background-color: @theme-color-4;
+    display: flex;
+    align-items: center;
+}
+
+.root > .content {
+    background: @theme-color-3;
+}

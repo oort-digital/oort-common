@@ -1,10 +1,8 @@
 import { ReactNode } from "react";
 import { IWeb3 } from "../connectModal";
 import { OortAside } from "./aside";
-import { FooterMenu } from "./footerMenu";
 import styles from './layout.module.less';
-import { LogoLink } from "./logoLink";
-import { INavItems, NavMenu } from "./navMenu";
+import { INavItems } from "./navMenu";
 
 interface IProps {
     children: ReactNode
