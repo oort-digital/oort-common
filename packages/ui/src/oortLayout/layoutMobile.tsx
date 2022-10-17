@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { IWeb3 } from "../connectModal";
-import { OortAside } from "./aside";
+import { AsideMobile } from "./aside";
 import styles from './layoutMobile.module.less';
 import { INavItems } from "./navMenu";
 import { Sider } from "./sider";
@@ -19,7 +19,7 @@ export const LayoutMobile = ({ navItems, children, web3, isActiveFunc }: IProps)
         
         <div className={styles.top_header}>
             <Sider>
-                <OortAside showLogo={false} navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
+                <AsideMobile navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
             </Sider>
         </div>
        
