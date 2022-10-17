@@ -1,5 +1,3 @@
-
-import React from "react";
 import "../styles/antOverride.less";
 import "../styles/fonts.css";
 
@@ -14,15 +12,15 @@ import { lazy } from "react";
 import { useTheme } from "../effects";
 import { TestCarousel } from "./testCarousel";
 import { ZERO_ADDR } from "../utils";
-import LayoutMobile from "./layoutMobile";
+import { Layout } from ".";
 
 const DarkTheme = lazy(() => import("../styles/theme/darkTheme"));
 const LightTheme = lazy(() => import("../styles/theme/lightTheme"));
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'oort/layout/mobile',
-  component: LayoutMobile,
+  title: 'oort/layout',
+  component: Layout,
 
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
@@ -32,17 +30,17 @@ export default {
   argTypes: {
     //backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof LayoutMobile>;
+} as ComponentMeta<typeof Layout>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof LayoutMobile> = (args) => {
+const Template: ComponentStory<typeof Layout> = (args) => {
 
   const [isDark] = useTheme()
 
   return <>
     { isDark ? <DarkTheme /> : <LightTheme /> }
     <Router>
-      <LayoutMobile {...args} />
+      <Layout {...args} />
     </Router>
     
   </>
@@ -107,7 +105,7 @@ const web3 = {
 }
 
 const style = { 
-  background: 'red'
+  // background: 'red'
 }
 const content = <div style={style}>
   <TestCarousel />

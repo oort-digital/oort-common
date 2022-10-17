@@ -7,7 +7,7 @@ import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
 import { logger } from "@oort/logger";
-import { LayoutDesktop } from './layoutDesktop';
+import LayoutDesktop from './layoutDesktop';
 import { INavItems } from "./navMenu";
 import { lazy } from "react";
 import { useTheme } from "../effects";
