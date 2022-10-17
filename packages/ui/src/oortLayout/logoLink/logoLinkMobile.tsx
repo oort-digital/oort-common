@@ -22,7 +22,7 @@ interface IProps {
     className?: string
 }
 
-export const LogoLink = ({ className }: IProps) => 
+export const LogoLinkMobile = ({ className }: IProps) => 
 <a href="https://oort.digital" className={className}>
     <LogoIcon />
 </a>

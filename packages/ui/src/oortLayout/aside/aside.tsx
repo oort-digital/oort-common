@@ -1,16 +1,16 @@
 import { FooterMenu } from "../footerMenu";
 import styles from './aside.module.less';
-import { LogoLink } from "../logoLink";
 import {  NavMenu } from "../navMenu";
 import { IAsideProps } from "./typesAndInterfaces";
+import { ReactNode } from "react";
 
 interface IProps extends IAsideProps {
     className: string
-    showLogo: boolean
+    logoLink?: ReactNode
 }
 
-export const Aside = ({ className, navItems, web3, isActiveFunc, showLogo }: IProps) => <aside className={`${styles.aside} ${className}`}>
-    { showLogo && <LogoLink className={styles.logo} /> }
+export const Aside = ({ className, navItems, web3, isActiveFunc, logoLink }: IProps) => <aside className={`${styles.aside} ${className}`}>
+    {logoLink}
     <NavMenu className={styles.nav_menu} isActiveFunc={isActiveFunc} navItems={navItems}/>
     <FooterMenu className={styles.footer} web3={web3} />
 </aside>
