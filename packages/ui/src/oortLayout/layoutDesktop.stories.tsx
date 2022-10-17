@@ -7,7 +7,7 @@ import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
 import { logger } from "@oort/logger";
-import { Layout } from './layout';
+import { LayoutDesktop } from './layoutDesktop';
 import { INavItems } from "./navMenu";
 import { lazy } from "react";
 import { useTheme } from "../effects";
@@ -20,7 +20,7 @@ const LightTheme = lazy(() => import("../styles/theme/lightTheme"));
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'oort/layout/desktop',
-  component: Layout,
+  component: LayoutDesktop,
 
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
@@ -30,17 +30,17 @@ export default {
   argTypes: {
     //backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof Layout>;
+} as ComponentMeta<typeof LayoutDesktop>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Layout> = (args) => {
+const Template: ComponentStory<typeof LayoutDesktop> = (args) => {
 
   const [isDark] = useTheme()
 
   return <>
     { isDark ? <DarkTheme /> : <LightTheme /> }
     <Router>
-      <Layout {...args} />
+      <LayoutDesktop {...args} />
     </Router>
     
   </>

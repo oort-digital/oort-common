@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { IWeb3 } from "../connectModal";
 import { AsideDesktop } from "./aside";
-import styles from './layout.module.less';
+import styles from './layoutDesktop.module.less';
 import { INavItems } from "./navMenu";
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
     isActiveFunc?: (href: string) => boolean
 }
 
-export const Layout = ({ navItems, children, web3, isActiveFunc }: IProps) => {
+export const LayoutDesktop = ({ navItems, children, web3, isActiveFunc }: IProps) => {
 
     return <div className={styles.root}>
         <AsideDesktop navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
