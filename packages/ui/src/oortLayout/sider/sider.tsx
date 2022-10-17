@@ -27,6 +27,6 @@ export const Sider = ({ children }: IProps) => {
 
     return <>
         {RenderDrawer()}
-        <div onClick={() => setMenuVisible(true)}><BurgerMenuIcon className={styles.burger_icon}/></div>
+        <div className={styles.burger_icon} onClick={() => setMenuVisible(true)}><BurgerMenuIcon /></div>
     </>
 }
