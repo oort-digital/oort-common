@@ -1,0 +1,67 @@
+@import "../../styles/theme/vars.less";
+@import "../../styles/typography.less";
+
+.top-header-menu {
+    .ant-drawer-content-wrapper {
+      width: 95% !important;
+      max-width: 400px;
+      .ant-drawer-content {
+        background-color: @theme-bg-2;
+        .ant-drawer-header {
+          background-color: @theme-bg-2;
+          border-bottom: none;
+          .ant-drawer-header-title {
+            
+            justify-content: end;
+            .ant-drawer-title {
+              color: @theme-color-10;
+              .h3-semibold-mixin();
+            }
+        
+            .ant-drawer-close {
+              margin: 0;
+              padding: 0;
+              color: @theme-color-10;
+              display: flex;
+              order: 2;
+            }
+          }
+        }
+  
+        .ant-drawer-body {
+          padding-left: 0;
+          padding-right: 0;
+          padding-bottom: 0;
+  
+          .menu-footer {
+            padding: 22px 0;
+            background-color: @theme-color-3;
+            .icon-wrap {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: @theme-color-7;
+              border-radius:50%;
+              height: 48px;
+              width: 48px;
+              background-color: @theme-bg-2;
+  
+              .anticon {
+                height: 24px;
+                width: 24px;
+              }
+            }
+          }
+        }
+  
+      }
+    }
+}
+
+.burger-icon {
+  padding-right: 16px;
+  cursor: pointer;
+  display: flex;
+  color: @theme-color-8 !important;
+}
+  
