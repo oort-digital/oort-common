@@ -4,7 +4,7 @@ import { FooterMenu } from "./footerMenu";
 import styles from './layout.module.less';
 import { LogoLink } from "./logoLink";
 import { INavItems, NavMenu } from "./navMenu";
-import { SideMenu } from "./sideMenu/sideMenu";
+import { Sider } from "./sider";
 
 interface IProps {
     children: ReactNode
@@ -16,18 +16,17 @@ interface IProps {
 
 export const LayoutMobile = ({ navItems, children, web3, isActiveFunc }: IProps) => {
 
-    return <SideMenu>
-        <div className={styles.root}>
+    return <div className={styles.root}>
+        <Sider>
             <aside>
                 <LogoLink className={styles.logo} />
                 <NavMenu className={styles.nav_menu} isActiveFunc={isActiveFunc} navItems={navItems}/>
                 <FooterMenu className={styles.footer} web3={web3} />
             </aside>
-            
-            <div className={styles.content}>
-                {children}
-            </div>
-
+        </Sider>
+        <div className={styles.content}>
+            {children}
         </div>
-    </SideMenu>
+            
+    </div>
 }
