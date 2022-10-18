@@ -1,7 +1,7 @@
 import { useState as D } from "react";
 import { Row as A, Col as p } from "antd";
-import { a as M, C as m, b as S, M as F, W as L } from "./index.es.46a1bf80.mjs";
-import { j as t, O as E, a as e, F as l } from "./index.125e7496.mjs";
+import { a as M, C as m, b as S, M as F, W as L } from "./index.es.80ef02dd.mjs";
+import { j as t, O as E, a as e, F as l } from "./index.48a07dc4.mjs";
 import "ethers";
 import "react-router-dom";
 var K = /* @__PURE__ */ ((o) => (o[o.WALLET_METAMASK = 0] = "WALLET_METAMASK", o[o.WALLET_CONNECT = 1] = "WALLET_CONNECT", o))(K || {});
@@ -141,4 +141,4 @@ export {
   K as WALLETTYPE,
   Q as default
 };
-//# sourceMappingURL=connectModalDesktop.340c1b9b.mjs.map
+//# sourceMappingURL=connectModalDesktop.825bf3cd.mjs.map
