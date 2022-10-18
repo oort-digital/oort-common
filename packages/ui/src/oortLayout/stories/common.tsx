@@ -56,8 +56,8 @@ supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger
 export const web3 = {
     canSwitchChain: true,
     connectorName: ConnectorNames.Injected,
-    switchChain: async (newChainId: number) => {},
-    connectAsync: async (connectorName: ConnectorNames) => {},
+    switchChain: async (_newChainId: number) => {},
+    connectAsync: async (_connectorName: ConnectorNames) => {},
     chain: supportedChains[0],
     account: ZERO_ADDR,
     supportedChains: supportedChains,
