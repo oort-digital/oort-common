@@ -8,6 +8,8 @@ interface IProps {
 export const BlockieAddress = ({address, className}: IProps) => {
     if (!address) { return null }
 
-    const imgSrc = blockies.create({seed:address}).toDataURL();
+    const imgSrc = addressToDataURL(address);
     return <img src={imgSrc} className={className} alt='blockies'/>
 }
+
+export const addressToDataURL = (address: string) => blockies.create({seed:address}).toDataURL()

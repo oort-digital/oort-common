@@ -1,0 +1,37 @@
+@import "../../styles/typography.less";
+@import "../../styles/palette.less";
+@import "../../styles/theme/vars.less";
+
+.collection_trigger_btn {
+	:global(.sub-title) {
+		.body-14-regular-mixin();
+		color: @btn-default-color;
+		:global(.tag) {
+			background-color: @neutral-5;
+			.footnote-12-description-mixin();
+			border-radius: 64px;
+			padding: 1px 5px;
+		}
+	}
+}
+
+.collection_popover_content {
+
+	max-width: 378px;
+	width: 378px;
+
+	.apply {
+		width: 252px;
+	}
+
+	.title {
+		font-style: normal;
+		font-weight: 600;
+		font-size: 20px;
+		line-height: 25px;
+		/* identical to box height, or 125% */
+		letter-spacing: -0.0045em;
+		color: @theme-color-9;
+		margin-bottom: 25px;
+	}
+}

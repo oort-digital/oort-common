@@ -1,18 +1,18 @@
-
 import "../styles/antOverride.less";
 import "../styles/fonts.css";
+
 // import '@oort/ui/dist/style.css';
 // import '../oortLib.less';
-
+import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
 import { logger } from "@oort/logger";
-import { Layout } from './layout';
 import { INavItems } from "./navMenu";
-import { ZERO_ADDR } from '../extensions';
 import { lazy } from "react";
 import { useTheme } from "../effects";
 import { TestCarousel } from "./testCarousel";
+import { ZERO_ADDR } from "../utils";
+import { Layout } from ".";
 
 const DarkTheme = lazy(() => import("../styles/theme/darkTheme"));
 const LightTheme = lazy(() => import("../styles/theme/lightTheme"));
@@ -39,7 +39,10 @@ const Template: ComponentStory<typeof Layout> = (args) => {
 
   return <>
     { isDark ? <DarkTheme /> : <LightTheme /> }
-    <Layout {...args} />
+    <Router>
+      <Layout {...args} />
+    </Router>
+    
   </>
 }
 
@@ -54,8 +57,14 @@ const navItems: INavItems = {
     lend: 'http://rent.oort.local/lend'
   },
   gameHub: {
-    games: 'http://game-hub.oort.local/games',
-    nfts: 'http://game-hub.oort.local/nfts'
+    games: {
+      href: 'http://game-hub.oort.local/games',
+      reactRouterLink: true
+    },
+    nfts: {
+      href: 'http://game-hub.oort.local/nfts',
+      reactRouterLink: true
+    }
   }
 }
 
@@ -95,7 +104,10 @@ const web3 = {
   supportedConnectors: supportedConnectors,
 }
 
-const content = <div style={{ background: 'red' }}>
+const style = { 
+  // background: 'red'
+}
+const content = <div style={style}>
   <TestCarousel />
 </div>
 

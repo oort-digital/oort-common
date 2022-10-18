@@ -6,46 +6,50 @@ import { IChain } from '../typesAndInterfaces';
 const Desktop = lazy(() => import("./connectModalDesktop"));
 const Mobile = lazy(() => import("./connectModalMobile"));
 
-interface IProps {
-	chain: IChain
-	supportedChains: IChain[]
-	account: string
-	canSwitchChain: boolean
-	connectorName: ConnectorNames
-	supportedConnectors: { [name: string]: IConnector }
-	visible: boolean
-	onCancel: () => void
-	switchChain: (newChainId: number) => Promise<void>
-	connectAsync: (connectorName: ConnectorNames) => Promise<void>
+export interface IWeb3 {
+    canSwitchChain: boolean
+    connectorName: ConnectorNames
+    supportedConnectors: { [name: string]: IConnector }
+    switchChain: (newChainId: number) => Promise<void>
+    connectAsync: (connectorName: ConnectorNames) => Promise<void>
+    supportedChains: IChain[]
+    chain: IChain
+    account: string
 }
 
-export const ConnectModal = (props: IProps) => {
+interface IProps {
+	web3: IWeb3
+	visible: boolean
+	/**
+	 * @deprecated Use onClose, afterConnect, afterChainSwitch
+	 */
+	onCancel?: () => void
 
-	const { onCancel, visible, supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = props
+	/** executed when user click 'X' in the top right corner */
+	onClose?: () => void
+	afterConnect?: () => void
+	afterChainSwitch?: () => void
+}
+
+export const ConnectModal = ({web3, visible, onCancel, onClose, afterConnect, afterChainSwitch}: IProps) => {
 
 	const desktop = <Desktop
 		onCancel={onCancel}
 		visible={visible}
-		supportedChains={supportedChains}
-		chain={chain}
-		switchChain={switchChain}
-		canSwitchChain={canSwitchChain}
-		connectAsync={connectAsync}
-		account={account}
-		connectorName={connectorName}
-		supportedConnectors={supportedConnectors} />
+		web3={web3}
+		onClose={onClose}
+		afterConnect={afterConnect}
+		afterChainSwitch={afterChainSwitch}
+		/>
 
 	const mobile = <Mobile
 		onCancel={onCancel}
 		visible={visible}
-		supportedChains={supportedChains}
-		chain={chain}
-		switchChain={switchChain}
-		canSwitchChain={canSwitchChain}
-		connectAsync={connectAsync}
-		account={account}
-		connectorName={connectorName}
-		supportedConnectors={supportedConnectors} />
+		web3={web3}
+		onClose={onClose}
+		afterConnect={afterConnect}
+		afterChainSwitch={afterChainSwitch}
+		/>
 
 	return <LazyLoader
 		desktop={desktop}

@@ -4,22 +4,22 @@ export declare enum MenuItemId {
     Rent = "rent",
     Mint = "mint"
 }
-export interface INavItem {
+export declare type NavItemType = string | {
     href: string;
-    isActive?: boolean;
-}
+    reactRouterLink: boolean;
+};
 export interface INavItems {
-    dashboard: string;
-    mint: string;
+    dashboard: NavItemType;
+    mint: NavItemType;
     rent: {
-        lend: string;
-        borrow: string;
-        heroes: string;
-        activity: string;
+        lend: NavItemType;
+        borrow: NavItemType;
+        heroes: NavItemType;
+        activity: NavItemType;
     };
     gameHub: {
-        games: string;
-        nfts: string;
+        games: NavItemType;
+        nfts: NavItemType;
     };
 }
 interface IProps {

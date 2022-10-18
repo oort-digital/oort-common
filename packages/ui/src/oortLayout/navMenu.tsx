@@ -1,7 +1,9 @@
 import { Collapse } from "antd";
+import { useLocation } from "react-router-dom";
 import { DashboardIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
 import styles from './navMenu.module.less';
+import { isHrefActive } from "./utils";
 
 const { Panel } = Collapse;
 
@@ -11,23 +13,23 @@ export enum MenuItemId {
     Mint = 'mint'
 }
 
-export interface INavItem {
+export type NavItemType = string | {
     href: string
-    isActive?: boolean
+    reactRouterLink: boolean
 }
 
 export interface INavItems {
-    dashboard: string
-    mint: string
+    dashboard: NavItemType
+    mint: NavItemType
     rent: {
-        lend: string
-        borrow: string
-        heroes: string
-        activity: string
+        lend: NavItemType
+        borrow: NavItemType
+        heroes: NavItemType
+        activity: NavItemType
     }
     gameHub: {
-        games: string
-        nfts: string
+        games: NavItemType
+        nfts: NavItemType
     }
 }
 
@@ -70,7 +72,9 @@ const gameHubInternal = {
     nfts: "NFTs"
 }
 
-type StringMap = { [id: string]: string; } 
+type StringMap = { [id: string]: string; }
+type NavItemMap = { [id: string]: NavItemType; }
+
 const getChildCaptions = (item: INavItemInternal): StringMap => {
 
     const map: StringMap = {}
@@ -87,18 +91,7 @@ const getChildCaptions = (item: INavItemInternal): StringMap => {
     return map
 }
 
-const isHrefActive = (href: string) => {
-    const curLocation = window.location
-    const location = new URL(href)
-
-    if(curLocation.origin === location.origin) {
-        if(curLocation.pathname === '/' || curLocation.pathname === location.pathname) {
-            return true
-        }
-    }
-
-    return false
-}
+const _isHrefActive = (href: string) => isHrefActive(window.location, href)
 
 const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
     const i = <span className={styles.icon}>{icon}</span>
@@ -107,21 +100,38 @@ const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
 
 export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
 
-    const isActive = isActiveFunc || isHrefActive;
+    // to trigger rerendering on react-router pathchange
+    useLocation()
+
+    const isActive = isActiveFunc || _isHrefActive;
 
     const getPanelActive = (hrefs: string[]): boolean => hrefs.some(isActive)
 
-    const RenderItem = (href: string, { caption, icon }: INavItemInternal) => {
+    const getHRef = (it: NavItemType) => typeof it  === 'string' ? it : it.href
+
+    const RenderItem = (it: NavItemType, { caption, icon }: INavItemInternal) => {
+
+        let href 
+        let reactRouterLink = false
+
+        if(typeof it === 'string') {
+            href = it
+        }
+        else {
+            href = it.href
+            reactRouterLink = it.reactRouterLink
+        }
+
         const activeCss = isActive(href) ? styles.active : ''
         const i = <span className={styles.icon}>{icon}</span>
-        return <MenuItemLink key={caption} className={activeCss} href={href} caption={caption} icon={i} />
+        return <MenuItemLink reactRouterLink={reactRouterLink || false} key={caption} className={activeCss} href={href} caption={caption} icon={i} />
     }
 
-    const RenderCollapse = (rootItem: INavItemInternal, hrefMap: StringMap) => {
+    const RenderCollapse = (rootItem: INavItemInternal, navItemMap: NavItemMap) => {
         const key = 1;
         const childCaptionsMap = getChildCaptions(rootItem)
-        const hrefEntries = Object.entries(hrefMap)
-        const hrefs = hrefEntries.map(kvp => kvp[1])
+        const hrefEntries = Object.entries(navItemMap)
+        const hrefs = hrefEntries.map(kvp => getHRef(kvp[1]))
 
         const isPanelActive = getPanelActive(hrefs)
 
@@ -138,8 +148,8 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
                     <Menu>
                         {
                             hrefEntries.map(kvp => {
-                                const [key, href] = kvp
-                                return RenderItem(href, { caption: childCaptionsMap[key] } )
+                                const [key, navItem] = kvp
+                                return RenderItem(navItem, { caption: childCaptionsMap[key] } )
                             })
                         }
                     </Menu>

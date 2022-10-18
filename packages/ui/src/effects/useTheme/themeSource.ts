@@ -38,7 +38,8 @@ class CookiesSource implements IThemeSource {
         expires.setFullYear(expires.getFullYear() + 10)
         setCookie(DARK_MODE, isDark, { 
             domain: domain,
-            expires: expires
+            expires: expires,
+            path: '/'
         })
     }
 

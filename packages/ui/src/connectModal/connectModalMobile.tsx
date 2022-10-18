@@ -7,9 +7,10 @@ import { MetamaskIcon } from './metamaskIcon';
 import { WalletConnectIcon } from './walletConnectIcon';
 import { Gutter } from 'antd/lib/grid/row';
 import { ChainButton } from './chainButton';
-import { ConnectorNames, IConnector } from "@oort/web3-connectors";
+import { ConnectorNames } from "@oort/web3-connectors";
 import { IChain } from '../typesAndInterfaces';
 import { OortModalMobile } from '../oortModal';
+import { IWeb3 } from './connectModal';
 
 
 export enum WALLETTYPE {
@@ -39,29 +40,31 @@ const renderAlert = (account: string, chain: IChain, supportedChains: IChain[]) 
 
 
 interface IProps {
-	chain: IChain
-	supportedChains: IChain[]
-	account: string
-	canSwitchChain: boolean
-	connectorName: ConnectorNames
-	supportedConnectors: { [name: string]: IConnector }
+	web3: IWeb3
 	visible: boolean
-	onCancel: () => void
-	switchChain: (newChainId: number) => Promise<void>
-	connectAsync: (connectorName: ConnectorNames) => Promise<void>
+	/**
+	 * @deprecated Use onClose, afterConnect, afterChainSwitch
+	 */
+	onCancel?: () => void
+
+	/** executed when user click 'X' in the top right corner */
+	onClose?: () => void
+	afterConnect?: () => void
+	afterChainSwitch?: () => void
 }
 
-const ConnectModalMobile = (props: IProps) => {
+const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, afterChainSwitch }: IProps) => {
 
 	const [ loading, setLoading ] = useState(false)
 	
-	const { onCancel, visible, supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = props
+	const { supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = web3
 
 	const connectAndClose = async (cnnName: ConnectorNames) => {
 		setLoading(true)
         try {
             await connectAsync(cnnName)
-			onCancel()
+			onCancel && onCancel()
+			afterConnect && afterConnect()
         }
         finally {
             setLoading(false)
@@ -72,7 +75,8 @@ const ConnectModalMobile = (props: IProps) => {
         setLoading(true)
         try {
             await switchChain(newChainId)
-			onCancel()
+			onCancel && onCancel()
+			afterChainSwitch && afterChainSwitch()
         }
         finally {
             setLoading(false)
@@ -128,8 +132,15 @@ const ConnectModalMobile = (props: IProps) => {
 	}
 
 	const btnGutter: [Gutter, Gutter] = [0, 12]
+
+	const _onCancel = () => {
+		onClose && onClose()
+		onCancel && onCancel()
+	}
 	
-	return <OortModalMobile viewMode="topGap" loading={loading} footer={footer} className='connect-wallet-mobile-modal' title='Network & Wallet' visible={visible} onCancel={onCancel}>
+	return <OortModalMobile viewMode="topGap" loading={loading} footer={footer}
+		className='connect-wallet-mobile-modal' title='Network & Wallet' visible={visible}
+		onCancel={() => _onCancel()}>
 		<>
 			{
 				chain && <>
