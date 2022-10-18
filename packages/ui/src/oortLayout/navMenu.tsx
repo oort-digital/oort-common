@@ -10,7 +10,7 @@ const { Panel } = Collapse;
 export enum MenuItemId {
     Dasboard = 'dasboard',
     Rent = 'rent',
-    Mint = 'mint'
+    Minting = 'minting'
 }
 
 export type NavItemType = string | {
@@ -20,7 +20,10 @@ export type NavItemType = string | {
 
 export interface INavItems {
     dashboard: NavItemType
-    mint: NavItemType
+    minting: {
+        mutation: NavItemType
+        claim: NavItemType
+    }
     rent: {
         lend: NavItemType
         borrow: NavItemType
@@ -61,8 +64,10 @@ const rentInternal = {
 }
 
 const mintInternal = {
-    caption: 'mint',
-    icon: <MintIcon />
+    caption: 'minting',
+    icon: <MintIcon />,
+    mutation: "Hero Mutation",
+    claim: "Claim Rewards"
 }
 
 const gameHubInternal = {
@@ -157,12 +162,12 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
             </Collapse>
     }
 
-    const { dashboard, rent, gameHub, mint } = navItems
+    const { dashboard, rent, gameHub, minting } = navItems
 
     return <Menu className={`${styles.root} ${className || ''}`}>
         {RenderItem(dashboard, dashboardInternal)}
         {RenderCollapse(rentInternal, rent)}
         {RenderCollapse(gameHubInternal, gameHub)}
-        {RenderItem(mint, mintInternal)}
+        {RenderCollapse(mintInternal, minting)}
     </Menu>
 }

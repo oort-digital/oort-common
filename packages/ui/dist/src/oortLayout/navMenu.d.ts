@@ -2,7 +2,7 @@
 export declare enum MenuItemId {
     Dasboard = "dasboard",
     Rent = "rent",
-    Mint = "mint"
+    Minting = "minting"
 }
 export declare type NavItemType = string | {
     href: string;
@@ -10,7 +10,10 @@ export declare type NavItemType = string | {
 };
 export interface INavItems {
     dashboard: NavItemType;
-    mint: NavItemType;
+    minting: {
+        mutation: NavItemType;
+        claim: NavItemType;
+    };
     rent: {
         lend: NavItemType;
         borrow: NavItemType;
