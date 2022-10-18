@@ -2217,7 +2217,7 @@ const ca = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => n === ot.Desktop ? e : n === ot.Phone ? r : t)(), " "]
   });
-}, G1 = Oe(() => import("./layoutDesktop.1cbb7c9a.mjs")), sr = Oe(() => import("./layoutMobile.b2d1f7f3.mjs")), ua = (e) => /* @__PURE__ */ i($r, {
+}, G1 = Oe(() => import("./layoutDesktop.7136b318.mjs")), sr = Oe(() => import("./layoutMobile.2729990b.mjs")), ua = (e) => /* @__PURE__ */ i($r, {
   desktop: /* @__PURE__ */ i(G1, {
     ...e
   }),
@@ -2566,7 +2566,7 @@ const ya = ({
   });
 }, Lo = (e) => Nr.create({
   seed: e
-}).toDataURL(), Ro = Oe(() => import("./connectModalDesktop.825bf3cd.mjs")), Mo = Oe(() => import("./connectModalMobile.c1e5a377.mjs")), wa = ({
+}).toDataURL(), Ro = Oe(() => import("./connectModalDesktop.1b0e4838.mjs")), Mo = Oe(() => import("./connectModalMobile.b44fb95d.mjs")), wa = ({
   web3: e,
   visible: r,
   onCancel: t,
@@ -2960,4 +2960,4 @@ export {
   $r as y,
   B1 as z
 };
-//# sourceMappingURL=index.48a07dc4.mjs.map
+//# sourceMappingURL=index.62f7dd05.mjs.map

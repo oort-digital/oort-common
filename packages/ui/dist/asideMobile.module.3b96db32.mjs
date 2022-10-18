@@ -1,138 +1,138 @@
 import { useState as k } from "react";
-import { j as C, a as s, F as i, T as Z, b as v, D as N, u as b, M as I, c as d, i as $, g as y, B as A, C as B, d as m, t as L, e as T, N as x } from "./index.48a07dc4.mjs";
-import { Switch as D } from "antd";
-const F = "_aside_desktop_1c8ys_1", S = "_logo_1c8ys_15", h1 = {
+import { j as C, a as s, F as r, T as Z, b as v, D as N, u as b, M as I, c as d, i as $, g as A, B as y, C as B, d as m, t as L, e as T, N as D } from "./index.62f7dd05.mjs";
+import { Switch as x } from "antd";
+const F = "_aside_desktop_izek7_1", S = "_logo_izek7_15", h1 = {
   aside_desktop: F,
   logo: S
-}, W = "_root_wv7hw_1", E = "_icon_before_wv7hw_1", j = "_icon_after_wv7hw_7", R = "_account_img_wv7hw_12", G = "_social_wv7hw_20", O = "_icon_wv7hw_1", q = "_theme_switch_wv7hw_29", z = "_theme_name_wv7hw_32", K = "_menu_item_btn_wv7hw_41", o = {
+}, W = "_root_wv7hw_1", E = "_icon_before_wv7hw_1", j = "_icon_after_wv7hw_7", z = "_account_img_wv7hw_12", R = "_social_wv7hw_20", G = "_icon_wv7hw_1", O = "_theme_switch_wv7hw_29", q = "_theme_name_wv7hw_32", K = "_menu_item_btn_wv7hw_41", e = {
   root: W,
   icon_before: E,
   icon_after: j,
-  account_img: R,
-  social: G,
-  icon: O,
-  theme_switch: q,
-  theme_name: z,
+  account_img: z,
+  social: R,
+  icon: G,
+  theme_switch: O,
+  theme_name: q,
   menu_item_btn: K
 }, U = "_root_rh9ts_3", Y = {
   root: U
 }, J = ({
-  isDarkMode: t,
-  onChange: e
-}) => /* @__PURE__ */ C(D, {
+  isDarkMode: o,
+  onChange: t
+}) => /* @__PURE__ */ C(x, {
   className: Y.root,
   size: "default",
-  checked: t,
-  onChange: e
-}), P = "https://twitter.com/OortDigital", Q = "https://t.co/6eYdGdfUK7?amp=1", X = "https://t.me/oortdigital", C1 = /* @__PURE__ */ s(i, {
+  checked: o,
+  onChange: t
+}), P = "https://twitter.com/OortDigital", Q = "https://t.co/6eYdGdfUK7?amp=1", X = "https://t.me/oortdigital", C1 = /* @__PURE__ */ s(r, {
   children: [/* @__PURE__ */ C("a", {
     href: X,
     children: /* @__PURE__ */ C("span", {
-      className: o.icon,
+      className: e.icon,
       children: /* @__PURE__ */ C(Z, {})
     })
   }), /* @__PURE__ */ C("a", {
     href: P,
     children: /* @__PURE__ */ C("span", {
-      className: o.icon,
+      className: e.icon,
       children: /* @__PURE__ */ C(v, {})
     })
   }), /* @__PURE__ */ C("a", {
     href: Q,
     children: /* @__PURE__ */ C("span", {
-      className: o.icon,
+      className: e.icon,
       children: /* @__PURE__ */ C(N, {})
     })
   })]
-}), o1 = ({
-  className: t,
-  web3: e
+}), e1 = ({
+  className: o,
+  web3: t
 }) => {
   const [a, n] = k(!1), [c, u] = b(), f = () => /* @__PURE__ */ C(T, {
     onCancel: () => n(!1),
     visible: a,
-    web3: e
-  }), p = () => {
-    if (!e)
+    web3: t
+  }), M = () => {
+    if (!t)
       return null;
     const {
       account: l,
       chain: _
-    } = e;
+    } = t;
     if ($(_))
       return null;
     const {
       chainId: V,
       name: w
     } = _, H = /* @__PURE__ */ C("span", {
-      className: o.icon_before,
-      children: y(V, 20, 20)
-    }), g = /* @__PURE__ */ C(A, {
+      className: e.icon_before,
+      children: A(V, 20, 20)
+    }), g = /* @__PURE__ */ C(y, {
       address: l,
-      className: o.account_img
+      className: e.account_img
     }), h = /* @__PURE__ */ C("span", {
-      className: o.icon_after,
+      className: e.icon_after,
       children: /* @__PURE__ */ C(B, {})
     });
-    return /* @__PURE__ */ s(i, {
+    return /* @__PURE__ */ s(r, {
       children: [f(), /* @__PURE__ */ C(m, {
-        className: o.menu_item_btn,
+        className: e.menu_item_btn,
         onClick: () => n(!0),
         iconBefore: H,
         iconAfter: h,
         caption: w
       }, "chain"), /* @__PURE__ */ C(m, {
-        className: o.menu_item_btn,
+        className: e.menu_item_btn,
         onClick: () => n(!0),
         iconBefore: g,
         iconAfter: h,
         caption: L(l)
       }, "account")]
     });
-  }, M = t ? `${t} ${o.root}` : o.root;
-  return /* @__PURE__ */ C(i, {
+  }, p = o ? `${o} ${e.root}` : e.root;
+  return /* @__PURE__ */ C(r, {
     children: /* @__PURE__ */ s(I, {
-      className: M,
+      className: p,
       children: [/* @__PURE__ */ C(d, {
-        className: o.social,
+        className: e.social,
         children: C1
-      }, "social"), p(), /* @__PURE__ */ s(d, {
-        className: o.theme_switch,
+      }, "social"), M(), /* @__PURE__ */ s(d, {
+        className: e.theme_switch,
         children: [/* @__PURE__ */ C(J, {
           isDarkMode: c,
           onChange: () => u(!c)
         }), /* @__PURE__ */ C("span", {
-          className: o.theme_name,
+          className: e.theme_name,
           children: c ? "light" : "dark"
         })]
       }, "theme-switch")]
     })
   });
-}, t1 = "_aside_73m89_1", e1 = "_nav_menu_73m89_1", s1 = "_footer_73m89_5", r = {
-  aside: t1,
-  nav_menu: e1,
+}, o1 = "_aside_73m89_1", t1 = "_nav_menu_73m89_1", s1 = "_footer_73m89_5", i = {
+  aside: o1,
+  nav_menu: t1,
   footer: s1
 }, d1 = ({
-  className: t,
-  navItems: e,
+  className: o,
+  navItems: t,
   web3: a,
   isActiveFunc: n,
   logoLink: c
 }) => /* @__PURE__ */ s("aside", {
-  className: `${r.aside} ${t}`,
-  children: [c, /* @__PURE__ */ C(x, {
-    className: r.nav_menu,
+  className: `${i.aside} ${o}`,
+  children: [c, /* @__PURE__ */ C(D, {
+    className: i.nav_menu,
     isActiveFunc: n,
-    navItems: e
-  }), /* @__PURE__ */ C(o1, {
-    className: r.footer,
+    navItems: t
+  }), /* @__PURE__ */ C(e1, {
+    className: i.footer,
     web3: a
   })]
 }), n1 = "_logo_link_yaxcy_1", c1 = {
   logo_link: n1
 }, a1 = () => /* @__PURE__ */ s("svg", {
-  width: "146px",
-  height: "32px",
+  width: "100%",
+  height: "100%",
   viewBox: "0 0 147 34",
   fill: "none",
   xmlns: "http://www.w3.org/2000/svg",
@@ -195,13 +195,13 @@ const F = "_aside_desktop_1c8ys_1", S = "_logo_1c8ys_15", h1 = {
     fill: "#2FB4AC"
   })]
 }), m1 = ({
-  className: t
+  className: o
 }) => /* @__PURE__ */ C("a", {
   href: "https://oort.digital",
-  className: `${c1.logo_link} ${t}`,
+  className: `${c1.logo_link} ${o}`,
   children: /* @__PURE__ */ C(a1, {})
-}), r1 = "_aside_mobile_5nsdq_1", u1 = {
-  aside_mobile: r1
+}), i1 = "_aside_mobile_5nsdq_1", u1 = {
+  aside_mobile: i1
 };
 export {
   d1 as A,
@@ -209,4 +209,4 @@ export {
   u1 as a,
   h1 as s
 };
-//# sourceMappingURL=asideMobile.module.516d0770.mjs.map
+//# sourceMappingURL=asideMobile.module.3b96db32.mjs.map
