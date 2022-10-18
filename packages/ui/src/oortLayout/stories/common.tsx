@@ -1,7 +1,7 @@
 import { logger } from "@oort/logger";
 import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
-import { ZERO_ADDR } from "../utils";
-import { INavItems } from "./navMenu";
+import { ZERO_ADDR } from "../../utils";
+import { INavItems } from "../navMenu";
 import { TestCarousel } from "./testCarousel";
 
 export const navItems: INavItems = {
