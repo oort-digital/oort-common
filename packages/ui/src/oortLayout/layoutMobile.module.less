@@ -1,21 +1,29 @@
 
 @import "../styles/theme/vars.less";
-@top-header-h: 60px;
+
+@side-padding: 23px;
 
 .root {
     display: flex;
     flex-direction: column;
 }
 
-@aside-width: 230px;
-
 .root > .top_header {
-    height: @top-header-h;
+    height: 52px;
     background-color: @theme-color-4;
     display: flex;
     align-items: center;
+    padding-right: @side-padding;
+    padding-left: @side-padding;
+
+    & > .logo {
+        margin-left: 18px;
+        height: 24px;
+    }
 }
 
 .root > .content {
     background: @theme-color-3;
+    padding-right: @side-padding;
+    padding-left: @side-padding;
 }

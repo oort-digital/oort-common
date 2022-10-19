@@ -10,7 +10,7 @@ const LayoutMobile = ({ navItems, children, web3, isActiveFunc }: ILayoutProps) 
         <Sider>
             <AsideMobile navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
         </Sider>
-        <LogoLink />
+        <LogoLink className={styles.logo}/>
     </div>
     
     <div className={styles.content}>
