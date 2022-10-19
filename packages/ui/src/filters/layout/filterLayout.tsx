@@ -1,14 +1,15 @@
-import { ReactNode } from "react"
+import { ReactElement } from "react"
 import { Row, Col } from "antd"
+import { toArr } from "./common"
 
 interface IProps {
-    sortBy?: ReactNode
-    children: ReactNode
+    sortBy?: ReactElement
+    children: ReactElement | ReactElement[]
 }
 
-const renderFilter = (filter: ReactNode) => {
+const renderFilter = (filter: ReactElement, idx: number) => {
     if(filter) {
-        return <Col>{filter}</Col>
+        return <Col key={idx}>{filter}</Col>
     }
     return null
 }
@@ -17,7 +18,9 @@ export const FilterLayout = ({ children, sortBy }: IProps) => {
 
     const g = 16
 
-    const filtersContainer = <Row gutter={[g, g]}>{renderFilter(children)}</Row>
+    const filters = toArr(children)
+
+    const filtersContainer = <Row gutter={[g, g]}>{filters.map(renderFilter)}</Row>
 
     return <Row  gutter={[0, g]} justify="space-between" className="filter-layout">
         <Col>{filtersContainer}</Col>

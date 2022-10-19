@@ -19,7 +19,7 @@ export const CollapseFilter = ({ title, children }: IProps) => <Collapse
     className={styles.collapse_filter}
     ghost={true}
     expandIcon={expandIconFunc}
-    expandIconPosition="right">
+    expandIconPosition="end">
     <Panel header={title} key="1">
       {children}
     </Panel>

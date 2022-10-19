@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 interface IProps {
-    sortBy?: ReactNode;
-    children: ReactNode;
+    sortBy?: ReactElement;
+    children: ReactElement | ReactElement[];
 }
 export declare const FilterLayout: ({ children, sortBy }: IProps) => JSX.Element;
 export {};

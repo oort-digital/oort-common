@@ -5,7 +5,7 @@ export interface IMobileFilterItemProps {
 interface IProps {
     activeFiltersCounter: number;
     sortBy?: ReactNode;
-    children: ReactElement;
+    children: ReactElement | ReactElement[];
     onApply: () => void;
     onClearAll: () => void;
     onCancel?: () => void;

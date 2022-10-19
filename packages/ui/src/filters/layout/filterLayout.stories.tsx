@@ -4,15 +4,15 @@ import "../../styles/theme/light.less";
 import "../../styles/fonts.css";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { FilterLayoutMobile } from "./filterLayoutMobile";
+import { FilterLayout } from "./filterLayout";
 import { SearchInputMobile } from "../searchInput";
 import { ThemeLoader } from "../../internalHelpers";
 
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
-  title: 'oort/filters/layout/mobile',
-  component: FilterLayoutMobile,
+  title: 'oort/filters/layout/desktop',
+  component: FilterLayout,
 
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
@@ -22,28 +22,23 @@ const meta = {
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof FilterLayoutMobile>;
+} as ComponentMeta<typeof FilterLayout>;
 
 export default meta
 
-const Template: ComponentStory<typeof FilterLayoutMobile> = (args) => {
+const Template: ComponentStory<typeof FilterLayout> = (args) => {
 
   return <>
     <ThemeLoader />
-    <FilterLayoutMobile {...args} >
+    <FilterLayout {...args} >
       <SearchInputMobile title="Search 1" onChange={() => {}}/>
       <SearchInputMobile title="Search 2" onChange={() => {}}/>
-    </FilterLayoutMobile>
+    </FilterLayout>
   </>
 }
 
 
 export const Main = Template.bind({}); 
 Main.args = {
-  activeFiltersCounter: 1,
-  // sortBy?: ReactNode
-  // children: ChildType[] | ChildType
-  onApply: () => {},
-  onClearAll: () => {},
-  // onCancel?: () => {}
+
 }

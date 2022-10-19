@@ -4,6 +4,7 @@ import { Row, Col, Button } from "antd"
 import { CollapseFilter } from "./collapseFilter"
 import { FilterIcon } from "./filterIcon"
 import { FooterButtonsMobile, OortModalMobile } from "../../oortModal"
+import { toArr } from "./common"
 
 export interface IMobileFilterItemProps {
     title: string
@@ -12,17 +13,17 @@ export interface IMobileFilterItemProps {
 interface IProps {
     activeFiltersCounter: number
     sortBy?: ReactNode
-    children: ReactElement
+    children: ReactElement | ReactElement[]
     onApply: () => void
     onClearAll: () => void
     onCancel?: () => void
 }
 
-const renderFilter = (filter: ReactElement) => {
+const renderFilter = (filter: ReactElement, idx: number) => {
    
     const { title } = filter.props as IMobileFilterItemProps
 
-    return <Col key={title}>
+    return <Col key={title || idx}>
         <CollapseFilter title={title || ''}>{filter}</CollapseFilter>
     </Col>
 }
@@ -30,6 +31,8 @@ const renderFilter = (filter: ReactElement) => {
 export const FilterLayoutMobile = ({ children, sortBy, onApply, onClearAll, activeFiltersCounter, onCancel }: IProps) => {
 
     const [ isFiltersVisible, setFiltersVisible ] = useState(false)
+
+    const filters = toArr(children)
 
     const onCancelInternal = () => {
         setFiltersVisible(false)
@@ -73,7 +76,7 @@ export const FilterLayoutMobile = ({ children, sortBy, onApply, onClearAll, acti
         visible={isFiltersVisible}
         footer={footer}
         viewMode="topGap">
-        <>{renderFilter(children)}</>
+        <>{filters.map(renderFilter)}</>
     </OortModalMobile>
 </>
 }
