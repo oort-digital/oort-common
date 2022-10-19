@@ -5,6 +5,7 @@ export interface ILayoutProps {
     children: ReactNode;
     navItems: INavItems;
     web3?: IWeb3;
+    className?: string;
     isActiveFunc?: (href: string) => boolean;
 }
 //# sourceMappingURL=typesAndInterfaces.d.ts.map
