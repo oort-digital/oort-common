@@ -10,6 +10,7 @@ const renderFilter = (filter: ReactNode) => {
     if(filter) {
         return <Col>{filter}</Col>
     }
+    return null
 }
 
 export const FilterLayout = ({ children, sortBy }: IProps) => {
