@@ -15,7 +15,8 @@ interface IProps {
     onSubmit: () => void;
     submitDisabled?: boolean;
     onVisibleChange?: (isVisible: boolean) => void;
+    onBottomSpaceHeightChange?: (heigth: number) => void;
 }
-export declare const PopoverFilter: ({ title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName, popoverTitleClassName, applyButtonClassName, cancelButtonClassName, isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled }: IProps) => JSX.Element;
+export declare const PopoverFilter: ({ title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName, popoverTitleClassName, applyButtonClassName, cancelButtonClassName, isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled, onBottomSpaceHeightChange }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=popoverFilter.d.ts.map

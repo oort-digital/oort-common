@@ -1,33 +1,33 @@
 import { useState as S } from "react";
 import { Row as I, Col as m } from "antd";
-import { a as k, C as p, b as D, M as F, W as L } from "./index.es.63dd4667.mjs";
-import { j as n, h as E, a as r, F as i } from "./index.5ebfa06e.mjs";
+import { a as k, C as p, b as D, M as E, W as F } from "./index.es.4edb0118.mjs";
+import { j as n, h as L, a as r, F as l, i as G } from "./index.7348b911.mjs";
 import "ethers";
 import "react-router-dom";
-var G = /* @__PURE__ */ ((e) => (e[e.WALLET_METAMASK = 0] = "WALLET_METAMASK", e[e.WALLET_CONNECT = 1] = "WALLET_CONNECT", e))(G || {});
-const K = (e, l, o) => e ? o.some((c) => c.name === l.name) ? /* @__PURE__ */ r(i, {
+var K = /* @__PURE__ */ ((e) => (e[e.WALLET_METAMASK = 0] = "WALLET_METAMASK", e[e.WALLET_CONNECT = 1] = "WALLET_CONNECT", e))(K || {});
+const R = (e, i, o) => e ? o.some((c) => c.name === i.name) ? /* @__PURE__ */ r(l, {
   children: ["You are currently using ", /* @__PURE__ */ n("span", {
     children: "Oort Digital"
   }), " on the ", /* @__PURE__ */ n("span", {
-    children: l.name
+    children: i.name
   }), " network"]
-}) : /* @__PURE__ */ r(i, {
+}) : /* @__PURE__ */ r(l, {
   children: ["You connected to ", /* @__PURE__ */ r("span", {
-    children: [l.name, "."]
+    children: [i.name, "."]
   }), /* @__PURE__ */ r("div", {
     children: ["Please connect to the appropriate network. ", /* @__PURE__ */ n("span", {
       children: o.map((c) => c.name).join(", ")
     })]
   })]
-}) : null, Q = ({
+}) : null, V = ({
   web3: e,
-  visible: l,
+  visible: i,
   onCancel: o,
   onClose: c,
   afterConnect: f,
-  afterChainSwitch: w
+  afterChainSwitch: C
 }) => {
-  const [C, s] = S(!1), {
+  const [w, s] = S(!1), {
     supportedChains: M,
     chain: d,
     switchChain: A,
@@ -46,11 +46,11 @@ const K = (e, l, o) => e ? o.some((c) => c.name === l.name) ? /* @__PURE__ */ r(
   }, T = async (t) => {
     s(!0);
     try {
-      await A(t), o && o(), w && w();
+      await A(t), o && o(), C && C();
     } finally {
       s(!1);
     }
-  }, _ = /* @__PURE__ */ r(i, {
+  }, _ = /* @__PURE__ */ r(l, {
     children: ["By connecting, I accept Oort Digital\u2019s ", /* @__PURE__ */ n("a", {
       href: "https://oort.digital/terms",
       children: "Terms of Service"
@@ -66,15 +66,15 @@ const K = (e, l, o) => e ? o.some((c) => c.name === l.name) ? /* @__PURE__ */ r(
         walletIcon: u,
         account: h
       });
-    const y = j[a];
-    return y.isInstalled ? /* @__PURE__ */ n(p, {
+    const b = j[a];
+    return b.isInstalled ? /* @__PURE__ */ n(p, {
       walletName: t,
       onClick: () => O(a),
       walletIcon: u,
       labelText: "Connect"
     }) : /* @__PURE__ */ n(p, {
       walletName: t,
-      onClick: () => window.open(y.installUrl, "_blank").focus(),
+      onClick: () => window.open(b.installUrl, "_blank").focus(),
       walletIcon: u,
       labelText: "Install"
     });
@@ -86,30 +86,30 @@ const K = (e, l, o) => e ? o.some((c) => c.name === l.name) ? /* @__PURE__ */ r(
       span: "24",
       children: /* @__PURE__ */ n(D, {
         onClick: () => T(a),
-        loading: C,
+        loading: w,
         isActive: a === d.chainId,
         canSwitchChain: v,
         chain: t
       })
     }, a);
-  }, b = [0, 12], B = () => {
+  }, y = [0, 12], B = () => {
     c && c(), o && o();
   };
-  return /* @__PURE__ */ n(E, {
+  return /* @__PURE__ */ n(L, {
     viewMode: "topGap",
-    loading: C,
+    loading: w,
     footer: _,
     className: "connect-wallet-mobile-modal",
     title: "Network & Wallet",
-    visible: l,
+    visible: i,
     onCancel: () => B(),
-    children: /* @__PURE__ */ r(i, {
-      children: [d && /* @__PURE__ */ r(i, {
+    children: /* @__PURE__ */ r(l, {
+      children: [!G(d) && /* @__PURE__ */ r(l, {
         children: [/* @__PURE__ */ n("div", {
           className: "description",
-          children: K(h, d, M)
+          children: R(h, d, M)
         }), /* @__PURE__ */ n(I, {
-          gutter: b,
+          gutter: y,
           className: "chain-buttons",
           children: M.map((t) => x(t))
         })]
@@ -119,20 +119,20 @@ const K = (e, l, o) => e ? o.some((c) => c.name === l.name) ? /* @__PURE__ */ r(
           children: "Connect your Wallet"
         }), " and jump into the world of NFT's"]
       }), /* @__PURE__ */ r(I, {
-        gutter: b,
+        gutter: y,
         children: [window.ethereum && /* @__PURE__ */ n(m, {
           span: "24",
-          children: g("Metamask", k.Injected, F)
+          children: g("Metamask", k.Injected, E)
         }), /* @__PURE__ */ n(m, {
           span: "24",
-          children: g("WalletConnect", k.WalletConnect, L)
+          children: g("WalletConnect", k.WalletConnect, F)
         })]
       })]
     })
   });
 };
 export {
-  G as WALLETTYPE,
-  Q as default
+  K as WALLETTYPE,
+  V as default
 };
-//# sourceMappingURL=connectModalMobile.6ea2b788.mjs.map
+//# sourceMappingURL=connectModalMobile.1b79593a.mjs.map

@@ -1,5 +1,5 @@
-import { A as i, s as t, L as c } from "./asideMobile.module.c03db1d0.mjs";
-import { j as s, a as r } from "./index.5ebfa06e.mjs";
+import { A as i, s as t, L as c } from "./asideMobile.module.3114b233.mjs";
+import { j as s, a as r } from "./index.7348b911.mjs";
 import "antd";
 import "react";
 import "react-router-dom";
@@ -30,4 +30,4 @@ const d = ({
 export {
   f as default
 };
-//# sourceMappingURL=layoutDesktop.1531b0dd.mjs.map
+//# sourceMappingURL=layoutDesktop.78d83c65.mjs.map

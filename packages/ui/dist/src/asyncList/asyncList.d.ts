@@ -8,8 +8,9 @@ interface IProps<TItem> {
     loading: boolean;
     grid?: ListGridType;
     className?: string;
+    style?: React.CSSProperties;
     noDataText?: string;
 }
-export declare const AsyncList: <TItem>({ hasLoadMore, itemRenderer, onLoadMore, items, loading, grid, className, noDataText }: IProps<TItem>) => JSX.Element;
+export declare const AsyncList: <TItem>({ hasLoadMore, itemRenderer, onLoadMore, items, loading, grid, className, style, noDataText }: IProps<TItem>) => JSX.Element;
 export {};
 //# sourceMappingURL=asyncList.d.ts.map

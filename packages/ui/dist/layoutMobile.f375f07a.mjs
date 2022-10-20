@@ -1,8 +1,8 @@
-import { A as d, a as _, L as u } from "./asideMobile.module.c03db1d0.mjs";
+import { A as d, a as _, L as u } from "./asideMobile.module.3114b233.mjs";
 import { Drawer as h } from "antd";
 import { useState as m } from "react";
 import "react-router-dom";
-import { j as e, a as s, F as p, f as g } from "./index.5ebfa06e.mjs";
+import { j as e, a as s, F as p, f as g } from "./index.7348b911.mjs";
 const k = ({
   navItems: t,
   web3: r,
@@ -94,4 +94,4 @@ const k = ({
 export {
   A as default
 };
-//# sourceMappingURL=layoutMobile.66d6957b.mjs.map
+//# sourceMappingURL=layoutMobile.f375f07a.mjs.map
