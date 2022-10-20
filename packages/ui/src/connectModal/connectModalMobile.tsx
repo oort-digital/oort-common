@@ -8,7 +8,7 @@ import { WalletConnectIcon } from './walletConnectIcon';
 import { Gutter } from 'antd/lib/grid/row';
 import { ChainButton } from './chainButton';
 import { ConnectorNames } from "@oort/web3-connectors";
-import { IChain } from '../typesAndInterfaces';
+import { IChain, isChainEmpty } from '../typesAndInterfaces';
 import { OortModalMobile } from '../oortModal';
 import { IWeb3 } from './connectModal';
 
@@ -143,7 +143,7 @@ const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, af
 		onCancel={() => _onCancel()}>
 		<>
 			{
-				chain && <>
+				!isChainEmpty(chain) && <>
 					<div className="description">
 						{renderAlert(account, chain, supportedChains)}
 					</div>

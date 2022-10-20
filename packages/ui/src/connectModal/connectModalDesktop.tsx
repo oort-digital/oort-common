@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react'
-import { IChain } from "../typesAndInterfaces"
+import { IChain, isChainEmpty } from "../typesAndInterfaces"
 import { Col, Row } from 'antd'
 import "./connectModalDesktop.less"
 import { ConnectButton } from './connectButton';
@@ -144,7 +144,7 @@ const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitc
 		visible={visible} onCancel={() => _onCancel()}>
 		<>
 			{
-				chain && <>
+				!isChainEmpty(chain) && <>
 					<div className="description">
 						{renderAlert(account, chain, supportedChains)}
 					</div>
