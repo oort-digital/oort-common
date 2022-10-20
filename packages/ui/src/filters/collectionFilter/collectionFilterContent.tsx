@@ -9,13 +9,14 @@ import {Tabs} from "antd"
 import { ICollectionFilterItem } from "./typesAndInterfaces"
 
 interface IProps {
+    bottomSpaceHeight?: number
     filterStore: ICollectionFilterStore
     searchable: boolean,
     selectSingle: boolean,
     searchPlaceholder: string
 }
 
-const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder}: IProps) => {
+const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomSpaceHeight}: IProps) => {
 
     const onTermChangeAbortController = useRef<AbortController | undefined>()
     const onTermChange = (term: string) => {
@@ -66,10 +67,31 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder}: IProps
         selected: favoritesSet
     }
 
+    const getListHeight = (): string => {
+        const minH = 150
+        const marginPaddingAndOtherContent = 500
+
+        if(bottomSpaceHeight && bottomSpaceHeight > marginPaddingAndOtherContent) {
+            const result = bottomSpaceHeight - marginPaddingAndOtherContent
+            if(result > minH) {
+                return `${result}px`
+            }
+        }
+
+        return `${minH}px`
+    }
+
     const renderList = (items: ICollectionFilterItem[], showLoadMore: boolean) => {
+
+        const h = getListHeight()
+        const heightStyle = {
+            maxHeight: h,
+            height: h
+        }
 
         if (showLoadMore) {
             return <AsyncList
+                style={heightStyle}
                 className={styles.list}
                 hasLoadMore={filterStore.hasLoadMore}
                 onLoadMore={() => filterStore.loadNextPage(false, EMPTY_ABORT_SIGNAL)}
@@ -80,6 +102,7 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder}: IProps
         }
 
         return <AsyncList
+            style={heightStyle}
             className={styles.list}
             hasLoadMore={false}
             loading={filterStore.isLoading}

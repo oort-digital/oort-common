@@ -12,10 +12,11 @@ interface IProps<TItem> {
     loading: boolean
     grid?: ListGridType
     className?: string
+    style?: React.CSSProperties
     noDataText?: string
 }
 
-export const AsyncList = <TItem, >({hasLoadMore, itemRenderer, onLoadMore, items, loading, grid, className, noDataText}: IProps<TItem>) => {
+export const AsyncList = <TItem, >({hasLoadMore, itemRenderer, onLoadMore, items, loading, grid, className, style, noDataText}: IProps<TItem>) => {
 
     const loadFirstPage = loading && items.length === 0
     const renderLoadMoreBtn = () => {
@@ -39,6 +40,7 @@ export const AsyncList = <TItem, >({hasLoadMore, itemRenderer, onLoadMore, items
     return (
         <ConfigProvider renderEmpty={customizeRenderEmpty}>
             <List
+                style={style}
                 className={`${styles.async_list} ${className || ''}`}
                 // if set loading=true, Ant List hide already loaded items, until loading not finished
                 // thats why set loading only for first page

@@ -2,6 +2,7 @@ import { ReactNode, useState } from 'react'
 import styles from "./popoverFilter.module.less"
 import { Button, Popover } from "antd"
 import { ChevronDownOutlineIcon, CloseIcon } from '../../icons'
+import { logger } from '@oort/logger'
 
 export type RangeValue = number | undefined
 
@@ -20,12 +21,15 @@ interface IProps {
     onSubmit: () => void
     submitDisabled?: boolean
     onVisibleChange?: (isVisible: boolean) => void
+    //returns space between bottom of button and bottom of the window then
+    onBottomSpaceHeightChange?: (heigth: number) => void
 }
 
 export const PopoverFilter = ({
     title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName,
     popoverTitleClassName, applyButtonClassName, cancelButtonClassName,
-    isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled}: IProps) => {
+    isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled,
+    onBottomSpaceHeightChange}: IProps) => {
 
     const [visible, setVisible] = useState(false)
 
@@ -74,6 +78,15 @@ export const PopoverFilter = ({
     let btnClassName = `${styles.trigger_btn} ${triggerBtnClassName ?? ''}`
     btnClassName = `${btnClassName} ${isClear ? '' : 'filled'}`
 
+    const setBtnRef = (btnElement: HTMLElement | null) => {
+        if(btnElement && onBottomSpaceHeightChange) {
+            //calculate space between bottom of button and bottom of the window
+            var bottomSpaceHeight = window.innerHeight - btnElement.offsetTop + btnElement.offsetHeight
+            logger.debug(`Popover filter. BottomSpaceHeight: ${bottomSpaceHeight}`)
+            onBottomSpaceHeightChange(bottomSpaceHeight)
+        }
+    }
+
     return <Popover
         style={{"backgroundColor":"#11151A"}}
         onOpenChange={onVisibleChange_}
@@ -81,7 +94,7 @@ export const PopoverFilter = ({
         placement="bottomRight"
         content={renderContent}
         trigger="click">
-        <Button className={btnClassName} size="large">
+        <Button ref={setBtnRef} className={btnClassName} size="large">
             {subTitle ? renderTitleAndSubTitle() : renderSingleTitle() }
         </Button>
   </Popover>

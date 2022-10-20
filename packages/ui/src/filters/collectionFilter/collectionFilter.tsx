@@ -5,6 +5,7 @@ import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
 import { ICollectionFilterItem } from "./typesAndInterfaces"
 import { ICollectionFilterStore } from "./collectionFilterStore"
+import { useState } from "react"
 
 interface IProps {
 	title: string
@@ -17,6 +18,8 @@ interface IProps {
 }
 
 const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchPlaceholder, filterStore }: IProps) => {
+
+	const [bottomSpaceHeight, setBottomSpaceHeight] = useState<number>()
 
 	const isClear = !filterStore.appliedItems.length
 	const renderSubTitle = () => {
@@ -44,7 +47,12 @@ const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchP
 		filterStore.clearNotApplied()
 	}
 
+	const onBottomSpaceHeightChange = (h: number) => {
+		setBottomSpaceHeight(h)
+	}
+
     return <PopoverFilter
+		onBottomSpaceHeightChange={onBottomSpaceHeightChange}
 		triggerBtnClassName={styles.collection_trigger_btn}
 		popoverClassName={styles.collection_popover_content}
 		popoverTitleClassName={styles.title}
@@ -60,6 +68,7 @@ const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchP
 
 
         <CollectionFilterContent
+			bottomSpaceHeight={bottomSpaceHeight}
 			searchPlaceholder={searchPlaceholder}
 			selectSingle={selectSingle}
 			searchable={searchable}

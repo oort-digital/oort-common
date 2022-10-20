@@ -29,7 +29,10 @@ export default {
 const inMemoryFilterStore = new InMemoryStoreStub()
 inMemoryFilterStore.setApplied([1, 2])
 
-const Template: ComponentStory<typeof CollectionFilter> = (args) => <CollectionFilter {...args} />
+const templateStyle = { height: '1000px' }
+const Template: ComponentStory<typeof CollectionFilter> = (args) => <div style={templateStyle}>
+  <CollectionFilter {...args} />
+</div>
 
 const onChange = (collections: ICollectionFilterItem[]) => {
   inMemoryFilterStore.setApplied(collections.map(x => x.key))
