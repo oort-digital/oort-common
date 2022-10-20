@@ -1,4 +1,5 @@
 import { Collapse } from "antd";
+import { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { DashboardIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
@@ -103,18 +104,44 @@ const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
     return <div className={styles.header}>{i}{caption}</div>
 }
 
+const getHRef = (it: NavItemType) => typeof it  === 'string' ? it : it.href
+
+type NavItemPairType = [INavItemInternal, NavItemMap]
+
 export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
 
     // to trigger rerendering on react-router pathchange
     useLocation()
 
+    const { dashboard, rent, gameHub, minting } = navItems
+
+    const collapseNavItemPairs: NavItemPairType[] = [
+        [rentInternal, rent],
+        [gameHubInternal, gameHub],
+        [mintInternal, minting]
+    ]
+
     const isActive = isActiveFunc || _isHrefActive;
 
-    const getPanelActive = (hrefs: string[]): boolean => hrefs.some(isActive)
+    const hasActiveHref = (hrefs: string[]): boolean => hrefs.some(isActive)
 
-    const getHRef = (it: NavItemType) => typeof it  === 'string' ? it : it.href
+    const getCollapseActiveKey = (): string | undefined => {
+        const activePair = collapseNavItemPairs.find(pair => {
+            const hrefEntries = Object.entries(pair[1])
+            const hrefs = hrefEntries.map(kvp => getHRef(kvp[1]))
+            return hasActiveHref(hrefs)
+        })
 
-    const RenderItem = (it: NavItemType, { caption, icon }: INavItemInternal) => {
+        if(activePair) {
+            return activePair[0].caption
+        }
+
+        return undefined
+    }
+
+    const defaultActiveKey = useRef(getCollapseActiveKey())
+
+    const renderItem = (it: NavItemType, { caption, icon }: INavItemInternal) => {
 
         let href 
         let reactRouterLink = false
@@ -132,42 +159,36 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         return <MenuItemLink reactRouterLink={reactRouterLink || false} key={caption} className={activeCss} href={href} caption={caption} icon={i} />
     }
 
-    const RenderCollapse = (rootItem: INavItemInternal, navItemMap: NavItemMap) => {
-        const key = 1;
-        const childCaptionsMap = getChildCaptions(rootItem)
-        const hrefEntries = Object.entries(navItemMap)
-        const hrefs = hrefEntries.map(kvp => getHRef(kvp[1]))
+    const renderCollapse = ([rootItem, navItemMap]: NavItemPairType) => {
+        const key = rootItem.caption;
 
-        const isPanelActive = getPanelActive(hrefs)
-
-        let defaultActiveKey: number | undefined
+        const isPanelActive = key === defaultActiveKey.current
         let panelClass = styles.collapse_panel
         
         if(isPanelActive) {
             panelClass = `${styles.active_header} ${panelClass}`
-            defaultActiveKey = key
         }
 
-        return <Collapse defaultActiveKey={defaultActiveKey} ghost expandIconPosition="end">
-                <Panel key={key} className={panelClass} header={RenderPanelHeader(rootItem)}>
+        const childCaptionsMap = getChildCaptions(rootItem)
+        const hrefEntries = Object.entries(navItemMap)
+
+        return <Panel key={key} className={panelClass} header={RenderPanelHeader(rootItem)}>
                     <Menu>
                         {
                             hrefEntries.map(kvp => {
                                 const [key, navItem] = kvp
-                                return RenderItem(navItem, { caption: childCaptionsMap[key] } )
+                                return renderItem(navItem, { caption: childCaptionsMap[key] } )
                             })
                         }
                     </Menu>
                 </Panel>
-            </Collapse>
     }
 
-    const { dashboard, rent, gameHub, minting } = navItems
-
     return <Menu className={`${styles.root} ${className || ''}`}>
-        {RenderItem(dashboard, dashboardInternal)}
-        {RenderCollapse(rentInternal, rent)}
-        {RenderCollapse(gameHubInternal, gameHub)}
-        {RenderCollapse(mintInternal, minting)}
+        {renderItem(dashboard, dashboardInternal)}
+        <Collapse accordion defaultActiveKey={defaultActiveKey.current} ghost expandIconPosition="end">
+            {collapseNavItemPairs.map(renderCollapse)}
+        </Collapse>
+   
     </Menu>
 }
