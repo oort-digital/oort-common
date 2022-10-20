@@ -1,8 +1,8 @@
-import { A as i, s as t, L as c } from "./asideMobile.module.22bf33ed.mjs";
-import { j as s, a as r } from "./index.5b66d996.mjs";
+import { A as i, s as t, L as c } from "./asideMobile.module.c03db1d0.mjs";
+import { j as s, a as r } from "./index.5ebfa06e.mjs";
 import "antd";
-import "react-router-dom";
 import "react";
+import "react-router-dom";
 const d = ({
   navItems: o,
   web3: a,
@@ -30,4 +30,4 @@ const d = ({
 export {
   f as default
 };
-//# sourceMappingURL=layoutDesktop.b1461178.mjs.map
+//# sourceMappingURL=layoutDesktop.1531b0dd.mjs.map

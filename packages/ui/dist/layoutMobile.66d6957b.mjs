@@ -1,8 +1,8 @@
-import { A as d, a as _, L as u } from "./asideMobile.module.22bf33ed.mjs";
+import { A as d, a as _, L as u } from "./asideMobile.module.c03db1d0.mjs";
 import { Drawer as h } from "antd";
+import { useState as m } from "react";
 import "react-router-dom";
-import { j as e, a as s, F as m, f as p } from "./index.5b66d996.mjs";
-import { useState as g } from "react";
+import { j as e, a as s, F as p, f as g } from "./index.5ebfa06e.mjs";
 const k = ({
   navItems: t,
   web3: r,
@@ -48,12 +48,12 @@ const k = ({
 }), v = ({
   children: t
 }) => {
-  const [r, o] = g(!1);
-  return /* @__PURE__ */ s(m, {
+  const [r, o] = m(!1);
+  return /* @__PURE__ */ s(p, {
     children: [(() => /* @__PURE__ */ e(h, {
       title: "Menu",
       className: a.top_header_menu,
-      closeIcon: /* @__PURE__ */ e(p, {}),
+      closeIcon: /* @__PURE__ */ e(g, {}),
       placement: "left",
       onClose: () => o(!1),
       open: r,
@@ -94,4 +94,4 @@ const k = ({
 export {
   A as default
 };
-//# sourceMappingURL=layoutMobile.fe7b581a.mjs.map
+//# sourceMappingURL=layoutMobile.66d6957b.mjs.map
