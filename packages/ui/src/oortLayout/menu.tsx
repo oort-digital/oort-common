@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 interface IMenuItemBtnProps {
     className?: string
     onClick?: () => void
-    key: string
+    key?: string
     caption: string
     iconBefore: ReactNode
     iconAfter: ReactNode

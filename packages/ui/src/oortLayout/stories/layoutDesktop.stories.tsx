@@ -8,7 +8,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import LayoutDesktop from '../layoutDesktop';
 import React, { lazy } from "react";
 import { useTheme } from "../../effects";
-import { isActiveFunc, navItems, TestContent, web3 } from "./common";
+import { isActiveFunc, navItems, TestContent, testNfts, web3 } from "./common";
 
 const DarkTheme = lazy(() => import("../../styles/theme/darkTheme"));
 const LightTheme = lazy(() => import("../../styles/theme/lightTheme"));
@@ -46,12 +46,14 @@ export const WithWeb3 = Template.bind({});
 WithWeb3.args = {
   navItems: navItems,
   web3: web3,
+  testNfts: testNfts,
   children: TestContent
 };
 
 export const WithoutWeb3 = Template.bind({});
 WithoutWeb3.args = {
   navItems: navItems,
+  testNfts: testNfts,
   children: TestContent
 };
 
