@@ -19,7 +19,7 @@ const TELEGRAM = "https://t.me/oortdigital";
 interface IProps {
     className?: string
     web3?: IWeb3
-    testNfts: ITestNfts
+    testNfts?: ITestNfts
 }
 
 const social = <>
