@@ -1,7 +1,7 @@
 import { useState as S } from "react";
-import { Row as I, Col as m } from "antd";
-import { a as k, C as p, b as D, M as E, W as F } from "./index.es.4edb0118.mjs";
-import { j as n, h as L, a as r, F as l, i as G } from "./index.7348b911.mjs";
+import { Row as k, Col as m } from "antd";
+import { a as I, C as p, b as D, M as E, W as L } from "./index.es.e50110e9.mjs";
+import { j as n, k as F, a as r, b as l, i as G } from "./index.14446a0b.mjs";
 import "ethers";
 import "react-router-dom";
 var K = /* @__PURE__ */ ((e) => (e[e.WALLET_METAMASK = 0] = "WALLET_METAMASK", e[e.WALLET_CONNECT = 1] = "WALLET_CONNECT", e))(K || {});
@@ -66,15 +66,15 @@ const R = (e, i, o) => e ? o.some((c) => c.name === i.name) ? /* @__PURE__ */ r(
         walletIcon: u,
         account: h
       });
-    const b = j[a];
-    return b.isInstalled ? /* @__PURE__ */ n(p, {
+    const y = j[a];
+    return y.isInstalled ? /* @__PURE__ */ n(p, {
       walletName: t,
       onClick: () => O(a),
       walletIcon: u,
       labelText: "Connect"
     }) : /* @__PURE__ */ n(p, {
       walletName: t,
-      onClick: () => window.open(b.installUrl, "_blank").focus(),
+      onClick: () => window.open(y.installUrl, "_blank").focus(),
       walletIcon: u,
       labelText: "Install"
     });
@@ -92,10 +92,10 @@ const R = (e, i, o) => e ? o.some((c) => c.name === i.name) ? /* @__PURE__ */ r(
         chain: t
       })
     }, a);
-  }, y = [0, 12], B = () => {
+  }, b = [0, 12], B = () => {
     c && c(), o && o();
   };
-  return /* @__PURE__ */ n(L, {
+  return /* @__PURE__ */ n(F, {
     viewMode: "topGap",
     loading: w,
     footer: _,
@@ -108,8 +108,8 @@ const R = (e, i, o) => e ? o.some((c) => c.name === i.name) ? /* @__PURE__ */ r(
         children: [/* @__PURE__ */ n("div", {
           className: "description",
           children: R(h, d, M)
-        }), /* @__PURE__ */ n(I, {
-          gutter: y,
+        }), /* @__PURE__ */ n(k, {
+          gutter: b,
           className: "chain-buttons",
           children: M.map((t) => x(t))
         })]
@@ -118,14 +118,14 @@ const R = (e, i, o) => e ? o.some((c) => c.name === i.name) ? /* @__PURE__ */ r(
         children: [/* @__PURE__ */ n("span", {
           children: "Connect your Wallet"
         }), " and jump into the world of NFT's"]
-      }), /* @__PURE__ */ r(I, {
-        gutter: y,
+      }), /* @__PURE__ */ r(k, {
+        gutter: b,
         children: [window.ethereum && /* @__PURE__ */ n(m, {
           span: "24",
-          children: g("Metamask", k.Injected, E)
+          children: g("Metamask", I.Injected, E)
         }), /* @__PURE__ */ n(m, {
           span: "24",
-          children: g("WalletConnect", k.WalletConnect, F)
+          children: g("WalletConnect", I.WalletConnect, L)
         })]
       })]
     })
@@ -135,4 +135,4 @@ export {
   K as WALLETTYPE,
   V as default
 };
-//# sourceMappingURL=connectModalMobile.1b79593a.mjs.map
+//# sourceMappingURL=connectModalMobile.5faa2c19.mjs.map
