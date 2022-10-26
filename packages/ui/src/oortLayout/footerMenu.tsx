@@ -8,6 +8,8 @@ import { ConnectModal, IWeb3 } from '../connectModal';
 import { BlockieAddress } from '../blockieAddress';
 import { useTheme } from '../effects';
 import { isChainEmpty } from '../typesAndInterfaces';
+import { MintTestNftModal } from './mintTestNftModal';
+import { ITestNfts } from './typesAndInterfaces';
 
 const TWITTER = "https://twitter.com/OortDigital";
 const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
@@ -17,6 +19,7 @@ const TELEGRAM = "https://t.me/oortdigital";
 interface IProps {
     className?: string
     web3?: IWeb3
+    testNfts?: ITestNfts
 }
 
 const social = <>
@@ -25,9 +28,11 @@ const social = <>
     <a href={DISCORD}><span className={styles.icon}><DiscordIcon/></span></a>
 </>
 
-export const FooterMenu = ({ className, web3 }: IProps) => {
+export const FooterMenu = ({ className, web3, testNfts }: IProps) => {
 
     const [ connectModalVisible, setConnectModalVisible ] = useState(false)
+
+    const [ isMintTestNftsVisible, setMintTestNftsVisible ] = useState(false)
 
     const [ isDarkMode, setDarkMode ] = useTheme()
 
@@ -52,9 +57,33 @@ export const FooterMenu = ({ className, web3 }: IProps) => {
         const afterIcon = <span className={styles.icon_after}><ChevronSortIcon /></span>
         return <>
             {renderConnectModal()}
-            <MenuItemBtn className={styles.menu_item_btn} key="chain" onClick={() => setConnectModalVisible(true)} iconBefore={chainIcon} iconAfter={afterIcon} caption={name} />
+            <MenuItemBtn className={`${styles.menu_item_btn} ${styles.chain_name}`} key="chain" onClick={() => setConnectModalVisible(true)} iconBefore={chainIcon} iconAfter={afterIcon} caption={name} />
             <MenuItemBtn className={styles.menu_item_btn} key="account" onClick={() => setConnectModalVisible(true)} iconBefore={accountImg} iconAfter={afterIcon} caption={toMasskedAddress(account)} />
         </>
+    }
+
+    const renderMintTestNftModal = () => {
+
+        if(testNfts?.isEnabled === true) {
+            const afterIcon = <span className={styles.icon_after}><ChevronSortIcon /></span>
+            const { isLoading, mintErc1155, mintErc721 } = testNfts
+            return <>
+                <MintTestNftModal
+                    loading={isLoading}
+                    mintErc721={mintErc721}
+                    mintErc1155={mintErc1155}
+                    onCancel={() => setMintTestNftsVisible(false)}
+                    visible={isMintTestNftsVisible} />
+                <MenuItemBtn
+                    className={styles.menu_item_btn}
+                    onClick={() => setMintTestNftsVisible(true)}
+                    iconBefore={<></>}
+                    iconAfter={afterIcon}
+                    caption="Mint Test NFTs" />
+            </>
+        }
+        return null
+
     }
 
     const cssClass = className ? `${className} ${styles.root}`: styles.root
@@ -62,6 +91,7 @@ export const FooterMenu = ({ className, web3 }: IProps) => {
     return <>
         <Menu className={cssClass}>
             <MenuItem key="social" className={styles.social}>{social}</MenuItem>
+            {renderMintTestNftModal()}
             {renderWeb3()}
             <MenuItem className={styles.theme_switch} key="theme-switch">
                 <ThemeSwitch isDarkMode={isDarkMode} onChange={() => setDarkMode(!isDarkMode)} />

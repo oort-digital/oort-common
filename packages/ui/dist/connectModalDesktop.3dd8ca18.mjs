@@ -1,7 +1,7 @@
 import { useState as D } from "react";
-import { j as t, O as S, a as e, F as i, i as E } from "./index.7348b911.mjs";
-import { Row as A, Col as u } from "antd";
-import { a as M, C as m, b as F, M as L, W as K } from "./index.es.4edb0118.mjs";
+import { j as t, O as S, a as e, b as i, i as E } from "./index.0773b078.mjs";
+import { Row as b, Col as u } from "antd";
+import { a as A, C as m, b as L, M as F, W as K } from "./index.es.2d8b01f2.mjs";
 import "react-router-dom";
 import "ethers";
 var G = /* @__PURE__ */ ((a) => (a[a.WALLET_METAMASK = 0] = "WALLET_METAMASK", a[a.WALLET_CONNECT = 1] = "WALLET_CONNECT", a))(G || {});
@@ -30,7 +30,7 @@ const R = (a, r, l) => a ? l.some((c) => c.name === r.name) ? /* @__PURE__ */ e(
   const [w, s] = D(!1), {
     supportedChains: y,
     chain: d,
-    switchChain: b,
+    switchChain: M,
     canSwitchChain: v,
     connectAsync: j,
     account: h,
@@ -46,7 +46,7 @@ const R = (a, r, l) => a ? l.some((c) => c.name === r.name) ? /* @__PURE__ */ e(
   }, O = async (n) => {
     s(!0);
     try {
-      await b(n), r && r(), f && f();
+      await M(n), r && r(), f && f();
     } finally {
       s(!1);
     }
@@ -88,7 +88,7 @@ const R = (a, r, l) => a ? l.some((c) => c.name === r.name) ? /* @__PURE__ */ e(
     } = n;
     return /* @__PURE__ */ t(u, {
       flex: 3,
-      children: /* @__PURE__ */ t(F, {
+      children: /* @__PURE__ */ t(L, {
         onClick: () => O(o),
         loading: w,
         isActive: o === d.chainId,
@@ -112,7 +112,7 @@ const R = (a, r, l) => a ? l.some((c) => c.name === r.name) ? /* @__PURE__ */ e(
         children: [/* @__PURE__ */ t("div", {
           className: "description",
           children: R(h, d, y)
-        }), /* @__PURE__ */ t(A, {
+        }), /* @__PURE__ */ t(b, {
           gutter: k,
           className: "chain-buttons",
           justify: "space-between",
@@ -123,15 +123,15 @@ const R = (a, r, l) => a ? l.some((c) => c.name === r.name) ? /* @__PURE__ */ e(
         children: [/* @__PURE__ */ t("span", {
           children: "Connect your Wallet"
         }), " and jump into the world of NFT's"]
-      }), /* @__PURE__ */ e(A, {
+      }), /* @__PURE__ */ e(b, {
         gutter: k,
         justify: "space-between",
         children: [/* @__PURE__ */ t(u, {
           span: 12,
-          children: g("Metamask", M.Injected, L)
+          children: g("Metamask", A.Injected, F)
         }), /* @__PURE__ */ t(u, {
           span: 12,
-          children: g("WalletConnect", M.WalletConnect, K)
+          children: g("WalletConnect", A.WalletConnect, K)
         })]
       })]
     })
@@ -141,4 +141,4 @@ export {
   G as WALLETTYPE,
   V as default
 };
-//# sourceMappingURL=connectModalDesktop.ac39b4b9.mjs.map
+//# sourceMappingURL=connectModalDesktop.3dd8ca18.mjs.map

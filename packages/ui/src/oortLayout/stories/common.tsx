@@ -2,6 +2,7 @@ import { logger } from "@oort/logger";
 import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
 import { ZERO_ADDR } from "../../utils";
 import { INavItems } from "../navMenu";
+import { ITestNfts } from "../typesAndInterfaces";
 import { TestCarousel } from "./testCarousel";
 
 export const navItems: INavItems = {
@@ -62,6 +63,17 @@ export const web3 = {
     account: ZERO_ADDR,
     supportedChains: supportedChains,
     supportedConnectors: supportedConnectors,
+}
+
+export const testNfts: ITestNfts = {
+  mintErc721: function (): void {
+    throw new Error("Function not implemented.");
+  },
+  mintErc1155: function (): void {
+    throw new Error("Function not implemented.");
+  },
+  isEnabled: true,
+  isLoading: false
 }
 
 const style = { 
