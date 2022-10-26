@@ -55,7 +55,7 @@ const dashboardInternal = {
 }
 
 const rentInternal = {
-    caption: 'rent app',
+    caption: 'NFT Rental',
     icon: <RentAppIcon />,
     lend: 'Lend',
     borrow: 'Borrow',
@@ -74,8 +74,8 @@ const mintInternal = {
 const gameHubInternal = {
     caption: 'game hub',
     icon: <GameHubIcon />,
-    games: 'Games',
-    nfts: "NFTs"
+    games: 'Game Library',
+    nfts: "NFT Library"
 }
 
 type StringMap = { [id: string]: string; }

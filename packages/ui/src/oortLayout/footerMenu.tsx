@@ -57,7 +57,7 @@ export const FooterMenu = ({ className, web3, testNfts }: IProps) => {
         const afterIcon = <span className={styles.icon_after}><ChevronSortIcon /></span>
         return <>
             {renderConnectModal()}
-            <MenuItemBtn className={styles.menu_item_btn} key="chain" onClick={() => setConnectModalVisible(true)} iconBefore={chainIcon} iconAfter={afterIcon} caption={name} />
+            <MenuItemBtn className={`${styles.menu_item_btn} ${styles.chain_name}`} key="chain" onClick={() => setConnectModalVisible(true)} iconBefore={chainIcon} iconAfter={afterIcon} caption={name} />
             <MenuItemBtn className={styles.menu_item_btn} key="account" onClick={() => setConnectModalVisible(true)} iconBefore={accountImg} iconAfter={afterIcon} caption={toMasskedAddress(account)} />
         </>
     }
