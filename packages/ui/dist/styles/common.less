@@ -1,0 +1,56 @@
+@sm-side-indent: 32px;
+@md-side-indent: 102px;
+@xl-side-indent: 222px;
+
+@md-screen-size: 1680px;
+@xl-screen-size: 1920px;
+
+
+.responsive-layout-padding-mixin() {
+  padding-right: @sm-side-indent;
+  padding-left: @sm-side-indent;
+
+  @media (min-width: @md-screen-size) {
+    padding-right: @md-side-indent;
+    padding-left: @md-side-indent;
+  }
+
+  @media (min-width: @xl-screen-size) {
+    padding-right: @xl-side-indent;
+    padding-left: @xl-side-indent;
+  }
+}
+
+.responsive-layout-margin-mixin() {
+  margin-right: @sm-side-indent;
+  margin-left: @sm-side-indent;
+
+  @media (min-width: @md-screen-size) {
+    margin-right: @md-side-indent;
+    margin-left: @md-side-indent;
+  }
+
+  @media (min-width: @xl-screen-size) {
+    margin-right: @xl-side-indent;
+    margin-left: @xl-side-indent;
+  }
+}
+
+.scrollbar-mixin() {
+    @scroll-bg: @theme-color-4;
+    @scroll-color: @theme-color-8;
+    /* Works on Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+      width: 12px;
+    }
+  
+    *::-webkit-scrollbar-track {
+      background: @scroll-bg;
+    }
+  
+    *::-webkit-scrollbar-thumb {
+      background-color: @scroll-color;
+      border-radius: 20px;
+      border: 3px solid @scroll-bg;
+    }
+}
