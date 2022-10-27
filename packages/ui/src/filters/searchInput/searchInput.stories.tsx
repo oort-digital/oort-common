@@ -1,8 +1,6 @@
 
 import "../../styles/antOverride.less";
-// import "../../styles/fonts.css";
 import '@oort/ui/dist/style.css';
-// import '../oortLib.less';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { SearchInput } from ".";
