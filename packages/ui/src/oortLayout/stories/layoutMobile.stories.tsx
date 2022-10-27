@@ -2,9 +2,6 @@
 import React from "react";
 import "../../styles/antOverride.less";
 import "../../styles/fonts.css";
-
-// import '@oort/ui/dist/style.css';
-// import '../oortLib.less';
 import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
