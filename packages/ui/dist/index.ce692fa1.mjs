@@ -2217,7 +2217,7 @@ const Ra = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => n === ut.Desktop ? e : n === ut.Phone ? r : t)(), " "]
   });
-}, ro = Pe(() => import("./layoutDesktop.9ab8b714.mjs")), gr = Pe(() => import("./layoutMobile.86cc0267.mjs")), Ma = (e) => /* @__PURE__ */ i(Hr, {
+}, ro = Pe(() => import("./layoutDesktop.63078e20.mjs")), gr = Pe(() => import("./layoutMobile.9b83e549.mjs")), Ma = (e) => /* @__PURE__ */ i(Hr, {
   desktop: /* @__PURE__ */ i(ro, {
     ...e
   }),
@@ -2576,7 +2576,7 @@ const Va = ({
   });
 }, No = (e) => zr.create({
   seed: e
-}).toDataURL(), Po = Pe(() => import("./connectModalDesktop.cb6240c2.mjs")), jo = Pe(() => import("./connectModalMobile.88ad4f1e.mjs")), Ha = ({
+}).toDataURL(), Po = Pe(() => import("./connectModalDesktop.6a079f2a.mjs")), jo = Pe(() => import("./connectModalMobile.2dbe65b9.mjs")), Ha = ({
   web3: e,
   visible: r,
   onCancel: t,
@@ -3117,4 +3117,4 @@ export {
   Hr as y,
   K1 as z
 };
-//# sourceMappingURL=index.880508e5.mjs.map
+//# sourceMappingURL=index.ce692fa1.mjs.map
