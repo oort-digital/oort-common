@@ -1,5 +1,5 @@
 import { logger } from "@oort/logger"
-import { runInAction } from "mobx"
+import { action, makeObservable, observable, runInAction } from "mobx"
 import { LocalStorageCacheProvider } from "../../cache"
 // import { distinct } from "../../utils"
 import { ItemQueue } from "./itemQueue"
@@ -192,26 +192,26 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         this._favoritesQueue = new ItemQueue(itemKeyFunc, favoriteMaxSize, [])
         this._recentQueue = new ItemQueue(itemKeyFunc, recentMaxSize, [])
        
-        // makeObservable(this, {
-        //     appliedItems: observable,
-        //     selected: observable,
-        //     favorites: observable,
-        //     recent: observable,
-        //     isLoading: observable,
-        //     hasLoadMore: observable,
-        //     all: observable,
-        //     term: observable,
-        //     setItems: action,
-        //     setTerm: action,
-        //     select: action,
-        //     setFavorites: action,
-        //     clearNotApplied: action,
-        //     loadFavoritesFromCache: action,
-        //     loadRecentFromCache: action,
-        //     copyNotAppliedToRecent: action,
-        //     setApplied: action,
-        //     selectSingle: action
-        // })
+        makeObservable(this, {
+            appliedItems: observable,
+            selected: observable,
+            favorites: observable,
+            recent: observable,
+            isLoading: observable,
+            hasLoadMore: observable,
+            all: observable,
+            term: observable,
+            setItems: action,
+            setTerm: action,
+            select: action,
+            setFavorites: action,
+            clearNotApplied: action,
+            loadFavoritesFromCache: action,
+            loadRecentFromCache: action,
+            copyNotAppliedToRecent: action,
+            setApplied: action,
+            selectSingle: action
+        })
     }
 
     private _nextPageCursor: string | undefined
