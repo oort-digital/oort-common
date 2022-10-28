@@ -1,7 +1,9 @@
+@import "theme/vars.less";
+
 @xs-side-indent: 23px;
 @sm-side-indent: 32px;
-@md-side-indent: 102px;
-@xl-side-indent: 222px;
+@md-side-indent: 6%;
+@xl-side-indent: 12%;
 
 @sm-screen-size: 650px;
 @md-screen-size: 1680px;
@@ -43,20 +45,21 @@
 }
 
 .scrollbar-mixin() {
-    @scroll-bg: @theme-color-4;
-    @scroll-color: @theme-color-8;
+    @scroll-bg: @theme-color-2;
+    @scroll-color: @theme-color-4;
     /* Works on Chrome, Edge, and Safari */
     *::-webkit-scrollbar {
-      width: 12px;
+      width: 18px;
     }
   
     *::-webkit-scrollbar-track {
       background: @scroll-bg;
+      border-radius: 4px;
     }
   
     *::-webkit-scrollbar-thumb {
       background-color: @scroll-color;
-      border-radius: 20px;
+      border-radius: 40px;
       border: 3px solid @scroll-bg;
     }
 }

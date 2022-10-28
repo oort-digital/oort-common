@@ -24,6 +24,15 @@
 @input-number-handler-bg: @input-bg;
 @input-disabled-bg: @input-bg;
 
+.ant-input {
+    .body-14-regular-mixin();
+}
+
+.ant-input-affix-wrapper > .ant-input-suffix > .ant-input-clear-icon > .anticon {
+    color: @input-color;
+    vertical-align: middle;
+}
+
 .ant-input-number {
     border-color: @input-border-color;
     .ant-input-number-handler-wrap {
@@ -118,6 +127,10 @@
     }
 }
 
+.ant-list-split.ant-list-something-after-last-item .ant-spin-container > .ant-list-items > .ant-list-item:last-child {
+    border-bottom: none;
+}
+
 
 .ant-upload.ant-upload-drag {
     background: @theme-color-1;
@@ -127,8 +140,6 @@
     }
 }
 
-// Checkbox
-@checkbox-border-radius: 2px;
 
 // Popover
 @popover-bg: @theme-color-1;
