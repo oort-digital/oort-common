@@ -1,6 +1,4 @@
-import "../../styles/antOverride.less";
-import "../../styles/theme/light.less";
-import "../../styles/fonts.css";
+import "../../stories.less";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ICollectionFilterItem } from "./typesAndInterfaces";
