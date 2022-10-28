@@ -1,5 +1,6 @@
 import { StarIcon } from "./startIcon"
 import { StarFilledIcon } from "./startFilledIcon"
+import styles from "./favoriteCheckBox.module.less"
 
 interface IProps {
 	checked: boolean
@@ -7,5 +8,5 @@ interface IProps {
 }
 
 export const FavoriteCheckBox = ({ checked, onChange }: IProps) => {
-	return <span onClick={(e) => {e.stopPropagation(); onChange(!checked)}}>{ checked ? <StarFilledIcon /> : <StarIcon /> }</span>
+	return <span className={styles.checkbox} onClick={(e) => {e.stopPropagation(); onChange(!checked)}}>{ checked ? <StarFilledIcon /> : <StarIcon /> }</span>
 }

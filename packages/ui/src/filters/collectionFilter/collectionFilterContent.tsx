@@ -94,6 +94,7 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
                 style={heightStyle}
                 className={styles.list}
                 hasLoadMore={filterStore.hasLoadMore}
+                loadMoreButtonSize="middle"
                 onLoadMore={() => filterStore.loadNextPage(false, EMPTY_ABORT_SIGNAL)}
                 loading={filterStore.isLoading}
                 itemRenderer={collectionItemRenderer(styles.list_item, isMobile, selectedParam, favoriteParam)}

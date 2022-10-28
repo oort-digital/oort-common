@@ -3,10 +3,13 @@ import {Button, List, ConfigProvider} from "antd"
 import {ListGridType} from "antd/lib/list"
 import styles from "./asyncList.module.less"
 import {ArrowDownIcon, NoDataIcon} from "../icons"
+import { SizeType } from "antd/lib/config-provider/SizeContext"
 
 interface IProps<TItem> {
     items: TItem[]
     itemRenderer: (item: TItem) => React.ReactElement
+    loadMoreButtonRendered?: (isLoading: boolean, onLoadMore: () => void) => React.ReactElement
+    loadMoreButtonSize?: SizeType,
     onLoadMore?: () => void
     hasLoadMore: boolean
     loading: boolean
@@ -16,17 +19,24 @@ interface IProps<TItem> {
     noDataText?: string
 }
 
-export const AsyncList = <TItem, >({hasLoadMore, itemRenderer, onLoadMore, items, loading, grid, className, style, noDataText}: IProps<TItem>) => {
+export const AsyncList = <TItem, >({
+    hasLoadMore, itemRenderer,
+    loadMoreButtonRendered, onLoadMore, items,
+    loading, grid, className, style,
+    noDataText, loadMoreButtonSize = 'large'}: IProps<TItem>) => {
 
     const loadFirstPage = loading && items.length === 0
     const renderLoadMoreBtn = () => {
-        if (!hasLoadMore || !items.length) {
+        if (!onLoadMore || !hasLoadMore || !items.length) {
             return null
         }
         return <div className={styles.load_more_btn_container}>
-            <Button className={styles.load_more_btn} loading={loading} size="large" onClick={onLoadMore}>
-                More <ArrowDownIcon />
-            </Button>
+            {
+                loadMoreButtonRendered ? loadMoreButtonRendered(loading, onLoadMore) :
+                <Button className={styles.load_more_btn} loading={loading} size={loadMoreButtonSize} onClick={onLoadMore}>
+                    More <ArrowDownIcon />
+                </Button>
+            }
         </div>
     }
 

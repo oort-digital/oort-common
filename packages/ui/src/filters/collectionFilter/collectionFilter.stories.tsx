@@ -1,12 +1,11 @@
-import "../../styles/antOverride.less";
-import "../../styles/theme/light.less";
-import "../../styles/fonts.css";
+import "../../stories.less";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { CollectionFilter } from "./collectionFilter";
 import { InMemoryStoreStub, NftsCollectionStore } from "./testStores";
 import { ICollectionFilterItem } from "./typesAndInterfaces";
 import React from "react";
+import { ThemeLoader } from "../../internalHelpers";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -28,9 +27,13 @@ const inMemoryFilterStore = new InMemoryStoreStub()
 inMemoryFilterStore.setApplied([1, 2])
 
 const templateStyle = { height: '1000px' }
-const Template: ComponentStory<typeof CollectionFilter> = (args) => <div style={templateStyle}>
-  <CollectionFilter {...args} />
-</div>
+const Template: ComponentStory<typeof CollectionFilter> = (args) => <>
+  <ThemeLoader />
+  <div style={templateStyle}>
+    <CollectionFilter {...args} />
+  </div>
+</>
+
 
 const onChange = (collections: ICollectionFilterItem[]) => {
   inMemoryFilterStore.setApplied(collections.map(x => x.key))
