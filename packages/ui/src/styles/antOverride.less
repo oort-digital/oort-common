@@ -24,6 +24,15 @@
 @input-number-handler-bg: @input-bg;
 @input-disabled-bg: @input-bg;
 
+.ant-input {
+    .body-14-regular-mixin();
+}
+
+.ant-input-affix-wrapper > .ant-input-suffix > .ant-input-clear-icon > .anticon {
+    color: @input-color;
+    vertical-align: middle;
+}
+
 .ant-input-number {
     border-color: @input-border-color;
     .ant-input-number-handler-wrap {
