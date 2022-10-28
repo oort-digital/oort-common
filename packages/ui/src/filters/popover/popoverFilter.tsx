@@ -81,7 +81,8 @@ export const PopoverFilter = ({
     const setBtnRef = (btnElement: HTMLElement | null) => {
         if(btnElement && onBottomSpaceHeightChange) {
             //calculate space between bottom of button and bottom of the window
-            var bottomSpaceHeight = window.innerHeight - btnElement.offsetTop + btnElement.offsetHeight
+            const rect = btnElement.getBoundingClientRect()
+            var bottomSpaceHeight = window.innerHeight - rect.top + btnElement.offsetHeight
             logger.debug(`Popover filter. BottomSpaceHeight: ${bottomSpaceHeight}`)
             onBottomSpaceHeightChange(bottomSpaceHeight)
         }
