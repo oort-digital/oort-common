@@ -55,7 +55,7 @@ const dashboardInternal = {
 }
 
 const rentInternal = {
-    caption: 'NFT Rental',
+    caption: 'NFT Rent-to-Earn',
     icon: <RentAppIcon />,
     lend: 'Lend',
     borrow: 'Borrow',
