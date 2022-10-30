@@ -7,7 +7,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { lazy } from "react";
 import { useTheme } from "../../effects";
 import LayoutMobile from "../layoutMobile";
-import { navItems, TestContent, web3 } from "./common";
+import { navItems, TestContent } from "./common";
+import { Web3StoreStub } from "./web3StoreStub";
 
 const DarkTheme = lazy(() => import("../../styles/theme/darkTheme"));
 const LightTheme = lazy(() => import("../../styles/theme/lightTheme"));
@@ -44,7 +45,7 @@ const Template: ComponentStory<typeof LayoutMobile> = (args) => {
 export const WithWeb3 = Template.bind({});
 WithWeb3.args = {
   navItems: navItems,
-  web3: web3,
+  web3: new Web3StoreStub(),
   children: TestContent
 };
 
