@@ -1,31 +1,32 @@
 import { useState as V } from "react";
-import { j as t, a as c, O as z, F as B, b as a, T as q, c as v, D as A, u as L, M as y, d as k, i as E, g as F, B as x, C as g, e as u, t as D, f as R, N as S } from "./index.ab3f15a6.mjs";
+import { j as t, a as c, O as z, F as B, b as a, T as v, c as q, D as A, u as L, M as y, d as k, i as E, g as F, B as x, C as g, e as u, t as D, f as R, N as S } from "./index.adc0fd4a.mjs";
 import { Switch as W, Button as H } from "antd";
-const O = "_aside_desktop_izek7_1", j = "_logo_izek7_15", g1 = {
-  aside_desktop: O,
-  logo: j
-}, G = "_root_udfzq_1", K = "_icon_before_udfzq_1", U = "_icon_after_udfzq_7", Y = "_account_img_udfzq_12", J = "_social_udfzq_20", P = "_icon_udfzq_1", Q = "_theme_switch_udfzq_29", X = "_theme_name_udfzq_32", t1 = "_menu_item_btn_udfzq_41", e1 = "_chain_name_udfzq_44", e = {
-  root: G,
-  icon_before: K,
-  icon_after: U,
-  account_img: Y,
-  social: J,
-  icon: P,
-  theme_switch: Q,
-  theme_name: X,
-  menu_item_btn: t1,
-  chain_name: e1
-}, o1 = "_root_rh9ts_3", n1 = {
-  root: o1
-}, C1 = ({
+import { observer as O } from "mobx-react";
+const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", N1 = {
+  aside_desktop: j,
+  logo: G
+}, K = "_root_udfzq_1", U = "_icon_before_udfzq_1", Y = "_icon_after_udfzq_7", J = "_account_img_udfzq_12", P = "_social_udfzq_20", Q = "_icon_udfzq_1", X = "_theme_switch_udfzq_29", t1 = "_theme_name_udfzq_32", e1 = "_menu_item_btn_udfzq_41", o1 = "_chain_name_udfzq_44", e = {
+  root: K,
+  icon_before: U,
+  icon_after: Y,
+  account_img: J,
+  social: P,
+  icon: Q,
+  theme_switch: X,
+  theme_name: t1,
+  menu_item_btn: e1,
+  chain_name: o1
+}, n1 = "_root_rh9ts_3", C1 = {
+  root: n1
+}, s1 = ({
   isDarkMode: o,
   onChange: n
 }) => /* @__PURE__ */ t(W, {
-  className: n1.root,
+  className: C1.root,
   size: "default",
   checked: o,
   onChange: n
-}), s1 = ({
+}), c1 = ({
   onCancel: o,
   visible: n,
   mintErc1155: s,
@@ -51,15 +52,9 @@ const O = "_aside_desktop_izek7_1", j = "_logo_izek7_15", g1 = {
     onClick: () => s(),
     children: "Mint ERC 1155"
   })]
-}), c1 = "https://twitter.com/OortDigital", i1 = "https://t.co/6eYdGdfUK7?amp=1", a1 = "https://t.me/oortdigital", r1 = /* @__PURE__ */ c(a, {
+}), i1 = "https://twitter.com/OortDigital", a1 = "https://t.co/6eYdGdfUK7?amp=1", r1 = "https://t.me/oortdigital", l1 = /* @__PURE__ */ c(a, {
   children: [/* @__PURE__ */ t("a", {
-    href: a1,
-    children: /* @__PURE__ */ t("span", {
-      className: e.icon,
-      children: /* @__PURE__ */ t(q, {})
-    })
-  }), /* @__PURE__ */ t("a", {
-    href: c1,
+    href: r1,
     children: /* @__PURE__ */ t("span", {
       className: e.icon,
       children: /* @__PURE__ */ t(v, {})
@@ -68,10 +63,16 @@ const O = "_aside_desktop_izek7_1", j = "_logo_izek7_15", g1 = {
     href: i1,
     children: /* @__PURE__ */ t("span", {
       className: e.icon,
+      children: /* @__PURE__ */ t(q, {})
+    })
+  }), /* @__PURE__ */ t("a", {
+    href: a1,
+    children: /* @__PURE__ */ t("span", {
+      className: e.icon,
       children: /* @__PURE__ */ t(A, {})
     })
   })]
-}), l1 = ({
+}), _1 = ({
   className: o,
   web3: n,
   testNfts: s
@@ -128,7 +129,7 @@ const O = "_aside_desktop_izek7_1", j = "_logo_izek7_15", g1 = {
         mintErc721: m
       } = s;
       return /* @__PURE__ */ c(a, {
-        children: [/* @__PURE__ */ t(s1, {
+        children: [/* @__PURE__ */ t(c1, {
           loading: _,
           mintErc721: m,
           mintErc1155: h,
@@ -150,10 +151,10 @@ const O = "_aside_desktop_izek7_1", j = "_logo_izek7_15", g1 = {
       className: I,
       children: [/* @__PURE__ */ t(k, {
         className: e.social,
-        children: r1
+        children: l1
       }, "social"), T(), Z(), /* @__PURE__ */ c(k, {
         className: e.theme_switch,
-        children: [/* @__PURE__ */ t(C1, {
+        children: [/* @__PURE__ */ t(s1, {
           isDarkMode: d,
           onChange: () => b(!d)
         }), /* @__PURE__ */ t("span", {
@@ -163,11 +164,11 @@ const O = "_aside_desktop_izek7_1", j = "_logo_izek7_15", g1 = {
       }, "theme-switch")]
     })
   });
-}, _1 = "_aside_titb4_1", d1 = "_nav_menu_titb4_1", h1 = "_footer_titb4_4", f = {
-  aside: _1,
-  nav_menu: d1,
-  footer: h1
-}, H1 = ({
+}, d1 = "_aside_titb4_1", h1 = "_nav_menu_titb4_1", m1 = "_footer_titb4_4", f = {
+  aside: d1,
+  nav_menu: h1,
+  footer: m1
+}, u1 = ({
   className: o,
   navItems: n,
   web3: s,
@@ -180,14 +181,14 @@ const O = "_aside_desktop_izek7_1", j = "_logo_izek7_15", g1 = {
     className: f.nav_menu,
     isActiveFunc: i,
     navItems: n
-  }), /* @__PURE__ */ t(l1, {
+  }), /* @__PURE__ */ t(_1, {
     testNfts: r,
     className: f.footer,
     web3: s
   })]
-}), m1 = "_logo_link_yaxcy_1", u1 = {
-  logo_link: m1
-}, f1 = () => /* @__PURE__ */ c("svg", {
+}), Z1 = O(u1), f1 = "_logo_link_yaxcy_1", M1 = {
+  logo_link: f1
+}, p1 = () => /* @__PURE__ */ c("svg", {
   width: "100%",
   height: "100%",
   viewBox: "0 0 147 34",
@@ -251,19 +252,19 @@ const O = "_aside_desktop_izek7_1", j = "_logo_izek7_15", g1 = {
     d: "M5.43525 9.6373C7.37456 9.6373 8.94667 8.06055 8.94667 6.11553C8.94667 4.1705 7.37456 2.59375 5.43525 2.59375C3.49595 2.59375 1.92383 4.1705 1.92383 6.11553C1.92383 8.06055 3.49595 9.6373 5.43525 9.6373Z",
     fill: "#2FB4AC"
   })]
-}), b1 = ({
+}), T1 = ({
   className: o
 }) => /* @__PURE__ */ t("a", {
   href: "https://oort.digital",
-  className: `${u1.logo_link} ${o}`,
-  children: /* @__PURE__ */ t(f1, {})
-}), M1 = "_aside_mobile_q4nfg_1", N1 = {
-  aside_mobile: M1
+  className: `${M1.logo_link} ${o}`,
+  children: /* @__PURE__ */ t(p1, {})
+}), V1 = "_aside_mobile_q4nfg_1", I1 = {
+  aside_mobile: V1
 };
 export {
-  H1 as A,
-  b1 as L,
-  N1 as a,
-  g1 as s
+  Z1 as A,
+  T1 as L,
+  I1 as a,
+  N1 as s
 };
-//# sourceMappingURL=asideMobile.module.c8ccbb47.mjs.map
+//# sourceMappingURL=asideMobile.module.fe79abce.mjs.map
