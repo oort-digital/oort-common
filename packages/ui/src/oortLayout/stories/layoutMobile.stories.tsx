@@ -4,13 +4,8 @@ import "../../styles/antOverride.less";
 import "../../styles/fonts.css";
 import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
-import { logger } from "@oort/logger";
-import { INavItems } from "../navMenu";
 import { lazy } from "react";
 import { useTheme } from "../../effects";
-import { TestCarousel } from "./testCarousel";
-import { ZERO_ADDR } from "../../utils";
 import LayoutMobile from "../layoutMobile";
 import { navItems, TestContent, web3 } from "./common";
 
