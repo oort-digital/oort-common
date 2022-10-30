@@ -4,15 +4,11 @@ import "../../styles/antOverride.less";
 import "../../styles/fonts.css";
 import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
-import { logger } from "@oort/logger";
-import { INavItems } from "../navMenu";
 import { lazy } from "react";
 import { useTheme } from "../../effects";
-import { TestCarousel } from "./testCarousel";
-import { ZERO_ADDR } from "../../utils";
 import LayoutMobile from "../layoutMobile";
-import { navItems, TestContent, web3 } from "./common";
+import { navItems, TestContent } from "./common";
+import { Web3StoreStub } from "./web3StoreStub";
 
 const DarkTheme = lazy(() => import("../../styles/theme/darkTheme"));
 const LightTheme = lazy(() => import("../../styles/theme/lightTheme"));
@@ -49,7 +45,7 @@ const Template: ComponentStory<typeof LayoutMobile> = (args) => {
 export const WithWeb3 = Template.bind({});
 WithWeb3.args = {
   navItems: navItems,
-  web3: web3,
+  web3: new Web3StoreStub(),
   children: TestContent
 };
 

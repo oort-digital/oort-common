@@ -1,6 +1,3 @@
-import { logger } from "@oort/logger";
-import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
-import { ZERO_ADDR } from "../../utils";
 import { INavItems } from "../navMenu";
 import { ITestNfts } from "../typesAndInterfaces";
 import { TestCarousel } from "./testCarousel";
@@ -28,41 +25,6 @@ export const navItems: INavItems = {
         reactRouterLink: true
       }
     }
-  }
-
-const supportedChains = [
-{
-    name: "rinkeby",
-    chainId: 4,
-    rpcUrl: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-    blockExplorer: 'https://rinkeby.etherscan.io'
-},
-{
-    name: 'mumbai',
-    chainId: 80001,
-    rpcUrl: 'https://rpc-mumbai.maticvigil.com',
-    blockExplorer: 'https://mumbai.polygonscan.com',
-
-    nativeCurrency: {
-        name: 'MATIC',
-        symbol: 'MATIC',
-        decimals: 18,
-    }
-}]
-    
-const supportedConnectors: { [name: string]: IConnector } = {}
-supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
-supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)
-    
-export const web3 = {
-    canSwitchChain: true,
-    connectorName: ConnectorNames.Injected,
-    switchChain: async (_newChainId: number) => {},
-    connectAsync: async (_connectorName: ConnectorNames) => {},
-    chain: supportedChains[0],
-    account: ZERO_ADDR,
-    supportedChains: supportedChains,
-    supportedConnectors: supportedConnectors,
 }
 
 export const testNfts: ITestNfts = {
