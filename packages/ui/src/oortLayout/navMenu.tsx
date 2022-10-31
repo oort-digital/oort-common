@@ -55,7 +55,7 @@ const dashboardInternal = {
 }
 
 const rentInternal = {
-    caption: 'NFT Rent-to-Earn',
+    caption: 'NFT Rental',
     icon: <RentAppIcon />,
     lend: 'Lend',
     borrow: 'Borrow',
@@ -143,7 +143,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
 
     const renderItem = (it: NavItemType, { caption, icon }: INavItemInternal) => {
 
-        let href 
+        let href
         let reactRouterLink = false
 
         if(typeof it === 'string') {
@@ -164,7 +164,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
 
         const isPanelActive = key === defaultActiveKey.current
         let panelClass = styles.collapse_panel
-        
+
         if(isPanelActive) {
             panelClass = `${styles.active_header} ${panelClass}`
         }
@@ -189,6 +189,6 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         <Collapse accordion defaultActiveKey={defaultActiveKey.current} ghost expandIconPosition="end">
             {collapseNavItemPairs.map(renderCollapse)}
         </Collapse>
-   
+
     </Menu>
 }
