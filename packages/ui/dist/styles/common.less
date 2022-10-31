@@ -47,19 +47,24 @@
 .scrollbar-mixin() {
     @scroll-bg: @theme-color-2;
     @scroll-color: @theme-color-4;
-    /* Works on Chrome, Edge, and Safari */
-    *::-webkit-scrollbar {
-      width: 18px;
+
+    // mobile and tablet already override scroll by default
+    @media (min-width: 1200px) {
+      /* Works on Chrome, Edge, and Safari */
+      *::-webkit-scrollbar {
+        width: 18px;
+      }
+    
+      *::-webkit-scrollbar-track {
+        background: @scroll-bg;
+        border-radius: 4px;
+      }
+    
+      *::-webkit-scrollbar-thumb {
+        background-color: @scroll-color;
+        border-radius: 40px;
+        border: 3px solid @scroll-bg;
+      }
     }
-  
-    *::-webkit-scrollbar-track {
-      background: @scroll-bg;
-      border-radius: 4px;
-    }
-  
-    *::-webkit-scrollbar-thumb {
-      background-color: @scroll-color;
-      border-radius: 40px;
-      border: 3px solid @scroll-bg;
-    }
+    
 }
