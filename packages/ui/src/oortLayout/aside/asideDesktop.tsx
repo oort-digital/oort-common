@@ -2,7 +2,6 @@ import styles from './asideDesktop.module.less';
 import { IAsideProps } from "./typesAndInterfaces";
 import { Aside } from "./aside";
 import { LogoLink } from '../logoLink';
-import { observer } from 'mobx-react';
 
 const Impl = ({ navItems, web3, isActiveFunc, testNfts }: IAsideProps) => 
     <Aside
@@ -14,4 +13,4 @@ const Impl = ({ navItems, web3, isActiveFunc, testNfts }: IAsideProps) =>
         logoLink={<LogoLink className={styles.logo} />}
         />
 
-export const AsideDesktop = observer(Impl)
+export const AsideDesktop = Impl

@@ -1,4 +1,3 @@
-import { observer } from "mobx-react"
 import { lazy, Suspense } from "react"
 import { DeviceType, useDeviceType } from "../effects"
 import { ILayoutProps } from "./typesAndInterfaces"
@@ -24,4 +23,4 @@ const Impl = (props: ILayoutProps) => {
 	return <Suspense fallback={<span />}> { renderDevice() } </Suspense>
 }
 
-export const Layout = observer(Impl)
+export const Layout = Impl

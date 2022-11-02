@@ -1,9 +1,9 @@
-import { a as m, s as w, L as b } from "./asideMobile.module.d7e93062.mjs";
-import { a as e, j as a, b as g, h as y, k } from "./index.221adb39.mjs";
-import { useState as f, useEffect as L } from "react";
-import { Drawer as S } from "antd";
-import "mobx-react";
+import { A as m, a as w, L as b } from "./asideMobile.module.84333d4f.mjs";
+import { Drawer as g } from "antd";
+import { useState as y, useEffect as k } from "react";
 import "react-router-dom";
+import { j as e, a, b as f, h as L, k as S } from "./index.7d7d73c5.mjs";
+import "mobx-react";
 import "mobx";
 const v = ({
   navItems: o,
@@ -47,19 +47,19 @@ const v = ({
     strokeLinecap: "round",
     strokeLinejoin: "round"
   })]
-}), h = (o) => y.debug(`Sider. ${o}`), H = ({
+}), h = (o) => L.debug(`Sider. ${o}`), A = ({
   children: o
 }) => {
-  const [n, r] = f(!1), t = () => r(!1), i = () => /* @__PURE__ */ e(S, {
+  const [n, r] = y(!1), t = () => r(!1), i = () => /* @__PURE__ */ e(g, {
     title: "Menu",
     className: p.top_header_menu,
-    closeIcon: /* @__PURE__ */ e(k, {}),
+    closeIcon: /* @__PURE__ */ e(S, {}),
     placement: "left",
     onClose: t,
     open: n,
     children: o
   });
-  return L(() => {
+  return k(() => {
     var c = window.history.pushState, _ = window.history.replaceState;
     window.history.pushState = function(l, d, u) {
       t(), h("history.pushState"), c.apply(window.history, [l, d, u]);
@@ -68,7 +68,7 @@ const v = ({
     }, window.addEventListener("beforeunload", function() {
       h("beforeunload"), t();
     });
-  }, []), /* @__PURE__ */ a(g, {
+  }, []), /* @__PURE__ */ a(f, {
     children: [i(), /* @__PURE__ */ e("div", {
       className: p.burger_icon,
       onClick: () => r(!0),
@@ -87,7 +87,7 @@ const v = ({
     className: c,
     children: [/* @__PURE__ */ a("div", {
       className: `oort-mobile-top-header ${s.top_header}`,
-      children: [/* @__PURE__ */ e(H, {
+      children: [/* @__PURE__ */ e(A, {
         children: /* @__PURE__ */ e(v, {
           navItems: o,
           isActiveFunc: t,
@@ -105,4 +105,4 @@ const v = ({
 export {
   F as default
 };
-//# sourceMappingURL=layoutMobile.4ebe2c97.mjs.map
+//# sourceMappingURL=layoutMobile.ba0f52f5.mjs.map

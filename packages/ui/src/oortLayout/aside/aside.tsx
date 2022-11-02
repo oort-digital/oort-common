@@ -3,7 +3,6 @@ import styles from './aside.module.less';
 import {  NavMenu } from "../navMenu";
 import { IAsideProps } from "./typesAndInterfaces";
 import { ReactNode } from "react";
-import { observer } from "mobx-react";
 
 interface IProps extends IAsideProps {
     className: string
@@ -16,4 +15,4 @@ const Impl = ({ className, navItems, web3, isActiveFunc, logoLink, testNfts }: I
     <FooterMenu testNfts={testNfts} className={styles.footer} web3={web3} />
 </aside>
 
-export const Aside = observer(Impl)
+export const Aside = Impl

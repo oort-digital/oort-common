@@ -1,1 +1,1 @@
-{"version":3,"file":"layoutDesktop.d.ts","sourceRoot":"","sources":["layoutDesktop.tsx"],"names":[],"mappings":";AAGA,OAAO,EAAE,YAAY,EAAE,MAAM,sBAAsB,CAAC;AASpD,QAAA,MAAM,aAAa,UAPE,YAAY,gBAOG,CAAA;AAEpC,eAAe,aAAa,CAAA"}
+{"version":3,"file":"layoutDesktop.d.ts","sourceRoot":"","sources":["layoutDesktop.tsx"],"names":[],"mappings":";AAEA,OAAO,EAAE,YAAY,EAAE,MAAM,sBAAsB,CAAC;AASpD,QAAA,MAAM,aAAa,UAPE,YAAY,gBAOP,CAAA;AAE1B,eAAe,aAAa,CAAA"}

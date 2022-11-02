@@ -1,2 +1,0 @@
-"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const r=require("mobx-react"),s=require("./asideMobile.module.1a973821.js"),e=require("./index.44221c4c.js");require("react");require("antd");require("react-router-dom");require("mobx");const c="_root_13dpi_1",i="_content_13dpi_7",o={root:c,content:i},n=t=>e.jsxs("div",{className:o.root,children:[e.jsx(s.AsideDesktop,{...t}),e.jsx("div",{className:o.content,children:t.children})]}),d=r.observer(n);exports.default=d;
-//# sourceMappingURL=layoutDesktop.7b329a3d.js.map

@@ -1,4 +1,3 @@
-import { observer } from "mobx-react";
 import { AsideDesktop } from "./aside";
 import styles from './layoutDesktop.module.less';
 import { ILayoutProps } from "./typesAndInterfaces";
@@ -10,6 +9,6 @@ const Impl = (props: ILayoutProps) => <div className={styles.root}>
     </div>
 </div>
 
-const LayoutDesktop = observer(Impl)
+const LayoutDesktop = Impl
 
 export default LayoutDesktop
