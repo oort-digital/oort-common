@@ -5,7 +5,7 @@ import { ILayoutProps } from "./typesAndInterfaces"
 const Desktop = lazy(() => import("./layoutDesktop"))
 const Mobile = lazy(() => import("./layoutMobile"))
 
-const Impl = (props: ILayoutProps) => {
+export const Layout = (props: ILayoutProps) => {
 
 	const deviceType = useDeviceType()
 
@@ -22,5 +22,3 @@ const Impl = (props: ILayoutProps) => {
 
 	return <Suspense fallback={<span />}> { renderDevice() } </Suspense>
 }
-
-export const Layout = Impl

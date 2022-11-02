@@ -2,13 +2,11 @@ import { AsideDesktop } from "./aside";
 import styles from './layoutDesktop.module.less';
 import { ILayoutProps } from "./typesAndInterfaces";
 
-const Impl = (props: ILayoutProps) => <div className={styles.root}>
+const LayoutDesktop = (props: ILayoutProps) => <div className={styles.root}>
     <AsideDesktop {...props} />
     <div className={styles.content}>
         {props.children}
     </div>
 </div>
-
-const LayoutDesktop = Impl
 
 export default LayoutDesktop
