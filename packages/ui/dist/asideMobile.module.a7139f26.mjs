@@ -1,8 +1,8 @@
 import { useState as V } from "react";
-import { j as t, a as c, O as z, F as B, b as a, T as v, c as q, D as A, u as L, M as y, d as k, i as E, g as F, B as x, C as g, e as u, t as D, f as R, N as S } from "./index.7d7d73c5.mjs";
+import { j as t, a as c, O as z, F as B, b as a, T as v, c as q, D as A, u as L, M as y, d as k, i as E, g as F, B as x, C as g, e as u, t as D, f as R, N as S } from "./index.9f449e18.mjs";
 import { Switch as W, Button as H } from "antd";
 import { observer as O } from "mobx-react";
-const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", Z1 = {
+const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", N1 = {
   aside_desktop: j,
   logo: G
 }, K = "_root_udfzq_1", U = "_icon_before_udfzq_1", Y = "_icon_after_udfzq_7", J = "_account_img_udfzq_12", P = "_social_udfzq_20", Q = "_icon_udfzq_1", X = "_theme_switch_udfzq_29", t1 = "_theme_name_udfzq_32", e1 = "_menu_item_btn_udfzq_41", o1 = "_chain_name_udfzq_44", e = {
@@ -118,7 +118,7 @@ const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", Z1 = {
         caption: D(l)
       }, "account")]
     });
-  }, I = () => {
+  }, T = () => {
     if ((s == null ? void 0 : s.isEnabled) === !0) {
       const l = /* @__PURE__ */ t("span", {
         className: e.icon_after,
@@ -145,14 +145,14 @@ const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", Z1 = {
       });
     }
     return null;
-  }, T = o ? `${o} ${e.root}` : e.root;
+  }, I = o ? `${o} ${e.root}` : e.root;
   return /* @__PURE__ */ t(a, {
     children: /* @__PURE__ */ c(y, {
-      className: T,
+      className: I,
       children: [/* @__PURE__ */ t(k, {
         className: e.social,
         children: l1
-      }, "social"), I(), Z(), /* @__PURE__ */ c(k, {
+      }, "social"), T(), Z(), /* @__PURE__ */ c(k, {
         className: e.theme_switch,
         children: [/* @__PURE__ */ t(s1, {
           isDarkMode: d,
@@ -168,7 +168,7 @@ const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", Z1 = {
   aside: h1,
   nav_menu: m1,
   footer: u1
-}, f1 = ({
+}, Z1 = ({
   className: o,
   navItems: n,
   web3: s,
@@ -186,9 +186,9 @@ const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", Z1 = {
     className: f.footer,
     web3: s
   })]
-}), I1 = f1, M1 = "_logo_link_yaxcy_1", p1 = {
-  logo_link: M1
-}, V1 = () => /* @__PURE__ */ c("svg", {
+}), f1 = "_logo_link_yaxcy_1", M1 = {
+  logo_link: f1
+}, p1 = () => /* @__PURE__ */ c("svg", {
   width: "100%",
   height: "100%",
   viewBox: "0 0 147 34",
@@ -256,15 +256,15 @@ const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", Z1 = {
   className: o
 }) => /* @__PURE__ */ t("a", {
   href: "https://oort.digital",
-  className: `${p1.logo_link} ${o}`,
-  children: /* @__PURE__ */ t(V1, {})
-}), k1 = "_aside_mobile_q4nfg_1", $1 = {
-  aside_mobile: k1
+  className: `${M1.logo_link} ${o}`,
+  children: /* @__PURE__ */ t(p1, {})
+}), V1 = "_aside_mobile_q4nfg_1", I1 = {
+  aside_mobile: V1
 };
 export {
-  I1 as A,
+  Z1 as A,
   T1 as L,
-  $1 as a,
-  Z1 as s
+  I1 as a,
+  N1 as s
 };
-//# sourceMappingURL=asideMobile.module.84333d4f.mjs.map
+//# sourceMappingURL=asideMobile.module.a7139f26.mjs.map
