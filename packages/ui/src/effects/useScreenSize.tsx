@@ -47,17 +47,30 @@ function getSreenSize(width: number, brakepoints: IScreenBrakepoints): ScreenSiz
 
 	return ScreenSize.xxl
 }
-  
 
+const logWidth = (msg: string) => {
+	logger.debug(`screenSize ${msg}`)
+	logger.debug(`screenSize window.outerWidth: ${window.outerWidth}`)
+	logger.debug(`screenSize window.innerWidth: ${window.innerWidth}`)
+	logger.debug(`screenSize screen.width: 	 ${window.screen.width}`)
+	logger.debug(`screenSize screen.availWidth: ${window.screen.availWidth}`)
+}
+
+const getWidth = (): number => {
+	return window.screen.availWidth
+}
+  
 export function useScreenSize(brakepoints?: IScreenBrakepoints): [number, ScreenSize] {
+	logWidth('init')
 	const bp = brakepoints || defaultScreenBrakepoints
-	const [screenSize, setScreenSize] = useState(getSreenSize(window.outerWidth, bp));
-	const [screenWidth, setScreenWidth] = useState(window.outerWidth)
+	const [screenSize, setScreenSize] = useState(getSreenSize(getWidth(), bp));
+	const [screenWidth, setScreenWidth] = useState(getWidth())
 
 	const handleResize = () => {
-		const w = window.outerWidth
+		const w = getWidth()
 		const sz = getSreenSize(w, bp)
 		logger.debug(`screenSize: ${sz}`)
+		logWidth('handleResize')
 		setScreenSize(sz);
 		setScreenWidth(w)
 	}
