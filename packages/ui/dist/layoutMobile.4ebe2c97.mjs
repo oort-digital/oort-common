@@ -1,5 +1,5 @@
-import { A as m, a as w, L as b } from "./asideMobile.module.2e7eb2a4.mjs";
-import { j as e, a, b as g, h as y, k } from "./index.d05086c5.mjs";
+import { a as m, s as w, L as b } from "./asideMobile.module.d7e93062.mjs";
+import { a as e, j as a, b as g, h as y, k } from "./index.221adb39.mjs";
 import { useState as f, useEffect as L } from "react";
 import { Drawer as S } from "antd";
 import "mobx-react";
@@ -47,7 +47,7 @@ const v = ({
     strokeLinecap: "round",
     strokeLinejoin: "round"
   })]
-}), h = (o) => y.debug(`Sider. ${o}`), A = ({
+}), h = (o) => y.debug(`Sider. ${o}`), H = ({
   children: o
 }) => {
   const [n, r] = f(!1), t = () => r(!1), i = () => /* @__PURE__ */ e(S, {
@@ -87,7 +87,7 @@ const v = ({
     className: c,
     children: [/* @__PURE__ */ a("div", {
       className: `oort-mobile-top-header ${s.top_header}`,
-      children: [/* @__PURE__ */ e(A, {
+      children: [/* @__PURE__ */ e(H, {
         children: /* @__PURE__ */ e(v, {
           navItems: o,
           isActiveFunc: t,
@@ -105,4 +105,4 @@ const v = ({
 export {
   F as default
 };
-//# sourceMappingURL=layoutMobile.2f470ae7.mjs.map
+//# sourceMappingURL=layoutMobile.4ebe2c97.mjs.map
