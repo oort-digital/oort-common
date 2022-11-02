@@ -10,6 +10,7 @@ import { useTheme } from '../effects';
 import { isChainEmpty } from '../typesAndInterfaces';
 import { MintTestNftModal } from './mintTestNftModal';
 import { ITestNfts } from './typesAndInterfaces';
+import { observer } from 'mobx-react';
 
 const TWITTER = "https://twitter.com/OortDigital";
 const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
@@ -28,7 +29,7 @@ const social = <>
     <a href={DISCORD}><span className={styles.icon}><DiscordIcon/></span></a>
 </>
 
-export const FooterMenu = ({ className, web3, testNfts }: IProps) => {
+const Impl = ({ className, web3, testNfts }: IProps) => {
 
     const [ connectModalVisible, setConnectModalVisible ] = useState(false)
 
@@ -100,3 +101,5 @@ export const FooterMenu = ({ className, web3, testNfts }: IProps) => {
         </Menu>
     </>
 }
+
+export const FooterMenu = observer(Impl)

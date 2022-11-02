@@ -1,9 +1,9 @@
-import { A as m, a as w, L as b } from "./asideMobile.module.2e7eb2a4.mjs";
-import { j as e, a, b as g, h as y, k } from "./index.d05086c5.mjs";
-import { useState as f, useEffect as L } from "react";
-import { Drawer as S } from "antd";
-import "mobx-react";
+import { A as m, a as w, L as b } from "./asideMobile.module.a7139f26.mjs";
+import { Drawer as g } from "antd";
+import { useState as y, useEffect as k } from "react";
 import "react-router-dom";
+import { j as e, a, b as f, h as L, k as S } from "./index.9f449e18.mjs";
+import "mobx-react";
 import "mobx";
 const v = ({
   navItems: o,
@@ -47,19 +47,19 @@ const v = ({
     strokeLinecap: "round",
     strokeLinejoin: "round"
   })]
-}), h = (o) => y.debug(`Sider. ${o}`), A = ({
+}), h = (o) => L.debug(`Sider. ${o}`), A = ({
   children: o
 }) => {
-  const [n, r] = f(!1), t = () => r(!1), i = () => /* @__PURE__ */ e(S, {
+  const [n, r] = y(!1), t = () => r(!1), i = () => /* @__PURE__ */ e(g, {
     title: "Menu",
     className: p.top_header_menu,
-    closeIcon: /* @__PURE__ */ e(k, {}),
+    closeIcon: /* @__PURE__ */ e(S, {}),
     placement: "left",
     onClose: t,
     open: n,
     children: o
   });
-  return L(() => {
+  return k(() => {
     var c = window.history.pushState, _ = window.history.replaceState;
     window.history.pushState = function(l, d, u) {
       t(), h("history.pushState"), c.apply(window.history, [l, d, u]);
@@ -68,7 +68,7 @@ const v = ({
     }, window.addEventListener("beforeunload", function() {
       h("beforeunload"), t();
     });
-  }, []), /* @__PURE__ */ a(g, {
+  }, []), /* @__PURE__ */ a(f, {
     children: [i(), /* @__PURE__ */ e("div", {
       className: p.burger_icon,
       onClick: () => r(!0),
@@ -105,4 +105,4 @@ const v = ({
 export {
   F as default
 };
-//# sourceMappingURL=layoutMobile.2f470ae7.mjs.map
+//# sourceMappingURL=layoutMobile.9bcedde3.mjs.map

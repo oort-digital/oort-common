@@ -1,5 +1,5 @@
 import { useState as V } from "react";
-import { j as t, a as c, O as z, F as B, b as a, T as v, c as q, D as A, u as L, M as y, d as k, i as E, g as F, B as x, C as g, e as u, t as D, f as R, N as S } from "./index.d05086c5.mjs";
+import { j as t, a as c, O as z, F as B, b as a, T as v, c as q, D as A, u as L, M as y, d as k, i as E, g as F, B as x, C as g, e as u, t as D, f as R, N as S } from "./index.9f449e18.mjs";
 import { Switch as W, Button as H } from "antd";
 import { observer as O } from "mobx-react";
 const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", N1 = {
@@ -164,11 +164,11 @@ const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", N1 = {
       }, "theme-switch")]
     })
   });
-}, d1 = "_aside_titb4_1", h1 = "_nav_menu_titb4_1", m1 = "_footer_titb4_4", f = {
-  aside: d1,
-  nav_menu: h1,
-  footer: m1
-}, u1 = ({
+}, d1 = O(_1), h1 = "_aside_titb4_1", m1 = "_nav_menu_titb4_1", u1 = "_footer_titb4_4", f = {
+  aside: h1,
+  nav_menu: m1,
+  footer: u1
+}, Z1 = ({
   className: o,
   navItems: n,
   web3: s,
@@ -181,12 +181,12 @@ const j = "_aside_desktop_izek7_1", G = "_logo_izek7_15", N1 = {
     className: f.nav_menu,
     isActiveFunc: i,
     navItems: n
-  }), /* @__PURE__ */ t(_1, {
+  }), /* @__PURE__ */ t(d1, {
     testNfts: r,
     className: f.footer,
     web3: s
   })]
-}), Z1 = O(u1), f1 = "_logo_link_yaxcy_1", M1 = {
+}), f1 = "_logo_link_yaxcy_1", M1 = {
   logo_link: f1
 }, p1 = () => /* @__PURE__ */ c("svg", {
   width: "100%",
@@ -267,4 +267,4 @@ export {
   I1 as a,
   N1 as s
 };
-//# sourceMappingURL=asideMobile.module.2e7eb2a4.mjs.map
+//# sourceMappingURL=asideMobile.module.a7139f26.mjs.map

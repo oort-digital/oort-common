@@ -1,14 +1,24 @@
-import { lazy } from "react"
-import { LazyLoader } from "../lazyLoader"
+import { lazy, Suspense } from "react"
+import { DeviceType, useDeviceType } from "../effects"
 import { ILayoutProps } from "./typesAndInterfaces"
 
 const Desktop = lazy(() => import("./layoutDesktop"))
 const Mobile = lazy(() => import("./layoutMobile"))
 
 export const Layout = (props: ILayoutProps) => {
-	return <LazyLoader
-		desktop={<Desktop {...props}/>}
-		mobile={<Mobile {...props} />}
-		tablet={<Mobile {...props} />}
-	/>
+
+	const deviceType = useDeviceType()
+
+    const renderDevice = () => {
+        if(deviceType === DeviceType.Desktop) {
+            return <Desktop {...props} />
+        }
+        if(deviceType === DeviceType.Phone) {
+            return <Mobile {...props} />
+        }
+
+        return <Mobile {...props} />
+    }
+
+	return <Suspense fallback={<span />}> { renderDevice() } </Suspense>
 }
