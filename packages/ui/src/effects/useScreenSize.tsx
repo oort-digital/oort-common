@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { logger } from '@oort/logger';
+import { debounceFunction } from '../utils';
 
 export interface IScreenBrakepoints {
 	xs: number
@@ -32,6 +33,10 @@ export enum ScreenSize {
 function getSreenSize(width: number, brakepoints: IScreenBrakepoints): ScreenSize {
 	
 	logger.debug(`window.outerWidth: ${width}`)
+
+	if(!width) {
+		logger.warn(`window.outerWidth is ${width}`)
+	}
 	const { sm, md, lg, xl, xxl } = brakepoints
 	
 	if(width < sm) { return ScreenSize.xs }
@@ -49,18 +54,19 @@ export function useScreenSize(brakepoints?: IScreenBrakepoints): [number, Screen
 	const [screenSize, setScreenSize] = useState(getSreenSize(window.outerWidth, bp));
 	const [screenWidth, setScreenWidth] = useState(window.outerWidth)
 
+	const handleResize = () => {
+		const w = window.outerWidth
+		const sz = getSreenSize(w, bp)
+		logger.debug(`screenSize: ${sz}`)
+		setScreenSize(sz);
+		setScreenWidth(w)
+	}
+
+	const handleResizeDebounced = debounceFunction(handleResize, 300)
+
 	useEffect(() => {
-		
-		function handleResize() {
-			const w = window.outerWidth
-			const sz = getSreenSize(w, bp)
-			logger.debug(`screenSize: ${sz}`)
-			setScreenSize(sz);
-			setScreenWidth(w)
-		}
-  
-	  	window.addEventListener('resize', handleResize);
-	  	return () => window.removeEventListener('resize', handleResize);
+	  	window.addEventListener('resize', handleResizeDebounced);
+	  	return () => window.removeEventListener('resize', handleResizeDebounced)
 	}, [bp]);
 
   return [screenWidth, screenSize];
