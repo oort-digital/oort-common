@@ -1,16 +1,16 @@
 import {Card, Col, Row} from 'antd'
-import {IMarketplaceConfig} from '../../env'
 import styles from './assetCardLayout.module.less'
 import { IAssetItem } from './typesAndInterfaces'
 import { getNftName, getNftTitle } from './utils';
 import { cutLongString, getChainIcon, toMasskedAddress } from '../utils';
 import { TileCoverSimple, TileCoverSkeleton } from '../tileCover';
 import { NftQuantity } from '../nftQuantity';
-import { ViewOnButton } from '../viewOn';
+import { IMarketplaceConfig, INftScanConfig, ViewOnButton } from '../viewOn';
 import { BigNumber } from 'ethers';
 import { ReactNode } from 'react';
 
 interface IProps<TAssetItem extends IAssetItem> {
+    nftScanConfig: INftScanConfig,
     assetItem: TAssetItem
     collateral: BigNumber | undefined
     owner: string
@@ -23,7 +23,7 @@ interface IProps<TAssetItem extends IAssetItem> {
 }
 
 const maxNftNameLen = 25
-export const AssetCardLayout = <TAsset extends IAssetItem, >({assetItem, owner, marketplace, chainId, children, onClick, href, collateral, coverSkeleton}: IProps<TAsset>) => {
+export const AssetCardLayout = <TAsset extends IAssetItem, >({assetItem, owner, marketplace, chainId, children, onClick, href, collateral, coverSkeleton, nftScanConfig}: IProps<TAsset>) => {
 
     const {tokenId, imgSrc, tokenAddress, projectName, nftAmount} = assetItem
 
@@ -44,7 +44,7 @@ export const AssetCardLayout = <TAsset extends IAssetItem, >({assetItem, owner, 
             <Col>
                 <div className={styles.owner}>
                     <span className={styles.lable}>Owner:</span><span className={styles.address}>{toMasskedAddress(owner)}</span>
-                    <ViewOnButton className={styles.view_on} assetItem={assetItem} chainId={chainId} marketplace={marketplace} showLabel={false}/>
+                    <ViewOnButton nftScanConfig={nftScanConfig} className={styles.view_on} assetItem={assetItem} chainId={chainId} marketplace={marketplace} showLabel={false}/>
                 </div>
             </Col>
             {/*

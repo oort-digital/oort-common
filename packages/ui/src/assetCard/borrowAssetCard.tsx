@@ -1,7 +1,7 @@
 import { Col, Row } from "antd"
 import { BigNumber, BigNumberish } from "ethers"
 import { formatUnits, parsePrice } from "../utils"
-import { IMarketplaceConfig } from "../viewOn"
+import { IMarketplaceConfig, INftScanConfig } from "../viewOn"
 import { AssetCardLayout } from "./assetCardLayout"
 import { IAssetItem } from "./typesAndInterfaces"
 import styles from "./borrowAssetCard.module.less"
@@ -19,6 +19,7 @@ export interface IBorrowAssetItem extends IAssetItem {
 }
 
 export interface IBorrowAssetCardProps<TAssetItem extends IBorrowAssetItem> {
+	nftScanConfig: INftScanConfig
     assetItem: TAssetItem
     owner: string
     chainId: number
@@ -38,7 +39,7 @@ const setting = (name: string, value: string) => <Col>
 	<div className={value === 'ZERO' ? styles.zero_value : styles.value}>{value}</div>
 </Col>
 
-export const BorrowAssetCard = <TAsset extends IBorrowAssetItem, >({assetItem, owner, marketplace, chainId, onClick, href }: IBorrowAssetCardProps<TAsset>) => {
+export const BorrowAssetCard = <TAsset extends IBorrowAssetItem, >({nftScanConfig, assetItem, owner, marketplace, chainId, onClick, href }: IBorrowAssetCardProps<TAsset>) => {
 
     const { durationHours, earningGoal, currency, collateral } = assetItem
 	const { uiName, decimals } = currency
@@ -50,6 +51,7 @@ export const BorrowAssetCard = <TAsset extends IBorrowAssetItem, >({assetItem, o
 	const formattedCollateral = collateralNum === 0 ? "ZERO" : `${parsePrice(collateralNum)} ${uiName}`;
 
     return <AssetCardLayout
+			nftScanConfig={nftScanConfig}
 			assetItem={assetItem}
 			// isShowCollateral={true}
 			collateral={collateral}

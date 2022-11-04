@@ -2,11 +2,12 @@
 import { Spin } from 'antd'
 import { BigNumber } from 'ethers'
 import { useEffect, useState} from 'react'
-import { IMarketplaceConfig } from '../../env'
-import { getViewOnIcon, getViewOnUrl } from './utils'
+import { INftScanConfig } from './nftScanApi'
+import { getViewOnIcon, getViewOnUrl, IMarketplaceConfig } from './utils'
 import "./viewOnLink.less"
 
 interface IProps {
+    nftScanConfig: INftScanConfig
     showLabel: boolean
     marketplace: IMarketplaceConfig
     chainId: number,
@@ -14,7 +15,7 @@ interface IProps {
     loadingText?: string
 }
 
-export const ViewOnLink = ({ showLabel, marketplace, assetItem, chainId, loadingText }: IProps) => {
+export const ViewOnLink = ({ showLabel, marketplace, assetItem, chainId, loadingText, nftScanConfig }: IProps) => {
 
     const [ viewOnUrl, setViewOnUrl ] = useState('')
 
@@ -24,7 +25,7 @@ export const ViewOnLink = ({ showLabel, marketplace, assetItem, chainId, loading
             assetItem: assetItem,
             chainId: chainId,
             marketplace: marketplace
-        }).then(url => setViewOnUrl(url))
+        }, nftScanConfig).then(url => setViewOnUrl(url))
 
     }, [ assetItem, chainId, marketplace ]);
 

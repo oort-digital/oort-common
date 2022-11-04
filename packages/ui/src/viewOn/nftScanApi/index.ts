@@ -1,2 +1,2 @@
-export type { INftScanClient } from "./nftScanClient"
+export type { INftScanConfig } from "./nftScanClient"
 export { NftScanClient } from "./nftScanClient"

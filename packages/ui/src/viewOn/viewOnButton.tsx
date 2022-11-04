@@ -2,10 +2,12 @@ import React from 'react'
 import { Spin } from 'antd'
 import { BigNumber } from 'ethers'
 import { useRef, useState} from 'react'
-import { getViewOnIcon, getViewOnUrl } from './utils'
+import { getViewOnIcon, getViewOnUrl, IMarketplaceConfig } from './utils'
 import "./viewOnButton.less"
+import { INftScanConfig } from './nftScanApi'
 
 interface IProps {
+    nftScanConfig: INftScanConfig
     showLabel: boolean
     marketplace: IMarketplaceConfig
     chainId: number,
@@ -13,7 +15,7 @@ interface IProps {
     className?: string
 }
 
-export const ViewOnButton = ({ showLabel, marketplace, assetItem, chainId, className }: IProps) => {
+export const ViewOnButton = ({ showLabel, marketplace, assetItem, chainId, className, nftScanConfig }: IProps) => {
 
     const [ loading, setLoading ] = useState(false)
 
@@ -30,7 +32,8 @@ export const ViewOnButton = ({ showLabel, marketplace, assetItem, chainId, class
                 assetItem: assetItem,
                 chainId: chainId,
                 marketplace: marketplace
-            })
+            }, nftScanConfig)
+            
             if(url) {
                 viewOnUrl.current = url
                 window.open(viewOnUrl.current);

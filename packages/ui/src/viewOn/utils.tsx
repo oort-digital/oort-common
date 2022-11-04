@@ -1,5 +1,6 @@
 import { BigNumber } from "ethers"
 import { NFTScanIcon, OpenseaIcon } from "../icons"
+import { NftScanClient, INftScanConfig } from "./nftScanApi"
 
 export enum MarketplaceEnum {
     nftscan = 'nftscan',
@@ -45,7 +46,7 @@ const getViewOnUrlFromTemplate = (params: IGetViewOnUrlParams) => {
         .replace(TOKEN_ID_VAR, tokenId.toString())
 }
 
-export const getViewOnUrl = async (params: IGetViewOnUrlParams): Promise<string> => {
+export const getViewOnUrl = async (params: IGetViewOnUrlParams, nftScanConfig: INftScanConfig): Promise<string> => {
     
     const { marketplace, assetItem } = params
 
@@ -55,7 +56,7 @@ export const getViewOnUrl = async (params: IGetViewOnUrlParams): Promise<string>
 
     const { tokenAddress, tokenId } = assetItem
 
-    const nft = await NftScanClient.getInstance().getSingleNft(tokenAddress, tokenId.toString())
+    const nft = await NftScanClient.getInstance(nftScanConfig).getSingleNft(tokenAddress, tokenId.toString())
     if(!nft) {
         return ''
     }
