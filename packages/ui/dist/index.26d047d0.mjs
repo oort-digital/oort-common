@@ -2352,7 +2352,7 @@ const Dc = (e = "cookies") => {
   return He(() => {
     t.isDarkMode !== n && (t.setDarkMode(n), window.location.reload());
   }, [n]), [n, r];
-}, ni = ht(() => import("./layoutDesktop.85714bd0.mjs")), dr = ht(() => import("./layoutMobile.153f49c9.mjs")), jc = (e) => {
+}, ni = ht(() => import("./layoutDesktop.7f51182c.mjs")), dr = ht(() => import("./layoutMobile.2a1e74cb.mjs")), jc = (e) => {
   const t = on();
   return /* @__PURE__ */ A(Ir, {
     fallback: /* @__PURE__ */ a("span", {}),
@@ -2656,7 +2656,7 @@ const zc = ({
   });
 }, Li = (e) => uo.create({
   seed: e
-}).toDataURL(), Ri = ht(() => import("./connectModalDesktop.23cce71b.mjs")), Ni = ht(() => import("./connectModalMobile.34eb652f.mjs")), Uc = ({
+}).toDataURL(), Ri = ht(() => import("./connectModalDesktop.440e26d4.mjs")), Ni = ht(() => import("./connectModalMobile.a3b9ba1a.mjs")), Uc = ({
   web3: e,
   visible: t,
   onCancel: n,
@@ -3553,22 +3553,24 @@ const Ua = ({
   imgSrc: t,
   href: n,
   size: r,
-  noText: o
+  noText: o,
+  onClick: s
 }) => {
-  const s = /* @__PURE__ */ a(za, {
+  const i = /* @__PURE__ */ a(za, {
     size: r,
     alt: "img",
     src: t || "",
     noText: o
-  }), i = `tile-cover-simple ${e || ""}`;
+  }), l = `tile-cover-simple ${e || ""}`;
   return n ? /* @__PURE__ */ a("a", {
     href: n,
     rel: "noreferrer",
-    className: i,
-    children: s
+    className: l,
+    children: i
   }) : /* @__PURE__ */ a("div", {
-    className: i,
-    children: s
+    onClick: s,
+    className: l,
+    children: i
   });
 };
 const $a = ({
@@ -5163,4 +5165,4 @@ export {
   Mc as y,
   Fc as z
 };
-//# sourceMappingURL=index.dc8191b3.mjs.map
+//# sourceMappingURL=index.26d047d0.mjs.map

@@ -6,11 +6,12 @@ interface IProps {
 	className?: string
 	imgSrc: string | undefined
     href?: string
+    onClick?: () => void
     size: 'sm' | 'md'
     noText: boolean
 }
 
-export const TileCoverSimple = ({ className, imgSrc, href, size, noText }: IProps) => {
+export const TileCoverSimple = ({ className, imgSrc, href, size, noText, onClick }: IProps) => {
 
     const body = <Img size={size} alt="img" src={imgSrc || ''} noText={noText}/>
 
@@ -20,5 +21,5 @@ export const TileCoverSimple = ({ className, imgSrc, href, size, noText }: IProp
 	    return <a href={href}  rel="noreferrer" className={cssClass}>{body}</a>
     }
 
-    return <div className={cssClass}>{body}</div>
+    return <div onClick={onClick} className={cssClass}>{body}</div>
 }
