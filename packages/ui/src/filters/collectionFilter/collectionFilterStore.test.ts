@@ -167,26 +167,3 @@ test('selected must be empty', async () => {
    expect(store.selected.length).toEqual(0)
 });
 
-test('must select allAppliedItems from items recent and favorites', async () => {
-
-   const store = create(1, 1)
-
-   await store.setApplied([one.key, two.key, three.key])
-   store.all.push(one)
-   store.recent.push(two)
-   store.favorites.push(three)
-
-/*
-   expect(store.allAppliedItems.length).toEqual(3)
-   const allAppliedItemAddresses = store.allAppliedItems.map(x => x.key)
-*/
-   expect(store.appliedItems.length).toEqual(3)
-   const allAppliedItemAddresses = store.appliedItems.map(x => x.key)
-
-   expect(allAppliedItemAddresses).toContain(one.key)
-   expect(allAppliedItemAddresses).toContain(two.key)
-   expect(allAppliedItemAddresses).toContain(three.key)
-});
-
-
- 
