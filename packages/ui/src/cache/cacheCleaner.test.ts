@@ -26,9 +26,12 @@ test('should clean expired', async () => {
     }
 
     const cleaner = new CacheCleaner()
-    cleaner.start(1)
+    const stopPromise = cleaner.start(1)
 
     await delayAsync(expirationMs + 100)
+
+    cleaner.stop()
+    await stopPromise
 
     for(let i = 0; i < cacheItemsCount; i++) {
         const actual = provider.getItem(`${key_prefix}_${i}`)
@@ -44,9 +47,12 @@ test('should clean expired', async () => {
     localStorage.setItem(key, expected)
 
     const cleaner = new CacheCleaner()
-    cleaner.start(1)
+    const stopPromise = cleaner.start(1)
 
     await delayAsync(100)
+
+    cleaner.stop()
+    await stopPromise
 
     const actual = localStorage.getItem(key)
     expect(actual).toEqual(expected)
