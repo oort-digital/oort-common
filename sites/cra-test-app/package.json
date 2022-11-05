@@ -31,7 +31,6 @@
   "scripts": {
     "start": "craco start",
     "build_site": "craco build",
-    "test": "craco test",
     "eject": "craco eject",
     "rm": "rimraf node_modules"
   },

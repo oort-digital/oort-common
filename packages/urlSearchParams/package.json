@@ -12,9 +12,6 @@
   "jest": {
     "verbose": true,
     "resetMocks": false,
-    "setupFiles": [
-      "jest-localstorage-mock"
-    ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     }

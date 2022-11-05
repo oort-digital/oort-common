@@ -6,4 +6,6 @@ export * from "./error";
 export * from "./vars";
 export * from "./array";
 export * from "./string";
+export * from "./priceRoundingUtils";
+export * from "./bigNumberUtils";
 //# sourceMappingURL=index.d.ts.map

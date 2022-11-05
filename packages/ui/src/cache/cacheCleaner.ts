@@ -40,7 +40,8 @@ export class CacheCleaner {
 
     async start(cleanIntervalSec: number): Promise<void> {
 
-        while(true) {
+        this._isStopped = false
+        while(!this._isStopped) {
             logger.debug(`${CacheCleaner.name} started. localStorage.length: ${localStorage.length}`)
             const now = new Date().getTime()
             for(let i = 0; i < localStorage.length; i++) {
@@ -54,5 +55,11 @@ export class CacheCleaner {
         }
        
     }
+
+    stop(): void {
+        this._isStopped = true
+    }
+
+    private _isStopped: boolean = true
     
 }

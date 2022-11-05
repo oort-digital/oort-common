@@ -11,7 +11,10 @@ export { PolygonIcon } from "./polygonIcon";
 export { EthIcon } from "./ethIcon";
 export { GameHubIcon } from "./gameHubIcon";
 export { NoDataIcon } from "./noDataIcon";
+export { NoImageIcon } from "./noImageIcon";
 export { ArrowDownIcon } from "./arrowDownIcon";
 export { CloseIcon } from "./closeIcon";
 export { ChevronDownOutlineIcon } from "./chevronDownOutlineIcon";
+export { OpenseaIcon } from "./openseaIcon";
+export { NFTScanIcon } from "./nftscanIcon";
 //# sourceMappingURL=index.d.ts.map

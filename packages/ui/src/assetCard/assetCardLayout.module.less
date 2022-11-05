@@ -1,0 +1,74 @@
+@import '../styles/typography.less';
+@import '../styles/palette.less';
+@import '../styles/theme/vars.less';
+
+.layout {
+	// min-width: 315px;
+
+	&.zero_collateral_layout {
+		border: 3px solid @asset-card-zero-collateral-border-color;
+	}
+	&:hover {
+		transform: translate3d(0px, -4px, 0px);
+    	transition: .1s ease-in-out;
+	}
+	
+	transition: .2s ease-in-out;
+
+	background-color: @theme-bg-1 !important;
+	border: 1px solid @theme-color-4;
+	padding-bottom: 16px !important;
+	box-shadow: 0px 8px 30px -16px rgba(0, 0, 0, 0.1), 0px 1.58132px 1.58132px rgba(0, 0, 0, 0.1);
+	box-sizing: border-box;
+
+	:global(.ant-card-head) {
+		border-bottom: none;
+		min-height: 20px;
+		margin-bottom: 4px;
+		:global(.ant-card-head-title) {
+			padding-bottom: 0;
+		}
+
+		:global(.ant-card-extra) {
+			padding: 0;
+    		margin-bottom: -45px;
+			margin-right: -10px;
+    		z-index: 1;
+		}
+		
+	}
+	:global(.ant-card-cover) {
+		padding: 0 24px;
+
+		.tile_cover {
+			border-color: @asset-img-border;
+		}
+	}
+	.owner {
+		.footnote-12-description-mixin;
+		
+		display: flex;
+
+		.lable { color: @asset-card-owner-lable; }
+		.address {
+			margin-left: 4px;
+			color: @asset-card-owner-address;
+		}
+		.view_on { margin-left: 6px; }
+	}
+
+	.asset_data {
+		padding: 0 24px;
+
+		.nft_title {
+			margin-top: 12px;
+			.footnote-12-description-mixin;
+			color: @theme-color-7;
+		}
+		.nft_name {
+			.body-14-medium-mixin;
+			color: @theme-color-10;
+		}
+	}
+}
+
