@@ -26,7 +26,7 @@ test('should clean expired', async () => {
     }
 
     const cleaner = new CacheCleaner()
-    cleaner.start(50)
+    cleaner.start(1)
 
     await delayAsync(expirationMs + 100)
 
@@ -44,7 +44,7 @@ test('should clean expired', async () => {
     localStorage.setItem(key, expected)
 
     const cleaner = new CacheCleaner()
-    cleaner.start(50)
+    cleaner.start(1)
 
     await delayAsync(100)
 
