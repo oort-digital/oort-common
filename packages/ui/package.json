@@ -6,7 +6,7 @@
     "build:types": "tsc",
     "build:source": "vite build",
     "build": "yarn clean && yarn tsc && vite build",
-    "test": "jest",
+    "test": "jest --runInBand --detectOpenHandles",
     "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
