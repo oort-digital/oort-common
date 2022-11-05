@@ -16,5 +16,6 @@ export * from "./assetCard";
 export * from "./nftQuantity";
 export * from "./viewOn";
 export * from "./img";
+export * from "./assetList";
 export { TileCoverSimple } from "./tileCover";
 //# sourceMappingURL=index.d.ts.map
