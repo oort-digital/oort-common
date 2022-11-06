@@ -17,6 +17,7 @@ export { NoDataIcon } from "./noDataIcon"
 export { NoImageIcon } from "./noImageIcon"
 export { ArrowDownIcon } from "./arrowDownIcon"
 export { CloseIcon } from "./closeIcon"
+export { CloseIconOld } from "./closeIconOld"
 export { ChevronDownOutlineIcon } from "./chevronDownOutlineIcon"
 
 export { OpenseaIcon } from "./openseaIcon"
