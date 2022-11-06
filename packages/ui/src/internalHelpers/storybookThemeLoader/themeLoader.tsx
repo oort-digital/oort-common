@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import { lazy, Suspense } from "react"
 import { useTheme } from "../../effects"
 
@@ -8,9 +9,29 @@ const LightTheme = lazy(() => import("../../styles/theme/lightTheme"));
 export const ThemeLoader = () => {
     const [isDark, setDarkMode] = useTheme()
 
+
+
     const renderTheme = () => {
-        if(isDark) {return <>Current: Dark <button onClick={() => setDarkMode(false)}>Set Light Theme</button> <DarkTheme /> </>}
-        return <>Current: Light <button onClick={() => setDarkMode(true)}>Set Dark Theme</button> <LightTheme /> </>
+
+      let curName = 'Light'
+      let setName = 'Dark'
+      let themeElement = <LightTheme />
+
+      if(isDark) {
+        curName = 'Dark'
+        setName = 'Light'
+        themeElement = <DarkTheme />
+      }
+
+      const style = {
+        marginRight: '10px'
+      }
+
+      return <>
+          <span style={style}>Current: {curName}</span>
+          <Button onClick={() => setDarkMode(!isDark)}>Set {setName}</Button>
+          {themeElement}
+        </>
     }
 
     return <>

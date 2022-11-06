@@ -1,8 +1,9 @@
-import "./oortModal.less"
+import styles from "./oortModal.module.less"
 import {Modal, Typography } from 'antd'
 import React, { ReactNode } from 'react'
 import { SizeType } from 'antd/lib/config-provider/SizeContext'
 import { ButtonType } from 'antd/lib/button';
+import { CloseIcon } from "../icons";
 const {Title} = Typography
 
 function OortModalTitle(props: { title: string }) {
@@ -35,13 +36,16 @@ export function OortModal({className, title, onCancel, loading, children, visibl
         }
     }
 
+    const cssClass = className ? `${className} ${styles.modal}` : styles.modal
+
     return <Modal
-        className={`${className} oort-modal`}
+        className={cssClass}
         width={width || '640px'}
         title={<OortModalTitle title={title}/>}
         centered
         open={visible}
         closable={true}
+        closeIcon={<CloseIcon />}
         cancelText="Close"
         onCancel={_onCancel}
         maskClosable={false}
