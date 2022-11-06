@@ -1,8 +1,3 @@
 /// <reference types="react" />
-interface IProps {
-    className?: string;
-    size: number;
-}
-export declare const CloseIcon: ({ className, size }: IProps) => JSX.Element;
-export {};
+export declare const CloseIcon: () => JSX.Element;
 //# sourceMappingURL=closeIcon.d.ts.map
