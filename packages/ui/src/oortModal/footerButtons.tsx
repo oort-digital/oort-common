@@ -1,5 +1,5 @@
 import { Button} from 'antd'
-import "./footerButtons.less"
+import styles from "./footerButtons.module.less"
 import React from 'react'
 import { SizeType } from 'antd/lib/config-provider/SizeContext'
 import { ButtonType } from 'antd/lib/button';
@@ -26,27 +26,26 @@ interface IProps {
 
 export function FooterButtons({okBtn, cancelBtn, onCancel, onOk, loading, className, firstBtn, secondBtn, onFistOk, onSecondOk }: IProps) {
 
-    let cssClass = 'footer-buttons'
+    let cssClass = `${styles.footer_buttons} footer-buttons`
     if(className) {
         cssClass = `${cssClass} ${className}`
     }
 
     if(cancelBtn && okBtn) {
-        cssClass = `${cssClass} two-buttons`
+        cssClass = `${cssClass} ${styles.two_buttons}`
     }
     else {
-        cssClass = `${cssClass} single-button`
+        cssClass = `${cssClass} ${styles.single_button}`
     }
 
     if (firstBtn && secondBtn) {
-        cssClass = `${cssClass} two-buttons`
+        cssClass = `${cssClass} ${styles.two_buttons}`
     }
 
     return <div className={cssClass}>
-    { cancelBtn ? <Button className='cancel-btn'  disabled={loading} size={cancelBtn.size ?? 'large'} type={cancelBtn.type} onClick={onCancel}>{cancelBtn.text}</Button> : null }
-    { okBtn ? <Button className='ok-btn' loading={loading} size={okBtn.size ?? 'large'} type={okBtn.type ?? "primary"} onClick={onOk}>{okBtn.text}</Button> : null }
-    { firstBtn ? <Button className='first-btn' loading={loading} size={firstBtn.size ?? 'large'} type={firstBtn.type ?? "primary"} onClick={onFistOk}>{firstBtn.text}</Button> : null }
-    { secondBtn ? <Button className='second-btn' loading={loading} size={secondBtn.size ?? 'large'} type={secondBtn.type ?? "primary"} onClick={onSecondOk}>{secondBtn.text}</Button> : null }
-
+    { cancelBtn ? <Button className={styles.cancel_btn} disabled={loading}  size={cancelBtn.size ?? 'large'} type={cancelBtn.type} onClick={onCancel}>{cancelBtn.text}</Button> : null }
+    { okBtn     ? <Button className={styles.ok_btn}     loading={loading}   size={okBtn.size ?? 'large'} type={okBtn.type ?? "primary"} onClick={onOk}>{okBtn.text}</Button> : null }
+    { firstBtn  ? <Button className={styles.first_btn}  loading={loading}   size={firstBtn.size ?? 'large'} type={firstBtn.type ?? "primary"} onClick={onFistOk}>{firstBtn.text}</Button> : null }
+    { secondBtn ? <Button className={styles.second_btn} loading={loading}   size={secondBtn.size ?? 'large'} type={secondBtn.type ?? "primary"} onClick={onSecondOk}>{secondBtn.text}</Button> : null }
     </div>
 }

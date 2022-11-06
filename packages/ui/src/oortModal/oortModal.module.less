@@ -1,25 +1,30 @@
 @import '../styles/typography.less';
 @import '../styles/theme/vars.less';
 
-.oort-modal {
+.modal {
 
-    .ant-modal-body {
+    & > :global(.ant-modal-content > .ant-modal-close > .ant-modal-close-x) {
+        padding: 19px;
+        color: @theme-color-10;
+    }
+
+    & > :global(.ant-modal-content > .ant-modal-body) {
         padding: 36px;
         .body-16-regular-mixin;
     }
 
-    .ant-modal-header {
+    & > :global(.ant-modal-content > .ant-modal-header) {
         margin-top: 20px;
         padding-top: 0;
         padding-bottom: 0;
         border-style: none;
     }
 
-    .ant-modal-footer {
+    & > :global(.ant-modal-content > .ant-modal-footer) {
         background-color: @theme-color-2;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
-        .footer-buttons {
+        :global(.footer-buttons) {
             padding-top: 31.5px;
             padding-bottom: 31.5px;
         }

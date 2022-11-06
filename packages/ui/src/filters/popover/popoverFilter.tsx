@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react'
 import styles from "./popoverFilter.module.less"
 import { Button, Popover } from "antd"
-import { ChevronDownOutlineIcon, CloseIcon } from '../../icons'
+import { ChevronDownOutlineIcon, CloseIconOld } from '../../icons'
 import { logger } from '@oort/logger'
 
 export type RangeValue = number | undefined
@@ -58,7 +58,7 @@ export const PopoverFilter = ({
         {
             isClear ? null :
             <span className='icon' onClick={(e) =>{ e.stopPropagation(); onClear();}}>
-                <CloseIcon size={8} />
+                <CloseIconOld size={8} />
             </span>
         }
         <ChevronDownOutlineIcon size={16} className='icon' />
