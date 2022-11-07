@@ -1,9 +1,9 @@
 import { useState as D } from "react";
-import { j as t, O as S, a as e, b as i, i as E } from "./index.ed576ab4.mjs";
-import { Row as b, Col as u } from "antd";
-import { a as A, C as m, b as L, M as F, W as K } from "./index.es.05fdcfdb.mjs";
-import "ethers";
+import { j as t, O as S, a as e, F as i, i as E } from "./index.684268db.mjs";
+import { Row as A, Col as u } from "antd";
+import { a as M, C as m, b as F, M as L, W as K } from "./index.es.34d646b7.mjs";
 import "react-router-dom";
+import "ethers";
 import "mobx-react";
 import "mobx";
 var G = /* @__PURE__ */ ((o) => (o[o.WALLET_METAMASK = 0] = "WALLET_METAMASK", o[o.WALLET_CONNECT = 1] = "WALLET_CONNECT", o))(G || {});
@@ -32,7 +32,7 @@ const R = (o, r, l) => o ? l.some((c) => c.name === r.name) ? /* @__PURE__ */ e(
   const [w, s] = D(!1), {
     supportedChains: y,
     chain: d,
-    switchChain: M,
+    switchChain: b,
     canSwitchChain: v,
     connectAsync: j,
     account: h,
@@ -48,7 +48,7 @@ const R = (o, r, l) => o ? l.some((c) => c.name === r.name) ? /* @__PURE__ */ e(
   }, O = async (n) => {
     s(!0);
     try {
-      await M(n), r && r(), f && f();
+      await b(n), r && r(), f && f();
     } finally {
       s(!1);
     }
@@ -90,7 +90,7 @@ const R = (o, r, l) => o ? l.some((c) => c.name === r.name) ? /* @__PURE__ */ e(
     } = n;
     return /* @__PURE__ */ t(u, {
       flex: 3,
-      children: /* @__PURE__ */ t(L, {
+      children: /* @__PURE__ */ t(F, {
         onClick: () => O(a),
         loading: w,
         isActive: a === d.chainId,
@@ -114,7 +114,7 @@ const R = (o, r, l) => o ? l.some((c) => c.name === r.name) ? /* @__PURE__ */ e(
         children: [/* @__PURE__ */ t("div", {
           className: "description",
           children: R(h, d, y)
-        }), /* @__PURE__ */ t(b, {
+        }), /* @__PURE__ */ t(A, {
           gutter: k,
           className: "chain-buttons",
           justify: "space-between",
@@ -125,15 +125,15 @@ const R = (o, r, l) => o ? l.some((c) => c.name === r.name) ? /* @__PURE__ */ e(
         children: [/* @__PURE__ */ t("span", {
           children: "Connect your Wallet"
         }), " and jump into the world of NFT's"]
-      }), /* @__PURE__ */ e(b, {
+      }), /* @__PURE__ */ e(A, {
         gutter: k,
         justify: "space-between",
         children: [/* @__PURE__ */ t(u, {
           span: 12,
-          children: g("Metamask", A.Injected, F)
+          children: g("Metamask", M.Injected, L)
         }), /* @__PURE__ */ t(u, {
           span: 12,
-          children: g("WalletConnect", A.WalletConnect, K)
+          children: g("WalletConnect", M.WalletConnect, K)
         })]
       })]
     })
@@ -143,4 +143,4 @@ export {
   G as WALLETTYPE,
   Z as default
 };
-//# sourceMappingURL=connectModalDesktop.8ccc9ed6.mjs.map
+//# sourceMappingURL=connectModalDesktop.d34f9f06.mjs.map
