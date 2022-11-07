@@ -40,6 +40,7 @@ export const testNfts: ITestNfts = {
 
 const style = { 
   // background: 'red'
+  height: '1000px'
 }
 
 export const TestContent = <div style={style}>

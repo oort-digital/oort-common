@@ -6,9 +6,14 @@
     flex-direction: column;
 }
 
+@topHeaderHeight: 52px;
+
 .root > .top_header {
     .responsive-layout-padding-mixin();
-    height: 52px;
+    position: fixed;
+    width: 100%;
+    height: @topHeaderHeight;
+    z-index: 1;
     background-color: @theme-color-4;
     display: flex;
     align-items: center;
@@ -20,5 +25,6 @@
 }
 
 .root > .content {
+    margin-top: @topHeaderHeight;
     background: @theme-color-3;
 }
