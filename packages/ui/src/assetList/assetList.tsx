@@ -13,7 +13,7 @@ interface IProps<TItem> {
 	className?: string
 }
 
-interface IAssetListGrid {
+export interface IAssetListGrid {
 	xs: ListGridType
 	sm: ListGridType
 	md: ListGridType
@@ -22,7 +22,7 @@ interface IAssetListGrid {
 	xxl: ListGridType
 }
 
-const AssetListGrid: IAssetListGrid = {
+export const AssetListGrid: IAssetListGrid = {
 	xs:  { column: 1 },
 	sm:  { column: 2, gutter: 12 },
 	md:  { column: 3, gutter: 12 },
@@ -39,7 +39,7 @@ const overridedBrakepoints = {
 	xxl: 1680
 }
 
-const AssetListBrakepoints: IScreenBrakepoints = {...defaultScreenBrakepoints, ...overridedBrakepoints}
+export const AssetListBrakepoints: IScreenBrakepoints = {...defaultScreenBrakepoints, ...overridedBrakepoints}
 
 const toGrid = (screenSize: ScreenSize): ListGridType => {
 	switch(screenSize) {
