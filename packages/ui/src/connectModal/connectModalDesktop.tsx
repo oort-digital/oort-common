@@ -10,36 +10,12 @@ import { ConnectorNames } from '@oort/web3-connectors';
 import { OortModal } from '../oortModal';
 import { IWeb3 } from './connectModal';
 import { ChainButtonWithLogic } from './chainButtonWithLogic';
-import { getChainName } from '../utils';
+import { Alert } from './alert';
+import { Bold } from './bold';
 
 export enum WALLETTYPE {
 	WALLET_METAMASK,
 	WALLET_CONNECT,
-}
-
-const renderAlert = (account: string, chain: IChain, supportedChains: IChain[], expectedChainId: number | undefined) => {
-
-	if (!account) { return null }
-
-	if(expectedChainId) {
-		return <>
-			You connected to <span className={styles.chain_name}>{chain.name}.</span>
-			<div>
-				Please connect to <span className={styles.chain_name}>{getChainName(expectedChainId)}</span> network.
-			</div>
-		</>
-	}
-
-	if (!supportedChains.some(x => x.name === chain.name)) {
-		return <>
-			You connected to <span className={styles.chain_name}>{chain.name}.</span>
-			<div>
-				Please connect to the appropriate network. <span className={styles.chain_name}>{supportedChains.map(x => x.name).join(', ')}</span>
-			</div>
-		</>
-	}
-
-	return <>You are currently using <span>Oort Digital</span> on the <span className={styles.chain_name}>{chain.name}</span> network</>
 }
 
 interface IProps {
@@ -154,7 +130,7 @@ const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitc
 			{
 				!isChainEmpty(chain) && <>
 					<div className={styles.description}>
-						{renderAlert(account, chain, supportedChains, expectedChainId)}
+						<Alert account={account} chain={chain} supportedChains={supportedChains} expectedChainId={expectedChainId} />
 					</div>
 					<Row gutter={btnGutter} className={styles.chain_buttons} justify='space-between'>
 						{supportedChains.map(x => renderChainBtn(x))}
@@ -162,7 +138,7 @@ const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitc
 				</>
 			}
 			<div className={styles.description}>
-				<span>Connect your Wallet</span> and jump into the world of NFT's
+				<Bold>Connect your Wallet</Bold> and jump into the world of NFT's
 			</div>
 			<Row gutter={btnGutter} justify='space-between'>
 				<Col span={12}>{renderWalletBtn("Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>

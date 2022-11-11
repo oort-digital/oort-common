@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react'
 import { Col, Row } from 'antd'
-import "./connectModalMobile.less"
+import styles from "./connectModalMobile.module.less"
 
 import { ConnectButton } from './connectButton';
 import { MetamaskIcon } from './metamaskIcon';
@@ -141,20 +141,20 @@ const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, af
 	}
 	
 	return <OortModalMobile viewMode="topGap" loading={loading} footer={footer}
-		className='connect-wallet-mobile-modal' title='Network & Wallet' visible={visible}
+		className={styles.modal} title='Network & Wallet' visible={visible}
 		onCancel={() => _onCancel()}>
 		<>
 			{
 				!isChainEmpty(chain) && <>
-					<div className="description">
+					<div className={styles.description}>
 						{renderAlert(account, chain, supportedChains)}
 					</div>
-					<Row gutter={btnGutter} className='chain-buttons'>
+					<Row gutter={btnGutter} className={styles.chain_buttons}>
 						{supportedChains.map(x => renderChainBtn(x))}
 					</Row>
 				</>
 			}
-			<div className="description">
+			<div className={styles.description}>
 				<span>Connect your Wallet</span> and jump into the world of NFT's
 			</div>
 			<Row gutter={btnGutter}>
