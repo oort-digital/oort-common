@@ -14,8 +14,8 @@ interface IProps {
     popoverTitleClassName?: string
     applyButtonClassName?: string
     cancelButtonClassName?: string
-    isClear: boolean
-    onClear: () => void
+    isClear?: boolean
+    onClear?: () => void
     popoverTitle: string
     children: ReactNode
     onSubmit: () => void
@@ -54,13 +54,17 @@ export const PopoverFilter = ({
         </div>
     </div>
 
-    const btnIcons = <>
-        {
-            isClear ? null :
-            <span className='icon' onClick={(e) =>{ e.stopPropagation(); onClear();}}>
-                <CloseIconOld size={8} />
-            </span>
+    const renderClose = () => {
+        if(isClear || !onClear) {
+            return null
         }
+        return <span className='icon' onClick={(e) =>{ e.stopPropagation(); onClear();}}>
+            <CloseIconOld size={8} />
+        </span>
+    }
+
+    const btnIcons = <>
+        { renderClose() }
         <ChevronDownOutlineIcon size={16} className='icon' />
     </>
 

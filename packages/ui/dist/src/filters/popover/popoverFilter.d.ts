@@ -8,8 +8,8 @@ interface IProps {
     popoverTitleClassName?: string;
     applyButtonClassName?: string;
     cancelButtonClassName?: string;
-    isClear: boolean;
-    onClear: () => void;
+    isClear?: boolean;
+    onClear?: () => void;
     popoverTitle: string;
     children: ReactNode;
     onSubmit: () => void;
