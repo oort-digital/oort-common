@@ -13,11 +13,6 @@ import { ChainButtonWithLogic } from './chainButtonWithLogic';
 import { Alert } from './alert';
 import { Bold } from './bold';
 
-export enum WALLETTYPE {
-	WALLET_METAMASK,
-	WALLET_CONNECT,
-}
-
 interface IProps {
 	web3: IWeb3
 	expectedChainId?: number

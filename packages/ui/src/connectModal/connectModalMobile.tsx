@@ -11,32 +11,8 @@ import { IChain, isChainEmpty } from '../typesAndInterfaces';
 import { OortModalMobile } from '../oortModal';
 import { IWeb3 } from './connectModal';
 import { ChainButtonWithLogic } from './chainButtonWithLogic';
-
-
-export enum WALLETTYPE {
-	WALLET_METAMASK,
-	WALLET_CONNECT,
-}
-
-const renderAlert = (account: string, chain: IChain, supportedChains: IChain[]) => {
-
-	if (!account) {
-		return null;
-	}
-
-	if (!supportedChains.some(x => x.name === chain!.name)) {
-		return <>
-			You connected to <span>{chain!.name}.</span>
-			<div>
-				Please connect to the appropriate network. <span>{supportedChains.map(x => x.name).join(', ')}</span>
-			</div>
-		</>
-	}
-
-	return <>
-	You are currently using <span>Oort Digital</span> on the <span>{chain!.name}</span> network
-	</>
-};
+import { Alert } from './alert';
+import { Bold } from './bold';
 
 
 interface IProps {
@@ -147,7 +123,7 @@ const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, af
 			{
 				!isChainEmpty(chain) && <>
 					<div className={styles.description}>
-						{renderAlert(account, chain, supportedChains)}
+						<Alert account={account} chain={chain} supportedChains={supportedChains} expectedChainId={expectedChainId} />
 					</div>
 					<Row gutter={btnGutter} className={styles.chain_buttons}>
 						{supportedChains.map(x => renderChainBtn(x))}
@@ -155,7 +131,7 @@ const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, af
 				</>
 			}
 			<div className={styles.description}>
-				<span>Connect your Wallet</span> and jump into the world of NFT's
+				<Bold>Connect your Wallet</Bold> and jump into the world of NFT's
 			</div>
 			<Row gutter={btnGutter}>
 				{window.ethereum && <Col span="24">{renderWalletBtn("Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>}
