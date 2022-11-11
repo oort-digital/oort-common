@@ -1,25 +1,22 @@
 @import "../styles/typography.less";
 @import "../styles/theme/vars.less";
 
-.connect-wallet-mobile-modal > .ant-drawer-content-wrapper > .ant-drawer-content > .ant-drawer-wrapper-body {
-    & > .ant-drawer-header {
+.modal > :global(.ant-drawer-content-wrapper > .ant-drawer-content > .ant-drawer-wrapper-body) {
+    & > :global(.ant-drawer-header) {
         border-bottom: 1px solid @theme-color-5;
     }
 
-    & > .ant-drawer-body {
+    & > :global(.ant-drawer-body) {
         & > .description {
             margin-bottom: 24px;
             color: @theme-color-13;
             .body-16-regular-mixin;
-            span {
-                .body-16-bold-mixin;
-            }
         }
     
-        & > .chain-buttons { margin-bottom: 56px; }
+        & > .chain_buttons { margin-bottom: 56px; }
     }
 
-    & > .ant-drawer-footer {
+    & > :global(.ant-drawer-footer) {
         .footnote-12-description-mixin();
         padding: 12px 24px;
         color: @theme-color-13;

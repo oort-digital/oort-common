@@ -1,8 +1,8 @@
 @import "../styles/typography.less";
 @import "../styles/theme/vars.less";
 
-.connect-wallet-desktop-modal {
-	.ant-modal-body {
+.modal {
+	:global(.ant-modal-body) {
         padding-top: 64px;
     }
     .description {
@@ -10,19 +10,16 @@
         text-align: center;
         color: @theme-color-13;
         .body-16-regular-mixin;
-        span {
-            .body-16-bold-mixin;
-        }
     }
 
-    .chain-buttons {
+    .chain_buttons {
         margin-bottom: 56px;
     }
 
-    .ant-modal-content {
+    :global(.ant-modal-content) {
         padding-bottom: 0 !important;
 
-        .ant-modal-footer {
+        :global(.ant-modal-footer) {
             margin-top: 22px;
             padding: 17px 100px;
             color: @theme-color-13;

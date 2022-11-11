@@ -43,7 +43,7 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
             abortController.abort()
         }
 
-    }, []);// eslint-disable-line react-hooks/exhaustive-deps
+    }, [filterStore]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const isMobile = useDeviceType() === DeviceType.Phone
 

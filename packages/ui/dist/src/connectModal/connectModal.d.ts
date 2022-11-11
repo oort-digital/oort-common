@@ -15,12 +15,13 @@ export interface IWeb3 {
 }
 interface IProps {
     web3: IWeb3;
+    expectedChainId?: number;
     visible: boolean;
     onCancel?: () => void;
     onClose?: () => void;
     afterConnect?: () => void;
     afterChainSwitch?: () => void;
 }
-export declare const ConnectModal: ({ web3, visible, onCancel, onClose, afterConnect, afterChainSwitch }: IProps) => JSX.Element;
+export declare const ConnectModal: (props: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=connectModal.d.ts.map
