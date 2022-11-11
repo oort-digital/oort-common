@@ -1,9 +1,5 @@
 /// <reference types="react" />
 import { IWeb3 } from './connectModal';
-export declare enum WALLETTYPE {
-    WALLET_METAMASK = 0,
-    WALLET_CONNECT = 1
-}
 interface IProps {
     web3: IWeb3;
     expectedChainId?: number;

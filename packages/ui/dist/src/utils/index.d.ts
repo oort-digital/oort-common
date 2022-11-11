@@ -1,4 +1,5 @@
 export { getChainIcon } from "./getChainIcon";
+export { getChainName } from "./getChainName";
 export { EMPTY_ABORT_SIGNAL } from "./emptyAbortSignal";
 export { debounceFunction } from "./debounce";
 export { delayAsync } from "./delayAsync";
