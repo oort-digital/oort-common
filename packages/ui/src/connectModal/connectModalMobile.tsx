@@ -6,7 +6,6 @@ import { ConnectButton } from './connectButton';
 import { MetamaskIcon } from './metamaskIcon';
 import { WalletConnectIcon } from './walletConnectIcon';
 import { Gutter } from 'antd/lib/grid/row';
-import { ChainButton } from './chainButton';
 import { ConnectorNames } from "@oort/web3-connectors";
 import { IChain, isChainEmpty } from '../typesAndInterfaces';
 import { OortModalMobile } from '../oortModal';
