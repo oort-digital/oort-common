@@ -1,21 +1,22 @@
 import { Button } from "antd"
 import {IChain} from "../typesAndInterfaces"
-import "./chainButton.less"
+import styles from "./chainButton.module.less"
 import { getChainIcon } from '../utils';
 
 
 interface IProps {
     loading: boolean
+	disabled?: boolean
     chain: IChain
     isActive: boolean
     canSwitchChain: boolean
     onClick: () => void
 }
 
-export const ChainButton = ({ chain, loading, isActive, canSwitchChain, onClick }: IProps) => {
+export const ChainButton = ({ chain, loading, disabled, isActive, canSwitchChain, onClick }: IProps) => {
     const { name, chainId } = chain
 
-    let cssClass = isActive ? 'chain-btn-active' : 'chain-btn'
+    let cssClass = isActive ? styles.active : styles.btn
     const canSwitch = canSwitchChain && !isActive
 	
 		let onClick_: () => void
@@ -23,11 +24,11 @@ export const ChainButton = ({ chain, loading, isActive, canSwitchChain, onClick 
 			onClick_ = () => onClick()
 		}
 		else {
-			cssClass = `${cssClass} can-not-switch`
+			cssClass = `${cssClass} ${styles.can_not_switch}`
 			onClick_ = () => {}
 		}
 
-    return <Button block className={cssClass} disabled={loading} icon={getChainIcon(chainId, 23, 23)} onClick={onClick_}>
+    return <Button block className={cssClass} disabled={loading || disabled} icon={getChainIcon(chainId, 23, 23)} onClick={onClick_}>
 				{name}
 			</Button>
 }
