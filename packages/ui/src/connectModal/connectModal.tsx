@@ -19,6 +19,7 @@ export interface IWeb3 {
 
 interface IProps {
 	web3: IWeb3
+	expectedChainId?: number
 	visible: boolean
 	/**
 	 * @deprecated Use onClose, afterConnect, afterChainSwitch
@@ -31,25 +32,10 @@ interface IProps {
 	afterChainSwitch?: () => void
 }
 
-export const ConnectModal = ({web3, visible, onCancel, onClose, afterConnect, afterChainSwitch}: IProps) => {
+export const ConnectModal = (props: IProps) => {
 
-	const desktop = <Desktop
-		onCancel={onCancel}
-		visible={visible}
-		web3={web3}
-		onClose={onClose}
-		afterConnect={afterConnect}
-		afterChainSwitch={afterChainSwitch}
-		/>
-
-	const mobile = <Mobile
-		onCancel={onCancel}
-		visible={visible}
-		web3={web3}
-		onClose={onClose}
-		afterConnect={afterConnect}
-		afterChainSwitch={afterChainSwitch}
-		/>
+	const desktop = <Desktop {...props} />
+	const mobile = <Mobile {...props} />
 
 	return <LazyLoader
 		desktop={desktop}

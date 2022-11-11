@@ -6,7 +6,7 @@ import { ConnectModal } from '.';
 import { ConnectorNames, IConnector, InjectedConnector } from '@oort/web3-connectors';
 import { logger } from '@oort/logger';
 import { ZERO_ADDR } from '../utils';
-import { EMPTY_CHAIN, isChainEmpty } from '../typesAndInterfaces';
+import { EMPTY_CHAIN } from '../typesAndInterfaces';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -44,7 +44,14 @@ const supportedChains = [
           symbol: 'MATIC',
           decimals: 18,
       }
-  }]
+  },
+  {
+    name: "goerli",
+    chainId: 5,
+    rpcUrl: 'https://ethereum-goerli-rpc.allthatnode.com',
+    blockExplorer: 'https://goerli.etherscan.io',
+  }
+]
   
 const supportedConnectors: { [name: string]: IConnector } = {}
 supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
@@ -76,4 +83,13 @@ export const NotConnected = Template.bind({});
 NotConnected.args = {
   web3: web3NotConnected,
   visible: true
+};
+
+
+export const ExpectedChain = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+ExpectedChain.args = {
+  web3: web3,
+  visible: true,
+  expectedChainId: 5
 };

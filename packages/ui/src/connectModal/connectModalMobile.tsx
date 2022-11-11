@@ -11,6 +11,7 @@ import { ConnectorNames } from "@oort/web3-connectors";
 import { IChain, isChainEmpty } from '../typesAndInterfaces';
 import { OortModalMobile } from '../oortModal';
 import { IWeb3 } from './connectModal';
+import { ChainButtonWithLogic } from './chainButtonWithLogic';
 
 
 export enum WALLETTYPE {
@@ -41,6 +42,7 @@ const renderAlert = (account: string, chain: IChain, supportedChains: IChain[]) 
 
 interface IProps {
 	web3: IWeb3
+	expectedChainId?: number
 	visible: boolean
 	/**
 	 * @deprecated Use onClose, afterConnect, afterChainSwitch
@@ -53,7 +55,7 @@ interface IProps {
 	afterChainSwitch?: () => void
 }
 
-const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, afterChainSwitch }: IProps) => {
+const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, afterChainSwitch, expectedChainId }: IProps) => {
 
 	const [ loading, setLoading ] = useState(false)
 	
@@ -121,10 +123,11 @@ const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, af
 		const { chainId } = supportedChain
 	
 		return <Col span="24" key={chainId}>
-			<ChainButton
+			<ChainButtonWithLogic
 				onClick={() => switchChainAndClose(chainId)}
 				loading={loading}
-				isActive={chainId === chain!.chainId}
+				expectedChainId={expectedChainId}
+				connectedChainId={chain.chainId}
 				canSwitchChain={canSwitchChain}
 				chain={supportedChain} />
 		</Col>

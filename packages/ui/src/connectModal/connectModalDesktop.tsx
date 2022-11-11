@@ -6,10 +6,10 @@ import { ConnectButton } from './connectButton';
 import { MetamaskIcon } from './metamaskIcon';
 import { WalletConnectIcon } from './walletConnectIcon';
 import { Gutter } from 'antd/lib/grid/row';
-import { ChainButton } from './chainButton';
 import { ConnectorNames } from '@oort/web3-connectors';
 import { OortModal } from '../oortModal';
 import { IWeb3 } from './connectModal';
+import { ChainButtonWithLogic } from './chainButtonWithLogic';
 
 export enum WALLETTYPE {
 	WALLET_METAMASK,
@@ -38,6 +38,7 @@ const renderAlert = (account: string, chain: IChain, supportedChains: IChain[]) 
 
 interface IProps {
 	web3: IWeb3
+	expectedChainId?: number
 	visible: boolean
 	 /**
      * @deprecated Use onClose, afterConnect, afterChainSwitch
@@ -50,7 +51,7 @@ interface IProps {
 	afterChainSwitch?: () => void
 }
 
-const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitch, afterConnect }: IProps) => {
+const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitch, afterConnect, expectedChainId }: IProps) => {
 
 	const [ loading, setLoading ] = useState(false)
 	const {  supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = web3
@@ -118,10 +119,11 @@ const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitc
 		const { chainId } = supportedChain
 	
 		return <Col flex={3} key={chainId}>
-			<ChainButton
+			<ChainButtonWithLogic
 				onClick={() => switchChainAndClose(chainId)}
 				loading={loading}
-				isActive={chainId === chain!.chainId}
+				expectedChainId={expectedChainId}
+				connectedChainId={chain.chainId}
 				canSwitchChain={canSwitchChain}
 				chain={supportedChain} />
 		</Col>
