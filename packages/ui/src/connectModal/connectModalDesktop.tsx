@@ -10,31 +10,37 @@ import { ConnectorNames } from '@oort/web3-connectors';
 import { OortModal } from '../oortModal';
 import { IWeb3 } from './connectModal';
 import { ChainButtonWithLogic } from './chainButtonWithLogic';
+import { getChainName } from '../utils';
 
 export enum WALLETTYPE {
 	WALLET_METAMASK,
 	WALLET_CONNECT,
 }
 
-const renderAlert = (account: string, chain: IChain, supportedChains: IChain[]) => {
+const renderAlert = (account: string, chain: IChain, supportedChains: IChain[], expectedChainId: number | undefined) => {
 
-	if (!account) {
-		return null;
+	if (!account) { return null }
+
+	if(expectedChainId) {
+		return <>
+			You connected to <span>{chain.name}.</span>
+			<div>
+				Please connect to <span>{getChainName(expectedChainId)}</span> network.
+			</div>
+		</>
 	}
 
-	if (!supportedChains.some(x => x.name === chain!.name)) {
+	if (!supportedChains.some(x => x.name === chain.name)) {
 		return <>
-			You connected to <span>{chain!.name}.</span>
+			You connected to <span>{chain.name}.</span>
 			<div>
 				Please connect to the appropriate network. <span>{supportedChains.map(x => x.name).join(', ')}</span>
 			</div>
 		</>
 	}
 
-	return <>
-	You are currently using <span>Oort Digital</span> on the <span>{chain!.name}</span> network
-	</>
-};
+	return <>You are currently using <span>Oort Digital</span> on the <span>{chain.name}</span> network</>
+}
 
 interface IProps {
 	web3: IWeb3
@@ -148,7 +154,7 @@ const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitc
 			{
 				!isChainEmpty(chain) && <>
 					<div className="description">
-						{renderAlert(account, chain, supportedChains)}
+						{renderAlert(account, chain, supportedChains, expectedChainId)}
 					</div>
 					<Row gutter={btnGutter} className='chain-buttons' justify='space-between'>
 						{supportedChains.map(x => renderChainBtn(x))}
