@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react'
 import { IChain, isChainEmpty } from "../typesAndInterfaces"
 import { Col, Row } from 'antd'
-import "./connectModalDesktop.less"
+import styles from "./connectModalDesktop.module.less"
 import { ConnectButton } from './connectButton';
 import { MetamaskIcon } from './metamaskIcon';
 import { WalletConnectIcon } from './walletConnectIcon';
@@ -23,23 +23,23 @@ const renderAlert = (account: string, chain: IChain, supportedChains: IChain[], 
 
 	if(expectedChainId) {
 		return <>
-			You connected to <span>{chain.name}.</span>
+			You connected to <span className={styles.chain_name}>{chain.name}.</span>
 			<div>
-				Please connect to <span>{getChainName(expectedChainId)}</span> network.
+				Please connect to <span className={styles.chain_name}>{getChainName(expectedChainId)}</span> network.
 			</div>
 		</>
 	}
 
 	if (!supportedChains.some(x => x.name === chain.name)) {
 		return <>
-			You connected to <span>{chain.name}.</span>
+			You connected to <span className={styles.chain_name}>{chain.name}.</span>
 			<div>
-				Please connect to the appropriate network. <span>{supportedChains.map(x => x.name).join(', ')}</span>
+				Please connect to the appropriate network. <span className={styles.chain_name}>{supportedChains.map(x => x.name).join(', ')}</span>
 			</div>
 		</>
 	}
 
-	return <>You are currently using <span>Oort Digital</span> on the <span>{chain.name}</span> network</>
+	return <>You are currently using <span>Oort Digital</span> on the <span className={styles.chain_name}>{chain.name}</span> network</>
 }
 
 interface IProps {
@@ -146,22 +146,22 @@ const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitc
 	return <OortModal 
 		loading={loading}
 		footer={footer}
-		className='connect-wallet-desktop-modal'
+		className={styles.modal}
 		title='Network & Wallet'
 		width="690px"
 		visible={visible} onCancel={() => _onCancel()}>
 		<>
 			{
 				!isChainEmpty(chain) && <>
-					<div className="description">
+					<div className={styles.description}>
 						{renderAlert(account, chain, supportedChains, expectedChainId)}
 					</div>
-					<Row gutter={btnGutter} className='chain-buttons' justify='space-between'>
+					<Row gutter={btnGutter} className={styles.chain_buttons} justify='space-between'>
 						{supportedChains.map(x => renderChainBtn(x))}
 					</Row>
 				</>
 			}
-			<div className="description">
+			<div className={styles.description}>
 				<span>Connect your Wallet</span> and jump into the world of NFT's
 			</div>
 			<Row gutter={btnGutter} justify='space-between'>
