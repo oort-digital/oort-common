@@ -67,7 +67,7 @@ export class InMemoryStoreStub extends CollectionFilterStore {
     }
   
     constructor() {
-        super({ cacheKeyPrefixFunc: () => 'storybook_collection_filter' })
+        super({ cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
         this._source = new Source(100)
     }
 

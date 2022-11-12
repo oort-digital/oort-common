@@ -60,7 +60,7 @@ export class NftsCollectionStore extends CollectionFilterStore {
 
     constructor() {
         super({
-            cacheKeyPrefixFunc: () => 'storybook_collection_filter'
+            cacheKeyPrefixFunc: () => 'storybook_collection_filter_nfts'
         })
         this._oortClient = new OortClient({apiUrl: "https://api-test.oort.digital/platform"})
     }

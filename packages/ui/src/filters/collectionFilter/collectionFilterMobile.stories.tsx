@@ -46,7 +46,6 @@ export const Main = Template.bind({});
 Main.args = {
   title: 'Title',
   searchPlaceholder: 'Enter text',
-  cacheKeyPrefixFunc: () => 'storybook_collection_filter',
   filterStore: inMemoryFilterStore,
   onChange: onChange,
   searchable: true,
