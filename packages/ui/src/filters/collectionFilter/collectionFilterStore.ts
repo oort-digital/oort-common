@@ -23,8 +23,9 @@ export interface ICollectionFilterStore {
     clearNotApplied: () => void
     copyNotAppliedToRecent: () => void
     setTerm: (term: string) => void
+    reset: () => void
     setFavorites: (item: ICollectionFilterItem, checked: boolean) => void
-    loadNextPage: (reset: boolean, signal: AbortSignal) => Promise<void>
+    loadNextPage: (signal: AbortSignal) => Promise<void>
     loadFavoritesFromCache: () => void
     loadRecentFromCache: () => void
     select: (key: ItemKeyType, checked: boolean) => void
@@ -65,7 +66,7 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         this.recent = this.loadFromCache(this.getRecentKey(), this._recentQueue)
     }
 
-    abstract loadNextPage(reset: boolean, signal: AbortSignal): Promise<void>
+    abstract loadNextPage(signal: AbortSignal): Promise<void>
     protected abstract getAppliedItems(appliedKeys: ItemKeyType[]): Promise<ICollectionFilterItem[]> 
 
     setTerm(term: string): void {
@@ -177,7 +178,7 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         this._curPage++
     }
 
-    protected reset(): void {
+    public reset(): void {
         this._nextPageCursor = undefined
         this._curPage = 0
         this.all = []
@@ -210,7 +211,8 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
             loadRecentFromCache: action,
             copyNotAppliedToRecent: action,
             setApplied: action,
-            selectSingle: action
+            selectSingle: action,
+            reset: action
         })
     }
 

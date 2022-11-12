@@ -7,14 +7,11 @@ import { SearchGameHubType } from "./typesAndInterfaces";
 
 export class NftsCollectionStore extends CollectionFilterStore {
 
-    loadNextPage = async (reset: boolean, signal: AbortSignal): Promise<void> => {
+    loadNextPage = async (signal: AbortSignal): Promise<void> => {
         //const traceId = this.term
         runInAction(() => {
             this.isLoading = true
         })
-        if (reset) {
-            runInAction(() => this.reset())
-        }
 
         const nextPageNum = this.curPage + 1
 
@@ -63,7 +60,7 @@ export class NftsCollectionStore extends CollectionFilterStore {
 
     constructor() {
         super({
-            cacheKeyPrefixFunc: () => 'storybook_collection_filter'
+            cacheKeyPrefixFunc: () => 'storybook_collection_filter_nfts'
         })
         this._oortClient = new OortClient({apiUrl: "https://api-test.oort.digital/platform"})
     }

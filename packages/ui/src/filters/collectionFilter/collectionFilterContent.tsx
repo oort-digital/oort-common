@@ -30,14 +30,16 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
 
         filterStore.clearNotApplied()
         filterStore.setTerm(term)
-        filterStore.loadNextPage(false, abortController.signal);
+        filterStore.reset()
+        filterStore.loadNextPage(abortController.signal);
     }
 
     useEffect(() => {
         const abortController = new AbortController()
         filterStore.loadFavoritesFromCache()
         filterStore.loadRecentFromCache()
-        filterStore.loadNextPage(true, abortController.signal)
+        filterStore.reset()
+        filterStore.loadNextPage(abortController.signal)
 
         return () => {
             abortController.abort()
@@ -95,7 +97,7 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
                 className={styles.list}
                 hasLoadMore={filterStore.hasLoadMore}
                 loadMoreButtonSize="middle"
-                onLoadMore={() => filterStore.loadNextPage(false, EMPTY_ABORT_SIGNAL)}
+                onLoadMore={() => filterStore.loadNextPage(EMPTY_ABORT_SIGNAL)}
                 loading={filterStore.isLoading}
                 itemRenderer={collectionItemRenderer(styles.list_item, isMobile, selectedParam, favoriteParam)}
                 items={items}

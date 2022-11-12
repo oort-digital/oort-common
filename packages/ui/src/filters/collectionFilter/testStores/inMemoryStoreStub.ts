@@ -46,7 +46,7 @@ class Source {
 
 export class InMemoryStoreStub extends CollectionFilterStore {
     
-    async loadNextPage(_reset: boolean, _signal: AbortSignal): Promise<void> {
+    async loadNextPage(_signal: AbortSignal): Promise<void> {
 
         runInAction(() => {
             this.isLoading = true
@@ -59,9 +59,7 @@ export class InMemoryStoreStub extends CollectionFilterStore {
             skip: this.offset,
             term: this.term })
 
-        runInAction(() => {
-            this.addNewPage(page)
-        })
+        this.addNewPage(page)
     }
 
     protected async getAppliedItems(_appliedKeys: ItemKeyType[]): Promise<ICollectionFilterItem[]> {
@@ -69,7 +67,7 @@ export class InMemoryStoreStub extends CollectionFilterStore {
     }
   
     constructor() {
-        super({ cacheKeyPrefixFunc: () => 'storybook_collection_filter' })
+        super({ cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
         this._source = new Source(100)
     }
 

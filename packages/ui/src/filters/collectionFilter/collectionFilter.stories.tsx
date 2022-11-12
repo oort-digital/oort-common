@@ -2,7 +2,7 @@ import "../../stories.less";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { CollectionFilter } from "./collectionFilter";
-import { InMemoryStoreStub, NftsCollectionStore } from "./testStores";
+import { InMemoryStoreStub, NftsCollectionStore, NoDataStoreStub } from "./testStores";
 import { ICollectionFilterItem } from "./typesAndInterfaces";
 import React from "react";
 import { ThemeLoader } from "../../internalHelpers";
@@ -65,6 +65,18 @@ Nfts.args = {
 	popoverTitle: 'PopoverTitle',
   searchPlaceholder: 'Enter text',
 	filterStore: nftsStore,
+	onChange: onChangeNfts,
+	searchable: true,
+	selectSingle: false
+}
+
+const noDataStore = new NoDataStoreStub()
+export const NoData = Template.bind({}); 
+NoData.args = {
+	title: 'Title',
+	popoverTitle: 'PopoverTitle',
+  searchPlaceholder: 'Enter text',
+	filterStore: noDataStore,
 	onChange: onChangeNfts,
 	searchable: true,
 	selectSingle: false

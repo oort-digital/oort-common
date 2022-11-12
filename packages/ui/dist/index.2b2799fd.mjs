@@ -4,7 +4,7 @@ import ut, { createContext as Po, useContext as Fo, useEffect as Re, useState as
 import { Link as Yn, useLocation as Do } from "react-router-dom";
 import { utils as Xn } from "ethers";
 import { observer as vt } from "mobx-react";
-import { makeObservable as Io, observable as ce, action as X, runInAction as q1 } from "mobx";
+import { makeObservable as Io, observable as ce, action as G, runInAction as q1 } from "mobx";
 const W1 = {
   chainId: -1,
   name: ""
@@ -87,7 +87,7 @@ function Wo() {
     }
     var V = !1, ae = !1, he = !1, Ce = !1, pe = !1, St;
     St = Symbol.for("react.module.reference");
-    function Y(c) {
+    function X(c) {
       return !!(typeof c == "string" || typeof c == "function" || c === r || c === s || pe || c === o || c === u || c === d || Ce || c === m || V || ae || he || typeof c == "object" && c !== null && (c.$$typeof === p || c.$$typeof === b || c.$$typeof === i || c.$$typeof === l || c.$$typeof === f || c.$$typeof === St || c.getModuleId !== void 0));
     }
     function We(c, C, v) {
@@ -597,7 +597,7 @@ Check the top-level render call using <` + v + ">.");
     }
     function $1(c, C, v, E, k, R) {
       {
-        var L = Y(c);
+        var L = X(c);
         if (!L) {
           var S = "";
           (c === void 0 || typeof c == "object" && c !== null && Object.keys(c).length === 0) && (S += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.");
@@ -1070,7 +1070,7 @@ function Ie(e) {
     a: n
   };
 }
-var us = "[-\\+]?\\d+%?", fs = "[-\\+]?\\d*\\.\\d+%?", de = "(?:".concat(fs, ")|(?:").concat(us, ")"), Ht = "[\\s|\\(]+(".concat(de, ")[,|\\s]+(").concat(de, ")[,|\\s]+(").concat(de, ")\\s*\\)?"), jt = "[\\s|\\(]+(".concat(de, ")[,|\\s]+(").concat(de, ")[,|\\s]+(").concat(de, ")[,|\\s]+(").concat(de, ")\\s*\\)?"), G = {
+var us = "[-\\+]?\\d+%?", fs = "[-\\+]?\\d*\\.\\d+%?", de = "(?:".concat(fs, ")|(?:").concat(us, ")"), Ht = "[\\s|\\(]+(".concat(de, ")[,|\\s]+(").concat(de, ")[,|\\s]+(").concat(de, ")\\s*\\)?"), jt = "[\\s|\\(]+(".concat(de, ")[,|\\s]+(").concat(de, ")[,|\\s]+(").concat(de, ")[,|\\s]+(").concat(de, ")\\s*\\)?"), Y = {
   CSS_UNIT: new RegExp(de),
   rgb: new RegExp("rgb" + Ht),
   rgba: new RegExp("rgba" + jt),
@@ -1091,25 +1091,25 @@ function ds(e) {
     e = en[e], t = !0;
   else if (e === "transparent")
     return { r: 0, g: 0, b: 0, a: 0, format: "name" };
-  var n = G.rgb.exec(e);
-  return n ? { r: n[1], g: n[2], b: n[3] } : (n = G.rgba.exec(e), n ? { r: n[1], g: n[2], b: n[3], a: n[4] } : (n = G.hsl.exec(e), n ? { h: n[1], s: n[2], l: n[3] } : (n = G.hsla.exec(e), n ? { h: n[1], s: n[2], l: n[3], a: n[4] } : (n = G.hsv.exec(e), n ? { h: n[1], s: n[2], v: n[3] } : (n = G.hsva.exec(e), n ? { h: n[1], s: n[2], v: n[3], a: n[4] } : (n = G.hex8.exec(e), n ? {
+  var n = Y.rgb.exec(e);
+  return n ? { r: n[1], g: n[2], b: n[3] } : (n = Y.rgba.exec(e), n ? { r: n[1], g: n[2], b: n[3], a: n[4] } : (n = Y.hsl.exec(e), n ? { h: n[1], s: n[2], l: n[3] } : (n = Y.hsla.exec(e), n ? { h: n[1], s: n[2], l: n[3], a: n[4] } : (n = Y.hsv.exec(e), n ? { h: n[1], s: n[2], v: n[3] } : (n = Y.hsva.exec(e), n ? { h: n[1], s: n[2], v: n[3], a: n[4] } : (n = Y.hex8.exec(e), n ? {
     r: z(n[1]),
     g: z(n[2]),
     b: z(n[3]),
     a: Q1(n[4]),
     format: t ? "name" : "hex8"
-  } : (n = G.hex6.exec(e), n ? {
+  } : (n = Y.hex6.exec(e), n ? {
     r: z(n[1]),
     g: z(n[2]),
     b: z(n[3]),
     format: t ? "name" : "hex"
-  } : (n = G.hex4.exec(e), n ? {
+  } : (n = Y.hex4.exec(e), n ? {
     r: z(n[1] + n[1]),
     g: z(n[2] + n[2]),
     b: z(n[3] + n[3]),
     a: Q1(n[4] + n[4]),
     format: t ? "name" : "hex8"
-  } : (n = G.hex3.exec(e), n ? {
+  } : (n = Y.hex3.exec(e), n ? {
     r: z(n[1] + n[1]),
     g: z(n[2] + n[2]),
     b: z(n[3] + n[3]),
@@ -1117,7 +1117,7 @@ function ds(e) {
   } : !1)))))))));
 }
 function ne(e) {
-  return Boolean(G.CSS_UNIT.exec(String(e)));
+  return Boolean(Y.CSS_UNIT.exec(String(e)));
 }
 var tt = 2, tn = 0.16, hs = 0.05, Cs = 0.05, ps = 0.15, tr = 5, nr = 4, ms = [{
   index: 7,
@@ -2492,7 +2492,7 @@ const Yi = (e = "cookies") => {
     fallback: /* @__PURE__ */ a("span", {}),
     children: [" ", (() => r === Te.Desktop ? e : r === Te.Phone ? t : n)(), " "]
   });
-}, Qi = gt(() => import("./connectModalDesktop.193349e8.mjs")), e5 = gt(() => import("./connectModalMobile.05d6d08e.mjs")), t5 = (e) => {
+}, Qi = gt(() => import("./connectModalDesktop.53b79107.mjs")), e5 = gt(() => import("./connectModalMobile.7890e31b.mjs")), t5 = (e) => {
   const t = /* @__PURE__ */ a(Qi, {
     ...e
   }), n = /* @__PURE__ */ a(e5, {
@@ -3128,8 +3128,8 @@ const S5 = {
 }) => {
   const [_, w] = $(!1), A = () => {
     b(), w(!1);
-  }, x = (Y) => {
-    w(Y), p && p(Y);
+  }, x = (X) => {
+    w(X), p && p(X);
   }, N = () => /* @__PURE__ */ y("div", {
     className: `${ue.popover_content} ${o || ""}`,
     children: [/* @__PURE__ */ a("div", {
@@ -3151,8 +3151,8 @@ const S5 = {
   }), ae = /* @__PURE__ */ y(I, {
     children: [(() => f || !u ? null : /* @__PURE__ */ a("span", {
       className: "icon",
-      onClick: (Y) => {
-        Y.stopPropagation(), u();
+      onClick: (X) => {
+        X.stopPropagation(), u();
       },
       children: /* @__PURE__ */ a(ri, {
         size: 8
@@ -3186,10 +3186,10 @@ const S5 = {
     content: N,
     trigger: "click",
     children: /* @__PURE__ */ a(q, {
-      ref: (Y) => {
-        if (Y && g) {
-          const Je = Y.getBoundingClientRect();
-          var We = window.innerHeight - Je.top + Y.offsetHeight;
+      ref: (X) => {
+        if (X && g) {
+          const Je = X.getBoundingClientRect();
+          var We = window.innerHeight - Je.top + X.offsetHeight;
           D.debug(`Popover filter. BottomSpaceHeight: ${We}`), g(We);
         }
       },
@@ -3335,11 +3335,11 @@ const S5 = {
   const s = bt(), i = (w) => {
     s.current && s.current.abort();
     const A = new AbortController();
-    s.current = A, e.clearNotApplied(), e.setTerm(w), e.loadNextPage(!1, A.signal);
+    s.current = A, e.clearNotApplied(), e.setTerm(w), e.reset(), e.loadNextPage(A.signal);
   };
   Re(() => {
     const w = new AbortController();
-    return e.loadFavoritesFromCache(), e.loadRecentFromCache(), e.loadNextPage(!0, w.signal), () => {
+    return e.loadFavoritesFromCache(), e.loadRecentFromCache(), e.reset(), e.loadNextPage(w.signal), () => {
       w.abort();
     };
   }, [e]);
@@ -3368,7 +3368,7 @@ const S5 = {
       className: Ve.list,
       hasLoadMore: e.hasLoadMore,
       loadMoreButtonSize: "middle",
-      onLoadMore: () => e.loadNextPage(!1, Oi),
+      onLoadMore: () => e.loadNextPage(Oi),
       loading: e.isLoading,
       itemRenderer: kn(Ve.list_item, l, u, b),
       items: w
@@ -3620,16 +3620,17 @@ class c6 {
       hasLoadMore: ce,
       all: ce,
       term: ce,
-      setItems: X,
-      setTerm: X,
-      select: X,
-      setFavorites: X,
-      clearNotApplied: X,
-      loadFavoritesFromCache: X,
-      loadRecentFromCache: X,
-      copyNotAppliedToRecent: X,
-      setApplied: X,
-      selectSingle: X
+      setItems: G,
+      setTerm: G,
+      select: G,
+      setFavorites: G,
+      clearNotApplied: G,
+      loadFavoritesFromCache: G,
+      loadRecentFromCache: G,
+      copyNotAppliedToRecent: G,
+      setApplied: G,
+      selectSingle: G,
+      reset: G
     });
   }
   setTerm(t) {
@@ -5582,4 +5583,4 @@ export {
   _r as y,
   vr as z
 };
-//# sourceMappingURL=index.6952c281.mjs.map
+//# sourceMappingURL=index.2b2799fd.mjs.map

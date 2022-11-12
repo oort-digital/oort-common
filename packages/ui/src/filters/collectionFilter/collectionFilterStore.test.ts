@@ -3,9 +3,10 @@ import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
 
 class TestCollectionFilterStore extends CollectionFilterStore {
    
-   loadNextPage(_reset: boolean, _signal: AbortSignal): Promise<void> {
+   loadNextPage(_signal: AbortSignal): Promise<void> {
       return Promise.resolve()
    }
+   
    protected async getAppliedItems(_appliedKeys: ItemKeyType[]): Promise<ICollectionFilterItem[]> {
       return []
    }
