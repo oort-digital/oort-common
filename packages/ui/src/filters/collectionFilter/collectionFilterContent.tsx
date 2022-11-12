@@ -30,14 +30,16 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
 
         filterStore.clearNotApplied()
         filterStore.setTerm(term)
-        filterStore.loadNextPage(false, abortController.signal);
+        filterStore.reset()
+        filterStore.loadNextPage(abortController.signal);
     }
 
     useEffect(() => {
         const abortController = new AbortController()
         filterStore.loadFavoritesFromCache()
         filterStore.loadRecentFromCache()
-        filterStore.loadNextPage(true, abortController.signal)
+        filterStore.reset()
+        filterStore.loadNextPage(abortController.signal)
 
         return () => {
             abortController.abort()
