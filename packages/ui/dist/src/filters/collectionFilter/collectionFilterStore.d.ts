@@ -11,8 +11,9 @@ export interface ICollectionFilterStore {
     clearNotApplied: () => void;
     copyNotAppliedToRecent: () => void;
     setTerm: (term: string) => void;
+    reset: () => void;
     setFavorites: (item: ICollectionFilterItem, checked: boolean) => void;
-    loadNextPage: (reset: boolean, signal: AbortSignal) => Promise<void>;
+    loadNextPage: (signal: AbortSignal) => Promise<void>;
     loadFavoritesFromCache: () => void;
     loadRecentFromCache: () => void;
     select: (key: ItemKeyType, checked: boolean) => void;
@@ -35,7 +36,7 @@ export declare abstract class CollectionFilterStore implements ICollectionFilter
     isLoading: boolean;
     loadFavoritesFromCache: () => void;
     loadRecentFromCache: () => void;
-    abstract loadNextPage(reset: boolean, signal: AbortSignal): Promise<void>;
+    abstract loadNextPage(signal: AbortSignal): Promise<void>;
     protected abstract getAppliedItems(appliedKeys: ItemKeyType[]): Promise<ICollectionFilterItem[]>;
     setTerm(term: string): void;
     setItems(items: ICollectionFilterItem[]): void;
@@ -49,7 +50,7 @@ export declare abstract class CollectionFilterStore implements ICollectionFilter
     protected get nextPageCursor(): string | undefined;
     protected readonly pageSize: number;
     protected addNewPage(page: ICollectionFilterItem[], nextPageCursor?: string): void;
-    protected reset(): void;
+    reset(): void;
     constructor({ cacheKeyPrefixFunc, recentMaxSize, favoriteMaxSize, pageSize }: ICollectionFilterStoreParams);
     private _nextPageCursor;
     private _curPage;
