@@ -15,9 +15,10 @@ interface IProps {
 	selectSingle: boolean
 	searchPlaceholder: string
     filterStore: ICollectionFilterStore
+	singleTab?: boolean
 }
 
-const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchPlaceholder, filterStore }: IProps) => {
+const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchPlaceholder, filterStore, singleTab }: IProps) => {
 
 	const [bottomSpaceHeight, setBottomSpaceHeight] = useState<number>()
 
@@ -73,6 +74,7 @@ const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchP
 			selectSingle={selectSingle}
 			searchable={searchable}
 			filterStore={filterStore}
+			singleTab={singleTab}
 		/>
 	</PopoverFilter>
 }

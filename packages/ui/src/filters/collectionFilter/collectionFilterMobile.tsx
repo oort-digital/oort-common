@@ -18,13 +18,6 @@ export interface ICollectionFilterMobileProps {
 const Impl = ({ filterStore, searchable, selectSingle, searchPlaceholder, 
 	addFilterEventListeners, removeFilterEventListeners, onChange }: ICollectionFilterMobileProps) => {
 
-	// const filterStore = useFilterStore({
-	// 	cacheKeyPrefixFunc: cacheKeyPrefixFunc,
-	// 	itemSource: itemSource,
-	// 	favoriteMaxSize: favoriteMaxSize,
-	// 	recentMaxSize: recentMaxSize
-	// }, applied)
-
 	const onClose = () => {
 		filterStore.clearNotApplied()
 	}

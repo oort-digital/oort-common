@@ -11,12 +11,13 @@ import { ICollectionFilterItem } from "./typesAndInterfaces"
 interface IProps {
     bottomSpaceHeight?: number
     filterStore: ICollectionFilterStore
-    searchable: boolean,
-    selectSingle: boolean,
+    searchable: boolean
+    selectSingle: boolean
     searchPlaceholder: string
+    singleTab?: boolean
 }
 
-const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomSpaceHeight}: IProps) => {
+const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomSpaceHeight, singleTab}: IProps) => {
 
     const onTermChangeAbortController = useRef<AbortController | undefined>()
     const onTermChange = (term: string) => {
@@ -129,7 +130,10 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
                                        placeholder={searchPlaceholder} />
         }
 
-        <Tabs defaultActiveKey="all" items={tabs} />
+        {
+            singleTab ? renderList(filterStore.all, true) : <Tabs defaultActiveKey="all" items={tabs} />
+        }
+        
     </div>
 }
 

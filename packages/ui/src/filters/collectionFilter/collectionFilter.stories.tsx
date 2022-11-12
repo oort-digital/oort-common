@@ -81,3 +81,16 @@ NoData.args = {
 	searchable: true,
 	selectSingle: false
 }
+
+
+export const SingleTab = Template.bind({}); 
+SingleTab.args = {
+	title: 'Title',
+	popoverTitle: 'PopoverTitle',
+  searchPlaceholder: 'Enter text',
+	filterStore: inMemoryFilterStore,
+	onChange: onChange,
+	searchable: true,
+	selectSingle: false,
+  singleTab: true
+}
