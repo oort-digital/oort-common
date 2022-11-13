@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { ICollectionFilterStore } from "./collectionFilterStore";
+import { ICollectionFilterStore } from "./stores";
 interface IProps {
     bottomSpaceHeight?: number;
     filterStore: ICollectionFilterStore;

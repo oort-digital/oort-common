@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import { ICollectionFilterStore } from "./collectionFilterStore";
-import { FilterListenerActionType, ICollectionFilterItem } from "./typesAndInterfaces";
+import { ICollectionFilterItem, ICollectionFilterStore } from "./stores";
+import { FilterListenerActionType } from "./typesAndInterfaces";
 export interface ICollectionFilterMobileProps {
     title: string;
     onChange: (collections: ICollectionFilterItem[]) => void;

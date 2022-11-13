@@ -1,4 +1,4 @@
-import { ItemKeyType } from "./typesAndInterfaces";
+import { ItemKeyType } from "./stores";
 export declare class ItemQueue<T> {
     get items(): T[];
     enqueue(newItems: T[], unique?: boolean): void;

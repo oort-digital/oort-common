@@ -1,6 +1,5 @@
 /// <reference types="react" />
-import { ICollectionFilterItem } from "./typesAndInterfaces";
-import { ICollectionFilterStore } from "./collectionFilterStore";
+import { ICollectionFilterItem, ICollectionFilterStore } from "./stores";
 interface IProps {
     title: string;
     popoverTitle: string;

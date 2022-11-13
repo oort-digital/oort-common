@@ -1,9 +1,9 @@
 export { CollectionFilter } from './collectionFilter';
 export { CollectionFilterMobile } from './collectionFilterMobile';
-export type { ICollectionFilterItem } from "./typesAndInterfaces";
-export type { IFilterListeners, FilterListenerActionType, ItemKeyType } from "./typesAndInterfaces";
+export type { ICollectionFilterItem, ItemKeyType, ICollectionFilterStore, ICollectionFilterStoreParams } from "./stores";
+export { CollectionFilterStore, StaticCollectionFilterStore } from "./stores";
+export type { IFilterListeners, FilterListenerActionType, } from "./typesAndInterfaces";
 export { useFilterListeners } from "./useFilterListeners";
-export { CollectionFilterStore } from "./collectionFilterStore";
-export type { ICollectionFilterStore, ICollectionFilterStoreParams } from "./collectionFilterStore";
+export type {} from "./collectionFilterStore";
 export { ItemQueue } from "./itemQueue";
 //# sourceMappingURL=index.d.ts.map
