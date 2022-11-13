@@ -149,7 +149,6 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
 
     constructor({cacheKeyPrefixFunc, recentMaxSize = 20, favoriteMaxSize = 20, pageSize = 20}: ICollectionFilterStoreParams) {
 
-        logger.debug('CollectionFilterStore.constructor')
         this.pageSize = pageSize
         this._cache = new LocalStorageCacheProvider()
         this._cacheKeyPrefixFunc = cacheKeyPrefixFunc

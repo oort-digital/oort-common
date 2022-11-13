@@ -15,10 +15,21 @@ interface IProps {
     searchable: boolean
     selectSingle: boolean
     searchPlaceholder: string
-    singleTab?: boolean
 }
 
-const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomSpaceHeight, singleTab}: IProps) => {
+const getFavoriteParams = (filterStore: ICollectionFilterStore): ISelectedParameter | undefined => {
+    if(filterStore.favorites && filterStore.setFavorites) {
+        const favoritesSet = new Set(filterStore.favorites.map(x => x.key))
+        const favoriteParam: ISelectedParameter = {
+            onChange: (item: ICollectionFilterItem, isChecked: boolean) => filterStore.setFavorites!(item, isChecked),
+            selected: favoritesSet
+        }
+        return favoriteParam
+    }
+    return undefined
+}
+
+const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomSpaceHeight}: IProps) => {
 
     const onTermChangeAbortController = useRef<AbortController | undefined>()
     const onTermChange = (term: string) => {
@@ -38,10 +49,10 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
 
     useEffect(() => {
         const abortController = new AbortController()
-        filterStore.loadFavoritesFromCache()
-        filterStore.loadRecentFromCache()
-        filterStore.reset()
-        filterStore.loadNextPage(abortController.signal)
+        filterStore.loadFavoritesFromCache && filterStore.loadFavoritesFromCache()
+        filterStore.loadRecentFromCache && filterStore.loadRecentFromCache()
+        filterStore.reset && filterStore.reset()
+        filterStore.loadNextPage && filterStore.loadNextPage(abortController.signal)
 
         return () => {
             abortController.abort()
@@ -65,11 +76,8 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
         selected: new Set([...filterStore.selected])
     }
 
-    const favoritesSet = new Set(filterStore.favorites.map(x => x.key))
-    const favoriteParam: ISelectedParameter = {
-        onChange: (item: ICollectionFilterItem, isChecked: boolean) => filterStore.setFavorites(item, isChecked),
-        selected: favoritesSet
-    }
+    const favoriteParam = getFavoriteParams(filterStore)
+   
 
     const getListHeight = (): string => {
         const minH = 150
@@ -94,12 +102,13 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
         }
 
         if (showLoadMore) {
+            const loadNextPageFunc = filterStore.loadNextPage ? (() => filterStore.loadNextPage!(EMPTY_ABORT_SIGNAL)) : undefined
             return <AsyncList
                 style={heightStyle}
                 className={styles.list}
                 hasLoadMore={filterStore.hasLoadMore}
                 loadMoreButtonSize="middle"
-                onLoadMore={() => filterStore.loadNextPage(EMPTY_ABORT_SIGNAL)}
+                onLoadMore={loadNextPageFunc}
                 loading={filterStore.isLoading}
                 itemRenderer={collectionItemRenderer(styles.list_item, isMobile, selectedParam, favoriteParam)}
                 items={items}
@@ -116,13 +125,17 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
         />
     }
 
-    const favTabTitle = filterStore.favorites.length ? `Favorites(${filterStore.favorites.length})` : 'Favorites'
+    
 
-    const tabs = [
-        { label: 'All', key: 'all', children: renderList(filterStore.all, true) },
-        { label: 'Recent', key: 'recent', children: renderList(filterStore.recent, false) },
-        { label: favTabTitle, key: 'favorites', children: renderList(filterStore.favorites, false) }
-      ];
+    const tabs = [{ label: 'All', key: 'all', children: renderList(filterStore.all, true) }]
+
+    if(filterStore.recent) {
+        tabs.push({ label: 'Recent', key: 'recent', children: renderList(filterStore.recent, false) })
+    }
+    if(filterStore.favorites) {
+        const favTabTitle = filterStore.favorites.length ? `Favorites(${filterStore.favorites.length})` : 'Favorites'
+        tabs.push({ label: favTabTitle, key: 'favorites', children: renderList(filterStore.favorites, false) })
+    }
 
     return <div className={styles.content}>
         {
@@ -132,7 +145,7 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
         }
 
         {
-            singleTab ? renderList(filterStore.all, true) : <Tabs defaultActiveKey="all" items={tabs} />
+            tabs.length === 1 ? tabs[0].children : <Tabs defaultActiveKey="all" items={tabs} />
         }
         
     </div>

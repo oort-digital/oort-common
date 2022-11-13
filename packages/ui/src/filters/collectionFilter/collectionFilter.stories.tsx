@@ -1,11 +1,10 @@
 import "../../stories.less";
-
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { CollectionFilter } from "./collectionFilter";
 import { InMemoryStoreStub, NftsCollectionStore, NoDataStoreStub } from "./testStores";
-import { ICollectionFilterItem } from "./typesAndInterfaces";
 import React from "react";
 import { ThemeLoader } from "../../internalHelpers";
+import { StaticCollectionFilterStore, ICollectionFilterItem } from "./stores";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -83,14 +82,27 @@ NoData.args = {
 }
 
 
-export const SingleTab = Template.bind({}); 
-SingleTab.args = {
+const generateItems = (count: number) => {
+	const result: ICollectionFilterItem[] = []
+	for(let i = 0; i < count; i++) {
+		result.push({
+			key: i,
+			title: `${i+1} item`,
+			iconUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRyZbR56vx1WJBb25cRQFBQLzgax11RjqFNA&usqp=CAU'
+		})
+	}
+	return result
+}
+
+const staticStore = new StaticCollectionFilterStore(generateItems(10))
+
+export const SingleTabStatic = Template.bind({}); 
+SingleTabStatic.args = {
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
-  searchPlaceholder: 'Enter text',
-	filterStore: inMemoryFilterStore,
+	searchPlaceholder: 'Enter text',
+	filterStore: staticStore,
 	onChange: onChange,
 	searchable: true,
 	selectSingle: false,
-  singleTab: true
 }

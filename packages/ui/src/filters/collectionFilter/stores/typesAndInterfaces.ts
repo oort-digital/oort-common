@@ -18,8 +18,8 @@ export interface ICollectionFilterStore {
 
     //tabs items
     all: ICollectionFilterItem[]
-    recent: ICollectionFilterItem[]
-    favorites: ICollectionFilterItem[]
+    recent?: ICollectionFilterItem[]
+    favorites?: ICollectionFilterItem[]
 
     term: string
     
@@ -31,11 +31,11 @@ export interface ICollectionFilterStore {
     clearNotApplied: () => void
     copyNotAppliedToRecent: () => void
     setTerm: (term: string) => void
-    reset: () => void
-    setFavorites: (item: ICollectionFilterItem, checked: boolean) => void
-    loadNextPage: (signal: AbortSignal) => Promise<void>
-    loadFavoritesFromCache: () => void
-    loadRecentFromCache: () => void
+    reset?: () => void
+    setFavorites?: (item: ICollectionFilterItem, checked: boolean) => void
+    loadNextPage?: (signal: AbortSignal) => Promise<void>
+    loadFavoritesFromCache?: () => void
+    loadRecentFromCache?: () => void
     select: (key: ItemKeyType, checked: boolean) => void
     selectSingle: (key: ItemKeyType, checked: boolean) => void
 }
