@@ -1,8 +1,8 @@
 import { observer } from "mobx-react"
 import { useEffect } from "react"
 import { CollectionFilterContent } from "./collectionFilterContent"
-import { ICollectionFilterStore } from "./collectionFilterStore"
-import { FilterListenerActionType, ICollectionFilterItem, IFilterListeners } from "./typesAndInterfaces"
+import { ICollectionFilterItem, ICollectionFilterStore } from "./stores"
+import { FilterListenerActionType, IFilterListeners } from "./typesAndInterfaces"
 
 export interface ICollectionFilterMobileProps {
 	title: string

@@ -1,45 +1,8 @@
 import { logger } from "@oort/logger"
 import { action, makeObservable, observable, runInAction } from "mobx"
-import { LocalStorageCacheProvider } from "../../cache"
-// import { distinct } from "../../utils"
-import { ItemQueue } from "./itemQueue"
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
-
-export interface ICollectionFilterStore {
-
-    //tabs items
-    all: ICollectionFilterItem[]
-    recent: ICollectionFilterItem[]
-    favorites: ICollectionFilterItem[]
-
-    term: string
-    
-    appliedItems: ICollectionFilterItem[]
-    // allAppliedItems: ICollectionFilterItem[]
-
-    selected: ItemKeyType[]
-    hasLoadMore: boolean
-    isLoading: boolean
-    clearNotApplied: () => void
-    copyNotAppliedToRecent: () => void
-    setTerm: (term: string) => void
-    reset: () => void
-    setFavorites: (item: ICollectionFilterItem, checked: boolean) => void
-    loadNextPage: (signal: AbortSignal) => Promise<void>
-    loadFavoritesFromCache: () => void
-    loadRecentFromCache: () => void
-    select: (key: ItemKeyType, checked: boolean) => void
-    selectSingle: (key: ItemKeyType, checked: boolean) => void
-
-    // getAppliedItems: (appliedKeys: ItemKeyType[]) => Promise<ICollectionFilterItem[]>
-}
-
-export interface ICollectionFilterStoreParams {
-    pageSize?: number
-    recentMaxSize?: number
-    favoriteMaxSize?: number
-    cacheKeyPrefixFunc: () => string
-}
+import { LocalStorageCacheProvider } from "../../../cache"
+import { ItemQueue } from "../itemQueue"
+import { ICollectionFilterItem, ICollectionFilterStore, ICollectionFilterStoreParams, ItemKeyType } from "./typesAndInterfaces"
 
 const itemKeyFunc = (item: ICollectionFilterItem): ItemKeyType => item.key
 

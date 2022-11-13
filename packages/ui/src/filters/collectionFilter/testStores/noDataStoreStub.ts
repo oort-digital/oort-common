@@ -1,7 +1,6 @@
 import { runInAction } from 'mobx'
 import { delayAsync } from '../../../utils';
-import { CollectionFilterStore } from '../collectionFilterStore';
-import { ICollectionFilterItem, ItemKeyType } from '../typesAndInterfaces';
+import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType } from '../stores';
 
 export class NoDataStoreStub extends CollectionFilterStore {
     

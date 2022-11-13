@@ -1,12 +1,13 @@
 import {useEffect, useRef} from "react"
-import {AsyncList, DeviceType, EMPTY_ABORT_SIGNAL, useDeviceType} from "../.."
 import {SearchInput} from "../searchInput"
 import {collectionItemRenderer, ISelectedParameter} from "./collectionFilterItemRenderer"
 import styles from "./collectionFilterContent.module.less"
-import { ICollectionFilterStore } from "./collectionFilterStore"
 import {observer} from "mobx-react"
 import {Tabs} from "antd"
-import { ICollectionFilterItem } from "./typesAndInterfaces"
+import { ICollectionFilterItem, ICollectionFilterStore } from "./stores"
+import { DeviceType, useDeviceType } from "../../effects"
+import { AsyncList } from "../../asyncList"
+import { EMPTY_ABORT_SIGNAL } from "../../utils"
 
 interface IProps {
     bottomSpaceHeight?: number

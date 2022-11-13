@@ -1,5 +1,5 @@
-import { CollectionFilterStore, ICollectionFilterStoreParams } from "./collectionFilterStore";
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
+import { CollectionFilterStore } from "./collectionFilterStore";
+import { ICollectionFilterItem, ItemKeyType, ICollectionFilterStoreParams } from "./typesAndInterfaces";
 
 class TestCollectionFilterStore extends CollectionFilterStore {
    

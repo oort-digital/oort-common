@@ -1,8 +1,7 @@
 import { runInAction } from 'mobx'
 import { addressToDataURL } from '../../../blockieAddress';
 import { delayAsync } from '../../../utils';
-import { CollectionFilterStore } from '../collectionFilterStore';
-import { ICollectionFilterItem, ItemKeyType } from '../typesAndInterfaces';
+import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType } from '../stores';
 
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const nameLen = 5;

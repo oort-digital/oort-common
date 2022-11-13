@@ -1,7 +1,7 @@
 import { Avatar, Checkbox, Col, Row } from "antd"
 import { cutLongString } from "../../utils"
 import { FavoriteCheckBox } from "./favoriteCheckBox"
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
+import { ICollectionFilterItem, ItemKeyType } from "./stores"
 
 export interface ISelectedParameter {
 	selected: Set<ItemKeyType>

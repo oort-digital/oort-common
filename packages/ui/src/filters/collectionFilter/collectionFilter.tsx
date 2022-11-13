@@ -3,9 +3,8 @@ import { PopoverFilter } from "../popover"
 import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
-import { ICollectionFilterItem } from "./typesAndInterfaces"
-import { ICollectionFilterStore } from "./collectionFilterStore"
 import { useState } from "react"
+import { ICollectionFilterItem, ICollectionFilterStore } from "./stores"
 
 interface IProps {
 	title: string
