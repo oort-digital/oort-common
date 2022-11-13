@@ -28,7 +28,7 @@ const Impl = ({ filterStore, searchable, selectSingle, searchPlaceholder,
 	}
 
 	const onSubmit = () => {
-		filterStore.copyNotAppliedToRecent()
+		filterStore.copyNotAppliedToRecent && filterStore.copyNotAppliedToRecent()
 		const selectedItems = filterStore.all.filter(x => filterStore.selected.some(s => s === x.key))
 		onChange(selectedItems)
 		filterStore.clearNotApplied()

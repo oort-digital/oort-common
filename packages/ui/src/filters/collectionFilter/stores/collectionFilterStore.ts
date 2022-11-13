@@ -1,4 +1,3 @@
-import { logger } from "@oort/logger"
 import { action, makeObservable, observable, runInAction } from "mobx"
 import { LocalStorageCacheProvider } from "../../../cache"
 import { ItemQueue } from "../itemQueue"

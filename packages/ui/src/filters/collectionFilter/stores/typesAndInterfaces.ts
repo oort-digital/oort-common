@@ -20,16 +20,13 @@ export interface ICollectionFilterStore {
     all: ICollectionFilterItem[]
     recent?: ICollectionFilterItem[]
     favorites?: ICollectionFilterItem[]
-
     term: string
-    
     appliedItems: ICollectionFilterItem[]
-
     selected: ItemKeyType[]
     hasLoadMore: boolean
     isLoading: boolean
     clearNotApplied: () => void
-    copyNotAppliedToRecent: () => void
+    copyNotAppliedToRecent?: () => void
     setTerm: (term: string) => void
     reset?: () => void
     setFavorites?: (item: ICollectionFilterItem, checked: boolean) => void

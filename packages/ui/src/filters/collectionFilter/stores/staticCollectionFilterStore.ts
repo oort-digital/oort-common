@@ -58,18 +58,6 @@ export class StaticCollectionFilterStore implements ICollectionFilterStore {
         }
     }
 
-    copyNotAppliedToRecent(): void {
-        if(this.selected.length) {
-            const notAppliedItems = this.all.filter(x => this.notApplied.has(x.key))
-            const notAppliedfavorites = this.favorites.filter(x => this.notApplied.has(x.key))
-            this._recentQueue.enqueue(notAppliedItems.concat(notAppliedfavorites), true)
-            this.recent = this._recentQueue.items
-        }
-
-        const key = this.getRecentKey()
-        this._cache.setItem(key, this._recentQueue.items)
-    }
-
     constructor(items: ICollectionFilterItem[]) {
 
         this.all = items
@@ -82,18 +70,10 @@ export class StaticCollectionFilterStore implements ICollectionFilterStore {
             setTerm: action,
             select: action,
             clearNotApplied: action,
-            copyNotAppliedToRecent: action,
             setApplied: action,
             selectSingle: action,
         })
     }
 
     private _appliedSet: Set<ItemKeyType> | undefined
-
-    private get notApplied() {
-        if(this._appliedSet) {
-            return new Set(this.selected.filter(x => !this._appliedSet!.has(x)))
-        }
-        return new Set(this.selected)
-    }
 }

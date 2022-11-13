@@ -43,8 +43,8 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
 
         filterStore.clearNotApplied()
         filterStore.setTerm(term)
-        filterStore.reset()
-        filterStore.loadNextPage(abortController.signal);
+        filterStore.reset && filterStore.reset()
+        filterStore.loadNextPage && filterStore.loadNextPage(abortController.signal);
     }
 
     useEffect(() => {
