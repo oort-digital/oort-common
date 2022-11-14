@@ -19,6 +19,7 @@ interface IProps {
     onCancel?: (e: React.MouseEvent<HTMLElement>) => void
     loading?: boolean
     className?: string
+    disable?:boolean
 }
 
 function renderButton(
@@ -48,7 +49,7 @@ function renderButton(
 
 }
 
-export function FooterButtonsMobile({okBtn, cancelBtn, onCancel, onOk, loading, className }: IProps) {
+export function FooterButtonsMobile({okBtn, cancelBtn, onCancel, onOk, loading, className,disable }: IProps) {
 
     let cssClass = 'footer-buttons-mobile'
     if(className) {
@@ -63,7 +64,7 @@ export function FooterButtonsMobile({okBtn, cancelBtn, onCancel, onOk, loading, 
     }
 
     return <div className={cssClass}>
-    { cancelBtn ? renderButton('cancel-btn', cancelBtn, 'Cancel', loading, undefined, cancelBtn.type ?? "default", onCancel) : null }
-    { okBtn ? renderButton('ok-btn', okBtn, 'Ok', undefined, loading, okBtn.type ?? "primary", onOk) : null }
+    { cancelBtn ? renderButton('cancel-btn', cancelBtn, 'Cancel',disable , loading, cancelBtn.type ?? "default", onCancel) : null }
+    { okBtn ? renderButton('ok-btn', okBtn, 'Ok', disable, loading, okBtn.type ?? "primary", onOk) : null }
     </div>
 }
