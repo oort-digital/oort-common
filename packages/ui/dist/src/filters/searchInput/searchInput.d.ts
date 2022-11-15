@@ -3,7 +3,7 @@ interface IProps {
     style?: CSSProperties | undefined;
     className?: string;
     value?: string;
-    placeholder: string;
+    placeholder?: string;
     onChange: (term: string) => void;
 }
 export declare const SearchInput: ({ value, placeholder, onChange, style, className }: IProps) => JSX.Element;

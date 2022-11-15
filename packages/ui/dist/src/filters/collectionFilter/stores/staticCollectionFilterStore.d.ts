@@ -1,18 +1,7 @@
-import { ICollectionFilterItem, ICollectionFilterStore, ItemKeyType } from "./typesAndInterfaces";
-export declare class StaticCollectionFilterStore implements ICollectionFilterStore {
-    all: ICollectionFilterItem[];
-    selected: ItemKeyType[];
-    appliedItems: ICollectionFilterItem[];
-    term: string;
-    hasLoadMore: boolean;
-    isLoading: boolean;
-    setTerm(term: string): void;
-    setItems(items: ICollectionFilterItem[]): void;
-    clearNotApplied(): void;
+import { BaseCollectionFilterStore } from "./baseCollectionFilterStore";
+import { ICollectionFilterItem, ICollectionFilterStore, ItemKeyType, SelectMode } from "./typesAndInterfaces";
+export declare class StaticCollectionFilterStore extends BaseCollectionFilterStore implements ICollectionFilterStore {
     setApplied(appliedKeys: ItemKeyType[]): Promise<void>;
-    select(key: ItemKeyType, checked: boolean): void;
-    selectSingle(key: ItemKeyType, checked: boolean): void;
-    constructor(items: ICollectionFilterItem[]);
-    private _appliedSet;
+    constructor(selectMode: SelectMode, items: ICollectionFilterItem[]);
 }
 //# sourceMappingURL=staticCollectionFilterStore.d.ts.map

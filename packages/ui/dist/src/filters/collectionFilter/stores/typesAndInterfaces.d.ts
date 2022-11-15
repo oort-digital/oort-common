@@ -1,17 +1,18 @@
+import { ReactNode } from "react";
+export declare enum SelectMode {
+    Multy = 0,
+    Single = 1,
+    SingleRequired = 2
+}
 export declare type ItemKeyType = string | number;
 export interface ICollectionFilterItem {
     key: ItemKeyType;
-    iconUrl: string;
+    icon: string | ReactNode;
     title: string;
     count?: number;
 }
-export interface ICollectionFilterStoreParams {
-    pageSize?: number;
-    recentMaxSize?: number;
-    favoriteMaxSize?: number;
-    cacheKeyPrefixFunc: () => string;
-}
 export interface ICollectionFilterStore {
+    selectMode: SelectMode;
     all: ICollectionFilterItem[];
     recent?: ICollectionFilterItem[];
     favorites?: ICollectionFilterItem[];
@@ -29,6 +30,5 @@ export interface ICollectionFilterStore {
     loadFavoritesFromCache?: () => void;
     loadRecentFromCache?: () => void;
     select: (key: ItemKeyType, checked: boolean) => void;
-    selectSingle: (key: ItemKeyType, checked: boolean) => void;
 }
 //# sourceMappingURL=typesAndInterfaces.d.ts.map

@@ -1,31 +1,28 @@
-import { ICollectionFilterItem, ICollectionFilterStore, ICollectionFilterStoreParams, ItemKeyType } from "./typesAndInterfaces";
-export declare abstract class CollectionFilterStore implements ICollectionFilterStore {
+import { BaseCollectionFilterStore } from "./baseCollectionFilterStore";
+import { ICollectionFilterItem, ICollectionFilterStore, ItemKeyType, SelectMode } from "./typesAndInterfaces";
+export interface ICollectionFilterStoreParams {
+    selectMode: SelectMode;
+    pageSize?: number;
+    recentMaxSize?: number;
+    favoriteMaxSize?: number;
+    cacheKeyPrefixFunc: () => string;
+}
+export declare abstract class CollectionFilterStore extends BaseCollectionFilterStore implements ICollectionFilterStore {
     favorites: ICollectionFilterItem[];
     recent: ICollectionFilterItem[];
-    all: ICollectionFilterItem[];
-    selected: ItemKeyType[];
-    appliedItems: ICollectionFilterItem[];
-    term: string;
-    hasLoadMore: boolean;
-    isLoading: boolean;
     loadFavoritesFromCache: () => void;
     loadRecentFromCache: () => void;
     abstract loadNextPage(signal: AbortSignal): Promise<void>;
     protected abstract getAppliedItems(appliedKeys: ItemKeyType[]): Promise<ICollectionFilterItem[]>;
-    setTerm(term: string): void;
-    setItems(items: ICollectionFilterItem[]): void;
-    clearNotApplied(): void;
     setFavorites(item: ICollectionFilterItem, checked: boolean): void;
     setApplied(appliedKeys: ItemKeyType[]): Promise<void>;
-    select(key: ItemKeyType, checked: boolean): void;
-    selectSingle(key: ItemKeyType, checked: boolean): void;
     copyNotAppliedToRecent(): void;
     protected get curPage(): number;
     protected get nextPageCursor(): string | undefined;
     protected readonly pageSize: number;
     protected addNewPage(page: ICollectionFilterItem[], nextPageCursor?: string): void;
     reset(): void;
-    constructor({ cacheKeyPrefixFunc, recentMaxSize, favoriteMaxSize, pageSize }: ICollectionFilterStoreParams);
+    constructor({ cacheKeyPrefixFunc, selectMode, recentMaxSize, favoriteMaxSize, pageSize }: ICollectionFilterStoreParams);
     private _nextPageCursor;
     private _curPage;
     private readonly _cache;
@@ -35,7 +32,6 @@ export declare abstract class CollectionFilterStore implements ICollectionFilter
     private getFavoritesKey;
     private getRecentKey;
     private loadFromCache;
-    private _appliedSet;
     private get notApplied();
 }
 //# sourceMappingURL=collectionFilterStore.d.ts.map
