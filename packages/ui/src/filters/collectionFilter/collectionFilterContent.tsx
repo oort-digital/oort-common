@@ -104,7 +104,7 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight}: I
                 loadMoreButtonSize="middle"
                 onLoadMore={loadNextPageFunc}
                 loading={filterStore.isLoading}
-                itemRenderer={collectionItemRenderer(styles.list_item, isMobile, selectedParam, favoriteParam)}
+                itemRenderer={collectionItemRenderer(filterStore.selectMode, styles.list_item, isMobile, selectedParam, favoriteParam)}
                 items={items}
             />
         }
@@ -114,12 +114,10 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight}: I
             className={styles.list}
             hasLoadMore={false}
             loading={filterStore.isLoading}
-            itemRenderer={collectionItemRenderer(styles.list_item, isMobile, selectedParam, favoriteParam)}
+            itemRenderer={collectionItemRenderer(filterStore.selectMode, styles.list_item, isMobile, selectedParam, favoriteParam)}
             items={items}
         />
     }
-
-    
 
     const tabs = [{ label: 'All', key: 'all', children: renderList(filterStore.all, true) }]
 

@@ -1,14 +1,14 @@
-import { Avatar, Checkbox, Col, Row } from "antd"
+import { Avatar, Checkbox, Col, Radio, Row } from "antd"
 import { cutLongString } from "../../utils"
 import { FavoriteCheckBox } from "./favoriteCheckBox"
-import { ICollectionFilterItem, ItemKeyType } from "./stores"
+import { ICollectionFilterItem, ItemKeyType, SelectMode } from "./stores"
 
 export interface ISelectedParameter {
 	selected: Set<ItemKeyType>
 	onChange: (item: ICollectionFilterItem, checked: boolean) => void
 }
 
-export const collectionItemRenderer = (className: string, isMobile: boolean, selected: ISelectedParameter, favorite?: ISelectedParameter) => {
+export const collectionItemRenderer = (selectMode: SelectMode, className: string, isMobile: boolean, selected: ISelectedParameter, favorite?: ISelectedParameter) => {
 
 	const tokenNameMaxLen = isMobile ? 16 : 20
 
@@ -31,7 +31,11 @@ export const collectionItemRenderer = (className: string, isMobile: boolean, sel
 		}
 
 		return <Row gutter={[16, 0]} justify="space-between" align="middle" onClick={() => selected.onChange(item, !isSelected)} className={className}>
-			<Col><Checkbox checked={isSelected}></Checkbox></Col>
+			<Col>
+				{
+					selectMode === SelectMode.Multy ? <Checkbox checked={isSelected}/> : <Radio checked={isSelected} />
+				}
+			</Col>
 			<Col><Avatar size={32} icon={<img src={iconUrl} /> } /></Col>
 			<Col flex="auto"><span className="collection-name">{collectionName}</span></Col>
 			{renderFavorite()}

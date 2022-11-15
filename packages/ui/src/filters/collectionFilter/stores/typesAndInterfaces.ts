@@ -15,6 +15,7 @@ export interface ICollectionFilterItem {
 }
 
 export interface ICollectionFilterStore {
+    selectMode: SelectMode
     //tabs items
     all: ICollectionFilterItem[]
     recent?: ICollectionFilterItem[]

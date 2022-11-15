@@ -5,6 +5,7 @@ import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
 
 export abstract class BaseCollectionFilterStore {
 
+    readonly selectMode: SelectMode
     all: ICollectionFilterItem[] = [];
     selected: ItemKeyType[] = [];
     appliedItems: ICollectionFilterItem[] = [];
@@ -91,5 +92,4 @@ export abstract class BaseCollectionFilterStore {
     }
 
     protected _appliedSet: Set<ItemKeyType> | undefined;
-    private readonly selectMode: SelectMode
 }

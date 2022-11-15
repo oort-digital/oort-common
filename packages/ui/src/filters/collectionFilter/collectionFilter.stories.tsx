@@ -4,7 +4,7 @@ import { CollectionFilter } from "./collectionFilter";
 import { InMemoryStoreStub, NftsCollectionStore, NoDataStoreStub } from "./testStores";
 import React from "react";
 import { ThemeLoader } from "../../internalHelpers";
-import { StaticCollectionFilterStore, ICollectionFilterItem } from "./stores";
+import { StaticCollectionFilterStore, ICollectionFilterItem, SelectMode } from "./stores";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -62,11 +62,10 @@ export const Nfts = Template.bind({});
 Nfts.args = {
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
-  searchPlaceholder: 'Enter text',
+  	searchPlaceholder: 'Enter text',
 	filterStore: nftsStore,
 	onChange: onChangeNfts,
-	searchable: true,
-	selectSingle: false
+	searchable: true
 }
 
 const noDataStore = new NoDataStoreStub()
@@ -74,11 +73,10 @@ export const NoData = Template.bind({});
 NoData.args = {
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
-  searchPlaceholder: 'Enter text',
+  	searchPlaceholder: 'Enter text',
 	filterStore: noDataStore,
 	onChange: onChangeNfts,
-	searchable: true,
-	selectSingle: false
+	searchable: true
 }
 
 
@@ -94,7 +92,7 @@ const generateItems = (count: number) => {
 	return result
 }
 
-const staticStore = new StaticCollectionFilterStore(generateItems(10))
+const staticStore = new StaticCollectionFilterStore(SelectMode.SingleRequired, generateItems(10))
 
 export const SingleTabStatic = Template.bind({}); 
 SingleTabStatic.args = {
@@ -103,6 +101,5 @@ SingleTabStatic.args = {
 	searchPlaceholder: 'Enter text',
 	filterStore: staticStore,
 	onChange: onChange,
-	searchable: true,
-	selectSingle: false,
+	searchable: true
 }
