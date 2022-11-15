@@ -9,7 +9,7 @@ export interface ICollectionFilterMobileProps {
 	onChange: (collections: ICollectionFilterItem[]) => void
 	searchable: boolean
 	selectSingle: boolean
-	searchPlaceholder: string
+	searchPlaceholder?: string
 	addFilterEventListeners?: FilterListenerActionType
 	removeFilterEventListeners?: FilterListenerActionType
 	filterStore: ICollectionFilterStore

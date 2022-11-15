@@ -14,7 +14,7 @@ interface IProps {
     filterStore: ICollectionFilterStore
     searchable: boolean
     selectSingle: boolean
-    searchPlaceholder: string
+    searchPlaceholder?: string
 }
 
 const getFavoriteParams = (filterStore: ICollectionFilterStore): ISelectedParameter | undefined => {
