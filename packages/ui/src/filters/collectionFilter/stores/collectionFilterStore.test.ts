@@ -20,7 +20,7 @@ class TestCollectionFilterStore extends CollectionFilterStore {
 class ItemStub implements ICollectionFilterItem {
     key: string
     title: string
-    iconUrl: string = 'fake_icon_url'
+    icon: string = 'fake_icon_url'
     count?: number | undefined
 
     constructor(n: number) {

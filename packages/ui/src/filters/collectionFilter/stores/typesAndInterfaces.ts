@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export enum SelectMode {
     Multy,
     Single,
@@ -9,7 +11,7 @@ export type ItemKeyType = string | number
 
 export interface ICollectionFilterItem {
 	key: ItemKeyType
-	iconUrl: string,
+	icon: string | ReactNode,
 	title: string
 	count?: number
 }

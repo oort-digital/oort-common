@@ -26,7 +26,7 @@ export class NftsCollectionStore extends CollectionFilterStore {
             page = response.dataList.map<ICollectionFilterItem>(x => ({
                 key: x.id,
                 title: x.name,
-                iconUrl: x.logo,
+                icon: x.logo,
             }))
         }
         catch(e: any) {
@@ -52,7 +52,7 @@ export class NftsCollectionStore extends CollectionFilterStore {
 
         return collections.map(x => ({
             key: x.id,
-            iconUrl: x.logo,
+            icon: x.logo,
             title: x.name
         }))
     }

@@ -25,7 +25,7 @@ class Source {
             this._items.push({
                 key: i,
                 title: Source.generateName(i),
-                iconUrl: addressToDataURL(i.toString()),
+                icon: addressToDataURL(i.toString()),
                 count: i
             })
         }
