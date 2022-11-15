@@ -2159,13 +2159,14 @@ function pi({
   onCancel: n,
   onOk: r,
   loading: o,
-  className: s
+  className: s,
+  disable: a
 }) {
-  var l, f;
-  let a = "footer-buttons-mobile";
-  return s && (a = `${a} ${s}`), t && e ? a = `${a} two-buttons` : a = `${a} single-button`, /* @__PURE__ */ w("div", {
-    className: a,
-    children: [t ? Cn("cancel-btn", t, "Cancel", o, void 0, (l = t.type) != null ? l : "default", n) : null, e ? Cn("ok-btn", e, "Ok", void 0, o, (f = e.type) != null ? f : "primary", r) : null]
+  var f, u;
+  let l = "footer-buttons-mobile";
+  return s && (l = `${l} ${s}`), t && e ? l = `${l} two-buttons` : l = `${l} single-button`, /* @__PURE__ */ w("div", {
+    className: l,
+    children: [t ? Cn("cancel-btn", t, "Cancel", a, o, (f = t.type) != null ? f : "default", n) : null, e ? Cn("ok-btn", e, "Ok", a, o, (u = e.type) != null ? u : "primary", r) : null]
   });
 }
 const mi = "_aside_desktop_izek7_1", gi = "_logo_izek7_15", pn = {
@@ -2566,7 +2567,7 @@ const Xi = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Te.Desktop ? e : r === Te.Phone ? t : n)(), " "]
   });
-}, e2 = vt(() => import("./connectModalDesktop.cdb3079e.mjs")), t2 = vt(() => import("./connectModalMobile.d4a1e2df.mjs")), n2 = (e) => {
+}, e2 = vt(() => import("./connectModalDesktop.69a6faa7.mjs")), t2 = vt(() => import("./connectModalMobile.2241a227.mjs")), n2 = (e) => {
   const t = /* @__PURE__ */ i(e2, {
     ...e
   }), n = /* @__PURE__ */ i(t2, {
@@ -5710,4 +5711,4 @@ export {
   wr as y,
   _r as z
 };
-//# sourceMappingURL=index.2339f6f7.mjs.map
+//# sourceMappingURL=index.3bce6737.mjs.map
