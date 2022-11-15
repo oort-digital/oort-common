@@ -2,7 +2,7 @@ import {Card, Col, Row} from 'antd'
 import styles from './assetCardLayout.module.less'
 import { IAssetItem } from './typesAndInterfaces'
 import { getNftName, getNftTitle } from './utils';
-import { cutLongString, getChainIcon, toMasskedAddress } from '../utils';
+import { cutLongString, getChainIconOld, toMasskedAddress } from '../utils';
 import { TileCoverSimple, TileCoverSkeleton } from '../tileCover';
 import { NftQuantity } from '../nftQuantity';
 import { IMarketplaceConfig, INftScanConfig, ViewOnButton } from '../viewOn';
@@ -59,7 +59,7 @@ export const AssetCardLayout = <TAsset extends IAssetItem, >({assetItem, owner, 
         <Row justify="space-between" align="middle">
             <div className={styles.nft_title}>{cutLongString(nftTitle, 28)}</div>
             <div className={styles.nft_title}>
-                {getChainIcon(chainId, 17, 15)}
+                {getChainIconOld(chainId, 17, 15)}
             </div>
         </Row>
         <div className={styles.nft_name}>{nftName}</div>

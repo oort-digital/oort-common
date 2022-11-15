@@ -1,7 +1,7 @@
 import { Button } from "antd"
 import {IChain} from "../typesAndInterfaces"
 import styles from "./chainButton.module.less"
-import { getChainIcon } from '../utils';
+import { getChainIconOld } from '../utils';
 
 
 interface IProps {
@@ -28,7 +28,7 @@ export const ChainButton = ({ chain, loading, disabled, isActive, canSwitchChain
 			onClick_ = () => {}
 		}
 
-    return <Button block className={cssClass} disabled={loading || disabled} icon={getChainIcon(chainId, 23, 23)} onClick={onClick_}>
+    return <Button block className={cssClass} disabled={loading || disabled} icon={getChainIconOld(chainId, 23, 23)} onClick={onClick_}>
 				{name}
 			</Button>
 }
