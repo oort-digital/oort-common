@@ -1,6 +1,15 @@
-export const BscIcon = () => <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-width="100%"
-height="100%"
+import Icon from '@ant-design/icons';
+
+interface IProps {
+    height?: number | string | undefined
+    width?: number | string | undefined
+}
+
+const Svg = ({ width, height }: IProps) => <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+x="0px"
+y="0px"
+width={width}
+height={height}
 viewBox="0 0 126.611 126.611" >
 <polygon fill="#F3BA2F" points="38.171,53.203 62.759,28.616 87.36,53.216 101.667,38.909 62.759,0 23.864,38.896 "/>
 <rect x="3.644" y="53.188" transform="matrix(0.7071 0.7071 -0.7071 0.7071 48.7933 8.8106)" fill="#F3BA2F" width="20.233" height="20.234"/>
@@ -10,3 +19,8 @@ viewBox="0 0 126.611 126.611" >
 <polygon fill="#F3BA2F" points="77.271,63.298 77.277,63.298 62.759,48.78 52.03,59.509 52.029,59.509 50.797,60.742 48.254,63.285 
 48.254,63.285 48.234,63.305 48.254,63.326 62.759,77.831 77.277,63.313 77.284,63.305 "/>
 </svg>
+
+/**
+ * @deprecated Use BscIcon
+ */
+export const BscIconOld = ({ height, width }: IProps) => <Icon component={() => <Svg width={width} height={height} />} />

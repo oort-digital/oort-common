@@ -5,6 +5,7 @@ import { InMemoryStoreStub, NftsCollectionStore, NoDataStoreStub } from "./testS
 import React from "react";
 import { ThemeLoader } from "../../internalHelpers";
 import { StaticCollectionFilterStore, ICollectionFilterItem, SelectMode } from "./stores";
+import { BscIcon, PolygonIcon, EthIcon } from "../../icons";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -45,8 +46,7 @@ Main.args = {
   searchPlaceholder: 'Enter text',
 	filterStore: inMemoryFilterStore,
 	onChange: onChange,
-	searchable: true,
-	selectSingle: false
+	searchable: true
 }
 
 
@@ -80,13 +80,29 @@ NoData.args = {
 }
 
 
+const getIcon = (i: number) => {
+
+	const iconNum = (i+1) % 3
+
+	if(iconNum === 1) {
+		return <BscIcon />
+	}
+
+	if(iconNum === 2) {
+		return <EthIcon />
+	}
+
+	return <PolygonIcon />
+
+}
+
 const generateItems = (count: number) => {
 	const result: ICollectionFilterItem[] = []
 	for(let i = 0; i < count; i++) {
 		result.push({
 			key: i,
 			title: `${i+1} item`,
-			iconUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRyZbR56vx1WJBb25cRQFBQLzgax11RjqFNA&usqp=CAU'
+			icon: getIcon(i)
 		})
 	}
 	return result
