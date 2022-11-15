@@ -1,3 +1,4 @@
+import { ICollectionFilterItem, ICollectionFilterStore } from "./stores"
 
 
 export interface IFilterListeners {
@@ -7,3 +8,11 @@ export interface IFilterListeners {
 }
 
 export type FilterListenerActionType = (listeners: IFilterListeners) => void
+
+export interface ICommonProps {
+	title: string
+	onChange: (collections: ICollectionFilterItem[]) => void
+	searchable: boolean
+	searchPlaceholder?: string
+    filterStore: ICollectionFilterStore
+}

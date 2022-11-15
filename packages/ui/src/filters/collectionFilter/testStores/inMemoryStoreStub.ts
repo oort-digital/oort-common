@@ -1,7 +1,7 @@
 import { runInAction } from 'mobx'
 import { addressToDataURL } from '../../../blockieAddress';
 import { delayAsync } from '../../../utils';
-import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType } from '../stores';
+import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType, SelectMode } from '../stores';
 
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const nameLen = 5;
@@ -66,7 +66,7 @@ export class InMemoryStoreStub extends CollectionFilterStore {
     }
   
     constructor() {
-        super({ cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
+        super({ selectMode: SelectMode.Multy, cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
         this._source = new Source(100)
     }
 

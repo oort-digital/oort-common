@@ -1,21 +1,15 @@
 import { observer } from "mobx-react"
 import { useEffect } from "react"
 import { CollectionFilterContent } from "./collectionFilterContent"
-import { ICollectionFilterItem, ICollectionFilterStore } from "./stores"
-import { FilterListenerActionType, IFilterListeners } from "./typesAndInterfaces"
+import { FilterListenerActionType, ICommonProps, IFilterListeners } from "./typesAndInterfaces"
 
-export interface ICollectionFilterMobileProps {
-	title: string
-	onChange: (collections: ICollectionFilterItem[]) => void
-	searchable: boolean
-	selectSingle: boolean
-	searchPlaceholder?: string
+
+export interface ICollectionFilterMobileProps extends ICommonProps {
 	addFilterEventListeners?: FilterListenerActionType
 	removeFilterEventListeners?: FilterListenerActionType
-	filterStore: ICollectionFilterStore
 }
 
-const Impl = ({ filterStore, searchable, selectSingle, searchPlaceholder, 
+const Impl = ({ filterStore, searchable, searchPlaceholder, 
 	addFilterEventListeners, removeFilterEventListeners, onChange }: ICollectionFilterMobileProps) => {
 
 	const onClose = () => {
@@ -49,7 +43,6 @@ const Impl = ({ filterStore, searchable, selectSingle, searchPlaceholder,
 	
     return <CollectionFilterContent
 			searchPlaceholder={searchPlaceholder}
-			selectSingle={selectSingle}
 			searchable={searchable}
 			filterStore={filterStore}
 		/>

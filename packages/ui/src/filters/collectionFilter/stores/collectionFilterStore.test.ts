@@ -1,5 +1,5 @@
-import { CollectionFilterStore } from "./collectionFilterStore";
-import { ICollectionFilterItem, ItemKeyType, ICollectionFilterStoreParams } from "./typesAndInterfaces";
+import { CollectionFilterStore, ICollectionFilterStoreParams } from "./collectionFilterStore";
+import { ICollectionFilterItem, ItemKeyType, SelectMode } from "./typesAndInterfaces";
 
 class TestCollectionFilterStore extends CollectionFilterStore {
    
@@ -34,9 +34,10 @@ const one = new ItemStub(1)
 const two = new ItemStub(2)
 const three = new ItemStub(3)
 
-const create = (favoriteMaxSize: number, recentMaxSize: number) => {
+const create = (favoriteMaxSize: number, recentMaxSize: number, selectMode: SelectMode) => {
 
     return new TestCollectionFilterStore({
+        selectMode: selectMode,
         cacheKeyPrefixFunc: () => '',
         favoriteMaxSize: favoriteMaxSize,
         recentMaxSize: recentMaxSize
@@ -44,7 +45,7 @@ const create = (favoriteMaxSize: number, recentMaxSize: number) => {
 }
 
 test('must add favorites in right order', async () => {
-   const store = create(2, 1)
+   const store = create(2, 1, SelectMode.Multy)
 
    store.setFavorites(one, true)
    store.setFavorites(two, true)
@@ -55,7 +56,7 @@ test('must add favorites in right order', async () => {
 });
 
 test('must remove old favorite items if max size excided', async () => {
-   const store = create(2, 1)
+   const store = create(2, 1, SelectMode.Multy)
 
    store.setFavorites(one, true)
    store.setFavorites(two, true)
@@ -68,7 +69,7 @@ test('must remove old favorite items if max size excided', async () => {
 
  test('must remove old recent items if max size excided', async () => {
 
-    const store = create(1, 2)
+    const store = create(1, 2, SelectMode.Multy)
     store.all.push(one)
     store.all.push(two)
     store.all.push(three)
@@ -91,7 +92,7 @@ test('must remove old favorite items if max size excided', async () => {
  });
 
 test('must copyNotAppliedToRecent from favorites', async () => {
-   const store = create(1, 1)
+   const store = create(1, 1, SelectMode.Multy)
 
    store.favorites.push(one)
    store.select(one.key, true)
@@ -103,7 +104,7 @@ test('must copyNotAppliedToRecent from favorites', async () => {
 
 test('must copyNotAppliedToRecent from items', async () => {
 
-   const store = create(1, 1)
+   const store = create(1, 1, SelectMode.Multy)
    store.all.push(one)
 
    store.select(one.key, true)
@@ -115,7 +116,7 @@ test('must copyNotAppliedToRecent from items', async () => {
 
 test('must copy not applied to recent without duplicated', async () => {
 
-   const store = create(1, 3)
+   const store = create(1, 3, SelectMode.Multy)
    store.all.push(one)
 
    store.select(one.key, true)
@@ -128,7 +129,7 @@ test('must copy not applied to recent without duplicated', async () => {
 });
 
 test('clearNotApplied must clean selected if no applied', async () => {
-   const store = create(1, 1)
+   const store = create(1, 1, SelectMode.Multy)
 
    store.select('1', true)
    store.clearNotApplied()
@@ -139,7 +140,7 @@ test('clearNotApplied must clean selected if no applied', async () => {
 test('clearNotApplied must not clean applied', async () => {
 
    const applied = 'applied'
-   const store = create(1, 1)
+   const store = create(1, 1, SelectMode.Multy)
 
    await store.setApplied([applied])
    store.select('1', true)
@@ -150,20 +151,20 @@ test('clearNotApplied must not clean applied', async () => {
 });
 
 test('selected must contain one item if selectSingle', async () => {
-   const store = create(1, 1)
+   const store = create(1, 1, SelectMode.Single)
 
-   store.selectSingle('1', true)
-   store.selectSingle('2', true)
+   store.select('1', true)
+   store.select('2', true)
 
    expect(store.selected.length).toEqual(1)
    expect(store.selected[0]).toEqual('2')
 });
 
 test('selected must be empty', async () => {
-   const store = create(1, 1)
+   const store = create(1, 1, SelectMode.Multy)
    
-   store.selectSingle('1', true)
-   store.selectSingle('1', false)
+   store.select('1', true)
+   store.select('1', false)
 
    expect(store.selected.length).toEqual(0)
 });

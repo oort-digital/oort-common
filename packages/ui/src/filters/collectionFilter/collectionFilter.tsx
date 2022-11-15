@@ -4,19 +4,13 @@ import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
 import { useState } from "react"
-import { ICollectionFilterItem, ICollectionFilterStore } from "./stores"
+import { ICommonProps } from "./typesAndInterfaces"
 
-interface IProps {
-	title: string
+interface IProps extends ICommonProps {
 	popoverTitle: string
-	onChange: (collections: ICollectionFilterItem[]) => void
-	searchable: boolean
-	selectSingle: boolean
-	searchPlaceholder: string
-    filterStore: ICollectionFilterStore
 }
 
-const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchPlaceholder, filterStore }: IProps) => {
+const Impl = ({ title, popoverTitle, onChange, searchable, searchPlaceholder, filterStore }: IProps) => {
 
 	const [bottomSpaceHeight, setBottomSpaceHeight] = useState<number>()
 
@@ -65,11 +59,9 @@ const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchP
 		isClear={isClear}
 		onClear={onClear}>
 
-
         <CollectionFilterContent
 			bottomSpaceHeight={bottomSpaceHeight}
 			searchPlaceholder={searchPlaceholder}
-			selectSingle={selectSingle}
 			searchable={searchable}
 			filterStore={filterStore}
 		/>

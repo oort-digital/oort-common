@@ -1,3 +1,10 @@
+export enum SelectMode {
+    Multy,
+    Single,
+    // have no unselected items
+    SingleRequired
+}
+
 export type ItemKeyType = string | number
 
 export interface ICollectionFilterItem {
@@ -7,15 +14,7 @@ export interface ICollectionFilterItem {
 	count?: number
 }
 
-export interface ICollectionFilterStoreParams {
-    pageSize?: number
-    recentMaxSize?: number
-    favoriteMaxSize?: number
-    cacheKeyPrefixFunc: () => string
-}
-
 export interface ICollectionFilterStore {
-
     //tabs items
     all: ICollectionFilterItem[]
     recent?: ICollectionFilterItem[]
@@ -34,5 +33,4 @@ export interface ICollectionFilterStore {
     loadFavoritesFromCache?: () => void
     loadRecentFromCache?: () => void
     select: (key: ItemKeyType, checked: boolean) => void
-    selectSingle: (key: ItemKeyType, checked: boolean) => void
 }

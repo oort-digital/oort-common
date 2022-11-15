@@ -13,7 +13,6 @@ interface IProps {
     bottomSpaceHeight?: number
     filterStore: ICollectionFilterStore
     searchable: boolean
-    selectSingle: boolean
     searchPlaceholder?: string
 }
 
@@ -29,7 +28,7 @@ const getFavoriteParams = (filterStore: ICollectionFilterStore): ISelectedParame
     return undefined
 }
 
-const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomSpaceHeight}: IProps) => {
+const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight}: IProps) => {
 
     const onTermChangeAbortController = useRef<AbortController | undefined>()
     const onTermChange = (term: string) => {
@@ -63,12 +62,7 @@ const Impl = ({filterStore, searchable, selectSingle, searchPlaceholder, bottomS
     const isMobile = useDeviceType() === DeviceType.Phone
 
     const select = (item: ICollectionFilterItem, isChecked: boolean) => {
-        if (selectSingle) {
-            filterStore.selectSingle(item.key, isChecked)
-        }
-        else {
-            filterStore.select(item.key, isChecked)
-        }
+        filterStore.select(item.key, isChecked)
     }
 
     const selectedParam: ISelectedParameter = {

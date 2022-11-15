@@ -2,7 +2,7 @@ import {runInAction} from "mobx"
 import { OortClient } from "./oortClient";
 import { EMPTY_ABORT_SIGNAL } from "../../../utils";
 import { SearchGameHubType } from "./typesAndInterfaces";
-import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType } from "../stores";
+import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType, SelectMode } from "../stores";
 
 export class NftsCollectionStore extends CollectionFilterStore {
 
@@ -59,6 +59,7 @@ export class NftsCollectionStore extends CollectionFilterStore {
 
     constructor() {
         super({
+            selectMode: SelectMode.Multy,
             cacheKeyPrefixFunc: () => 'storybook_collection_filter_nfts'
         })
         this._oortClient = new OortClient({apiUrl: "https://api-test.oort.digital/platform"})
