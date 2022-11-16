@@ -23,7 +23,7 @@ export const getChainIconOld = (chainId: number, height: number, width: number):
     throw new Error(`Unknow chainId: ${chainId}`)
 }
 
-export const getChainIcon = (chainId: number): React.ReactNode => {
+export const getChainIcon = (chainId: number): React.ReactElement => {
     switch(chainId)
     {
         case ChainEnum.EthereumMainnet:
