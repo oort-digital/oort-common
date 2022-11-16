@@ -2,7 +2,7 @@ import { ICollectionFilterItem, ICollectionFilterStore } from "./stores";
 export interface IFilterListeners {
     submit: () => void;
     close: () => void;
-    clear?: () => void;
+    clear: () => void;
 }
 export declare type FilterListenerActionType = (listeners: IFilterListeners) => void;
 export interface ICommonProps {
