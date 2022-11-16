@@ -150,7 +150,7 @@ test('clearNotApplied must not clean applied', async () => {
    expect(store.selected[0]).toEqual(applied)
 });
 
-test('selected must contain one item if selectSingle', async () => {
+test('selected must contain one item if SelectMode.Single', async () => {
    const store = create(1, 1, SelectMode.Single)
 
    store.select('1', true)
@@ -158,6 +158,26 @@ test('selected must contain one item if selectSingle', async () => {
 
    expect(store.selected.length).toEqual(1)
    expect(store.selected[0]).toEqual('2')
+});
+
+test('selected must contain one item if SelectMode.SingleRequired', async () => {
+   const store = create(1, 1, SelectMode.SingleRequired)
+
+   store.select('1', true)
+   store.select('2', true)
+
+   expect(store.selected.length).toEqual(1)
+   expect(store.selected[0]).toEqual('2')
+});
+
+test('can not unchecked selected item if SelectMode.SingleRequired', async () => {
+   const store = create(1, 1, SelectMode.SingleRequired)
+
+   store.select('1', true)
+   store.select('1', false)
+
+   expect(store.selected.length).toEqual(1)
+   expect(store.selected[0]).toEqual('1')
 });
 
 test('selected must be empty', async () => {
