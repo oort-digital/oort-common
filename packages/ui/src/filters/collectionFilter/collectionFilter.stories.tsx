@@ -43,10 +43,11 @@ export const Main = Template.bind({});
 Main.args = {
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
-  searchPlaceholder: 'Enter text',
+  	searchPlaceholder: 'Enter text',
 	filterStore: inMemoryFilterStore,
 	onChange: onChange,
-	searchable: true
+	searchable: true,
+	circleIcons: true
 }
 
 
@@ -65,7 +66,8 @@ Nfts.args = {
   	searchPlaceholder: 'Enter text',
 	filterStore: nftsStore,
 	onChange: onChangeNfts,
-	searchable: true
+	searchable: true,
+	circleIcons: true
 }
 
 const noDataStore = new NoDataStoreStub()
@@ -76,7 +78,8 @@ NoData.args = {
   	searchPlaceholder: 'Enter text',
 	filterStore: noDataStore,
 	onChange: onChangeNfts,
-	searchable: true
+	searchable: true,
+	circleIcons: true
 }
 
 

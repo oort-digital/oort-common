@@ -1,4 +1,4 @@
-import { Avatar, Checkbox, Col, Radio, Row } from "antd"
+import { Checkbox, Col, Radio, Row } from "antd"
 import { cutLongString } from "../../utils"
 import { FavoriteCheckBox } from "./favoriteCheckBox"
 import { ICollectionFilterItem, ItemKeyType, SelectMode } from "./stores"
@@ -30,11 +30,10 @@ export const collectionItemRenderer = (selectMode: SelectMode, className: string
 			return null
 		}
 
-		const renderIcon  = () => {
+		const renderIcon = () => {
 			if(typeof(icon) === 'string') {
-				return <img src={icon} />
+				return <img src={icon}/>
 			}
-
 			return icon
 		}
 
@@ -44,8 +43,8 @@ export const collectionItemRenderer = (selectMode: SelectMode, className: string
 					selectMode === SelectMode.Multy ? <Checkbox checked={isSelected}/> : <Radio checked={isSelected} />
 				}
 			</Col>
-			<Col><Avatar size={32} icon={renderIcon()} /></Col>
-			<Col flex="auto"><span className="collection-name">{collectionName}</span></Col>
+			<Col><div className="item-icon">{renderIcon()}</div></Col>
+			<Col flex="auto"><span className="item-name">{collectionName}</span></Col>
 			{renderFavorite()}
 		</Row>
 	}

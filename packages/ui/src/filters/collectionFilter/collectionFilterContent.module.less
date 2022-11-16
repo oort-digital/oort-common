@@ -39,7 +39,21 @@
 				width: 100%;
 				.callout-medium-mixin();
 
-				:global(.collection-name) { color: @theme-color-9; }
+				:global(.item-name) { color: @theme-color-9; }
+				:global(.item-icon) { 
+					height: 32px; width: 32px;
+					& > img {
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
+			.circle_icons {
+				:global(.item-icon) {
+					& > img {
+						border-radius: 50%;
+					}
+				}
 			}
 		}
 

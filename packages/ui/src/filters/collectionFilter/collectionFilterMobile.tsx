@@ -9,7 +9,7 @@ export interface ICollectionFilterMobileProps extends ICommonProps {
 	removeFilterEventListeners?: FilterListenerActionType
 }
 
-const Impl = ({ filterStore, searchable, searchPlaceholder, 
+const Impl = ({ filterStore, searchable, searchPlaceholder, circleIcons,
 	addFilterEventListeners, removeFilterEventListeners, onChange }: ICollectionFilterMobileProps) => {
 
 	const onClose = () => {
@@ -42,6 +42,7 @@ const Impl = ({ filterStore, searchable, searchPlaceholder,
 	  }, []);
 	
     return <CollectionFilterContent
+			circleIcons={circleIcons}
 			searchPlaceholder={searchPlaceholder}
 			searchable={searchable}
 			filterStore={filterStore}

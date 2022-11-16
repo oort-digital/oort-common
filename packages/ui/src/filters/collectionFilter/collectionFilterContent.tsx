@@ -14,6 +14,7 @@ interface IProps {
     filterStore: ICollectionFilterStore
     searchable: boolean
     searchPlaceholder?: string
+    circleIcons: boolean
 }
 
 const getFavoriteParams = (filterStore: ICollectionFilterStore): ISelectedParameter | undefined => {
@@ -28,7 +29,7 @@ const getFavoriteParams = (filterStore: ICollectionFilterStore): ISelectedParame
     return undefined
 }
 
-const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight}: IProps) => {
+const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, circleIcons}: IProps) => {
 
     const onTermChangeAbortController = useRef<AbortController | undefined>()
     const onTermChange = (term: string) => {
@@ -95,6 +96,8 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight}: I
             height: h
         }
 
+        const itemCss = circleIcons ? `${styles.list_item} ${styles.circle_icons}` : styles.list_item
+
         if (showLoadMore) {
             const loadNextPageFunc = filterStore.loadNextPage ? (() => filterStore.loadNextPage!(EMPTY_ABORT_SIGNAL)) : undefined
             return <AsyncList
@@ -104,7 +107,7 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight}: I
                 loadMoreButtonSize="middle"
                 onLoadMore={loadNextPageFunc}
                 loading={filterStore.isLoading}
-                itemRenderer={collectionItemRenderer(filterStore.selectMode, styles.list_item, isMobile, selectedParam, favoriteParam)}
+                itemRenderer={collectionItemRenderer(filterStore.selectMode, itemCss, isMobile, selectedParam, favoriteParam)}
                 items={items}
             />
         }
@@ -114,7 +117,7 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight}: I
             className={styles.list}
             hasLoadMore={false}
             loading={filterStore.isLoading}
-            itemRenderer={collectionItemRenderer(filterStore.selectMode, styles.list_item, isMobile, selectedParam, favoriteParam)}
+            itemRenderer={collectionItemRenderer(filterStore.selectMode, itemCss, isMobile, selectedParam, favoriteParam)}
             items={items}
         />
     }

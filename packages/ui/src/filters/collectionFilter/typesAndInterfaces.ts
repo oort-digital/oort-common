@@ -15,4 +15,5 @@ export interface ICommonProps {
 	searchable: boolean
 	searchPlaceholder?: string
     filterStore: ICollectionFilterStore
+    circleIcons: boolean
 }
