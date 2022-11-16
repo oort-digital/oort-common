@@ -8,10 +8,10 @@ export declare type FilterListenerActionType = (listeners: IFilterListeners) => 
 export interface ICommonProps {
     title: string;
     onChange: (collections: ICollectionFilterItem[]) => void;
-    searchable: boolean;
+    searchable?: boolean;
     searchPlaceholder?: string;
     filterStore: ICollectionFilterStore;
-    circleIcons: boolean;
-    noClear: boolean;
+    circleIcons?: boolean;
+    noClear?: boolean;
 }
 //# sourceMappingURL=typesAndInterfaces.d.ts.map

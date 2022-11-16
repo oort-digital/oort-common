@@ -12,9 +12,9 @@ export type FilterListenerActionType = (listeners: IFilterListeners) => void
 export interface ICommonProps {
 	title: string
 	onChange: (collections: ICollectionFilterItem[]) => void
-	searchable: boolean
+	searchable?: boolean
 	searchPlaceholder?: string
     filterStore: ICollectionFilterStore
-    circleIcons: boolean
-    noClear: boolean
+    circleIcons?: boolean
+    noClear?: boolean
 }

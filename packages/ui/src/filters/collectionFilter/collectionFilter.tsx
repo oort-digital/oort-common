@@ -10,7 +10,7 @@ interface IProps extends ICommonProps {
 	popoverTitle: string
 }
 
-const Impl = ({ title, popoverTitle, onChange, searchable, searchPlaceholder, filterStore, circleIcons, noClear }: IProps) => {
+const Impl = ({ title, popoverTitle, onChange, searchable = true, searchPlaceholder, filterStore, circleIcons = true, noClear = false }: IProps) => {
 
 	const [bottomSpaceHeight, setBottomSpaceHeight] = useState<number>()
 

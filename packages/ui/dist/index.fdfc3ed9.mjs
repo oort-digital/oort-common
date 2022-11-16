@@ -2583,7 +2583,7 @@ const e2 = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Re.Desktop ? e : r === Re.Phone ? t : n)(), " "]
   });
-}, n2 = vt(() => import("./connectModalDesktop.577b739c.mjs")), r2 = vt(() => import("./connectModalMobile.bc5c53ce.mjs")), o2 = (e) => {
+}, n2 = vt(() => import("./connectModalDesktop.6b9b2857.mjs")), r2 = vt(() => import("./connectModalMobile.353d1962.mjs")), o2 = (e) => {
   const t = /* @__PURE__ */ i(n2, {
     ...e
   }), n = /* @__PURE__ */ i(r2, {
@@ -3808,11 +3808,11 @@ const Nn = (e, t, n, r, o) => {
   title: e,
   popoverTitle: t,
   onChange: n,
-  searchable: r,
+  searchable: r = !0,
   searchPlaceholder: o,
   filterStore: s,
-  circleIcons: a,
-  noClear: l
+  circleIcons: a = !0,
+  noClear: l = !1
 }) => {
   const [f, u] = U(), d = !s.appliedItems.length, v = () => d ? null : /* @__PURE__ */ i(D3, {
     names: s.appliedItems.map((y) => y.title)
@@ -3850,28 +3850,29 @@ const Nn = (e, t, n, r, o) => {
   });
 }, h6 = _t(H3), B3 = ({
   filterStore: e,
-  searchable: t,
+  searchable: t = !0,
   searchPlaceholder: n,
-  circleIcons: r,
+  circleIcons: r = !0,
   addFilterEventListeners: o,
   removeFilterEventListeners: s,
-  onChange: a
+  onChange: a,
+  noClear: l = !1
 }) => {
-  const d = {
+  const v = {
     submit: () => {
       e.copyNotAppliedToRecent && e.copyNotAppliedToRecent();
-      const v = e.all.filter((m) => e.selected.some((g) => g === m.key));
-      a(v), e.clearNotApplied();
+      const m = e.all.filter((g) => e.selected.some((C) => C === g.key));
+      a(m), e.clearNotApplied();
     },
-    clear: () => {
+    clear: l ? void 0 : () => {
       a([]), e.clearNotApplied();
     },
     close: () => {
       e.clearNotApplied();
     }
   };
-  return Ne(() => (o && o(d), () => {
-    s && s(d);
+  return Ne(() => (o && o(v), () => {
+    s && s(v);
   }), []), /* @__PURE__ */ i(Or, {
     circleIcons: r,
     searchPlaceholder: n,
@@ -5735,4 +5736,4 @@ export {
   t2 as y,
   wr as z
 };
-//# sourceMappingURL=index.cc99acd6.mjs.map
+//# sourceMappingURL=index.fdfc3ed9.mjs.map

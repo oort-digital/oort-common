@@ -9,8 +9,8 @@ export interface ICollectionFilterMobileProps extends ICommonProps {
 	removeFilterEventListeners?: FilterListenerActionType
 }
 
-const Impl = ({ filterStore, searchable, searchPlaceholder, circleIcons,
-	addFilterEventListeners, removeFilterEventListeners, onChange }: ICollectionFilterMobileProps) => {
+const Impl = ({ filterStore, searchable = true, searchPlaceholder, circleIcons = true,
+	addFilterEventListeners, removeFilterEventListeners, onChange, noClear = false }: ICollectionFilterMobileProps) => {
 
 	const onClose = () => {
 		filterStore.clearNotApplied()
@@ -30,7 +30,7 @@ const Impl = ({ filterStore, searchable, searchPlaceholder, circleIcons,
 
 	const listeners: IFilterListeners = {
 		submit: onSubmit,
-		clear: onClear,
+		clear: noClear ? undefined : onClear,
 		close: onClose
 	}
 
