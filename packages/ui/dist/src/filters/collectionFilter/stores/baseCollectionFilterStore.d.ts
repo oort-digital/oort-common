@@ -1,5 +1,4 @@
-import { SelectMode } from "..";
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
+import { ICollectionFilterItem, ItemKeyType, SelectMode } from "./typesAndInterfaces";
 export declare abstract class BaseCollectionFilterStore {
     readonly selectMode: SelectMode;
     all: ICollectionFilterItem[];
