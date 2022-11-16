@@ -112,7 +112,7 @@ const generateItems = (count: number) => {
 }
 
 const staticStore = new StaticCollectionFilterStore(SelectMode.SingleRequired, generateItems(10))
-
+staticStore.setApplied([1])
 export const SingleTabStatic = Template.bind({}); 
 SingleTabStatic.args = {
 	title: 'Title',
