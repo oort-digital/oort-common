@@ -86,9 +86,6 @@ export abstract class BaseCollectionFilterStore {
         if (checked) {
             this.selected = [key];
         }
-        else {
-            this.selected = [];
-        }
     }
 
     protected _appliedSet: Set<ItemKeyType> | undefined;
