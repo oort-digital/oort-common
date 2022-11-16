@@ -11,5 +11,6 @@ export interface ICommonProps {
     searchable: boolean;
     searchPlaceholder?: string;
     filterStore: ICollectionFilterStore;
+    circleIcons: boolean;
 }
 //# sourceMappingURL=typesAndInterfaces.d.ts.map

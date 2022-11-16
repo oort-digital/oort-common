@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 export declare enum SelectMode {
     Multy = 0,
     Single = 1,
@@ -7,7 +7,7 @@ export declare enum SelectMode {
 export declare type ItemKeyType = string | number;
 export interface ICollectionFilterItem {
     key: ItemKeyType;
-    icon: string | ReactNode;
+    icon: ReactElement | string;
     title: string;
     count?: number;
 }
