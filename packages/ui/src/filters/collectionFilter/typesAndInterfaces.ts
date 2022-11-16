@@ -4,7 +4,7 @@ import { ICollectionFilterItem, ICollectionFilterStore } from "./stores"
 export interface IFilterListeners {
     submit: () => void
     close: () => void
-    clear?: () => void
+    clear: () => void
 }
 
 export type FilterListenerActionType = (listeners: IFilterListeners) => void

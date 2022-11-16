@@ -30,7 +30,7 @@ const Impl = ({ filterStore, searchable = true, searchPlaceholder, circleIcons =
 
 	const listeners: IFilterListeners = {
 		submit: onSubmit,
-		clear: noClear ? undefined : onClear,
+		clear: noClear ? () => {} : onClear,
 		close: onClose
 	}
 
