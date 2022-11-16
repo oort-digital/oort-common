@@ -1,6 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
-import { SelectMode } from "..";
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces";
+import { ICollectionFilterItem, ItemKeyType, SelectMode } from "./typesAndInterfaces";
 
 
 export abstract class BaseCollectionFilterStore {
