@@ -10,7 +10,7 @@ interface IProps extends ICommonProps {
 	popoverTitle: string
 }
 
-const Impl = ({ title, popoverTitle, onChange, searchable, searchPlaceholder, filterStore, circleIcons }: IProps) => {
+const Impl = ({ title, popoverTitle, onChange, searchable, searchPlaceholder, filterStore, circleIcons, noClear }: IProps) => {
 
 	const [bottomSpaceHeight, setBottomSpaceHeight] = useState<number>()
 
@@ -57,7 +57,7 @@ const Impl = ({ title, popoverTitle, onChange, searchable, searchPlaceholder, fi
 		popoverTitle={popoverTitle}
 		// submitDisabled={!notSubmited.length}
 		isClear={isClear}
-		onClear={onClear}>
+		onClear={noClear ? undefined : onClear}>
 
         <CollectionFilterContent
 			circleIcons={circleIcons}
