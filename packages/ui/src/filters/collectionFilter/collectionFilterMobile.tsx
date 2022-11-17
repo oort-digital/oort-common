@@ -1,4 +1,3 @@
-import { logger } from "@oort/logger"
 import { observer } from "mobx-react"
 import { useEffect } from "react"
 import { CollectionFilterContent } from "./collectionFilterContent"
