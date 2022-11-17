@@ -1,12 +1,12 @@
 import "../../stories.less";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ICollectionFilterItem } from "./typesAndInterfaces";
-import { CollectionFilterMobile, ICollectionFilterMobileProps } from "./collectionFilterMobile";
 import { Row, Col } from "antd";
 import { useFilterListeners } from "./useFilterListeners";
 import React from "react";
 import { InMemoryStoreStub } from "./testStores";
+import { ICollectionFilterItem } from "./stores";
+import { CollectionFilterMobile, ICollectionFilterMobileProps } from "./collectionFilterMobile";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -48,6 +48,5 @@ Main.args = {
   searchPlaceholder: 'Enter text',
   filterStore: inMemoryFilterStore,
   onChange: onChange,
-  searchable: true,
-  selectSingle: false,
+  searchable: true
 }

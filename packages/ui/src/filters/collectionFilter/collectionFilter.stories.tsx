@@ -1,8 +1,9 @@
+import React from "react";
 import "../../stories.less";
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { CollectionFilter } from "./collectionFilter";
-import { InMemoryStoreStub, NftsCollectionStore, NoDataStoreStub } from "./testStores";
-import React from "react";
+import { InMemoryStoreStub, LoadingStoreStub, NftsCollectionStore, NoDataStoreStub } from "./testStores";
+
 import { ThemeLoader } from "../../internalHelpers";
 import { StaticCollectionFilterStore, ICollectionFilterItem, SelectMode } from "./stores";
 import { BscIcon, PolygonIcon, EthIcon } from "../../icons";
@@ -119,6 +120,17 @@ SingleTabStatic.args = {
 	popoverTitle: 'PopoverTitle',
 	searchPlaceholder: 'Enter text',
 	filterStore: staticStore,
+	onChange: onChange,
+	searchable: true
+}
+
+const loadingStore = new LoadingStoreStub()
+export const Loading = Template.bind({}); 
+Loading.args = {
+	title: 'Title',
+	popoverTitle: 'PopoverTitle',
+	searchPlaceholder: 'Enter text',
+	filterStore: loadingStore,
 	onChange: onChange,
 	searchable: true
 }
