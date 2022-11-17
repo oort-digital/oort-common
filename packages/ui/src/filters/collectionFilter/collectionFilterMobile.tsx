@@ -1,29 +1,16 @@
 import { observer } from "mobx-react"
 import { useEffect } from "react"
 import { CollectionFilterContent } from "./collectionFilterContent"
-import { ICollectionFilterStore } from "./collectionFilterStore"
-import { FilterListenerActionType, ICollectionFilterItem, IFilterListeners } from "./typesAndInterfaces"
+import { FilterListenerActionType, ICommonProps, IFilterListeners } from "./typesAndInterfaces"
 
-export interface ICollectionFilterMobileProps {
-	title: string
-	onChange: (collections: ICollectionFilterItem[]) => void
-	searchable: boolean
-	selectSingle: boolean
-	searchPlaceholder: string
+
+export interface ICollectionFilterMobileProps extends ICommonProps {
 	addFilterEventListeners?: FilterListenerActionType
 	removeFilterEventListeners?: FilterListenerActionType
-	filterStore: ICollectionFilterStore
 }
 
-const Impl = ({ filterStore, searchable, selectSingle, searchPlaceholder, 
-	addFilterEventListeners, removeFilterEventListeners, onChange }: ICollectionFilterMobileProps) => {
-
-	// const filterStore = useFilterStore({
-	// 	cacheKeyPrefixFunc: cacheKeyPrefixFunc,
-	// 	itemSource: itemSource,
-	// 	favoriteMaxSize: favoriteMaxSize,
-	// 	recentMaxSize: recentMaxSize
-	// }, applied)
+const Impl = ({ filterStore, searchable = true, searchPlaceholder, circleIcons = true,
+	addFilterEventListeners, removeFilterEventListeners, onChange, noClear = false }: ICollectionFilterMobileProps) => {
 
 	const onClose = () => {
 		filterStore.clearNotApplied()
@@ -35,7 +22,7 @@ const Impl = ({ filterStore, searchable, selectSingle, searchPlaceholder,
 	}
 
 	const onSubmit = () => {
-		filterStore.copyNotAppliedToRecent()
+		filterStore.copyNotAppliedToRecent && filterStore.copyNotAppliedToRecent()
 		const selectedItems = filterStore.all.filter(x => filterStore.selected.some(s => s === x.key))
 		onChange(selectedItems)
 		filterStore.clearNotApplied()
@@ -43,7 +30,7 @@ const Impl = ({ filterStore, searchable, selectSingle, searchPlaceholder,
 
 	const listeners: IFilterListeners = {
 		submit: onSubmit,
-		clear: onClear,
+		clear: noClear ? () => {} : onClear,
 		close: onClose
 	}
 
@@ -52,11 +39,11 @@ const Impl = ({ filterStore, searchable, selectSingle, searchPlaceholder,
 		return () => {
 			removeFilterEventListeners && removeFilterEventListeners(listeners)
 		};
-	  }, []);
+	  }, [filterStore]);
 	
     return <CollectionFilterContent
+			circleIcons={circleIcons}
 			searchPlaceholder={searchPlaceholder}
-			selectSingle={selectSingle}
 			searchable={searchable}
 			filterStore={filterStore}
 		/>

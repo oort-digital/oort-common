@@ -1,7 +1,6 @@
 import { runInAction } from 'mobx'
 import { delayAsync } from '../../../utils';
-import { CollectionFilterStore } from '../collectionFilterStore';
-import { ICollectionFilterItem, ItemKeyType } from '../typesAndInterfaces';
+import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType, SelectMode } from '../stores';
 
 export class NoDataStoreStub extends CollectionFilterStore {
     
@@ -18,6 +17,6 @@ export class NoDataStoreStub extends CollectionFilterStore {
     }
   
     constructor() {
-        super({ cacheKeyPrefixFunc: () => 'storybook_collection_filter_no_data' })
+        super({ selectMode: SelectMode.Multy, cacheKeyPrefixFunc: () => 'storybook_collection_filter_no_data' })
     }
 }

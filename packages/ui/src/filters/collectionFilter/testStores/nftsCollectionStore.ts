@@ -1,9 +1,8 @@
 import {runInAction} from "mobx"
 import { OortClient } from "./oortClient";
-import { CollectionFilterStore } from "../collectionFilterStore";
-import { ICollectionFilterItem, ItemKeyType } from "../typesAndInterfaces";
 import { EMPTY_ABORT_SIGNAL } from "../../../utils";
 import { SearchGameHubType } from "./typesAndInterfaces";
+import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType, SelectMode } from "../stores";
 
 export class NftsCollectionStore extends CollectionFilterStore {
 
@@ -27,7 +26,7 @@ export class NftsCollectionStore extends CollectionFilterStore {
             page = response.dataList.map<ICollectionFilterItem>(x => ({
                 key: x.id,
                 title: x.name,
-                iconUrl: x.logo,
+                icon: x.logo,
             }))
         }
         catch(e: any) {
@@ -53,13 +52,14 @@ export class NftsCollectionStore extends CollectionFilterStore {
 
         return collections.map(x => ({
             key: x.id,
-            iconUrl: x.logo,
+            icon: x.logo,
             title: x.name
         }))
     }
 
     constructor() {
         super({
+            selectMode: SelectMode.Multy,
             cacheKeyPrefixFunc: () => 'storybook_collection_filter_nfts'
         })
         this._oortClient = new OortClient({apiUrl: "https://api-test.oort.digital/platform"})

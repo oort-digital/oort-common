@@ -7,7 +7,7 @@ interface IProps {
 	style?: CSSProperties | undefined;
 	className?: string
 	value?: string
-	placeholder: string
+	placeholder?: string
 	onChange: (term: string) => void
 }
 

@@ -3,21 +3,14 @@ import { PopoverFilter } from "../popover"
 import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
-import { ICollectionFilterItem } from "./typesAndInterfaces"
-import { ICollectionFilterStore } from "./collectionFilterStore"
 import { useState } from "react"
+import { ICommonProps } from "./typesAndInterfaces"
 
-interface IProps {
-	title: string
+interface IProps extends ICommonProps {
 	popoverTitle: string
-	onChange: (collections: ICollectionFilterItem[]) => void
-	searchable: boolean
-	selectSingle: boolean
-	searchPlaceholder: string
-    filterStore: ICollectionFilterStore
 }
 
-const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchPlaceholder, filterStore }: IProps) => {
+const Impl = ({ title, popoverTitle, onChange, searchable = true, searchPlaceholder, filterStore, circleIcons = true, noClear = false }: IProps) => {
 
 	const [bottomSpaceHeight, setBottomSpaceHeight] = useState<number>()
 
@@ -30,7 +23,7 @@ const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchP
 	}
 
 	const onSubmit = () => {
-		filterStore.copyNotAppliedToRecent()
+		filterStore.copyNotAppliedToRecent && filterStore.copyNotAppliedToRecent()
 		const selectedItems = filterStore.all.filter(x => filterStore.selected.some(s => s === x.key))
 		onChange(selectedItems)
 		filterStore.clearNotApplied()
@@ -64,13 +57,12 @@ const Impl = ({ title, popoverTitle, onChange, searchable, selectSingle, searchP
 		popoverTitle={popoverTitle}
 		// submitDisabled={!notSubmited.length}
 		isClear={isClear}
-		onClear={onClear}>
-
+		onClear={noClear ? undefined : onClear}>
 
         <CollectionFilterContent
+			circleIcons={circleIcons}
 			bottomSpaceHeight={bottomSpaceHeight}
 			searchPlaceholder={searchPlaceholder}
-			selectSingle={selectSingle}
 			searchable={searchable}
 			filterStore={filterStore}
 		/>

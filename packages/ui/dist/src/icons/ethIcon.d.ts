@@ -1,8 +1,3 @@
 /// <reference types="react" />
-interface IProps {
-    height?: number | string | undefined;
-    width?: number | string | undefined;
-}
-export declare const EthIcon: ({ height, width }: IProps) => JSX.Element;
-export {};
+export declare const EthIcon: () => JSX.Element;
 //# sourceMappingURL=ethIcon.d.ts.map

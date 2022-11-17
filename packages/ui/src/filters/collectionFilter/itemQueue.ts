@@ -1,5 +1,5 @@
 import { distinct } from "../../utils"
-import { ItemKeyType } from "./typesAndInterfaces"
+import { ItemKeyType } from "./stores"
 
 export class ItemQueue<T> {
 

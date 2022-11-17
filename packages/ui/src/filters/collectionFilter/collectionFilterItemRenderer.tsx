@@ -1,32 +1,51 @@
-import { Avatar, Checkbox, Col, Row } from "antd"
+import { Checkbox, Col, Radio, Row } from "antd"
 import { cutLongString } from "../../utils"
 import { FavoriteCheckBox } from "./favoriteCheckBox"
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
+import { ICollectionFilterItem, ItemKeyType, SelectMode } from "./stores"
 
 export interface ISelectedParameter {
 	selected: Set<ItemKeyType>
 	onChange: (item: ICollectionFilterItem, checked: boolean) => void
 }
 
-export const collectionItemRenderer = (className: string, isMobile: boolean, selected: ISelectedParameter, favorite: ISelectedParameter) => {
+export const collectionItemRenderer = (selectMode: SelectMode, className: string, isMobile: boolean, selected: ISelectedParameter, favorite?: ISelectedParameter) => {
 
 	const tokenNameMaxLen = isMobile ? 16 : 20
 
 	return (item: ICollectionFilterItem) => {
-		const { key, title, count, iconUrl } = item
+		const { key, title, count, icon } = item
 		const isSelected = selected.selected.has(key)
-		const isFavorite = favorite.selected.has(key)
+		
 
 		let collectionName = `${cutLongString(title, tokenNameMaxLen)}`
 		if(count) {
 			collectionName = `${collectionName} (${count})`
 		}
 
+		const renderFavorite = () => {
+			if(favorite) {
+				const isFavorite = favorite && favorite.selected.has(key)
+				return <Col><FavoriteCheckBox checked={isFavorite} onChange={checked => favorite.onChange(item, checked)} /></Col>
+			}
+			return null
+		}
+
+		const renderIcon = () => {
+			if(typeof(icon) === 'string') {
+				return <img src={icon}/>
+			}
+			return icon
+		}
+
 		return <Row gutter={[16, 0]} justify="space-between" align="middle" onClick={() => selected.onChange(item, !isSelected)} className={className}>
-			<Col><Checkbox checked={isSelected}></Checkbox></Col>
-			<Col><Avatar size={32} icon={<img src={iconUrl} /> } /></Col>
-			<Col flex="auto"><span className="collection-name">{collectionName}</span></Col>
-			<Col><FavoriteCheckBox checked={isFavorite} onChange={checked => favorite.onChange(item, checked)} /></Col>
+			<Col>
+				{
+					selectMode === SelectMode.Multy ? <Checkbox checked={isSelected}/> : <Radio checked={isSelected} />
+				}
+			</Col>
+			<Col><div className="item-icon">{renderIcon()}</div></Col>
+			<Col flex="auto"><span className="item-name">{collectionName}</span></Col>
+			{renderFavorite()}
 		</Row>
 	}
 }

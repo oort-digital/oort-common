@@ -1,15 +1,6 @@
-import Icon from '@ant-design/icons';
-
-interface IProps {
-    height?: number | string | undefined
-    width?: number | string | undefined
-}
-
-const Svg = ({ width, height }: IProps) => <svg
-x="0px"
-y="0px"
-height={height}
-width={width}
+export const EthIcon = () => <svg
+height="100%"
+width="100%"
 viewBox="0 0 256 417"
 version="1.1"
 xmlns="http://www.w3.org/2000/svg"
@@ -24,4 +15,3 @@ preserveAspectRatio="xMidYMid">
 </g>
 </svg>
 
-export const EthIcon = ({ height, width }: IProps) => <Icon component={() => <Svg height={height} width={width}/>} />

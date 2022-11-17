@@ -1,11 +1,11 @@
 import "../../stories.less";
-
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { CollectionFilter } from "./collectionFilter";
 import { InMemoryStoreStub, NftsCollectionStore, NoDataStoreStub } from "./testStores";
-import { ICollectionFilterItem } from "./typesAndInterfaces";
 import React from "react";
 import { ThemeLoader } from "../../internalHelpers";
+import { StaticCollectionFilterStore, ICollectionFilterItem, SelectMode } from "./stores";
+import { BscIcon, PolygonIcon, EthIcon } from "../../icons";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -43,11 +43,11 @@ export const Main = Template.bind({});
 Main.args = {
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
-  searchPlaceholder: 'Enter text',
+  	searchPlaceholder: 'Enter text',
 	filterStore: inMemoryFilterStore,
 	onChange: onChange,
 	searchable: true,
-	selectSingle: false
+	circleIcons: true
 }
 
 
@@ -63,11 +63,11 @@ export const Nfts = Template.bind({});
 Nfts.args = {
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
-  searchPlaceholder: 'Enter text',
+  	searchPlaceholder: 'Enter text',
 	filterStore: nftsStore,
 	onChange: onChangeNfts,
 	searchable: true,
-	selectSingle: false
+	circleIcons: true
 }
 
 const noDataStore = new NoDataStoreStub()
@@ -75,9 +75,50 @@ export const NoData = Template.bind({});
 NoData.args = {
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
-  searchPlaceholder: 'Enter text',
+  	searchPlaceholder: 'Enter text',
 	filterStore: noDataStore,
 	onChange: onChangeNfts,
 	searchable: true,
-	selectSingle: false
+	circleIcons: true
+}
+
+
+const getIcon = (i: number) => {
+
+	const iconNum = (i+1) % 3
+
+	if(iconNum === 1) {
+		return <BscIcon />
+	}
+
+	if(iconNum === 2) {
+		return <EthIcon />
+	}
+
+	return <PolygonIcon />
+
+}
+
+const generateItems = (count: number) => {
+	const result: ICollectionFilterItem[] = []
+	for(let i = 0; i < count; i++) {
+		result.push({
+			key: i,
+			title: `${i+1} item`,
+			icon: getIcon(i)
+		})
+	}
+	return result
+}
+
+const staticStore = new StaticCollectionFilterStore(SelectMode.SingleRequired, generateItems(10))
+staticStore.setApplied([1])
+export const SingleTabStatic = Template.bind({}); 
+SingleTabStatic.args = {
+	title: 'Title',
+	popoverTitle: 'PopoverTitle',
+	searchPlaceholder: 'Enter text',
+	filterStore: staticStore,
+	onChange: onChange,
+	searchable: true
 }

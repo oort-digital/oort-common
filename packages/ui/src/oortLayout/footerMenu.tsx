@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './footerMenu.module.less';
 import { Menu, MenuItem, MenuItemBtn } from './menu';
-import { getChainIcon, toMasskedAddress } from '../utils';
+import { getChainIconOld, toMasskedAddress } from '../utils';
 import { ChevronSortIcon, DiscordIcon, TelegramIcon, TwitterIcon } from '../icons';
 import { ThemeSwitch } from './themeSwitch';
 import { ConnectModal, IWeb3 } from '../connectModal';
@@ -53,7 +53,7 @@ const Impl = ({ className, web3, testNfts }: IProps) => {
         if(isChainEmpty(chain)) { return null }
         
         const { chainId, name } = chain
-        const chainIcon = <span className={styles.icon_before}>{getChainIcon(chainId, 20, 20)}</span>
+        const chainIcon = <span className={styles.icon_before}>{getChainIconOld(chainId, 20, 20)}</span>
         const accountImg = <BlockieAddress address={account} className={styles.account_img}/>
         const afterIcon = <span className={styles.icon_after}><ChevronSortIcon /></span>
         return <>

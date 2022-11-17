@@ -1,17 +1,21 @@
-import { useState } from 'react';
+import { useRef } from 'react';
+import { InternalFilterListeners } from './internalFilterListeners';
 import { FilterListenerActionType, IFilterListeners } from './typesAndInterfaces';
 
-export function useFilterListeners(): [ FilterListenerActionType, FilterListenerActionType, IFilterListeners | undefined ] {
+export function useFilterListeners(): [ FilterListenerActionType, FilterListenerActionType, IFilterListeners ] {
 	
-	const [listeners, set] = useState<IFilterListeners | undefined>()
-
-    const add = (listeners: IFilterListeners) => {
-        set(listeners)
+	const listenersRef = useRef<InternalFilterListeners>()
+    if(!listenersRef.current) {
+        listenersRef.current = new InternalFilterListeners()
     }
 
-    const remove = (_listeners: IFilterListeners) => {
-        set(undefined)
+    const add = (newListeners: IFilterListeners) => {
+        listenersRef.current!.addListeners(newListeners)
     }
 
-	return [add, remove, listeners]
+    const remove = (listeners: IFilterListeners) => {
+        listenersRef.current!.removeListeners(listeners)
+    }
+
+	return [add, remove, listenersRef.current!]
 }

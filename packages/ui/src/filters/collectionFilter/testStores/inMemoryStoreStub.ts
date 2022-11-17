@@ -1,8 +1,7 @@
 import { runInAction } from 'mobx'
 import { addressToDataURL } from '../../../blockieAddress';
 import { delayAsync } from '../../../utils';
-import { CollectionFilterStore } from '../collectionFilterStore';
-import { ICollectionFilterItem, ItemKeyType } from '../typesAndInterfaces';
+import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType, SelectMode } from '../stores';
 
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const nameLen = 5;
@@ -26,7 +25,7 @@ class Source {
             this._items.push({
                 key: i,
                 title: Source.generateName(i),
-                iconUrl: addressToDataURL(i.toString()),
+                icon: addressToDataURL(i.toString()),
                 count: i
             })
         }
@@ -67,7 +66,7 @@ export class InMemoryStoreStub extends CollectionFilterStore {
     }
   
     constructor() {
-        super({ cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
+        super({ selectMode: SelectMode.Multy, cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
         this._source = new Source(100)
     }
 

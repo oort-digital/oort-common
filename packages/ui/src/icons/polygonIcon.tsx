@@ -1,13 +1,6 @@
-import Icon from '@ant-design/icons';
-
-interface IProps {
-    height?: number | string | undefined
-    width?: number | string | undefined
-}
-
-const Svg = ({ width, height }: IProps) => <svg version="1.1"
-height={height}
-width={width}
+export const PolygonIcon = () => <svg version="1.1"
+height="100%"
+width="100%"
 xmlns="http://www.w3.org/2000/svg"
 viewBox="0 0 38.4 33.5" >
 
@@ -20,6 +13,3 @@ viewBox="0 0 38.4 33.5" >
    c0.7,0.4,1.6,0.4,2.4,0l8.1-4.7c0.7-0.4,1.2-1.2,1.2-2.1V17c0-0.8-0.4-1.6-1.2-2.1L29,10.2z"/>
 </g>
 </svg>
-
-
-export const PolygonIcon = ({ height, width }: IProps) => <Icon component={() => <Svg width={width} height={height} />} />

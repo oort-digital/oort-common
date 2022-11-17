@@ -23,9 +23,9 @@ const Template: ComponentStory<typeof CollectionFilterMobile> = (args: ICollecti
   args.removeFilterEventListeners = remove
 
   return <>
-    <button onClick={() => listeners!.submit()}>submit</button>
-    <button onClick={() => listeners!.clear()}>clear</button>
-    <button onClick={() => listeners!.close()}>close</button>
+    <button onClick={() => listeners.submit()}>submit</button>
+    <button onClick={() => listeners.clear()}>clear</button>
+    <button onClick={() => listeners.close()}>close</button>
 
     <Row style={{ marginTop: '20px' }}>
       <Col span={6}>

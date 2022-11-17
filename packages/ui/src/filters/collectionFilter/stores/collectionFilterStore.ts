@@ -1,63 +1,27 @@
-import { logger } from "@oort/logger"
 import { action, makeObservable, observable, runInAction } from "mobx"
-import { LocalStorageCacheProvider } from "../../cache"
-// import { distinct } from "../../utils"
-import { ItemQueue } from "./itemQueue"
-import { ICollectionFilterItem, ItemKeyType } from "./typesAndInterfaces"
+import { LocalStorageCacheProvider } from "../../../cache"
+import { ItemQueue } from "../itemQueue"
+import { BaseCollectionFilterStore } from "./baseCollectionFilterStore"
+import { ICollectionFilterItem, ICollectionFilterStore, ItemKeyType, SelectMode } from "./typesAndInterfaces"
 
-export interface ICollectionFilterStore {
-
-    //tabs items
-    all: ICollectionFilterItem[]
-    recent: ICollectionFilterItem[]
-    favorites: ICollectionFilterItem[]
-
-    term: string
-    
-    appliedItems: ICollectionFilterItem[]
-    // allAppliedItems: ICollectionFilterItem[]
-
-    selected: ItemKeyType[]
-    hasLoadMore: boolean
-    isLoading: boolean
-    clearNotApplied: () => void
-    copyNotAppliedToRecent: () => void
-    setTerm: (term: string) => void
-    reset: () => void
-    setFavorites: (item: ICollectionFilterItem, checked: boolean) => void
-    loadNextPage: (signal: AbortSignal) => Promise<void>
-    loadFavoritesFromCache: () => void
-    loadRecentFromCache: () => void
-    select: (key: ItemKeyType, checked: boolean) => void
-    selectSingle: (key: ItemKeyType, checked: boolean) => void
-
-    // getAppliedItems: (appliedKeys: ItemKeyType[]) => Promise<ICollectionFilterItem[]>
-}
+const itemKeyFunc = (item: ICollectionFilterItem): ItemKeyType => item.key
 
 export interface ICollectionFilterStoreParams {
+    selectMode: SelectMode
     pageSize?: number
     recentMaxSize?: number
     favoriteMaxSize?: number
     cacheKeyPrefixFunc: () => string
 }
 
-const itemKeyFunc = (item: ICollectionFilterItem): ItemKeyType => item.key
-
-export abstract class CollectionFilterStore implements ICollectionFilterStore {
+export abstract class CollectionFilterStore
+extends BaseCollectionFilterStore
+implements ICollectionFilterStore {
     
     //tabs items
     favorites: ICollectionFilterItem[] = []
     recent: ICollectionFilterItem[] = []
-    all: ICollectionFilterItem[] = []
-
-    selected: ItemKeyType[] = []
-   
-    appliedItems: ICollectionFilterItem[] = []
-    term: string = ''
     
-    hasLoadMore: boolean = false
-    isLoading: boolean = false
-
     loadFavoritesFromCache = () => {
         this.favorites = this.loadFromCache(this.getFavoritesKey(), this._favoritesQueue)
     }
@@ -68,23 +32,6 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
 
     abstract loadNextPage(signal: AbortSignal): Promise<void>
     protected abstract getAppliedItems(appliedKeys: ItemKeyType[]): Promise<ICollectionFilterItem[]> 
-
-    setTerm(term: string): void {
-        this.term = term
-    }
-
-    setItems(items: ICollectionFilterItem[]): void {
-        this.all = items
-    }
-
-    clearNotApplied() {
-        if(this._appliedSet) {
-            this.selected = [...this._appliedSet]
-        }
-        else {
-            this.selected = []
-        }
-    }
 
     setFavorites(item: ICollectionFilterItem, checked: boolean): void {
         if(checked) {
@@ -128,24 +75,6 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         })
     }
 
-    select(key: ItemKeyType, checked: boolean): void {
-        if(checked) {
-            this.selected = [...this.selected, key]
-        }
-        else {
-            this.selected = this.selected.filter(x => x !== key)
-        }
-    }
-
-    selectSingle(key: ItemKeyType, checked: boolean): void {
-        if(checked) {
-            this.selected = [key]
-        }
-        else {
-            this.selected = []
-        }
-    }
-
     copyNotAppliedToRecent(): void {
         if(this.selected.length) {
             const notAppliedItems = this.all.filter(x => this.notApplied.has(x.key))
@@ -184,9 +113,8 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         this.all = []
     }
 
-    constructor({cacheKeyPrefixFunc, recentMaxSize = 20, favoriteMaxSize = 20, pageSize = 20}: ICollectionFilterStoreParams) {
-
-        logger.debug('CollectionFilterStore.constructor')
+    constructor({cacheKeyPrefixFunc, selectMode, recentMaxSize = 20, favoriteMaxSize = 20, pageSize = 20}: ICollectionFilterStoreParams) {
+        super(selectMode)
         this.pageSize = pageSize
         this._cache = new LocalStorageCacheProvider()
         this._cacheKeyPrefixFunc = cacheKeyPrefixFunc
@@ -194,24 +122,13 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         this._recentQueue = new ItemQueue(itemKeyFunc, recentMaxSize, [])
        
         makeObservable(this, {
-            appliedItems: observable,
-            selected: observable,
             favorites: observable,
             recent: observable,
-            isLoading: observable,
-            hasLoadMore: observable,
-            all: observable,
-            term: observable,
-            setItems: action,
-            setTerm: action,
-            select: action,
             setFavorites: action,
-            clearNotApplied: action,
             loadFavoritesFromCache: action,
             loadRecentFromCache: action,
             copyNotAppliedToRecent: action,
             setApplied: action,
-            selectSingle: action,
             reset: action
         })
     }
@@ -230,8 +147,6 @@ export abstract class CollectionFilterStore implements ICollectionFilterStore {
         if(fromCache) { q.enqueue(fromCache) }
         return q.items
     }
-
-    private _appliedSet: Set<ItemKeyType> | undefined
 
     private get notApplied() {
         if(this._appliedSet) {

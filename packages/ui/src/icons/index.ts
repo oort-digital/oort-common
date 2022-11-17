@@ -11,6 +11,10 @@ export { TwitterIcon } from "./twitterIcon"
 export { BscIcon } from "./bscIcon"
 export { PolygonIcon } from "./polygonIcon"
 export { EthIcon } from "./ethIcon"
+export { BscIconOld } from "./bscIconOld"
+export { PolygonIconOld } from "./polygonIconOld"
+export { EthIconOld } from "./ethIconOld"
+
 export { GameHubIcon } from "./gameHubIcon"
 
 export { NoDataIcon } from "./noDataIcon"
