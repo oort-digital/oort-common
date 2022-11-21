@@ -2583,7 +2583,7 @@ const t2 = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Re.Desktop ? e : r === Re.Phone ? t : n)(), " "]
   });
-}, r2 = bt(() => import("./connectModalDesktop.8850efed.mjs")), o2 = bt(() => import("./connectModalMobile.ba1a07ac.mjs")), s2 = (e) => {
+}, r2 = bt(() => import("./connectModalDesktop.21203bf0.mjs")), o2 = bt(() => import("./connectModalMobile.36d65ca2.mjs")), s2 = (e) => {
   const t = /* @__PURE__ */ i(r2, {
     ...e
   }), n = /* @__PURE__ */ i(o2, {
@@ -3648,7 +3648,7 @@ const On = (e, t, n, r, o) => {
   list: R3,
   list_item: k3,
   circle_icons: N3
-}, O3 = "_async_list_1ouit_1", M3 = "_load_more_btn_container_1ouit_1", P3 = "_load_more_btn_1ouit_1", F3 = "_empty_hint_1ouit_8", it = {
+}, O3 = "_async_list_ptqy8_1", M3 = "_load_more_btn_container_ptqy8_1", P3 = "_load_more_btn_ptqy8_1", F3 = "_empty_hint_ptqy8_8", it = {
   async_list: O3,
   load_more_btn_container: M3,
   load_more_btn: P3,
@@ -5761,4 +5761,4 @@ export {
   n2 as y,
   wr as z
 };
-//# sourceMappingURL=index.f3ec0c26.mjs.map
+//# sourceMappingURL=index.632529a3.mjs.map
