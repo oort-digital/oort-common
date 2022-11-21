@@ -32,9 +32,7 @@ const getItems = (count: number): IItem[] => {
   return result
 }
 
-
 const itemRenderer = (item: IItem): React.ReactElement => <>{item.name}</>
-
 
 export const main = Template.bind({});
 main.args = {
