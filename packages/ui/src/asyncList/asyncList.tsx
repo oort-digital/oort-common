@@ -5,7 +5,7 @@ import styles from "./asyncList.module.less"
 import {ArrowDownIcon, NoDataIcon} from "../icons"
 import { SizeType } from "antd/lib/config-provider/SizeContext"
 
-interface IProps<TItem> {
+export interface IProps<TItem> {
     items: TItem[]
     itemRenderer: (item: TItem) => React.ReactElement
     loadMoreButtonRendered?: (isLoading: boolean, onLoadMore: () => void) => React.ReactElement
