@@ -1,16 +1,9 @@
 import { Button} from 'antd'
 import "./footerButtonsMobile.less"
 import React from 'react'
-import { SizeType } from 'antd/lib/config-provider/SizeContext'
 import { ButtonType } from 'antd/lib/button';
+import { IFooterBtn } from './footerButtons';
 
-export interface IFooterBtn {
-    text: string | undefined
-    size?: SizeType
-    type?: ButtonType
-    icon?: React.ReactNode
-    href?: string
-}
 
 interface IProps {
     okBtn?: IFooterBtn

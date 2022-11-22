@@ -5,10 +5,11 @@ import { SizeType } from 'antd/lib/config-provider/SizeContext'
 import { ButtonType } from 'antd/lib/button';
 
 export interface IFooterBtn {
-    text: string
+    text: string | undefined
     size?: SizeType
     type?: ButtonType
     icon?: React.ReactNode
+    href?: string
 }
 
 interface IProps {

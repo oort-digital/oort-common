@@ -1,13 +1,5 @@
 import React from 'react';
-import { SizeType } from 'antd/lib/config-provider/SizeContext';
-import { ButtonType } from 'antd/lib/button';
-export interface IFooterBtn {
-    text: string | undefined;
-    size?: SizeType;
-    type?: ButtonType;
-    icon?: React.ReactNode;
-    href?: string;
-}
+import { IFooterBtn } from './footerButtons';
 interface IProps {
     okBtn?: IFooterBtn;
     cancelBtn?: IFooterBtn;
