@@ -2583,7 +2583,7 @@ const t2 = (e = "cookies") => {
     fallback: /* @__PURE__ */ i("span", {}),
     children: [" ", (() => r === Re.Desktop ? e : r === Re.Phone ? t : n)(), " "]
   });
-}, r2 = bt(() => import("./connectModalDesktop.21203bf0.mjs")), o2 = bt(() => import("./connectModalMobile.36d65ca2.mjs")), s2 = (e) => {
+}, r2 = bt(() => import("./connectModalDesktop.3a122441.mjs")), o2 = bt(() => import("./connectModalMobile.7bc30f79.mjs")), s2 = (e) => {
   const t = /* @__PURE__ */ i(r2, {
     ...e
   }), n = /* @__PURE__ */ i(o2, {
@@ -3517,15 +3517,15 @@ class Nr {
 }
 const Nn = (e) => e.key;
 class h6 extends Nr {
-  constructor({ cacheKeyPrefixFunc: t, selectMode: n, recentMaxSize: r = 20, favoriteMaxSize: o = 20, pageSize: s = 20 }) {
-    super(n), this.favorites = [], this.recent = [], this.loadFavoritesFromCache = () => {
-      this.favorites = this.loadFromCache(this.getFavoritesKey(), this._favoritesQueue);
+  constructor({ cacheKeyPrefixFunc: t, selectMode: n, useFavorites: r = !0, useRecent: o = !0, recentMaxSize: s = 20, favoriteMaxSize: a = 20, pageSize: l = 20 }) {
+    super(n), this.favorites = null, this.recent = null, this.loadFavoritesFromCache = () => {
+      this.favorites && (this.favorites = this.loadFromCache(this.getFavoritesKey(), this._favoritesQueue));
     }, this.loadRecentFromCache = () => {
-      this.recent = this.loadFromCache(this.getRecentKey(), this._recentQueue);
-    }, this._curPage = 0, this.getFavoritesKey = () => `${this._cacheKeyPrefixFunc()}_FAV`, this.getRecentKey = () => `${this._cacheKeyPrefixFunc()}_RECENT`, this.loadFromCache = (a, l) => {
-      const f = this._cache.getItem(a);
-      return f && l.enqueue(f), l.items;
-    }, this.pageSize = s, this._cache = new re(), this._cacheKeyPrefixFunc = t, this._favoritesQueue = new kn(Nn, o, []), this._recentQueue = new kn(Nn, r, []), l1(this, {
+      this.recent && (this.recent = this.loadFromCache(this.getRecentKey(), this._recentQueue));
+    }, this._curPage = 0, this.getFavoritesKey = () => `${this._cacheKeyPrefixFunc()}_FAV`, this.getRecentKey = () => `${this._cacheKeyPrefixFunc()}_RECENT`, this.loadFromCache = (f, u) => {
+      const d = this._cache.getItem(f);
+      return d && u.enqueue(d), u.items;
+    }, this.pageSize = l, this._cache = new re(), this._cacheKeyPrefixFunc = t, this._favoritesQueue = new kn(Nn, a, []), this._recentQueue = new kn(Nn, s, []), r && (this.favorites = []), o && (this.recent = []), l1(this, {
       favorites: ue,
       recent: ue,
       setFavorites: X,
@@ -3557,8 +3557,8 @@ class h6 extends Nr {
     });
   }
   copyNotAppliedToRecent() {
-    if (this.selected.length) {
-      const n = this.all.filter((o) => this.notApplied.has(o.key)), r = this.favorites.filter((o) => this.notApplied.has(o.key));
+    if (this.selected.length && this.recent) {
+      const n = this.all.filter((o) => this.notApplied.has(o.key)), r = this.favorites ? this.favorites.filter((o) => this.notApplied.has(o.key)) : [];
       this._recentQueue.enqueue(n.concat(r), !0), this.recent = this._recentQueue.items;
     }
     const t = this.getRecentKey();
@@ -3629,7 +3629,7 @@ const On = (e, t, n, r, o) => {
         }) : /* @__PURE__ */ i(ko, {
           checked: v
         })
-      }), /* @__PURE__ */ i(W, {
+      }), d && /* @__PURE__ */ i(W, {
         children: /* @__PURE__ */ i("div", {
           className: "item-icon",
           children: C()
@@ -5761,4 +5761,4 @@ export {
   n2 as y,
   wr as z
 };
-//# sourceMappingURL=index.632529a3.mjs.map
+//# sourceMappingURL=index.e9fcf918.mjs.map

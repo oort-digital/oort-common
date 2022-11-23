@@ -7,15 +7,15 @@ export declare enum SelectMode {
 export declare type ItemKeyType = string | number;
 export interface ICollectionFilterItem {
     key: ItemKeyType;
-    icon: ReactElement | string;
+    icon?: ReactElement | string | null;
     title: string;
     count?: number;
 }
 export interface ICollectionFilterStore {
     selectMode: SelectMode;
     all: ICollectionFilterItem[];
-    recent?: ICollectionFilterItem[];
-    favorites?: ICollectionFilterItem[];
+    recent?: ICollectionFilterItem[] | null;
+    favorites?: ICollectionFilterItem[] | null;
     term: string;
     appliedItems: ICollectionFilterItem[];
     selected: ItemKeyType[];
