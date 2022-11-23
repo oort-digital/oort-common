@@ -43,7 +43,7 @@ export const collectionItemRenderer = (selectMode: SelectMode, className: string
 					selectMode === SelectMode.Multy ? <Checkbox checked={isSelected}/> : <Radio checked={isSelected} />
 				}
 			</Col>
-			<Col><div className="item-icon">{renderIcon()}</div></Col>
+			{ icon && <Col><div className="item-icon">{renderIcon()}</div></Col> }
 			<Col flex="auto"><span className="item-name">{collectionName}</span></Col>
 			{renderFavorite()}
 		</Row>

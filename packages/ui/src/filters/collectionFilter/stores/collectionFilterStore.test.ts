@@ -50,9 +50,9 @@ test('must add favorites in right order', async () => {
    store.setFavorites(one, true)
    store.setFavorites(two, true)
 
-   expect(store.favorites.length).toEqual(2)
-   expect(store.favorites[0].key).toEqual(two.key)
-   expect(store.favorites[1].key).toEqual(one.key)
+   expect(store.favorites!.length).toEqual(2)
+   expect(store.favorites![0].key).toEqual(two.key)
+   expect(store.favorites![1].key).toEqual(one.key)
 });
 
 test('must remove old favorite items if max size excided', async () => {
@@ -62,9 +62,9 @@ test('must remove old favorite items if max size excided', async () => {
    store.setFavorites(two, true)
    store.setFavorites(three, true)
 
-   expect(store.favorites.length).toEqual(2)
-   expect(store.favorites[0].key).toEqual(three.key)
-   expect(store.favorites[1].key).toEqual(two.key)
+   expect(store.favorites!.length).toEqual(2)
+   expect(store.favorites![0].key).toEqual(three.key)
+   expect(store.favorites![1].key).toEqual(two.key)
 });
 
  test('must remove old recent items if max size excided', async () => {
@@ -78,28 +78,28 @@ test('must remove old favorite items if max size excided', async () => {
     store.select(two.key, true)
     store.copyNotAppliedToRecent()
 
-    expect(store.recent.length).toEqual(2)
-    expect(store.recent[0].key).toEqual(one.key)
-    expect(store.recent[1].key).toEqual(two.key)
+    expect(store.recent!.length).toEqual(2)
+    expect(store.recent![0].key).toEqual(one.key)
+    expect(store.recent![1].key).toEqual(two.key)
 
     store.clearNotApplied()
     store.select(three.key, true)
     store.copyNotAppliedToRecent()
 
-    expect(store.recent.length).toEqual(2)
-    expect(store.recent[0].key).toEqual(three.key)
-    expect(store.recent[1].key).toEqual(one.key)
+    expect(store.recent!.length).toEqual(2)
+    expect(store.recent![0].key).toEqual(three.key)
+    expect(store.recent![1].key).toEqual(one.key)
  });
 
 test('must copyNotAppliedToRecent from favorites', async () => {
    const store = create(1, 1, SelectMode.Multy)
 
-   store.favorites.push(one)
+   store.favorites!.push(one)
    store.select(one.key, true)
    store.copyNotAppliedToRecent()
 
-   expect(store.recent.length).toEqual(1)
-   expect(store.recent[0].key).toEqual(one.key)
+   expect(store.recent!.length).toEqual(1)
+   expect(store.recent![0].key).toEqual(one.key)
 });
 
 test('must copyNotAppliedToRecent from items', async () => {
@@ -110,8 +110,8 @@ test('must copyNotAppliedToRecent from items', async () => {
    store.select(one.key, true)
    store.copyNotAppliedToRecent()
 
-   expect(store.recent.length).toEqual(1)
-   expect(store.recent[0].key).toEqual(one.key)
+   expect(store.recent!.length).toEqual(1)
+   expect(store.recent![0].key).toEqual(one.key)
 });
 
 test('must copy not applied to recent without duplicated', async () => {
@@ -124,8 +124,8 @@ test('must copy not applied to recent without duplicated', async () => {
    store.copyNotAppliedToRecent()
    store.copyNotAppliedToRecent()
 
-   expect(store.recent.length).toEqual(1)
-   expect(store.recent[0].key).toEqual(one.key)
+   expect(store.recent!.length).toEqual(1)
+   expect(store.recent![0].key).toEqual(one.key)
 });
 
 test('clearNotApplied must clean selected if no applied', async () => {

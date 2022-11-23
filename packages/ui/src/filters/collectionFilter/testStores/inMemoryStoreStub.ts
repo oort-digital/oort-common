@@ -9,6 +9,7 @@ const nameLen = 5;
 class Source {
 
     private _items: ICollectionFilterItem[] = []
+    private _noIcon: boolean
 
     private static generateName(idx: number): string {
         const alphaIdx = idx % alpha.length
@@ -20,12 +21,13 @@ class Source {
         return result
     }
 
-    constructor(len: number) {
+    constructor(len: number, noIcon: boolean) {
+        this._noIcon = noIcon
         for(let i = 0; i < len; i++) {
             this._items.push({
                 key: i,
                 title: Source.generateName(i),
-                icon: addressToDataURL(i.toString()),
+                icon: this._noIcon ? null : addressToDataURL(i.toString()),
                 count: i
             })
         }
@@ -41,6 +43,12 @@ class Source {
         return this._items.find(x => x.key === key)!
     }
 
+}
+
+export interface IInMemoryStoreStubConfig {
+    useRecent?: boolean
+    useFavorite?: boolean
+    noIcons?: boolean
 }
 
 export class InMemoryStoreStub extends CollectionFilterStore {
@@ -65,9 +73,9 @@ export class InMemoryStoreStub extends CollectionFilterStore {
         return []
     }
   
-    constructor() {
-        super({ selectMode: SelectMode.Multy, cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
-        this._source = new Source(100)
+    constructor({ useFavorite = true, useRecent = true, noIcons = false }: IInMemoryStoreStubConfig) {
+        super({ selectMode: SelectMode.Multy, useFavorites: useFavorite, useRecent: useRecent, cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
+        this._source = new Source(100, noIcons)
     }
 
     private _source: Source

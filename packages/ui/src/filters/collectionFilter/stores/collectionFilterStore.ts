@@ -12,6 +12,8 @@ export interface ICollectionFilterStoreParams {
     recentMaxSize?: number
     favoriteMaxSize?: number
     cacheKeyPrefixFunc: () => string
+    useFavorites?: boolean
+    useRecent?: boolean
 }
 
 export abstract class CollectionFilterStore
@@ -19,15 +21,19 @@ extends BaseCollectionFilterStore
 implements ICollectionFilterStore {
     
     //tabs items
-    favorites: ICollectionFilterItem[] = []
-    recent: ICollectionFilterItem[] = []
+    favorites: ICollectionFilterItem[] | null = null
+    recent: ICollectionFilterItem[] | null = null
     
     loadFavoritesFromCache = () => {
-        this.favorites = this.loadFromCache(this.getFavoritesKey(), this._favoritesQueue)
+        if(this.favorites) {
+            this.favorites = this.loadFromCache(this.getFavoritesKey(), this._favoritesQueue)
+        }
     }
 
     loadRecentFromCache = () => {
-        this.recent = this.loadFromCache(this.getRecentKey(), this._recentQueue)
+        if(this.recent) {
+            this.recent = this.loadFromCache(this.getRecentKey(), this._recentQueue)
+        }
     }
 
     abstract loadNextPage(signal: AbortSignal): Promise<void>
@@ -76,9 +82,9 @@ implements ICollectionFilterStore {
     }
 
     copyNotAppliedToRecent(): void {
-        if(this.selected.length) {
+        if(this.selected.length && this.recent) {
             const notAppliedItems = this.all.filter(x => this.notApplied.has(x.key))
-            const notAppliedfavorites = this.favorites.filter(x => this.notApplied.has(x.key))
+            const notAppliedfavorites = this.favorites ? this.favorites.filter(x => this.notApplied.has(x.key)) : []
             this._recentQueue.enqueue(notAppliedItems.concat(notAppliedfavorites), true)
             this.recent = this._recentQueue.items
         }
@@ -113,13 +119,16 @@ implements ICollectionFilterStore {
         this.all = []
     }
 
-    constructor({cacheKeyPrefixFunc, selectMode, recentMaxSize = 20, favoriteMaxSize = 20, pageSize = 20}: ICollectionFilterStoreParams) {
+    constructor({cacheKeyPrefixFunc, selectMode, useFavorites = true, useRecent = true, recentMaxSize = 20, favoriteMaxSize = 20, pageSize = 20}: ICollectionFilterStoreParams) {
         super(selectMode)
         this.pageSize = pageSize
         this._cache = new LocalStorageCacheProvider()
         this._cacheKeyPrefixFunc = cacheKeyPrefixFunc
         this._favoritesQueue = new ItemQueue(itemKeyFunc, favoriteMaxSize, [])
         this._recentQueue = new ItemQueue(itemKeyFunc, recentMaxSize, [])
+
+        if(useFavorites) { this.favorites = [] }
+        if(useRecent) { this.recent = [] }
        
         makeObservable(this, {
             favorites: observable,

@@ -6,10 +6,12 @@ export interface ICollectionFilterStoreParams {
     recentMaxSize?: number;
     favoriteMaxSize?: number;
     cacheKeyPrefixFunc: () => string;
+    useFavorites?: boolean;
+    useRecent?: boolean;
 }
 export declare abstract class CollectionFilterStore extends BaseCollectionFilterStore implements ICollectionFilterStore {
-    favorites: ICollectionFilterItem[];
-    recent: ICollectionFilterItem[];
+    favorites: ICollectionFilterItem[] | null;
+    recent: ICollectionFilterItem[] | null;
     loadFavoritesFromCache: () => void;
     loadRecentFromCache: () => void;
     abstract loadNextPage(signal: AbortSignal): Promise<void>;
@@ -22,7 +24,7 @@ export declare abstract class CollectionFilterStore extends BaseCollectionFilter
     protected readonly pageSize: number;
     protected addNewPage(page: ICollectionFilterItem[], nextPageCursor?: string): void;
     reset(): void;
-    constructor({ cacheKeyPrefixFunc, selectMode, recentMaxSize, favoriteMaxSize, pageSize }: ICollectionFilterStoreParams);
+    constructor({ cacheKeyPrefixFunc, selectMode, useFavorites, useRecent, recentMaxSize, favoriteMaxSize, pageSize }: ICollectionFilterStoreParams);
     private _nextPageCursor;
     private _curPage;
     private readonly _cache;
