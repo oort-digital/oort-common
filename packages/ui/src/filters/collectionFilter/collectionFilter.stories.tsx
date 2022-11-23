@@ -50,7 +50,7 @@ Main.args = {
 }
 
 const inMemoryNoFavoriteStore = new InMemoryStoreStub(true, false)
-debugger
+
 export const MainNoFavorite = Template.bind({}); 
 MainNoFavorite.args = {
 	title: 'Title',

@@ -25,11 +25,15 @@ implements ICollectionFilterStore {
     recent: ICollectionFilterItem[] | null = null
     
     loadFavoritesFromCache = () => {
-        this.favorites = this.loadFromCache(this.getFavoritesKey(), this._favoritesQueue)
+        if(this.favorites) {
+            this.favorites = this.loadFromCache(this.getFavoritesKey(), this._favoritesQueue)
+        }
     }
 
     loadRecentFromCache = () => {
-        this.recent = this.loadFromCache(this.getRecentKey(), this._recentQueue)
+        if(this.recent) {
+            this.recent = this.loadFromCache(this.getRecentKey(), this._recentQueue)
+        }
     }
 
     abstract loadNextPage(signal: AbortSignal): Promise<void>
