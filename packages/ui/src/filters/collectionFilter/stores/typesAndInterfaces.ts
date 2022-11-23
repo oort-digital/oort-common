@@ -11,7 +11,7 @@ export type ItemKeyType = string | number
 
 export interface ICollectionFilterItem {
 	key: ItemKeyType
-	icon: ReactElement | string,
+	icon?: ReactElement | string | null,
 	title: string
 	count?: number
 }

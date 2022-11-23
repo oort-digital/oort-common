@@ -24,7 +24,7 @@ export default {
 } as ComponentMeta<typeof CollectionFilter>;
 
 
-const inMemoryStore = new InMemoryStoreStub(true, true)
+const inMemoryStore = new InMemoryStoreStub({})
 inMemoryStore.setApplied([1, 2])
 
 const templateStyle = { height: '1000px' }
@@ -49,7 +49,7 @@ Main.args = {
 	circleIcons: true
 }
 
-const inMemoryNoFavoriteStore = new InMemoryStoreStub(true, false)
+const inMemoryNoFavoriteStore = new InMemoryStoreStub({ useFavorite: false, useRecent: true, noIcons: true })
 
 export const MainNoFavorite = Template.bind({}); 
 MainNoFavorite.args = {
