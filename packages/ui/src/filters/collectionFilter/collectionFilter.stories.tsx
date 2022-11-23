@@ -24,8 +24,8 @@ export default {
 } as ComponentMeta<typeof CollectionFilter>;
 
 
-const inMemoryFilterStore = new InMemoryStoreStub()
-inMemoryFilterStore.setApplied([1, 2])
+const inMemoryStore = new InMemoryStoreStub(true, true)
+inMemoryStore.setApplied([1, 2])
 
 const templateStyle = { height: '1000px' }
 const Template: ComponentStory<typeof CollectionFilter> = (args) => <>
@@ -36,17 +36,30 @@ const Template: ComponentStory<typeof CollectionFilter> = (args) => <>
 </>
 
 
-const onChange = (collections: ICollectionFilterItem[]) => {
-  inMemoryFilterStore.setApplied(collections.map(x => x.key))
-}
-
 export const Main = Template.bind({}); 
 Main.args = {
 	title: 'Title',
 	popoverTitle: 'PopoverTitle',
   	searchPlaceholder: 'Enter text',
-	filterStore: inMemoryFilterStore,
-	onChange: onChange,
+	filterStore: inMemoryStore,
+	onChange: (collections: ICollectionFilterItem[]) => {
+		inMemoryStore.setApplied(collections.map(x => x.key))
+	},
+	searchable: true,
+	circleIcons: true
+}
+
+const inMemoryNoFavoriteStore = new InMemoryStoreStub(true, false)
+debugger
+export const MainNoFavorite = Template.bind({}); 
+MainNoFavorite.args = {
+	title: 'Title',
+	popoverTitle: 'PopoverTitle',
+  	searchPlaceholder: 'Enter text',
+	filterStore: inMemoryNoFavoriteStore,
+	onChange: (collections: ICollectionFilterItem[]) => {
+		inMemoryNoFavoriteStore.setApplied(collections.map(x => x.key))
+	},
 	searchable: true,
 	circleIcons: true
 }
@@ -120,7 +133,9 @@ SingleTabStatic.args = {
 	popoverTitle: 'PopoverTitle',
 	searchPlaceholder: 'Enter text',
 	filterStore: staticStore,
-	onChange: onChange,
+	onChange: (collections: ICollectionFilterItem[]) => {
+		staticStore.setApplied(collections.map(x => x.key))
+	},
 	searchable: true
 }
 
@@ -131,6 +146,5 @@ Loading.args = {
 	popoverTitle: 'PopoverTitle',
 	searchPlaceholder: 'Enter text',
 	filterStore: loadingStore,
-	onChange: onChange,
 	searchable: true
 }

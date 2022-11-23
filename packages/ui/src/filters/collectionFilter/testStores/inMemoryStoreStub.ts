@@ -65,8 +65,8 @@ export class InMemoryStoreStub extends CollectionFilterStore {
         return []
     }
   
-    constructor() {
-        super({ selectMode: SelectMode.Multy, cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
+    constructor(useRecent: boolean, useFavorite: boolean) {
+        super({ selectMode: SelectMode.Multy, useFavorites: useFavorite, useRecent: useRecent, cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
         this._source = new Source(100)
     }
 

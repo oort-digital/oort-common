@@ -20,8 +20,8 @@ export interface ICollectionFilterStore {
     selectMode: SelectMode
     //tabs items
     all: ICollectionFilterItem[]
-    recent?: ICollectionFilterItem[]
-    favorites?: ICollectionFilterItem[]
+    recent?: ICollectionFilterItem[] | null
+    favorites?: ICollectionFilterItem[] | null
     term: string
     appliedItems: ICollectionFilterItem[]
     selected: ItemKeyType[]
