@@ -1,4 +1,5 @@
 import { getCookie, setCookie } from 'typescript-cookie'
+import { getCookieDomain } from './utils';
 
 const DARK_MODE = "dark-mode";
 export type ThemeSourceType = 'localstorage' | 'cookies'
@@ -22,7 +23,6 @@ class LocalStorageSource implements IThemeSource {
   }
 }
 
-
 class CookiesSource implements IThemeSource {
     get isDarkMode(): boolean {
       const json = getCookie(DARK_MODE)
@@ -33,7 +33,7 @@ class CookiesSource implements IThemeSource {
       return JSON.parse(json) || false;
     }
     setDarkMode = (isDark: boolean) => {
-        const domain = this.getCookieDomain()
+        const domain = getCookieDomain(window.location.hostname)
         const expires = new Date()
         expires.setFullYear(expires.getFullYear() + 10)
         setCookie(DARK_MODE, isDark, { 
@@ -41,17 +41,6 @@ class CookiesSource implements IThemeSource {
             expires: expires,
             path: '/'
         })
-    }
-
-    private getCookieDomain = (): string | undefined => {
-        const host = window.location.hostname;
-        const arr = host.split('.')
-
-        if(arr.length === 3) {
-            return `${arr[1]}.${arr[2]}`
-        }
-
-        return undefined
     }
 }
 
