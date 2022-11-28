@@ -1,3 +1,4 @@
+import { TooltipPlacement } from 'antd/es/tooltip'
 import { useState } from 'react'
 import { PopoverFilter } from "../popover"
 import "./rangeFilter.less"
@@ -16,9 +17,10 @@ interface IProps {
     onChange: (values: [RangeValue, RangeValue]) => void
     onVisibleChange?: (isVisible: boolean) => void
     triggerElement?: JSX.Element
+    placement?: TooltipPlacement
 }
 
-export const RangeFilter = ({title, popoverTitle, onChange, values, min, max, open, showTriggerButton, onVisibleChange, triggerElement }: IProps) => {
+export const RangeFilter = ({placement, title, popoverTitle, onChange, values, min, max, open, showTriggerButton, onVisibleChange, triggerElement }: IProps) => {
     
     const [intrenalValues, setInternalValues] = useState<[RangeValue, RangeValue]>(values)
 
@@ -62,6 +64,7 @@ export const RangeFilter = ({title, popoverTitle, onChange, values, min, max, op
         showTriggerButton={showTriggerButton}
         onVisibleChange={onVisibleChange}
         triggerElement={triggerElement}
+        placement={placement}
         onClear={() => onChange([undefined, undefined])}>
         <RangeFilterContent
             onMaxValueChange={onMaxValueChange}

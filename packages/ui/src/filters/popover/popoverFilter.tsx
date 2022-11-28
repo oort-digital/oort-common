@@ -3,6 +3,7 @@ import styles from "./popoverFilter.module.less"
 import { Button, Popover } from "antd"
 import { ChevronDownOutlineIcon, CloseIconOld } from '../../icons'
 import { logger } from '@oort/logger'
+import { TooltipPlacement } from 'antd/es/tooltip'
 
 export type RangeValue = number | undefined
 
@@ -26,13 +27,15 @@ interface IProps {
     //returns space between bottom of button and bottom of the window then
     onBottomSpaceHeightChange?: (heigth: number) => void
     triggerElement?: JSX.Element
+    placement?: TooltipPlacement
 }
 
 export const PopoverFilter = ({
     title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName,
     popoverTitleClassName, applyButtonClassName, cancelButtonClassName,
     isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled,
-    onBottomSpaceHeightChange, open, showTriggerButton = true, triggerElement}: IProps) => {
+    onBottomSpaceHeightChange, open, showTriggerButton = true, triggerElement,
+    placement = "bottomRight"}: IProps) => {
     
     const [visible, setVisible] = useState(!!open)
 
@@ -121,7 +124,7 @@ export const PopoverFilter = ({
         style={{"backgroundColor":"#11151A"}}
         onOpenChange={onVisibleChange_}
         open={visible}
-        placement="bottomRight"
+        placement={placement}
         content={renderContent}
         trigger="click">
         {renderTriggerBtn()}
