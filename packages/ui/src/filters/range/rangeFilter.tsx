@@ -15,9 +15,10 @@ interface IProps {
     showTriggerButton?: boolean
     onChange: (values: [RangeValue, RangeValue]) => void
     onVisibleChange?: (isVisible: boolean) => void
+    triggerElement?: JSX.Element
 }
 
-export const RangeFilter = ({title, popoverTitle, onChange, values, min, max, open, showTriggerButton, onVisibleChange }: IProps) => {
+export const RangeFilter = ({title, popoverTitle, onChange, values, min, max, open, showTriggerButton, onVisibleChange, triggerElement }: IProps) => {
     
     const [intrenalValues, setInternalValues] = useState<[RangeValue, RangeValue]>(values)
 
@@ -60,6 +61,7 @@ export const RangeFilter = ({title, popoverTitle, onChange, values, min, max, op
         open={open}
         showTriggerButton={showTriggerButton}
         onVisibleChange={onVisibleChange}
+        triggerElement={triggerElement}
         onClear={() => onChange([undefined, undefined])}>
         <RangeFilterContent
             onMaxValueChange={onMaxValueChange}

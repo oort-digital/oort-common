@@ -25,13 +25,14 @@ interface IProps {
     onVisibleChange?: (isVisible: boolean) => void
     //returns space between bottom of button and bottom of the window then
     onBottomSpaceHeightChange?: (heigth: number) => void
+    triggerElement?: JSX.Element
 }
 
 export const PopoverFilter = ({
     title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName,
     popoverTitleClassName, applyButtonClassName, cancelButtonClassName,
     isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled,
-    onBottomSpaceHeightChange, open, showTriggerButton = true}: IProps) => {
+    onBottomSpaceHeightChange, open, showTriggerButton = true, triggerElement}: IProps) => {
     
     const [visible, setVisible] = useState(!!open)
 
@@ -102,6 +103,20 @@ export const PopoverFilter = ({
         }
     }
 
+    const renderTriggerBtn = () => {
+        if(!showTriggerButton) {
+            return null
+        }
+
+        if(triggerElement) {
+            return triggerElement
+        }
+
+        return <Button ref={setBtnRef} className={btnClassName} size="large">
+            {subTitle ? renderTitleAndSubTitle() : renderSingleTitle() }
+        </Button>
+    }
+
     return <Popover
         style={{"backgroundColor":"#11151A"}}
         onOpenChange={onVisibleChange_}
@@ -109,10 +124,6 @@ export const PopoverFilter = ({
         placement="bottomRight"
         content={renderContent}
         trigger="click">
-        {
-                showTriggerButton && <Button ref={setBtnRef} className={btnClassName} size="large">
-                    {subTitle ? renderTitleAndSubTitle() : renderSingleTitle() }
-                </Button>
-        }
+        {renderTriggerBtn()}
   </Popover>
 }
