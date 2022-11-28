@@ -6,6 +6,7 @@ import { RangeFilter } from ".";
 import { ThemeLoader } from "../../internalHelpers";
 import { RangeValue } from "./rangeFilterContent";
 import { Button } from "antd";
+import { IRangeFilterProps } from "./rangeFilter";
 
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -43,11 +44,11 @@ const Template: ComponentStory<typeof RangeFilter> = (args) => {
   </>
 }
 
-const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (args) => {
+const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (args: IRangeFilterProps) => {
 
   const [values, setValues] = useState<[RangeValue, RangeValue]>([1, 10])
 
-  const [open, setOpen] = useState(false)
+  const [visible, setVisible] = useState(false)
 
   const onChange = (newVals: [RangeValue, RangeValue]) => {
     setValues(newVals)
@@ -57,8 +58,8 @@ const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (args) => {
     values,
     onChange,
     showTriggerButton: false,
-    open,
-    onVisibleChange: setOpen,
+    visible,
+    onVisibleChange: setVisible,
   }
 
   const mergedProps = { ...args, ...props }
@@ -67,7 +68,7 @@ const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (args) => {
     <ThemeLoader />
     <div>{values[0]}-{values[1]}</div>
     <div>
-      <Button style={{marginLeft: '300px'}} onClick={() => setOpen(true)}>Open</Button>
+      <Button style={{marginLeft: '300px'}} onClick={() => setVisible(true)}>Open</Button>
       <RangeFilter {...mergedProps} />
     </div>
   </>
@@ -83,12 +84,13 @@ Main.args = {
 };
 
 export const NoTriggerButton = NoTriggerButtonTemplate.bind({});
-Main.args = {
+NoTriggerButton.args = {
   title: 'Range filter',
   popoverTitle: 'Enter values',
   values: [1, 10],
   min: 1,
-  max: 10
-};
-
-
+  max: 10,
+  showClose: true,
+  showCancel: false,
+  showClear: true
+}

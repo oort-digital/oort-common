@@ -6,20 +6,27 @@ import { RangeFilterContent } from './rangeFilterContent'
 
 export type RangeValue = number | undefined
 
-interface IProps {
+export interface IRangeFilterProps {
     title: string
     popoverTitle: string
     values: [RangeValue, RangeValue]
     min?: number
     max?: number
-    open?: boolean
+    visible?: boolean
     showTriggerButton?: boolean
+    showClose?: boolean
+    showCancel?: boolean
+    showClear?: boolean
     onChange: (values: [RangeValue, RangeValue]) => void
     onVisibleChange?: (isVisible: boolean) => void
     placement?: TooltipPlacement
 }
 
-export const RangeFilter = ({placement, title, popoverTitle, onChange, values, min, max, open, showTriggerButton, onVisibleChange }: IProps) => {
+export const RangeFilter = ({placement, title, popoverTitle,
+    onChange, values, min, max,
+    visible: visible,
+    showTriggerButton, showCancel,
+    showClear, showClose, onVisibleChange }: IRangeFilterProps) => {
     
     const [intrenalValues, setInternalValues] = useState<[RangeValue, RangeValue]>(values)
 
@@ -59,8 +66,11 @@ export const RangeFilter = ({placement, title, popoverTitle, onChange, values, m
         subTitle={subTitle}
         popoverTitle={popoverTitle}
         isClear={isClear}
-        open={open}
+        visible={visible}
         showTriggerButton={showTriggerButton}
+        showClose={showClose}
+        showCancel={showCancel}
+        showClear={showClear}
         onVisibleChange={onVisibleChange}
         placement={placement}
         onClear={() => onChange([undefined, undefined])}>
