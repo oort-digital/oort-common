@@ -26,7 +26,6 @@ interface IProps {
     onVisibleChange?: (isVisible: boolean) => void
     //returns space between bottom of button and bottom of the window then
     onBottomSpaceHeightChange?: (heigth: number) => void
-    triggerElement?: JSX.Element
     placement?: TooltipPlacement
 }
 
@@ -34,7 +33,7 @@ export const PopoverFilter = ({
     title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName,
     popoverTitleClassName, applyButtonClassName, cancelButtonClassName,
     isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled,
-    onBottomSpaceHeightChange, open, showTriggerButton = true, triggerElement,
+    onBottomSpaceHeightChange, open, showTriggerButton = true,
     placement = "bottomRight"}: IProps) => {
     
     const [visible, setVisible] = useState(!!open)
@@ -106,20 +105,6 @@ export const PopoverFilter = ({
         }
     }
 
-    const renderTriggerBtn = () => {
-        if(!showTriggerButton) {
-            return null
-        }
-
-        if(triggerElement) {
-            return triggerElement
-        }
-
-        return <Button ref={setBtnRef} className={btnClassName} size="large">
-            {subTitle ? renderTitleAndSubTitle() : renderSingleTitle() }
-        </Button>
-    }
-
     return <Popover
         style={{"backgroundColor":"#11151A"}}
         onOpenChange={onVisibleChange_}
@@ -127,6 +112,10 @@ export const PopoverFilter = ({
         placement={placement}
         content={renderContent}
         trigger="click">
-        {renderTriggerBtn()}
+        {
+            showTriggerButton && <Button ref={setBtnRef} className={btnClassName} size="large">
+                {subTitle ? renderTitleAndSubTitle() : renderSingleTitle() }
+            </Button>
+        }
   </Popover>
 }
