@@ -9,12 +9,15 @@ interface IProps {
     title: string
     popoverTitle: string
     values: [RangeValue, RangeValue]
-    min?: number,
+    min?: number
     max?: number
-    onChange: (values: [RangeValue, RangeValue]) => void;
+    open?: boolean
+    showTriggerButton?: boolean
+    onChange: (values: [RangeValue, RangeValue]) => void
+    onVisibleChange?: (isVisible: boolean) => void
 }
 
-export const RangeFilter = ({title, popoverTitle, onChange, values, min, max }: IProps) => {
+export const RangeFilter = ({title, popoverTitle, onChange, values, min, max, open, showTriggerButton, onVisibleChange }: IProps) => {
     
     const [intrenalValues, setInternalValues] = useState<[RangeValue, RangeValue]>(values)
 
@@ -54,6 +57,9 @@ export const RangeFilter = ({title, popoverTitle, onChange, values, min, max }: 
         subTitle={subTitle}
         popoverTitle={popoverTitle}
         isClear={isClear}
+        open={open}
+        showTriggerButton={showTriggerButton}
+        onVisibleChange={onVisibleChange}
         onClear={() => onChange([undefined, undefined])}>
         <RangeFilterContent
             onMaxValueChange={onMaxValueChange}

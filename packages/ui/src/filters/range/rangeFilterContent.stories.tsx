@@ -5,7 +5,6 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { RangeFilter } from ".";
 import { ThemeLoader } from "../../internalHelpers";
 import { RangeValue } from "./rangeFilterContent";
-import { Button } from "antd";
 
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -43,47 +42,8 @@ const Template: ComponentStory<typeof RangeFilter> = (args) => {
   </>
 }
 
-const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (args) => {
-
-  const [values, setValues] = useState<[RangeValue, RangeValue]>([1, 10])
-
-  const [open, setOpen] = useState(false)
-
-  const onChange = (newVals: [RangeValue, RangeValue]) => {
-    setValues(newVals)
-  }
-
-  const props = {
-    values,
-    onChange,
-    showTriggerButton: false,
-    open,
-    onVisibleChange: setOpen
-  }
-
-  const mergedProps = { ...args, ...props }
-
-  return <>
-    <ThemeLoader />
-    <div>{values[0]}-{values[1]}</div>
-    <div>
-      <Button onClick={() => setOpen(true)}>Open</Button>
-      <RangeFilter {...mergedProps} />
-    </div>
-  </>
-}
-
 
 export const Main = Template.bind({});
-Main.args = {
-  title: 'Range filter',
-  popoverTitle: 'Enter values',
-  values: [1, 10],
-  min: 1,
-  max: 10
-};
-
-export const NoTriggerButton = NoTriggerButtonTemplate.bind({});
 Main.args = {
   title: 'Range filter',
   popoverTitle: 'Enter values',
