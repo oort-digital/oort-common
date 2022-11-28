@@ -1,6 +1,6 @@
 import { TooltipPlacement } from 'antd/es/tooltip'
 import { useState } from 'react'
-import { NumOrUndef, NumRange } from '../../typesAndInterfaces'
+import { emptyRange, isRangeEmpty, NumOrUndef, NumRange } from '../../typesAndInterfaces'
 import { PopoverFilter } from "../popover"
 import "./rangeFilter.less"
 import { RangeFilterContent } from './rangeFilterContent'
@@ -29,7 +29,7 @@ export const RangeFilter = ({placement, title, popoverTitle,
     
     const [intrenalValues, setInternalValues] = useState<NumRange>(values)
 
-    const isClear = values[0] === undefined && values[1] === undefined
+    const isClear = isRangeEmpty(values)
 
     const onMinValueChange = (value: NumOrUndef) => {
         setInternalValues([value as NumOrUndef, intrenalValues[1]])
@@ -41,6 +41,11 @@ export const RangeFilter = ({placement, title, popoverTitle,
 
     const onSubmit = () => {
         onChange(intrenalValues)
+    }
+
+    const clear = () => {
+        setInternalValues(emptyRange())
+        onChange(emptyRange())
     }
 
     const renderTitleVal = (label: string, value: NumOrUndef) => {
@@ -72,7 +77,7 @@ export const RangeFilter = ({placement, title, popoverTitle,
         showClear={showClear}
         onVisibleChange={onVisibleChange}
         placement={placement}
-        onClear={() => onChange([undefined, undefined])}>
+        onClear={clear}>
         <RangeFilterContent
             onMaxValueChange={onMaxValueChange}
             onMinValueChange={onMinValueChange}

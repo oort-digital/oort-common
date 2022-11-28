@@ -7,6 +7,7 @@ import { ThemeLoader } from "../../internalHelpers";
 import { RangeValue } from "./rangeFilterContent";
 import { Button } from "antd";
 import { IRangeFilterProps } from "./rangeFilter";
+import { emptyRange, NumRange } from "../../typesAndInterfaces";
 
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -46,11 +47,11 @@ const Template: ComponentStory<typeof RangeFilter> = (args) => {
 
 const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (args: IRangeFilterProps) => {
 
-  const [values, setValues] = useState<[RangeValue, RangeValue]>([1, 10])
+  const [values, setValues] = useState<NumRange>(emptyRange())
 
   const [visible, setVisible] = useState(false)
 
-  const onChange = (newVals: [RangeValue, RangeValue]) => {
+  const onChange = (newVals: NumRange) => {
     setValues(newVals)
   }
 
@@ -87,9 +88,8 @@ export const NoTriggerButton = NoTriggerButtonTemplate.bind({});
 NoTriggerButton.args = {
   title: 'Range filter',
   popoverTitle: 'Enter values',
-  values: [1, 10],
-  min: 1,
-  max: 10,
+  // min: 1,
+  // max: 10,
   showClose: true,
   showCancel: false,
   showClear: true
