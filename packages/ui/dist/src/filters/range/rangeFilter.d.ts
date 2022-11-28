@@ -10,7 +10,8 @@ interface IProps {
     showTriggerButton?: boolean;
     onChange: (values: [RangeValue, RangeValue]) => void;
     onVisibleChange?: (isVisible: boolean) => void;
+    triggerElement?: JSX.Element;
 }
-export declare const RangeFilter: ({ title, popoverTitle, onChange, values, min, max, open, showTriggerButton, onVisibleChange }: IProps) => JSX.Element;
+export declare const RangeFilter: ({ title, popoverTitle, onChange, values, min, max, open, showTriggerButton, onVisibleChange, triggerElement }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=rangeFilter.d.ts.map
