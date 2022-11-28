@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import { debounceFunction } from "oort/packages/ui"
+import { useRef } from 'react'
+import { debounceFunction } from '../../utils'
 import { IMobileFilterItemProps } from '../layout/filterLayoutMobile'
 import { RangeFilterContent, RangeValue } from './rangeFilterContent'
 

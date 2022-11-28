@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PopoverFilter } from "oort/packages/ui"
+import { PopoverFilter } from "../popover"
 import "./rangeFilter.less"
 import { RangeFilterContent } from './rangeFilterContent'
 

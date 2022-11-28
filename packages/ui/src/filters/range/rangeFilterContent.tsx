@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { InputNumber, Space } from "antd"
 import "./rangeFilterContent.less"
 
