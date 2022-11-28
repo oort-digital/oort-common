@@ -10,6 +10,8 @@ interface IProps {
     cancelButtonClassName?: string;
     isClear?: boolean;
     onClear?: () => void;
+    open?: boolean;
+    showTriggerButton?: boolean;
     popoverTitle: string;
     children: ReactNode;
     onSubmit: () => void;
@@ -17,6 +19,6 @@ interface IProps {
     onVisibleChange?: (isVisible: boolean) => void;
     onBottomSpaceHeightChange?: (heigth: number) => void;
 }
-export declare const PopoverFilter: ({ title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName, popoverTitleClassName, applyButtonClassName, cancelButtonClassName, isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled, onBottomSpaceHeightChange }: IProps) => JSX.Element;
+export declare const PopoverFilter: ({ title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName, popoverTitleClassName, applyButtonClassName, cancelButtonClassName, isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled, onBottomSpaceHeightChange, open, showTriggerButton }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=popoverFilter.d.ts.map
