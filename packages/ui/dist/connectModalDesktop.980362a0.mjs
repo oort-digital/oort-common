@@ -1,7 +1,7 @@
 import { useState as L } from "react";
-import { j as t, O as S, a as e, F as d, i as E } from "./index.55d0bbf8.mjs";
+import { j as t, O as S, a as e, F as d, i as E } from "./index.57bdb138.mjs";
 import { Row as I, Col as h } from "antd";
-import { A as G, B as R, a as k, C as p, b as U, M as q, W as z } from "./alert.2241ffa3.mjs";
+import { A as G, B as R, a as k, C as p, b as U, M as q, W as z } from "./alert.d0ef240e.mjs";
 import "react-router-dom";
 import "ethers";
 import "mobx-react";
@@ -138,4 +138,4 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
 export {
   nt as default
 };
-//# sourceMappingURL=connectModalDesktop.7551edef.mjs.map
+//# sourceMappingURL=connectModalDesktop.980362a0.mjs.map
