@@ -49,7 +49,7 @@ const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (args: IRang
 
   const [values, setValues] = useState<NumRange>(emptyRange())
 
-  const [visible, setVisible] = useState(false)
+  const [visible, onVisibleChange] = useState(false)
 
   const onChange = (newVals: NumRange) => {
     setValues(newVals)
@@ -60,7 +60,7 @@ const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (args: IRang
     onChange,
     showTriggerButton: false,
     visible,
-    onVisibleChange: setVisible,
+    onVisibleChange
   }
 
   const mergedProps = { ...args, ...props }
@@ -69,7 +69,7 @@ const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (args: IRang
     <ThemeLoader />
     <div>{values[0]}-{values[1]}</div>
     <div>
-      <Button style={{marginLeft: '300px'}} onClick={() => setVisible(true)}>Open</Button>
+      <Button style={{marginLeft: '300px'}} onClick={() => onVisibleChange(true)}>Open</Button>
       <RangeFilter {...mergedProps} />
     </div>
   </>
