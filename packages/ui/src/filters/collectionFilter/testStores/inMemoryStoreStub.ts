@@ -47,7 +47,7 @@ class Source {
 
 export interface IInMemoryStoreStubConfig {
     useRecent?: boolean
-    useFavorite?: boolean
+    useFavorites?: boolean
     noIcons?: boolean
 }
 
@@ -73,8 +73,8 @@ export class InMemoryStoreStub extends CollectionFilterStore {
         return []
     }
   
-    constructor({ useFavorite = true, useRecent = true, noIcons = false }: IInMemoryStoreStubConfig) {
-        super({ selectMode: SelectMode.Multy, useFavorites: useFavorite, useRecent: useRecent, cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
+    constructor({ useFavorites = true, useRecent = true, noIcons = false }: IInMemoryStoreStubConfig) {
+        super({ selectMode: SelectMode.Multy, useFavorites, useRecent, cacheKeyPrefixFunc: () => 'storybook_collection_filter_in_memory' })
         this._source = new Source(100, noIcons)
     }
 
