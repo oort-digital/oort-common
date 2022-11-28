@@ -1,15 +1,14 @@
 import { TooltipPlacement } from 'antd/es/tooltip'
 import { useState } from 'react'
+import { NumOrUndef, NumRange } from '../../typesAndInterfaces'
 import { PopoverFilter } from "../popover"
 import "./rangeFilter.less"
 import { RangeFilterContent } from './rangeFilterContent'
 
-export type RangeValue = number | undefined
-
 export interface IRangeFilterProps {
     title: string
     popoverTitle: string
-    values: [RangeValue, RangeValue]
+    values: NumRange
     min?: number
     max?: number
     visible?: boolean
@@ -17,7 +16,7 @@ export interface IRangeFilterProps {
     showClose?: boolean
     showCancel?: boolean
     showClear?: boolean
-    onChange: (values: [RangeValue, RangeValue]) => void
+    onChange: (values: NumRange) => void
     onVisibleChange?: (isVisible: boolean) => void
     placement?: TooltipPlacement
 }
@@ -28,23 +27,23 @@ export const RangeFilter = ({placement, title, popoverTitle,
     showTriggerButton, showCancel,
     showClear, showClose, onVisibleChange }: IRangeFilterProps) => {
     
-    const [intrenalValues, setInternalValues] = useState<[RangeValue, RangeValue]>(values)
+    const [intrenalValues, setInternalValues] = useState<NumRange>(values)
 
     const isClear = values[0] === undefined && values[1] === undefined
 
-    const onMinValueChange = (value: RangeValue) => {
-        setInternalValues([value as RangeValue, intrenalValues[1]])
+    const onMinValueChange = (value: NumOrUndef) => {
+        setInternalValues([value as NumOrUndef, intrenalValues[1]])
     };
 
-    const onMaxValueChange = (value: RangeValue) => {
-        setInternalValues([intrenalValues[0], value as RangeValue])
+    const onMaxValueChange = (value: NumOrUndef) => {
+        setInternalValues([intrenalValues[0], value as NumOrUndef])
     };
 
     const onSubmit = () => {
         onChange(intrenalValues)
     }
 
-    const renderTitleVal = (label: string, value: RangeValue) => {
+    const renderTitleVal = (label: string, value: NumOrUndef) => {
         if(value === undefined){
             return null
         }

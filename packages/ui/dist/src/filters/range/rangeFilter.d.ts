@@ -1,10 +1,10 @@
 /// <reference types="react" />
 import { TooltipPlacement } from 'antd/es/tooltip';
-export declare type RangeValue = number | undefined;
+import { NumRange } from '../../typesAndInterfaces';
 export interface IRangeFilterProps {
     title: string;
     popoverTitle: string;
-    values: [RangeValue, RangeValue];
+    values: NumRange;
     min?: number;
     max?: number;
     visible?: boolean;
@@ -12,7 +12,7 @@ export interface IRangeFilterProps {
     showClose?: boolean;
     showCancel?: boolean;
     showClear?: boolean;
-    onChange: (values: [RangeValue, RangeValue]) => void;
+    onChange: (values: NumRange) => void;
     onVisibleChange?: (isVisible: boolean) => void;
     placement?: TooltipPlacement;
 }
