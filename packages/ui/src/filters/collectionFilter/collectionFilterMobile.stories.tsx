@@ -35,7 +35,7 @@ const Template: ComponentStory<typeof CollectionFilterMobile> = (args: ICollecti
   </>
 }
 
-const inMemoryFilterStore = new InMemoryStoreStub()
+const inMemoryFilterStore = new InMemoryStoreStub({})
 inMemoryFilterStore.setApplied([1, 2])
 
 const onChange = (collections: ICollectionFilterItem[]) => {

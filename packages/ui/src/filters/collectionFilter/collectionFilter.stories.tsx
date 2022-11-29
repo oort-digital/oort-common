@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../stories.less";
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { CollectionFilter } from "./collectionFilter";
+import { CollectionFilter, ICollectionFilterProps } from "./collectionFilter";
 import { InMemoryStoreStub, LoadingStoreStub, NftsCollectionStore, NoDataStoreStub } from "./testStores";
 
 import { ThemeLoader } from "../../internalHelpers";
 import { StaticCollectionFilterStore, ICollectionFilterItem, SelectMode } from "./stores";
 import { BscIcon, PolygonIcon, EthIcon } from "../../icons";
+import { Button } from "antd";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -24,7 +25,7 @@ export default {
 } as ComponentMeta<typeof CollectionFilter>;
 
 
-const inMemoryStore = new InMemoryStoreStub({})
+const inMemoryStore = new InMemoryStoreStub({ useFavorites: true, useRecent: true, noIcons: false })
 inMemoryStore.setApplied([1, 2])
 
 const templateStyle = { height: '1000px' }
@@ -34,6 +35,21 @@ const Template: ComponentStory<typeof CollectionFilter> = (args) => <>
     <CollectionFilter {...args} />
   </div>
 </>
+
+const NoTriggerButtonTemplate: ComponentStory<typeof CollectionFilter> = (args: ICollectionFilterProps) => {
+
+	const [visible, onVisibleChange] = useState(false)
+
+	const mergedProps = { ...args, ...{ visible, onVisibleChange } }
+
+	return <>
+		<ThemeLoader />
+		<div style={templateStyle}>
+			<Button onClick={() => onVisibleChange(true)}>Open</Button>
+			<CollectionFilter {...mergedProps} />
+		</div>
+	</>
+}
 
 
 export const Main = Template.bind({}); 
@@ -49,7 +65,7 @@ Main.args = {
 	circleIcons: true
 }
 
-const inMemoryNoFavoriteStore = new InMemoryStoreStub({ useFavorite: false, useRecent: true, noIcons: true })
+const inMemoryNoFavoriteStore = new InMemoryStoreStub({ useFavorites: false, useRecent: true, noIcons: true })
 
 export const MainNoFavorite = Template.bind({}); 
 MainNoFavorite.args = {
@@ -137,6 +153,22 @@ SingleTabStatic.args = {
 		staticStore.setApplied(collections.map(x => x.key))
 	},
 	searchable: true
+}
+
+export const NoTriggerButton = NoTriggerButtonTemplate.bind({}); 
+NoTriggerButton.args = {
+	title: 'Title',
+	popoverTitle: 'PopoverTitle',
+	searchPlaceholder: 'Enter text',
+	filterStore: staticStore,
+	onChange: (collections: ICollectionFilterItem[]) => {
+		staticStore.setApplied(collections.map(x => x.key))
+	},
+	searchable: true,
+	showTriggerButton: false,
+    showClose: true,
+    showCancel: false,
+    showClear: true,
 }
 
 const loadingStore = new LoadingStoreStub()

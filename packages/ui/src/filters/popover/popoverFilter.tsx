@@ -1,8 +1,9 @@
 import { ReactNode, useState } from 'react'
 import styles from "./popoverFilter.module.less"
 import { Button, Popover } from "antd"
-import { ChevronDownOutlineIcon, CloseIconOld } from '../../icons'
+import { ChevronDownOutlineIcon, CloseIcon, CloseIconOld } from '../../icons'
 import { logger } from '@oort/logger'
+import { TooltipPlacement } from 'antd/es/tooltip'
 
 export type RangeValue = number | undefined
 
@@ -16,6 +17,12 @@ interface IProps {
     cancelButtonClassName?: string
     isClear?: boolean
     onClear?: () => void
+    visible?: boolean
+    showTriggerButton?: boolean
+    // show X icon in top right corner 
+    showClose?: boolean
+    showCancel?: boolean
+    showClear?: boolean
     popoverTitle: string
     children: ReactNode
     onSubmit: () => void
@@ -23,19 +30,39 @@ interface IProps {
     onVisibleChange?: (isVisible: boolean) => void
     //returns space between bottom of button and bottom of the window then
     onBottomSpaceHeightChange?: (heigth: number) => void
+    placement?: TooltipPlacement
 }
 
 export const PopoverFilter = ({
     title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName,
     popoverTitleClassName, applyButtonClassName, cancelButtonClassName,
     isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled,
-    onBottomSpaceHeightChange}: IProps) => {
+    onBottomSpaceHeightChange, visible, showTriggerButton = true,
+    showClose = false,
+    showCancel = true,
+    showClear = false,
+    placement = "bottomRight"}: IProps) => {
+    
+    const [visibleInternal, setVisible] = useState(!!visible)
 
-    const [visible, setVisible] = useState(false)
+    if(visible !== undefined && visibleInternal !== visible) {
+        setVisible(visible)
+    }
 
     const submit = () => {
         onSubmit()
-        setVisible(false)
+        onVisibleChange_(false)
+    }
+
+    const cancel = () => {
+        onVisibleChange_(false)
+    }
+
+    const clear = () => {
+        if(onClear) {
+            onClear()
+        }
+        onVisibleChange_(false)
     }
 
     const onVisibleChange_ = (isVisible: boolean) => {
@@ -45,14 +72,18 @@ export const PopoverFilter = ({
         }
     }
 
-    const renderContent = () => <div className={`${styles.popover_content} ${popoverClassName || ''}`}>
-        <div className={`${styles.title} ${popoverTitleClassName}`}>{popoverTitle}</div>
-        {children}
-        <div>
-            <Button className={`${styles.cancel} ${cancelButtonClassName}`} onClick={() => setVisible(false)}>Cancel</Button>
-            <Button className={`${styles.apply} ${applyButtonClassName}`} onClick={submit} disabled={submitDisabled} type='primary'>Apply</Button>
+    const renderContent = () => {
+        return <div className={`${styles.popover_content} ${popoverClassName || ''}`}>
+            { showClose && <div onClick={cancel} className={styles.close_icon_wrap}><CloseIcon /></div> } 
+            <div className={`${styles.title} ${popoverTitleClassName}`}>{popoverTitle}</div>
+            {children}
+            <div>
+                { showClear && <Button className={`${styles.cancel} ${cancelButtonClassName}`} onClick={clear}>Clear</Button> }
+                { showCancel && <Button className={`${styles.cancel} ${cancelButtonClassName}`} onClick={cancel}>Cancel</Button> }
+                <Button className={`${styles.apply} ${applyButtonClassName}`} onClick={submit} disabled={submitDisabled} type='primary'>Apply</Button>
+            </div>
         </div>
-    </div>
+    }
 
     const renderClose = () => {
         if(isClear || !onClear) {
@@ -95,12 +126,14 @@ export const PopoverFilter = ({
     return <Popover
         style={{"backgroundColor":"#11151A"}}
         onOpenChange={onVisibleChange_}
-        open={visible}
-        placement="bottomRight"
+        open={visibleInternal}
+        placement={placement}
         content={renderContent}
         trigger="click">
-        <Button ref={setBtnRef} className={btnClassName} size="large">
-            {subTitle ? renderTitleAndSubTitle() : renderSingleTitle() }
-        </Button>
+        {
+            showTriggerButton && <Button ref={setBtnRef} className={btnClassName} size="large">
+                {subTitle ? renderTitleAndSubTitle() : renderSingleTitle() }
+            </Button>
+        }
   </Popover>
 }
