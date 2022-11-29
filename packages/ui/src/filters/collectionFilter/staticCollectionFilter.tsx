@@ -1,8 +1,4 @@
-import styles from "./collectionFilter.module.less"
-import { PopoverFilter } from "../popover"
 import { observer } from "mobx-react"
-import { CollectionFilterContent } from "./collectionFilterContent"
-import { SubTitle } from "../subTitle"
 import { useEffect, useState } from "react"
 import { TooltipPlacement } from "antd/es/tooltip"
 import { ICollectionFilterItem, ItemKeyType, SelectMode, StaticCollectionFilterStore } from "./stores"

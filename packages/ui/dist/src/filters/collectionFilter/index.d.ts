@@ -5,4 +5,5 @@ export { CollectionFilterStore, StaticCollectionFilterStore, SelectMode } from "
 export type { IFilterListeners, FilterListenerActionType, } from "./typesAndInterfaces";
 export { useFilterListeners } from "./useFilterListeners";
 export { ItemQueue } from "./itemQueue";
+export { StaticCollectionFilter } from "./staticCollectionFilter";
 //# sourceMappingURL=index.d.ts.map
