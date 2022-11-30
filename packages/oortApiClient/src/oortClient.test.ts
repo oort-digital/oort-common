@@ -7,7 +7,7 @@ const oortClientSettings: IOortClientSettings = {
     apiUrl: 'https://api-test.oort.digital/platform'
 }
 
-test('dasboard', async () => {
+test.skip('debug only dasboard', async () => {
 
     const client = new OortClient(oortClientSettings)
 
