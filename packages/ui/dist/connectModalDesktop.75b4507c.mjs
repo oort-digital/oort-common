@@ -1,13 +1,13 @@
 import { useState as L } from "react";
-import { j as t, O as S, a as e, F as d, i as E } from "./index.597a74b8.mjs";
+import { j as t, O as S, a as e, F as d, i as E } from "./index.c415ef99.mjs";
 import { Row as I, Col as h } from "antd";
-import { A as G, B as R, a as k, C as p, b as U, M as q, W as z } from "./alert.2d40f023.mjs";
+import { A as G, B as R, n as k, C as p, a as U, M as q, W as z } from "./alert.9810e5f4.mjs";
 import "react-router-dom";
 import "ethers";
 import "mobx-react";
 import "mobx";
 import "axios";
-const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e5_18", s = {
+const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e5_18", i = {
   modal: H,
   description: J,
   chain_buttons: K
@@ -20,7 +20,7 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
   afterConnect: f,
   expectedChainId: C
 }) => {
-  const [_, i] = L(!1), {
+  const [_, s] = L(!1), {
     supportedChains: w,
     chain: c,
     switchChain: B,
@@ -30,18 +30,18 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
     connectorName: A,
     supportedConnectors: M
   } = W, O = async (n) => {
-    i(!0);
+    s(!0);
     try {
       await x(n), o && o(), f && f();
     } finally {
-      i(!1);
+      s(!1);
     }
   }, T = async (n) => {
-    i(!0);
+    s(!0);
     try {
       await B(n), o && o(), u && u();
     } finally {
-      i(!1);
+      s(!1);
     }
   }, D = /* @__PURE__ */ e(d, {
     children: [/* @__PURE__ */ e("div", {
@@ -63,15 +63,15 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
         walletIcon: l,
         account: r
       });
-    const g = M[a];
-    return g.isInstalled ? /* @__PURE__ */ t(p, {
+    const b = M[a];
+    return b.isInstalled ? /* @__PURE__ */ t(p, {
       walletName: n,
       onClick: () => O(a),
       walletIcon: l,
       labelText: "Connect"
     }) : /* @__PURE__ */ t(p, {
       walletName: n,
-      onClick: () => window.open(g.installUrl, "_blank").focus(),
+      onClick: () => window.open(b.installUrl, "_blank").focus(),
       walletIcon: l,
       labelText: "Install"
     });
@@ -90,13 +90,13 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
         chain: n
       })
     }, a);
-  }, b = [10, 0], N = () => {
+  }, g = [10, 0], N = () => {
     m && m(), o && o();
   };
   return /* @__PURE__ */ t(S, {
     loading: _,
     footer: D,
-    className: s.modal,
+    className: i.modal,
     title: "Network & Wallet",
     width: "690px",
     visible: j,
@@ -104,7 +104,7 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
     children: /* @__PURE__ */ e(d, {
       children: [!E(c) && /* @__PURE__ */ e(d, {
         children: [/* @__PURE__ */ t("div", {
-          className: s.description,
+          className: i.description,
           children: /* @__PURE__ */ t(G, {
             account: r,
             chain: c,
@@ -112,18 +112,18 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
             expectedChainId: C
           })
         }), /* @__PURE__ */ t(I, {
-          gutter: b,
-          className: s.chain_buttons,
+          gutter: g,
+          className: i.chain_buttons,
           justify: "space-between",
           children: w.map((n) => F(n))
         })]
       }), /* @__PURE__ */ e("div", {
-        className: s.description,
+        className: i.description,
         children: [/* @__PURE__ */ t(R, {
           children: "Connect your Wallet"
         }), " and jump into the world of NFT's"]
       }), /* @__PURE__ */ e(I, {
-        gutter: b,
+        gutter: g,
         justify: "space-between",
         children: [/* @__PURE__ */ t(h, {
           span: 12,
@@ -139,4 +139,4 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
 export {
   et as default
 };
-//# sourceMappingURL=connectModalDesktop.7ff80a18.mjs.map
+//# sourceMappingURL=connectModalDesktop.75b4507c.mjs.map

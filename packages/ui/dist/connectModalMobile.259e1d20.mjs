@@ -1,7 +1,7 @@
 import { useState as G } from "react";
 import { Row as I, Col as d } from "antd";
-import { A as L, B as S, a as j, C as h, b as E, M as R, W as U } from "./alert.2d40f023.mjs";
-import { j as t, c as q, a, F as m, i as z } from "./index.597a74b8.mjs";
+import { A as L, B as S, n as j, C as h, a as E, M as R, W as U } from "./alert.9810e5f4.mjs";
+import { j as t, c as q, a, F as m, i as z } from "./index.c415ef99.mjs";
 import "ethers";
 import "react-router-dom";
 import "mobx-react";
@@ -59,15 +59,15 @@ const H = "_modal_1asgj_5", J = "_description_1asgj_8", K = "_chain_buttons_1asg
         walletIcon: l,
         account: r
       });
-    const y = x[e];
-    return y.isInstalled ? /* @__PURE__ */ t(h, {
+    const b = x[e];
+    return b.isInstalled ? /* @__PURE__ */ t(h, {
       walletName: n,
       onClick: () => T(e),
       walletIcon: l,
       labelText: "Connect"
     }) : /* @__PURE__ */ t(h, {
       walletName: n,
-      onClick: () => window.open(y.installUrl, "_blank").focus(),
+      onClick: () => window.open(b.installUrl, "_blank").focus(),
       walletIcon: l,
       labelText: "Install"
     });
@@ -86,7 +86,7 @@ const H = "_modal_1asgj_5", J = "_description_1asgj_8", K = "_chain_buttons_1asg
         chain: n
       })
     }, e);
-  }, b = [0, 12], D = () => {
+  }, y = [0, 12], D = () => {
     p && p(), o && o();
   };
   return /* @__PURE__ */ t(q, {
@@ -108,7 +108,7 @@ const H = "_modal_1asgj_5", J = "_description_1asgj_8", K = "_chain_buttons_1asg
             expectedChainId: g
           })
         }), /* @__PURE__ */ t(I, {
-          gutter: b,
+          gutter: y,
           className: i.chain_buttons,
           children: _.map((n) => O(n))
         })]
@@ -118,7 +118,7 @@ const H = "_modal_1asgj_5", J = "_description_1asgj_8", K = "_chain_buttons_1asg
           children: "Connect your Wallet"
         }), " and jump into the world of NFT's"]
       }), /* @__PURE__ */ a(I, {
-        gutter: b,
+        gutter: y,
         children: [window.ethereum && /* @__PURE__ */ t(d, {
           span: "24",
           children: w("Metamask", j.Injected, R)
@@ -133,4 +133,4 @@ const H = "_modal_1asgj_5", J = "_description_1asgj_8", K = "_chain_buttons_1asg
 export {
   ot as default
 };
-//# sourceMappingURL=connectModalMobile.18cc1416.mjs.map
+//# sourceMappingURL=connectModalMobile.259e1d20.mjs.map
