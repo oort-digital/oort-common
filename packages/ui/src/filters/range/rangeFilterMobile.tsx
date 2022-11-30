@@ -1,26 +1,27 @@
 import { useRef } from 'react'
+import { NumOrUndef, NumRange } from '../../typesAndInterfaces'
 import { debounceFunction } from '../../utils'
 import { IMobileFilterItemProps } from '../layout/filterLayoutMobile'
-import { RangeFilterContent, RangeValue } from './rangeFilterContent'
+import { RangeFilterContent } from './rangeFilterContent'
 
 
 interface IProps extends IMobileFilterItemProps {
-    values: [RangeValue, RangeValue]
-    min?: number,
+    values: NumRange
+    min?: number
     max?: number
-    onChange: (values: [RangeValue, RangeValue]) => void;
+    onChange: (values: NumRange) => void;
 }
 
 export const RangeFilterMobile = ({ onChange, values, min, max }: IProps) => {
     
     const onChangeDebounced = useRef(debounceFunction(onChange, 300)).current;
 
-    const onMinValueChange = (value: RangeValue) => {
-        onChangeDebounced([value as RangeValue, values[1]])
+    const onMinValueChange = (value: NumOrUndef) => {
+        onChangeDebounced([value as NumOrUndef, values[1]])
     };
 
-    const onMaxValueChange = (value: RangeValue) => {
-        onChangeDebounced([values[0], value as RangeValue])
+    const onMaxValueChange = (value: NumOrUndef) => {
+        onChangeDebounced([values[0], value as NumOrUndef])
     };
 
     return <RangeFilterContent
