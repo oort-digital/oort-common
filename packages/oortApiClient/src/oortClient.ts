@@ -3,7 +3,7 @@ import { toAuthRequest } from "./isAuthRequest"
 
 import {
     IDasboardResponse, IGameDetailParams, IGameDetailResponse,
-    IGamesParams, IGamesResponse, ILikeGameParams, ILikeReviewParams, INftDetailParams, INftDetailResponse,
+    IGamesParams, IGamesResponse, ILikeGameParams, ILikeReviewParams, INftDetailByAddressParams, INftDetailParams, INftDetailResponse,
     INftsParams,
     INftsResponse,
     IOortClient,
@@ -184,6 +184,15 @@ export class OortClient implements IOortClient {
         const response: AxiosResponse<INftDetailResponse> =
             await axios.get<INftDetailResponse, AxiosResponse<INftDetailResponse>>(
                 `${this._apiUrl}/game-hub/nft-collections/${nftCollectionId}`,
+                getConfig(false, signal)
+            )
+        return response.data;
+    }
+
+    nftDetailByAddress = async ({collectionAddress}: INftDetailByAddressParams, signal: AbortSignal): Promise<INftDetailResponse> => {
+        const response: AxiosResponse<INftDetailResponse> =
+            await axios.get<INftDetailResponse, AxiosResponse<INftDetailResponse>>(
+                `${this._apiUrl}/game-hub/nft-collections/address/${collectionAddress}`,
                 getConfig(false, signal)
             )
         return response.data;

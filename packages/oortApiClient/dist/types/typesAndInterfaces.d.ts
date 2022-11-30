@@ -207,12 +207,16 @@ export interface IGameDetailParams {
 export interface INftDetailParams {
     nftCollectionId: number;
 }
+export interface INftDetailByAddressParams {
+    collectionAddress: string;
+}
 export interface IOortClient {
     dashboard: (signal: AbortSignal) => Promise<IDasboardResponse>;
     nfts: (params: INftsParams, signal: AbortSignal) => Promise<INftsResponse>;
     games: (params: IGamesParams, signal: AbortSignal) => Promise<IGamesResponse>;
     gameDetail: (params: IGameDetailParams, signal: AbortSignal) => Promise<IGameDetailResponse>;
     nftDetail: (params: INftDetailParams, signal: AbortSignal) => Promise<INftDetailResponse>;
+    nftDetailByAddress: (params: INftDetailByAddressParams, signal: AbortSignal) => Promise<INftDetailResponse>;
     getSearch: (params: ISearchParams, signal: AbortSignal) => Promise<ISearchResultResponse>;
     likeGame: (params: ILikeGameParams, signal: AbortSignal) => Promise<void>;
     likeReview: (params: ILikeReviewParams, signal: AbortSignal) => Promise<void>;
