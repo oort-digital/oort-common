@@ -28,7 +28,7 @@ export default defineConfig({
             fileName: (format) => `ui.${format}.js`,
         },
         rollupOptions: {
-            external: ['react', 'react-dom', 'antd', "ethers", 'mobx', 'mobx-react', 'react-router-dom'],
+            external: ['axios', 'react', 'react-dom', 'antd', "ethers", 'mobx', 'mobx-react', 'react-router-dom'],
             output: {
                 globals: {
                     react: 'React',
