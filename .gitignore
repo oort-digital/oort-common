@@ -5,6 +5,7 @@
 /packages/ui/node_modules
 /packages/ui/storybook-static
 /packages/logger/node_modules
+/packages/oortApiClient/node_modules
 /packages/web3Connectors/node_modules
 /packages/urlSearchParams/node_modules
 
