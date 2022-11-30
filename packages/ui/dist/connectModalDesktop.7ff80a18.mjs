@@ -1,25 +1,26 @@
 import { useState as L } from "react";
-import { j as t, O as S, a as e, F as d, i as E } from "./index.b4467ac1.mjs";
+import { j as t, O as S, a as e, F as d, i as E } from "./index.597a74b8.mjs";
 import { Row as I, Col as h } from "antd";
-import { A as G, B as R, a as k, C as p, b as U, M as q, W as z } from "./alert.fa41e157.mjs";
+import { A as G, B as R, a as k, C as p, b as U, M as q, W as z } from "./alert.2d40f023.mjs";
 import "react-router-dom";
 import "ethers";
 import "mobx-react";
 import "mobx";
-const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e5_18", i = {
+import "axios";
+const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e5_18", s = {
   modal: H,
   description: J,
   chain_buttons: K
-}, nt = ({
+}, et = ({
   web3: W,
   onCancel: o,
   visible: j,
-  onClose: u,
-  afterChainSwitch: m,
+  onClose: m,
+  afterChainSwitch: u,
   afterConnect: f,
   expectedChainId: C
 }) => {
-  const [_, s] = L(!1), {
+  const [_, i] = L(!1), {
     supportedChains: w,
     chain: c,
     switchChain: B,
@@ -29,18 +30,18 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
     connectorName: A,
     supportedConnectors: M
   } = W, O = async (n) => {
-    s(!0);
+    i(!0);
     try {
       await x(n), o && o(), f && f();
     } finally {
-      s(!1);
+      i(!1);
     }
   }, T = async (n) => {
-    s(!0);
+    i(!0);
     try {
-      await B(n), o && o(), m && m();
+      await B(n), o && o(), u && u();
     } finally {
-      s(!1);
+      i(!1);
     }
   }, D = /* @__PURE__ */ e(d, {
     children: [/* @__PURE__ */ e("div", {
@@ -90,12 +91,12 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
       })
     }, a);
   }, b = [10, 0], N = () => {
-    u && u(), o && o();
+    m && m(), o && o();
   };
   return /* @__PURE__ */ t(S, {
     loading: _,
     footer: D,
-    className: i.modal,
+    className: s.modal,
     title: "Network & Wallet",
     width: "690px",
     visible: j,
@@ -103,7 +104,7 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
     children: /* @__PURE__ */ e(d, {
       children: [!E(c) && /* @__PURE__ */ e(d, {
         children: [/* @__PURE__ */ t("div", {
-          className: i.description,
+          className: s.description,
           children: /* @__PURE__ */ t(G, {
             account: r,
             chain: c,
@@ -112,12 +113,12 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
           })
         }), /* @__PURE__ */ t(I, {
           gutter: b,
-          className: i.chain_buttons,
+          className: s.chain_buttons,
           justify: "space-between",
           children: w.map((n) => F(n))
         })]
       }), /* @__PURE__ */ e("div", {
-        className: i.description,
+        className: s.description,
         children: [/* @__PURE__ */ t(R, {
           children: "Connect your Wallet"
         }), " and jump into the world of NFT's"]
@@ -136,6 +137,6 @@ const H = "_modal_f97e5_5", J = "_description_f97e5_8", K = "_chain_buttons_f97e
   });
 };
 export {
-  nt as default
+  et as default
 };
-//# sourceMappingURL=connectModalDesktop.9201ce5e.mjs.map
+//# sourceMappingURL=connectModalDesktop.7ff80a18.mjs.map

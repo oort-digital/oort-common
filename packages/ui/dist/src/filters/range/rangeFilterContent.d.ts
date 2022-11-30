@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
-export declare type RangeValue = number | undefined;
+import { NumOrUndef, NumRange } from '../../typesAndInterfaces';
 interface IProps {
-    values: [RangeValue, RangeValue];
+    values: NumRange;
     min?: number;
     max?: number;
     rangeIcon?: ReactNode;
-    onMinValueChange: (value: RangeValue) => void;
-    onMaxValueChange: (value: RangeValue) => void;
+    onMinValueChange: (value: NumOrUndef) => void;
+    onMaxValueChange: (value: NumOrUndef) => void;
 }
 export declare const RangeFilterContent: ({ onMinValueChange, onMaxValueChange, values, min, max }: IProps) => JSX.Element;
 export {};
