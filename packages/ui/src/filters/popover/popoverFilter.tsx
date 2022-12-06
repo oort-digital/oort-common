@@ -124,6 +124,7 @@ export const PopoverFilter = ({
     }
 
     return <Popover
+        overlayClassName={styles.overlay}
         style={{"backgroundColor":"#11151A"}}
         onOpenChange={onVisibleChange_}
         open={visibleInternal}
