@@ -77,7 +77,7 @@ export const PopoverFilter = ({
             { showClose && <div onClick={cancel} className={styles.close_icon_wrap}><CloseIcon /></div> } 
             <div className={`${styles.title} ${popoverTitleClassName}`}>{popoverTitle}</div>
             {children}
-            <div>
+            <div className={styles.buttons}>
                 { showClear && <Button className={`${styles.cancel} ${cancelButtonClassName}`} onClick={clear}>Clear</Button> }
                 { showCancel && <Button className={`${styles.cancel} ${cancelButtonClassName}`} onClick={cancel}>Cancel</Button> }
                 <Button className={`${styles.apply} ${applyButtonClassName}`} onClick={submit} disabled={submitDisabled} type='primary'>Apply</Button>

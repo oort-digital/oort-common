@@ -8,12 +8,20 @@
         margin-bottom: 32px;
     }
 
-    .cancel {
-        margin-right: 16px;
-        width: 110px;
-        color:@theme-color-9
+    .buttons {
+        display: flex;
+        .cancel {
+            flex: 1;
+            margin-right: 16px;
+            // width: 110px;
+            color:@theme-color-9
+        }
+        .apply  {
+            flex: 3;
+            // width: 195px;
+            color:@theme-color-1
+        }
     }
-    .apply  { width: 195px; color:@theme-color-1 }
 
     .close_icon_wrap {
         cursor: pointer;
