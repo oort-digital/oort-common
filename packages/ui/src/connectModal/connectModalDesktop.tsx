@@ -107,7 +107,7 @@ const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitc
 	
 	}
 
-	const btnGutter: [Gutter, Gutter] = [10, 0]
+	const btnGutter: [Gutter, Gutter] = [10, 10]
 
 	const _onCancel = () => {
 		onClose && onClose()
@@ -138,6 +138,7 @@ const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitc
 			<Row gutter={btnGutter} justify='space-between'>
 				<Col span={12}>{renderWalletBtn("Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>
 				<Col span={12}>{renderWalletBtn("WalletConnect", ConnectorNames.WalletConnect, WalletConnectIcon)}</Col>
+				<Col span={12}>{renderWalletBtn("FaceWallet", ConnectorNames.FaceWallet, WalletConnectIcon)}</Col>
 			</Row>
 		</>
 	</OortModal>

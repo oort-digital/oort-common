@@ -7,6 +7,7 @@ import { ConnectorNames, IConnector, InjectedConnector } from '@oort/web3-connec
 import { logger } from '@oort/logger';
 import { ZERO_ADDR } from '../utils';
 import { EMPTY_CHAIN } from '../typesAndInterfaces';
+import { FaceWalletConnector } from './faceWalletConnector';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -56,13 +57,15 @@ const supportedChains = [
 const supportedConnectors: { [name: string]: IConnector } = {}
 supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
 supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)
-
+supportedConnectors[ConnectorNames.FaceWallet] = new FaceWalletConnector(logger, supportedChains)
 
 const web3 = {
   canSwitchChain: true,
   connectorName: ConnectorNames.Injected,
   switchChain: async (_newChainId: number) => {},
-  connectAsync: async (_connectorName: ConnectorNames) => {},
+  connectAsync: async (_connectorName: ConnectorNames) => {
+    await supportedConnectors[_connectorName].enable()
+  },
   chain: supportedChains[0],
   account: ZERO_ADDR,
   supportedChains: supportedChains,
