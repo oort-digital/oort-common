@@ -1,10 +1,10 @@
+import { ConnectorNames, IConnector, BaseConnector, IChainInfo } from '@oort/web3-connectors';
 import { ILogger } from "@oort/logger";
-import { BaseConnector, IChainInfo } from "./baseConnector";
-import { ConnectorNames } from "./connectorNames";
-import { IConnector } from "./iConnector";
 import { Face, Network } from "@haechi-labs/face-sdk";
 
-//todo: need our own api keys
+// todo:
+// these api keys works only for localhost:3000
+// to go to production we definitely need your own api keys
 const resolveApiKey = (network: Network) => {
     switch (network) {
       case Network.ETHEREUM:
@@ -24,26 +24,42 @@ const resolveApiKey = (network: Network) => {
     }
 }
 
-export class FaceWalletConnector extends BaseConnector implements IConnector {
 
-    private readonly _face: Face
+// todo:
+// after develop put it to /packages/web3Connectors
+export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     constructor(logger: ILogger, chains: IChainInfo[]) {
         super(logger, ConnectorNames.FaceWallet, chains)
-        // this._rpc = {}
-        // chains.forEach(x => this._rpc[x.chainId] = x.rpcUrl)
-        // this._walletConnect = new WalletConnectProvider({ rpc: this._rpc })
+
         // this.initListeners(this._walletConnect)
 
+        /*
+        don't create new Face in constructor, it catch error
+        no time to research it =)
         this._face = new Face({
             network: Network.MUMBAI, 
             apiKey: resolveApiKey(Network.MUMBAI)
-          });
+        })
+        */
+    }
+
+    private _face: Face | undefined
+    get face(): Face {
+
+        if(!this._face) {
+            this._face = new Face({
+                network: Network.MUMBAI, 
+                apiKey: resolveApiKey(Network.MUMBAI)
+            })
+        }
+    
+        return this._face
     }
 
     async disconnect(): Promise<void> {
         await super.disconnect()
-        await this._face.auth.logout()
+        await this.face.auth.logout()
     }
     
     get canSwitchChain() { return true }
@@ -55,11 +71,12 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     }
 
     protected get rawProvider(): any {
-        return this._face.getEthLikeProvider()
+        return this.face.getEthLikeProvider()
     }
 
     get isConnected(): Promise<boolean> {
-        return this._face.auth.isLoggedIn()
+        debugger
+        return this.face.auth.isLoggedIn()
     }
 
     get isInstalled(): boolean {
@@ -71,6 +88,7 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     }
 
     async enable(): Promise<any> {
-        await this._face.auth.login()
+        debugger
+        await this.face.auth.login()
     }
 }
