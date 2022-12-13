@@ -1,6 +1,7 @@
 import { ConnectorNames, IConnector, BaseConnector, IChainInfo } from '@oort/web3-connectors';
 import { ILogger } from "@oort/logger";
 import { Face, Network } from "@haechi-labs/face-sdk";
+import { ethers } from 'ethers';
 
 // todo:
 // these api keys works only for localhost:3000
@@ -24,38 +25,20 @@ const resolveApiKey = (network: Network) => {
     }
 }
 
+const getNetworkById = (id: number): Network => {
+
+    if(id === 80001) {
+        return Network.MUMBAI
+    }
+
+    throw new Error(`Unknow chain id: ${id}`)
+
+}
+
 
 // todo:
 // after develop put it to /packages/web3Connectors
 export class FaceWalletConnector extends BaseConnector implements IConnector {
-
-    constructor(logger: ILogger, chains: IChainInfo[]) {
-        super(logger, ConnectorNames.FaceWallet, chains)
-
-        // this.initListeners(this._walletConnect)
-
-        /*
-        don't create new Face in constructor, it catch error
-        no time to research it =)
-        this._face = new Face({
-            network: Network.MUMBAI, 
-            apiKey: resolveApiKey(Network.MUMBAI)
-        })
-        */
-    }
-
-    private _face: Face | undefined
-    get face(): Face {
-
-        if(!this._face) {
-            this._face = new Face({
-                network: Network.MUMBAI, 
-                apiKey: resolveApiKey(Network.MUMBAI)
-            })
-        }
-    
-        return this._face
-    }
 
     async disconnect(): Promise<void> {
         await super.disconnect()
@@ -65,17 +48,12 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     get canSwitchChain() { return true }
 
     // @ts-ignore
-    switchChain(chainId: number): Promise<void> {
-        // todo: use this._face.switchNetwork()
-        throw new Error("Method not implemented.");
-    }
-
-    protected get rawProvider(): any {
-        return this.face.getEthLikeProvider()
+    async switchChain(chainId: number): Promise<void> {
+        const network = getNetworkById(chainId)
+        await this.face.switchNetwork(network)
     }
 
     get isConnected(): Promise<boolean> {
-        debugger
         return this.face.auth.isLoggedIn()
     }
 
@@ -87,8 +65,53 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         return ''
     }
 
-    async enable(): Promise<any> {
-        debugger
-        await this.face.auth.login()
+    // It looks like you need ask user, which one network he want to connect and pass chainId as parameter.
+    // WalletConnetConnector and InjectedConnector must ignore this parameter.
+    // Because user selects network in native wallet interface
+    async enable(/* chainId: number */): Promise<any> {
+        
+        if(!await this.face.auth.isLoggedIn()) {
+            await this.face.auth.login()
+        }
+
+        this._web3Provider = new ethers.providers.Web3Provider(this.face.getEthLikeProvider())
+        this.initListeners(this._web3Provider)
     }
+
+    constructor(logger: ILogger, chains: IChainInfo[]) {
+        super(logger, ConnectorNames.FaceWallet, chains)
+        /*
+        don't create new Face in constructor, it catch error
+        no time to research it =)
+        this._face = new Face({
+            network: Network.MUMBAI, 
+            apiKey: resolveApiKey(Network.MUMBAI)
+        })
+        */
+    }
+
+    protected get rawProvider(): any {
+        return this._web3Provider
+    }
+
+    private _face: Face | undefined
+    private _web3Provider: ethers.providers.Web3Provider | undefined
+
+    // todo: hardcoded just for example. need some refactoring
+    private readonly _initialNetworkId: number = 80001
+
+    get face(): Face {
+
+        if(!this._face) {
+            const network = getNetworkById(this._initialNetworkId)
+            this._face = new Face({
+                network: network, 
+                apiKey: resolveApiKey(network)
+            })
+        }
+    
+        return this._face
+    }
+
+
 }
