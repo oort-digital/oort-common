@@ -3,7 +3,7 @@ import '../styles/antOverride.less';
 import '../styles/fonts.css';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectModal } from '.';
-import { ConnectorNames, IConnector, InjectedConnector } from '@oort/web3-connectors';
+import { ConnectorNames, ConnectorProvider, IConnector, InjectedConnector } from '@oort/web3-connectors';
 import { logger } from '@oort/logger';
 import { ZERO_ADDR } from '../utils';
 import { EMPTY_CHAIN } from '../typesAndInterfaces';
@@ -59,12 +59,22 @@ supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, sup
 supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)
 supportedConnectors[ConnectorNames.FaceWallet] = new FaceWalletConnector(logger, supportedChains)
 
+const connectorProvider = new ConnectorProvider(logger, [
+  new InjectedConnector(logger, supportedChains),
+  new InjectedConnector(logger, supportedChains),
+  new FaceWalletConnector(logger, supportedChains)
+])
+
 const web3 = {
   canSwitchChain: true,
-  connectorName: ConnectorNames.Injected,
-  switchChain: async (_newChainId: number) => {},
-  connectAsync: async (_connectorName: ConnectorNames) => {
-    await supportedConnectors[_connectorName].enable()
+  connectorName: ConnectorNames.Undefined,
+  switchChain: async (newChainId: number) => {
+    if(connectorProvider.CurConnector?.canSwitchChain === true) {
+      connectorProvider.CurConnector.switchChain(newChainId)
+    }
+  },
+  connectAsync: async (connectorName: ConnectorNames) => {
+    await connectorProvider.EnableAsync(connectorName)
   },
   chain: supportedChains[0],
   account: ZERO_ADDR,

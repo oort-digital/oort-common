@@ -31,6 +31,10 @@ const getNetworkById = (id: number): Network => {
         return Network.MUMBAI
     }
 
+    if(id === 5) {
+        return Network.GOERLI
+    }
+
     throw new Error(`Unknow chain id: ${id}`)
 
 }
@@ -51,6 +55,7 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     async switchChain(chainId: number): Promise<void> {
         const network = getNetworkById(chainId)
         await this.face.switchNetwork(network)
+        this.logger.debug(`FaceWalletConnector.switchNetwork. ChainId: ${chainId}`)
     }
 
     get isConnected(): Promise<boolean> {
@@ -68,14 +73,13 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     // It looks like you need ask user, which one network he want to connect and pass chainId as parameter.
     // WalletConnetConnector and InjectedConnector must ignore this parameter.
     // Because user selects network in native wallet interface
-    async enable(/* chainId: number */): Promise<any> {
+    async enable(/* chainId: number */): Promise<boolean> {
         
         if(!await this.face.auth.isLoggedIn()) {
             await this.face.auth.login()
         }
 
-        this._web3Provider = new ethers.providers.Web3Provider(this.face.getEthLikeProvider())
-        this.initListeners(this._web3Provider)
+        return true
     }
 
     constructor(logger: ILogger, chains: IChainInfo[]) {
@@ -91,11 +95,10 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     }
 
     protected get rawProvider(): any {
-        return this._web3Provider
+        return this.face.getEthLikeProvider()
     }
 
     private _face: Face | undefined
-    private _web3Provider: ethers.providers.Web3Provider | undefined
 
     // todo: hardcoded just for example. need some refactoring
     private readonly _initialNetworkId: number = 80001
