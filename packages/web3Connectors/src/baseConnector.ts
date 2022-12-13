@@ -59,8 +59,7 @@ export abstract class BaseConnector {
         chains.forEach(x => this._chains[x.chainId] = x)
     }
 
-    protected initListeners(rawProvider: any) {
-
+    protected initListeners(web3Provider: any) {
         this.logger.debug('initListeners')
         const that = this
         this.accountsChangedHandler = (accounts: Array<string>) => {
@@ -78,10 +77,10 @@ export abstract class BaseConnector {
             that._externalDisconnectHandlers.forEach(h => h(error));
         }
 
-        rawProvider.on('accountsChanged', this.accountsChangedHandler);
-        rawProvider.on('chainChanged', this.chainChangedHandler);
+        web3Provider.on('accountsChanged', this.accountsChangedHandler);
+        web3Provider.on('chainChanged', this.chainChangedHandler);
         // use custom connection check by timer. See onDisconnect
-        // rawProvider.on("disconnect", this.disconnectHandler);
+        // web3Provider.on("disconnect", this.disconnectHandler);
     }
 
     private removeListeners() {
