@@ -8,6 +8,8 @@ import { ICommonProps } from "./typesAndInterfaces"
 import { TooltipPlacement } from "antd/es/tooltip"
 
 export interface ICollectionFilterProps extends ICommonProps {
+	triggerBtnClassName?: string
+	popoverClassName?: string
 	popoverTitle: string
 	visible?: boolean
     showTriggerButton?: boolean
@@ -18,7 +20,7 @@ export interface ICollectionFilterProps extends ICommonProps {
 	placement?: TooltipPlacement
 }
 
-const Impl = ({ title, popoverTitle, onChange,
+const Impl = ({ title, popoverTitle, onChange, triggerBtnClassName, popoverClassName,
 	searchable = true, searchPlaceholder, filterStore,
 	circleIcons = true, noClear = false, visible,
 	showTriggerButton, showClose, onVisibleChange,
@@ -57,10 +59,13 @@ const Impl = ({ title, popoverTitle, onChange,
 		setBottomSpaceHeight(h)
 	}
 
+	const triggerBtnCss = triggerBtnClassName ? `${triggerBtnClassName} ${styles.collection_trigger_btn}` : styles.collection_trigger_btn
+	const popoverCss = popoverClassName ? `${popoverClassName} ${styles.collection_popover_content}`: styles.collection_popover_content
+
     return <PopoverFilter
 		onBottomSpaceHeightChange={onBottomSpaceHeightChange}
-		triggerBtnClassName={styles.collection_trigger_btn}
-		popoverClassName={styles.collection_popover_content}
+		triggerBtnClassName={triggerBtnCss}
+		popoverClassName={popoverCss}
 		popoverTitleClassName={styles.title}
 		// applyButtonClassName={styles.apply}
 		onVisibleChange={_onVisibleChange}
