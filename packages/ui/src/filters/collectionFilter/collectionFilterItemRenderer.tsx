@@ -9,16 +9,14 @@ export interface ISelectedParameter {
 	onChange: (item: ICollectionFilterItem, checked: boolean) => void
 }
 
-export const collectionItemRenderer = (selectMode: SelectMode, className: string, isMobile: boolean, selected: ISelectedParameter, favorite?: ISelectedParameter) => {
-
-	const tokenNameMaxLen = isMobile ? 16 : 20
+export const collectionItemRenderer = (selectMode: SelectMode, className: string, itemTitleMaxLen: number, selected: ISelectedParameter, favorite?: ISelectedParameter) => {
 
 	return (item: ICollectionFilterItem) => {
 		const { key, title, count, icon } = item
 		const isSelected = selected.selected.has(key)
 		
 
-		let collectionName = `${cutLongString(title, tokenNameMaxLen)}`
+		let collectionName = `${cutLongString(title, itemTitleMaxLen)}`
 		if(count) {
 			collectionName = `${collectionName} (${count})`
 		}

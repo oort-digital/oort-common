@@ -20,7 +20,8 @@ export interface ICollectionFilterProps extends ICommonProps {
 	placement?: TooltipPlacement
 }
 
-const Impl = ({ title, popoverTitle, onChange, triggerBtnClassName, popoverClassName,
+const Impl = ({ title, popoverTitle, onChange, triggerBtnClassName,
+	popoverClassName, itemTitleMaxLen = 20,
 	searchable = true, searchPlaceholder, filterStore,
 	circleIcons = true, noClear = false, visible,
 	showTriggerButton, showClose, onVisibleChange,
@@ -84,6 +85,7 @@ const Impl = ({ title, popoverTitle, onChange, triggerBtnClassName, popoverClass
 		placement={placement}>
 
         <CollectionFilterContent
+			itemTitleMaxLen={itemTitleMaxLen}
 			circleIcons={circleIcons}
 			bottomSpaceHeight={bottomSpaceHeight}
 			searchPlaceholder={searchPlaceholder}
