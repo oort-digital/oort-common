@@ -2,6 +2,8 @@
 import { ICommonProps } from "./typesAndInterfaces";
 import { TooltipPlacement } from "antd/es/tooltip";
 export interface ICollectionFilterProps extends ICommonProps {
+    triggerBtnClassName?: string;
+    popoverClassName?: string;
     popoverTitle: string;
     visible?: boolean;
     showTriggerButton?: boolean;
@@ -11,5 +13,5 @@ export interface ICollectionFilterProps extends ICommonProps {
     onVisibleChange?: (isVisible: boolean) => void;
     placement?: TooltipPlacement;
 }
-export declare const CollectionFilter: ({ title, popoverTitle, onChange, searchable, searchPlaceholder, filterStore, circleIcons, noClear, visible, showTriggerButton, showClose, onVisibleChange, showCancel, showClear, placement }: ICollectionFilterProps) => JSX.Element;
+export declare const CollectionFilter: ({ title, popoverTitle, onChange, triggerBtnClassName, popoverClassName, itemTitleMaxLen, searchable, searchPlaceholder, filterStore, circleIcons, noClear, visible, showTriggerButton, showClose, onVisibleChange, showCancel, showClear, placement }: ICollectionFilterProps) => JSX.Element;
 //# sourceMappingURL=collectionFilter.d.ts.map
