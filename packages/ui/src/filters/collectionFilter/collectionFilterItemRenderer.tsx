@@ -2,6 +2,7 @@ import { Checkbox, Col, Radio, Row } from "antd"
 import { cutLongString } from "../../utils"
 import { FavoriteCheckBox } from "./favoriteCheckBox"
 import { ICollectionFilterItem, ItemKeyType, SelectMode } from "./stores"
+import styles from "./collectionFilterContent.module.less"
 
 export interface ISelectedParameter {
 	selected: Set<ItemKeyType>
@@ -44,7 +45,7 @@ export const collectionItemRenderer = (selectMode: SelectMode, className: string
 				}
 			</Col>
 			{ icon && <Col><div className="item-icon">{renderIcon()}</div></Col> }
-			<Col flex="auto"><span className="item-name">{collectionName}</span></Col>
+			<Col flex="auto" className={styles.item_name}>{collectionName}</Col>
 			{renderFavorite()}
 		</Row>
 	}
