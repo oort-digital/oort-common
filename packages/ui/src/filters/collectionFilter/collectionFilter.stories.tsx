@@ -152,7 +152,7 @@ SingleTabStatic.args = {
 	onChange: (collections: ICollectionFilterItem[]) => {
 		staticStore.setApplied(collections.map(x => x.key))
 	},
-	searchable: true
+	searchable: false
 }
 
 export const NoTriggerButton = NoTriggerButtonTemplate.bind({}); 
