@@ -134,7 +134,7 @@ const generateItems = (count: number) => {
 	for(let i = 0; i < count; i++) {
 		result.push({
 			key: i,
-			title: `${i+1} item`,
+			title: `${i+1} list item`,
 			icon: getIcon(i)
 		})
 	}
