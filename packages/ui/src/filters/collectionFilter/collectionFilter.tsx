@@ -3,13 +3,14 @@ import { PopoverFilter } from "../popover"
 import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
-import { useState } from "react"
+import { CSSProperties, useState } from "react"
 import { ICommonProps } from "./typesAndInterfaces"
 import { TooltipPlacement } from "antd/es/tooltip"
 
 export interface ICollectionFilterProps extends ICommonProps {
 	triggerBtnClassName?: string
 	popoverClassName?: string
+	popoverStyle?: CSSProperties | undefined
 	popoverTitle: string
 	visible?: boolean
     showTriggerButton?: boolean
@@ -20,8 +21,9 @@ export interface ICollectionFilterProps extends ICommonProps {
 	placement?: TooltipPlacement
 }
 
-const Impl = ({ title, popoverTitle, onChange, triggerBtnClassName,
-	popoverClassName, itemTitleMaxLen = 20,
+const Impl = ({ title, popoverTitle, onChange,
+	triggerBtnClassName, popoverClassName, popoverStyle,
+	itemTitleMaxLen = 20,
 	searchable = true, searchPlaceholder, filterStore,
 	circleIcons = true, noClear = false, visible,
 	showTriggerButton, showClose, onVisibleChange,
@@ -67,6 +69,7 @@ const Impl = ({ title, popoverTitle, onChange, triggerBtnClassName,
 		onBottomSpaceHeightChange={onBottomSpaceHeightChange}
 		triggerBtnClassName={triggerBtnCss}
 		popoverClassName={popoverCss}
+		popoverStyle={popoverStyle}
 		popoverTitleClassName={styles.title}
 		// applyButtonClassName={styles.apply}
 		onVisibleChange={_onVisibleChange}

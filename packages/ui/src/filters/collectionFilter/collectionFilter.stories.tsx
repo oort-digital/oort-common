@@ -62,7 +62,8 @@ Main.args = {
 		inMemoryStore.setApplied(collections.map(x => x.key))
 	},
 	searchable: true,
-	circleIcons: true
+	circleIcons: true,
+	popoverStyle: { width: '350px' }
 }
 
 const inMemoryNoFavoriteStore = new InMemoryStoreStub({ useFavorites: false, useRecent: true, noIcons: true })
@@ -77,7 +78,7 @@ MainNoFavorite.args = {
 		inMemoryNoFavoriteStore.setApplied(collections.map(x => x.key))
 	},
 	searchable: true,
-	circleIcons: true
+	circleIcons: true,
 }
 
 
