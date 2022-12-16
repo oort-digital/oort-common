@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import { TooltipPlacement } from 'antd/es/tooltip';
 export declare type RangeValue = number | undefined;
 interface IProps {
@@ -6,6 +6,7 @@ interface IProps {
     subTitle?: ReactNode;
     triggerBtnClassName?: string;
     popoverClassName?: string;
+    popoverStyle?: CSSProperties | undefined;
     popoverTitleClassName?: string;
     applyButtonClassName?: string;
     cancelButtonClassName?: string;
@@ -24,6 +25,6 @@ interface IProps {
     onBottomSpaceHeightChange?: (heigth: number) => void;
     placement?: TooltipPlacement;
 }
-export declare const PopoverFilter: ({ title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName, popoverTitleClassName, applyButtonClassName, cancelButtonClassName, isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled, onBottomSpaceHeightChange, visible, showTriggerButton, showClose, showCancel, showClear, placement }: IProps) => JSX.Element;
+export declare const PopoverFilter: ({ title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName, popoverStyle, popoverTitleClassName, applyButtonClassName, cancelButtonClassName, isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled, onBottomSpaceHeightChange, visible, showTriggerButton, showClose, showCancel, showClear, placement }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=popoverFilter.d.ts.map
