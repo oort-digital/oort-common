@@ -5,11 +5,11 @@ import styles from "./collectionFilterContent.module.less"
 import {observer} from "mobx-react"
 import {Tabs} from "antd"
 import { ICollectionFilterItem, ICollectionFilterStore } from "./stores"
-import { DeviceType, useDeviceType } from "../../effects"
 import { AsyncList } from "../../asyncList"
 import { EMPTY_ABORT_SIGNAL } from "../../utils"
 
 interface IProps {
+    itemTitleMaxLen: number
     bottomSpaceHeight?: number
     filterStore: ICollectionFilterStore
     searchable: boolean
@@ -29,7 +29,7 @@ const getFavoriteParams = (filterStore: ICollectionFilterStore): ISelectedParame
     return undefined
 }
 
-const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, circleIcons}: IProps) => {
+const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, circleIcons, itemTitleMaxLen}: IProps) => {
 
     const onTermChangeAbortController = useRef<AbortController | undefined>()
     const onTermChange = (term: string) => {
@@ -59,8 +59,6 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, ci
         }
 
     }, [filterStore]);// eslint-disable-line react-hooks/exhaustive-deps
-
-    const isMobile = useDeviceType() === DeviceType.Phone
 
     const select = (item: ICollectionFilterItem, isChecked: boolean) => {
         filterStore.select(item.key, isChecked)
@@ -107,7 +105,7 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, ci
                 loadMoreButtonSize="middle"
                 onLoadMore={loadNextPageFunc}
                 loading={filterStore.isLoading}
-                itemRenderer={collectionItemRenderer(filterStore.selectMode, itemCss, isMobile, selectedParam, favoriteParam)}
+                itemRenderer={collectionItemRenderer(filterStore.selectMode, itemCss, itemTitleMaxLen, selectedParam, favoriteParam)}
                 items={items}
             />
         }
@@ -117,7 +115,7 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, ci
             className={styles.list}
             hasLoadMore={false}
             loading={filterStore.isLoading}
-            itemRenderer={collectionItemRenderer(filterStore.selectMode, itemCss, isMobile, selectedParam, favoriteParam)}
+            itemRenderer={collectionItemRenderer(filterStore.selectMode, itemCss, itemTitleMaxLen, selectedParam, favoriteParam)}
             items={items}
         />
     }

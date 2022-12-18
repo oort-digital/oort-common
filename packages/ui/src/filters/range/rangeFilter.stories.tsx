@@ -69,7 +69,7 @@ const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (args: IRang
     <ThemeLoader />
     <div>{values[0]}-{values[1]}</div>
     <div>
-      <Button style={{marginLeft: '300px'}} onClick={() => onVisibleChange(true)}>Open</Button>
+      <Button onClick={() => onVisibleChange(true)}>Open</Button>
       <RangeFilter {...mergedProps} />
     </div>
   </>

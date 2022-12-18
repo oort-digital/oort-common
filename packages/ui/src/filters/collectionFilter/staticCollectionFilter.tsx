@@ -1,10 +1,13 @@
 import { observer } from "mobx-react"
-import { useEffect, useState } from "react"
+import { CSSProperties, useEffect, useState } from "react"
 import { TooltipPlacement } from "antd/es/tooltip"
 import { ICollectionFilterItem, ItemKeyType, SelectMode, StaticCollectionFilterStore } from "./stores"
 import { CollectionFilter } from "./collectionFilter"
 
 interface IProps {
+	triggerBtnClassName?: string
+	popoverClassName?: string
+	popoverStyle?: CSSProperties | undefined
 	items: ICollectionFilterItem[]
 	title: string
 	applied: ItemKeyType[]

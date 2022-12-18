@@ -3,11 +3,14 @@ import { PopoverFilter } from "../popover"
 import { observer } from "mobx-react"
 import { CollectionFilterContent } from "./collectionFilterContent"
 import { SubTitle } from "../subTitle"
-import { useState } from "react"
+import { CSSProperties, useState } from "react"
 import { ICommonProps } from "./typesAndInterfaces"
 import { TooltipPlacement } from "antd/es/tooltip"
 
 export interface ICollectionFilterProps extends ICommonProps {
+	triggerBtnClassName?: string
+	popoverClassName?: string
+	popoverStyle?: CSSProperties | undefined
 	popoverTitle: string
 	visible?: boolean
     showTriggerButton?: boolean
@@ -19,6 +22,8 @@ export interface ICollectionFilterProps extends ICommonProps {
 }
 
 const Impl = ({ title, popoverTitle, onChange,
+	triggerBtnClassName, popoverClassName, popoverStyle,
+	itemTitleMaxLen = 20,
 	searchable = true, searchPlaceholder, filterStore,
 	circleIcons = true, noClear = false, visible,
 	showTriggerButton, showClose, onVisibleChange,
@@ -57,12 +62,16 @@ const Impl = ({ title, popoverTitle, onChange,
 		setBottomSpaceHeight(h)
 	}
 
+	const triggerBtnCss = triggerBtnClassName ? `${triggerBtnClassName} ${styles.collection_trigger_btn}` : styles.collection_trigger_btn
+	const popoverCss = popoverClassName ? `${popoverClassName} ${styles.collection_popover_content}`: styles.collection_popover_content
+
     return <PopoverFilter
 		onBottomSpaceHeightChange={onBottomSpaceHeightChange}
-		triggerBtnClassName={styles.collection_trigger_btn}
-		popoverClassName={styles.collection_popover_content}
+		triggerBtnClassName={triggerBtnCss}
+		popoverClassName={popoverCss}
+		popoverStyle={popoverStyle}
 		popoverTitleClassName={styles.title}
-		applyButtonClassName={styles.apply}
+		// applyButtonClassName={styles.apply}
 		onVisibleChange={_onVisibleChange}
 		onSubmit={onSubmit}
 		title={title}
@@ -79,6 +88,7 @@ const Impl = ({ title, popoverTitle, onChange,
 		placement={placement}>
 
         <CollectionFilterContent
+			itemTitleMaxLen={itemTitleMaxLen}
 			circleIcons={circleIcons}
 			bottomSpaceHeight={bottomSpaceHeight}
 			searchPlaceholder={searchPlaceholder}

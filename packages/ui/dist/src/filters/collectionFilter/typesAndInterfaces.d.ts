@@ -6,6 +6,7 @@ export interface IFilterListeners {
 }
 export declare type FilterListenerActionType = (listeners: IFilterListeners) => void;
 export interface ICommonProps {
+    itemTitleMaxLen?: number;
     title: string;
     onChange: (collections: ICollectionFilterItem[]) => void;
     searchable?: boolean;

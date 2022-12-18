@@ -62,7 +62,8 @@ Main.args = {
 		inMemoryStore.setApplied(collections.map(x => x.key))
 	},
 	searchable: true,
-	circleIcons: true
+	circleIcons: true,
+	popoverStyle: { width: '350px' }
 }
 
 const inMemoryNoFavoriteStore = new InMemoryStoreStub({ useFavorites: false, useRecent: true, noIcons: true })
@@ -77,7 +78,7 @@ MainNoFavorite.args = {
 		inMemoryNoFavoriteStore.setApplied(collections.map(x => x.key))
 	},
 	searchable: true,
-	circleIcons: true
+	circleIcons: true,
 }
 
 
@@ -134,7 +135,7 @@ const generateItems = (count: number) => {
 	for(let i = 0; i < count; i++) {
 		result.push({
 			key: i,
-			title: `${i+1} item`,
+			title: `${i+1} list item`,
 			icon: getIcon(i)
 		})
 	}
@@ -152,7 +153,7 @@ SingleTabStatic.args = {
 	onChange: (collections: ICollectionFilterItem[]) => {
 		staticStore.setApplied(collections.map(x => x.key))
 	},
-	searchable: true
+	searchable: false
 }
 
 export const NoTriggerButton = NoTriggerButtonTemplate.bind({}); 

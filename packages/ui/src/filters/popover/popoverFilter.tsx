@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { CSSProperties, ReactNode, useState } from 'react'
 import styles from "./popoverFilter.module.less"
 import { Button, Popover } from "antd"
 import { ChevronDownOutlineIcon, CloseIcon, CloseIconOld } from '../../icons'
@@ -12,6 +12,7 @@ interface IProps {
     subTitle?: ReactNode
     triggerBtnClassName?: string
     popoverClassName?: string
+    popoverStyle?: CSSProperties | undefined;
     popoverTitleClassName?: string
     applyButtonClassName?: string
     cancelButtonClassName?: string
@@ -34,7 +35,8 @@ interface IProps {
 }
 
 export const PopoverFilter = ({
-    title, subTitle, triggerBtnClassName, popoverTitle, popoverClassName,
+    title, subTitle, triggerBtnClassName, popoverTitle,
+    popoverClassName, popoverStyle,
     popoverTitleClassName, applyButtonClassName, cancelButtonClassName,
     isClear, onClear, children, onSubmit, onVisibleChange, submitDisabled,
     onBottomSpaceHeightChange, visible, showTriggerButton = true,
@@ -73,11 +75,11 @@ export const PopoverFilter = ({
     }
 
     const renderContent = () => {
-        return <div className={`${styles.popover_content} ${popoverClassName || ''}`}>
+        return <div style={popoverStyle} className={`${styles.popover_content} ${popoverClassName || ''}`}>
             { showClose && <div onClick={cancel} className={styles.close_icon_wrap}><CloseIcon /></div> } 
             <div className={`${styles.title} ${popoverTitleClassName}`}>{popoverTitle}</div>
             {children}
-            <div>
+            <div className={styles.buttons}>
                 { showClear && <Button className={`${styles.cancel} ${cancelButtonClassName}`} onClick={clear}>Clear</Button> }
                 { showCancel && <Button className={`${styles.cancel} ${cancelButtonClassName}`} onClick={cancel}>Cancel</Button> }
                 <Button className={`${styles.apply} ${applyButtonClassName}`} onClick={submit} disabled={submitDisabled} type='primary'>Apply</Button>
@@ -124,6 +126,7 @@ export const PopoverFilter = ({
     }
 
     return <Popover
+        overlayClassName={styles.overlay}
         style={{"backgroundColor":"#11151A"}}
         onOpenChange={onVisibleChange_}
         open={visibleInternal}
