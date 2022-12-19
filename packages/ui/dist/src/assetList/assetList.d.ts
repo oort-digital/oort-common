@@ -1,7 +1,7 @@
 import React from "react";
 import { ListGridType } from "antd/lib/list";
 import { IScreenBrakepoints } from "../effects";
-interface IProps<TItem> {
+export interface IAssetListProps<TItem> {
     items: TItem[];
     itemRenderer: (item: TItem) => React.ReactElement;
     onLoadMore?: () => void;
@@ -19,6 +19,5 @@ export interface IAssetListGrid {
 }
 export declare const AssetListGrid: IAssetListGrid;
 export declare const AssetListBrakepoints: IScreenBrakepoints;
-export declare const AssetList: <TItem>({ hasLoadMore, itemRenderer, onLoadMore, items, loading, className }: IProps<TItem>) => JSX.Element;
-export {};
+export declare const AssetList: <TItem>({ hasLoadMore, itemRenderer, onLoadMore, items, loading, className }: IAssetListProps<TItem>) => JSX.Element;
 //# sourceMappingURL=assetList.d.ts.map
