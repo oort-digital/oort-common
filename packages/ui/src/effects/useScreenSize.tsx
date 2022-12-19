@@ -57,7 +57,8 @@ const logWidth = (msg: string) => {
 }
 
 const getWidth = (): number => {
-	return window.screen.availWidth
+	//return window.screen.availWidth
+	return window.innerWidth
 }
   
 export function useScreenSize(brakepoints?: IScreenBrakepoints): [number, ScreenSize] {
