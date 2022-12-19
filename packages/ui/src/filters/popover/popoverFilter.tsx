@@ -91,14 +91,14 @@ export const PopoverFilter = ({
         if(isClear || !onClear) {
             return null
         }
-        return <span className='icon' onClick={(e) =>{ e.stopPropagation(); onClear();}}>
+        return <span className={styles.icon} onClick={(e) =>{ e.stopPropagation(); onClear();}}>
             <CloseIconOld size={8} />
         </span>
     }
 
     const btnIcons = <>
         { renderClose() }
-        <ChevronDownOutlineIcon size={16} className='icon' />
+        <ChevronDownOutlineIcon size={16} className={styles.icon} />
     </>
 
 
