@@ -4,7 +4,7 @@ import {ListGridType} from "antd/lib/list"
 import { defaultScreenBrakepoints, IScreenBrakepoints, ScreenSize, useScreenSize } from "../effects";
 import { AsyncList } from "../asyncList";
 
-interface IProps<TItem> {
+export interface IAssetListProps<TItem> {
 	items: TItem[]
 	itemRenderer: (item: TItem) => React.ReactElement
 	onLoadMore?: () => void
@@ -58,7 +58,7 @@ const toGrid = (screenSize: ScreenSize): ListGridType => {
 	return AssetListGrid.xxl
 }
 
-export const AssetList = <TItem, >({ hasLoadMore, itemRenderer, onLoadMore, items, loading, className }: IProps<TItem>) => {
+export const AssetList = <TItem, >({ hasLoadMore, itemRenderer, onLoadMore, items, loading, className }: IAssetListProps<TItem>) => {
 
 	const [, screenSize] = useScreenSize(AssetListBrakepoints)
 

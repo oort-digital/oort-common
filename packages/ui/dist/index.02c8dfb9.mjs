@@ -2453,7 +2453,7 @@ function Kt(e, t) {
 }
 const Gt = (e) => {
   D.debug(`screenSize ${e}`), D.debug(`screenSize window.outerWidth: ${window.outerWidth}`), D.debug(`screenSize window.innerWidth: ${window.innerWidth}`), D.debug(`screenSize screen.width: 	 ${window.screen.width}`), D.debug(`screenSize screen.availWidth: ${window.screen.availWidth}`);
-}, Re = () => window.screen.availWidth;
+}, Re = () => window.innerWidth;
 function Vn(e) {
   Gt("init");
   const t = e || Pn, [n, r] = z(Kt(Re(), t)), [a, s] = z(Re()), c = Ge(() => {
@@ -2594,7 +2594,7 @@ const a5 = (e = "cookies") => {
     fallback: /* @__PURE__ */ o("span", {}),
     children: [" ", (() => r === D1.Desktop ? e : r === D1.Phone ? t : n)(), " "]
   });
-}, s5 = ue(() => import("./connectModalDesktop.5baad2d0.mjs")), l5 = ue(() => import("./connectModalMobile.7671674e.mjs")), c5 = (e) => {
+}, s5 = ue(() => import("./connectModalDesktop.1bcd3b84.mjs")), l5 = ue(() => import("./connectModalMobile.64c64aaa.mjs")), c5 = (e) => {
   const t = /* @__PURE__ */ o(s5, {
     ...e
   }), n = /* @__PURE__ */ o(l5, {
@@ -4774,4 +4774,4 @@ export {
   $3 as y,
   vo as z
 };
-//# sourceMappingURL=index.7495bd9a.mjs.map
+//# sourceMappingURL=index.02c8dfb9.mjs.map
