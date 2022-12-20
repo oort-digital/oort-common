@@ -2010,7 +2010,6 @@ const i1 = Nn, H2 = () => /* @__PURE__ */ g("svg", {
   className: e,
   component: a3
 }), Rn = () => /* @__PURE__ */ o("svg", {
-  width: "100%",
   height: "100%",
   viewBox: "0 0 16 16",
   fill: "none",
@@ -2594,7 +2593,7 @@ const n5 = (e = "cookies") => {
     fallback: /* @__PURE__ */ o("span", {}),
     children: [" ", (() => r === j1.Desktop ? e : r === j1.Phone ? t : n)(), " "]
   });
-}, o5 = ue(() => import("./connectModalDesktop.8c282d86.mjs")), a5 = ue(() => import("./connectModalMobile.68d43077.mjs")), i5 = (e) => {
+}, o5 = ue(() => import("./connectModalDesktop.bddb55f8.mjs")), a5 = ue(() => import("./connectModalMobile.81992450.mjs")), i5 = (e) => {
   const t = /* @__PURE__ */ o(o5, {
     ...e
   }), n = /* @__PURE__ */ o(a5, {
@@ -4774,4 +4773,4 @@ export {
   D3 as y,
   po as z
 };
-//# sourceMappingURL=index.69900f46.mjs.map
+//# sourceMappingURL=index.6b152576.mjs.map
