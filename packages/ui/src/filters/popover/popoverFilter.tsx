@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode, useState } from 'react'
 import styles from "./popoverFilter.module.less"
 import { Button, Popover } from "antd"
-import { ChevronDownOutlineIcon, CloseIcon, CloseIconOld } from '../../icons'
+import { ChevronDownOutlineIconSvg, CloseIcon } from '../../icons'
 import { logger } from '@oort/logger'
 import { TooltipPlacement } from 'antd/es/tooltip'
 
@@ -91,14 +91,16 @@ export const PopoverFilter = ({
         if(isClear || !onClear) {
             return null
         }
-        return <span className='icon' onClick={(e) =>{ e.stopPropagation(); onClear();}}>
-            <CloseIconOld size={8} />
+        return <span className={`${styles.icon} ${styles.close}`} onClick={(e) =>{ e.stopPropagation(); onClear();}}>
+            <CloseIcon />
         </span>
     }
 
     const btnIcons = <>
         { renderClose() }
-        <ChevronDownOutlineIcon size={16} className='icon' />
+        <span className={styles.icon}>
+            <ChevronDownOutlineIconSvg />
+        </span>
     </>
 
 

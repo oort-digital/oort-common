@@ -27,6 +27,7 @@
         cursor: pointer;
         color: @theme-color-10;
         height: 15px;
+        width: 15px;
         float: right;
     }
 }
@@ -52,8 +53,16 @@
         margin-top: -5px;
     }
 
-    :global(.icon) {
+    .icon {
+        vertical-align: middle;
         margin-left: 15px;
+        width: 16px;
+        height: 16px;
+        display: inline-flex;
+    }
+
+    .icon.close {
+        height: 8px;
     }
 
     :global(.anticon) {
