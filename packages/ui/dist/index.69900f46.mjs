@@ -2594,7 +2594,7 @@ const n5 = (e = "cookies") => {
     fallback: /* @__PURE__ */ o("span", {}),
     children: [" ", (() => r === j1.Desktop ? e : r === j1.Phone ? t : n)(), " "]
   });
-}, o5 = ue(() => import("./connectModalDesktop.a700038f.mjs")), a5 = ue(() => import("./connectModalMobile.d842efcc.mjs")), i5 = (e) => {
+}, o5 = ue(() => import("./connectModalDesktop.8c282d86.mjs")), a5 = ue(() => import("./connectModalMobile.68d43077.mjs")), i5 = (e) => {
   const t = /* @__PURE__ */ o(o5, {
     ...e
   }), n = /* @__PURE__ */ o(a5, {
@@ -2986,6 +2986,7 @@ const R5 = {
 }), D5 = "_logo_link_yaxcy_1", z5 = {
   logo_link: D5
 }, B5 = () => /* @__PURE__ */ g("svg", {
+  width: "auto",
   height: "100%",
   viewBox: "0 0 147 34",
   fill: "none",
@@ -4773,4 +4774,4 @@ export {
   D3 as y,
   po as z
 };
-//# sourceMappingURL=index.e674b461.mjs.map
+//# sourceMappingURL=index.69900f46.mjs.map
