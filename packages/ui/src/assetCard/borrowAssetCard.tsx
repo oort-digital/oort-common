@@ -26,6 +26,7 @@ export interface IBorrowAssetCardProps<TAssetItem extends IBorrowAssetItem> {
     marketplace: IMarketplaceConfig
     onClick?: (asset: TAssetItem) => void
     href?: string
+	reactRouterLink?: string
 }
 
 const countCostPerHour = (earningGoal: number, durationHours: number): number =>
@@ -39,7 +40,7 @@ const setting = (name: string, value: string) => <Col>
 	<div className={value === 'ZERO' ? styles.zero_value : styles.value}>{value}</div>
 </Col>
 
-export const BorrowAssetCard = <TAsset extends IBorrowAssetItem, >({nftScanConfig, assetItem, owner, marketplace, chainId, onClick, href }: IBorrowAssetCardProps<TAsset>) => {
+export const BorrowAssetCard = <TAsset extends IBorrowAssetItem, >({nftScanConfig, assetItem, owner, marketplace, chainId, onClick, href, reactRouterLink }: IBorrowAssetCardProps<TAsset>) => {
 
     const { durationHours, earningGoal, currency, collateral } = assetItem
 	const { uiName, decimals } = currency
@@ -59,6 +60,7 @@ export const BorrowAssetCard = <TAsset extends IBorrowAssetItem, >({nftScanConfi
 			marketplace={marketplace}
 			owner={owner}
 			onClick={onClick}
+			reactRouterLink={reactRouterLink}
 			href={href}>
 				<Row justify='start' gutter={[25, 0]} className={styles.settings}>
 					{/* <Tooltip title={getTheFullHourToDay(durationHours)}>
