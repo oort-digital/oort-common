@@ -52,13 +52,24 @@ const marketplaceConfig: IMarketplaceConfig = {
   name: MarketplaceEnum.opensea
 }
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   assetItem: assetItem,
   owner: ZERO_ADDR,
   chainId: 1,
   marketplace: marketplaceConfig,
-  onClick: (asset: IBorrowAssetItem) => {},
+  onClick: (asset: IBorrowAssetItem) => { console.log('clicked') },
   href: 'https://rental.oort.digital/borrow'
+}
+
+export const NoHref = Template.bind({})
+NoHref.args = {
+  assetItem: assetItem,
+  owner: ZERO_ADDR,
+  chainId: 1,
+  marketplace: marketplaceConfig,
+  onClick: (asset: IBorrowAssetItem) => {
+    console.log('clicked')
+  }
 };
