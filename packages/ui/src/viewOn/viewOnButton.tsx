@@ -21,12 +21,12 @@ export const ViewOnButton = ({ showLabel, marketplace, assetItem, chainId, class
 
     const viewOnUrl = useRef('')
     const onClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.stopPropagation()
         if(viewOnUrl.current) {
             window.open(viewOnUrl.current);
             return
         }
         try {
-            e.stopPropagation()
             setLoading(true)
             const url = await getViewOnUrl({
                 assetItem: assetItem,
