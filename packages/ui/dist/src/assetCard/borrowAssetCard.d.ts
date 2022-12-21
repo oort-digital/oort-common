@@ -20,7 +20,8 @@ export interface IBorrowAssetCardProps<TAssetItem extends IBorrowAssetItem> {
     marketplace: IMarketplaceConfig;
     onClick?: (asset: TAssetItem) => void;
     href?: string;
+    reactRouterLink?: string;
 }
-export declare const BorrowAssetCard: <TAsset extends IBorrowAssetItem>({ nftScanConfig, assetItem, owner, marketplace, chainId, onClick, href }: IBorrowAssetCardProps<TAsset>) => JSX.Element;
+export declare const BorrowAssetCard: <TAsset extends IBorrowAssetItem>({ nftScanConfig, assetItem, owner, marketplace, chainId, onClick, href, reactRouterLink }: IBorrowAssetCardProps<TAsset>) => JSX.Element;
 export {};
 //# sourceMappingURL=borrowAssetCard.d.ts.map

@@ -12,8 +12,9 @@ interface IProps<TAssetItem extends IAssetItem> {
     children: ReactNode;
     onClick?: (asset: TAssetItem) => void;
     href?: string;
+    reactRouterLink?: string;
     coverSkeleton?: boolean;
 }
-export declare const AssetCardLayout: <TAsset extends IAssetItem>({ assetItem, owner, marketplace, chainId, children, onClick, href, collateral, coverSkeleton, nftScanConfig }: IProps<TAsset>) => JSX.Element;
+export declare const AssetCardLayout: <TAsset extends IAssetItem>({ assetItem, owner, marketplace, chainId, children, onClick, href, reactRouterLink, collateral, coverSkeleton, nftScanConfig }: IProps<TAsset>) => JSX.Element;
 export {};
 //# sourceMappingURL=assetCardLayout.d.ts.map
