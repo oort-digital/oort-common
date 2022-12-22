@@ -72,7 +72,7 @@ const mintInternal = {
 }
 
 const gameHubInternal = {
-    caption: 'game hub',
+    caption: 'NFT Play',
     icon: <GameHubIcon />,
     games: 'Game Library',
     nfts: "NFT Library"

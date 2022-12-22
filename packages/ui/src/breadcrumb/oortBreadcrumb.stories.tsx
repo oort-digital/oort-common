@@ -26,7 +26,7 @@ const Template: ComponentStory<typeof OortBreadcrumb> = (args) => {
 
 const bcItems: IBreadcrumbItem[] = [
   {
-    name: 'Game Hub',
+    name: 'NFT Play',
     path: '/'
   },
   {
