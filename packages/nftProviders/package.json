@@ -24,25 +24,28 @@
     }
   },
   "dependencies": {
-    "@oort/logger": "*",
-    "moralis": "2.10.2"
+    "@oort/logger": "*"
   },
+
   "devDependencies": {
+    "@moralisweb3/common-core": "^2.10.3",
+    "@moralisweb3/evm-api": "^2.10.3",
+    "@moralisweb3/api-utils": "^2.10.3",
+    "@moralisweb3/common-evm-utils": "^2.10.3",
     "@rollup/plugin-commonjs": "22.0.2",
+    "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "13.3.0",
-    "rollup": "2.78.0",
-    "rollup-plugin-esbuild": "4.9.3",
-    "typescript": "4.8.2",
     "@types/jest": "^29.1.1",
     "jest": "^29.1.2",
-    "ts-jest": "^29.0.3"
+    "rollup": "2.78.0",
+    "rollup-plugin-esbuild": "4.9.3",
+    "ts-jest": "^29.0.3",
+    "typescript": "4.8.2"
   },
   "license": "UNLICENSED",
- 
   "files": [
     "dist"
   ],
- 
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "unpkg": "dist/index.umd.js",
