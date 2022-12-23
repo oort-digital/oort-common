@@ -15,7 +15,7 @@ export declare class MoralisNftProvider implements IAssetsProvider, IAssetProvid
         apiKey: string;
     }, logLevel?: MoralisLogLevel);
     private readonly _logger;
-    private readonly _startPromise;
+    private static StartPromise;
     private ParseImage;
     private ParseNftName;
     private ParseDescription;
