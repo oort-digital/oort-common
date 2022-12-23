@@ -123,7 +123,7 @@ export class MoralisNftProvider implements IAssetsProvider, IAssetProvider, INft
             address: params.ownerAddress,
             tokenAddresses: params.tokenAddresses,
             limit: params.limit,
-            //cursor: params.cursor
+            cursor: params.cursor
         })
         const { pagination, result } = moralisResponse
 
