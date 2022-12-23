@@ -1,4 +1,4 @@
-import Moralis  from "moralis";
+import Moralis  from "./moralis";
 // import { EvmChain } from '@moralisweb3/common-evm-utils';
 import { MoralisDataObjectValue } from '@moralisweb3/common-core';
 import { INftOwnerProvider, IFeatchNftOwnerResponse, ProviderKind, IFeatchAccountNftsParams, IFeatchNftImageSrc, IFeatchNftParams, IFeatchNftsResponse, INft, NftType, IAssetsProvider, IAssetProvider } from "../typesAndInterfaces";
