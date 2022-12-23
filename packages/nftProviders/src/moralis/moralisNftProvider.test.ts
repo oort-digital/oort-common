@@ -15,19 +15,17 @@ const assertNft = (nft: INft) => {
     expect(nft.tokenId).toBeDefined()
 }
 
-test('debug only. Moralis featchAccountNfts', async () => {
+test.skip('debug only. Moralis featchAccountNfts', async () => {
    const respose = await provider.featchAccountNfts({
        ownerAddress: '0x103a9685D26fF05F2fed95dbC6e706B8841E5EC7',
        cursor: undefined,
        limit: 10
    })
 
-   console.log(JSON.stringify(respose))
-   
-//    expect(respose.total).toBeDefined()
-//    expect(respose.page).toEqual(0)
-//    expect(respose.pageSize).toEqual(500)
-//    respose.data.forEach(assertNft)
+   expect(respose.total).toBeDefined()
+   expect(respose.page).toEqual(0)
+   expect(respose.pageSize).toEqual(500)
+   respose.data.forEach(assertNft)
 });
 
 test.skip('debug only. Moralis featchNft', async () => {
