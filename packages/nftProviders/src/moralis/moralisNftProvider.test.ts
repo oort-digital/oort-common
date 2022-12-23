@@ -4,7 +4,7 @@ import { INft } from "../typesAndInterfaces";
 
 import { MoralisNftProvider } from "./moralisNftProvider";
 
-const provider = new MoralisNftProvider(logger, 4, { apiKey: "fake-key" })
+const provider = new MoralisNftProvider(logger, 80001, { apiKey: "76e3cVcdO0ennLoMfMaAoAhuWnL0l0tJ5Bz7n511UGwmyVfHy3JqVF6XlSgE5cld" }, 'verbose')
 
 const assertNft = (nft: INft) => {
     expect(nft.amount).toBeDefined()
@@ -15,17 +15,19 @@ const assertNft = (nft: INft) => {
     expect(nft.tokenId).toBeDefined()
 }
 
-test.skip('debug only. Moralis featchAccountNfts', async () => {
+test('debug only. Moralis featchAccountNfts', async () => {
    const respose = await provider.featchAccountNfts({
        ownerAddress: '0x103a9685D26fF05F2fed95dbC6e706B8841E5EC7',
-       cursor: "fake-cursor",
-       limit: 1000
+       cursor: undefined,
+       limit: 10
    })
 
-   expect(respose.total).toBeDefined()
-   expect(respose.page).toEqual(0)
-   expect(respose.pageSize).toEqual(500)
-   respose.data.forEach(assertNft)
+   console.log(JSON.stringify(respose))
+   
+//    expect(respose.total).toBeDefined()
+//    expect(respose.page).toEqual(0)
+//    expect(respose.pageSize).toEqual(500)
+//    respose.data.forEach(assertNft)
 });
 
 test.skip('debug only. Moralis featchNft', async () => {

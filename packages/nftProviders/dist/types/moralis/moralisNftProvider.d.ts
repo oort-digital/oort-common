@@ -3,11 +3,6 @@ import { ILogger } from "@oort/logger";
 declare type MoralisLogLevel = 'verbose' | 'debug' | 'info' | 'warning' | 'error' | 'off';
 export declare class MoralisNftProvider implements IAssetsProvider, IAssetProvider, INftOwnerProvider {
     readonly providerKind: ProviderKind;
-    private readonly _logger;
-    private readonly _startPromise;
-    constructor(logger: ILogger, chainId: number, config: {
-        apiKey: string;
-    }, logLevel?: MoralisLogLevel);
     readonly chainId: number;
     featchNftOwner(params: {
         address: string;
@@ -16,6 +11,11 @@ export declare class MoralisNftProvider implements IAssetsProvider, IAssetProvid
     featchNft(params: IFeatchNftParams): Promise<INft>;
     featchNftImageSrc(params: IFeatchNftImageSrc): Promise<string | undefined>;
     featchAccountNfts(params: IFeatchAccountNftsParams): Promise<IFeatchNftsResponse>;
+    constructor(logger: ILogger, chainId: number, config: {
+        apiKey: string;
+    }, logLevel?: MoralisLogLevel);
+    private readonly _logger;
+    private readonly _startPromise;
     private ParseImage;
     private ParseNftName;
     private ParseDescription;

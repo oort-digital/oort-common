@@ -1,5 +1,6 @@
 import Moralis  from "moralis";
-import { EvmChain } from '@moralisweb3/common-evm-utils';
+// import { EvmChain } from '@moralisweb3/common-evm-utils';
+import { MoralisDataObjectValue } from '@moralisweb3/common-core';
 import { INftOwnerProvider, IFeatchNftOwnerResponse, ProviderKind, IFeatchAccountNftsParams, IFeatchNftImageSrc, IFeatchNftParams, IFeatchNftsResponse, INft, NftType, IAssetsProvider, IAssetProvider } from "../typesAndInterfaces";
 import { ILogger } from "@oort/logger";
 
@@ -28,8 +29,14 @@ interface IRawNft {
     symbol: string
 }
 
-function toMoralisMetadata(_rawMetadata: any): IMoralisMetadata | undefined {
-    debugger
+function toMoralisMetadata(rawMetadata: MoralisDataObjectValue | undefined): IMoralisMetadata | undefined {
+    if(rawMetadata) {
+        return {
+            name: rawMetadata["name"],
+            description: rawMetadata['description'],
+            image: rawMetadata['image']
+        }
+    }
     return undefined
 }
 
@@ -50,24 +57,10 @@ type MoralisLogLevel = 'verbose' | 'debug' | 'info' | 'warning' | 'error' | 'off
 export class MoralisNftProvider implements IAssetsProvider, IAssetProvider, INftOwnerProvider {
     public readonly providerKind: ProviderKind = ProviderKind.Moralis
 
-    private readonly _logger: ILogger
-    private readonly _startPromise: Promise<void>
-
-    constructor(logger: ILogger, chainId: number, config: { apiKey: string }, logLevel: MoralisLogLevel = 'info') {
-        this._startPromise = Moralis.start({
-            apiKey: config.apiKey,
-            formatEvmAddress: 'checksum',
-            formatEvmChainId: 'decimal',
-            logLevel: logLevel
-        }
-        )
-        this.chainId = chainId
-        this._logger = logger
-    }
-
     public readonly chainId: number;
 
     public async featchNftOwner(params: { address: string, tokenId: string }): Promise<IFeatchNftOwnerResponse> {
+        await this._startPromise
         const { address, tokenId } = params
         const response = await Moralis.EvmApi.nft.getNFTTokenIdOwners({
             chain: this.chainId,
@@ -103,6 +96,7 @@ export class MoralisNftProvider implements IAssetsProvider, IAssetProvider, INft
     }
 
     public async featchNft(params: IFeatchNftParams): Promise<INft> {
+        await this._startPromise
         const { address, tokenId } = params
         const response = await Moralis.EvmApi.nft.getNFTMetadata({
             chain: this.chainId,
@@ -110,41 +104,54 @@ export class MoralisNftProvider implements IAssetsProvider, IAssetProvider, INft
             tokenId: tokenId
         })
 
-        const nft = response!.toJSON()
-        const moralisNft = toMoralisNft(response!.raw)
-        return this.mapNft(moralisNft, nft.normalized_metadata)
-
-
+        const rawNft = response!.raw
+        const moralisNft = toMoralisNft(rawNft)
+        return this.mapNft(moralisNft, rawNft.normalized_metadata)
     }
 
     public async featchNftImageSrc(params: IFeatchNftImageSrc): Promise<string | undefined> {
+        await this._startPromise
         const moralisNft = await this.featchNft(params)
         return moralisNft.image
     }
 
     public async featchAccountNfts(params: IFeatchAccountNftsParams): Promise<IFeatchNftsResponse> {
         await this._startPromise
-        debugger
-        const moralisResponse = await Moralis.EvmApi.nft.getWalletNFTs({
-            chain: EvmChain.ETHEREUM,
-            address: params.ownerAddress,
-            //tokenAddresses: params.tokenAddresses,
-            // limit: params.limit,
-            // cursor: params.cursor
-        })
 
-        debugger
+        const moralisResponse = await Moralis.EvmApi.nft.getWalletNFTs({
+            chain: this.chainId,
+            address: params.ownerAddress,
+            tokenAddresses: params.tokenAddresses,
+            limit: params.limit,
+            //cursor: params.cursor
+        })
         const { pagination, result } = moralisResponse
 
+        const data = result.map(x => this.mapNft(x.toJSON(), toMoralisMetadata(x.metadata)))
+        
         return {
             page: pagination.page,
             pageSize: pagination.pageSize,
             total: pagination.total,
-            data: result.map(x => this.mapNft(x.toJSON(), toMoralisMetadata(x.metadata))),
+            data,
             cursor: pagination.cursor
         }
+        
     }
 
+    constructor(logger: ILogger, chainId: number, config: { apiKey: string }, logLevel: MoralisLogLevel = 'info') {
+        this._startPromise = Moralis.start({
+            apiKey: config.apiKey,
+            formatEvmAddress: 'checksum',
+            formatEvmChainId: 'decimal',
+            logLevel: logLevel
+        })
+        this.chainId = chainId
+        this._logger = logger
+    }
+
+    private readonly _logger: ILogger
+    private readonly _startPromise: Promise<void>
     private ParseImage(tokenAddress: string, tokenId: string, metadata: IMoralisMetadata): string | undefined {
         if(metadata.image !== undefined) { return metadata.image }
         //if(metadata.image_data !== undefined) { return metadata.image_data }
