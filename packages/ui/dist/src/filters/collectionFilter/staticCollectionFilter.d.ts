@@ -22,6 +22,7 @@ interface IProps {
     onVisibleChange?: (isVisible: boolean) => void;
     placement?: TooltipPlacement;
     selectMode?: SelectMode;
+    calcOptimalListHeight?: boolean;
 }
 export declare const StaticCollectionFilter: (props: IProps) => JSX.Element | null;
 export {};
