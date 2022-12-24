@@ -29,7 +29,7 @@ const inMemoryStore = new InMemoryStoreStub({ useFavorites: true, useRecent: tru
 inMemoryStore.setApplied([1, 2])
 
 const templateStyle = { height: '1000px' }
-const Template: ComponentStory<typeof CollectionFilter> = (args) => <>
+const Template: ComponentStory<typeof CollectionFilter> = (args: ICollectionFilterProps) => <>
   <ThemeLoader />
   <div style={templateStyle}>
     <CollectionFilter {...args} />
@@ -153,7 +153,24 @@ SingleTabStatic.args = {
 	onChange: (collections: ICollectionFilterItem[]) => {
 		staticStore.setApplied(collections.map(x => x.key))
 	},
-	searchable: false
+	searchable: false,
+	popoverStyle: { width: '300px' }
+}
+
+const noOptimalHeightStore = new StaticCollectionFilterStore(SelectMode.SingleRequired, generateItems(2))
+noOptimalHeightStore.setApplied([1])
+export const NoOptimalHeight = Template.bind({}); 
+NoOptimalHeight.args = {
+	title: 'Title',
+	popoverTitle: 'PopoverTitle',
+	searchPlaceholder: 'Enter text',
+	filterStore: noOptimalHeightStore,
+	onChange: (collections: ICollectionFilterItem[]) => {
+		noOptimalHeightStore.setApplied(collections.map(x => x.key))
+	},
+	searchable: false,
+	popoverStyle: { width: '300px' },
+	calcOptimalListHeight: false
 }
 
 export const NoTriggerButton = NoTriggerButtonTemplate.bind({}); 

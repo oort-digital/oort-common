@@ -10,7 +10,8 @@ import { EMPTY_ABORT_SIGNAL } from "../../utils"
 
 interface IProps {
     itemTitleMaxLen: number
-    bottomSpaceHeight?: number
+    bottomSpaceHeight: number | undefined
+    calcOptimalListHeight: boolean
     filterStore: ICollectionFilterStore
     searchable: boolean
     searchPlaceholder?: string
@@ -29,7 +30,7 @@ const getFavoriteParams = (filterStore: ICollectionFilterStore): ISelectedParame
     return undefined
 }
 
-const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, circleIcons, itemTitleMaxLen}: IProps) => {
+const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, circleIcons, itemTitleMaxLen, calcOptimalListHeight}: IProps) => {
 
     const onTermChangeAbortController = useRef<AbortController | undefined>()
     const onTermChange = (term: string) => {
@@ -72,27 +73,30 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, ci
     const favoriteParam = getFavoriteParams(filterStore)
    
 
-    const getListHeight = (): string => {
+    const calcOptimalListHeightFunc = () => {
         const minH = 150
         const marginPaddingAndOtherContent = 500
 
+        let h: string = ''
         if(bottomSpaceHeight && bottomSpaceHeight > marginPaddingAndOtherContent) {
             const result = bottomSpaceHeight - marginPaddingAndOtherContent
             if(result > minH) {
-                return `${result}px`
+                h = `${result}px`
             }
         }
+        else {
+            h = `${minH}px`
+        }
 
-        return `${minH}px`
+        return {
+            maxHeight: h,
+            height: h
+        }
     }
 
     const renderList = (items: ICollectionFilterItem[], showLoadMore: boolean) => {
 
-        const h = getListHeight()
-        const heightStyle = {
-            maxHeight: h,
-            height: h
-        }
+        const heightStyle = calcOptimalListHeight ? calcOptimalListHeightFunc() : undefined
 
         const itemCss = circleIcons ? `${styles.list_item} ${styles.circle_icons}` : styles.list_item
 
