@@ -1,4 +1,3 @@
-/// <reference types="react" />
 interface IProps {
     mintErc721: () => void;
     mintErc1155: () => void;

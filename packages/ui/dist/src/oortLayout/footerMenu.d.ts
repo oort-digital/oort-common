@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { IWeb3 } from '../connectModal';
 import { ITestNfts } from './typesAndInterfaces';
 interface IProps {

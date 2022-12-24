@@ -1,4 +1,3 @@
-/// <reference types="react" />
 interface IProps {
     quantity: number;
 }

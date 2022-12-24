@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { IWeb3 } from './connectModal';
 interface IProps {
     web3: IWeb3;

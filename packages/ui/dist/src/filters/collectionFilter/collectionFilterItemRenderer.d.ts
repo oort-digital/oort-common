@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { ICollectionFilterItem, ItemKeyType, SelectMode } from "./stores";
 export interface ISelectedParameter {
     selected: Set<ItemKeyType>;
