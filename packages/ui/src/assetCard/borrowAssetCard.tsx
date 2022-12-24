@@ -11,6 +11,8 @@ interface ICurrency {
     decimals: number
 }
 
+export type PriceMode = 'perHour' | 'perDay'
+
 export interface IBorrowAssetItem extends IAssetItem {
     earningGoal: BigNumber
     durationHours: number
@@ -27,10 +29,13 @@ export interface IBorrowAssetCardProps<TAssetItem extends IBorrowAssetItem> {
     onClick?: (asset: TAssetItem) => void
     href?: string
 	reactRouterLink?: string
+	priceMode: PriceMode
 }
 
-const countCostPerHour = (earningGoal: number, durationHours: number): number =>
+const countPricePerHour = (earningGoal: number, durationHours: number): number =>
     durationHours <= 0 ? 0 : earningGoal / durationHours;
+
+const countPricePerDay = (earningGoal: number, durationHours: number) => 24 * countPricePerHour(earningGoal, durationHours)
 
 //Convert bigNumber to number
 const convertToNumber = (value: BigNumberish, decimals: number): number => Number.parseFloat(formatUnits(value, decimals));
@@ -40,15 +45,26 @@ const setting = (name: string, value: string) => <Col>
 	<div className={value === 'ZERO' ? styles.zero_value : styles.value}>{value}</div>
 </Col>
 
-export const BorrowAssetCard = <TAsset extends IBorrowAssetItem, >({nftScanConfig, assetItem, owner, marketplace, chainId, onClick, href, reactRouterLink }: IBorrowAssetCardProps<TAsset>) => {
+export const BorrowAssetCard = <TAsset extends IBorrowAssetItem, >({priceMode, nftScanConfig, assetItem, owner, marketplace, chainId, onClick, href, reactRouterLink }: IBorrowAssetCardProps<TAsset>) => {
 
     const { durationHours, earningGoal, currency, collateral } = assetItem
 	const { uiName, decimals } = currency
 
     const collateralNum = convertToNumber(collateral, decimals);
 
-	const costPerHour = countCostPerHour(convertToNumber(earningGoal, decimals), durationHours)
-	const formattedCostPerHour = `${parsePrice(costPerHour)} ${uiName}`;
+	let price: number = 0
+	let priceUnits: 'hour' | 'day' = 'day'
+
+	if(priceMode === "perHour") {
+		price = countPricePerHour(convertToNumber(earningGoal, decimals), durationHours)
+		priceUnits = "hour"
+	}
+	else {
+		price = countPricePerDay(convertToNumber(earningGoal, decimals), durationHours)
+		priceUnits = "day"
+	}
+
+	const formattedPrice = `${parsePrice(price)} ${uiName}`;
 	const formattedCollateral = collateralNum === 0 ? "ZERO" : `${parsePrice(collateralNum)} ${uiName}`;
 
     return <AssetCardLayout
@@ -66,7 +82,7 @@ export const BorrowAssetCard = <TAsset extends IBorrowAssetItem, >({nftScanConfi
 					{/* <Tooltip title={getTheFullHourToDay(durationHours)}>
 					{setting('Max duration', convertHoursToDay(durationHours))}
 					</Tooltip> */}
-					{setting('Price/hour', formattedCostPerHour)}
+					{setting(`Price/${priceUnits}`, formattedPrice)}
 					{setting('Collateral', formattedCollateral)}
 				</Row>
 		</AssetCardLayout>
