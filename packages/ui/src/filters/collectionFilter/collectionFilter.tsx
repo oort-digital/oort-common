@@ -19,11 +19,13 @@ export interface ICollectionFilterProps extends ICommonProps {
     showClear?: boolean
 	onVisibleChange?: (isVisible: boolean) => void
 	placement?: TooltipPlacement
+	calcOptimalListHeight?: boolean
 }
 
 const Impl = ({ title, popoverTitle, onChange,
 	triggerBtnClassName, popoverClassName, popoverStyle,
 	itemTitleMaxLen = 20,
+	calcOptimalListHeight = true,
 	searchable = true, searchPlaceholder, filterStore,
 	circleIcons = true, noClear = false, visible,
 	showTriggerButton, showClose, onVisibleChange,
@@ -88,6 +90,7 @@ const Impl = ({ title, popoverTitle, onChange,
 		placement={placement}>
 
         <CollectionFilterContent
+			calcOptimalListHeight={calcOptimalListHeight}
 			itemTitleMaxLen={itemTitleMaxLen}
 			circleIcons={circleIcons}
 			bottomSpaceHeight={bottomSpaceHeight}

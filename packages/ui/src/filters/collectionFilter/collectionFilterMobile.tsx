@@ -48,6 +48,8 @@ const Impl = ({ filterStore, searchable = true, searchPlaceholder, circleIcons =
 			searchPlaceholder={searchPlaceholder}
 			searchable={searchable}
 			filterStore={filterStore}
+			bottomSpaceHeight={undefined}
+			calcOptimalListHeight={false}
 		/>
 }
 

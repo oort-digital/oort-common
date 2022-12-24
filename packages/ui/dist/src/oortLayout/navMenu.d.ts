@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export declare enum MenuItemId {
     Dasboard = "dasboard",
     Rent = "rent",

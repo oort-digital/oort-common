@@ -13,6 +13,7 @@ export interface ICollectionFilterProps extends ICommonProps {
     showClear?: boolean;
     onVisibleChange?: (isVisible: boolean) => void;
     placement?: TooltipPlacement;
+    calcOptimalListHeight?: boolean;
 }
-export declare const CollectionFilter: ({ title, popoverTitle, onChange, triggerBtnClassName, popoverClassName, popoverStyle, itemTitleMaxLen, searchable, searchPlaceholder, filterStore, circleIcons, noClear, visible, showTriggerButton, showClose, onVisibleChange, showCancel, showClear, placement }: ICollectionFilterProps) => JSX.Element;
+export declare const CollectionFilter: ({ title, popoverTitle, onChange, triggerBtnClassName, popoverClassName, popoverStyle, itemTitleMaxLen, calcOptimalListHeight, searchable, searchPlaceholder, filterStore, circleIcons, noClear, visible, showTriggerButton, showClose, onVisibleChange, showCancel, showClear, placement }: ICollectionFilterProps) => JSX.Element;
 //# sourceMappingURL=collectionFilter.d.ts.map

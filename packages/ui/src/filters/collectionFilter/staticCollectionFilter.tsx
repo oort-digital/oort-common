@@ -25,6 +25,7 @@ interface IProps {
 	onVisibleChange?: (isVisible: boolean) => void
 	placement?: TooltipPlacement
 	selectMode?: SelectMode
+	calcOptimalListHeight?: boolean
 }
 
 const Impl = (props: IProps) => {

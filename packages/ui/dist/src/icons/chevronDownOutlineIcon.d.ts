@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export declare const ChevronDownOutlineIconSvg: () => JSX.Element;
 interface IProps {
     className?: string;
