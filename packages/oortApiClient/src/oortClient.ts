@@ -2,12 +2,13 @@ import axios, {AxiosRequestConfig, AxiosResponse} from "axios"
 import { toAuthRequest } from "./isAuthRequest"
 
 import {
+    ICurUserReview,
     IDasboardResponse, IGameDetailParams, IGameDetailResponse,
     IGamesParams, IGamesResponse, ILikeGameParams, ILikeReviewParams, INftDetailByAddressParams, INftDetailParams, INftDetailResponse,
     INftsParams,
     INftsResponse,
     IOortClient,
-    IOortClientSettings, IPagingParams, IReview, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse
+    IOortClientSettings, IPagingParams, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse
 } from "./typesAndInterfaces"
 
 
@@ -270,9 +271,9 @@ export class OortClient implements IOortClient {
         return response.data;
     }
 
-    getCurrentUserReview = async (gameUri: string, signal: AbortSignal): Promise<IReview> => {
-        const response: AxiosResponse<IReview> =
-            await axios.get<IReview, AxiosResponse<IReview>>(
+    getCurrentUserReview = async (gameUri: string, signal: AbortSignal): Promise<ICurUserReview> => {
+        const response: AxiosResponse<ICurUserReview> =
+            await axios.get<ICurUserReview, AxiosResponse<ICurUserReview>>(
                 `${this._apiUrl}/game-hub/games/${gameUri}/reviews/cur-user-review`,
                 getConfig(true, signal))
 

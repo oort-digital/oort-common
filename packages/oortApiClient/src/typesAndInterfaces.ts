@@ -244,6 +244,11 @@ export interface INftDetailByAddressParams {
     collectionAddress: string
 }
 
+export interface ICurUserReview {
+    reviewId: number
+    content: string
+}
+
 export interface IOortClient {
     dashboard: (signal: AbortSignal) => Promise<IDasboardResponse>
     nfts: (params: INftsParams, signal: AbortSignal) => Promise<INftsResponse>
@@ -255,7 +260,7 @@ export interface IOortClient {
     likeGame: (params: ILikeGameParams, signal: AbortSignal) => Promise<void>
     likeReview: (params: ILikeReviewParams, signal: AbortSignal) => Promise<void>
     getReviews: (params: IReviewsParams, signal: AbortSignal) => Promise<IReviewResponse>
-    getCurrentUserReview: (gameUri: string, signal: AbortSignal) => Promise<IReview>
+    getCurrentUserReview: (gameUri: string, signal: AbortSignal) => Promise<ICurUserReview>
     saveReview: (params: ISaveReviewParams, signal: AbortSignal) => Promise<void>
     saveFeedback: (params: ISaveFeedbackParams, signal: AbortSignal) => Promise<void>
 }
