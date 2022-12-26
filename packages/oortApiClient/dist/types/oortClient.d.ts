@@ -1,4 +1,4 @@
-import { IDasboardResponse, IGameDetailParams, IGameDetailResponse, IGamesParams, IGamesResponse, ILikeGameParams, ILikeReviewParams, INftDetailByAddressParams, INftDetailParams, INftDetailResponse, INftsParams, INftsResponse, IOortClient, IOortClientSettings, IReview, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse } from "./typesAndInterfaces";
+import { ICurUserReview, IDasboardResponse, IGameDetailParams, IGameDetailResponse, IGamesParams, IGamesResponse, ILikeGameParams, ILikeReviewParams, INftDetailByAddressParams, INftDetailParams, INftDetailResponse, INftsParams, INftsResponse, IOortClient, IOortClientSettings, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse } from "./typesAndInterfaces";
 export declare class OortClient implements IOortClient {
     dashboard: (signal: AbortSignal) => Promise<IDasboardResponse>;
     nfts: ({ pageNum, pageSize, chains, keywords, games, twitterFollowersRange, discordFollowersRange, floorPriceRange, marketCapRange, volumeRange, tradersRange, totalSupplyRange, orders, orderDirections, gamesOnly }: INftsParams, signal: AbortSignal) => Promise<INftsResponse>;
@@ -12,7 +12,7 @@ export declare class OortClient implements IOortClient {
     saveReview: ({ content, gameUri }: ISaveReviewParams, signal: AbortSignal) => Promise<void>;
     saveFeedback: ({ gameUri, isGameFun, isGameProfitable, rating }: ISaveFeedbackParams, signal: AbortSignal) => Promise<void>;
     getReviews: ({ pageNum, pageSize, gameUri }: IReviewsParams, signal: AbortSignal) => Promise<IReviewResponse>;
-    getCurrentUserReview: (gameUri: string, signal: AbortSignal) => Promise<IReview>;
+    getCurrentUserReview: (gameUri: string, signal: AbortSignal) => Promise<ICurUserReview>;
     constructor({ apiUrl }: IOortClientSettings);
     private readonly _apiUrl;
     private addArrParam;
