@@ -8,7 +8,7 @@ import {
     INftsParams,
     INftsResponse,
     IOortClient,
-    IOortClientSettings, IPagingParams, IReview, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse
+    IOortClientSettings, IPagingParams, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse
 } from "./typesAndInterfaces"
 
 
