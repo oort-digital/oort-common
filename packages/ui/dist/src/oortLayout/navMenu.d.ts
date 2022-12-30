@@ -13,6 +13,11 @@ export interface INavItems {
         mutation: NavItemType;
         claim: NavItemType;
     };
+    testMinting: {
+        mutation: NavItemType;
+        claim: NavItemType;
+        testMint: NavItemType
+    }
     rent: {
         lend: NavItemType;
         borrow: NavItemType;

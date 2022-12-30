@@ -9,6 +9,11 @@ export const navItems: INavItems = {
       mutation: 'http://minting.oort.local/hero-mutation',
       claim: 'http://minting.oort.local/claim-rewards'
     },
+    testMinting: {
+        mutation: 'http://minting.oort.local/hero-mutation',
+        claim: 'http://minting.oort.local/claim-rewards',
+        testMint: "https://faucet.oort.digital/"
+    },
     rent: {
       activity: 'http://rent.oort.local/avtivities',
       borrow: 'http://rent.oort.local/borrow',

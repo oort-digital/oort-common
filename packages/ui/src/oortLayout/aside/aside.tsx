@@ -9,8 +9,8 @@ interface IProps extends IAsideProps {
     logoLink?: ReactNode
 }
 
-export const Aside = ({ className, navItems, web3, isActiveFunc, logoLink, testNfts }: IProps) => <aside className={`${styles.aside} ${className}`}>
+export const Aside = ({ className, navItems, web3, isActiveFunc, logoLink, testNfts, isDev }: IProps) => <aside className={`${styles.aside} ${className}`}>
     {logoLink}
-    <NavMenu className={styles.nav_menu} isActiveFunc={isActiveFunc} navItems={navItems}/>
+    <NavMenu className={styles.nav_menu} isActiveFunc={isActiveFunc} navItems={navItems} isDev={isDev}/>
     <FooterMenu testNfts={testNfts} className={styles.footer} web3={web3} />
 </aside>

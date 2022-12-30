@@ -67,3 +67,14 @@ ActiveCollapse.args = {
 };
 
 
+export const withTestMint = Template.bind({});
+withTestMint.args = {
+    navItems: navItems,
+    isDev: true,
+    web3: web3,
+    children: <>
+        <Button onClick={() => web3.connectAsync()}>Connect</Button>
+        {TestContent}
+    </>
+}
+
