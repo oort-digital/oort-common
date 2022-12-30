@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare enum MenuItemId {
     Dasboard = "dasboard",
     Rent = "rent",
@@ -13,11 +14,6 @@ export interface INavItems {
         mutation: NavItemType;
         claim: NavItemType;
     };
-    testMinting: {
-        mutation: NavItemType;
-        claim: NavItemType;
-        testMint: NavItemType
-    }
     rent: {
         lend: NavItemType;
         borrow: NavItemType;
@@ -28,12 +24,18 @@ export interface INavItems {
         games: NavItemType;
         nfts: NavItemType;
     };
+    testMinting: {
+        mutation: NavItemType;
+        claim: NavItemType;
+        testMint: NavItemType;
+    };
 }
 interface IProps {
     isActiveFunc?: (href: string) => boolean;
     className?: string;
     navItems: INavItems;
+    isDev?: boolean;
 }
-export declare const NavMenu: ({ className, navItems, isActiveFunc }: IProps) => JSX.Element;
+export declare const NavMenu: ({ className, navItems, isActiveFunc, isDev }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=navMenu.d.ts.map

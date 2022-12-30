@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { BigNumber } from "ethers";
 import { IMarketplaceConfig, INftScanConfig } from "../viewOn";
 import { IAssetItem } from "./typesAndInterfaces";

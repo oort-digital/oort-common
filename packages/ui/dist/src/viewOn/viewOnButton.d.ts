@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { BigNumber } from 'ethers';
 import { IMarketplaceConfig } from './utils';
 import { INftScanConfig } from './nftScanApi';

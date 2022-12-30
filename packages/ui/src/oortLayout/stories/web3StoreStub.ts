@@ -19,6 +19,11 @@ export const navItems: INavItems = {
       heroes: 'http://rent.oort.local/heroes',
       lend: 'http://rent.oort.local/lend'
     },
+    testMinting: {
+        mutation: 'http://minting.oort.local/hero-mutation',
+        claim: 'http://minting.oort.local/claim-rewards',
+        testMint: "https://faucet.oort.digital/"
+    },
     gameHub: {
       games: {
         href: 'http://game-hub.oort.local/games',

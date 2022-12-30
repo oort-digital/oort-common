@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { NumRange } from '../../typesAndInterfaces';
 import { IMobileFilterItemProps } from '../layout/filterLayoutMobile';
 interface IProps extends IMobileFilterItemProps {

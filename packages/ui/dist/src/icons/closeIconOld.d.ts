@@ -1,3 +1,4 @@
+/// <reference types="react" />
 interface IProps {
     className?: string;
     size: number;
