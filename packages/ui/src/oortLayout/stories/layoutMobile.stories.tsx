@@ -66,4 +66,10 @@ ActiveCollapse.args = {
   isActiveFunc: isActiveFunc
 };
 
+export const WithFaucet = Template.bind({});
+WithFaucet.args = {
+  navItems: navItems,
+    isDev: true,
+    children: TestContent
+}
 

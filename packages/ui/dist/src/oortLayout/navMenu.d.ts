@@ -27,7 +27,7 @@ export interface INavItems {
     testMinting: {
         mutation: NavItemType;
         claim: NavItemType;
-        testMint: NavItemType;
+        faucet: NavItemType;
     };
 }
 interface IProps {

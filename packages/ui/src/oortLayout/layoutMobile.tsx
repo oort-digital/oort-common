@@ -4,7 +4,7 @@ import { LogoLink } from "./logoLink/logoLink";
 import { Sider } from "./sider";
 import { ILayoutProps } from "./typesAndInterfaces";
 
-const LayoutMobile = ({ navItems, children, web3, isActiveFunc, className }: ILayoutProps) => {
+const LayoutMobile = ({ navItems, children, web3, isActiveFunc, className, isDev }: ILayoutProps) => {
 
     const cssClass = className ? `${styles.root} ${className}` : styles.root
 
@@ -12,7 +12,7 @@ const LayoutMobile = ({ navItems, children, web3, isActiveFunc, className }: ILa
     
         <div className={`oort-mobile-top-header ${styles.top_header}`}>
             <Sider>
-                <AsideMobile navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
+                <AsideMobile navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} isDev={isDev}/>
             </Sider>
             <LogoLink className={styles.logo}/>
         </div>

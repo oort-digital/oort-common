@@ -22,7 +22,7 @@ export const navItems: INavItems = {
     testMinting: {
         mutation: 'http://minting.oort.local/hero-mutation',
         claim: 'http://minting.oort.local/claim-rewards',
-        testMint: "https://faucet.oort.digital/"
+        faucet: "https://faucet.oort.digital/"
     },
     gameHub: {
       games: {

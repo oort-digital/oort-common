@@ -67,8 +67,8 @@ ActiveCollapse.args = {
 };
 
 
-export const withTestMint = Template.bind({});
-withTestMint.args = {
+export const WithFaucet = Template.bind({});
+WithFaucet.args = {
     navItems: navItems,
     isDev: true,
     web3: web3,

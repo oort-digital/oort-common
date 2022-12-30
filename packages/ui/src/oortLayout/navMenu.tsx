@@ -38,7 +38,7 @@ export interface INavItems {
     testMinting: {
         mutation: NavItemType
         claim: NavItemType
-        testMint: NavItemType
+        faucet: NavItemType
     }
 }
 
@@ -82,7 +82,7 @@ const testMintInternal = {
     icon: <MintIcon />,
     mutation: "Hero Mutation",
     claim: "Claim Rewards",
-    testMint: "Test Mint"
+    faucet: "Faucet"
 }
 
 const gameHubInternal = {
