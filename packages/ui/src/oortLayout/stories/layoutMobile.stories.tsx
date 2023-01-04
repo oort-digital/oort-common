@@ -7,7 +7,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { lazy } from "react";
 import { useTheme } from "../../effects";
 import LayoutMobile from "../layoutMobile";
-import { navItems, TestContent } from "./common";
+import {navItems, TestContent, testNavItems} from "./common";
 import { Web3StoreStub } from "./web3StoreStub";
 
 const DarkTheme = lazy(() => import("../../styles/theme/darkTheme"));
@@ -68,8 +68,7 @@ ActiveCollapse.args = {
 
 export const WithFaucet = Template.bind({});
 WithFaucet.args = {
-  navItems: navItems,
-    isDev: true,
-    children: TestContent
+  navItems: testNavItems,
+  children: TestContent
 }
 

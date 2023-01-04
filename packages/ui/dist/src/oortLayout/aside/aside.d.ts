@@ -4,6 +4,6 @@ interface IProps extends IAsideProps {
     className: string;
     logoLink?: ReactNode;
 }
-export declare const Aside: ({ className, navItems, web3, isActiveFunc, logoLink, testNfts, isDev }: IProps) => JSX.Element;
+export declare const Aside: ({ className, navItems, web3, isActiveFunc, logoLink, testNfts }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=aside.d.ts.map

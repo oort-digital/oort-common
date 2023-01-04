@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React, { lazy } from "react";
 import { useTheme } from "../../effects";
 import { Layout } from "..";
-import { isActiveFunc, navItems, TestContent } from "./common";
+import {isActiveFunc, navItems, TestContent, testNavItems} from "./common";
 import { Web3StoreStub } from "./web3StoreStub";
 import { ILayoutProps } from "../typesAndInterfaces";
 import { Button } from "antd";
@@ -69,8 +69,7 @@ ActiveCollapse.args = {
 
 export const WithFaucet = Template.bind({});
 WithFaucet.args = {
-    navItems: navItems,
-    isDev: true,
+    navItems: testNavItems,
     web3: web3,
     children: <>
         <Button onClick={() => web3.connectAsync()}>Connect</Button>

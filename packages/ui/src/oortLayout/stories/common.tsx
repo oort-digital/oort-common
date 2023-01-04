@@ -3,16 +3,10 @@ import { ITestNfts } from "../typesAndInterfaces";
 import { TestCarousel } from "./testCarousel";
 
 export const navItems: INavItems = {
-
     dashboard: 'http://dashboard.oort.local',
     minting: {
       mutation: 'http://minting.oort.local/hero-mutation',
-      claim: 'http://minting.oort.local/claim-rewards'
-    },
-    testMinting: {
-        mutation: 'http://minting.oort.local/hero-mutation',
-        claim: 'http://minting.oort.local/claim-rewards',
-        faucet: "https://faucet.oort.digital/"
+      claim: 'http://minting.oort.local/claim-rewards',
     },
     rent: {
       activity: 'http://rent.oort.local/avtivities',
@@ -29,6 +23,31 @@ export const navItems: INavItems = {
         href: 'http://game-hub.oort.local/nfts',
         reactRouterLink: true
       }
+    }
+}
+
+export const testNavItems: INavItems = {
+    dashboard: 'http://dashboard.oort.local',
+    minting: {
+        mutation: 'http://minting.oort.local/hero-mutation',
+        claim: 'http://minting.oort.local/claim-rewards',
+        faucet: "https://faucet.oort.digital/"
+    },
+    rent: {
+        activity: 'http://rent.oort.local/avtivities',
+        borrow: 'http://rent.oort.local/borrow',
+        heroes: 'http://rent.oort.local/heroes',
+        lend: 'http://rent.oort.local/lend'
+    },
+    gameHub: {
+        games: {
+            href: 'http://game-hub.oort.local/games',
+            reactRouterLink: true
+        },
+        nfts: {
+            href: 'http://game-hub.oort.local/nfts',
+            reactRouterLink: true
+        }
     }
 }
 

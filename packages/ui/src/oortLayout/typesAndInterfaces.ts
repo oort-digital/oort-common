@@ -7,7 +7,6 @@ export interface ILayoutProps {
     navItems: INavItems
     web3?: IWeb3
     testNfts?: ITestNfts
-    isDev?: boolean
     className?: string
     //for testing
     isActiveFunc?: (href: string) => boolean

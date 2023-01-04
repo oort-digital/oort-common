@@ -13,6 +13,7 @@ export interface INavItems {
     minting: {
         mutation: NavItemType;
         claim: NavItemType;
+        faucet?: NavItemType;
     };
     rent: {
         lend: NavItemType;
@@ -24,18 +25,12 @@ export interface INavItems {
         games: NavItemType;
         nfts: NavItemType;
     };
-    testMinting: {
-        mutation: NavItemType;
-        claim: NavItemType;
-        faucet: NavItemType;
-    };
 }
 interface IProps {
     isActiveFunc?: (href: string) => boolean;
     className?: string;
     navItems: INavItems;
-    isDev?: boolean;
 }
-export declare const NavMenu: ({ className, navItems, isActiveFunc, isDev }: IProps) => JSX.Element;
+export declare const NavMenu: ({ className, navItems, isActiveFunc }: IProps) => JSX.Element;
 export {};
 //# sourceMappingURL=navMenu.d.ts.map

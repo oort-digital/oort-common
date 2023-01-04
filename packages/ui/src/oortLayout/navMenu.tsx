@@ -24,6 +24,7 @@ export interface INavItems {
     minting: {
         mutation: NavItemType
         claim: NavItemType
+        faucet?: NavItemType
     }
     rent: {
         lend: NavItemType
@@ -35,11 +36,6 @@ export interface INavItems {
         games: NavItemType
         nfts: NavItemType
     }
-    testMinting: {
-        mutation: NavItemType
-        claim: NavItemType
-        faucet: NavItemType
-    }
 }
 
 interface IProps {
@@ -47,7 +43,6 @@ interface IProps {
     isActiveFunc?: (href: string) => boolean
     className?: string,
     navItems: INavItems
-    isDev?: boolean
 }
 
 interface INavItemInternal {
@@ -122,17 +117,17 @@ const getHRef = (it: NavItemType) => typeof it  === 'string' ? it : it.href
 
 type NavItemPairType = [INavItemInternal, NavItemMap]
 
-export const NavMenu = ({ className, navItems, isActiveFunc, isDev }: IProps) => {
+export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
 
     // to trigger rerendering on react-router pathchange
     useLocation()
 
-    const { dashboard, rent, gameHub, minting, testMinting } = navItems
+    const { dashboard, rent, gameHub, minting } = navItems
 
     const collapseNavItemPairs: NavItemPairType[] = [
         [rentInternal, rent],
         [gameHubInternal, gameHub],
-        [isDev ? testMintInternal : mintInternal, isDev ?  testMinting : minting]
+        [minting.faucet ? testMintInternal : mintInternal,  minting]
     ]
 
     const isActive = isActiveFunc || _isHrefActive;
