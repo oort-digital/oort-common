@@ -4,7 +4,7 @@ import { Signer } from "ethers";
 export interface IConnector {
     readonly name: ConnectorNames
     signer: Promise<Signer>
-    enable(): Promise<boolean>
+    enable(chainId: number): Promise<boolean>
     isConnected: Promise<boolean>
     // detect that metamask installed
     isInstalled: boolean
