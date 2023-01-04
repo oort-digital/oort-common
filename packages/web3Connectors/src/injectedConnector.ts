@@ -13,6 +13,9 @@ export class InjectedConnector
     extends BaseConnector
     implements IConnector
 {
+  protected getRawProvider(): Promise<any> {
+    return Promise.resolve(window.ethereum)
+  }
   private _ethRequestAccounts: Promise<boolean> | undefined = undefined
 
     constructor(logger: ILogger, chains: IChainInfo[]) {
@@ -101,9 +104,5 @@ export class InjectedConnector
 
     get installUrl(): string {
       return 'https://metamask.io/download'
-    }
-
-    protected get rawProvider(): any {
-        return window.ethereum
     }
 }
