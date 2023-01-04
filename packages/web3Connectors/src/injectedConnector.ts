@@ -62,7 +62,7 @@ export class InjectedConnector
 
     private async prvEnable(): Promise<boolean> {
       try {
-        await this.rawProvider.request({ method: 'eth_requestAccounts' })
+        await window.ethereum.request({ method: 'eth_requestAccounts' })
       }
       catch(error: any) {
         if (error.code === 4001) {
@@ -76,7 +76,7 @@ export class InjectedConnector
       return true
     }
 
-    async connect(): Promise<boolean> {
+    async connect(_chainId: number): Promise<boolean> {
         if(this._ethRequestAccounts) {
           this.logger.debug('InjectedConnector.enable already called')
           return await this._ethRequestAccounts

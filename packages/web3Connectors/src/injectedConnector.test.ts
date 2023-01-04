@@ -46,7 +46,7 @@ test('injectedConnector call enable twice', async () => {
 
   const rawProvider = new TestRawProvider(requestCallback)
   const connector = new InjectedConnectorForTest(rawProvider, logger, [chainInfo])
-  const results = await Promise.all([ connector.enable(), connector.enable() ])
+  const results = await Promise.all([ connector.connect(1), connector.connect(1) ])
 
   expect(results[0]).toBeTruthy()
   expect(results[1]).toBeTruthy()
@@ -61,7 +61,7 @@ test('injectedConnector user reject enable return false', async () => {
 
   const rawProvider = new TestRawProvider(requestCallback)
   const connector = new InjectedConnectorForTest(rawProvider, logger, [chainInfo])
-  const result = await connector.enable()
+  const result = await connector.connect(1)
 
   expect(result).toBeFalsy()
 });

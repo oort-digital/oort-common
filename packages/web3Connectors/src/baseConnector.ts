@@ -84,9 +84,9 @@ export abstract class BaseConnector {
         // rawProvider.on("disconnect", this.disconnectHandler);
     }
 
-    private removeListeners() {
-        this.rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
-        this.rawProvider.removeListener('chainChanged', this.chainChangedHandler);
+    private removeListeners(rawProvider: any) {
+        rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
+        rawProvider.removeListener('chainChanged', this.chainChangedHandler);
         // this.rawProvider.removeListener("disconnect", this.disconnectHandler);
         this._externalAccountChangedHandlers = []
         this._externalChainChangedHandlers = []
@@ -125,9 +125,8 @@ export abstract class BaseConnector {
         return this.getSigner()
     }
 
-    disconnect(): Promise<void> {
-        this.removeListeners()
-        return Promise.resolve()
+    async disconnect(): Promise<void> {
+        this.removeListeners(await this.getRawProvider())
     }
 
 }
