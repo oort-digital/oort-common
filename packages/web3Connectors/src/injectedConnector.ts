@@ -76,7 +76,7 @@ export class InjectedConnector
       return true
     }
 
-    async enable(): Promise<boolean> {
+    async connect(): Promise<boolean> {
         if(this._ethRequestAccounts) {
           this.logger.debug('InjectedConnector.enable already called')
           return await this._ethRequestAccounts

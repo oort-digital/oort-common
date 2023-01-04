@@ -44,8 +44,8 @@ export class WalletConnectConnectorNew extends BaseConnector implements IConnect
         return ''
     }
 
-     //todo rename to connect
-     async enable(chainId: number): Promise<any> {
+    // todo rename to connect
+    async connect(chainId: number): Promise<any> {
 
         const ethereumProvider = await this.universalProvider
 
@@ -132,7 +132,7 @@ export class WalletConnectConnectorNew extends BaseConnector implements IConnect
         // Subscribe to session updat
         client.on(
             "session_update",
-            ({ topic, session }: { topic: string; session: SessionTypes.Struct }) => {
+            ({ /*topic,*/ session }: { /*topic: string;*/ session: SessionTypes.Struct }) => {
                 console.log("EVENT", "session_updated");
                 this._session = session
             },
