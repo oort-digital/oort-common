@@ -37,31 +37,5 @@ module.exports = {
   "framework": "@storybook/react",
   "core": {
     "builder": "@storybook/builder-webpack5"
-  },
-
-  webpackFinal: config => {
-    return {
-      ...config,
-      resolve: {
-        ...config.resolve,
-        modules: [...config.resolve.modules],
-        fallback: {
-           stream: false,
-          //  timers: false,
-          //  tty: false,
-          //  os: false,
-          //  http: false,
-          //  https: false,
-          //  zlib: false,
-          //  util: false,
-           ...config.resolve.fallback,
-        }
-      }
-    };
-  },
-
-  // env: (config) => ({
-  //   ...config,
-  //   REACT_APP_ENV: require("../config/dev").REACT_APP_ENV,
-  // }),
+  }
 }
