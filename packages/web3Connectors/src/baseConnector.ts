@@ -1,6 +1,6 @@
 import { providers, Signer } from "ethers";
 import { ILogger } from "@oort/logger";
-import { ConnectorNames } from "./connectorNames";
+import { ConnectorNames } from "@oort/web3-connectors";
 
 type AccountChangedHandlerType = (accounts: Array<string>) => void
 type ChainChangedHandlerType = (chainId: string) => void
@@ -93,7 +93,7 @@ export abstract class BaseConnector {
         this._externalDisconnectHandlers = []
     }
 
-    protected abstract get rawProvider(): any;
+    protected abstract getRawProvider(): Promise<any>;
    
     onAccountsChanged(handler: AccountChangedHandlerType) {
         this._externalAccountChangedHandlers.push(handler)
@@ -115,9 +115,14 @@ export abstract class BaseConnector {
 
     abstract get isConnected(): Promise<boolean>
 
-    get signer(): Signer {
-        const provider = new providers.Web3Provider(this.rawProvider);
+
+    private async getSigner(): Promise<Signer> {
+        const provider = new providers.Web3Provider(await this.getRawProvider())
         return provider.getSigner()
+    }
+
+    get signer(): Promise<Signer> {
+        return this.getSigner()
     }
 
     disconnect(): Promise<void> {
