@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { WalletConnectConnectorNew } from './walletConnectConnectorNew';
 import { logger } from '@oort/logger';
@@ -42,15 +42,31 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
   const [ chainId, setChainId ] = useState<number>()
   const [ address, setAddress ] = useState<string>()
 
+  const onConnect = async () => {
+    const signer = await connector.getSigner()
+    setAddress(await signer.getAddress())
+    setChainId(await signer.getChainId())
+  }
+
+  useEffect(() => {
+
+    const init = async () => {
+      if(await connector.isConnected) {
+        onConnect()
+      }
+    }
+
+    init()
+
+  }, [])
+
   connector.onChainChanged(_id => {
     debugger
   })
 
   const connect = async (chainId: number) => {
     await connector.connect(chainId)
-    const signer = await connector.getSigner()
-    setAddress(await signer.getAddress())
-    setChainId(await signer.getChainId())
+    onConnect()
   }
 
   return <div>
