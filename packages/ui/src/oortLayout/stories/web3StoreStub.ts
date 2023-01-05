@@ -1,12 +1,10 @@
 import { logger } from "@oort/logger";
-import { ConnectorNames, InjectedConnector } from "@oort/web3-connectors";
+import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
 import { makeObservable, observable, runInAction } from "mobx";
 import { IWeb3 } from "../../connectModal";
 import { EMPTY_CHAIN, IChain } from "../../typesAndInterfaces";
 import { delayAsync } from "../../utils";
 import { INavItems } from "../navMenu";
-import { IConnector } from "./iConnector";
-import { WalletConnectConnectorNew } from "./walletConnectConnector";
 
 export const navItems: INavItems = {
 
@@ -54,8 +52,7 @@ const supportedChains = [
 }]
     
 const supportedConnectors: { [name: string]: IConnector } = {}
-// supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
-supportedConnectors[ConnectorNames.WalletConnect] = new WalletConnectConnectorNew(logger, supportedChains)
+supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
     
 
 export class Web3StoreStub implements IWeb3 {
@@ -82,7 +79,7 @@ export class Web3StoreStub implements IWeb3 {
 
   connectAsync = async (_connectorName: ConnectorNames) => {
     // await delayAsync(1000)
-    await this.supportedConnectors[ConnectorNames.WalletConnect].enable(1)
+    await this.supportedConnectors[ConnectorNames.Injected].connect(1)
     runInAction(() => {
       this.chain = { ...supportedChains[0] }
       this.account = '0x0000000000000000000000000000000000000001'
