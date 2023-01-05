@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { WalletConnectConnector } from './walletConnectConnector';
 import { logger } from '@oort/logger';
+import { InjectedConnector } from './injectedConnector';
 
 const FakeComponent = () => <></>
 
 export default {
-  title: 'web3Connectors/walletConnectConnector',
+  title: 'web3Connectors/injectedConnector',
   component: FakeComponent,
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
@@ -35,44 +35,23 @@ const supportedChains = [
       }
   }]
 
-const connector = new WalletConnectConnector(logger, supportedChains)
+const connector = new InjectedConnector(logger, supportedChains)
 
 const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
-  const [ chainId, setChainId ] = useState<number>()
-  const [ address, setAddress ] = useState<string>()
-
-  const onConnect = async () => {
-    const signer = await connector.getSigner()
-    setAddress(await signer.getAddress())
-    setChainId(await signer.getChainId())
-  }
-
-  useEffect(() => {
-
-    const init = async () => {
-      if(await connector.isConnected) {
-        onConnect()
-      }
-    }
-
-    init()
-
-  }, [])
-
-  /*
-  connector.onChainChanged(_id => {
-    debugger
-  })*/
+  // connector.onChainChanged(chainId => {
+  //   debugger
+  // })
 
   const connect = async (chainId: number) => {
     await connector.connect(chainId)
-    onConnect()
+
   }
 
+
+
   return <div>
-    <div>chainId: {chainId}</div>
-    <div>address: {address}</div>
+
     <button onClick={() => connect(1)}>Connect Ethereum</button>
 
   </div>
@@ -80,3 +59,4 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
 export const Main = Template.bind({});
 Main.args = { }
+
