@@ -12,6 +12,7 @@ export interface INavItems {
     minting: {
         mutation: NavItemType;
         claim: NavItemType;
+        faucet?: NavItemType;
     };
     rent: {
         lend: NavItemType;

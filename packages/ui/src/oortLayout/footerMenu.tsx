@@ -8,8 +8,6 @@ import { ConnectModal, IWeb3 } from '../connectModal';
 import { BlockieAddress } from '../blockieAddress';
 import { useTheme } from '../effects';
 import { isChainEmpty } from '../typesAndInterfaces';
-import { MintTestNftModal } from './mintTestNftModal';
-import { ITestNfts } from './typesAndInterfaces';
 import { observer } from 'mobx-react';
 
 const TWITTER = "https://twitter.com/OortDigital";
@@ -20,7 +18,6 @@ const TELEGRAM = "https://t.me/oortdigital";
 interface IProps {
     className?: string
     web3?: IWeb3
-    testNfts?: ITestNfts
 }
 
 const social = <>
@@ -29,11 +26,9 @@ const social = <>
     <a href={DISCORD}><span className={styles.icon}><DiscordIcon/></span></a>
 </>
 
-const Impl = ({ className, web3, testNfts }: IProps) => {
+const Impl = ({ className, web3 }: IProps) => {
 
     const [ connectModalVisible, setConnectModalVisible ] = useState(false)
-
-    const [ isMintTestNftsVisible, setMintTestNftsVisible ] = useState(false)
 
     const [ isDarkMode, setDarkMode ] = useTheme()
 
@@ -63,36 +58,13 @@ const Impl = ({ className, web3, testNfts }: IProps) => {
         </>
     }
 
-    const renderMintTestNftModal = () => {
 
-        if(testNfts?.isEnabled === true) {
-            const afterIcon = <span className={styles.icon_after}><ChevronSortIcon /></span>
-            const { isLoading, mintErc1155, mintErc721 } = testNfts
-            return <>
-                <MintTestNftModal
-                    loading={isLoading}
-                    mintErc721={mintErc721}
-                    mintErc1155={mintErc1155}
-                    onCancel={() => setMintTestNftsVisible(false)}
-                    visible={isMintTestNftsVisible} />
-                <MenuItemBtn
-                    className={styles.menu_item_btn}
-                    onClick={() => setMintTestNftsVisible(true)}
-                    iconBefore={<></>}
-                    iconAfter={afterIcon}
-                    caption="Mint Test NFTs" />
-            </>
-        }
-        return null
-
-    }
 
     const cssClass = className ? `${className} ${styles.root}`: styles.root
 
     return <>
         <Menu className={cssClass}>
             <MenuItem key="social" className={styles.social}>{social}</MenuItem>
-            {renderMintTestNftModal()}
             {renderWeb3()}
             <MenuItem className={styles.theme_switch} key="theme-switch">
                 <ThemeSwitch isDarkMode={isDarkMode} onChange={() => setDarkMode(!isDarkMode)} />

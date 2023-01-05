@@ -12,7 +12,7 @@ const LayoutMobile = ({ navItems, children, web3, isActiveFunc, className }: ILa
     
         <div className={`oort-mobile-top-header ${styles.top_header}`}>
             <Sider>
-                <AsideMobile navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
+                <AsideMobile navItems={navItems} isActiveFunc={isActiveFunc} web3={web3}/>
             </Sider>
             <LogoLink className={styles.logo}/>
         </div>
