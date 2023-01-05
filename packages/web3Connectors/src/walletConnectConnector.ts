@@ -104,10 +104,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     } 
 
     private async subscribeToProviderEvents(client: UniversalProvider) {
-        if (typeof client === "undefined") {
-        throw new Error("WalletConnect is not initialized");
-        }
-
+        
         client.on("display_uri", async (uri: string) => {
             console.log("EVENT", "QR Code Modal open");
             web3Modal?.openModal({ uri });
