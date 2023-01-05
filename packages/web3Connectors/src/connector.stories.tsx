@@ -99,6 +99,11 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
     reset()
   }
 
+  const switchChain = async (chainId: number) => {
+    await getConnectorInstance().switchChain(chainId)
+    onConnect()
+  }
+
   return <div>
 
     <select value={curConnector} onChange={(ev: any) => setCurConnector(ev.target.value)}>
@@ -110,6 +115,7 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
     <div>address: {address}</div>
     <div>connected: {connected.toString()}</div>
     <button disabled={connected} onClick={() => connect(1)}>Connect Ethereum</button>
+    <button disabled={!connected} onClick={() => switchChain(137)}>Switch to Polygon</button>
     <button disabled={!connected} onClick={() => disconnect()}>Disconnect</button>
 
   </div>
