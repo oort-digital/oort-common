@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { TooltipPlacement } from 'antd/es/tooltip';
 import { NumRange } from '../../typesAndInterfaces';
 export interface IRangeFilterProps {

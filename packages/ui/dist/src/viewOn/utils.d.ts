@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { BigNumber } from "ethers";
 import { INftScanConfig } from "./nftScanApi";
 export declare enum MarketplaceEnum {
