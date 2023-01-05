@@ -34,12 +34,12 @@ const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, af
 
 	const [ loading, setLoading ] = useState(false)
 	
-	const { supportedChains, chain, switchChain, canSwitchChain, connectAsync, account, connectorName, supportedConnectors } = web3
+	const { supportedChains, chain, switchChain, canSwitchChain, connect, account, connectorName, supportedConnectors } = web3
 
-	const connectAndClose = async (cnnName: ConnectorNames) => {
+	const connectAndClose = async (chainId: number, cnnName: ConnectorNames) => {
 		setLoading(true)
         try {
-            await connectAsync(cnnName)
+            await connect(chainId, cnnName)
 			onCancel && onCancel()
 			afterConnect && afterConnect()
         }
@@ -64,7 +64,7 @@ const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, af
 		By connecting, I accept Oort Digital’s <a href='https://oort.digital/terms'>Terms of Service</a> and acknowledge that you have read and understand the <a href='https://oort.digital/terms#disclaimer'>Oort Digital protocol disclaimer</a>
 	</>
 
-	const renderWalletBtn = (walletName: string, cnnName: ConnectorNames, icon: ReactNode) => {
+	const renderWalletBtn = (chainId: number, walletName: string, cnnName: ConnectorNames, icon: ReactNode) => {
 
 		if(account && cnnName === connectorName) {
 			return <ConnectButton
@@ -86,7 +86,7 @@ const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, af
 
 		return <ConnectButton
 			walletName={walletName}
-			onClick={() => connectAndClose(cnnName)}
+			onClick={() => connectAndClose(chainId, cnnName)}
 			walletIcon={icon}
 			labelText="Connect"
 		/>
@@ -134,8 +134,8 @@ const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, af
 				<Bold>Connect your Wallet</Bold> and jump into the world of NFT's
 			</div>
 			<Row gutter={btnGutter}>
-				{window.ethereum && <Col span="24">{renderWalletBtn("Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>}
-				<Col span="24">{renderWalletBtn("WalletConnect", ConnectorNames.WalletConnect, WalletConnectIcon)}</Col>
+				<Col span="24">{renderWalletBtn(supportedChains[0].chainId, "Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>
+				<Col span="24">{renderWalletBtn(supportedChains[0].chainId, "WalletConnect", ConnectorNames.WalletConnect, WalletConnectIcon)}</Col>
 			</Row>
 		</>
 	</OortModalMobile>

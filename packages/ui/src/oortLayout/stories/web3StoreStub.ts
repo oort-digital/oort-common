@@ -77,7 +77,7 @@ export class Web3StoreStub implements IWeb3 {
     
   }
 
-  connectAsync = async (_connectorName: ConnectorNames) => {
+  connect = async (_chainId: number, _connectorName: ConnectorNames) => {
     // await delayAsync(1000)
     await this.supportedConnectors[ConnectorNames.Injected].connect(1)
     runInAction(() => {
