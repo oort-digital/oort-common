@@ -19,23 +19,14 @@ export default {
 
 const supportedChains = [
   {
-      name: "rinkeby",
-      chainId: 4,
-      rpcUrl: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-      blockExplorer: 'https://rinkeby.etherscan.io'
+    name: "polygon",
+    chainId: 137
   },
   {
-      name: 'mumbai',
-      chainId: 80001,
-      rpcUrl: 'https://rpc-mumbai.maticvigil.com',
-      blockExplorer: 'https://mumbai.polygonscan.com',
-  
-      nativeCurrency: {
-          name: 'MATIC',
-          symbol: 'MATIC',
-          decimals: 18,
-      }
-  }]
+      name: "ethereum",
+      chainId: 1
+  }
+]
 
 const walletConnect = new WalletConnectConnector(logger, supportedChains)
 const injected = new InjectedConnector(logger, supportedChains)

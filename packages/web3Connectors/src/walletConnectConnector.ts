@@ -68,7 +68,11 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     constructor(logger: ILogger, chains: IChainInfo[]) {
         super(logger, ConnectorNames.WalletConnect, chains)
         this._rpc = {}
-        chains.forEach(x => this._rpc[`${x.chainId}`] = x.rpcUrl)
+        chains.forEach(x => {
+            if(x.rpcUrl) {
+                this._rpc[`${x.chainId}`] = x.rpcUrl
+            }
+        })
         // this._walletConnect = new WalletConnectProvider({ rpc: this._rpc })
         // this.initListeners(this._walletConnect)
         this._waitInit = this.init()

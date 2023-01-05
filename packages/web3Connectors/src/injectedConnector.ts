@@ -76,7 +76,7 @@ export class InjectedConnector
       return true
     }
 
-    async connect(_chainId: number): Promise<boolean> {
+    async connect(chainId: number): Promise<boolean> {
         if(this._ethRequestAccounts) {
           this.logger.debug('InjectedConnector.enable already called')
           return await this._ethRequestAccounts
@@ -86,6 +86,14 @@ export class InjectedConnector
         this._ethRequestAccounts = this.prvEnable()
         const result = await this._ethRequestAccounts
         this._ethRequestAccounts = undefined
+
+        const signer = await this.getSigner()
+        const curChainId = await signer.getChainId()
+
+        if(curChainId !== chainId) {
+          await this.switchChain(chainId)
+        }
+
         return result;
     }
 
