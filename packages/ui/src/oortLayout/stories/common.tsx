@@ -1,5 +1,4 @@
 import { INavItems } from "../navMenu";
-import { ITestNfts } from "../typesAndInterfaces";
 import { TestCarousel } from "./testCarousel";
 
 export const navItems: INavItems = {
@@ -28,17 +27,6 @@ export const navItems: INavItems = {
 
 const minting = { ...navItems.minting, ...{ faucet: "https://faucet.oort.digital/" } }
 export const testNavItems: INavItems = { ...navItems, ...{ minting } }
-
-export const testNfts: ITestNfts = {
-  mintErc721: function (): void {
-    throw new Error("Function not implemented.");
-  },
-  mintErc1155: function (): void {
-    throw new Error("Function not implemented.");
-  },
-  isEnabled: true,
-  isLoading: false
-}
 
 const style = { 
   // background: 'red'
