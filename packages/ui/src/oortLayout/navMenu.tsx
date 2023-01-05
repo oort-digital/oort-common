@@ -69,13 +69,6 @@ const mintInternal = {
     caption: 'minting',
     icon: <MintIcon />,
     mutation: "Hero Mutation",
-    claim: "Claim Rewards"
-}
-
-const testMintInternal = {
-    caption: 'minting',
-    icon: <MintIcon />,
-    mutation: "Hero Mutation",
     claim: "Claim Rewards",
     faucet: "Faucet"
 }
@@ -127,7 +120,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     const collapseNavItemPairs: NavItemPairType[] = [
         [rentInternal, rent],
         [gameHubInternal, gameHub],
-        [minting.faucet ? testMintInternal : mintInternal,  minting]
+        [mintInternal,  minting]
     ]
 
     const isActive = isActiveFunc || _isHrefActive;
