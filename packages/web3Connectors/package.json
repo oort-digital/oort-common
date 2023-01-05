@@ -36,7 +36,6 @@
     "@walletconnect/universal-provider": "^2.1.5",
     "@walletconnect/utils": "^2.1.5",
     "@web3modal/standalone": "^2.0.0-rc.1",
-    "@walletconnect/web3-provider": "^1.8.0",
     "jest": "^29.1.2",
     "rollup": "2.78.0",
     "rollup-plugin-esbuild": "4.9.3",
