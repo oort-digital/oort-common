@@ -116,13 +116,9 @@ export abstract class BaseConnector {
     abstract get isConnected(): Promise<boolean>
 
 
-    private async getSigner(): Promise<Signer> {
+    async getSigner(): Promise<Signer> {
         const provider = new providers.Web3Provider(await this.getRawProvider())
         return provider.getSigner()
-    }
-
-    get signer(): Promise<Signer> {
-        return this.getSigner()
     }
 
     async disconnect(): Promise<void> {

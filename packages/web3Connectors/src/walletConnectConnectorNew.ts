@@ -5,10 +5,6 @@ import { BaseConnector, IChainInfo } from "./baseConnector";
 import { SessionTypes } from "@walletconnect/types";
 import { Web3Modal } from "@web3modal/standalone";
 import { IConnector } from "./iConnector";
-// import { BaseConnector, IChainInfo } from "./baseConnector";
-// import { ConnectorNames } from "./connectorNames";
-// import { IConnector } from "./iConnector";
-
 
 const DEFAULT_PROJECT_ID = 'c2b4ff7ce76613f93a7edea85b9618f5'
 
@@ -96,7 +92,7 @@ export class WalletConnectConnectorNew extends BaseConnector implements IConnect
             relayUrl: 'wss://relay.walletconnect.com',
         });
 
-    
+        this.initListeners(this._universalProvider)
         this.subscribeToProviderEvents(this._universalProvider)
 
         // await this.checkForPersistedSession(this._universalProvider)

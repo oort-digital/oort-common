@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { WalletConnectConnectorNew } from './walletConnectConnectorNew';
 import { logger } from '@oort/logger';
@@ -39,9 +39,24 @@ const connector = new WalletConnectConnectorNew(logger, supportedChains)
 
 const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
-  return <div>
+  const [ chainId, setChainId ] = useState<number>()
+  const [ address, setAddress ] = useState<string>()
 
-    <button onClick={() => connector.connect(1)}>Connect Ethereum</button>
+  connector.onChainChanged(_id => {
+    debugger
+  })
+
+  const connect = async (chainId: number) => {
+    await connector.connect(chainId)
+    const signer = await connector.getSigner()
+    setAddress(await signer.getAddress())
+    setChainId(await signer.getChainId())
+  }
+
+  return <div>
+    <div>chainId: {chainId}</div>
+    <div>address: {address}</div>
+    <button onClick={() => connect(1)}>Connect Ethereum</button>
 
   </div>
 }
