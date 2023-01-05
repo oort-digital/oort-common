@@ -21,11 +21,11 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         await this._universalProvider!.disconnect()
     }
     
-    get canSwitchChain() { return false }
+    get canSwitchChain() { return true }
 
-    // @ts-ignore
-    switchChain(chainId: number): Promise<void> {
-        throw new Error("Method not implemented.");
+    async switchChain(chainId: number): Promise<void> {
+        await this.disconnect()
+        await this.connect(chainId)
     }
 
     get isConnected(): Promise<boolean> {
@@ -40,7 +40,6 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         return ''
     }
 
-    // todo rename to connect
     async connect(chainId: number): Promise<any> {
 
         const ethereumProvider = await this.universalProvider

@@ -115,7 +115,7 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
     <div>address: {address}</div>
     <div>connected: {connected.toString()}</div>
     <button disabled={connected} onClick={() => connect(1)}>Connect Ethereum</button>
-    <button disabled={!connected} onClick={() => switchChain(137)}>Switch to Polygon</button>
+    <button disabled={!connected || chainId === 137} onClick={() => switchChain(137)}>Switch to Polygon</button>
     <button disabled={!connected} onClick={() => disconnect()}>Disconnect</button>
 
   </div>
