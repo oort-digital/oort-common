@@ -6,13 +6,6 @@ import { SessionTypes } from "@walletconnect/types";
 import { Web3Modal } from "@web3modal/standalone";
 import { IConnector } from "./iConnector";
 
-const DEFAULT_PROJECT_ID = 'c2b4ff7ce76613f93a7edea85b9618f5'
-
-const web3Modal = new Web3Modal({
-    projectId: DEFAULT_PROJECT_ID,
-    themeMode: "light",
-  });
-
 export class WalletConnectConnector extends BaseConnector implements IConnector {
 
     async disconnect(): Promise<void> {
@@ -62,10 +55,10 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
             // pairingTopic: pairing?.topic,
           });
     
-          web3Modal.closeModal()
+          this._web3Modal.closeModal()
     }
 
-    constructor(logger: ILogger, chains: IChainInfo[]) {
+    constructor(projectId: string, logger: ILogger, chains: IChainInfo[]) {
         super(logger, ConnectorNames.WalletConnect, chains)
         this._rpc = {}
         chains.forEach(x => {
@@ -73,10 +66,19 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
                 this._rpc[`${x.chainId}`] = x.rpcUrl
             }
         })
+
+        this._projectId = projectId
+        this._web3Modal = new Web3Modal({
+            projectId: this._projectId,
+            themeMode: "light",
+        })
         // this._walletConnect = new WalletConnectProvider({ rpc: this._rpc })
         // this.initListeners(this._walletConnect)
         this._waitInit = this.init()
     }
+
+    private readonly _projectId: string
+    private readonly _web3Modal: Web3Modal
 
     // private _walletConnect: WalletConnectProvider
     private readonly _rpc: EthereumRpcMap
@@ -90,7 +92,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
     private async init(): Promise<void> {
         this._universalProvider = await UniversalProvider.init({
-            projectId: DEFAULT_PROJECT_ID,
+            projectId: this._projectId,
             logger: 'debug',
             relayUrl: 'wss://relay.walletconnect.com',
         });
@@ -110,7 +112,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         
         client.on("display_uri", async (uri: string) => {
             console.log("EVENT", "QR Code Modal open");
-            web3Modal?.openModal({ uri });
+            this._web3Modal.openModal({ uri });
         });
 
         // Subscribe to session ping

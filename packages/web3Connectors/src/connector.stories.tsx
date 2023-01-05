@@ -28,7 +28,7 @@ const supportedChains = [
   }
 ]
 
-const walletConnect = new WalletConnectConnector(logger, supportedChains)
+const walletConnect = new WalletConnectConnector('c2b4ff7ce76613f93a7edea85b9618f5', logger, supportedChains)
 const injected = new InjectedConnector(logger, supportedChains)
 
 type ConnectorType = 'walletConnect' | 'injected'
