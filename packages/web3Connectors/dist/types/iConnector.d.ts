@@ -2,8 +2,8 @@ import { Signer } from "ethers";
 import { ConnectorNames } from "./connectorNames";
 export interface IConnector {
     readonly name: ConnectorNames;
-    signer: Signer;
-    enable(): Promise<boolean>;
+    getSigner(): Promise<Signer>;
+    connect(chainId: number): Promise<boolean>;
     isConnected: Promise<boolean>;
     isInstalled: boolean;
     installUrl: string;

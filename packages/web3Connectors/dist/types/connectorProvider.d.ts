@@ -11,7 +11,7 @@ export declare class ConnectorProvider {
     private InitAsync;
     constructor(logger: ILogger, connectors: IConnector[]);
     get CurConnector(): IConnector | undefined;
-    EnableAsync(connectorName: ConnectorNames): Promise<any>;
+    connect(chainId: number, connectorName: ConnectorNames): Promise<any>;
     disconnect(): Promise<void>;
 }
 //# sourceMappingURL=connectorProvider.d.ts.map
