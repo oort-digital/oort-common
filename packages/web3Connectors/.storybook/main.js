@@ -1,3 +1,5 @@
+const { ProvidePlugin } = require('webpack');
+
 module.exports = {
   "stories": [
     "../src/**/*.stories.mdx",
@@ -40,7 +42,7 @@ module.exports = {
   },
 
   webpackFinal: config => {
-    return {
+    const modifiedConfig = {
       ...config,
       resolve: {
         ...config.resolve,
@@ -57,6 +59,14 @@ module.exports = {
            ...config.resolve.fallback,
         }
       }
-    };
+    }
+
+    modifiedConfig.plugins.push(
+      new ProvidePlugin({
+          process: 'process/browser',
+          Buffer: ['buffer', 'Buffer'],
+      }),
+    );
+    return modifiedConfig
   }
 }
