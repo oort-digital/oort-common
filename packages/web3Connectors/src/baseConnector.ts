@@ -1,6 +1,6 @@
 import { providers, Signer } from "ethers";
 import { ILogger } from "@oort/logger";
-import { ConnectorNames } from "@oort/web3-connectors";
+import { ConnectorNames } from "./connectorNames";
 
 type AccountChangedHandlerType = (accounts: Array<string>) => void
 type ChainChangedHandlerType = (chainId: string) => void

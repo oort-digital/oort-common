@@ -1,10 +1,10 @@
 import UniversalProvider, { EthereumRpcMap } from "@walletconnect/universal-provider";
 import { ILogger } from "@oort/logger";
-import { ConnectorNames } from "@oort/web3-connectors";
 import { BaseConnector, IChainInfo } from "./baseConnector";
 import { SessionTypes } from "@walletconnect/types";
 import { Web3Modal } from "@web3modal/standalone";
 import { IConnector } from "./iConnector";
+import { ConnectorNames } from "./connectorNames";
 
 export class WalletConnectConnector extends BaseConnector implements IConnector {
 

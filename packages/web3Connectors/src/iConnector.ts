@@ -1,5 +1,5 @@
-import { ConnectorNames } from "@oort/web3-connectors";
 import { Signer } from "ethers";
+import { ConnectorNames } from "./connectorNames";
 
 export interface IConnector {
     readonly name: ConnectorNames
