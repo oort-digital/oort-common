@@ -86,8 +86,9 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
   })*/
 
   const connect = async (chainId: number) => {
-    await getConnectorInstance().connect(chainId)
-    onConnect()
+    if(await getConnectorInstance().connect(chainId)) {
+      onConnect()
+    }
   }
 
   const disconnect = async () => {

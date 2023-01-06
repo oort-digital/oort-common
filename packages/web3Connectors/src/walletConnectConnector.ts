@@ -41,11 +41,12 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         return ''
     }
 
-    async connect(chainId: number): Promise<any> {
+    async connect(chainId: number): Promise<boolean> {
 
         const ethereumProvider = await this.universalProvider
 
-        this._session = await ethereumProvider.connect({
+        const closePromise = this.waitModalClose()
+        const sessionPromise = ethereumProvider.connect({
             namespaces: {
               eip155: {
                 methods: [
@@ -62,8 +63,18 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
             },
             // pairingTopic: pairing?.topic,
           });
-    
-          this._web3Modal.closeModal()
+
+          const session = await Promise.race([closePromise, sessionPromise])
+
+          if(session && session.expiry) {
+            this._session = session
+            this._web3Modal.closeModal()
+            return true
+          }
+
+          //user close web3Modal
+          return false
+
     }
 
     constructor({ logger, chains, projectId, modalZIndex }: IWalletConnectOptions) {
@@ -87,16 +98,22 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     }
     private readonly _projectId: string
     private readonly _web3Modal: Web3Modal
-
-    // private _walletConnect: WalletConnectProvider
     private readonly _rpc: EthereumRpcMap
-
     private _waitInit: Promise<void>
 
-    // private async checkForPersistedSession(provider: UniversalProvider) {
-    //     const pairings = provider.client.pairing.getAll({ active: true });
-    //     // populates existing pairings to state
-    // }
+    private waitModalClose = (): Promise<void> => {
+        let unSubscribe: (() => void) | undefined
+        const promise = new Promise<void>((resolve, _reject) => {
+            unSubscribe = this._web3Modal.subscribeModal(state => {
+                this.logger.debug(`modal.open: ${state.open.toString()}`)
+                if(state.open === false) {
+                    resolve()
+                }
+            })
+        });
+
+        return promise.then(unSubscribe)
+    }
 
     private async init(): Promise<void> {
         this._universalProvider = await UniversalProvider.init({
