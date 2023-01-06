@@ -9,28 +9,12 @@ import { Gutter } from 'antd/lib/grid/row';
 import { ConnectorNames } from "@oort/web3-connectors";
 import { IChain, isChainEmpty } from '../typesAndInterfaces';
 import { OortModalMobile } from '../oortModal';
-import { IWeb3 } from './connectModal';
+import { IConnectModalProps, IWeb3 } from './connectModal';
 import { ChainButtonWithLogic } from './chainButtonWithLogic';
 import { Alert } from './alert';
 import { Bold } from './bold';
 
-
-interface IProps {
-	web3: IWeb3
-	expectedChainId?: number
-	visible: boolean
-	/**
-	 * @deprecated Use onClose, afterConnect, afterChainSwitch
-	 */
-	onCancel?: () => void
-
-	/** executed when user click 'X' in the top right corner */
-	onClose?: () => void
-	afterConnect?: () => void
-	afterChainSwitch?: () => void
-}
-
-const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, afterChainSwitch, expectedChainId }: IProps) => {
+const ConnectModalMobile = ({ web3, visible, onCancel, onClose, afterConnect, afterChainSwitch, expectedChainId }: IConnectModalProps) => {
 
 	const [ loading, setLoading ] = useState(false)
 	

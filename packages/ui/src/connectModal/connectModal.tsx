@@ -17,7 +17,7 @@ export interface IWeb3 {
     account: string
 }
 
-interface IProps {
+export interface IConnectModalProps {
 	web3: IWeb3
 	expectedChainId?: number
 	visible: boolean
@@ -32,7 +32,7 @@ interface IProps {
 	afterChainSwitch?: () => void
 }
 
-export const ConnectModal = (props: IProps) => {
+export const ConnectModal = (props: IConnectModalProps) => {
 
 	const desktop = <Desktop {...props} />
 	const mobile = <Mobile {...props} />
