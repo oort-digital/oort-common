@@ -15,12 +15,13 @@ export declare class WalletConnectConnector extends BaseConnector implements ICo
     get isConnected(): Promise<boolean>;
     get isInstalled(): boolean;
     get installUrl(): string;
-    connect(chainId: number): Promise<any>;
+    connect(chainId: number): Promise<boolean>;
     constructor({ logger, chains, projectId, modalZIndex }: IWalletConnectOptions);
     private readonly _projectId;
     private readonly _web3Modal;
     private readonly _rpc;
     private _waitInit;
+    private waitModalClose;
     private init;
     private get universalProvider();
     private subscribeToProviderEvents;
