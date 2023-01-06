@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/antOverride.less';
 import '../styles/fonts.css';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
@@ -7,6 +7,8 @@ import { ConnectorNames, IConnector, InjectedConnector, WalletConnectConnector, 
 import { logger } from '@oort/logger';
 import { ZERO_ADDR } from '../utils';
 import { EMPTY_CHAIN } from '../typesAndInterfaces';
+import { IConnectModalProps } from './connectModal';
+import { Button } from 'antd';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -24,7 +26,19 @@ export default {
 } as ComponentMeta<typeof ConnectModal>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ConnectModal> = (args) => <ConnectModal {...args} />;
+const Template: ComponentStory<typeof ConnectModal> = (args: IConnectModalProps) => {
+
+  const [ visible, setVisible ] = useState(true)
+
+  args.onClose = () => setVisible(false)
+  args.visible = visible
+
+  return <>
+    <Button onClick={() => setVisible(true)}>Show modal</Button>
+    <ConnectModal {...args} />
+  </>
+
+}
 
 const chains = [
   {
@@ -83,15 +97,13 @@ const web3NotConnected = { ...web3, ...{ chain: EMPTY_CHAIN, account: '' } }
 export const Connected = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Connected.args = {
-  web3: web3,
-  visible: true
+  web3: web3
 };
 
 export const NotConnected = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 NotConnected.args = {
-  web3: web3NotConnected,
-  visible: true
+  web3: web3NotConnected
 };
 
 
@@ -99,6 +111,5 @@ export const ExpectedChain = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 ExpectedChain.args = {
   web3: web3,
-  visible: true,
   expectedChainId: 5
 };
