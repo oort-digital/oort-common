@@ -6,6 +6,14 @@ import { Web3Modal } from "@web3modal/standalone";
 import { IConnector } from "./iConnector";
 import { ConnectorNames } from "./connectorNames";
 
+
+export interface IWalletConnectOptions {
+    modalZIndex?: number
+    projectId: string
+    logger: ILogger
+    chains: IChainInfo[]
+}
+
 export class WalletConnectConnector extends BaseConnector implements IConnector {
 
     async disconnect(): Promise<void> {
@@ -58,7 +66,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
           this._web3Modal.closeModal()
     }
 
-    constructor(projectId: string, logger: ILogger, chains: IChainInfo[]) {
+    constructor({ logger, chains, projectId, modalZIndex }: IWalletConnectOptions) {
         super(logger, ConnectorNames.WalletConnect, chains)
         this._rpc = {}
         chains.forEach(x => {
@@ -69,6 +77,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
         this._projectId = projectId
         this._web3Modal = new Web3Modal({
+            themeZIndex: modalZIndex,
             projectId: this._projectId,
             themeMode: "light",
         })
@@ -76,7 +85,6 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         // this.initListeners(this._walletConnect)
         this._waitInit = this.init()
     }
-
     private readonly _projectId: string
     private readonly _web3Modal: Web3Modal
 

@@ -17,7 +17,7 @@ export default {
 } as ComponentMeta<typeof FakeComponent>;
 
 
-const supportedChains = [
+const chains = [
   {
     name: "polygon",
     chainId: 137
@@ -28,8 +28,13 @@ const supportedChains = [
   }
 ]
 
-const walletConnect = new WalletConnectConnector('c2b4ff7ce76613f93a7edea85b9618f5', logger, supportedChains)
-const injected = new InjectedConnector(logger, supportedChains)
+const options = {
+  projectId: 'c2b4ff7ce76613f93a7edea85b9618f5',
+  logger,
+  chains
+}
+const walletConnect = new WalletConnectConnector(options)
+const injected = new InjectedConnector(logger, chains)
 
 type ConnectorType = 'walletConnect' | 'injected'
 
