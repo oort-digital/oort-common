@@ -2,6 +2,12 @@ import UniversalProvider from "@walletconnect/universal-provider";
 import { ILogger } from "@oort/logger";
 import { BaseConnector, IChainInfo } from "./baseConnector";
 import { IConnector } from "./iConnector";
+export interface IWalletConnectOptions {
+    modalZIndex?: number;
+    projectId: string;
+    logger: ILogger;
+    chains: IChainInfo[];
+}
 export declare class WalletConnectConnector extends BaseConnector implements IConnector {
     disconnect(): Promise<void>;
     get canSwitchChain(): boolean;
@@ -10,7 +16,7 @@ export declare class WalletConnectConnector extends BaseConnector implements ICo
     get isInstalled(): boolean;
     get installUrl(): string;
     connect(chainId: number): Promise<any>;
-    constructor(projectId: string, logger: ILogger, chains: IChainInfo[]);
+    constructor({ logger, chains, projectId, modalZIndex }: IWalletConnectOptions);
     private readonly _projectId;
     private readonly _web3Modal;
     private readonly _rpc;

@@ -1,4 +1,5 @@
 export type { IConnector } from "./iConnector";
+export type { IWalletConnectOptions } from "./walletConnectConnector";
 export { ConnectorProvider } from "./connectorProvider";
 export { InjectedConnector } from "./injectedConnector";
 export { WalletConnectConnector } from "./walletConnectConnector";
