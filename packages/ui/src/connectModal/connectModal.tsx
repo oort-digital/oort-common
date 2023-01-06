@@ -11,7 +11,7 @@ export interface IWeb3 {
     connectorName: ConnectorNames
     supportedConnectors: { [name: string]: IConnector }
     switchChain: (newChainId: number) => Promise<void>
-    connect: (chainId: number, connectorName: ConnectorNames) => Promise<void>
+    connect: (chainId: number, connectorName: ConnectorNames) => Promise<boolean>
     supportedChains: IChain[]
     chain: IChain
     account: string

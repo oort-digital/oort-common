@@ -8,7 +8,7 @@ import { WalletConnectIcon } from './walletConnectIcon';
 import { Gutter } from 'antd/lib/grid/row';
 import { ConnectorNames } from '@oort/web3-connectors';
 import { OortModal } from '../oortModal';
-import { IConnectModalProps, IWeb3 } from './connectModal';
+import { IConnectModalProps } from './connectModal';
 import { ChainButtonWithLogic } from './chainButtonWithLogic';
 import { Alert } from './alert';
 import { Bold } from './bold';
@@ -21,9 +21,10 @@ const ConnectModalDesktop = ({ web3, onCancel, visible, onClose, afterChainSwitc
 	const connectAndClose = async (chainId: number, cnnName: ConnectorNames) => {
 		setLoading(true)
         try {
-            await connect(chainId, cnnName)
-			onCancel && onCancel()
-			afterConnect && afterConnect()
+            if(await connect(chainId, cnnName)) {
+				onCancel && onCancel()
+				afterConnect && afterConnect()
+			}
         }
         finally {
             setLoading(false)
