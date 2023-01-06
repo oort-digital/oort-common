@@ -2,8 +2,8 @@ import React from 'react';
 import '../styles/antOverride.less';
 import '../styles/fonts.css';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ConnectModal } from '.';
-import { ConnectorNames, IConnector, InjectedConnector } from '@oort/web3-connectors';
+import { ConnectModal, IWeb3 } from '.';
+import { ConnectorNames, IConnector, InjectedConnector, WalletConnectConnector, IWalletConnectOptions } from '@oort/web3-connectors';
 import { logger } from '@oort/logger';
 import { ZERO_ADDR } from '../utils';
 import { EMPTY_CHAIN } from '../typesAndInterfaces';
@@ -26,7 +26,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ConnectModal> = (args) => <ConnectModal {...args} />;
 
-const supportedChains = [
+const chains = [
   {
       name: "rinkeby",
       chainId: 4,
@@ -52,20 +52,29 @@ const supportedChains = [
     blockExplorer: 'https://goerli.etherscan.io',
   }
 ]
+
+const options: IWalletConnectOptions = {
+  modalZIndex: 1001,
+  projectId: 'c2b4ff7ce76613f93a7edea85b9618f5',
+  logger,
+  chains,
+}
   
 const supportedConnectors: { [name: string]: IConnector } = {}
-supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
-supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)
+supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, chains)
+supportedConnectors[ConnectorNames.WalletConnect] = new WalletConnectConnector(options)
 
 
-const web3 = {
+const web3: IWeb3 = {
   canSwitchChain: true,
   connectorName: ConnectorNames.Injected,
   switchChain: async (_newChainId: number) => {},
-  connectAsync: async (_connectorName: ConnectorNames) => {},
-  chain: supportedChains[0],
+  connect: async (chainId: number, connectorName: ConnectorNames) => {
+    await supportedConnectors[connectorName].connect(chainId)
+  },
+  chain: chains[0],
   account: ZERO_ADDR,
-  supportedChains: supportedChains,
+  supportedChains: chains,
   supportedConnectors: supportedConnectors,
 }
 
