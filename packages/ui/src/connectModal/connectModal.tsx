@@ -10,7 +10,7 @@ export interface IWeb3 {
     canSwitchChain: boolean
     connectorName: ConnectorNames
     supportedConnectors: { [name: string]: IConnector }
-    switchChain: (newChainId: number) => Promise<void>
+    switchChain: (newChainId: number) => Promise<boolean>
     connect: (chainId: number, connectorName: ConnectorNames) => Promise<boolean>
     supportedChains: IChain[]
     chain: IChain

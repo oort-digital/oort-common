@@ -1,8 +1,7 @@
 import styles from "./connectModalDesktop.module.less"
-import { OortModal } from '../oortModal';
-import { IConnectModalProps } from './connectModal';
-import { Bold } from './bold';
-import { useConnectModalCommon } from './useConnectModalCommon';
+import { OortModal } from '../oortModal'
+import { IConnectModalProps } from './connectModal'
+import { useConnectModalCommon } from './useConnectModalCommon'
 
 const ConnectModalDesktop = (props: IConnectModalProps) => {
 

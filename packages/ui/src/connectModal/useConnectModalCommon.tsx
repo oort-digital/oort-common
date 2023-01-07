@@ -28,7 +28,7 @@ interface IArgs {
 
 export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IArgs): IResult => {
 
-    const { onCancel, onClose, afterChainSwitch, web3, expectedChainId } = props
+    const { onCancel, onClose, afterConnect, afterChainSwitch, web3, expectedChainId } = props
     const [ loading, setLoading ] = useState(false)
     
     const footer1 = <>By connecting, I accept Oort Digital’s <a href='https://oort.digital/terms'>Terms of Service</a> and acknowledge</>
@@ -57,9 +57,10 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
     const switchChainAndClose = async (newChainId: number): Promise<void> => {		
         setLoading(true)
         try {
-            await switchChain(newChainId)
-			onCancel && onCancel()
-			afterChainSwitch && afterChainSwitch()
+            if(await switchChain(newChainId)) {
+			    onCancel && onCancel()
+			    afterChainSwitch && afterChainSwitch()
+            }
         }
         finally {
             setLoading(false)
