@@ -74,6 +74,8 @@ export class Web3StoreStub implements IWeb3 {
         this.chain = { ...newChain }
       })
     }
+
+    return true
     
   }
 
@@ -84,6 +86,7 @@ export class Web3StoreStub implements IWeb3 {
       this.chain = { ...supportedChains[0] }
       this.account = '0x0000000000000000000000000000000000000001'
     })
+    return true
   }
 
   constructor() {
