@@ -24,9 +24,9 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     
     get canSwitchChain() { return true }
 
-    async switchChain(chainId: number): Promise<void> {
+    async switchChain(chainId: number): Promise<boolean> {
         await this.disconnect()
-        await this.connect(chainId)
+        return await this.connect(chainId)
     }
 
     get isConnected(): Promise<boolean> {

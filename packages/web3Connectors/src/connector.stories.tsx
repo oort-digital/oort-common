@@ -4,6 +4,7 @@ import { WalletConnectConnector } from './walletConnectConnector';
 import { logger } from '@oort/logger';
 import { InjectedConnector } from './injectedConnector';
 import { IConnector } from './iConnector';
+import { IChainInfo } from './baseConnector';
 
 const FakeComponent = () => <></>
 
@@ -17,14 +18,16 @@ export default {
 } as ComponentMeta<typeof FakeComponent>;
 
 
-const chains = [
+const chains: IChainInfo[] = [
   {
     name: "polygon",
-    chainId: 137
+    chainId: 137,
+    rpcUrl: 'https://matic-mainnet.chainstacklabs.com'
   },
   {
       name: "ethereum",
-      chainId: 1
+      chainId: 1,
+      rpcUrl: ''
   }
 ]
 
@@ -97,8 +100,9 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
   }
 
   const switchChain = async (chainId: number) => {
-    await getConnectorInstance().switchChain(chainId)
-    onConnect()
+    if(await getConnectorInstance().switchChain(chainId)) {
+      onConnect()
+    }
   }
 
   return <div>

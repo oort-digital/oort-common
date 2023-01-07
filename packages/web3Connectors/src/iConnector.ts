@@ -13,6 +13,6 @@ export interface IConnector {
     onChainChanged(handler: (chainId: string) => void) : void
     onDisconnect(handler: (error: any) => void) : void
     canSwitchChain: boolean
-    switchChain(chainId: number): Promise<void>
+    switchChain(chainId: number): Promise<boolean>
     disconnect(): Promise<void>
 }

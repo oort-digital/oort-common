@@ -9,7 +9,7 @@ type DisconnectHandlerType = (error: any) => void
 export interface IChainInfo {
     name: string
     chainId: number
-    rpcUrl?: string
+    rpcUrl: string
     blockExplorer?: string
     nativeCurrency?: {
         name: string
