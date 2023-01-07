@@ -11,7 +11,7 @@ export interface IWalletConnectOptions {
 export declare class WalletConnectConnector extends BaseConnector implements IConnector {
     disconnect(): Promise<void>;
     get canSwitchChain(): boolean;
-    switchChain(chainId: number): Promise<void>;
+    switchChain(chainId: number): Promise<boolean>;
     get isConnected(): Promise<boolean>;
     get isInstalled(): boolean;
     get installUrl(): string;

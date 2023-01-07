@@ -7,16 +7,17 @@ declare global {
     }
 }
 export declare class InjectedConnector extends BaseConnector implements IConnector {
-    protected getRawProvider(): Promise<any>;
-    private _ethRequestAccounts;
-    constructor(logger: ILogger, chains: IChainInfo[]);
     get canSwitchChain(): boolean;
-    switchChain(chainId: number): Promise<void>;
-    private prvEnable;
     connect(chainId: number): Promise<boolean>;
-    private isConnectedAsync;
+    switchChain(chainId: number): Promise<boolean>;
     get isConnected(): Promise<boolean>;
     get isInstalled(): boolean;
     get installUrl(): string;
+    constructor(logger: ILogger, chains: IChainInfo[]);
+    private addEthereumChain;
+    protected getRawProvider(): Promise<any>;
+    private _ethRequestAccounts;
+    private prvEnable;
+    private isConnectedAsync;
 }
 //# sourceMappingURL=injectedConnector.d.ts.map
