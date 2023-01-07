@@ -54,7 +54,7 @@ export class ConnectorProvider
         return this._curConnector;
     }
 
-    async connect(chainId: number, connectorName: ConnectorNames): Promise<any> {
+    async connect(chainId: number, connectorName: ConnectorNames): Promise<void> {
         await this.WaitInitialisationAsync
         const curConnector = this.connectorsByName[connectorName]
         if(await curConnector.connect(chainId)) {
