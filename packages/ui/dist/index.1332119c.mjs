@@ -2636,7 +2636,7 @@ const u5 = (e = "cookies") => {
     fallback: /* @__PURE__ */ o("span", {}),
     children: [" ", (() => r === $1.Desktop ? e : r === $1.Phone ? t : n)(), " "]
   });
-}, f5 = Ce(() => import("./connectModalDesktop.f2bfdc44.mjs")), C5 = Ce(() => import("./connectModalMobile.5c07e73d.mjs")), h5 = (e) => {
+}, f5 = Ce(() => import("./connectModalDesktop.8c216192.mjs")), C5 = Ce(() => import("./connectModalMobile.02df8896.mjs")), h5 = (e) => {
   const t = /* @__PURE__ */ o(f5, {
     ...e
   }), n = /* @__PURE__ */ o(C5, {
@@ -4797,12 +4797,12 @@ export {
   Ho as ay,
   jo as az,
   xo as b,
-  A3 as c,
-  V0 as d,
-  Zr as e,
-  Nt as f,
+  V0 as c,
+  Zr as d,
+  Nt as e,
+  bo as f,
   Fn as g,
-  bo as h,
+  A3 as h,
   $r as i,
   o as j,
   x3 as k,
@@ -4822,4 +4822,4 @@ export {
   K3 as y,
   No as z
 };
-//# sourceMappingURL=index.76adbf6b.mjs.map
+//# sourceMappingURL=index.1332119c.mjs.map

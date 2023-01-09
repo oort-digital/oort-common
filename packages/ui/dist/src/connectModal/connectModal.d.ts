@@ -6,13 +6,13 @@ export interface IWeb3 {
     supportedConnectors: {
         [name: string]: IConnector;
     };
-    switchChain: (newChainId: number) => Promise<void>;
-    connectAsync: (connectorName: ConnectorNames) => Promise<void>;
+    switchChain: (newChainId: number) => Promise<boolean>;
+    connect: (chainId: number, connectorName: ConnectorNames) => Promise<boolean>;
     supportedChains: IChain[];
     chain: IChain;
     account: string;
 }
-interface IProps {
+export interface IConnectModalProps {
     web3: IWeb3;
     expectedChainId?: number;
     visible: boolean;
@@ -21,6 +21,5 @@ interface IProps {
     afterConnect?: () => void;
     afterChainSwitch?: () => void;
 }
-export declare const ConnectModal: (props: IProps) => JSX.Element;
-export {};
+export declare const ConnectModal: (props: IConnectModalProps) => JSX.Element;
 //# sourceMappingURL=connectModal.d.ts.map
