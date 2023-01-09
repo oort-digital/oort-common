@@ -10,14 +10,14 @@ export interface IWeb3 {
     canSwitchChain: boolean
     connectorName: ConnectorNames
     supportedConnectors: { [name: string]: IConnector }
-    switchChain: (newChainId: number) => Promise<void>
-    connectAsync: (connectorName: ConnectorNames) => Promise<void>
+    switchChain: (newChainId: number) => Promise<boolean>
+    connect: (chainId: number, connectorName: ConnectorNames) => Promise<boolean>
     supportedChains: IChain[]
     chain: IChain
     account: string
 }
 
-interface IProps {
+export interface IConnectModalProps {
 	web3: IWeb3
 	expectedChainId?: number
 	visible: boolean
@@ -32,7 +32,7 @@ interface IProps {
 	afterChainSwitch?: () => void
 }
 
-export const ConnectModal = (props: IProps) => {
+export const ConnectModal = (props: IConnectModalProps) => {
 
 	const desktop = <Desktop {...props} />
 	const mobile = <Mobile {...props} />
