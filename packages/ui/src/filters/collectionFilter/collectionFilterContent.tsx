@@ -59,7 +59,7 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, ci
             abortController.abort()
         }
 
-    }, [filterStore]);// eslint-disable-line react-hooks/exhaustive-deps
+    }, [filterStore]);
 
     const select = (item: ICollectionFilterItem, isChecked: boolean) => {
         filterStore.select(item.key, isChecked)

@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/antOverride.less';
 import '../styles/fonts.css';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ConnectModal } from '.';
+import { ConnectModal, IWeb3 } from '.';
 import { ConnectorNames, IConnector, InjectedConnector } from '@oort/web3-connectors';
 import { logger } from '@oort/logger';
 import { ZERO_ADDR } from '../utils';
@@ -26,7 +26,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ConnectModal> = (args) => <ConnectModal {...args} />;
 
-const supportedChains = [
+const chains = [
   {
       name: "rinkeby",
       chainId: 4,
@@ -54,18 +54,18 @@ const supportedChains = [
 ]
   
 const supportedConnectors: { [name: string]: IConnector } = {}
-supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
-supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)
+supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, chains)
+supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, chains)
 
 
-const web3 = {
+const web3: IWeb3 = {
   canSwitchChain: true,
   connectorName: ConnectorNames.Injected,
-  switchChain: async (_newChainId: number) => {},
-  connectAsync: async (_connectorName: ConnectorNames) => {},
-  chain: supportedChains[0],
+  switchChain: async (_newChainId: number) => true,
+  connect: async (chainId: number, _connectorName: ConnectorNames) => true,
+  chain: chains[0],
   account: ZERO_ADDR,
-  supportedChains: supportedChains,
+  supportedChains: chains,
   supportedConnectors: supportedConnectors,
 }
 

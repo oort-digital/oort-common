@@ -7,7 +7,8 @@
     "build:source": "rollup --config rollup.config.js",
     "build": "yarn clean && yarn build:source && yarn build:types",
     "test": "jest",
-    "rm": "rimraf node_modules"
+    "rm": "rimraf node_modules",
+    "storybook": "yarn start-storybook -p 6006 -s public"
   },
   "jest": {
     "verbose": true,
@@ -35,7 +36,17 @@
     "@types/jest": "^29.1.1",
     "jest": "^29.1.2",
     "ts-jest": "^29.0.3",
-    "@walletconnect/web3-provider": "^1.8.0"
+    "@walletconnect/web3-provider": "^1.8.0",
+    "@storybook/addon-actions": "^6.5.13",
+    "@storybook/addon-essentials": "^6.5.13",
+    "@storybook/addon-interactions": "^6.5.13",
+    "@storybook/addon-links": "^6.5.13",
+    "@storybook/builder-webpack5": "^6.5.13",
+    "@storybook/manager-webpack5": "^6.5.13",
+    "@storybook/node-logger": "^6.5.13",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.13",
+    "@storybook/testing-library": "^0.0.13"
   },
   "license": "UNLICENSED",
  
