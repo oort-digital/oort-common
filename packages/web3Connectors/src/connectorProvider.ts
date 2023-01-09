@@ -4,12 +4,17 @@ import { IConnector } from "./iConnector";
 
 const lsKey = 'cur_connector';
 
-const getCurConnectorName = () : ConnectorNames | undefined => {
-    const curCnnNameStr = localStorage.getItem(lsKey);
-    return curCnnNameStr ? curCnnNameStr as ConnectorNames : undefined;
+interface ICurConnector {
+    chainId: number
+    name: ConnectorNames
 }
 
-const setCurConnectorName = (connectorName: ConnectorNames) => localStorage.setItem(lsKey, connectorName);
+const getCurConnectorName = () : ICurConnector | undefined => {
+    const jsonStr = localStorage.getItem(lsKey);
+    return jsonStr ? JSON.parse(jsonStr) : undefined;
+}
+
+const setCurConnectorName = (curConnector: ICurConnector) => localStorage.setItem(lsKey, JSON.stringify(curConnector));
 const removeCurConnectorName = () => localStorage.removeItem(lsKey);
 
 
@@ -20,12 +25,12 @@ export class ConnectorProvider
     private _curConnector: IConnector | undefined
     public readonly WaitInitialisationAsync : Promise<void>
 
-    private async InitAsync(connectors: IConnector[], curConnectorName?: ConnectorNames): Promise<void> {
+    private async InitAsync(connectors: IConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
         let curConnector: IConnector | undefined = undefined
         for(let i = 0; i < connectors.length; i++) {
             const c = connectors[i]
             this.connectorsByName[c.name] = c
-            if(c.name === curConnectorName) {
+            if(c.name === curConnectorData?.name) {
                 if(await c.isConnected) {
                     curConnector = c
                 }
@@ -33,7 +38,7 @@ export class ConnectorProvider
         }
 
         if(curConnector) {
-            if(await curConnector.enable()) {
+            if(await curConnector.connect(curConnectorData!.chainId)) {
                 this._curConnector = curConnector
                 this._logger.debug(`Current connector is ${this._curConnector.name}`)
             }
@@ -49,11 +54,11 @@ export class ConnectorProvider
         return this._curConnector;
     }
 
-    async EnableAsync(connectorName: ConnectorNames): Promise<any> {
+    async connect(chainId: number, connectorName: ConnectorNames): Promise<void> {
         await this.WaitInitialisationAsync
         const curConnector = this.connectorsByName[connectorName]
-        if(await curConnector.enable()) {
-            setCurConnectorName(connectorName)
+        if(await curConnector.connect(chainId)) {
+            setCurConnectorName({ chainId, name: connectorName})
             this._curConnector = curConnector
         }
     }
