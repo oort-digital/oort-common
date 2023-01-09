@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"version":3,"file":"connectModalMobile.d.ts","sourceRoot":"","sources":["connectModalMobile.tsx"],"names":[],"mappings":"AAEA,OAAO,EAAE,kBAAkB,EAAE,MAAM,gBAAgB,CAAC;AAGpD,QAAA,MAAM,kBAAkB,UAAW,kBAAkB,gBAkBpD,CAAA;AAED,eAAe,kBAAkB,CAAA"}
+=======
+{"version":3,"file":"connectModalMobile.d.ts","sourceRoot":"","sources":["connectModalMobile.tsx"],"names":[],"mappings":"AAEA,OAAO,EAAE,kBAAkB,EAAE,MAAM,gBAAgB,CAAA;AAGnD,QAAA,MAAM,mBAAmB,UAAW,kBAAkB,gBA2BrD,CAAC;AAEF,eAAe,mBAAmB,CAAA"}
+>>>>>>> master

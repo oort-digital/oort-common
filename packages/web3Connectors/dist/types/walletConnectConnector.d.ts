@@ -9,6 +9,7 @@ export interface IWalletConnectOptions {
     chains: IChainInfo[];
 }
 export declare class WalletConnectConnector extends BaseConnector implements IConnector {
+<<<<<<< HEAD
     disconnect(): Promise<void>;
     get canSwitchChain(): boolean;
     switchChain(chainId: number): Promise<boolean>;
@@ -28,5 +29,18 @@ export declare class WalletConnectConnector extends BaseConnector implements ICo
     private _universalProvider;
     protected getRawProvider: () => Promise<UniversalProvider>;
     private _session;
+=======
+    private _walletConnect;
+    private readonly _rpc;
+    constructor({ logger, chains }: IWalletConnectOptions);
+    disconnect(): Promise<void>;
+    get canSwitchChain(): boolean;
+    switchChain(chainId: number): Promise<boolean>;
+    protected getRawProvider(): Promise<any>;
+    get isConnected(): Promise<boolean>;
+    get isInstalled(): boolean;
+    get installUrl(): string;
+    connect(_chainId: number): Promise<boolean>;
+>>>>>>> master
 }
 //# sourceMappingURL=walletConnectConnector.d.ts.map

@@ -1,24 +1,23 @@
-const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
+const { ProvidePlugin } = require('webpack');
 
 module.exports = {
-
-  webpackFinal: async (config, { configType }) => {
-    // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
-    // You can change the configuration based on that.
-    // 'PRODUCTION' is used when building the static version of storybook.
-
-    // Make whatever fine-grained changes you need
-    config.plugins.push(new NodePolyfillPlugin());
-
-    // Return the altered config
-    return config;
-  },
-
   "stories": [
     "../src/**/*.stories.mdx",
     "../src/**/*.stories.@(js|jsx|ts|tsx)"
   ],
   "addons": [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    // "@storybook/preset-create-react-app",
+    {
+      name: '@storybook/preset-create-react-app',
+      options: {
+        craOverrides: {
+          fileLoaderExcludes: ['less'],
+        },
+      },
+    },
     {
       name: 'storybook-preset-less',
       options: {
@@ -32,16 +31,45 @@ module.exports = {
             // noIeCompat: true,
             // relativeUrls: false,
             javascriptEnabled: true,
-          },
-        },
-      },
-    },
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions"
+          }
+        }
+      }
+    }
   ],
   "framework": "@storybook/react",
   "core": {
     "builder": "@storybook/builder-webpack5"
+  },
+
+  webpackFinal: config => {
+    const modifiedConfig = {
+      ...config,
+      resolve: {
+        ...config.resolve,
+        modules: [...config.resolve.modules],
+        fallback: {
+          stream: false,
+          //  timers: false,
+          //  tty: false,
+          os: false,
+          http: false,
+          https: false,
+          zlib: false,
+          net: false,
+          tls: false,
+          crypto: false,
+          //  util: false,
+           ...config.resolve.fallback,
+        }
+      }
+    }
+
+    modifiedConfig.plugins.push(
+      new ProvidePlugin({
+          process: 'process/browser',
+          Buffer: ['buffer', 'Buffer'],
+      }),
+    );
+    return modifiedConfig
   }
 }
