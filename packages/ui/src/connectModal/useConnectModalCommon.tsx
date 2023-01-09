@@ -116,6 +116,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 
     const span = isMobile ? 24 : 12
 
+    const connectChainId = expectedChainId || supportedChains[0].chainId
     const content = <>
         {
             isChainEmpty(chain) && <>
@@ -131,8 +132,8 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
             <Bold>Connect your Wallet</Bold> and jump into the world of NFT's
         </div>
         <Row gutter={btnGutter} justify={justify}>
-            <Col span={span}>{renderWalletBtn(supportedChains[0].chainId, "Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>
-            <Col span={span}>{renderWalletBtn(supportedChains[0].chainId, "WalletConnect", ConnectorNames.WalletConnect, WalletConnectIcon)}</Col>
+            <Col span={span}>{renderWalletBtn(connectChainId, "Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>
+            <Col span={span}>{renderWalletBtn(connectChainId, "WalletConnect", ConnectorNames.WalletConnect, WalletConnectIcon)}</Col>
         </Row>
     </>
 
