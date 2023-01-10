@@ -9,7 +9,7 @@ const plugins = [
   commonjs(),
   json(),
   esbuild({
-    minify: true,
+    minify: false,
     tsconfig: "./tsconfig.json",
     loaders: {
       ".json": "json",
@@ -25,20 +25,20 @@ export default function createConfig(packageName, packageDependencies) {
       external: packageDependencies,
       output: [
         {
-          file: "./dist/index.cjs.js",
+          file: "./dist/index.js",
           format: "cjs",
           exports: "named",
           name: packageName,
           sourcemap: true,
         },
         {
-          file: "./dist/index.es.js",
+          file: "./dist/index.mjs",
           format: "es",
           exports: "named",
           name: packageName,
           sourcemap: true,
         },
       ],
-    },
+    }
   ];
 }
