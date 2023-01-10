@@ -98,6 +98,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 
 		if(account && cnnName === connectorName) {
 			return <ConnectButton
+                    disabled={loading.inProcess}
 					walletName={walletName}
 					walletIcon={icon}
 					account={account}/>
@@ -107,6 +108,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 		if(!connector.isInstalled) {
 			return <ConnectButton
 				walletName={walletName}
+                disabled={loading.inProcess}
 				onClick={() => window.open(connector.installUrl, '_blank')!.focus()}
 				walletIcon={icon}
 				labelText="Install"
@@ -115,6 +117,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 
 		return <ConnectButton
             loading={cnnName === loading.cnnName}
+            disabled={loading.inProcess}
 			walletName={walletName}
 			onClick={() => connectAndClose(chainId, cnnName)}
 			walletIcon={icon}
