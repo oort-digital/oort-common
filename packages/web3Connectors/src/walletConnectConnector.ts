@@ -26,7 +26,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     }
 
     async disconnect(): Promise<void> {
-        await super.disconnect()
+        super.removeListeners_(this._walletConnect)
         await this._walletConnect.disconnect()
     }
     

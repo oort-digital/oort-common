@@ -21,7 +21,6 @@ export interface IFaceWalletOptions {
 export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     async disconnect(): Promise<void> {
-        await super.disconnect()
         await this.face.auth.logout()
     }
     

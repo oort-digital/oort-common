@@ -83,7 +83,7 @@ export abstract class BaseConnector {
         // web3Provider.on("disconnect", this.disconnectHandler);
     }
 
-    private removeListeners(rawProvider: any) {
+    protected removeListeners_(rawProvider: any) {
         rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
         rawProvider.removeListener('chainChanged', this.chainChangedHandler);
         // this.rawProvider.removeListener("disconnect", this.disconnectHandler);
@@ -119,9 +119,4 @@ export abstract class BaseConnector {
         const provider = new providers.Web3Provider(await this.getRawProvider())
         return provider.getSigner()
     }
-
-    async disconnect(): Promise<void> {
-        this.removeListeners(await this.getRawProvider())
-    }
-
 }

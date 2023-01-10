@@ -21,6 +21,11 @@ export class InjectedConnector extends BaseConnector implements IConnector
 {
   get canSwitchChain() { return !!window.ethereum.isMetaMask }
 
+  disconnect(): Promise<void> {
+    super.removeListeners_(window.ethereum)
+    return Promise.resolve()
+  }
+
   async connect(chainId: number): Promise<boolean> {
     if(this._ethRequestAccounts) {
       this.logger.debug('InjectedConnector.enable already called')
