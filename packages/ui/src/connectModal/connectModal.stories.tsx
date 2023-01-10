@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectModal, IWeb3 } from '.';
 import { ConnectorNames, ConnectorProvider, FaceWalletConnector, IConnector, IFaceWalletOptions, InjectedConnector } from '@oort/web3-connectors';
 import { logger } from '@oort/logger';
-import { ZERO_ADDR } from '../utils';
+import { delayAsync, ZERO_ADDR } from '../utils';
 import { EMPTY_CHAIN } from '../typesAndInterfaces';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -68,16 +68,19 @@ supportedConnectors[ConnectorNames.FaceWallet] = new FaceWalletConnector(faceWal
 
 const connectorProvider = new ConnectorProvider(logger, Object.entries(supportedConnectors).map(x => x[1]))
 
+const web3Delay = 5000
 const web3: IWeb3 = {
   canSwitchChain: true,
   connectorName: ConnectorNames.Injected,
   switchChain: async (newChainId: number) => {
+    await delayAsync(web3Delay)
     if(connectorProvider.CurConnector?.canSwitchChain === true) {
       return await connectorProvider.CurConnector.switchChain(newChainId)
     }
     return false
   },
   connect: async (chainId: number, connectorName: ConnectorNames) => {
+    await delayAsync(web3Delay)
     await connectorProvider.connect(chainId, connectorName)
     return true
   },
