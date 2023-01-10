@@ -8,7 +8,7 @@
     "build": "yarn clean && yarn build:source && yarn build:types",
     "test": "jest",
     "rm": "rimraf node_modules",
-    "storybook": "yarn start-storybook -p 6006 -s public"
+    "storybook": "yarn start-storybook -p 3000 -s public"
   },
   "jest": {
     "verbose": true,

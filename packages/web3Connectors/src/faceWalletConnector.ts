@@ -76,15 +76,19 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     async connect(chainId: number): Promise<boolean> {
         
-        const network = getNetworkById(chainId)
-        this._face = new Face({
-            network: network, 
-            apiKey: resolveApiKey(network)
-        })
-
-        if(!await this.face.auth.isLoggedIn()) {
-            await this.face.auth.login()
+        if(!this._face) {
+            const network = getNetworkById(chainId)
+            this._face = new Face({
+                network: network, 
+                apiKey: resolveApiKey(network)
+            })
         }
+
+        if(await this.face.auth.isLoggedIn()) {
+            return true
+        }
+
+        /*const response = */await this.face.auth.login()
 
         return true
     }
