@@ -57,11 +57,50 @@ const walletConnect = new WalletConnectConnector(walletConnectOptions)
 const injected = new InjectedConnector(logger, chains)
 const faceWallet = new FaceWalletConnector(faceWalletConnectOptions)
 
+
+type OnClickHandler = (chainId: number) => Promise<void>
+interface IConnectButtonProps {
+  chainId: number
+  curChainId: number | undefined
+  connect: OnClickHandler
+  switchChain: OnClickHandler
+}
+
+const getChainName = (chainId: number): string => {
+  switch(chainId) {
+    case 1:
+      return 'Ethereum'
+    case 5:
+      return 'Goerli'
+    case 137:
+      return 'Polygon'
+    case 80001:
+      return 'Mumbai'
+  }
+
+  throw new Error(`Unknown chain. ChainId: ${chainId}`)
+}
+
+const ConnectButton = ({ chainId, curChainId, connect, switchChain }: IConnectButtonProps) => {
+
+  let onClick: OnClickHandler
+  let text = `to ${getChainName(chainId)}`
+
+  if(curChainId) {
+    onClick = switchChain
+    text = `Switch ${text}`
+  }
+  else {
+    onClick = connect
+    text = `Connect ${text}`
+  }
+  return <button disabled={curChainId === chainId} onClick={() => onClick(chainId)}>{text}</button>
+}
+
 const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
   const [ chainId, setChainId ] = useState<number>()
   const [ address, setAddress ] = useState<string>()
-  const [ connected, setConnected ] = useState<boolean>(false)
 
   const [ curConnector, setCurConnector ] = useState<ConnectorNames>(ConnectorNames.FaceWallet)
 
@@ -76,13 +115,11 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
     const signer = await instance.getSigner()
     setAddress(await signer.getAddress())
     setChainId(await signer.getChainId())
-    setConnected(true)
   }
 
   const reset = () => {
     setChainId(undefined)
     setAddress(undefined)
-    setConnected(false)
   }
 
   useEffect(() => {
@@ -120,6 +157,8 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
     }
   }
 
+  const renderConnectBtn = (chnId: number) => <ConnectButton curChainId={chainId} chainId={chnId} switchChain={switchChain} connect={connect} />
+
   return <div>
 
     <select value={curConnector} onChange={(ev: any) => setCurConnector(ev.target.value)}>
@@ -130,16 +169,15 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
     <div>chainId: {chainId}</div>
     <div>address: {address}</div>
-    <div>connected: {connected.toString()}</div>
-    <button disabled={!connected} onClick={() => disconnect()}>Disconnect</button>
+    <div>connected: {(!!chainId).toString()}</div>
+    <button disabled={!chainId} onClick={() => disconnect()}>Disconnect</button>
     <h1>Mainnets</h1>
-    <button disabled={connected} onClick={() => connect(1)}>Connect to Ethereum</button>
-    <button disabled={!connected || chainId === 137} onClick={() => switchChain(137)}>Switch to Polygon</button>
+    {renderConnectBtn(1)}
+    {renderConnectBtn(137)}
 
     <h1>Testnets</h1>
-    <button disabled={connected} onClick={() => connect(5)}>Connect to Goerli</button>
-    <button disabled={!connected || chainId === 80001} onClick={() => switchChain(80001)}>Switch to Mumbai</button>
-
+    {renderConnectBtn(5)}
+    {renderConnectBtn(80001)}
   </div>
 }
 
