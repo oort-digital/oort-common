@@ -5,6 +5,8 @@ import { logger } from '@oort/logger';
 import { InjectedConnector } from './injectedConnector';
 import { IConnector } from './iConnector';
 import { IChainInfo } from './baseConnector';
+import { ConnectorNames } from './connectorNames';
+import { FaceWalletConnector } from './faceWalletConnector';
 
 const FakeComponent = () => <></>
 
@@ -38,10 +40,7 @@ const options = {
 }
 const walletConnect = new WalletConnectConnector(options)
 const injected = new InjectedConnector(logger, chains)
-
-type ConnectorType = 'walletConnect' | 'injected'
-
-
+const faceWallet = new FaceWalletConnector(logger, chains)
 
 const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
@@ -49,10 +48,11 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
   const [ address, setAddress ] = useState<string>()
   const [ connected, setConnected ] = useState<boolean>(false)
 
-  const [ curConnector, setCurConnector ] = useState<ConnectorType>('walletConnect')
+  const [ curConnector, setCurConnector ] = useState<ConnectorNames>(ConnectorNames.FaceWallet)
 
   const getConnectorInstance = (): IConnector => {
-    if(curConnector === 'injected') { return injected }
+    if(curConnector === ConnectorNames.Injected) { return injected }
+    if(curConnector === ConnectorNames.FaceWallet) { return faceWallet }
     return walletConnect
   }
 
@@ -108,8 +108,9 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
   return <div>
 
     <select value={curConnector} onChange={(ev: any) => setCurConnector(ev.target.value)}>
-      <option value="walletConnect">wallet connect</option>
-      <option value="injected">injected</option>
+      <option value={ConnectorNames.FaceWallet}>face wallet</option>
+      <option value={ConnectorNames.WalletConnect}>wallet connect</option>
+      <option value={ConnectorNames.Injected}>injected</option>
     </select>
 
     <div>chainId: {chainId}</div>

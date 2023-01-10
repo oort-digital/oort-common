@@ -1,6 +1,5 @@
 import { ILogger } from "@oort/logger";
 import { Face, Network } from "@haechi-labs/face-sdk";
-import { ethers } from 'ethers';
 import { BaseConnector, IChainInfo } from "./baseConnector";
 import { IConnector } from "./iConnector";
 import { ConnectorNames } from "./connectorNames";
@@ -28,17 +27,10 @@ const resolveApiKey = (network: Network) => {
 }
 
 const getNetworkById = (id: number): Network => {
-
-    if(id === 80001) {
-        return Network.MUMBAI
-    }
-
-    if(id === 5) {
-        return Network.GOERLI
-    }
-
+    if(id === 1) { return Network.ETHEREUM }
+    if(id === 80001) { return Network.MUMBAI }
+    if(id === 5) { return Network.GOERLI }
     throw new Error(`Unknow chain id: ${id}`)
-
 }
 
 
@@ -59,7 +51,10 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     }
 
     get isConnected(): Promise<boolean> {
-        return this.face.auth.isLoggedIn()
+        if(!this._face) {
+            return Promise.resolve(false)
+        }
+        return this._face.auth.isLoggedIn()
     }
 
     get isInstalled(): boolean {
@@ -101,6 +96,11 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         return Promise.resolve(this.face.getEthLikeProvider())
     }
 
+    /*
+    According to https://docs.facewallet.xyz/docs/initialize
+    Face objects cannot be duplicated. For an object that was created,
+    we recommend you manage and use it as a global variable or global state.
+    */
     private _face: Face | undefined
 
     private get face(): Face {
