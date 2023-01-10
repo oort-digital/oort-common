@@ -1,4 +1,4 @@
 import createConfig from "../../rollup.config.mjs";
-// const { name, dependencies } = require('./package.json')
+import pks from './package.json' assert { type: "json" };
 
-export default createConfig('test', {});
+export default createConfig(pks.name, pks.dependencies);
