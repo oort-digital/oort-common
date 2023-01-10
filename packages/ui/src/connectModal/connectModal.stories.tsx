@@ -7,7 +7,7 @@ import { ConnectorNames, ConnectorProvider, IConnector, InjectedConnector } from
 import { logger } from '@oort/logger';
 import { ZERO_ADDR } from '../utils';
 import { EMPTY_CHAIN } from '../typesAndInterfaces';
-import { FaceWalletConnector } from './faceWalletConnector';
+import { FaceWalletConnector } from '../../../../faceWalletConnector';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

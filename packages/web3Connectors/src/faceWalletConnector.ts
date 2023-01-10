@@ -1,7 +1,9 @@
-import { ConnectorNames, IConnector, BaseConnector, IChainInfo } from '@oort/web3-connectors';
 import { ILogger } from "@oort/logger";
 import { Face, Network } from "@haechi-labs/face-sdk";
 import { ethers } from 'ethers';
+import { BaseConnector, IChainInfo } from "./baseConnector";
+import { IConnector } from "./iConnector";
+import { ConnectorNames } from "./connectorNames";
 
 // todo:
 // these api keys works only for localhost:3000
@@ -40,8 +42,6 @@ const getNetworkById = (id: number): Network => {
 }
 
 
-// todo:
-// after develop put it to /packages/web3Connectors
 export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     async disconnect(): Promise<void> {
@@ -52,10 +52,10 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     get canSwitchChain() { return true }
 
     // @ts-ignore
-    async switchChain(chainId: number): Promise<void> {
+    async switchChain(chainId: number): Promise<boolean> {
         const network = getNetworkById(chainId)
         await this.face.switchNetwork(network)
-        this.logger.debug(`FaceWalletConnector.switchNetwork. ChainId: ${chainId}`)
+        return true
     }
 
     get isConnected(): Promise<boolean> {
@@ -70,11 +70,14 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         return ''
     }
 
-    // It looks like you need ask user, which one network he want to connect and pass chainId as parameter.
-    // WalletConnetConnector and InjectedConnector must ignore this parameter.
-    // Because user selects network in native wallet interface
-    async enable(/* chainId: number */): Promise<boolean> {
+    async connect(chainId: number): Promise<boolean> {
         
+        const network = getNetworkById(chainId)
+        this._face = new Face({
+            network: network, 
+            apiKey: resolveApiKey(network)
+        })
+
         if(!await this.face.auth.isLoggedIn()) {
             await this.face.auth.login()
         }
@@ -94,23 +97,16 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         */
     }
 
-    protected get rawProvider(): any {
-        return this.face.getEthLikeProvider()
+    protected getRawProvider(): Promise<any> {
+        return Promise.resolve(this.face.getEthLikeProvider())
     }
 
     private _face: Face | undefined
 
-    // todo: hardcoded just for example. need some refactoring
-    private readonly _initialNetworkId: number = 80001
-
-    get face(): Face {
+    private get face(): Face {
 
         if(!this._face) {
-            const network = getNetworkById(this._initialNetworkId)
-            this._face = new Face({
-                network: network, 
-                apiKey: resolveApiKey(network)
-            })
+            throw new Error('Provider not connected. Call FaceWalletConnector.connect first')
         }
     
         return this._face
