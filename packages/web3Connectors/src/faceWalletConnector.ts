@@ -4,37 +4,6 @@ import { BaseConnector, IChainInfo } from "./baseConnector";
 import { IConnector } from "./iConnector";
 import { ConnectorNames } from "./connectorNames";
 
-
-/*
-https://oortdigital.slack.com/archives/C04EY5MLV50/p1671005355999189
-
-Oort NFT Rental Marketplace
-
-[API Key for Testnet]
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDD7uJnqeI74gH6M-cSeEq82_Zrh-dp9KYH9asKMsjmdZpxjuHifc8lRhkKp5ZDTr9H__bpX8XFSBHt52r_iyP2-pMMh5E-T3uQJLFs0dBUSw2COr2ZgA_QWFHaIoSOtV_b9w5gEzxY623L0_Op9ItpZ51NN1WGEWgate5k-vMaDwIDAQAB
-
-[API Key for Mainnet]
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCX9F3aDaZiPAsbGNbnpHAyBJNBHi4DtLkHIo1ZSYKSlxVHkg2ejuN1rMmPFGe6cZsZS7eAcNB-AaVTLyDgmYYdYBYwdJEoTejAJ2nC1ntZwmOEDC6nR_oeedEH2lc4zQp05rV0p8DHDUYxiYC6nlG-RSEUOvJhzsoC2tetoEbjuQIDAQAB
-*/
-const resolveApiKey = (network: Network) => {
-    switch (network) {
-      case Network.ETHEREUM:
-      case Network.POLYGON:
-      case Network.BNB_SMART_CHAIN:
-      case Network.KLAYTN:
-      case Network.BORA:
-        return 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCX9F3aDaZiPAsbGNbnpHAyBJNBHi4DtLkHIo1ZSYKSlxVHkg2ejuN1rMmPFGe6cZsZS7eAcNB-AaVTLyDgmYYdYBYwdJEoTejAJ2nC1ntZwmOEDC6nR_oeedEH2lc4zQp05rV0p8DHDUYxiYC6nlG-RSEUOvJhzsoC2tetoEbjuQIDAQAB';
-      case Network.GOERLI:
-      case Network.MUMBAI:
-      case Network.BNB_SMART_CHAIN_TESTNET:
-      case Network.BAOBAB:
-      case Network.BORA_TESTNET:
-        return 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDD7uJnqeI74gH6M-cSeEq82_Zrh-dp9KYH9asKMsjmdZpxjuHifc8lRhkKp5ZDTr9H__bpX8XFSBHt52r_iyP2-pMMh5E-T3uQJLFs0dBUSw2COr2ZgA_QWFHaIoSOtV_b9w5gEzxY623L0_Op9ItpZ51NN1WGEWgate5k-vMaDwIDAQAB';
-      default:
-        throw new Error("unsupported network error");
-    }
-}
-
 const getNetworkById = (id: number): Network => {
     if(id === 1) { return Network.ETHEREUM }
     if(id === 80001) { return Network.MUMBAI }
@@ -42,6 +11,12 @@ const getNetworkById = (id: number): Network => {
     throw new Error(`Unknow chain id: ${id}`)
 }
 
+export interface IFaceWalletOptions {
+    logger: ILogger
+    chains: IChainInfo[]
+    testnetApiKey: string | null
+    mainnetApiKey: string | null
+}
 
 export class FaceWalletConnector extends BaseConnector implements IConnector {
 
@@ -80,7 +55,7 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
             const network = getNetworkById(chainId)
             this._face = new Face({
                 network: network, 
-                apiKey: resolveApiKey(network)
+                apiKey: this.resolveApiKey(network)
             })
         }
 
@@ -93,8 +68,16 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         return true
     }
 
-    constructor(logger: ILogger, chains: IChainInfo[]) {
+    constructor({ logger, chains, testnetApiKey, mainnetApiKey }: IFaceWalletOptions) {
         super(logger, ConnectorNames.FaceWallet, chains)
+
+        if(!testnetApiKey && !mainnetApiKey) {
+            throw new Error(`Set value for testnetApiKey or mainnetApiKey or both`)
+        }
+
+        this._mainnetApiKey = mainnetApiKey
+        this._testnetApiKey = testnetApiKey
+
         /*
         don't create new Face in constructor, it catch error
         no time to research it =)
@@ -123,6 +106,38 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         }
     
         return this._face
+    }
+
+    private _testnetApiKey: string | null
+    private _mainnetApiKey: string | null
+
+    private resolveApiKey = (network: Network) => {
+        switch (network) {
+          case Network.ETHEREUM:
+          case Network.POLYGON:
+          case Network.BNB_SMART_CHAIN:
+          case Network.KLAYTN:
+          case Network.BORA:
+            {
+                if(!this._mainnetApiKey) {
+                    throw new Error('No API key for mainnet')
+                }
+                return this._mainnetApiKey
+            }
+          case Network.GOERLI:
+          case Network.MUMBAI:
+          case Network.BNB_SMART_CHAIN_TESTNET:
+          case Network.BAOBAB:
+          case Network.BORA_TESTNET:
+            {
+                if(!this._testnetApiKey) {
+                    throw new Error('No API key for testnet')
+                }
+                return this._testnetApiKey
+            }
+          default:
+            throw new Error("unsupported network error");
+        }
     }
 
 

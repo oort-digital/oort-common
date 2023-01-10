@@ -6,7 +6,7 @@ import { InjectedConnector } from './injectedConnector';
 import { IConnector } from './iConnector';
 import { IChainInfo } from './baseConnector';
 import { ConnectorNames } from './connectorNames';
-import { FaceWalletConnector } from './faceWalletConnector';
+import { FaceWalletConnector, IFaceWalletOptions } from './faceWalletConnector';
 
 const FakeComponent = () => <></>
 
@@ -33,14 +33,29 @@ const chains: IChainInfo[] = [
   }
 ]
 
-const options = {
+const walletConnectOptions = {
   projectId: 'c2b4ff7ce76613f93a7edea85b9618f5',
   logger,
   chains
 }
-const walletConnect = new WalletConnectConnector(options)
+
+/*
+https://oortdigital.slack.com/archives/C04EY5MLV50/p1671005355999189
+Oort NFT Rental Marketplace
+[API Key for Testnet]
+*/
+const testnetApiKey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDD7uJnqeI74gH6M-cSeEq82_Zrh-dp9KYH9asKMsjmdZpxjuHifc8lRhkKp5ZDTr9H__bpX8XFSBHt52r_iyP2-pMMh5E-T3uQJLFs0dBUSw2COr2ZgA_QWFHaIoSOtV_b9w5gEzxY623L0_Op9ItpZ51NN1WGEWgate5k-vMaDwIDAQAB'
+
+const faceWalletConnectOptions: IFaceWalletOptions = {
+  logger,
+  chains,
+  testnetApiKey,
+  mainnetApiKey: null
+}
+
+const walletConnect = new WalletConnectConnector(walletConnectOptions)
 const injected = new InjectedConnector(logger, chains)
-const faceWallet = new FaceWalletConnector(logger, chains)
+const faceWallet = new FaceWalletConnector(faceWalletConnectOptions)
 
 const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
