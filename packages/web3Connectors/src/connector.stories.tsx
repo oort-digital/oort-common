@@ -11,7 +11,7 @@ import { FaceWalletConnector, IFaceWalletOptions } from './faceWalletConnector';
 const FakeComponent = () => <></>
 
 export default {
-  title: 'web3Connectors/walletConnectConnector',
+  title: 'web3Connectors/connectors',
   component: FakeComponent,
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
