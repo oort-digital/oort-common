@@ -1,4 +1,4 @@
 import { IConnectModalProps } from './connectModal';
-declare const ConnectModalDesktop: (props: IConnectModalProps) => JSX.Element;
-export default ConnectModalDesktop;
+declare const ConnectModalMobile: (props: IConnectModalProps) => JSX.Element;
+export default ConnectModalMobile;
 //# sourceMappingURL=connectModalMobile.d.ts.map

@@ -1,35 +1,26 @@
-import styles from "./connectModalDesktop.module.less"
-import { OortModal } from '../oortModal'
-import { IConnectModalProps } from './connectModal'
-import { useConnectModalCommon } from './useConnectModalCommon'
+import styles from "./connectModalMobile.module.less"
+import { OortModalMobile } from '../oortModal';
+import { IConnectModalProps } from './connectModal';
+import { useConnectModalCommon } from './useConnectModalCommon';
 
-const ConnectModalDesktop = (props: IConnectModalProps) => {
+const ConnectModalMobile = (props: IConnectModalProps) => {
 
 	const { footer1, footer2, content, onCancel, loading } = useConnectModalCommon({
 		props,
 		styles,
-		btnGutter: [10, 0],
-		isMobile: false
+		btnGutter: [0, 12],
+		isMobile: true
 	})
 
 	const { visible } = props
 
-	const footer = <>
-		<div>{footer1}</div>
-		<div>{footer2}</div>
-	</>
-	
-	return <OortModal 
-		loading={loading}
-		footer={footer}
-		className={styles.modal}
-		title='Network & Wallet'
-		width="690px"
-		visible={visible} onCancel={() => onCancel()}>
-		<>{content}</>
-	</OortModal>
-		
-	
-};
+	const footer = <>{footer1}{footer2}</>
 
-export default ConnectModalDesktop
+	return <OortModalMobile viewMode="topGap" loading={loading} footer={footer}
+		className={styles.modal} title='Network & Wallet' visible={visible}
+		onCancel={() => onCancel()}>
+		<>{content}</>
+	</OortModalMobile>
+}
+
+export default ConnectModalMobile
