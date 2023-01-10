@@ -24,6 +24,7 @@ export interface INavItems {
     minting: {
         mutation: NavItemType
         claim: NavItemType
+        faucet?: NavItemType
     }
     rent: {
         lend: NavItemType
@@ -68,11 +69,12 @@ const mintInternal = {
     caption: 'minting',
     icon: <MintIcon />,
     mutation: "Hero Mutation",
-    claim: "Claim Rewards"
+    claim: "Claim Rewards",
+    faucet: "Faucet"
 }
 
 const gameHubInternal = {
-    caption: 'game hub',
+    caption: 'NFT Play',
     icon: <GameHubIcon />,
     games: 'Game Library',
     nfts: "NFT Library"
@@ -118,7 +120,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     const collapseNavItemPairs: NavItemPairType[] = [
         [rentInternal, rent],
         [gameHubInternal, gameHub],
-        [mintInternal, minting]
+        [mintInternal,  minting]
     ]
 
     const isActive = isActiveFunc || _isHrefActive;

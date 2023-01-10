@@ -8,7 +8,7 @@ export interface IChainInfo {
     name: string;
     chainId: number;
     rpcUrl: string;
-    blockExplorer: string;
+    blockExplorer?: string;
     nativeCurrency?: {
         name: string;
         symbol: string;
@@ -34,12 +34,12 @@ export declare abstract class BaseConnector {
     constructor(logger: ILogger, name: ConnectorNames, chains: IChainInfo[]);
     protected initListeners(rawProvider: any): void;
     private removeListeners;
-    protected abstract get rawProvider(): any;
+    protected abstract getRawProvider(): Promise<any>;
     onAccountsChanged(handler: AccountChangedHandlerType): void;
     onChainChanged(handler: ChainChangedHandlerType): void;
     onDisconnect(handler: (error: any) => void): void;
     abstract get isConnected(): Promise<boolean>;
-    get signer(): Signer;
+    getSigner(): Promise<Signer>;
     disconnect(): Promise<void>;
 }
 export {};

@@ -1,17 +1,24 @@
 import "../../stories.less";
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Row, Col } from "antd";
 import { useFilterListeners } from "./useFilterListeners";
 import React from "react";
 import { InMemoryStoreStub } from "./testStores";
 import { ICollectionFilterItem } from "./stores";
 import { CollectionFilterMobile, ICollectionFilterMobileProps } from "./collectionFilterMobile";
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'oort/filters/collectionMobile',
   component: CollectionFilterMobile,
+
+  parameters: {
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'iphone6',
+    },
+  }
 
 } as ComponentMeta<typeof CollectionFilterMobile>;
 
@@ -23,15 +30,13 @@ const Template: ComponentStory<typeof CollectionFilterMobile> = (args: ICollecti
   args.removeFilterEventListeners = remove
 
   return <>
-    <button onClick={() => listeners.submit()}>submit</button>
-    <button onClick={() => listeners.clear()}>clear</button>
-    <button onClick={() => listeners.close()}>close</button>
+    <div style={{marginBottom: '20px'}}>
+      <button onClick={() => listeners.submit()}>submit</button>
+      <button onClick={() => listeners.clear()}>clear</button>
+      <button onClick={() => listeners.close()}>close</button>
+    </div>
 
-    <Row style={{ marginTop: '20px' }}>
-      <Col span={6}>
-        <CollectionFilterMobile {...args} />
-      </Col>
-    </Row>
+    <CollectionFilterMobile {...args} />
   </>
 }
 

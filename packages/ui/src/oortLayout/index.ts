@@ -4,5 +4,4 @@ import LayoutMobile from "./layoutMobile"
 export { Layout } from "./layout"
 export { LayoutDesktop, LayoutMobile }
 export type { INavItems, NavItemType } from "./navMenu"
-export type { ITestNfts } from "./typesAndInterfaces"
 export { MenuItemId } from "./navMenu"

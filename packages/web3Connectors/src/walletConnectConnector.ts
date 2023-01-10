@@ -5,12 +5,19 @@ import { BaseConnector, IChainInfo } from "./baseConnector";
 import { ConnectorNames } from "./connectorNames";
 import { IConnector } from "./iConnector";
 
+export interface IWalletConnectOptions {
+    modalZIndex?: number //actual for v2
+    projectId: string //actual for v2
+    logger: ILogger
+    chains: IChainInfo[]
+}
+
 export class WalletConnectConnector extends BaseConnector implements IConnector {
 
     private _walletConnect: WalletConnectProvider
     private readonly _rpc: IRPCMap
 
-    constructor(logger: ILogger, chains: IChainInfo[]) {
+    constructor({ logger, chains }: IWalletConnectOptions) {
         super(logger, ConnectorNames.WalletConnect, chains)
         this._rpc = {}
         chains.forEach(x => this._rpc[x.chainId] = x.rpcUrl)
@@ -26,13 +33,13 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     get canSwitchChain() { return false }
 
     // @ts-ignore
-    switchChain(chainId: number): Promise<void> {
+    switchChain(chainId: number): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
 
-    protected get rawProvider(): any {
-        return this._walletConnect;
-    }
+    protected getRawProvider(): Promise<any> {
+        return Promise.resolve(this._walletConnect)
+      }
 
     get isConnected(): Promise<boolean> {
         const lsItem = localStorage.getItem('walletconnect');
@@ -49,14 +56,15 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         return ''
     }
 
-    async enable(): Promise<any> {
+    async connect(_chainId: number/* this parameter is used for V2 */): Promise<boolean> {
         try {
-            return await this._walletConnect.enable();
+            await this._walletConnect.enable();
         }
         catch(error)
         {
             this._walletConnect = new WalletConnectProvider({ rpc: this._rpc });
-            return Promise.reject<any>(error);
+            return false
         }
+        return true
     }
 }

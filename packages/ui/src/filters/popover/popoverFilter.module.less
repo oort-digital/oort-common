@@ -8,17 +8,26 @@
         margin-bottom: 32px;
     }
 
-    .cancel {
-        margin-right: 16px;
-        width: 110px;
-        color:@theme-color-9
+    .buttons {
+        display: flex;
+        .cancel {
+            flex: 1;
+            margin-right: 16px;
+            // width: 110px;
+            color:@theme-color-9
+        }
+        .apply  {
+            flex: 3;
+            // width: 195px;
+            color:@theme-color-1
+        }
     }
-    .apply  { width: 195px; color:@theme-color-1 }
 
     .close_icon_wrap {
         cursor: pointer;
         color: @theme-color-10;
         height: 15px;
+        width: 15px;
         float: right;
     }
 }
@@ -44,8 +53,16 @@
         margin-top: -5px;
     }
 
-    :global(.icon) {
+    .icon {
+        vertical-align: middle;
         margin-left: 15px;
+        width: 16px;
+        height: 16px;
+        display: inline-flex;
+    }
+
+    .icon.close {
+        height: 8px;
     }
 
     :global(.anticon) {
@@ -56,4 +73,10 @@
 .trigger_btn.filled {
     padding-top: 6px;
     padding-bottom: 6px;
+}
+
+.overlay {
+    @media (max-width: 400px) {
+        width: 95%;
+    }
 }

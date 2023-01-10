@@ -10,7 +10,7 @@ export interface IChainInfo {
     name: string
     chainId: number
     rpcUrl: string
-    blockExplorer: string
+    blockExplorer?: string
     nativeCurrency?: {
         name: string
         symbol: string
@@ -83,16 +83,16 @@ export abstract class BaseConnector {
         // web3Provider.on("disconnect", this.disconnectHandler);
     }
 
-    private removeListeners() {
-        this.rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
-        this.rawProvider.removeListener('chainChanged', this.chainChangedHandler);
+    private removeListeners(rawProvider: any) {
+        rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
+        rawProvider.removeListener('chainChanged', this.chainChangedHandler);
         // this.rawProvider.removeListener("disconnect", this.disconnectHandler);
         this._externalAccountChangedHandlers = []
         this._externalChainChangedHandlers = []
         this._externalDisconnectHandlers = []
     }
 
-    protected abstract get rawProvider(): any;
+    protected abstract getRawProvider(): Promise<any>;
    
     onAccountsChanged(handler: AccountChangedHandlerType) {
         this._externalAccountChangedHandlers.push(handler)
@@ -114,14 +114,14 @@ export abstract class BaseConnector {
 
     abstract get isConnected(): Promise<boolean>
 
-    get signer(): Signer {
-        const provider = new providers.Web3Provider(this.rawProvider);
+
+    async getSigner(): Promise<Signer> {
+        const provider = new providers.Web3Provider(await this.getRawProvider())
         return provider.getSigner()
     }
 
-    disconnect(): Promise<void> {
-        this.removeListeners()
-        return Promise.resolve()
+    async disconnect(): Promise<void> {
+        this.removeListeners(await this.getRawProvider())
     }
 
 }

@@ -75,15 +75,17 @@ export class Web3StoreStub implements IWeb3 {
         this.chain = { ...newChain }
       })
     }
-    
+
+    return false
   }
 
-  connectAsync = async (_connectorName: ConnectorNames) => {
+  connect = async (_chainId: number, _connectorName: ConnectorNames) => {
     await delayAsync(1000)
     runInAction(() => {
       this.chain = { ...supportedChains[0] }
       this.account = '0x0000000000000000000000000000000000000001'
     })
+    return false
   }
 
   constructor() {

@@ -5,12 +5,13 @@ import styles from "./collectionFilterContent.module.less"
 import {observer} from "mobx-react"
 import {Tabs} from "antd"
 import { ICollectionFilterItem, ICollectionFilterStore } from "./stores"
-import { DeviceType, useDeviceType } from "../../effects"
 import { AsyncList } from "../../asyncList"
 import { EMPTY_ABORT_SIGNAL } from "../../utils"
 
 interface IProps {
-    bottomSpaceHeight?: number
+    itemTitleMaxLen: number
+    bottomSpaceHeight: number | undefined
+    calcOptimalListHeight: boolean
     filterStore: ICollectionFilterStore
     searchable: boolean
     searchPlaceholder?: string
@@ -29,7 +30,7 @@ const getFavoriteParams = (filterStore: ICollectionFilterStore): ISelectedParame
     return undefined
 }
 
-const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, circleIcons}: IProps) => {
+const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, circleIcons, itemTitleMaxLen, calcOptimalListHeight}: IProps) => {
 
     const onTermChangeAbortController = useRef<AbortController | undefined>()
     const onTermChange = (term: string) => {
@@ -58,9 +59,7 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, ci
             abortController.abort()
         }
 
-    }, [filterStore]);// eslint-disable-line react-hooks/exhaustive-deps
-
-    const isMobile = useDeviceType() === DeviceType.Phone
+    }, [filterStore]);
 
     const select = (item: ICollectionFilterItem, isChecked: boolean) => {
         filterStore.select(item.key, isChecked)
@@ -74,27 +73,30 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, ci
     const favoriteParam = getFavoriteParams(filterStore)
    
 
-    const getListHeight = (): string => {
+    const calcOptimalListHeightFunc = () => {
         const minH = 150
         const marginPaddingAndOtherContent = 500
 
+        let h: string = ''
         if(bottomSpaceHeight && bottomSpaceHeight > marginPaddingAndOtherContent) {
             const result = bottomSpaceHeight - marginPaddingAndOtherContent
             if(result > minH) {
-                return `${result}px`
+                h = `${result}px`
             }
         }
+        else {
+            h = `${minH}px`
+        }
 
-        return `${minH}px`
+        return {
+            maxHeight: h,
+            height: h
+        }
     }
 
     const renderList = (items: ICollectionFilterItem[], showLoadMore: boolean) => {
 
-        const h = getListHeight()
-        const heightStyle = {
-            maxHeight: h,
-            height: h
-        }
+        const heightStyle = calcOptimalListHeight ? calcOptimalListHeightFunc() : undefined
 
         const itemCss = circleIcons ? `${styles.list_item} ${styles.circle_icons}` : styles.list_item
 
@@ -107,7 +109,7 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, ci
                 loadMoreButtonSize="middle"
                 onLoadMore={loadNextPageFunc}
                 loading={filterStore.isLoading}
-                itemRenderer={collectionItemRenderer(filterStore.selectMode, itemCss, isMobile, selectedParam, favoriteParam)}
+                itemRenderer={collectionItemRenderer(filterStore.selectMode, itemCss, itemTitleMaxLen, selectedParam, favoriteParam)}
                 items={items}
             />
         }
@@ -117,7 +119,7 @@ const Impl = ({filterStore, searchable, searchPlaceholder, bottomSpaceHeight, ci
             className={styles.list}
             hasLoadMore={false}
             loading={filterStore.isLoading}
-            itemRenderer={collectionItemRenderer(filterStore.selectMode, itemCss, isMobile, selectedParam, favoriteParam)}
+            itemRenderer={collectionItemRenderer(filterStore.selectMode, itemCss, itemTitleMaxLen, selectedParam, favoriteParam)}
             items={items}
         />
     }

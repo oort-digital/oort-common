@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export declare enum MenuItemId {
     Dasboard = "dasboard",
     Rent = "rent",
@@ -13,6 +12,7 @@ export interface INavItems {
     minting: {
         mutation: NavItemType;
         claim: NavItemType;
+        faucet?: NavItemType;
     };
     rent: {
         lend: NavItemType;

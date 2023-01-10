@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export interface IBreadcrumbItem {
     path?: string;
     name: string;

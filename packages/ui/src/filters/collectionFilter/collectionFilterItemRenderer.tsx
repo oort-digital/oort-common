@@ -2,22 +2,21 @@ import { Checkbox, Col, Radio, Row } from "antd"
 import { cutLongString } from "../../utils"
 import { FavoriteCheckBox } from "./favoriteCheckBox"
 import { ICollectionFilterItem, ItemKeyType, SelectMode } from "./stores"
+import styles from "./collectionFilterContent.module.less"
 
 export interface ISelectedParameter {
 	selected: Set<ItemKeyType>
 	onChange: (item: ICollectionFilterItem, checked: boolean) => void
 }
 
-export const collectionItemRenderer = (selectMode: SelectMode, className: string, isMobile: boolean, selected: ISelectedParameter, favorite?: ISelectedParameter) => {
-
-	const tokenNameMaxLen = isMobile ? 16 : 20
+export const collectionItemRenderer = (selectMode: SelectMode, className: string, itemTitleMaxLen: number, selected: ISelectedParameter, favorite?: ISelectedParameter) => {
 
 	return (item: ICollectionFilterItem) => {
 		const { key, title, count, icon } = item
 		const isSelected = selected.selected.has(key)
 		
 
-		let collectionName = `${cutLongString(title, tokenNameMaxLen)}`
+		let collectionName = `${cutLongString(title, itemTitleMaxLen)}`
 		if(count) {
 			collectionName = `${collectionName} (${count})`
 		}
@@ -44,7 +43,7 @@ export const collectionItemRenderer = (selectMode: SelectMode, className: string
 				}
 			</Col>
 			{ icon && <Col><div className="item-icon">{renderIcon()}</div></Col> }
-			<Col flex="auto"><span className="item-name">{collectionName}</span></Col>
+			<Col flex="auto" className={styles.item_name}>{collectionName}</Col>
 			{renderFavorite()}
 		</Row>
 	}

@@ -8,6 +8,7 @@ import { NftQuantity } from '../nftQuantity';
 import { IMarketplaceConfig, INftScanConfig, ViewOnButton } from '../viewOn';
 import { BigNumber } from 'ethers';
 import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 interface IProps<TAssetItem extends IAssetItem> {
     nftScanConfig: INftScanConfig,
@@ -19,11 +20,12 @@ interface IProps<TAssetItem extends IAssetItem> {
     children: ReactNode
     onClick?: (asset: TAssetItem) => void
     href?: string
+    reactRouterLink?: string
     coverSkeleton?: boolean
 }
 
 const maxNftNameLen = 25
-export const AssetCardLayout = <TAsset extends IAssetItem, >({assetItem, owner, marketplace, chainId, children, onClick, href, collateral, coverSkeleton, nftScanConfig}: IProps<TAsset>) => {
+export const AssetCardLayout = <TAsset extends IAssetItem, >({assetItem, owner, marketplace, chainId, children, onClick, href, reactRouterLink, collateral, coverSkeleton, nftScanConfig}: IProps<TAsset>) => {
 
     const {tokenId, imgSrc, tokenAddress, projectName, nftAmount} = assetItem
 
@@ -68,6 +70,9 @@ export const AssetCardLayout = <TAsset extends IAssetItem, >({assetItem, owner, 
     </div>
 
     const renderAssetData = () => {
+        if(reactRouterLink) {
+            return <Link to={reactRouterLink}>{assetData}</Link>
+        }
         if (href) {
             return <a href={href}>{assetData}</a>
         }
@@ -76,7 +81,7 @@ export const AssetCardLayout = <TAsset extends IAssetItem, >({assetItem, owner, 
 
     const cover = coverSkeleton ?
         <TileCoverSkeleton/> :
-        <TileCoverSimple className={styles.tile_cover} size='md' href={href} imgSrc={imgSrc || ''} noText={false}/>
+        <TileCoverSimple className={styles.tile_cover} size='md' reactRouterLink={reactRouterLink} href={href} imgSrc={imgSrc || ''} noText={false}/>
 
     const cardClass = showZeroCollateral ? `${styles.layout} ${styles.zero_collateral_layout}` : styles.layout
 

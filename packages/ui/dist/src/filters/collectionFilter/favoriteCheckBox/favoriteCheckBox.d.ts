@@ -1,4 +1,3 @@
-/// <reference types="react" />
 interface IProps {
     checked: boolean;
     onChange: (checked: boolean) => void;
