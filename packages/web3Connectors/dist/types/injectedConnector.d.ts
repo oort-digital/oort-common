@@ -8,6 +8,7 @@ declare global {
 }
 export declare class InjectedConnector extends BaseConnector implements IConnector {
     get canSwitchChain(): boolean;
+    disconnect(): Promise<void>;
     connect(chainId: number): Promise<boolean>;
     switchChain(chainId: number): Promise<boolean>;
     get isConnected(): Promise<boolean>;

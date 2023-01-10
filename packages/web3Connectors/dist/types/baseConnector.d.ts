@@ -33,14 +33,13 @@ export declare abstract class BaseConnector {
     private CheckConnection;
     constructor(logger: ILogger, name: ConnectorNames, chains: IChainInfo[]);
     protected initListeners(web3Provider: any): void;
-    private removeListeners;
+    protected removeListeners_(rawProvider: any): void;
     protected abstract getRawProvider(): Promise<any>;
     onAccountsChanged(handler: AccountChangedHandlerType): void;
     onChainChanged(handler: ChainChangedHandlerType): void;
     onDisconnect(handler: (error: any) => void): void;
     abstract get isConnected(): Promise<boolean>;
     getSigner(): Promise<Signer>;
-    disconnect(): Promise<void>;
 }
 export {};
 //# sourceMappingURL=baseConnector.d.ts.map
