@@ -25,12 +25,18 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ConnectButton> = (args) => <ConnectButton {...args} />;
 
+export const NotActive = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+NotActive.args = {
+	walletIcon: MetamaskIcon,
+	walletName: 'Metamask',
+	labelText: 'Connect'
+};
 
 export const Connected = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Connected.args = {
   account: '0x0000000000000000000000000000000000000000',
-	disabled: false,
 	walletIcon: MetamaskIcon,
 	walletName: 'Metamask',
 	labelText: 'some text'

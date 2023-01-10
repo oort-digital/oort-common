@@ -27,10 +27,20 @@ interface IArgs {
     styles: any
 }
 
+interface ILoadingData {
+    inProcess: boolean
+    cnnName: ConnectorNames
+}
+
+const stopedLoading: ILoadingData = { inProcess: false, cnnName: ConnectorNames.Undefined }
+
 export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IArgs): IResult => {
 
     const { onCancel, onClose, afterConnect, afterChainSwitch, web3, expectedChainId } = props
-    const [ loading, setLoading ] = useState(false)
+    const [ loading, setLoading ] = useState<ILoadingData>(stopedLoading)
+
+    const startLoading = (cnnName: ConnectorNames) => setLoading({ inProcess: true, cnnName })
+    const stopLoading = () => setLoading(stopedLoading)
     
     const footer1 = <>By connecting, I accept Oort Digital’s <a href='https://oort.digital/terms'>Terms of Service</a> and acknowledge</>
     const footer2 = <>that you have read and understand the <a href='https://oort.digital/terms#disclaimer'>Oort Digital protocol disclaimer</a></>
@@ -43,7 +53,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 	}
 
     const connectAndClose = async (chainId: number, cnnName: ConnectorNames) => {
-		setLoading(true)
+		startLoading(cnnName)
         try {
             if(await connect(chainId, cnnName)) {
 				onCancel && onCancel()
@@ -51,12 +61,12 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 			}
         }
         finally {
-            setLoading(false)
+            stopLoading()
         }
 	}
 
     const switchChainAndClose = async (newChainId: number): Promise<void> => {		
-        setLoading(true)
+        startLoading(connectorName)
         try {
             if(await switchChain(newChainId)) {
 			    onCancel && onCancel()
@@ -64,7 +74,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
             }
         }
         finally {
-            setLoading(false)
+            stopLoading()
         }
     }
 
@@ -75,7 +85,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 		return <Col flex={isMobile ? 24 : 3} key={chainId}>
 			<ChainButtonWithLogic
 				onClick={() => switchChainAndClose(chainId)}
-				loading={loading}
+				loading={loading.inProcess}
 				expectedChainId={expectedChainId}
 				connectedChainId={chain.chainId}
 				canSwitchChain={canSwitchChain}
@@ -88,7 +98,6 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 
 		if(account && cnnName === connectorName) {
 			return <ConnectButton
-					disabled={true}
 					walletName={walletName}
 					walletIcon={icon}
 					account={account}/>
@@ -105,6 +114,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 		}
 
 		return <ConnectButton
+            loading={cnnName === loading.cnnName}
 			walletName={walletName}
 			onClick={() => connectAndClose(chainId, cnnName)}
 			walletIcon={icon}
@@ -144,7 +154,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
         footer2,
         content,
         onCancel: _onCancel,
-        loading
+        loading: loading.inProcess
     }
 
 }
