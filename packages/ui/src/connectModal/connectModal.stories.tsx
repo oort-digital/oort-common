@@ -70,7 +70,7 @@ const connectorProvider = new ConnectorProvider(logger, Object.entries(supported
 
 const web3: IWeb3 = {
   canSwitchChain: true,
-  connectorName: ConnectorNames.Undefined,
+  connectorName: ConnectorNames.Injected,
   switchChain: async (newChainId: number) => {
     if(connectorProvider.CurConnector?.canSwitchChain === true) {
       return await connectorProvider.CurConnector.switchChain(newChainId)
