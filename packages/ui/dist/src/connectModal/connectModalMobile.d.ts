@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { IConnectModalProps } from './connectModal';
 declare const ConnectModalMobile: (props: IConnectModalProps) => JSX.Element;
 export default ConnectModalMobile;

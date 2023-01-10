@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { FilterListenerActionType, ICommonProps } from "./typesAndInterfaces";
 export interface ICollectionFilterMobileProps extends ICommonProps {
     addFilterEventListeners?: FilterListenerActionType;

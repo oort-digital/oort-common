@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ICollectionFilterStore } from "./stores";
 interface IProps {
     itemTitleMaxLen: number;

@@ -1,1 +1,1 @@
-{"version":3,"file":"connectModalDesktop.d.ts","sourceRoot":"","sources":["connectModalDesktop.tsx"],"names":[],"mappings":"AAEA,OAAO,EAAE,kBAAkB,EAAE,MAAM,gBAAgB,CAAA;AAGnD,QAAA,MAAM,mBAAmB,UAAW,kBAAkB,gBA2BrD,CAAC;AAEF,eAAe,mBAAmB,CAAA"}
+{"version":3,"file":"connectModalDesktop.d.ts","sourceRoot":"","sources":["connectModalDesktop.tsx"],"names":[],"mappings":";AAEA,OAAO,EAAE,kBAAkB,EAAE,MAAM,gBAAgB,CAAA;AAGnD,QAAA,MAAM,mBAAmB,UAAW,kBAAkB,gBA2BrD,CAAC;AAEF,eAAe,mBAAmB,CAAA"}

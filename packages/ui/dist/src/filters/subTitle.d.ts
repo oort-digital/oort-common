@@ -1,3 +1,4 @@
+/// <reference types="react" />
 interface IProps {
     names: string[];
     len?: number;

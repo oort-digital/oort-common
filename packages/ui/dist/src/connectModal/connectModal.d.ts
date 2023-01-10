@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ConnectorNames, IConnector } from '@oort/web3-connectors';
 import { IChain } from '../typesAndInterfaces';
 export interface IWeb3 {

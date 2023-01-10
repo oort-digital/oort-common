@@ -1,6 +1,6 @@
 import "antd";
-import { j as o, O as d, F as n, a as m } from "./index.a165b07d.mjs";
-import { u as p } from "./useConnectModalCommon.d51848fe.mjs";
+import { j as o, O as d, F as n, a as m } from "./index.321a7bed.mjs";
+import { u as p } from "./useConnectModalCommon.4b3ce12e.mjs";
 import "react";
 import "react-router-dom";
 import "ethers";
@@ -21,7 +21,7 @@ const _ = "_modal_f97e5_5", f = "_description_f97e5_8", h = "_chain_buttons_f97e
   } = p({
     props: t,
     styles: e,
-    btnGutter: [10, 0],
+    btnGutter: [10, 10],
     isMobile: !1
   }), {
     visible: l
@@ -48,4 +48,4 @@ const _ = "_modal_f97e5_5", f = "_description_f97e5_8", h = "_chain_buttons_f97e
 export {
   F as default
 };
-//# sourceMappingURL=connectModalDesktop.8b42f1b2.mjs.map
+//# sourceMappingURL=connectModalDesktop.42504bf3.mjs.map
