@@ -1,30 +1,49 @@
 import { ReactNode } from "react";
 import { toMasskedAddress } from "../utils";
-import "./connectButton.less"
+import styles from "./connectButton.module.less"
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 
 
 interface IProps {
 	account?: string
 	disabled?: boolean
+	loading?: boolean
 	walletIcon: ReactNode
 	walletName: string
 	labelText?: string
 	onClick?: () => void;
 }
 
-export const ConnectButton = ({ account, onClick, walletIcon, walletName, labelText }:IProps) => {
+const spinner = <Spin className={styles.spinner} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
 
-	let acc = <span className="cnn">{labelText}</span>
-	let className = 'connect-wallet-button'
+export const ConnectButton = ({ account, onClick, walletIcon, walletName, labelText, disabled, loading }:IProps) => {
+
+	let label: ReactNode
+	let className = styles.button
 
 	if(account) {
-		acc = <span className="acc">{toMasskedAddress(account)}</span>
-		className = `${className} active`
+		label = <span className={styles.acc}>{toMasskedAddress(account)}</span>
+		className = `${className} ${styles.active}`
+	}
+	else if(loading) {
+		label = spinner
+		className = `${className} ${styles.loading}`
+	}
+	else {
+		label = <span className={styles.cnn}>{labelText}</span>
 	}
 
-	return <div onClick={account ? undefined : onClick} className={className} >
+
+	let _onClick = onClick 
+
+	if(account || disabled || loading) {
+		_onClick = undefined
+	}
+
+	return <div onClick={_onClick} className={className} >
 			{walletIcon}
-			<span className="wallet-name">{walletName}</span>
-			{acc}
+			<span className={styles.wallet_name}>{walletName}</span>
+			{label}
 		</div>
 }

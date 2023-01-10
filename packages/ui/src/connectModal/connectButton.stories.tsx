@@ -5,6 +5,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ConnectButton } from "./connectButton"
 import { MetamaskIcon } from './metamaskIcon';
+import React from 'react';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -25,11 +26,20 @@ export default {
 const Template: ComponentStory<typeof ConnectButton> = (args) => <ConnectButton {...args} />;
 
 
-export const Primary = Template.bind({});
+export const Connected = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
+Connected.args = {
   account: '0x0000000000000000000000000000000000000000',
 	disabled: false,
+	walletIcon: MetamaskIcon,
+	walletName: 'Metamask',
+	labelText: 'some text'
+};
+
+export const Loading = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Loading.args = {
+	loading: true,
 	walletIcon: MetamaskIcon,
 	walletName: 'Metamask',
 	labelText: 'some text'
