@@ -24,12 +24,12 @@
     }
   },
   "dependencies": {
-    "@haechi-labs/face-sdk": "^1.6.0",
-    "@haechi-labs/face-types": "^1.6.0",
     "@oort/logger": "*",
     "ethers": "^5.7.0"
   },
   "devDependencies": {
+    "@haechi-labs/face-sdk": "^1.7.0",
+    "@haechi-labs/face-types": "^1.7.0",
     "@rollup/plugin-commonjs": "22.0.2",
     "@rollup/plugin-node-resolve": "13.3.0",
     "@types/jest": "^29.1.1",
