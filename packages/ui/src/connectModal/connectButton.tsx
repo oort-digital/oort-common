@@ -8,6 +8,7 @@ import { Spin } from 'antd';
 interface IProps {
 	account?: string
 	loading?: boolean
+	disabled?: boolean
 	walletIcon: ReactNode
 	walletName: string
 	labelText?: string
@@ -16,7 +17,7 @@ interface IProps {
 
 const spinner = <Spin className={styles.spinner} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
 
-export const ConnectButton = ({ account, onClick, walletIcon, walletName, labelText, loading }:IProps) => {
+export const ConnectButton = ({ account, onClick, walletIcon, walletName, labelText, loading, disabled }:IProps) => {
 
 	let label: ReactNode
 	let className = styles.button
@@ -29,13 +30,17 @@ export const ConnectButton = ({ account, onClick, walletIcon, walletName, labelT
 		label = spinner
 		className = `${className} ${styles.loading}`
 	}
+	else if(disabled) {
+		label = <span className={styles.cnn}>{labelText}</span>
+		className = `${className} ${styles.disabled}`
+	}
 	else {
 		label = <span className={styles.cnn}>{labelText}</span>
 	}
 
 	let _onClick = onClick 
 
-	if(account || loading) {
+	if(account || loading || disabled) {
 		_onClick = undefined
 	}
 
