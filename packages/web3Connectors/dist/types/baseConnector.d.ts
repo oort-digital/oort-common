@@ -32,7 +32,7 @@ export declare abstract class BaseConnector {
     private _timerId?;
     private CheckConnection;
     constructor(logger: ILogger, name: ConnectorNames, chains: IChainInfo[]);
-    protected initListeners(rawProvider: any): void;
+    protected initListeners(web3Provider: any): void;
     private removeListeners;
     protected abstract getRawProvider(): Promise<any>;
     onAccountsChanged(handler: AccountChangedHandlerType): void;
