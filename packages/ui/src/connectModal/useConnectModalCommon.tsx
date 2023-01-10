@@ -10,6 +10,7 @@ import { IChain, isChainEmpty } from "../typesAndInterfaces"
 import { Gutter } from "antd/lib/grid/row"
 import { Alert } from "./alert"
 import { Bold } from "./bold"
+import { FaceWalletIcon } from "./faceWalletIcon"
 
 interface IResult {
     footer1: ReactNode
@@ -133,6 +134,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
         </div>
         <Row gutter={btnGutter} justify={justify}>
             <Col span={span}>{renderWalletBtn(connectChainId, "Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>
+            <Col span={span}>{renderWalletBtn(connectChainId, "FaceWallet", ConnectorNames.FaceWallet, FaceWalletIcon)}</Col>
             <Col span={span}>{renderWalletBtn(connectChainId, "WalletConnect", ConnectorNames.WalletConnect, WalletConnectIcon)}</Col>
         </Row>
     </>

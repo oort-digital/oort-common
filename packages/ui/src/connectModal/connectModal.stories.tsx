@@ -2,12 +2,11 @@ import React from 'react';
 import '../styles/antOverride.less';
 import '../styles/fonts.css';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ConnectModal } from '.';
-import { ConnectorNames, ConnectorProvider, IConnector, InjectedConnector } from '@oort/web3-connectors';
+import { ConnectModal, IWeb3 } from '.';
+import { ConnectorNames, ConnectorProvider, FaceWalletConnector, IConnector, IFaceWalletOptions, InjectedConnector } from '@oort/web3-connectors';
 import { logger } from '@oort/logger';
 import { ZERO_ADDR } from '../utils';
 import { EMPTY_CHAIN } from '../typesAndInterfaces';
-import { FaceWalletConnector } from '../../../../faceWalletConnector';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -27,24 +26,18 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ConnectModal> = (args) => <ConnectModal {...args} />;
 
-const supportedChains = [
+const chains = [
   {
-      name: "rinkeby",
-      chainId: 4,
-      rpcUrl: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-      blockExplorer: 'https://rinkeby.etherscan.io'
-  },
-  {
-      name: 'mumbai',
-      chainId: 80001,
-      rpcUrl: 'https://rpc-mumbai.maticvigil.com',
-      blockExplorer: 'https://mumbai.polygonscan.com',
-  
-      nativeCurrency: {
-          name: 'MATIC',
-          symbol: 'MATIC',
-          decimals: 18,
-      }
+    name: 'mumbai',
+    chainId: 80001,
+    rpcUrl: 'https://rpc-mumbai.maticvigil.com',
+    blockExplorer: 'https://mumbai.polygonscan.com',
+
+    nativeCurrency: {
+        name: 'MATIC',
+        symbol: 'MATIC',
+        decimals: 18,
+    }
   },
   {
     name: "goerli",
@@ -53,32 +46,44 @@ const supportedChains = [
     blockExplorer: 'https://goerli.etherscan.io',
   }
 ]
+
+/*
+https://oortdigital.slack.com/archives/C04EY5MLV50/p1671005355999189
+Oort NFT Rental Marketplace
+[API Key for Testnet]
+*/
+const testnetApiKey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDD7uJnqeI74gH6M-cSeEq82_Zrh-dp9KYH9asKMsjmdZpxjuHifc8lRhkKp5ZDTr9H__bpX8XFSBHt52r_iyP2-pMMh5E-T3uQJLFs0dBUSw2COr2ZgA_QWFHaIoSOtV_b9w5gEzxY623L0_Op9ItpZ51NN1WGEWgate5k-vMaDwIDAQAB'
+
+const faceWalletOptions: IFaceWalletOptions = {
+  chains,
+  logger,
+  mainnetApiKey: null,
+  testnetApiKey
+}
   
 const supportedConnectors: { [name: string]: IConnector } = {}
-supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
-supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, supportedChains)
-supportedConnectors[ConnectorNames.FaceWallet] = new FaceWalletConnector(logger, supportedChains)
+supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, chains)
+supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, chains)
+supportedConnectors[ConnectorNames.FaceWallet] = new FaceWalletConnector(faceWalletOptions)
 
-const connectorProvider = new ConnectorProvider(logger, [
-  new InjectedConnector(logger, supportedChains),
-  new InjectedConnector(logger, supportedChains),
-  new FaceWalletConnector(logger, supportedChains)
-])
+const connectorProvider = new ConnectorProvider(logger, Object.entries(supportedConnectors).map(x => x[1]))
 
-const web3 = {
+const web3: IWeb3 = {
   canSwitchChain: true,
   connectorName: ConnectorNames.Undefined,
   switchChain: async (newChainId: number) => {
     if(connectorProvider.CurConnector?.canSwitchChain === true) {
-      connectorProvider.CurConnector.switchChain(newChainId)
+      return await connectorProvider.CurConnector.switchChain(newChainId)
     }
+    return false
   },
-  connectAsync: async (connectorName: ConnectorNames) => {
-    await connectorProvider.EnableAsync(connectorName)
+  connect: async (chainId: number, connectorName: ConnectorNames) => {
+    await connectorProvider.connect(chainId, connectorName)
+    return true
   },
-  chain: supportedChains[0],
+  chain: chains[0],
   account: ZERO_ADDR,
-  supportedChains: supportedChains,
+  supportedChains: chains,
   supportedConnectors: supportedConnectors,
 }
 
