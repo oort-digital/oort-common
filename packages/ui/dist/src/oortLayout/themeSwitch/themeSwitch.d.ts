@@ -1,4 +1,3 @@
-/// <reference types="react" />
 interface IProps {
     isDarkMode: boolean;
     onChange: (isDarkMode: boolean) => void;

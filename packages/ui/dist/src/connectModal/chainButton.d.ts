@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { IChain } from "../typesAndInterfaces";
 interface IProps {
     loading: boolean;
