@@ -1,6 +1,6 @@
 {
   "name": "@oort/web3-connectors",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "scripts": {
     "clean": "rimraf dist",
     "build:types": "tsc",
@@ -55,7 +55,7 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "types": "dist/types/index.d.ts"
 }

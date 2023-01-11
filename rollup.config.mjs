@@ -25,14 +25,14 @@ export default function createConfig(packageName, packageDependencies) {
       external: packageDependencies,
       output: [
         {
-          file: "./dist/index.js",
+          file: "./dist/index.cjs.js",
           format: "cjs",
           exports: "named",
           name: packageName,
           sourcemap: true,
         },
         {
-          file: "./dist/index.mjs",
+          file: "./dist/index.es.js",
           format: "es",
           exports: "named",
           name: packageName,
