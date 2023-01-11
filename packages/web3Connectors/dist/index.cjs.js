@@ -89193,9 +89193,6 @@ class Wallet {
     constructor(internal) {
         this.internal = internal;
     }
-    close() {
-        this.internal.iframe.hideOverlay();
-    }
     async home() {
         return this.internal.openHome();
     }
