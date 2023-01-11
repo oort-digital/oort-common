@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import { dependencies } from './package.json';
 import path from 'node:path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
@@ -28,7 +29,7 @@ export default defineConfig({
             fileName: (format) => `ui.${format}.js`,
         },
         rollupOptions: {
-            external: ['axios', 'react', 'react-dom', 'antd', "ethers", 'mobx', 'mobx-react', 'react-router-dom'],
+            external: Object.entries(dependencies).map(x => x[0]),
             output: {
                 globals: {
                     react: 'React',
