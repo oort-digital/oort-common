@@ -1,15 +1,13 @@
 import pks from './package.json' assert { type: "json" };
 
-
 import esbuild from "rollup-plugin-esbuild";
-import { nodeResolve } from "@rollup/plugin-node-resolve";
 import json from "@rollup/plugin-json";
 
 const input = "./src/index.ts";
 const plugins = [
   json(),
   esbuild({
-    minify: false,
+    minify: true,
     tsconfig: "./tsconfig.json",
     loaders: {
       ".json": "json",
