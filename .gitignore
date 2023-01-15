@@ -10,6 +10,8 @@
 /packages/urlSearchParams/node_modules
 /packages/nftProviders/node_modules
 
+/packages/logger/dist
+
 /sites/cra-test-app/node_modules
 /sites/cra-test-app/build
 /.idea
