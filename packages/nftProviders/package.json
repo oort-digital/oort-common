@@ -27,7 +27,7 @@
     }
   },
   "dependencies": {
-    "@oort-digital/logger": "0.0.1"
+    "@oort-digital/logger": "^0.0.1"
   },
   "devDependencies": {
     "@moralisweb3/api-utils": "^2.10.3",

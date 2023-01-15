@@ -782,7 +782,7 @@
     "@moralisweb3/common-core" "^2.11.1"
     "@moralisweb3/common-evm-utils" "^2.11.1"
 
-"@oort-digital/logger@0.0.1":
+"@oort-digital/logger@^0.0.1":
   version "0.0.1"
   resolved "https://npm.pkg.github.com/download/@oort-digital/logger/0.0.1/d515debc7555a38c9bf6d0539ab927a8f31bfacb#d515debc7555a38c9bf6d0539ab927a8f31bfacb"
   integrity sha512-wdDok8NivsPasswFEVGKLbG5/NtW24BmT2eaUKQPUkMInazDYQhtmP8a16NlcSiw5OI2wX7NNGyqbZeEIxvNkg==
