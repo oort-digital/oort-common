@@ -9,6 +9,9 @@ jobs:
 
   publish-gpr:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/logger
     permissions:
       contents: read
       packages: write
@@ -18,9 +21,9 @@ jobs:
         with:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
-          working-directory: ./packages/logger
+      - run: ls
       - run: yarn install
-      - run: yarn build
-      - run: npm publish
+      # - run: yarn build
+      # - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
