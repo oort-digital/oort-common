@@ -1,11 +1,10 @@
 {
-  "name": "@oort/nft-providers",
-  "version": "0.0.7",
+  "name": "@oort-digital/nft-providers",
+  "version": "0.0.1",
   "scripts": {
-    "clean": "rimraf dist",
     "build:types": "tsc",
     "build:source": "rollup --config rollup.config.js",
-    "build": "yarn clean && yarn build:source && yarn build:types",
+    "build": "yarn build:source && yarn build:types",
     "test": "jest",
     "test:debug": "node --inspect-brk ../../node_modules/jest/bin/jest.js",
     "rm": "rimraf node_modules"
@@ -24,18 +23,18 @@
     }
   },
   "dependencies": {
-    "@oort/logger": "*"
+    "@oort-digital/logger": "0.0.1"
   },
-
   "devDependencies": {
-    "@moralisweb3/common-core": "^2.10.3",
-    "@moralisweb3/evm-api": "^2.10.3",
     "@moralisweb3/api-utils": "^2.10.3",
+    "@moralisweb3/common-core": "^2.10.3",
     "@moralisweb3/common-evm-utils": "^2.10.3",
+    "@moralisweb3/evm-api": "^2.10.3",
     "@rollup/plugin-commonjs": "22.0.2",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "13.3.0",
     "@types/jest": "^29.1.1",
+    "esbuild": "^0.17.0",
     "jest": "^29.1.2",
     "rollup": "2.78.0",
     "rollup-plugin-esbuild": "4.9.3",

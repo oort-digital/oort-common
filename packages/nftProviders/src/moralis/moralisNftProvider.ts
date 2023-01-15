@@ -2,7 +2,7 @@ import Moralis  from "./moralis";
 // import { EvmChain } from '@moralisweb3/common-evm-utils';
 import { MoralisDataObjectValue } from '@moralisweb3/common-core';
 import { INftOwnerProvider, IFeatchNftOwnerResponse, ProviderKind, IFeatchAccountNftsParams, IFeatchNftImageSrc, IFeatchNftParams, IFeatchNftsResponse, INft, NftType, IAssetsProvider, IAssetProvider } from "../typesAndInterfaces";
-import { ILogger } from "@oort/logger";
+import { ILogger } from "@oort-digital/logger";
 
 interface IMoralisMetadata {
     image?: string
@@ -131,7 +131,7 @@ export class MoralisNftProvider implements IAssetsProvider, IAssetProvider, INft
         return {
             page: pagination.page,
             pageSize: pagination.pageSize,
-            total: pagination.total,
+            total: pagination.total || 0,
             data,
             cursor: pagination.cursor
         }
