@@ -26,7 +26,7 @@ jobs:
         working-directory: ./packages/${{github.event.inputs.package}}
     permissions:
       contents: read
-      packages: write
+      packages: read|write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
