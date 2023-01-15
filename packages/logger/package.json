@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/darkspring1/logger.git"
+    "url": "git+https://github.com/oort-digital/oort-common.git"
   },
   "scripts": {
     "clean": "rimraf dist",
     "build:types": "tsc",
-    "build:source": "rollup --config rollup.config.js",
+    "build:source": "rollup -c",
     "build": "yarn build:source && yarn build:types",
     "rm": "rimraf node_modules"
   },
