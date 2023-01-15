@@ -11,6 +11,7 @@
 /packages/nftProviders/node_modules
 
 /packages/logger/dist
+/packages/nftProviders/dist
 
 /sites/cra-test-app/node_modules
 /sites/cra-test-app/build
