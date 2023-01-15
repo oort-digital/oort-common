@@ -1,6 +1,10 @@
 {
   "name": "@oort-digital/nft-providers",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oort-digital/oort-common.git"
+  },
   "scripts": {
     "build:types": "tsc",
     "build:source": "rollup --config rollup.config.js",
