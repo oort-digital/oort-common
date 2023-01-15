@@ -1,11 +1,15 @@
 {
-  "name": "@oort/logger",
-  "version": "0.0.7",
+  "name": "@oort-digital/logger",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darkspring1/logger.git"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build:types": "tsc",
     "build:source": "rollup --config rollup.config.js",
-    "build": "yarn clean && yarn build:source && yarn build:types",
+    "build": "yarn build:source && yarn build:types",
     "rm": "rimraf node_modules"
   },
   "dependencies":{
