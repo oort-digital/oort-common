@@ -39,5 +39,6 @@ jobs:
       - run: yarn build
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          # NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_INSTALL_AUTH_TOKEN}}
           INSTALL_TOKEN: ${{secrets.NPM_INSTALL_AUTH_TOKEN}}
