@@ -8,8 +8,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build:types": "tsc",
-    "build:source": "vite build",
-    "build": "yarn tsc && vite build",
+    "build": "vite build",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
