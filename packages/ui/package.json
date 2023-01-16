@@ -1,11 +1,15 @@
 {
-  "name": "@oort/ui",
-  "version": "0.1.7",
+  "name": "@oort-digital/ui",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oort-digital/oort-common.git"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build:types": "tsc",
     "build:source": "vite build",
-    "build": "yarn clean && yarn tsc && vite build",
+    "build": "yarn tsc && vite build",
     "test": "jest",
     "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
     "storybook": "start-storybook -p 6006",
@@ -27,7 +31,7 @@
   },
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
-    "@oort/logger": "*",
+    "@oort-digital/logger": "^0.0.1",
     "@oort/web3-connectors": "*",
     "@types/react-router-dom": "^5.3.3",
     "antd": "4.23.0",
