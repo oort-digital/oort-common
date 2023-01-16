@@ -12,6 +12,8 @@
 
 /packages/logger/dist
 /packages/nftProviders/dist
+/packages/web3Connectors/dist
+/packages/urlSearchParams/dist
 
 /sites/cra-test-app/node_modules
 /sites/cra-test-app/build

@@ -1,4 +1,5 @@
-import { NumRange } from "@oort/ui";
+declare type NumOrUndef = number | undefined;
+declare type NumRange = [NumOrUndef, NumOrUndef];
 export interface IPagingParams {
     pageNum: number;
     pageSize: number;
