@@ -32,7 +32,7 @@
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@oort-digital/logger": "^0.0.1",
-    "@oort/web3-connectors": "*",
+    "@oort-digital/web3-connectors": "^0.0.1",
     "@types/react-router-dom": "^5.3.3",
     "antd": "4.23.0",
     "blockies-ts": "^1.0.0",
