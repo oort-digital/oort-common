@@ -1,4 +1,4 @@
-import { logger } from "@oort/logger";
+import { logger } from "@oort-digital/logger";
 import axios from "axios";
 
 export interface NftScanApiData {
