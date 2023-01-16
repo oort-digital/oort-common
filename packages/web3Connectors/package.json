@@ -29,7 +29,8 @@
   },
   "dependencies": {
     "@oort-digital/logger": "^0.0.1",
-    "ethers": "^5.7.0"
+    "ethers": "^5.7.0",
+    "@walletconnect/web3-provider": "^1.8.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "22.0.2",
@@ -46,9 +47,9 @@
     "@storybook/react": "^6.5.13",
     "@storybook/testing-library": "^0.0.13",
     "@types/jest": "^29.1.1",
-    "@walletconnect/web3-provider": "^1.8.0",
     "esbuild": "^0.17.1",
     "jest": "^29.1.2",
+    "react": "^18.2.0",
     "rollup": "2.78.0",
     "rollup-plugin-esbuild": "4.9.3",
     "ts-jest": "^29.0.3",
