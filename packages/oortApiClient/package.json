@@ -1,11 +1,15 @@
 {
-  "name": "@oort/oort-api-client",
+  "name": "@oort-digital/oort-api-client",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oort-digital/oort-common.git"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build:types": "tsc",
-    "build:source": "rollup --config rollup.config.js",
-    "build": "yarn clean && yarn build:source && yarn build:types",
+    "build:source": "rollup -c",
+    "build": "yarn build:source && yarn build:types",
     "test": "jest",
     "rm": "rimraf node_modules"
   },
