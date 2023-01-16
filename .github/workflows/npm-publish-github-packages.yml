@@ -36,7 +36,7 @@ jobs:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
       - run: ls -a
-      - run: npm install
+      - run: yarn install
       - run: yarn build
       - run: npm publish
         
