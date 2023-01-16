@@ -11,7 +11,6 @@
     "build:source": "vite build",
     "build": "yarn tsc && vite build",
     "test": "jest",
-    "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "rm": "rimraf node_modules"
