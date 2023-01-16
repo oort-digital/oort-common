@@ -1,8 +1,10 @@
 import { OortClient } from "./oortClient"
 import { IOortClientSettings } from "./typesAndInterfaces"
-import { EMPTY_ABORT_SIGNAL } from "@oort/ui"
 import axios, { AxiosRequestConfig } from "axios"
 import * as https from "https";
+
+const abortController = new AbortController()
+export const EMPTY_ABORT_SIGNAL = abortController.signal
 
 const setTokenHeader = (token: string, curRequest: AxiosRequestConfig<any>) => {
     if(token) {

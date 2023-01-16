@@ -13,7 +13,6 @@
     "test": "jest",
     "rm": "rimraf node_modules"
   },
-
   "jest": {
     "preset": "ts-jest",
     "verbose": true,
@@ -24,33 +23,29 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    
     "globals": {
       "window": {}
     }
-
   },
-
-  "dependencies":{
+  "dependencies": {
     "axios": "^1.1.2"
   },
- 
   "devDependencies": {
     "@rollup/plugin-commonjs": "22.0.2",
+    "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "13.3.0",
+    "@types/jest": "^29.1.1",
+    "esbuild": "^0.17.1",
+    "jest": "^29.1.2",
     "rollup": "2.78.0",
     "rollup-plugin-esbuild": "4.9.3",
-    "typescript": "4.8.2",
-    "@types/jest": "^29.1.1",
-    "jest": "^29.1.2",
-    "ts-jest": "^29.0.3"
+    "ts-jest": "^29.0.3",
+    "typescript": "4.8.2"
   },
   "license": "UNLICENSED",
- 
   "files": [
     "dist"
   ],
- 
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "unpkg": "dist/index.umd.js",
