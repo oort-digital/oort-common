@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/logger",
-  "version": "0.0.1-alfa.0",
+  "version": "0.0.1-alfa.0.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
