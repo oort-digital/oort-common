@@ -33,4 +33,4 @@ jobs:
       run: |
         yarn install
         yarn test
-      working-directory: ./app
+      working-directory: ./nftProviders
