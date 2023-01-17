@@ -30,7 +30,7 @@ export default defineConfig({
         },
         rollupOptions: {
             //external: ['axios', 'react', 'react-dom', 'antd', "ethers", 'mobx', 'mobx-react', 'react-router-dom'],
-            external: Object.entries(dependencies).map(x => x[0]),
+            external: Object.keys(dependencies),
             output: {
                 globals: {
                     react: 'React',

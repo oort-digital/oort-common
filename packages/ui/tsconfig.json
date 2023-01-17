@@ -1,11 +1,15 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./src/**/*", "typings.d.ts"],
-  "exclude": ["**/*.stories.tsx"],
+  "exclude": ["**/*.stories.tsx", "node_modules"],
+  "include": [
+    "src/**/*",
+    "typings.d.ts"
+  ],
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "./dist",
     "emitDeclarationOnly": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "composite": false
   }
 }

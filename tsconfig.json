@@ -34,6 +34,5 @@
     "strictPropertyInitialization": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "ESNext"
-  },
-  "include": ["**/package.json", "packages", "providers"]
+  }
 }
