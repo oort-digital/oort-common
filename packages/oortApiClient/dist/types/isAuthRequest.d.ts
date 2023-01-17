@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-export declare type TokenType = string | null;
+export type TokenType = string | null;
 export interface AxiosRequestConfigExtended<D = any> extends AxiosRequestConfig<D> {
     isAuthRequest: boolean | undefined;
 }

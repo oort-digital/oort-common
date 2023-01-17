@@ -1,5 +1,5 @@
-declare type NumOrUndef = number | undefined;
-declare type NumRange = [NumOrUndef, NumOrUndef];
+type NumOrUndef = number | undefined;
+type NumRange = [NumOrUndef, NumOrUndef];
 export interface IPagingParams {
     pageNum: number;
     pageSize: number;
@@ -101,7 +101,7 @@ export interface INftsResponse extends IPagingResponse<INft> {
 export interface IReviewsParams extends IPagingParams {
     gameUri: string;
 }
-export declare type RatingType = 0 | 1 | 2 | 3 | 4 | 5;
+export type RatingType = 0 | 1 | 2 | 3 | 4 | 5;
 export interface IReview {
     id: number;
     content: string;
@@ -162,7 +162,7 @@ export interface IDasboardResponse {
 export interface IOortClientSettings {
     apiUrl: string;
 }
-export declare type LikeType = 'like' | 'dislike';
+export type LikeType = 'like' | 'dislike';
 export interface ILikeGameParams {
     action: LikeType | null;
     gameUri: string;
