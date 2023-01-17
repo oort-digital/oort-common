@@ -15,6 +15,7 @@ yarn.lock
 /packages/nftProviders/dist
 /packages/web3Connectors/dist
 /packages/urlSearchParams/dist
+/packages/oortApiClient/dist
 
 /sites/cra-test-app/node_modules
 /sites/cra-test-app/build
