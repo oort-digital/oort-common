@@ -11,12 +11,7 @@ on:
 
 jobs:
   tests:
-
     runs-on: ubuntu-latest    
-    defaults:
-      run:
-        working-directory: ./packages
-
     permissions:
       contents: read
       packages: read
@@ -31,7 +26,6 @@ jobs:
 
     - name: nftProviders tests
       run: |
-        ls -a
         yarn install
         yarn test
       working-directory: ./packages/nftProviders
