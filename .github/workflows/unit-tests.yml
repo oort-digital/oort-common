@@ -29,3 +29,28 @@ jobs:
         yarn install
         yarn test
       working-directory: ./packages/nftProviders
+
+    - name: oortApiClient tests
+      run: |
+        yarn install
+        yarn test
+      working-directory: ./packages/oortApiClient
+
+    - name: ui tests
+      run: |
+        yarn install
+        yarn test
+      working-directory: ./packages/ui
+
+    - name: urlSearchParams tests
+      run: |
+        yarn install
+        yarn test
+      working-directory: ./packages/urlSearchParams
+
+    - name: web3Connectors tests
+      run: |
+        yarn install
+        yarn test
+      working-directory: ./packages/web3Connectors
+    
