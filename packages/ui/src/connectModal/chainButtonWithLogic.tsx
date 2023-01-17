@@ -14,7 +14,7 @@ export const ChainButtonWithLogic = ({ chain, loading, connectedChainId, expecte
     const { chainId } = chain
 	const isActive = chainId === connectedChainId
 
-	let disabled = undefined
+	let disabled: boolean | undefined = undefined
 
 	if(!isActive && expectedChainId) {
 		disabled = chainId !== expectedChainId

@@ -10,21 +10,47 @@ on:
     branches: [ master, development ]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+  tests:
+    runs-on: ubuntu-latest    
+    permissions:
+      contents: read
+      packages: read
+    env:
+      NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
       with:
-        # node-version: ${{ matrix.node-version }}        
-        install-command: yarn --frozen-lockfile --silent
-    - run: yarn install
-    - run: yarn test
+        node-version: 16
+        registry-url: https://npm.pkg.github.com/
+
+    - name: nftProviders tests
+      run: |
+        yarn install
+        yarn test
+      working-directory: ./packages/nftProviders
+
+    - name: oortApiClient tests
+      run: |
+        yarn install
+        yarn test
+      working-directory: ./packages/oortApiClient
+
+    - name: ui tests
+      run: |
+        yarn install
+        yarn test
+      working-directory: ./packages/ui
+
+    - name: urlSearchParams tests
+      run: |
+        yarn install
+        yarn test
+      working-directory: ./packages/urlSearchParams
+
+    - name: web3Connectors tests
+      run: |
+        yarn install
+        yarn test
+      working-directory: ./packages/web3Connectors
+    

@@ -1,4 +1,4 @@
-import { ConnectorNames } from "@oort/web3-connectors"
+import { ConnectorNames } from "@oort-digital/web3-connectors"
 import { Col, Row } from "antd"
 import { ReactNode, useState } from "react"
 import { ChainButtonWithLogic } from "./chainButtonWithLogic"
