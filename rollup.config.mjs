@@ -4,18 +4,20 @@ export default function createConfig(pluginsData, packageName, packageDependenci
 
   const { esbuild, nodeResolve, commonjs, json } = pluginsData
 
-  const plugins = [
-    nodeResolve({ preferBuiltins: false, browser: true }),
-    commonjs(),
-    json(),
-    esbuild({
+  const plugins = [ ];
+
+  if(nodeResolve) { plugins.push(nodeResolve({ preferBuiltins: false, browser: true })) }
+  if(commonjs) { commonjs() }
+  if(json) { json() }
+
+  plugins.push(
+      esbuild({
       minify: true,
       tsconfig: "./tsconfig.json",
       loaders: {
         ".json": "json",
-      },
-    }),
-  ];
+      }
+    }))
 
   return [
     {
