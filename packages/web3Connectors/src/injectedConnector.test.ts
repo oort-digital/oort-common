@@ -1,33 +1,7 @@
-import { InjectedConnector } from ".";
-import { logger, ILogger } from "@oort-digital/logger";
+import { logger } from "@oort-digital/logger";
 import { delayAsync } from "./utils";
 import { IChainInfo } from "./baseConnector";
-
-class TestRawProvider {
-
-  private readonly _requestCallback: () => Promise<any>
-
-  constructor(requestCallback: () => Promise<any>) {
-    this._requestCallback = requestCallback
-  }
-// @ts-ignore
-  request(params: any): Promise<any> {
-    return this._requestCallback()
-  }
-}
-
-class InjectedConnectorForTest extends InjectedConnector {
-
-  private readonly _rawProvider: any
-  constructor(rawProvider: any, logger: ILogger, chains: IChainInfo[]) {
-    super(logger, chains)
-    this._rawProvider = rawProvider
-  }
-
-  protected get rawProvider(): any {
-    return this._rawProvider
-  }
-}
+import { InjectedConnectorForTest, TestRawProvider, TestSigner } from "./testStubs";
 
 const chainInfo: IChainInfo = {
   name: 'mumbai',
@@ -44,9 +18,11 @@ test('injectedConnector call enable twice', async () => {
     return delayAsync(1000)
   }
 
+  const chainId = 1
+  const signer = new TestSigner(chainId)
   const rawProvider = new TestRawProvider(requestCallback)
-  const connector = new InjectedConnectorForTest(rawProvider, logger, [chainInfo])
-  const results = await Promise.all([ connector.connect(1), connector.connect(1) ])
+  const connector = new InjectedConnectorForTest({rawProvider, signer, logger, chains: [chainInfo]})
+  const results = await Promise.all([ connector.connect(chainId), connector.connect(chainId) ])
 
   expect(results[0]).toBeTruthy()
   expect(results[1]).toBeTruthy()
@@ -59,9 +35,11 @@ test('injectedConnector user reject enable return false', async () => {
     throw new Error('user reject connection')
   }
 
+  const chainId = 1
+  const signer = new TestSigner(chainId)
   const rawProvider = new TestRawProvider(requestCallback)
-  const connector = new InjectedConnectorForTest(rawProvider, logger, [chainInfo])
-  const result = await connector.connect(1)
+  const connector = new InjectedConnectorForTest({rawProvider, signer, logger, chains: [chainInfo]})
+  const result = await connector.connect(chainId)
 
   expect(result).toBeFalsy()
 });
