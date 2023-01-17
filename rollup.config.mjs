@@ -1,23 +1,22 @@
-import esbuild from "rollup-plugin-esbuild";
-import { nodeResolve } from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import json from "@rollup/plugin-json";
-
 const input = "./src/index.ts";
-const plugins = [
-  nodeResolve({ preferBuiltins: false, browser: true }),
-  commonjs(),
-  json(),
-  esbuild({
-    minify: true,
-    tsconfig: "./tsconfig.json",
-    loaders: {
-      ".json": "json",
-    },
-  }),
-];
 
-export default function createConfig(packageName, packageDependencies) {
+export default function createConfig(pluginsData, packageName, packageDependencies) {
+
+  const { esbuild, nodeResolve, commonjs, json } = pluginsData
+
+  const plugins = [
+    nodeResolve({ preferBuiltins: false, browser: true }),
+    commonjs(),
+    json(),
+    esbuild({
+      minify: true,
+      tsconfig: "./tsconfig.json",
+      loaders: {
+        ".json": "json",
+      },
+    }),
+  ];
+
   return [
     {
       input,
