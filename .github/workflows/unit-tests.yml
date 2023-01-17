@@ -31,6 +31,7 @@ jobs:
 
     - name: nftProviders tests
       run: |
+        ls- a
         yarn install
         yarn test
-      working-directory: ./nftProviders
+      working-directory: ./packages/nftProviders
