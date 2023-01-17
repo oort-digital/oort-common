@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1",
+  "version": "0.0.1-alfa.0.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -28,7 +28,7 @@
     }
   },
   "dependencies": {
-    "@oort-digital/logger": "^0.0.1",
+    "@oort-digital/logger": "^0.0.1-alfa.0.0.1",
     "ethers": "^5.7.0",
     "@walletconnect/web3-provider": "^1.8.0"
   },
