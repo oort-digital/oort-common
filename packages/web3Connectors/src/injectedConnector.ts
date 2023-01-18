@@ -1,4 +1,4 @@
-import { ILogger } from "@oort/logger";
+import { ILogger } from "@oort-digital/logger";
 import { BaseConnector, IChainInfo } from "./baseConnector";
 import { ConnectorNames } from "./connectorNames";
 import { IConnector } from "./iConnector";
@@ -19,7 +19,7 @@ const ErrorCodes = {
 
 export class InjectedConnector extends BaseConnector implements IConnector
 {
-  get canSwitchChain() { return !!window.ethereum.isMetaMask }
+  get canSwitchChain() { return !!this.rawProvider.isMetaMask }
 
   disconnect(): Promise<void> {
     super.removeListeners_(window.ethereum)
@@ -53,7 +53,7 @@ export class InjectedConnector extends BaseConnector implements IConnector
         if(!this._chains[chainId]) {
             throw new Error(`Chain ${chainId} not supported`)
         }
-        await window.ethereum.request({
+        await this.rawProvider.request({
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: chainIdHex }],
         });
@@ -77,7 +77,7 @@ export class InjectedConnector extends BaseConnector implements IConnector
   }
 
   get isInstalled(): boolean {
-    return !!window.ethereum
+    return !!this.rawProvider
   }
 
   get installUrl(): string {
@@ -87,7 +87,7 @@ export class InjectedConnector extends BaseConnector implements IConnector
   constructor(logger: ILogger, chains: IChainInfo[]) {
       super(logger, ConnectorNames.Injected, chains);
       if(this.isInstalled) {
-        this.initListeners(window.ethereum)
+        this.initListeners(this.rawProvider)
       }
   }
 
@@ -95,7 +95,7 @@ export class InjectedConnector extends BaseConnector implements IConnector
     try {
       const chain = this._chains[chainId]
       const blockExplorerUrls = chain.blockExplorer ? [chain.blockExplorer] : undefined
-      await window.ethereum.request({
+      await this.rawProvider.request({
         method: 'wallet_addEthereumChain',
         params: [{
           chainId: chainIdHex,
@@ -117,15 +117,20 @@ export class InjectedConnector extends BaseConnector implements IConnector
     return true
   }
 
+  //use this method to override window.ethereum in unit tests
+  protected get rawProvider(): any {
+    return window.ethereum
+  }
+
   protected getRawProvider(): Promise<any> {
-    return Promise.resolve(window.ethereum)
+    return Promise.resolve(this.rawProvider)
   }
 
   private _ethRequestAccounts: Promise<boolean> | undefined = undefined
 
   private async prvEnable(): Promise<boolean> {
     try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' })
+      await this.rawProvider.request({ method: 'eth_requestAccounts' })
     }
     catch(error: any) {
       if (error.code === ErrorCodes.UserReject) {
@@ -140,7 +145,7 @@ export class InjectedConnector extends BaseConnector implements IConnector
   }
 
   private async isConnectedAsync(): Promise<boolean> {
-    const response: string[] = await window.ethereum.request({ method: 'eth_accounts' })
+    const response: string[] = await this.rawProvider.request({ method: 'eth_accounts' })
     return response.length > 0
   }
 }

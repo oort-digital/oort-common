@@ -1,4 +1,4 @@
-import { ILogger } from "@oort/logger";
+import { ILogger } from "@oort-digital/logger";
 import { ConnectorNames } from "./connectorNames";
 import { IConnector } from "./iConnector";
 

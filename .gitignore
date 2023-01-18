@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+yarn.lock
 
-# dependencies
 /node_modules
 /packages/ui/node_modules
 /packages/ui/storybook-static
@@ -9,6 +9,13 @@
 /packages/web3Connectors/node_modules
 /packages/urlSearchParams/node_modules
 /packages/nftProviders/node_modules
+
+/packages/logger/dist
+/packages/ui/dist
+/packages/nftProviders/dist
+/packages/web3Connectors/dist
+/packages/urlSearchParams/dist
+/packages/oortApiClient/dist
 
 /sites/cra-test-app/node_modules
 /sites/cra-test-app/build

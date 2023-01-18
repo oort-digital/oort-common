@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 import { LazyLoader } from '../lazyLoader';
-import { ConnectorNames, IConnector } from '@oort/web3-connectors';
+import { ConnectorNames, IConnector } from '@oort-digital/web3-connectors';
 import { IChain } from '../typesAndInterfaces';
 
 const Desktop = lazy(() => import("./connectModalDesktop"));

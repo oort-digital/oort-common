@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { logger } from '@oort/logger';
+import { logger } from '@oort-digital/logger';
 import { debounceFunction } from '../utils';
 
 export interface IScreenBrakepoints {

@@ -1,9 +1,9 @@
 import react from '@vitejs/plugin-react';
-import { dependencies } from './package.json';
 import path from 'node:path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy'
+import { dependencies } from "./package.json"
 
 export default defineConfig({
     plugins: [
@@ -29,7 +29,8 @@ export default defineConfig({
             fileName: (format) => `ui.${format}.js`,
         },
         rollupOptions: {
-            external: Object.entries(dependencies).map(x => x[0]),
+            //external: ['axios', 'react', 'react-dom', 'antd', "ethers", 'mobx', 'mobx-react', 'react-router-dom'],
+            external: Object.keys(dependencies),
             output: {
                 globals: {
                     react: 'React',

@@ -1,4 +1,4 @@
-import { logger } from "@oort/logger";
+import { logger } from "@oort-digital/logger";
 import React, { CSSProperties, useState } from "react";
 import { Img } from "../img";
 import './tileCoverAvg.less'
