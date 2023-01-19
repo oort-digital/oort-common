@@ -1,5 +1,5 @@
 import UniversalProvider, { EthereumRpcMap } from "@walletconnect/universal-provider";
-import { ILogger } from "@oort/logger";
+import { ILogger } from "@oort-digital/logger";
 import { BaseConnector, IChainInfo } from "./baseConnector";
 import { SessionTypes } from "@walletconnect/types";
 import { Web3Modal } from "@web3modal/standalone";

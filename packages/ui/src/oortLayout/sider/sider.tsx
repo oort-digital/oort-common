@@ -3,7 +3,7 @@ import { Drawer } from "antd"
 import { CloseCircleIcon } from "../../icons"
 import styles from "./sider.module.less"
 import { BurgerMenuIcon } from "./burgerMenuIcon"
-import { logger } from "@oort/logger"
+import { logger } from "@oort-digital/logger"
 
 interface IProps {
     children: ReactNode

@@ -1,4 +1,4 @@
-import axios, {AxiosRequestConfig, AxiosResponse} from "axios"
+import axios, {AxiosHeaders, AxiosResponse, RawAxiosRequestConfig} from "axios"
 import { toAuthRequest } from "./isAuthRequest"
 
 import {
@@ -12,9 +12,12 @@ import {
 } from "./typesAndInterfaces"
 
 
-function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParams): AxiosRequestConfig<any> {
+function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParams): RawAxiosRequestConfig<any> {
 
-    const config: AxiosRequestConfig<any> = { signal: signal }
+    const config: RawAxiosRequestConfig<any> = {
+        signal: signal,
+        headers: new AxiosHeaders()
+    }
 
     if(params) {
         config.params = params

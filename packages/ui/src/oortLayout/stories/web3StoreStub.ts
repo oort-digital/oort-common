@@ -1,5 +1,5 @@
-import { logger } from "@oort/logger";
-import { ConnectorNames, IConnector, InjectedConnector } from "@oort/web3-connectors";
+import { logger } from "@oort-digital/logger";
+import { ConnectorNames, IConnector, InjectedConnector } from "@oort-digital/web3-connectors";
 import { makeObservable, observable, runInAction } from "mobx";
 import { IWeb3 } from "../../connectModal";
 import { EMPTY_CHAIN, IChain } from "../../typesAndInterfaces";

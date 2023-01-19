@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { WalletConnectConnector } from './walletConnectConnector';
-import { logger } from '@oort/logger';
+import { logger } from '@oort-digital/logger';
 import { InjectedConnector } from './injectedConnector';
 import { IConnector } from './iConnector';
 import { IChainInfo } from './baseConnector';

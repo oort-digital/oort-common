@@ -1,0 +1,42 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: publish npm package
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        type: choice
+        description: Select package
+        options:
+        - logger
+        - nftProviders
+        - oortApiClient
+        - ui
+        - urlSearchParams
+        - web3Connectors
+
+jobs:
+
+  publish-gpr:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/${{github.event.inputs.package}}
+    permissions:
+      contents: read
+      packages: write
+    env:
+      NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com/
+      - run: ls -a
+      - run: yarn install
+      - run: yarn build
+      - run: npm publish
+        

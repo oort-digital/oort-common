@@ -1,5 +1,5 @@
 
-import { logger } from "@oort/logger";
+import { logger } from "@oort-digital/logger";
 import { INft } from "../typesAndInterfaces";
 
 import { MoralisNftProvider } from "./moralisNftProvider";

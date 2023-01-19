@@ -4,7 +4,7 @@ import '../styles/fonts.css';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectModal, IWeb3 } from '.';
 import { ConnectorNames, IConnector, InjectedConnector, WalletConnectConnector, IWalletConnectOptions } from '@oort/web3-connectors';
-import { logger } from '@oort/logger';
+import { logger } from '@oort-digital/logger';
 import { ZERO_ADDR } from '../utils';
 import { EMPTY_CHAIN } from '../typesAndInterfaces';
 import { IConnectModalProps } from './connectModal';
