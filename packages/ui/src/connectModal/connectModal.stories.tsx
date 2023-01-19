@@ -3,7 +3,7 @@ import '../styles/antOverride.less';
 import '../styles/fonts.css';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectModal, IWeb3 } from '.';
-import { ConnectorNames, ConnectorProvider, FaceWalletConnector, IConnector, IFaceWalletOptions, InjectedConnector } from '@oort-digital/web3-connectors';
+import { ConnectorNames, ConnectorProvider, FaceWalletConnector, IChainInfo, IConnector, IFaceWalletOptions, InjectedConnector, WalletConnectConnector } from '@oort-digital/web3-connectors';
 import { logger } from '@oort-digital/logger';
 import { delayAsync, ZERO_ADDR } from '../utils';
 import { EMPTY_CHAIN } from '../typesAndInterfaces';
@@ -26,7 +26,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ConnectModal> = (args) => <ConnectModal {...args} />;
 
-const chains = [
+const chains: IChainInfo[] = [
   {
     name: 'mumbai',
     chainId: 80001,
@@ -63,7 +63,7 @@ const faceWalletOptions: IFaceWalletOptions = {
   
 const supportedConnectors: { [name: string]: IConnector } = {}
 supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, chains)
-supportedConnectors[ConnectorNames.WalletConnect] = new InjectedConnector(logger, chains)
+supportedConnectors[ConnectorNames.WalletConnect] = new WalletConnectConnector({ projectId: '', logger, chains})
 supportedConnectors[ConnectorNames.FaceWallet] = new FaceWalletConnector(faceWalletOptions)
 
 const connectorProvider = new ConnectorProvider(logger, Object.entries(supportedConnectors).map(x => x[1]))
