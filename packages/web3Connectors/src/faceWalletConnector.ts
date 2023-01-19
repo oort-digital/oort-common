@@ -5,9 +5,11 @@ import { IConnector } from "./iConnector";
 import { ConnectorNames } from "./connectorNames";
 
 const getNetworkById = (id: number): Network => {
-    if(id === 1) { return Network.ETHEREUM }
-    if(id === 80001) { return Network.MUMBAI }
-    if(id === 5) { return Network.GOERLI }
+    if(id === 1)        { return Network.ETHEREUM }
+    if(id === 137)      { return Network.POLYGON }
+    if(id === 56)       { return Network.BNB_SMART_CHAIN }
+    if(id === 80001)    { return Network.MUMBAI }
+    if(id === 5)        { return Network.GOERLI }
     throw new Error(`Unknow chain id: ${id}`)
 }
 
@@ -127,8 +129,6 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
           case Network.ETHEREUM:
           case Network.POLYGON:
           case Network.BNB_SMART_CHAIN:
-          case Network.KLAYTN:
-          case Network.BORA:
             {
                 if(!this._mainnetApiKey) {
                     throw new Error('No API key for mainnet')
@@ -138,8 +138,6 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
           case Network.GOERLI:
           case Network.MUMBAI:
           case Network.BNB_SMART_CHAIN_TESTNET:
-          case Network.BAOBAB:
-          case Network.BORA_TESTNET:
             {
                 if(!this._testnetApiKey) {
                     throw new Error('No API key for testnet')
@@ -147,7 +145,7 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
                 return this._testnetApiKey
             }
           default:
-            throw new Error("unsupported network error");
+            throw new Error(`Unsupported network: ${network}`);
         }
     }
 
