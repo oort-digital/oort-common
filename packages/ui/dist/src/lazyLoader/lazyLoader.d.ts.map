@@ -1,1 +1,0 @@
-{"version":3,"file":"lazyLoader.d.ts","sourceRoot":"","sources":["lazyLoader.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAY,MAAM,OAAO,CAAA;AAG3C,UAAU,MAAM;IACZ,OAAO,EAAE,SAAS,CAAA;IAClB,MAAM,EAAE,SAAS,CAAA;IACjB,MAAM,EAAE,SAAS,CAAA;CACpB;AAED,eAAO,MAAM,UAAU,gCAAiC,MAAM,gBAe7D,CAAA"}
