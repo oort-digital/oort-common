@@ -1,4 +1,4 @@
-import { ILogger } from "@oort/logger";
+import { ILogger } from "@oort-digital/logger";
 import { Face, Network } from "@haechi-labs/face-sdk";
 import { BaseConnector, IChainInfo } from "./baseConnector";
 import { IConnector } from "./iConnector";
