@@ -18,6 +18,19 @@ export interface IFaceWalletOptions {
     mainnetApiKey: string | null
 }
 
+
+let frameCloseCallback: (() => void) | null = null
+window.addEventListener('message', event => {
+    // IMPORTANT: check the origin of the data!
+    
+    if (event.origin === 'https://app.test.facewallet.xyz' && event.data.method === 'face_closeIframe') {
+        frameCloseCallback && frameCloseCallback()
+        // The data was sent from your site.
+        // Data sent with postMessage is stored in event.data:
+        console.log(event.data);
+    }
+});
+
 export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     async disconnect(): Promise<void> {
@@ -61,10 +74,12 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         if(await this.face.auth.isLoggedIn()) {
             return true
         }
+        
+        const loginPromise = this.face.auth.login()
+        const frameClosePromise = this.waitFrameClose()
 
-        /*const response = */await this.face.auth.login()
-
-        return true
+        const loginResponse = await Promise.race([ loginPromise, frameClosePromise ])
+        return !!loginResponse
     }
 
     constructor({ logger, chains, testnetApiKey, mainnetApiKey }: IFaceWalletOptions) {
@@ -139,5 +154,10 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         }
     }
 
+    private waitFrameClose = (): Promise<void> => {
+        return new Promise<void>(async ( resolve ) => {
+            frameCloseCallback = resolve
+        })
+    }
 
 }
