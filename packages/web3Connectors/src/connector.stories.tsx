@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { WalletConnectConnector } from './walletConnectConnector';
+// import { WalletConnectConnector } from './walletConnectConnector';
 import { logger } from '@oort-digital/logger';
 import { InjectedConnector } from './injectedConnector';
 import { IConnector } from './iConnector';
@@ -33,11 +33,13 @@ const chains: IChainInfo[] = [
   }
 ]
 
+/*
 const walletConnectOptions = {
   projectId: 'c2b4ff7ce76613f93a7edea85b9618f5',
   logger,
   chains
 }
+*/
 
 /*
 https://oortdigital.slack.com/archives/C04EY5MLV50/p1671005355999189
