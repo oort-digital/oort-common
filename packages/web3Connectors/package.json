@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-facewallet.0.0.1",
+  "version": "0.0.1-facewallet.0.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
