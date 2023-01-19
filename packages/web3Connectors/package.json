@@ -1,6 +1,10 @@
 {
-  "name": "@oort/web3-connectors",
-  "version": "0.1.2",
+  "name": "@oort-digital/web3-connectors",
+  "version": "0.0.1-facewallet.0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oort-digital/oort-common.git"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build:types": "tsc",
@@ -8,7 +12,7 @@
     "build": "yarn clean && yarn build:source && yarn build:types",
     "test": "jest",
     "rm": "rimraf node_modules",
-    "storybook": "yarn start-storybook -p 3000 -s public"
+    "storybook": "yarn start-storybook -p 3000"
   },
   "jest": {
     "verbose": true,
@@ -23,31 +27,34 @@
       "window": {}
     }
   },
+  "browser": {
+    "buffer": false
+  },
   "dependencies": {
-    "@oort/logger": "*",
+    "@haechi-labs/face-sdk": "^1.7.0",
+    "@haechi-labs/face-types": "^1.7.0",
+    "@oort-digital/logger": "^0.0.1-alfa.0.0.1",
+    "@walletconnect/web3-provider": "^1.8.0",
     "ethers": "^5.7.0"
   },
   "devDependencies": {
-    "@haechi-labs/face-sdk": "^1.7.0",
-    "@haechi-labs/face-types": "^1.7.0",
-    "@walletconnect/web3-provider": "^1.8.0",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-essentials": "^6.5.15",
+    "@storybook/addon-interactions": "^6.5.15",
+    "@storybook/addon-links": "^6.5.15",
+    "@storybook/builder-webpack5": "^6.5.15",
+    "@storybook/manager-webpack5": "^6.5.15",
+    "@storybook/react": "^6.5.15",
+    "@storybook/testing-library": "^0.0.13",
     "@types/jest": "^29.1.1",
     "jest": "^29.1.2",
-    "ts-jest": "^29.0.3",
-    "rollup": "^3.9.1",
+    "process": "^0.11.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^3.10.0",
     "rollup-plugin-esbuild": "^5.0.0",
-    "@rollup/plugin-json": "^6.0.0",
-    "esbuild": "^0.16.16",
-    "@storybook/addon-actions": "^6.5.13",
-    "@storybook/addon-essentials": "^6.5.13",
-    "@storybook/addon-interactions": "^6.5.13",
-    "@storybook/addon-links": "^6.5.13",
-    "@storybook/builder-webpack5": "^6.5.13",
-    "@storybook/manager-webpack5": "^6.5.13",
-    "@storybook/node-logger": "^6.5.13",
-    "@storybook/preset-create-react-app": "^4.1.2",
-    "@storybook/react": "^6.5.13",
-    "@storybook/testing-library": "^0.0.13"
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.9.4"
   },
   "license": "UNLICENSED",
   "files": [
