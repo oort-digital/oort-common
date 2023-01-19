@@ -46,14 +46,16 @@ Oort NFT Rental Marketplace
 */
 const testnetApiKey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDD7uJnqeI74gH6M-cSeEq82_Zrh-dp9KYH9asKMsjmdZpxjuHifc8lRhkKp5ZDTr9H__bpX8XFSBHt52r_iyP2-pMMh5E-T3uQJLFs0dBUSw2COr2ZgA_QWFHaIoSOtV_b9w5gEzxY623L0_Op9ItpZ51NN1WGEWgate5k-vMaDwIDAQAB'
 
+const mainnetApiKey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCX9F3aDaZiPAsbGNbnpHAyBJNBHi4DtLkHIo1ZSYKSlxVHkg2ejuN1rMmPFGe6cZsZS7eAcNB-AaVTLyDgmYYdYBYwdJEoTejAJ2nC1ntZwmOEDC6nR_oeedEH2lc4zQp05rV0p8DHDUYxiYC6nlG-RSEUOvJhzsoC2tetoEbjuQIDAQAB'
+
 const faceWalletConnectOptions: IFaceWalletOptions = {
   logger,
   chains,
   testnetApiKey,
-  mainnetApiKey: null
+  mainnetApiKey,
 }
 
-const walletConnect = new WalletConnectConnector(walletConnectOptions)
+// const walletConnect = new WalletConnectConnector(walletConnectOptions)
 const injected = new InjectedConnector(logger, chains)
 const faceWallet = new FaceWalletConnector(faceWalletConnectOptions)
 
@@ -106,8 +108,8 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
   const getConnectorInstance = (): IConnector => {
     if(curConnector === ConnectorNames.Injected) { return injected }
-    if(curConnector === ConnectorNames.FaceWallet) { return faceWallet }
-    return walletConnect
+    // if(curConnector === ConnectorNames.WalletConnect) { return walletConnect }
+    return faceWallet
   }
 
   const onConnect = async () => {

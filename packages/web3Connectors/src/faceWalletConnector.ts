@@ -22,12 +22,9 @@ export interface IFaceWalletOptions {
 let frameCloseCallback: (() => void) | null = null
 window.addEventListener('message', event => {
     // IMPORTANT: check the origin of the data!
-    
-    if (event.origin === 'https://app.test.facewallet.xyz' && event.data.method === 'face_closeIframe') {
+    if ((event.origin === 'https://app.facewallet.xyz' || event.origin === 'https://app.test.facewallet.xyz')
+        && event.data.method === 'face_closeIframe') {
         frameCloseCallback && frameCloseCallback()
-        // The data was sent from your site.
-        // Data sent with postMessage is stored in event.data:
-        console.log(event.data);
     }
 });
 
