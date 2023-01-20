@@ -27,13 +27,15 @@
     }
   },
   "dependencies": {
-    "@moralisweb3/api-utils": "2.10.3",
-    "@moralisweb3/common-core": "2.10.3",
-    "@moralisweb3/common-evm-utils": "2.10.3",
-    "@moralisweb3/evm-api": "2.10.3",
+    "@moralisweb3/api-utils": "2.11.1",
+    "@moralisweb3/common-core": "2.11.1",
+    "@moralisweb3/common-evm-utils": "2.11.1",
+    "@moralisweb3/evm-api": "2.11.1",
     "@oort-digital/logger": "^0.0.1-alfa.0.0.1"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/jest": "^29.1.1",
     "esbuild": "^0.17.0",
     "jest": "^29.1.2",
