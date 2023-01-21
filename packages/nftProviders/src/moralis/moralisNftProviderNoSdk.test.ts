@@ -23,8 +23,8 @@ test('debug only. Moralis featchAccountNfts', async () => {
    })
 
    expect(respose.total).toBeDefined()
-   expect(respose.page).toEqual(0)
-   expect(respose.pageSize).toEqual(500)
+   expect(respose.page).toEqual(1)
+   expect(respose.pageSize).toEqual(10)
    respose.data.forEach(assertNft)
 });
 
