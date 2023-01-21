@@ -68,7 +68,7 @@ export class MoralisNftProvider implements IAssetsProvider, IAssetProvider, INft
             tokenId: tokenId,
         })
         if(!response.result?.length) {
-            return { asset: undefined }
+            return { asset: null }
         }
 
         const sorted = response.result.sort((a, b) => {

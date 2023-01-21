@@ -10,7 +10,7 @@
     "build:source": "rollup -c",
     "build": "yarn build:source && yarn build:types",
     "test": "jest",
-    "test:debug": "node --inspect-brk ../../node_modules/jest/bin/jest.js",
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js",
     "rm": "rimraf node_modules"
   },
   "jest": {
@@ -27,11 +27,12 @@
     }
   },
   "dependencies": {
-    "@moralisweb3/api-utils": "^2.10.3",
-    "@moralisweb3/common-core": "^2.10.3",
-    "@moralisweb3/common-evm-utils": "^2.10.3",
-    "@moralisweb3/evm-api": "^2.10.3",
-    "@oort-digital/logger": "^0.0.1-alfa.0.0.1"
+    "@moralisweb3/api-utils": "2.11.1",
+    "@moralisweb3/common-core": "2.11.1",
+    "@moralisweb3/common-evm-utils": "2.11.1",
+    "@moralisweb3/evm-api": "2.11.1",
+    "@oort-digital/logger": "^0.0.1-alfa.0.0.1",
+    "axios": "^1.2.3"
   },
   "devDependencies": {
     "@types/jest": "^29.1.1",
