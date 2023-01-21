@@ -28,7 +28,7 @@ interface IRawNft {
     block_number: string
     owner_of: string
     amount: string
-    contract_type: string
+    contract_type: string | null
     name: string | null
     symbol: string | null
     token_uri: string
@@ -193,10 +193,11 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         return undefined
     }
 
-    private static ParseContractType(tokenAddress: string, tokenId: string, rawNftType: string): NftType {
+    private static ParseContractType(tokenAddress: string, tokenId: string, rawNftType: string | null, logger: ILogger): NftType {
         if(rawNftType === "ERC721") { return NftType.ERC721 }
         if(rawNftType === "ERC1155") { return NftType.ERC1155 }
-        throw new Error(`Unknow contarct type: ${rawNftType}. TokenAddress: ${tokenAddress} TokenId: ${tokenId}`)
+        logger.debug(`Unknow contarct type: ${rawNftType}. TokenAddress: ${tokenAddress} TokenId: ${tokenId}`)
+        return NftType.UNKNOWN
     }
 
     private mapNft(rawNft: IRawNftWithUnparsedMetadata, metadata: IMoralisMetadata | null): INft {
@@ -205,7 +206,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         const result: INft = {
             projectName: rawNft.name ?? undefined,
             amount:  parseInt(amount),
-            contractType: MoralisNftProviderNoSdk.ParseContractType(token_address, token_id, rawNft.contract_type),
+            contractType: MoralisNftProviderNoSdk.ParseContractType(token_address, token_id, rawNft.contract_type, this._logger),
             tokenAddress: token_address,
             tokenId: token_id,
             symbol: rawNft.symbol || '',
