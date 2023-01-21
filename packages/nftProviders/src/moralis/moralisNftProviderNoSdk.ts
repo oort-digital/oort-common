@@ -44,7 +44,7 @@ interface IRawNftWithNormMetadata extends IRawNft {
 }
 
 const is404 = (err: any) => {
-    return err.status === 404
+    return err.response?.status === 404
 }
 
 export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider, INftOwnerProvider {
