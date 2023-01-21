@@ -39,6 +39,10 @@ interface IRawNftWithUnparsedMetadata extends IRawNft {
     metadata: string | null
 }
 
+interface IRawNftWithNormMetadata extends IRawNft {
+    normalized_metadata: IMoralisMetadata | null
+}
+
 export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider, INftOwnerProvider {
     public readonly providerKind: ProviderKind = ProviderKind.Moralis
 
@@ -89,8 +93,19 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         }
     }
 
-    public async featchNft(_params: IFeatchNftParams): Promise<INft> {
-        throw new Error('not implemented')
+    public async featchNft({ address, tokenId }: IFeatchNftParams): Promise<INft> {
+
+        const config = {
+            params: {
+              chain: this._chainIdHex,
+              format: 'decimal',
+              normalizeMetadata: true
+            }
+        }
+
+        const axiosResponse = await this._axios.get<IRawNftWithNormMetadata>(`/nft/${address}/${tokenId}`, config)
+        const rawNft = axiosResponse.data
+        return this.mapNft(rawNft, rawNft.normalized_metadata)
     }
 
     public async featchNftImageSrc(_params: IFeatchNftImageSrc): Promise<string | undefined> {
@@ -116,7 +131,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         const axiosResponse = await this._axios.get<IMoralisPagingResponse<IRawNftWithUnparsedMetadata[]>>(`/${ownerAddress}/nft`, config)
 
         const moralisResponse = axiosResponse.data
-        const data = moralisResponse.result.map(x => this.mapNft(x))
+        const data = moralisResponse.result.map(x => this.mapNft(x, x.metadata ? JSON.parse(x.metadata) as IMoralisMetadata : null))
    
         return {
             page: moralisResponse.page,
@@ -169,10 +184,9 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         throw new Error(`Unknow contarct type: ${rawNftType}. TokenAddress: ${tokenAddress} TokenId: ${tokenId}`)
     }
 
-    private mapNft(rawNft: IRawNftWithUnparsedMetadata): INft {
-        const { token_address, token_id, amount, metadata } = rawNft
+    private mapNft(rawNft: IRawNftWithUnparsedMetadata, metadata: IMoralisMetadata | null): INft {
+        const { token_address, token_id, amount } = rawNft
 
-        const metadataParsed: IMoralisMetadata | undefined = metadata ? JSON.parse(metadata) as IMoralisMetadata : undefined        
         const result: INft = {
             projectName: rawNft.name ?? undefined,
             amount:  parseInt(amount),
@@ -187,10 +201,10 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
             description: undefined
         }
 
-        if(metadataParsed) {
-            result.image = this.ParseImage(token_address, token_id, metadataParsed)
-            result.nftName = this.ParseNftName(token_address, token_id, metadataParsed)
-            result.description = this.ParseDescription(token_address, token_id, metadataParsed)
+        if(metadata) {
+            result.image = this.ParseImage(token_address, token_id, metadata)
+            result.nftName = this.ParseNftName(token_address, token_id, metadata)
+            result.description = this.ParseDescription(token_address, token_id, metadata)
         }
 
         return result
