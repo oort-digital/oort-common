@@ -15,7 +15,7 @@ const assertNft = (nft: INft) => {
     expect(nft.tokenId).toBeDefined()
 }
 
-test('debug only. Moralis featchAccountNfts', async () => {
+test.skip('debug only. Moralis featchAccountNfts', async () => {
    const respose = await provider.featchAccountNfts({
        ownerAddress: '0x103a9685D26fF05F2fed95dbC6e706B8841E5EC7',
        cursor: undefined,
