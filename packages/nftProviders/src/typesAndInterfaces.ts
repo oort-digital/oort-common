@@ -64,11 +64,11 @@ export interface IAssetProvider {
 }
 
 export interface IFeatchNftOwnerResponse {
-    asset?: {
+    asset: {
         address: string
         tokenId: string
         ownerAddress: string
-    }
+    } | null
 }
 
 export interface INftOwnerProvider {

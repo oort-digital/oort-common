@@ -41,17 +41,15 @@ test.skip('debug only. Moralis featchAccountNfts 404', async () => {
  
     expect(respose.total).toEqual(0)
     expect(respose.data.length).toEqual(0)
- });
+});
  
-
-
 test.skip('debug only. Moralis featchNft', async () => {
     const nft = await provider.featchNft({
         address: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB',
         tokenId: '1'
     })
     assertNft(nft!)
- });
+});
 
  test('debug only. Moralis featchNft 404', async () => {
     const nft = await provider.featchNft({
@@ -60,11 +58,19 @@ test.skip('debug only. Moralis featchNft', async () => {
     })
 
     expect(nft).toBeNull()
- });
+});
 
- test.skip('debug only. Moralis featchNftOwner', async () => {
+test.skip('debug only. Moralis featchNftOwner', async () => {
     await provider.featchNftOwner({
         address: '0x91f16f2b28d96c3d1a3202b574fc05e749defb6c',
         tokenId: '15'
     })
- });
+});
+
+test.skip('debug only. Moralis featchNftOwner 404', async () => {
+    const response = await provider.featchNftOwner({
+        address: badAddress,
+        tokenId: '15'
+    })
+    expect(response.asset).toBeNull()
+});

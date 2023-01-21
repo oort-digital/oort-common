@@ -62,15 +62,15 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
               format: 'decimal',
               //If the result should skip returning the total count (Improves performance).
               disable_total: false,
-            //   limit: 1,
+              // limit: 1,
             }
         }
 
         const axiosResponse = await this._axios.get<IMoralisPagingResponse<IRawNft[]>>(`/nft/${address}/${tokenId}/owners`, config)
         const moralisResponse = axiosResponse.data
 
-        if(moralisResponse.result.length) {
-            return { asset: undefined }
+        if(!moralisResponse.result.length) {
+            return { asset: null }
         }
 
         const sorted = moralisResponse.result.sort((a, b) => {
