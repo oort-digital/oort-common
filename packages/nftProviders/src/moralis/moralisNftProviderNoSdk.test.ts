@@ -19,6 +19,7 @@ test('debug only. Moralis featchAccountNfts', async () => {
    const respose = await provider.featchAccountNfts({
        ownerAddress: '0x103a9685D26fF05F2fed95dbC6e706B8841E5EC7',
        cursor: undefined,
+       tokenAddresses: ['0x11a57ee56d1851cb9b0de5244e00716ad3a787f3', '0x7b72f99683f4186f1cb979012c15f7d3bbfdfc19'],
        limit: 10
    })
 

@@ -52,7 +52,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
 
     public async featchAccountNfts(params: IFeatchAccountNftsParams): Promise<IFeatchNftsResponse> {
         
-        const { ownerAddress, cursor, limit, /*tokenAddresses*/ } = params
+        const { ownerAddress, cursor, limit, tokenAddresses } = params
 
         const config = {
             params: {
@@ -60,7 +60,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
               format: 'decimal',
               //If the result should skip returning the total count (Improves performance).
               disable_total: false,
-              token_addresses: undefined,
+              token_addresses: tokenAddresses,
               limit,
               cursor
             }
