@@ -108,8 +108,9 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         return this.mapNft(rawNft, rawNft.normalized_metadata)
     }
 
-    public async featchNftImageSrc(_params: IFeatchNftImageSrc): Promise<string | undefined> {
-        throw new Error('not implemented')
+    public async featchNftImageSrc(params: IFeatchNftImageSrc): Promise<string | undefined> {
+        const moralisNft = await this.featchNft(params)
+        return moralisNft.image
     }
 
     public async featchAccountNfts(params: IFeatchAccountNftsParams): Promise<IFeatchNftsResponse> {
