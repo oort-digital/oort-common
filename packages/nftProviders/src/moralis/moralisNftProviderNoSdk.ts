@@ -27,10 +27,10 @@ interface IRawNft {
     token_address: string
     amount: string
     contract_type: string
-    name: string
-    symbol: string
+    name: string | null
+    symbol: string | null
     token_uri: string
-    metadata: string | undefined
+    metadata: string | null
 }
 
 export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider, INftOwnerProvider {
@@ -128,7 +128,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
 
         const metadataParsed: IMoralisMetadata | undefined = metadata ? JSON.parse(metadata) as IMoralisMetadata : undefined        
         const result: INft = {
-            projectName: rawNft.name,
+            projectName: rawNft.name ?? undefined,
             amount:  parseInt(amount),
             contractType: MoralisNftProviderNoSdk.ParseContractType(token_address, token_id, rawNft.contract_type),
             tokenAddress: token_address,
