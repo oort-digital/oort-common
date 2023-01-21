@@ -59,7 +59,7 @@ export interface IAssetsProvider {
 
 export interface IAssetProvider {
     chainId: number
-    featchNft: (params: IFeatchNftParams) => Promise<INft>
+    featchNft: (params: IFeatchNftParams) => Promise<INft | null>
 }
 
 export interface IFeatchNftOwnerResponse {

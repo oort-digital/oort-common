@@ -43,6 +43,10 @@ interface IRawNftWithNormMetadata extends IRawNft {
     normalized_metadata: IMoralisMetadata | null
 }
 
+const is404 = (err: any) => {
+    return err.status === 404
+}
+
 export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider, INftOwnerProvider {
     public readonly providerKind: ProviderKind = ProviderKind.Moralis
 
@@ -93,7 +97,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         }
     }
 
-    public async featchNft({ address, tokenId }: IFeatchNftParams): Promise<INft> {
+    public async featchNft({ address, tokenId }: IFeatchNftParams): Promise<INft | null> {
 
         const config = {
             params: {
@@ -103,14 +107,24 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
             }
         }
 
-        const axiosResponse = await this._axios.get<IRawNftWithNormMetadata>(`/nft/${address}/${tokenId}`, config)
-        const rawNft = axiosResponse.data
-        return this.mapNft(rawNft, rawNft.normalized_metadata)
+        try {
+            const axiosResponse = await this._axios.get<IRawNftWithNormMetadata>(`/nft/${address}/${tokenId}`, config)
+            const rawNft = axiosResponse.data
+            return this.mapNft(rawNft, rawNft.normalized_metadata)
+        }
+
+        catch(err) {
+            if(is404(err)) { return null }
+            throw err
+        }
     }
 
     public async featchNftImageSrc(params: IFeatchNftImageSrc): Promise<string | undefined> {
         const moralisNft = await this.featchNft(params)
-        return moralisNft.image
+        if(moralisNft) {
+            return moralisNft.image
+        }
+        return undefined
     }
 
     public async featchAccountNfts(params: IFeatchAccountNftsParams): Promise<IFeatchNftsResponse> {
