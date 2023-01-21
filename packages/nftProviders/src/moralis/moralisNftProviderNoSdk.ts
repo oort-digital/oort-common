@@ -25,6 +25,8 @@ interface IMoralisPagingResponse<TResult> extends IMoralisResponse<TResult> {
 interface IRawNft {
     token_id: string
     token_address: string
+    block_number: string
+    owner_of: string
     amount: string
     contract_type: string
     name: string | null
@@ -33,13 +35,58 @@ interface IRawNft {
     metadata: string | null
 }
 
+interface IRawNftWithUnparsedMetadata extends IRawNft {
+    metadata: string | null
+}
+
 export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider, INftOwnerProvider {
     public readonly providerKind: ProviderKind = ProviderKind.Moralis
 
     public readonly chainId: number;
 
-    public async featchNftOwner(_params: { address: string, tokenId: string }): Promise<IFeatchNftOwnerResponse> {
-        throw new Error('not implemented')
+    public async featchNftOwner(params: { address: string, tokenId: string }): Promise<IFeatchNftOwnerResponse> {
+        
+        const { address, tokenId } = params
+
+        const config = {
+            params: {
+              chain: this._chainIdHex,
+              format: 'decimal',
+              //If the result should skip returning the total count (Improves performance).
+              disable_total: false,
+            //   limit: 1,
+            }
+        }
+
+        const axiosResponse = await this._axios.get<IMoralisPagingResponse<IRawNft[]>>(`/nft/${address}/${tokenId}/owners`, config)
+        const moralisResponse = axiosResponse.data
+
+        if(moralisResponse.result.length) {
+            return { asset: undefined }
+        }
+
+        const sorted = moralisResponse.result.sort((a, b) => {
+            const aBN = parseInt(a.block_number)
+            const bBN = parseInt(b.block_number)
+
+            if (aBN < bBN) {
+                return -1;
+              }
+              if (aBN > bBN) {
+                return 1;
+              }
+
+              return 0;
+        })
+
+        const nft = sorted[0]
+        return {
+            asset: {
+                address: nft.token_address,
+                tokenId: nft.token_id,
+                ownerAddress: nft.owner_of
+            }
+        }
     }
 
     public async featchNft(_params: IFeatchNftParams): Promise<INft> {
@@ -66,8 +113,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
             }
         }
 
-        // https://deep-index.moralis.io/api/v2/0xd8da6bf26964af9d7eed9e03e53415d37aa96045/nft?chain=eth&format=decimal
-        const axiosResponse = await this._axios.get<IMoralisPagingResponse<IRawNft[]>>(`/${ownerAddress}/nft`, config)
+        const axiosResponse = await this._axios.get<IMoralisPagingResponse<IRawNftWithUnparsedMetadata[]>>(`/${ownerAddress}/nft`, config)
 
         const moralisResponse = axiosResponse.data
         const data = moralisResponse.result.map(x => this.mapNft(x))
@@ -123,7 +169,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         throw new Error(`Unknow contarct type: ${rawNftType}. TokenAddress: ${tokenAddress} TokenId: ${tokenId}`)
     }
 
-    private mapNft(rawNft: IRawNft): INft {
+    private mapNft(rawNft: IRawNftWithUnparsedMetadata): INft {
         const { token_address, token_id, amount, metadata } = rawNft
 
         const metadataParsed: IMoralisMetadata | undefined = metadata ? JSON.parse(metadata) as IMoralisMetadata : undefined        
