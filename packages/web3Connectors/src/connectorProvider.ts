@@ -16,7 +16,7 @@ const readCurConnectorData = () : ICurConnector | undefined => {
 }
 
 const saveCurConnectorData = (curConnector: ICurConnector) => localStorage.setItem(lsKey, JSON.stringify(curConnector));
-const removeCurConnectorName = () => localStorage.removeItem(lsKey);
+const removeCurConnectorData = () => localStorage.removeItem(lsKey);
 
 
 export class ConnectorProvider
@@ -55,18 +55,31 @@ export class ConnectorProvider
         return this._curConnector;
     }
 
-    async connect(chainId: number, connectorName: ConnectorNames): Promise<void> {
+    async connect(chainId: number, connectorName: ConnectorNames): Promise<boolean> {
         await this.WaitInitialisationAsync
         const curConnector = this.connectorsByName[connectorName]
         if(await curConnector.connect(chainId)) {
             saveCurConnectorData({ chainId, name: connectorName})
             this._curConnector = curConnector
+            return true
         }
+        return false
+    }
+
+    async switchChain(chainId: number): Promise<boolean> {
+        await this.WaitInitialisationAsync
+        if(this._curConnector) {
+            if(await this._curConnector.switchChain(chainId)) {
+                saveCurConnectorData({ chainId, name: this._curConnector.name})
+            }
+        }
+        
+        return false
     }
 
     async disconnect(): Promise<void> {
         await this._curConnector?.disconnect()
-        removeCurConnectorName()
+        removeCurConnectorData()
         this._curConnector = undefined
     }
 }
