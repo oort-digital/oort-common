@@ -1,4 +1,5 @@
 import { ILogger } from "@oort-digital/logger";
+import { BaseConnector } from "./baseConnector";
 import { ConnectorNames } from "./connectorNames";
 import { IConnector } from "./iConnector";
 
@@ -21,12 +22,12 @@ const removeCurConnectorName = () => localStorage.removeItem(lsKey);
 export class ConnectorProvider
 {
     private readonly _logger: ILogger
-    public readonly connectorsByName: { [name: string]: IConnector } = {}
-    private _curConnector: IConnector | undefined
+    public readonly connectorsByName: { [name: string]: BaseConnector} = {}
+    private _curConnector: BaseConnector | undefined
     public readonly WaitInitialisationAsync : Promise<void>
 
-    private async InitAsync(connectors: IConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
-        let curConnector: IConnector | undefined = undefined
+    private async InitAsync(connectors: BaseConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
+        let curConnector: BaseConnector | undefined = undefined
         for(let i = 0; i < connectors.length; i++) {
             const c = connectors[i]
             this.connectorsByName[c.name] = c
@@ -45,7 +46,7 @@ export class ConnectorProvider
         }
     }
 
-    constructor(logger: ILogger, connectors: IConnector[]) {
+    constructor(logger: ILogger, connectors: BaseConnector[]) {
         this._logger = logger
         this.WaitInitialisationAsync = this.InitAsync(connectors, readCurConnectorData());
     }

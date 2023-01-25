@@ -3,8 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { WalletConnectConnector } from './walletConnectConnector';
 import { logger } from '@oort-digital/logger';
 import { InjectedConnector } from './injectedConnector';
-import { IConnector } from './iConnector';
-import { IChainInfo } from './baseConnector';
+import { BaseConnector, IChainInfo } from './baseConnector';
 
 const FakeComponent = () => <></>
 
@@ -51,7 +50,7 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
   const [ curConnector, setCurConnector ] = useState<ConnectorType>('walletConnect')
 
-  const getConnectorInstance = (): IConnector => {
+  const getConnectorInstance = (): BaseConnector => {
     if(curConnector === 'injected') { return injected }
     return walletConnect
   }

@@ -22,35 +22,39 @@ export interface IChainMap {
   }
 
 export abstract class BaseConnector {
-    name: ConnectorNames;
+    public readonly name: ConnectorNames;
+    public abstract get isInstalled(): boolean
+    public abstract get installUrl(): string
+    public abstract get isConnected(): Promise<boolean>
+    public abstract get canSwitchChain(): boolean
+    public abstract connect(chainId: number): Promise<boolean>
+    public abstract switchChain(chainId: number): Promise<boolean>
 
-    protected readonly _chains: IChainMap = {}
+    public async getSigner(): Promise<Signer> {
+        const provider = new providers.Web3Provider(await this.getRawProvider())
+        return provider.getSigner()
+    }
 
-    private _externalAccountChangedHandlers: AccountChangedHandlerType[] = []
-    private accountsChangedHandler?: AccountChangedHandlerType
+    public async disconnect(): Promise<void> {
+        this.removeListeners(await this.getRawProvider())
+    }
 
-    private _externalChainChangedHandlers: ChainChangedHandlerType[] = []
-    private chainChangedHandler?: ChainChangedHandlerType
+    public onAccountsChanged(handler: AccountChangedHandlerType) {
+        this._externalAccountChangedHandlers.push(handler)
+    }
 
-    private _externalDisconnectHandlers: DisconnectHandlerType[] = []
-    protected disconnectHandler?: DisconnectHandlerType
+    public onChainChanged(handler: ChainChangedHandlerType): void {
+        this._externalChainChangedHandlers.push(handler)
+    }
 
-    protected readonly logger: ILogger
+    public onDisconnect(handler: (error: any) => void): void {
 
-    private readonly _checkConnectionDelayMs : number = 500;
-    private _timerId?: NodeJS.Timeout;
-    
-    private async CheckConnection(): Promise<void> {
-        if(!await this.isConnected)
-        {
-            if(this._timerId) {
-                clearInterval(this._timerId)
-                this.logger.debug(`${this.name}Connector. CheckConnection stopped`)
-            }
-
-            this._externalDisconnectHandlers.forEach(h => h(undefined));
-            this._externalDisconnectHandlers = [];
+        if(!this._timerId) {
+            const self = this;
+            this._timerId = setInterval(() => self.CheckConnection(), this._checkConnectionDelayMs)
         }
+        
+        this._externalDisconnectHandlers.push(handler);
     }
 
     constructor(logger: ILogger, name: ConnectorNames, chains: IChainInfo[]) {
@@ -58,6 +62,11 @@ export abstract class BaseConnector {
         this.logger = logger
         chains.forEach(x => this._chains[x.chainId] = x)
     }
+
+    protected readonly _chains: IChainMap = {}
+    protected disconnectHandler?: DisconnectHandlerType
+    protected readonly logger: ILogger
+    protected abstract getRawProvider(): Promise<any>;
 
     protected initListeners(rawProvider: any) {
 
@@ -84,6 +93,30 @@ export abstract class BaseConnector {
         // rawProvider.on("disconnect", this.disconnectHandler);
     }
 
+    private readonly _checkConnectionDelayMs : number = 500;
+    private _timerId?: NodeJS.Timeout;
+    
+    private async CheckConnection(): Promise<void> {
+        if(!await this.isConnected)
+        {
+            if(this._timerId) {
+                clearInterval(this._timerId)
+                this.logger.debug(`${this.name}Connector. CheckConnection stopped`)
+            }
+
+            this._externalDisconnectHandlers.forEach(h => h(undefined));
+            this._externalDisconnectHandlers = [];
+        }
+    }
+
+    private _externalAccountChangedHandlers: AccountChangedHandlerType[] = []
+    private accountsChangedHandler?: AccountChangedHandlerType
+
+    private _externalChainChangedHandlers: ChainChangedHandlerType[] = []
+    private chainChangedHandler?: ChainChangedHandlerType
+
+    private _externalDisconnectHandlers: DisconnectHandlerType[] = []
+
     private removeListeners(rawProvider: any) {
         rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
         rawProvider.removeListener('chainChanged', this.chainChangedHandler);
@@ -92,37 +125,5 @@ export abstract class BaseConnector {
         this._externalChainChangedHandlers = []
         this._externalDisconnectHandlers = []
     }
-
-    protected abstract getRawProvider(): Promise<any>;
-   
-    onAccountsChanged(handler: AccountChangedHandlerType) {
-        this._externalAccountChangedHandlers.push(handler)
-    }
-
-    onChainChanged(handler: ChainChangedHandlerType): void {
-        this._externalChainChangedHandlers.push(handler)
-    }
-
-    onDisconnect(handler: (error: any) => void): void {
-
-        if(!this._timerId) {
-            const self = this;
-            this._timerId = setInterval(() => self.CheckConnection(), this._checkConnectionDelayMs)
-        }
-        
-        this._externalDisconnectHandlers.push(handler);
-    }
-
-    abstract get isConnected(): Promise<boolean>
-
-
-    async getSigner(): Promise<Signer> {
-        const provider = new providers.Web3Provider(await this.getRawProvider())
-        return provider.getSigner()
-    }
-
-    async disconnect(): Promise<void> {
-        this.removeListeners(await this.getRawProvider())
-    }
-
+    
 }
