@@ -9,12 +9,12 @@ interface ICurConnector {
     name: ConnectorNames
 }
 
-const getCurConnectorName = () : ICurConnector | undefined => {
+const readCurConnectorData = () : ICurConnector | undefined => {
     const jsonStr = localStorage.getItem(lsKey);
     return jsonStr ? JSON.parse(jsonStr) : undefined;
 }
 
-const setCurConnectorName = (curConnector: ICurConnector) => localStorage.setItem(lsKey, JSON.stringify(curConnector));
+const saveCurConnectorData = (curConnector: ICurConnector) => localStorage.setItem(lsKey, JSON.stringify(curConnector));
 const removeCurConnectorName = () => localStorage.removeItem(lsKey);
 
 
@@ -47,7 +47,7 @@ export class ConnectorProvider
 
     constructor(logger: ILogger, connectors: IConnector[]) {
         this._logger = logger
-        this.WaitInitialisationAsync = this.InitAsync(connectors, getCurConnectorName());
+        this.WaitInitialisationAsync = this.InitAsync(connectors, readCurConnectorData());
     }
 
     public get CurConnector(): IConnector | undefined {
@@ -58,7 +58,7 @@ export class ConnectorProvider
         await this.WaitInitialisationAsync
         const curConnector = this.connectorsByName[connectorName]
         if(await curConnector.connect(chainId)) {
-            setCurConnectorName({ chainId, name: connectorName})
+            saveCurConnectorData({ chainId, name: connectorName})
             this._curConnector = curConnector
         }
     }
