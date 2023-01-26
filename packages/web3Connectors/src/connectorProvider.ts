@@ -22,10 +22,10 @@ const removeCurConnectorData = () => localStorage.removeItem(lsKey);
 export class ConnectorProvider {
    
     public readonly connectorsByName: { [name: string]: BaseConnector} = {}
-    public readonly WaitInitialisationAsync : Promise<void>
+    public readonly waitInitialisation : Promise<void>
 
     async connect(chainId: number, connectorName: ConnectorNames): Promise<boolean> {
-        await this.WaitInitialisationAsync
+        await this.waitInitialisation
         const curConnector = this.connectorsByName[connectorName]
         if(await curConnector.connect(chainId)) {
             saveCurConnectorData({ chainId, name: connectorName})
@@ -36,7 +36,7 @@ export class ConnectorProvider {
     }
 
     async switchChain(chainId: number): Promise<boolean> {
-        await this.WaitInitialisationAsync
+        await this.waitInitialisation
         if(this._curConnector) {
             if(await this._curConnector.switchChain(chainId)) {
                 saveCurConnectorData({ chainId, name: this._curConnector.name})
@@ -55,13 +55,13 @@ export class ConnectorProvider {
         this._curConnector = undefined
     }
 
-    public get CurConnector(): IConnector | undefined {
+    public get curConnector(): IConnector | undefined {
         return this._curConnector;
     }
 
     constructor(logger: ILogger, connectors: BaseConnector[]) {
         this._logger = logger
-        this.WaitInitialisationAsync = this.InitAsync(connectors, readCurConnectorData());
+        this.waitInitialisation = this.Init(connectors, readCurConnectorData());
     }
 
     private readonly _logger: ILogger
@@ -73,10 +73,10 @@ export class ConnectorProvider {
 
     private setCurConnector(curConnector: BaseConnector) {
         this._curConnector = curConnector
-        this._curConnector.onChainChanged(this.onChainChanged)
+        this._curConnector.onChainChanged(chainId => this.onChainChanged(chainId))
     }
 
-    private async InitAsync(connectors: BaseConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
+    private async Init(connectors: BaseConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
         let curConnector: BaseConnector | undefined = undefined
         for(let i = 0; i < connectors.length; i++) {
             const c = connectors[i]

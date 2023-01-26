@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { WalletConnectConnector } from './walletConnectConnector';
 import { logger } from '@oort-digital/logger';
 import { InjectedConnector } from './injectedConnector';
-import { BaseConnector, IChainInfo } from './baseConnector';
+import { IChainInfo } from './baseConnector';
 import { ConnectorProvider } from './connectorProvider';
 import { ConnectorNames } from './connectorNames';
 
