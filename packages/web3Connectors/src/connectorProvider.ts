@@ -73,8 +73,11 @@ export class ConnectorProvider
                 saveCurConnectorData({ chainId, name: this._curConnector.name})
             }
         }
-        
         return false
+    }
+
+    get canSwitchChain(): boolean {
+        return !!this._curConnector?.canSwitchChain
     }
 
     async disconnect(): Promise<void> {
