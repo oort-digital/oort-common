@@ -17,23 +17,6 @@ module.exports = {
           fileLoaderExcludes: ['less'],
         },
       },
-    },
-    {
-      name: 'storybook-preset-less',
-      options: {
-        // cssLoaderOptions: {
-        //    modules: true,
-        //    localIdentName: '[name]__[local]--[hash:base64:5]',
-        // },
-        lessLoaderOptions: {
-          lessOptions: {
-            // strictMath: false,
-            // noIeCompat: true,
-            // relativeUrls: false,
-            javascriptEnabled: true,
-          }
-        }
-      }
     }
   ],
   "framework": "@storybook/react",
