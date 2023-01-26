@@ -19,41 +19,10 @@ const saveCurConnectorData = (curConnector: ICurConnector) => localStorage.setIt
 const removeCurConnectorData = () => localStorage.removeItem(lsKey);
 
 
-export class ConnectorProvider
-{
-    private readonly _logger: ILogger
+export class ConnectorProvider {
+   
     public readonly connectorsByName: { [name: string]: BaseConnector} = {}
-    private _curConnector: BaseConnector | undefined
     public readonly WaitInitialisationAsync : Promise<void>
-
-    private async InitAsync(connectors: BaseConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
-        let curConnector: BaseConnector | undefined = undefined
-        for(let i = 0; i < connectors.length; i++) {
-            const c = connectors[i]
-            this.connectorsByName[c.name] = c
-            if(c.name === curConnectorData?.name) {
-                if(await c.isConnected) {
-                    curConnector = c
-                }
-            }
-        }
-
-        if(curConnector) {
-            if(await curConnector.connect(curConnectorData!.chainId)) {
-                this._curConnector = curConnector
-                this._logger.debug(`Current connector is ${this._curConnector.name}`)
-            }
-        }
-    }
-
-    constructor(logger: ILogger, connectors: BaseConnector[]) {
-        this._logger = logger
-        this.WaitInitialisationAsync = this.InitAsync(connectors, readCurConnectorData());
-    }
-
-    public get CurConnector(): IConnector | undefined {
-        return this._curConnector;
-    }
 
     async connect(chainId: number, connectorName: ConnectorNames): Promise<boolean> {
         await this.WaitInitialisationAsync
@@ -84,5 +53,37 @@ export class ConnectorProvider
         await this._curConnector?.disconnect()
         removeCurConnectorData()
         this._curConnector = undefined
+    }
+
+    public get CurConnector(): IConnector | undefined {
+        return this._curConnector;
+    }
+
+    constructor(logger: ILogger, connectors: BaseConnector[]) {
+        this._logger = logger
+        this.WaitInitialisationAsync = this.InitAsync(connectors, readCurConnectorData());
+    }
+
+    private readonly _logger: ILogger
+    private _curConnector: BaseConnector | undefined
+
+    private async InitAsync(connectors: BaseConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
+        let curConnector: BaseConnector | undefined = undefined
+        for(let i = 0; i < connectors.length; i++) {
+            const c = connectors[i]
+            this.connectorsByName[c.name] = c
+            if(c.name === curConnectorData?.name) {
+                if(await c.isConnected) {
+                    curConnector = c
+                }
+            }
+        }
+
+        if(curConnector) {
+            if(await curConnector.connect(curConnectorData!.chainId)) {
+                this._curConnector = curConnector
+                this._logger.debug(`Current connector is ${this._curConnector.name}`)
+            }
+        }
     }
 }
