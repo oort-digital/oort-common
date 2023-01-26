@@ -29,7 +29,7 @@ export class ConnectorProvider {
         const curConnector = this.connectorsByName[connectorName]
         if(await curConnector.connect(chainId)) {
             saveCurConnectorData({ chainId, name: connectorName})
-            this._curConnector = curConnector
+            this.setCurConnector(curConnector)
             return true
         }
         return false
@@ -67,6 +67,15 @@ export class ConnectorProvider {
     private readonly _logger: ILogger
     private _curConnector: BaseConnector | undefined
 
+    private onChainChanged(chainId: string) {
+        saveCurConnectorData({ chainId: parseInt(chainId), name: this._curConnector!.name})
+    }
+
+    private setCurConnector(curConnector: BaseConnector) {
+        this._curConnector = curConnector
+        this._curConnector.onChainChanged(this.onChainChanged)
+    }
+
     private async InitAsync(connectors: BaseConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
         let curConnector: BaseConnector | undefined = undefined
         for(let i = 0; i < connectors.length; i++) {
@@ -81,8 +90,8 @@ export class ConnectorProvider {
 
         if(curConnector) {
             if(await curConnector.connect(curConnectorData!.chainId)) {
-                this._curConnector = curConnector
-                this._logger.debug(`Current connector is ${this._curConnector.name}`)
+                this.setCurConnector(curConnector)
+                this._logger.debug(`Current connector is ${this._curConnector!.name}`)
             }
         }
     }
