@@ -21,7 +21,7 @@ export class InjectedConnector extends BaseConnector implements IConnector
 {
   get canSwitchChain() { return !!this.rawProvider.isMetaMask }
 
-  async connect(chainId: number): Promise<boolean> {
+  async connect(_chainId: number): Promise<boolean> {
     if(this._ethRequestAccounts) {
       this.logger.debug('InjectedConnector.enable already called')
       return await this._ethRequestAccounts
@@ -32,12 +32,12 @@ export class InjectedConnector extends BaseConnector implements IConnector
     const result = await this._ethRequestAccounts
     this._ethRequestAccounts = undefined
 
-    const signer = await this.getSigner()
-    const curChainId = await signer.getChainId()
+    // const signer = await this.getSigner()
+    // const curChainId = await signer.getChainId()
 
-    if(curChainId !== chainId) {
-      await this.switchChain(chainId)
-    }
+    // if(chainId && curChainId !== chainId) {
+    //   await this.switchChain(chainId)
+    // }
 
     return result;
   }

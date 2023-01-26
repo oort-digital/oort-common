@@ -61,7 +61,7 @@ export class ConnectorProvider {
 
     constructor(logger: ILogger, connectors: BaseConnector[]) {
         this._logger = logger
-        this.waitInitialisation = this.Init(connectors, readCurConnectorData());
+        this.waitInitialisation = this.init(connectors, readCurConnectorData());
     }
 
     private readonly _logger: ILogger
@@ -76,20 +76,26 @@ export class ConnectorProvider {
         this._curConnector.onChainChanged(chainId => this.onChainChanged(chainId))
     }
 
-    private async Init(connectors: BaseConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
+    private async init(connectors: BaseConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
+
+        if(!curConnectorData) {
+            return
+        }
+
         let curConnector: BaseConnector | undefined = undefined
         for(let i = 0; i < connectors.length; i++) {
             const c = connectors[i]
             this.connectorsByName[c.name] = c
-            if(c.name === curConnectorData?.name) {
+            if(c.name === curConnectorData.name) {
                 if(await c.isConnected) {
                     curConnector = c
+                    break
                 }
             }
         }
 
         if(curConnector) {
-            if(await curConnector.connect(curConnectorData!.chainId)) {
+            if(await curConnector.connect(curConnectorData.chainId)) {
                 this.setCurConnector(curConnector)
                 this._logger.debug(`Current connector is ${this._curConnector!.name}`)
             }
