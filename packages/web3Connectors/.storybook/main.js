@@ -9,15 +9,6 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    // "@storybook/preset-create-react-app",
-    {
-      name: '@storybook/preset-create-react-app',
-      options: {
-        craOverrides: {
-          fileLoaderExcludes: ['less'],
-        },
-      },
-    }
   ],
   "framework": "@storybook/react",
   "core": {
