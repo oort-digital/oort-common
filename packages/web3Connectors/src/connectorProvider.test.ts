@@ -28,3 +28,25 @@ test('connectorProvider init', async () => {
   expect(connectorProvider.canSwitchChain).toBeFalsy()
 });
 
+test('connectorProvider read cur provider from localStorage', async () => {
+  
+  const requestCallback = () => Promise.resolve()
+
+  const lsKey = 'cur_connector'
+  const chainId = 1
+  const signer = new TestSigner(chainId)
+  const rawProvider = new TestRawProvider(requestCallback)
+  const connector = new InjectedConnectorForTest({rawProvider, signer, logger, chains: [chainInfo]})
+
+  localStorage.setItem(lsKey, JSON.stringify({ chainId, name: ConnectorNames.Injected }))
+
+  const connectorProvider = new ConnectorProvider(logger, [connector])
+  await connectorProvider.waitInitialisation
+
+  expect(connectorProvider.connectorsByName[ConnectorNames.Injected]).toBeDefined()
+  expect(connectorProvider.curConnector).toBeDefined()
+  expect(connectorProvider.canSwitchChain).toBeFalsy()
+
+  localStorage.removeItem(lsKey)
+});
+
