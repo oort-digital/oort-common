@@ -1,5 +1,4 @@
 import { logger } from "@oort-digital/logger";
-import { delayAsync } from "./utils";
 import { IChainInfo } from "./baseConnector";
 import { InjectedConnectorForTest, TestRawProvider, TestSigner } from "./testStubs";
 import { ConnectorProvider } from "./connectorProvider";
@@ -14,12 +13,7 @@ const chainInfo: IChainInfo = {
 
 test('connectorProvider init', async () => {
   
-  debugger
-  //let callCounter = 0
-  const requestCallback = (): Promise<any> => {
-    //callCounter++
-    return delayAsync(1000)
-  }
+  const requestCallback = () => Promise.resolve()
 
   const chainId = 1
   const signer = new TestSigner(chainId)
