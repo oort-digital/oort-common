@@ -3,12 +3,14 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { WalletConnectConnector } from './walletConnectConnector';
 import { logger } from '@oort-digital/logger';
 import { InjectedConnector } from './injectedConnector';
-import { BaseConnector, IChainInfo } from './baseConnector';
+import { IChainInfo } from './baseConnector';
+import { ConnectorProvider } from './connectorProvider';
+import { ConnectorNames } from './connectorNames';
 
 const FakeComponent = () => <></>
 
 export default {
-  title: 'web3Connectors/connectors',
+  title: 'web3Connectors/connectorProvider',
   component: FakeComponent,
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
@@ -38,25 +40,21 @@ const options = {
 const walletConnect = new WalletConnectConnector(options)
 const injected = new InjectedConnector(logger, chains)
 
-type ConnectorType = 'walletConnect' | 'injected'
 
-
+const connectorProvider = new ConnectorProvider(logger, [walletConnect, injected])
 
 const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
+  // const [ ready, setReady ] = useState(false)
   const [ chainId, setChainId ] = useState<number>()
   const [ address, setAddress ] = useState<string>()
   const [ connected, setConnected ] = useState<boolean>(false)
 
-  const [ curConnector, setCurConnector ] = useState<ConnectorType>('walletConnect')
+  const [ curConnector, setCurConnector ] = useState<ConnectorNames>(ConnectorNames.Injected)
 
-  const getConnectorInstance = (): BaseConnector => {
-    if(curConnector === 'injected') { return injected }
-    return walletConnect
-  }
 
   const onConnect = async () => {
-    const instance = getConnectorInstance()
+    const instance = connectorProvider.curConnector!
     const signer = await instance.getSigner()
     setAddress(await signer.getAddress())
     setChainId(await signer.getChainId())
@@ -71,35 +69,27 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
   useEffect(() => {
 
-    const init = async () => {
-      if(await getConnectorInstance().isConnected) {
+    connectorProvider.waitInitialisation.then(() => {
+      if(connectorProvider.curConnector) {
         onConnect()
       }
-    }
+    })
 
-    reset()
-    init()
-
-  }, [curConnector])
-
-  /*
-  connector.onChainChanged(_id => {
-    debugger
-  })*/
+  }, [])
 
   const connect = async (chainId: number) => {
-    if(await getConnectorInstance().connect(chainId)) {
+    if(await connectorProvider.connect(chainId, curConnector)) {
       onConnect()
     }
   }
 
   const disconnect = async () => {
-    await getConnectorInstance().disconnect()
+    await connectorProvider.disconnect()
     reset()
   }
 
   const switchChain = async (chainId: number) => {
-    if(await getConnectorInstance().switchChain(chainId)) {
+    if(await connectorProvider.switchChain(chainId)) {
       onConnect()
     }
   }

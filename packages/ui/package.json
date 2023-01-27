@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/ui",
-  "version": "0.0.1-alfa.0.0.1",
+  "version": "0.0.1-alfa.0.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@oort-digital/logger": "^0.0.1-alfa.0.0.1",
-    "@oort-digital/web3-connectors": "^0.0.1-alfa.0.0.1",
+    "@oort-digital/web3-connectors": "0.0.1-alfa.0.0.2",
     "antd": "4.23.0",
     "blockies-ts": "^1.0.0",
     "ethers": "^5.7.0",

@@ -119,7 +119,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
     const connectChainId = expectedChainId || supportedChains[0].chainId
     const content = <>
         {
-            isChainEmpty(chain) && <>
+            !isChainEmpty(chain) && <>
                 <div className={styles.description}>
                     <Alert account={account} chain={chain} supportedChains={supportedChains} expectedChainId={expectedChainId} />
                 </div>
