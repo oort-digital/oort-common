@@ -78,15 +78,11 @@ export class ConnectorProvider {
 
     private async init(connectors: BaseConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
 
-        if(!curConnectorData) {
-            return
-        }
-
         let curConnector: BaseConnector | undefined = undefined
         for(let i = 0; i < connectors.length; i++) {
             const c = connectors[i]
             this.connectorsByName[c.name] = c
-            if(c.name === curConnectorData.name) {
+            if(c.name === curConnectorData?.name) {
                 if(await c.isConnected) {
                     curConnector = c
                 }
@@ -94,7 +90,7 @@ export class ConnectorProvider {
         }
 
         if(curConnector) {
-            if(await curConnector.connect(curConnectorData.chainId)) {
+            if(await curConnector.connect(curConnectorData!.chainId)) {
                 this.setCurConnector(curConnector)
                 this._logger.debug(`Current connector is ${this._curConnector!.name}`)
             }
