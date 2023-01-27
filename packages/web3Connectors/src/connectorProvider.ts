@@ -89,7 +89,6 @@ export class ConnectorProvider {
             if(c.name === curConnectorData.name) {
                 if(await c.isConnected) {
                     curConnector = c
-                    break
                 }
             }
         }
