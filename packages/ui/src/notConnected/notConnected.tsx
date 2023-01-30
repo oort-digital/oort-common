@@ -1,22 +1,20 @@
 import {useState} from 'react';
 import {Button} from 'antd';
 import styles from "./notConnected.module.less"
-import { ConnectModal, getChainName, isChainEmpty } from "@oort-digital/ui";
-import { IWeb3Store } from '../../stores';
 import { PageLoader } from '../pageLoader';
 import { observer } from 'mobx-react';
 import { WalletSvg } from './walletSvg';
 import { WalletIcon } from '../icons';
-import { IChain } from '../typesAndInterfaces';
+import { ConnectModal, IWeb3 } from '../connectModal';
+import { isChainEmpty } from '../typesAndInterfaces';
+import { getChainName } from '../utils';
 
-interface IWeb3 {
+interface IWeb3Store extends IWeb3 {
     isReady: boolean
-    supportedChains: IChain[]
-    chain: IChain
 }
 
 interface IProps {
-    web3Store: IWeb3
+    web3Store: IWeb3Store
     expectedChainId?: number
 }
 
