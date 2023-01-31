@@ -189,7 +189,6 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
     private async tryFetchMetadataByUri(token_uri: string): Promise<IMoralisMetadata | null> {
         try {
             const response = await this._axios.get(token_uri)
-            debugger
             const metadata: IMoralisMetadata = {
                 name: response.data?.name,
                 image: response.data?.image,
