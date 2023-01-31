@@ -233,6 +233,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         const { token_address, token_id, amount, token_uri } = rawNft
 
         if(!metadata && token_uri) {
+            // sometimes moralis doesn't fetch metadata even if nft has token_uri
             metadata = await this.tryFetchMetadataByUri(token_uri)
         }
 
