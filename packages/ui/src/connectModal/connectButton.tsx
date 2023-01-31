@@ -1,5 +1,5 @@
+import { toMasskedAddress } from "@oort-digital/utils";
 import { ReactNode } from "react";
-import { toMasskedAddress } from "../utils";
 import "./connectButton.less"
 
 

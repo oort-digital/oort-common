@@ -1,6 +1,6 @@
+import { debounceFunction } from '@oort-digital/utils'
 import { useRef } from 'react'
 import { NumOrUndef, NumRange } from '../../typesAndInterfaces'
-import { debounceFunction } from '../../utils'
 import { IMobileFilterItemProps } from '../layout/filterLayoutMobile'
 import { RangeFilterContent } from './rangeFilterContent'
 
