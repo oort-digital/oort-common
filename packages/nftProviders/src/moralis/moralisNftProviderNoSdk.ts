@@ -3,6 +3,7 @@ import { INftOwnerProvider, IFeatchNftOwnerResponse, ProviderKind, IFeatchAccoun
 import { ILogger, logger } from "@oort-digital/logger";
 import axios, { AxiosInstance } from "axios";
 import { toErrorWithMessage } from "@oort-digital/utils";
+import * as https from "https";
 
 interface IMoralisMetadata {
     image?: string
@@ -145,7 +146,6 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         }
 
         const axiosResponse = await this._axios.get<IMoralisPagingResponse<IRawNftWithUnparsedMetadata[]>>(`/${ownerAddress}/nft`, config)
-
         const moralisResponse = axiosResponse.data
         const promises = moralisResponse.result.map(x => this.mapNft(x, x.metadata ? JSON.parse(x.metadata) as IMoralisMetadata : null))
    
@@ -159,12 +159,23 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         
     }
 
-    constructor(_logger: ILogger, chainId: number, config: { apiKey: string }) {
-       
-        this._axios = axios.create({
-            baseURL: 'https://deep-index.moralis.io/api/v2/',
-            headers: {'X-API-Key': config.apiKey}
-          });
+    constructor(
+        _logger: ILogger,
+        chainId: number,
+        config: { apiKey: string },
+        // for test
+        rejectUnauthorized?: boolean) {
+
+        const baseURL = 'https://deep-index.moralis.io/api/v2/'
+        const headers = {'X-API-Key': config.apiKey}
+
+        if(rejectUnauthorized === false) {
+            const httpsAgent = new https.Agent({ rejectUnauthorized: false })
+            this._axios = axios.create({ baseURL, headers, httpsAgent });
+        }
+        else {
+            this._axios = axios.create({ baseURL, headers });
+        }        
         
         this.chainId = chainId
         this._logger = logger
