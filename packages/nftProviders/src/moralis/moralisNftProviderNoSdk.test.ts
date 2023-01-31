@@ -6,7 +6,7 @@ import { MoralisNftProviderNoSdk } from "./moralisNftProviderNoSdk";
 
 const badAddress = '0x0000000000dDF8e4c57F05d70Ab8444555666777'
 
-const provider = new MoralisNftProviderNoSdk(logger, 1, { apiKey: "76e3cVcdO0ennLoMfMaAoAhuWnL0l0tJ5Bz7n511UGwmyVfHy3JqVF6XlSgE5cld" })
+const provider = new MoralisNftProviderNoSdk(logger, 80001, { apiKey: "76e3cVcdO0ennLoMfMaAoAhuWnL0l0tJ5Bz7n511UGwmyVfHy3JqVF6XlSgE5cld" }, false)
 
 const assertNft = (nft: INft) => {
     expect(nft.amount).toBeDefined()
@@ -51,7 +51,7 @@ test.skip('debug only. Moralis featchNft', async () => {
     assertNft(nft!)
 });
 
- test('debug only. Moralis featchNft 404', async () => {
+ test.skip('debug only. Moralis featchNft 404', async () => {
     const nft = await provider.featchNft({
         address: badAddress,
         tokenId: '1'

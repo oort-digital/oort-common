@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './footerMenu.module.less';
 import { Menu, MenuItem, MenuItemBtn } from './menu';
-import { getChainIconOld, toMasskedAddress } from '../utils';
+import { getChainIconOld } from '../utils';
 import { ChevronSortIcon, DiscordIcon, TelegramIcon, TwitterIcon } from '../icons';
 import { ThemeSwitch } from './themeSwitch';
 import { ConnectModal, IWeb3 } from '../connectModal';
@@ -9,6 +9,7 @@ import { BlockieAddress } from '../blockieAddress';
 import { useTheme } from '../effects';
 import { isChainEmpty } from '../typesAndInterfaces';
 import { observer } from 'mobx-react';
+import { toMasskedAddress } from '@oort-digital/utils';
 
 const TWITTER = "https://twitter.com/OortDigital";
 const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";

@@ -8,6 +8,7 @@ yarn.lock
 /packages/oortApiClient/node_modules
 /packages/web3Connectors/node_modules
 /packages/urlSearchParams/node_modules
+/packages/utils/node_modules
 /packages/nftProviders/node_modules
 
 /packages/logger/dist
@@ -15,6 +16,7 @@ yarn.lock
 /packages/nftProviders/dist
 /packages/web3Connectors/dist
 /packages/urlSearchParams/dist
+/packages/utils/dist
 /packages/oortApiClient/dist
 
 /sites/cra-test-app/node_modules

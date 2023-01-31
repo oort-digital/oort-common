@@ -2,13 +2,14 @@ import {Card, Col, Row} from 'antd'
 import styles from './assetCardLayout.module.less'
 import { IAssetItem } from './typesAndInterfaces'
 import { getNftName, getNftTitle } from './utils';
-import { cutLongString, getChainIconOld, toMasskedAddress } from '../utils';
+import { getChainIconOld } from '../utils';
 import { TileCoverSimple, TileCoverSkeleton } from '../tileCover';
 import { NftQuantity } from '../nftQuantity';
 import { IMarketplaceConfig, INftScanConfig, ViewOnButton } from '../viewOn';
 import { BigNumber } from 'ethers';
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { cutLongString, toMasskedAddress } from '@oort-digital/utils';
 
 interface IProps<TAssetItem extends IAssetItem> {
     nftScanConfig: INftScanConfig,
