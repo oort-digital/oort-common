@@ -58,8 +58,6 @@ const injected = new InjectedConnector(logger, chains)
 const faceWallet = new FaceWalletConnector(faceWalletConnectOptions)
 
 
-
-
 const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
   const [ chainId, setChainId ] = useState<number>()
@@ -74,8 +72,23 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
     return walletConnect
   }
 
+  const accountsChangedHandler = (_accounts: Array<string>) => {
+    console.log('AccountsChanged')
+  }
+
+  const chainChangedHandler = (_chainId: string) => {
+    console.log('chainChanged')
+  }
+
+  const disconnectHandler = (_error: any) => {
+    console.log('disconnect')
+  }
+
   const onConnect = async () => {
     const instance = getConnectorInstance()
+    instance.onAccountsChanged(accountsChangedHandler)
+    instance.onChainChanged(chainChangedHandler)
+    instance.onDisconnect(disconnectHandler)
     const signer = await instance.getSigner()
     setAddress(await signer.getAddress())
     setChainId(await signer.getChainId())
