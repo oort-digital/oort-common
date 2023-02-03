@@ -4,6 +4,8 @@ import { WalletConnectConnector } from './walletConnectConnector';
 import { logger } from '@oort-digital/logger';
 import { InjectedConnector } from './injectedConnector';
 import { BaseConnector, IChainInfo } from './baseConnector';
+import { FaceWalletConnector, IFaceWalletOptions } from './faceWalletConnector';
+import { ConnectorNames } from './connectorNames';
 
 const FakeComponent = () => <></>
 
@@ -30,6 +32,22 @@ const chains: IChainInfo[] = [
   }
 ]
 
+/*
+https://oortdigital.slack.com/archives/C04EY5MLV50/p1671005355999189
+Oort NFT Rental Marketplace
+[API Key for Testnet]
+*/
+const testnetApiKey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDD7uJnqeI74gH6M-cSeEq82_Zrh-dp9KYH9asKMsjmdZpxjuHifc8lRhkKp5ZDTr9H__bpX8XFSBHt52r_iyP2-pMMh5E-T3uQJLFs0dBUSw2COr2ZgA_QWFHaIoSOtV_b9w5gEzxY623L0_Op9ItpZ51NN1WGEWgate5k-vMaDwIDAQAB'
+
+const mainnetApiKey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCX9F3aDaZiPAsbGNbnpHAyBJNBHi4DtLkHIo1ZSYKSlxVHkg2ejuN1rMmPFGe6cZsZS7eAcNB-AaVTLyDgmYYdYBYwdJEoTejAJ2nC1ntZwmOEDC6nR_oeedEH2lc4zQp05rV0p8DHDUYxiYC6nlG-RSEUOvJhzsoC2tetoEbjuQIDAQAB'
+
+const faceWalletConnectOptions: IFaceWalletOptions = {
+  logger,
+  chains,
+  testnetApiKey,
+  mainnetApiKey,
+}
+
 const options = {
   projectId: 'c2b4ff7ce76613f93a7edea85b9618f5',
   logger,
@@ -37,8 +55,8 @@ const options = {
 }
 const walletConnect = new WalletConnectConnector(options)
 const injected = new InjectedConnector(logger, chains)
+const faceWallet = new FaceWalletConnector(faceWalletConnectOptions)
 
-type ConnectorType = 'walletConnect' | 'injected'
 
 
 
@@ -48,10 +66,11 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
   const [ address, setAddress ] = useState<string>()
   const [ connected, setConnected ] = useState<boolean>(false)
 
-  const [ curConnector, setCurConnector ] = useState<ConnectorType>('walletConnect')
+  const [ curConnector, setCurConnector ] = useState<ConnectorNames>(ConnectorNames.FaceWallet)
 
   const getConnectorInstance = (): BaseConnector => {
-    if(curConnector === 'injected') { return injected }
+    if(curConnector === ConnectorNames.Injected) { return injected }
+    if(curConnector === ConnectorNames.FaceWallet) { return faceWallet }
     return walletConnect
   }
 
@@ -107,8 +126,9 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
   return <div>
 
     <select value={curConnector} onChange={(ev: any) => setCurConnector(ev.target.value)}>
-      <option value="walletConnect">wallet connect</option>
-      <option value="injected">injected</option>
+      <option value={ConnectorNames.FaceWallet}>face wallet</option>
+      <option value={ConnectorNames.WalletConnect}>wallet connect</option>
+      <option value={ConnectorNames.Injected}>injected</option>
     </select>
 
     <div>chainId: {chainId}</div>
