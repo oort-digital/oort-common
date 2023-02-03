@@ -1,10 +1,6 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["./src/**/*"],
-  "exclude": ["node_modules",
-    "./src/moralis/moralis.ts",
-    "./src/moralis/moralisNftProvider.ts",
-    "./src/moralis/moralisNftProvider.test.ts"],
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "./dist/types",

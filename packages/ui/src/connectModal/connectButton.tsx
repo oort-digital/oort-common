@@ -1,5 +1,5 @@
+import { toMasskedAddress } from "@oort-digital/utils";
 import { ReactNode } from "react";
-import { toMasskedAddress } from "../utils";
 import styles from "./connectButton.module.less"
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';

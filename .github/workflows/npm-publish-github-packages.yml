@@ -15,6 +15,7 @@ on:
         - oortApiClient
         - ui
         - urlSearchParams
+        - utils
         - web3Connectors
 
 jobs:

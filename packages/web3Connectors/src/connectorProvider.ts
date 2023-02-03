@@ -1,4 +1,5 @@
 import { ILogger } from "@oort-digital/logger";
+import { BaseConnector } from "./baseConnector";
 import { ConnectorNames } from "./connectorNames";
 import { IConnector } from "./iConnector";
 
@@ -9,24 +10,75 @@ interface ICurConnector {
     name: ConnectorNames
 }
 
-const getCurConnectorName = () : ICurConnector | undefined => {
+const readCurConnectorData = () : ICurConnector | undefined => {
     const jsonStr = localStorage.getItem(lsKey);
     return jsonStr ? JSON.parse(jsonStr) : undefined;
 }
 
-const setCurConnectorName = (curConnector: ICurConnector) => localStorage.setItem(lsKey, JSON.stringify(curConnector));
-const removeCurConnectorName = () => localStorage.removeItem(lsKey);
+const saveCurConnectorData = (curConnector: ICurConnector) => localStorage.setItem(lsKey, JSON.stringify(curConnector));
+const removeCurConnectorData = () => localStorage.removeItem(lsKey);
 
 
-export class ConnectorProvider
-{
+export class ConnectorProvider {
+   
+    public readonly connectorsByName: { [name: string]: BaseConnector} = {}
+    public readonly waitInitialisation : Promise<void>
+
+    async connect(chainId: number, connectorName: ConnectorNames): Promise<boolean> {
+        await this.waitInitialisation
+        const curConnector = this.connectorsByName[connectorName]
+        if(await curConnector.connect(chainId)) {
+            saveCurConnectorData({ chainId, name: connectorName})
+            this.setCurConnector(curConnector)
+            return true
+        }
+        return false
+    }
+
+    async switchChain(chainId: number): Promise<boolean> {
+        await this.waitInitialisation
+        if(this._curConnector) {
+            if(await this._curConnector.switchChain(chainId)) {
+                saveCurConnectorData({ chainId, name: this._curConnector.name})
+            }
+        }
+        return false
+    }
+
+    get canSwitchChain(): boolean {
+        return !!this._curConnector?.canSwitchChain
+    }
+
+    async disconnect(): Promise<void> {
+        await this._curConnector?.disconnect()
+        removeCurConnectorData()
+        this._curConnector = undefined
+    }
+
+    public get curConnector(): IConnector | undefined {
+        return this._curConnector;
+    }
+
+    constructor(logger: ILogger, connectors: BaseConnector[]) {
+        this._logger = logger
+        this.waitInitialisation = this.init(connectors, readCurConnectorData());
+    }
+
     private readonly _logger: ILogger
-    public readonly connectorsByName: { [name: string]: IConnector } = {}
-    private _curConnector: IConnector | undefined
-    public readonly WaitInitialisationAsync : Promise<void>
+    private _curConnector: BaseConnector | undefined
 
-    private async InitAsync(connectors: IConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
-        let curConnector: IConnector | undefined = undefined
+    private onChainChanged(chainId: string) {
+        saveCurConnectorData({ chainId: parseInt(chainId), name: this._curConnector!.name})
+    }
+
+    private setCurConnector(curConnector: BaseConnector) {
+        this._curConnector = curConnector
+        this._curConnector.onChainChanged(chainId => this.onChainChanged(chainId))
+    }
+
+    private async init(connectors: BaseConnector[], curConnectorData: ICurConnector | undefined): Promise<void> {
+
+        let curConnector: BaseConnector | undefined = undefined
         for(let i = 0; i < connectors.length; i++) {
             const c = connectors[i]
             this.connectorsByName[c.name] = c
@@ -39,33 +91,9 @@ export class ConnectorProvider
 
         if(curConnector) {
             if(await curConnector.connect(curConnectorData!.chainId)) {
-                this._curConnector = curConnector
-                this._logger.debug(`Current connector is ${this._curConnector.name}`)
+                this.setCurConnector(curConnector)
+                this._logger.debug(`Current connector is ${this._curConnector!.name}`)
             }
         }
-    }
-
-    constructor(logger: ILogger, connectors: IConnector[]) {
-        this._logger = logger
-        this.WaitInitialisationAsync = this.InitAsync(connectors, getCurConnectorName());
-    }
-
-    public get CurConnector(): IConnector | undefined {
-        return this._curConnector;
-    }
-
-    async connect(chainId: number, connectorName: ConnectorNames): Promise<void> {
-        await this.WaitInitialisationAsync
-        const curConnector = this.connectorsByName[connectorName]
-        if(await curConnector.connect(chainId)) {
-            setCurConnectorName({ chainId, name: connectorName})
-            this._curConnector = curConnector
-        }
-    }
-
-    async disconnect(): Promise<void> {
-        await this._curConnector?.disconnect()
-        removeCurConnectorName()
-        this._curConnector = undefined
     }
 }

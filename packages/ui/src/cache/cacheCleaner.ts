@@ -1,5 +1,5 @@
 import { logger } from "@oort-digital/logger"
-import { delayAsync, toErrorWithMessage } from "../utils";
+import { delayAsync, toErrorWithMessage } from "@oort-digital/utils";
 import { ICacheEntry, KEY_PREFIX } from "./icacheProvider";
 
 export class CacheCleaner {

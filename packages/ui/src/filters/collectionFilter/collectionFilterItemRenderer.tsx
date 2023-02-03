@@ -1,8 +1,8 @@
 import { Checkbox, Col, Radio, Row } from "antd"
-import { cutLongString } from "../../utils"
 import { FavoriteCheckBox } from "./favoriteCheckBox"
 import { ICollectionFilterItem, ItemKeyType, SelectMode } from "./stores"
 import styles from "./collectionFilterContent.module.less"
+import { cutLongString } from "@oort-digital/utils"
 
 export interface ISelectedParameter {
 	selected: Set<ItemKeyType>

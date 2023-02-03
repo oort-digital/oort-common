@@ -1,0 +1,29 @@
+{
+  "name": "@oort-digital/utils",
+  "version": "0.0.1-alfa.0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oort-digital/oort-common.git"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:types": "tsc",
+    "build:source": "rollup -c",
+    "build": "yarn build:source && yarn build:types",
+    "rm": "rimraf node_modules"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "esbuild": "^0.17.2",
+    "rollup": "3.10.0",
+    "rollup-plugin-esbuild": "5.0.0",
+    "typescript": "4.9.4"
+  },
+  "license": "UNLICENSED",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/types/index.d.ts"
+}

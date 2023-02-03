@@ -9,6 +9,7 @@ import {isActiveFunc, navItems, TestContent, testNavItems} from "./common";
 import { Web3StoreStub } from "./web3StoreStub";
 import { ILayoutProps } from "../typesAndInterfaces";
 import { Button } from "antd";
+import { ConnectorNames } from "@oort-digital/web3-connectors";
 
 const DarkTheme = lazy(() => import("../../styles/theme/darkTheme"));
 const LightTheme = lazy(() => import("../../styles/theme/lightTheme"));
@@ -48,7 +49,7 @@ WithWeb3.args = {
   navItems: navItems,
   web3: web3,
   children: <>
-    <Button onClick={() => web3.connectAsync()}>Connect</Button>
+    <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
     {TestContent}
     </>
 };
@@ -72,7 +73,7 @@ WithFaucet.args = {
     navItems: testNavItems,
     web3: web3,
     children: <>
-        <Button onClick={() => web3.connectAsync()}>Connect</Button>
+        <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
         {TestContent}
     </>
 }

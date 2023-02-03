@@ -2,6 +2,8 @@
 import { INftOwnerProvider, IFeatchNftOwnerResponse, ProviderKind, IFeatchAccountNftsParams, IFeatchNftImageSrc, IFeatchNftParams, IFeatchNftsResponse, INft, IAssetsProvider, IAssetProvider, NftType } from "../typesAndInterfaces";
 import { ILogger, logger } from "@oort-digital/logger";
 import axios, { AxiosInstance } from "axios";
+import { toErrorWithMessage } from "@oort-digital/utils";
+import * as https from "https";
 
 interface IMoralisMetadata {
     image?: string
@@ -110,7 +112,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         try {
             const axiosResponse = await this._axios.get<IRawNftWithNormMetadata>(`/nft/${address}/${tokenId}`, config)
             const rawNft = axiosResponse.data
-            return this.mapNft(rawNft, rawNft.normalized_metadata)
+            return await this.mapNft(rawNft, rawNft.normalized_metadata)
         }
 
         catch(err) {
@@ -144,26 +146,36 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         }
 
         const axiosResponse = await this._axios.get<IMoralisPagingResponse<IRawNftWithUnparsedMetadata[]>>(`/${ownerAddress}/nft`, config)
-
         const moralisResponse = axiosResponse.data
-        const data = moralisResponse.result.map(x => this.mapNft(x, x.metadata ? JSON.parse(x.metadata) as IMoralisMetadata : null))
+        const promises = moralisResponse.result.map(x => this.mapNft(x, x.metadata ? JSON.parse(x.metadata) as IMoralisMetadata : null))
    
         return {
             page: moralisResponse.page,
             pageSize: moralisResponse.page_size,
             total: moralisResponse.total,
-            data,
+            data: await Promise.all(promises),
             cursor: moralisResponse.cursor
         }
         
     }
 
-    constructor(_logger: ILogger, chainId: number, config: { apiKey: string }) {
-       
-        this._axios = axios.create({
-            baseURL: 'https://deep-index.moralis.io/api/v2/',
-            headers: {'X-API-Key': config.apiKey}
-          });
+    constructor(
+        _logger: ILogger,
+        chainId: number,
+        config: { apiKey: string },
+        // for test
+        rejectUnauthorized?: boolean) {
+
+        const baseURL = 'https://deep-index.moralis.io/api/v2/'
+        const headers = {'X-API-Key': config.apiKey}
+
+        if(rejectUnauthorized === false) {
+            const httpsAgent = new https.Agent({ rejectUnauthorized: false })
+            this._axios = axios.create({ baseURL, headers, httpsAgent });
+        }
+        else {
+            this._axios = axios.create({ baseURL, headers });
+        }        
         
         this.chainId = chainId
         this._logger = logger
@@ -173,6 +185,23 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
     private readonly _chainIdHex: string
     private readonly _axios: AxiosInstance
     private readonly _logger: ILogger
+
+    private async tryFetchMetadataByUri(token_uri: string): Promise<IMoralisMetadata | null> {
+        try {
+            const response = await this._axios.get(token_uri)
+            const metadata: IMoralisMetadata = {
+                name: response.data?.name,
+                image: response.data?.image,
+                description: response.data?.description
+            }
+            return metadata
+        }
+        catch(err: any) {
+            const errWithMessage = toErrorWithMessage(err)
+            this._logger.debug(errWithMessage.message)
+        }
+        return null
+    }
 
     private ParseImage(tokenAddress: string, tokenId: string, metadata: IMoralisMetadata): string | undefined {
         if(metadata.image !== undefined) { return metadata.image }
@@ -200,8 +229,13 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         return NftType.UNKNOWN
     }
 
-    private mapNft(rawNft: IRawNftWithUnparsedMetadata, metadata: IMoralisMetadata | null): INft {
-        const { token_address, token_id, amount } = rawNft
+    private async mapNft(rawNft: IRawNftWithUnparsedMetadata, metadata: IMoralisMetadata | null): Promise<INft> {
+        const { token_address, token_id, amount, token_uri } = rawNft
+
+        if(!metadata && token_uri) {
+            // sometimes moralis doesn't fetch metadata even if nft has token_uri
+            metadata = await this.tryFetchMetadataByUri(token_uri)
+        }
 
         const result: INft = {
             projectName: rawNft.name ?? undefined,

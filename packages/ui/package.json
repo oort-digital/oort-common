@@ -30,6 +30,7 @@
   "dependencies": {
     "@oort-digital/logger": "^0.0.1-alfa.0.0.1",
     "@oort-digital/web3-connectors": "0.0.1-facewallet.0.0.3",
+    "@oort-digital/utils": "0.0.1-alfa.0.0.1",
     "antd": "4.23.0",
     "blockies-ts": "^1.0.0",
     "ethers": "^5.7.0",

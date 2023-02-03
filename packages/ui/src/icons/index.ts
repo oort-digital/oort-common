@@ -26,3 +26,5 @@ export { ChevronDownOutlineIcon, ChevronDownOutlineIconSvg } from "./chevronDown
 
 export { OpenseaIcon } from "./openseaIcon"
 export { NFTScanIcon } from "./nftscanIcon"
+
+export { WalletIcon } from "./walletIcon"
