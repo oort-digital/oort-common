@@ -79,12 +79,29 @@ export class InjectedConnector extends BaseConnector implements IConnector
     return 'https://metamask.io/download'
   }
 
+  async disconnect(): Promise<void> {
+    this.rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
+    this.rawProvider.removeListener('chainChanged', this.chainChangedHandler);
+    // this.rawProvider.removeListener("disconnect", this.disconnectHandler);
+    await super.disconnect()
+}
+
   constructor(logger: ILogger, chains: IChainInfo[]) {
       super(logger, ConnectorNames.Injected, chains);
       if(this.isInstalled) {
         this.initListeners(this.rawProvider)
       }
   }
+
+  private initListeners(rawProvider: any) {
+
+    this.logger.debug(`${this.name} initListeners`)
+
+    rawProvider.on('accountsChanged', this.accountsChangedHandler);
+    rawProvider.on('chainChanged', this.chainChangedHandler);
+    // use custom connection check by timer. See onDisconnect
+    // rawProvider.on("disconnect", this.disconnectHandler);
+}
 
   private addEthereumChain = async (chainId: number, chainIdHex: string): Promise<boolean> => {
     try {

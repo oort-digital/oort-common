@@ -25,8 +25,22 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         this.initListeners(this._walletConnect)
     }
 
+    private initListeners(rawProvider: any) {
+
+        this.logger.debug(`${this.name} initListeners`)
+
+        rawProvider.on('accountsChanged', this.accountsChangedHandler);
+        rawProvider.on('chainChanged', this.chainChangedHandler);
+        // use custom connection check by timer. See onDisconnect
+        // rawProvider.on("disconnect", this.disconnectHandler);
+    }
+
     async disconnect(): Promise<void> {
-        super.removeListeners_(this._walletConnect)
+        const rawProvider = this._walletConnect
+        rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
+        rawProvider.removeListener('chainChanged', this.chainChangedHandler);
+        // this.rawProvider.removeListener("disconnect", this.disconnectHandler);
+        await super.disconnect()
         await this._walletConnect.disconnect()
     }
     

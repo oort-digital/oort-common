@@ -33,6 +33,7 @@ window.addEventListener('message', event => {
 export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     async disconnect(): Promise<void> {
+        await super.disconnect()
         await this.face.auth.logout()
     }
     
@@ -42,6 +43,7 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     async switchChain(chainId: number): Promise<boolean> {
         const network = getNetworkById(chainId)
         await this.face.switchNetwork(network)
+        this.chainChangedHandler(chainId.toString())
         return true
     }
 
