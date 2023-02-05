@@ -16,7 +16,7 @@ export class ConnectorProvider {
         await this.waitInitialisation
         const curConnector = this.connectorsByName[connectorName]
         if(await curConnector.connect(chainId)) {
-            saveCurConnectorData({ chainId, name: connectorName})
+            connectorStorage.save({ chainId, name: connectorName})
             this.setCurConnector(curConnector)
             return true
         }
@@ -27,7 +27,7 @@ export class ConnectorProvider {
         await this.waitInitialisation
         if(this._curConnector) {
             if(await this._curConnector.switchChain(chainId)) {
-                saveCurConnectorData({ chainId, name: this._curConnector.name})
+                connectorStorage.save({ chainId, name: this._curConnector.name})
             }
         }
         return false
