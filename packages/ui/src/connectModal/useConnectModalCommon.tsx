@@ -36,7 +36,7 @@ const stopedLoading: ILoadingData = { inProcess: false, cnnName: ConnectorNames.
 
 export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IArgs): IResult => {
 
-    const { onCancel, onClose, afterConnect, afterChainSwitch, web3, expectedChainId } = props
+    const { onCancel, onClose, afterConnect, afterChainSwitch, web3, expectedChainId, supportedWallets } = props
     const [ loading, setLoading ] = useState<ILoadingData>(stopedLoading)
 
     const startLoading = (cnnName: ConnectorNames) => setLoading({ inProcess: true, cnnName })
@@ -46,7 +46,7 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
     const footer2 = <>that you have read and understand the <a href='https://oort.digital/terms#disclaimer'>Oort Digital protocol disclaimer</a></>
 
     const {  supportedChains, chain, switchChain, canSwitchChain, connect, account, connectorName, supportedConnectors } = web3
-	
+
     const _onCancel = () => {
 		onClose && onClose()
 		onCancel && onCancel()
@@ -93,6 +93,14 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 		</Col>
 	
 	}
+
+    const isWalletSupported = (connectorName: ConnectorNames): boolean => {
+        if(supportedWallets) {
+            return supportedWallets.some(x => x === connectorName)
+        }
+
+        return true
+    }
 
     const renderWalletBtn = (chainId: number, walletName: string, cnnName: ConnectorNames, icon: ReactNode) => {
 
@@ -146,9 +154,9 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
             <Bold>Connect your Wallet</Bold> and jump into the world of NFT's
         </div>
         <Row gutter={btnGutter} justify={justify}>
-            <Col span={span}>{renderWalletBtn(connectChainId, "Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col>
-            <Col span={span}>{renderWalletBtn(connectChainId, "FaceWallet", ConnectorNames.FaceWallet, FaceWalletIcon)}</Col>
-            <Col span={span}>{renderWalletBtn(connectChainId, "WalletConnect", ConnectorNames.WalletConnect, WalletConnectIcon)}</Col>
+            { isWalletSupported(ConnectorNames.Injected) && <Col span={span}>{renderWalletBtn(connectChainId, "Metamask", ConnectorNames.Injected, MetamaskIcon)}</Col> }
+            { isWalletSupported(ConnectorNames.FaceWallet) && <Col span={span}>{renderWalletBtn(connectChainId, "FaceWallet", ConnectorNames.FaceWallet, FaceWalletIcon)}</Col> }
+            { isWalletSupported(ConnectorNames.WalletConnect) && <Col span={span}>{renderWalletBtn(connectChainId, "WalletConnect", ConnectorNames.WalletConnect, WalletConnectIcon)}</Col> }
         </Row>
     </>
 

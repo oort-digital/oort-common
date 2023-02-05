@@ -3,10 +3,11 @@ import '../styles/antOverride.less';
 import '../styles/fonts.css';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectModal, IWeb3 } from '.';
-import { ConnectorNames, ConnectorProvider, FaceWalletConnector, IChainInfo, IConnector, IFaceWalletOptions, InjectedConnector, WalletConnectConnector } from '@oort-digital/web3-connectors';
+import { BaseConnector, ConnectorNames, ConnectorProvider, FaceWalletConnector, IChainInfo, IConnector, IFaceWalletOptions, InjectedConnector, WalletConnectConnector } from '@oort-digital/web3-connectors';
 import { logger } from '@oort-digital/logger';
-import { delayAsync, ZERO_ADDR } from '../utils';
 import { EMPTY_CHAIN } from '../typesAndInterfaces';
+import { delayAsync, ZERO_ADDR } from '@oort-digital/utils';
+import { IConnectModalProps } from './connectModal';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -24,7 +25,7 @@ export default {
 } as ComponentMeta<typeof ConnectModal>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ConnectModal> = (args) => <ConnectModal {...args} />;
+const Template: ComponentStory<typeof ConnectModal> = (args: IConnectModalProps) => <ConnectModal {...args} />;
 
 const chains: IChainInfo[] = [
   {
@@ -61,12 +62,12 @@ const faceWalletOptions: IFaceWalletOptions = {
   testnetApiKey
 }
   
-const supportedConnectors: { [name: string]: IConnector } = {}
+const supportedConnectors: { [name: string]: BaseConnector } = {}
 supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, chains)
 supportedConnectors[ConnectorNames.WalletConnect] = new WalletConnectConnector({ projectId: '', logger, chains})
 supportedConnectors[ConnectorNames.FaceWallet] = new FaceWalletConnector(faceWalletOptions)
 
-const connectorProvider = new ConnectorProvider(logger, Object.entries(supportedConnectors).map(x => x[1]))
+const connectorProvider = new ConnectorProvider(logger, Object.values(supportedConnectors))
 
 const web3Delay = 5000
 const web3: IWeb3 = {
@@ -74,8 +75,8 @@ const web3: IWeb3 = {
   connectorName: ConnectorNames.Injected,
   switchChain: async (newChainId: number) => {
     await delayAsync(web3Delay)
-    if(connectorProvider.CurConnector?.canSwitchChain === true) {
-      return await connectorProvider.CurConnector.switchChain(newChainId)
+    if(connectorProvider.canSwitchChain === true) {
+      return await connectorProvider.switchChain(newChainId)
     }
     return false
   },
