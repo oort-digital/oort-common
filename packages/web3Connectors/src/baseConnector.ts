@@ -35,10 +35,6 @@ export abstract class BaseConnector {
         return provider.getSigner()
     }
 
-    public async disconnect(): Promise<void> {
-        this.removeListeners(await this.getRawProvider())
-    }
-
     public onAccountsChanged(handler: AccountChangedHandlerType) {
         this._externalAccountChangedHandlers.push(handler)
     }
@@ -50,11 +46,19 @@ export abstract class BaseConnector {
     public onDisconnect(handler: (error: any) => void): void {
 
         if(!this._timerId) {
+            // run check connection cycle
             const self = this;
             this._timerId = setInterval(() => self.CheckConnection(), this._checkConnectionDelayMs)
         }
         
         this._externalDisconnectHandlers.push(handler);
+    }
+
+    public disconnect(): Promise<void> {
+        this._externalAccountChangedHandlers = []
+        this._externalChainChangedHandlers = []
+        this._externalDisconnectHandlers = []
+        return Promise.resolve()
     }
 
     constructor(logger: ILogger, name: ConnectorNames, chains: IChainInfo[]) {
@@ -64,34 +68,8 @@ export abstract class BaseConnector {
     }
 
     protected readonly _chains: IChainMap = {}
-    protected disconnectHandler?: DisconnectHandlerType
     protected readonly logger: ILogger
     protected abstract getRawProvider(): Promise<any>;
-
-    protected initListeners(rawProvider: any) {
-
-        this.logger.debug('initListeners')
-        const that = this
-        this.accountsChangedHandler = (accounts: Array<string>) => {
-            this.logger.debug(`${this.name}.accountsChangedHandler`)
-            that._externalAccountChangedHandlers.forEach(h => h(accounts));
-        }
-
-        this.chainChangedHandler = (chainId: string) => {
-            this.logger.debug(`${this.name}.chainChangedHandler`)
-            that._externalChainChangedHandlers.forEach(h => h(chainId));
-        }
-
-        this.disconnectHandler = (error: any) => {
-            this.logger.debug(`${this.name}.disconnectHandler ${JSON.stringify(error)}`)
-            that._externalDisconnectHandlers.forEach(h => h(error));
-        }
-
-        rawProvider.on('accountsChanged', this.accountsChangedHandler);
-        rawProvider.on('chainChanged', this.chainChangedHandler);
-        // use custom connection check by timer. See onDisconnect
-        // rawProvider.on("disconnect", this.disconnectHandler);
-    }
 
     private readonly _checkConnectionDelayMs : number = 500;
     private _timerId?: NodeJS.Timeout;
@@ -110,20 +88,20 @@ export abstract class BaseConnector {
     }
 
     private _externalAccountChangedHandlers: AccountChangedHandlerType[] = []
-    private accountsChangedHandler?: AccountChangedHandlerType
+    protected accountsChangedHandler: AccountChangedHandlerType = (accounts: Array<string>) => {
+        this.logger.debug(`${this.name}.accountsChangedHandler`)
+        this._externalAccountChangedHandlers.forEach(h => h(accounts));
+    }
 
     private _externalChainChangedHandlers: ChainChangedHandlerType[] = []
-    private chainChangedHandler?: ChainChangedHandlerType
+    protected chainChangedHandler: ChainChangedHandlerType =  (chainId: string) => {
+        this.logger.debug(`${this.name}.chainChangedHandler`)
+        this._externalChainChangedHandlers.forEach(h => h(chainId));
+    }
 
     private _externalDisconnectHandlers: DisconnectHandlerType[] = []
-
-    private removeListeners(rawProvider: any) {
-        rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
-        rawProvider.removeListener('chainChanged', this.chainChangedHandler);
-        // this.rawProvider.removeListener("disconnect", this.disconnectHandler);
-        this._externalAccountChangedHandlers = []
-        this._externalChainChangedHandlers = []
-        this._externalDisconnectHandlers = []
-    }
-    
+    protected disconnectHandler: DisconnectHandlerType = (error: any) => {
+        this.logger.debug(`${this.name}.disconnectHandler ${JSON.stringify(error)}`)
+        this._externalDisconnectHandlers.forEach(h => h(error));
+    }    
 }

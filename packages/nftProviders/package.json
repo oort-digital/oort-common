@@ -27,8 +27,8 @@
     }
   },
   "dependencies": {
-    "@oort-digital/utils": "0.0.1-alfa.0.0.1",
     "@oort-digital/logger": "^0.0.1-alfa.0.0.1",
+    "@oort-digital/utils": "0.0.1-alfa.0.0.1",
     "axios": "^1.2.3"
   },
   "devDependencies": {
@@ -39,6 +39,7 @@
     "rollup": "3.10.0",
     "rollup-plugin-esbuild": "5.0.0",
     "ts-jest": "^29.0.3",
+    "tslib": "^2.5.0",
     "typescript": "4.9.4"
   },
   "license": "UNLICENSED",

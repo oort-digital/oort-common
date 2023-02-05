@@ -8,7 +8,7 @@ const ConnectModalDesktop = (props: IConnectModalProps) => {
 	const { footer1, footer2, content, onCancel, loading } = useConnectModalCommon({
 		props,
 		styles,
-		btnGutter: [10, 0],
+		btnGutter: [10, 10],
 		isMobile: false
 	})
 

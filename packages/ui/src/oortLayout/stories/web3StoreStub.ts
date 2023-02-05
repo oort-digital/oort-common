@@ -1,9 +1,9 @@
 import { logger } from "@oort-digital/logger";
+import { delayAsync } from "@oort-digital/utils";
 import { ConnectorNames, IConnector, InjectedConnector } from "@oort-digital/web3-connectors";
 import { makeObservable, observable, runInAction } from "mobx";
 import { IWeb3 } from "../../connectModal";
 import { EMPTY_CHAIN, IChain } from "../../typesAndInterfaces";
-import { delayAsync } from "../../utils";
 import { INavItems } from "../navMenu";
 
 export const navItems: INavItems = {

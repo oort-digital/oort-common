@@ -2,8 +2,7 @@
 @import "../styles/palette.less";
 @import "../styles/theme/vars.less";
 
-
-.connect-wallet-button {
+.button {
 	.acc-mixin() {
 		.body-14-regular-mixin;
 		flex: auto;
@@ -24,7 +23,7 @@
 	border: 1px solid @btn-default-border;
 	border-radius: 8px;	
 
-	.wallet-name {
+	.wallet_name {
 		.body-16-medium-mixin;
 		margin-left: 8px;
 		color: @theme-color-13;
@@ -40,11 +39,32 @@
 	}
 }
 
-.connect-wallet-button.active {
+.button.active {
 	cursor: default;
 	background: rgba(47, 180, 172, 0.1);
 	border: 2px solid @primary-6;
-	.wallet-name {
+	.wallet_name {
 		color: @primary-6;
+	}
+}
+
+.button.disabled {
+	cursor: default;
+}
+
+.button.loading {
+	cursor: default;
+	border: 2px solid @btn-disable-border;
+	background: @btn-disable-bg;
+
+	.wallet_name {
+		color: @btn-disable-color;
+	}
+
+	.spinner {
+		width: 100%;
+		color: @btn-disable-color;
+		display: flex;
+		justify-content: flex-end;
 	}
 }

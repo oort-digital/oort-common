@@ -1,8 +1,8 @@
 import {runInAction} from "mobx"
 import { OortClient } from "./oortClient";
-import { EMPTY_ABORT_SIGNAL } from "../../../utils";
 import { SearchGameHubType } from "./typesAndInterfaces";
 import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType, SelectMode } from "../stores";
+import { EMPTY_ABORT_SIGNAL } from "@oort-digital/utils";
 
 export class NftsCollectionStore extends CollectionFilterStore {
 

@@ -1,23 +1,8 @@
 import { ILogger } from "@oort-digital/logger";
 import { BaseConnector } from "./baseConnector";
 import { ConnectorNames } from "./connectorNames";
+import { connectorStorage, ICurConnector } from "./connectorStorage";
 import { IConnector } from "./iConnector";
-
-const lsKey = 'cur_connector';
-
-interface ICurConnector {
-    chainId: number
-    name: ConnectorNames
-}
-
-const readCurConnectorData = () : ICurConnector | undefined => {
-    const jsonStr = localStorage.getItem(lsKey);
-    return jsonStr ? JSON.parse(jsonStr) : undefined;
-}
-
-const saveCurConnectorData = (curConnector: ICurConnector) => localStorage.setItem(lsKey, JSON.stringify(curConnector));
-const removeCurConnectorData = () => localStorage.removeItem(lsKey);
-
 
 export class ConnectorProvider {
    
@@ -28,7 +13,7 @@ export class ConnectorProvider {
         await this.waitInitialisation
         const curConnector = this.connectorsByName[connectorName]
         if(await curConnector.connect(chainId)) {
-            saveCurConnectorData({ chainId, name: connectorName})
+            connectorStorage.save({ chainId, name: connectorName})
             this.setCurConnector(curConnector)
             return true
         }
@@ -39,7 +24,8 @@ export class ConnectorProvider {
         await this.waitInitialisation
         if(this._curConnector) {
             if(await this._curConnector.switchChain(chainId)) {
-                saveCurConnectorData({ chainId, name: this._curConnector.name})
+                connectorStorage.save({ chainId, name: this._curConnector.name})
+                return true
             }
         }
         return false
@@ -51,7 +37,7 @@ export class ConnectorProvider {
 
     async disconnect(): Promise<void> {
         await this._curConnector?.disconnect()
-        removeCurConnectorData()
+        connectorStorage.remove()
         this._curConnector = undefined
     }
 
@@ -61,14 +47,14 @@ export class ConnectorProvider {
 
     constructor(logger: ILogger, connectors: BaseConnector[]) {
         this._logger = logger
-        this.waitInitialisation = this.init(connectors, readCurConnectorData());
+        this.waitInitialisation = this.init(connectors, connectorStorage.read());
     }
 
     private readonly _logger: ILogger
     private _curConnector: BaseConnector | undefined
 
     private onChainChanged(chainId: string) {
-        saveCurConnectorData({ chainId: parseInt(chainId), name: this._curConnector!.name})
+        connectorStorage.save({ chainId: parseInt(chainId), name: this._curConnector!.name})
     }
 
     private setCurConnector(curConnector: BaseConnector) {

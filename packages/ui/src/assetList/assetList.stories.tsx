@@ -6,8 +6,9 @@ import { ThemeLoader } from "../internalHelpers"
 import { IAssetListProps, AssetList } from "./assetList"
 import { BorrowAssetCard, IBorrowAssetItem } from "../assetCard"
 import { BigNumber } from "ethers"
-import { ZERO_ADDR } from "../utils"
+
 import { IMarketplaceConfig, MarketplaceEnum } from "../viewOn"
+import { ZERO_ADDR } from "@oort-digital/utils"
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

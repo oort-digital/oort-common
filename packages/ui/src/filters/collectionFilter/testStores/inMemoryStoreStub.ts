@@ -1,6 +1,6 @@
+import { delayAsync } from '@oort-digital/utils';
 import { runInAction } from 'mobx'
 import { addressToDataURL } from '../../../blockieAddress';
-import { delayAsync } from '../../../utils';
 import { CollectionFilterStore, ICollectionFilterItem, ItemKeyType, SelectMode } from '../stores';
 
 const alpha = 'abcdefghijklmnopqrstuvwxyz'

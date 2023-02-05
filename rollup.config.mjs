@@ -40,6 +40,6 @@ export default function createConfig(pluginsData, packageName, packageDependenci
           sourcemap: true,
         },
       ],
-    },
+    }
   ];
 }
