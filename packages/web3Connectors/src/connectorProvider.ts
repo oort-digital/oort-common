@@ -4,9 +4,6 @@ import { ConnectorNames } from "./connectorNames";
 import { connectorStorage, ICurConnector } from "./connectorStorage";
 import { IConnector } from "./iConnector";
 
-
-
-
 export class ConnectorProvider {
    
     public readonly connectorsByName: { [name: string]: BaseConnector} = {}
@@ -28,6 +25,7 @@ export class ConnectorProvider {
         if(this._curConnector) {
             if(await this._curConnector.switchChain(chainId)) {
                 connectorStorage.save({ chainId, name: this._curConnector.name})
+                return true
             }
         }
         return false

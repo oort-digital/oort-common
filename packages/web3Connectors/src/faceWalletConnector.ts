@@ -3,6 +3,7 @@ import { Face, Network } from "@haechi-labs/face-sdk";
 import { BaseConnector, IChainInfo } from "./baseConnector";
 import { IConnector } from "./iConnector";
 import { ConnectorNames } from "./connectorNames";
+import { connectorStorage } from "./connectorStorage";
 
 const getNetworkById = (id: number): Network => {
     if(id === 1)        { return Network.ETHEREUM }
@@ -48,11 +49,7 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     }
 
     get isConnected(): Promise<boolean> {
-        debugger
-        if(!this._face) {
-            return Promise.resolve(false)
-        }
-        return this._face.auth.isLoggedIn()
+        return this.isConnectedInternal()
     }
 
     get isInstalled(): boolean {
@@ -65,23 +62,26 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     async connect(chainId: number): Promise<boolean> {
         
-        if(!this._face) {
-            const network = getNetworkById(chainId)
-            this._face = new Face({
-                network: network, 
-                apiKey: this.resolveApiKey(network)
-            })
+        if(this._curChainId != chainId) {
+            this._curChainId = chainId
         }
 
-        if(await this.face.auth.isLoggedIn()) {
-            return true
+        const isLoggedIn = await this.face.auth.isLoggedIn()
+       
+        if(!isLoggedIn) {
+            const loginPromise = this.face.auth.login()
+            const frameClosePromise = this.waitFrameClose()
+            const loginResponse = await Promise.race([ loginPromise, frameClosePromise ])
+            if(!loginResponse) {
+                return false
+            }
         }
-        
-        const loginPromise = this.face.auth.login()
-        const frameClosePromise = this.waitFrameClose()
 
-        const loginResponse = await Promise.race([ loginPromise, frameClosePromise ])
-        return !!loginResponse
+        const curNetwork = getNetworkById(chainId)
+        if(this.face.getNetwork() !== curNetwork) {
+            await this.face.switchNetwork(curNetwork)
+        }
+        return true
     }
 
     constructor({ logger, chains, testnetApiKey, mainnetApiKey }: IFaceWalletOptions) {
@@ -94,6 +94,11 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         this._mainnetApiKey = mainnetApiKey
         this._testnetApiKey = testnetApiKey
 
+        const curConnector = connectorStorage.read()
+        if(curConnector?.name === ConnectorNames.FaceWallet) {
+            this._curChainId = curConnector.chainId
+        }
+
         /*
         don't create new Face in constructor, it catch error
         no time to research it =)
@@ -103,6 +108,8 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         })
         */
     }
+
+    private _curChainId: number | undefined
 
     protected getRawProvider(): Promise<any> {
         return Promise.resolve(this.face.getEthLikeProvider())
@@ -118,7 +125,16 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     private get face(): Face {
 
         if(!this._face) {
-            throw new Error('Provider not connected. Call FaceWalletConnector.connect first')
+            if(!this._curChainId) {
+                throw new Error('Please set _curChainId first')
+            }
+
+            const network = getNetworkById(this._curChainId)
+    
+            this._face = new Face({
+                network: network, 
+                apiKey: this.resolveApiKey(network)
+            })
         }
     
         return this._face
@@ -156,6 +172,22 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         return new Promise<void>(async ( resolve ) => {
             frameCloseCallback = resolve
         })
+    }
+
+    private async isConnectedInternal(): Promise<boolean> {
+        if(!this._curChainId) {
+            return false
+        }
+
+        try {
+            await this.face.getAddresses()
+            return true
+        }
+        catch(err) {
+
+        }
+
+        return false
     }
 
 }

@@ -83,7 +83,6 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
   useEffect(() => {
 
     connectorProvider.waitInitialisation.then(() => {
-      debugger
       if(connectorProvider.curConnector) {
         onConnect()
       }
@@ -119,7 +118,8 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
     <div>chainId: {chainId}</div>
     <div>address: {address}</div>
     <div>connected: {connected.toString()}</div>
-    <button disabled={connected} onClick={() => connect(1)}>Connect Ethereum</button>
+    <button onClick={() => connect(1)}>Connect Ethereum</button>
+    <button onClick={() => connect(137)}>Connect Polygon</button>
     <button disabled={!connected || chainId === 137} onClick={() => switchChain(137)}>Switch to Polygon</button>
     <button disabled={!connected} onClick={() => disconnect()}>Disconnect</button>
 
