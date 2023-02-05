@@ -19,7 +19,7 @@ export interface IWeb3 {
 
 export interface IConnectModalProps {
 	web3: IWeb3
-	supportedWallets?: ConnectorNames[]
+	supportedWallets: ConnectorNames[]
 	expectedChainId?: number
 	visible: boolean
 	/**

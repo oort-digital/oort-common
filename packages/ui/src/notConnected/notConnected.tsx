@@ -8,12 +8,14 @@ import { WalletIcon } from '../icons';
 import { ConnectModal, IWeb3 } from '../connectModal';
 import { isChainEmpty } from '../typesAndInterfaces';
 import { getChainName } from '../utils';
+import { ConnectorNames } from '@oort-digital/web3-connectors';
 
 interface IWeb3Store extends IWeb3 {
     isReady: boolean
 }
 
 interface IProps {
+    supportedWallets: ConnectorNames[]
     web3Store: IWeb3Store
     expectedChainId?: number
 }
@@ -51,7 +53,7 @@ const renderText = ({ web3Store, expectedChainId }: IProps) => {
 
 const Impl = (props: IProps) => {
 
-    const { web3Store, expectedChainId } = props
+    const { web3Store, expectedChainId, supportedWallets } = props
     const [isWalletVisible, setIsWalletVisible] = useState(false)
 
     const onCancel = () => setIsWalletVisible(false)
@@ -67,7 +69,7 @@ const Impl = (props: IProps) => {
             Connect your WEB 3.0 wallet <WalletIcon />
         </Button>
         <div className={styles.label_text}>To enter the world of Oort Digital</div>
-        <ConnectModal expectedChainId={expectedChainId} web3={web3Store} visible={isWalletVisible} onCancel={onCancel} />
+        <ConnectModal supportedWallets={supportedWallets} expectedChainId={expectedChainId} web3={web3Store} visible={isWalletVisible} onCancel={onCancel} />
     </div>
 }
 
