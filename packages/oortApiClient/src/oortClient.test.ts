@@ -7,7 +7,7 @@ const abortController = new AbortController()
 export const EMPTY_ABORT_SIGNAL = abortController.signal
 
 const setTokenHeader = (token: string, curRequest: AxiosRequestConfig<any>) => {
-    if(token) {
+    if(token && curRequest.headers) {
         curRequest.headers['token'] = token
     }
 }
