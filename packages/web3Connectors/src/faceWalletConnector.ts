@@ -48,6 +48,7 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     }
 
     get isConnected(): Promise<boolean> {
+        debugger
         if(!this._face) {
             return Promise.resolve(false)
         }
