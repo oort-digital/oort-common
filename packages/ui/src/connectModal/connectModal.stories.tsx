@@ -64,10 +64,12 @@ const faceWalletOptions: IFaceWalletOptions = {
   
 const supportedConnectors: { [name: string]: BaseConnector } = {}
 supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, chains)
-supportedConnectors[ConnectorNames.WalletConnect] = new WalletConnectConnector({ projectId: '', logger, chains})
+// supportedConnectors[ConnectorNames.WalletConnect] = new WalletConnectConnector({ projectId: '', logger, chains})
 supportedConnectors[ConnectorNames.FaceWallet] = new FaceWalletConnector(faceWalletOptions)
 
 const connectorProvider = new ConnectorProvider(logger, Object.values(supportedConnectors))
+
+const supportedWallets: ConnectorNames[] = [ ConnectorNames.Injected, ConnectorNames.FaceWallet ]
 
 const web3Delay = 5000
 const web3: IWeb3 = {
@@ -97,14 +99,16 @@ export const Connected = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Connected.args = {
   web3: web3,
-  visible: true
+  visible: true,
+  supportedWallets
 };
 
 export const NotConnected = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 NotConnected.args = {
   web3: web3NotConnected,
-  visible: true
+  visible: true,
+  supportedWallets
 };
 
 
@@ -113,5 +117,6 @@ export const ExpectedChain = Template.bind({});
 ExpectedChain.args = {
   web3: web3,
   visible: true,
-  expectedChainId: 5
+  expectedChainId: 5,
+  supportedWallets
 };
