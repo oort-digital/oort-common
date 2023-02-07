@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-alfa.0.0.3",
+  "version": "0.0.1-alfa.0.0.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -35,7 +35,7 @@
     "@haechi-labs/face-types": "^1.7.0",
     "@oort-digital/logger": "^0.0.1-alfa.0.0.1",
     "@walletconnect/web3-provider": "^1.8.0",
-    "ethers": "^5.7.0"
+    "ethers": "5.7.2"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.15",
