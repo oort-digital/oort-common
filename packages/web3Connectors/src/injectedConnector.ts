@@ -97,8 +97,9 @@ export class InjectedConnector extends BaseConnector implements IConnector
 
     this.logger.debug(`${this.name} initListeners`)
 
-    rawProvider.on('accountsChanged', this.accountsChangedHandler);
-    rawProvider.on('chainChanged', this.chainChangedHandler);
+    const that = this
+    rawProvider.on('accountsChanged', (accounts: Array<string>) => that.accountsChangedHandler.call(that, accounts));
+    rawProvider.on('chainChanged', (chainId: string) => that.chainChangedHandler.call(that, chainId));
     // use custom connection check by timer. See onDisconnect
     // rawProvider.on("disconnect", this.disconnectHandler);
 }

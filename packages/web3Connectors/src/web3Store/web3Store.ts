@@ -132,7 +132,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
     }
 
     private async disconnectHandler(): Promise<void> {
-        this.logDebug('disconnect')
+        this.logDebug('disconnectHandler')
         await this._connectorProvider.disconnect()
         this._connector = undefined
         runInAction(() => {
