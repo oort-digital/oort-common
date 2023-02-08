@@ -7,7 +7,7 @@ import { ThemeSwitch } from './themeSwitch';
 import { ConnectModal, IWeb3 } from '../connectModal';
 import { BlockieAddress } from '../blockieAddress';
 import { useTheme } from '../effects';
-import { isChainEmpty } from '../typesAndInterfaces';
+import { isChainEmpty } from '@oort-digital/web3-connectors';
 import { observer } from 'mobx-react';
 import { toMasskedAddress } from '@oort-digital/utils';
 import { ConnectorNames } from '@oort-digital/web3-connectors';

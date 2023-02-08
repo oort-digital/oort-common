@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import { WalletSvg } from './walletSvg';
 import { WalletIcon } from '../icons';
 import { ConnectModal, IWeb3 } from '../connectModal';
-import { isChainEmpty } from '../typesAndInterfaces';
+import { isChainEmpty } from '@oort-digital/web3-connectors';
 import { getChainName } from '../utils';
 import { ConnectorNames } from '@oort-digital/web3-connectors';
 

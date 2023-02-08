@@ -1,8 +1,8 @@
-import { IChain } from "../typesAndInterfaces"
 import styles from "./alert.module.less"
 import { getChainName } from '../utils';
 import { ReactNode } from "react";
 import { Bold } from "./bold";
+import { IChain } from "@oort-digital/web3-connectors";
 
 interface IProps {
 	account: string
