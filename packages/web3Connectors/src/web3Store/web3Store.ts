@@ -26,6 +26,7 @@ export interface IWeb3Store {
     chain: IChain
     account: string
     signer: Signer | undefined
+    isReady: boolean
 }
 
 export class Web3Store<TChain extends IChain> implements IWeb3Store {
