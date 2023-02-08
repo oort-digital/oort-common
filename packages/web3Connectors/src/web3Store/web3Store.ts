@@ -21,7 +21,6 @@ export interface IWeb3Store {
     }
     switchChain: (newChainId: number) => Promise<boolean>
     connect: (chainId: number, connectorName: ConnectorNames) => Promise<boolean>
-    disconnect(): Promise<void>
     supportedChains: IChain[]
     isConnectedToSupportedChain: boolean
     chain: IChain
@@ -69,17 +68,6 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
         return false
     }
 
-    async disconnect(): Promise<void> {
-        this._logger.trace('web3store.disconnect')
-        await this._connectorProvider.disconnect()
-        this._connector = undefined
-        runInAction(() => {
-            this.account = ''
-            this.chain = EMPTY_CHAIN
-            this.connectorName = ConnectorNames.Undefined;
-        })
-    }
-
     constructor({logger, connectorProvider, chainService}: IWeb3StoreParams<TChain>) {
         this._logger = logger
         this._chainService = chainService
@@ -92,9 +80,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
             signer: observable,
             connectorName: observable,
             isConnectedToSupportedChain: computed,
-            // __initAsync: action.bound,
             connect: action.bound,
-            disconnect: action.bound
         });
 
         this.runInit()
@@ -104,6 +90,10 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
     private _connector: IConnector | undefined
     private _connectorProvider: ConnectorProvider
     private readonly _chainService: IChainService<TChain>
+
+    private logDebug = (msg: string) => {
+        this._logger.debug(`web3store. ${msg}`)
+    }
 
     private runInit = async (): Promise<void> => {
 
@@ -120,7 +110,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
 
     private async chainChangeHandler(chainIdStr: string) {
         const chainId = parseInt(chainIdStr)
-        this._logger.debug(`Web3Store.chainChangeHandler. NewChainId: ${chainId}`)
+        this.logDebug(`chainChangeHandler. NewChainId: ${chainId}`)
         const signer = await this._connector!.getSigner()
         runInAction(() => {
             this.signer = signer
@@ -141,6 +131,18 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
         }
     }
 
+    private async disconnectHandler(): Promise<void> {
+        this.logDebug('disconnect')
+        await this._connectorProvider.disconnect()
+        this._connector = undefined
+        runInAction(() => {
+            this.signer = undefined
+            this.account = ''
+            this.chain = EMPTY_CHAIN
+            this.connectorName = ConnectorNames.Undefined;
+        })
+    }
+
     private async onConnect(connector: IConnector) {
         
         this._connector = connector
@@ -153,8 +155,8 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
         connector.onAccountsChanged((accounts: string[]) => that.accountChangeHandler.call(that, accounts))
         connector.onChainChanged((chainIdStr: string) => that.chainChangeHandler.call(that, chainIdStr))
         connector.onDisconnect(() => {
-            that._logger.debug("Web3store. connector.onDisconnect")
-            that.disconnect.call(that)
+            that.logDebug("connector.onDisconnect")
+            that.disconnectHandler.call(that)
         })
         
         runInAction(() => {

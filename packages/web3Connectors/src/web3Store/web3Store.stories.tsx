@@ -69,10 +69,6 @@ const FakeComponent = observer(() => {
     }
   }
 
-  const onDisconnect = () => {
-    web3Store.disconnect()
-  }
-
   if(!isReady) {
     return <>store is not ready</>
   }
@@ -80,7 +76,6 @@ const FakeComponent = observer(() => {
   return <div>
     <button disabled={isConnected} onClick={onConnect}>Connect</button>
     <button disabled={!isConnected} onClick={onSwitch}>Switch</button>
-    <button disabled={!isConnected} onClick={onDisconnect}>Disconnect</button>
     <div>isConnectedToSupportedChain: {isConnectedToSupportedChain.toString()}</div>
     <div>account: {account}</div>
     <div>chainId: {chain.chainId}</div>
