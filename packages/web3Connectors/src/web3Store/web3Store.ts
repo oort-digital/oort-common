@@ -7,7 +7,7 @@ import { EMPTY_CHAIN, IChain, isChainEmpty } from "./ichain";
 import { IConnector } from "../iConnector";
 import { IChainService } from "./chainService";
 
-interface IWeb3StoreParams<TChain extends IChain> {
+export interface IWeb3StoreParams<TChain extends IChain> {
     logger: ILogger,
     chainService: IChainService<TChain>
     connectorProvider: ConnectorProvider
@@ -37,7 +37,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
     signer: Signer | undefined
 
     get supportedChains(): IChain[] {
-        return this._chainService.supportedChains
+        return this.chainService.supportedChains
     }
 
     get canSwitchChain(): boolean {
@@ -48,7 +48,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
         if (isChainEmpty(this.chain)) {
             return false
         }
-        return !!this._chainService.isSupported(this.chain.chainId)
+        return !!this.chainService.isSupported(this.chain.chainId)
     }
 
     get supportedConnectors(): { [name: string]: IConnector } {
@@ -69,8 +69,8 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
     }
 
     constructor({logger, connectorProvider, chainService}: IWeb3StoreParams<TChain>) {
-        this._logger = logger
-        this._chainService = chainService
+        this.logger = logger
+        this.chainService = chainService
         this._connectorProvider = connectorProvider;
 
         makeObservable(this, {
@@ -86,13 +86,14 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
         this.runInit()
     }
     
-    private readonly _logger: ILogger
+    protected readonly logger: ILogger
+    protected readonly chainService: IChainService<TChain>
+
     private _connector: IConnector | undefined
     private _connectorProvider: ConnectorProvider
-    private readonly _chainService: IChainService<TChain>
 
     private logDebug = (msg: string) => {
-        this._logger.debug(`web3store. ${msg}`)
+        this.logger.debug(`web3store. ${msg}`)
     }
 
     private runInit = async (): Promise<void> => {
@@ -116,7 +117,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
             this.signer = signer
             this.chain = {
                 chainId: chainId,
-                name: this._chainService.chainName(chainId)
+                name: this.chainService.chainName(chainId)
             }
         })
     }
@@ -165,7 +166,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
             this.account = acc.toLowerCase()
             this.chain = {
                 chainId: chainId,
-                name: this._chainService.chainName(chainId)
+                name: this.chainService.chainName(chainId)
             }
         })
     }
