@@ -5,11 +5,11 @@ import { ConnectorNames } from "../connectorNames";
 import { ConnectorProvider } from "../connectorProvider";
 import { EMPTY_CHAIN, IChain, isChainEmpty } from "./ichain";
 import { IConnector } from "../iConnector";
-import { IChainConfigService } from "./ichainConfigService";
+import { IChainService } from "./chainService";
 
-interface IWeb3StoreParams {
+interface IWeb3StoreParams<TChain extends IChain> {
     logger: ILogger,
-    chainService: IChainConfigService
+    chainService: IChainService<TChain>
     connectorProvider: ConnectorProvider
 }
 
@@ -61,7 +61,9 @@ export class Web3Store implements IWeb3Store {
     }
 
     async connect(chainId: number, connectorName: ConnectorNames): Promise<boolean> {
-        await this._connectorProvider.connect(chainId, connectorName);
+        debugger
+        await this._connectorProvider.connect(chainId, connectorName)
+        debugger
         if (this._connectorProvider.curConnector) {
             await this.__initAsync(this._connectorProvider.curConnector)
             return true

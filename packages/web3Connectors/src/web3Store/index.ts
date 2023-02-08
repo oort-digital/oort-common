@@ -1,3 +1,3 @@
 export * from "./ichain"
-export * from "./ichainConfigService"
+export * from "./chainService"
 export * from "./web3Store"
