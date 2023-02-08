@@ -29,7 +29,7 @@ export interface IWeb3Store {
     signer: Signer | undefined
 }
 
-export class Web3Store implements IWeb3Store {
+export class Web3Store<TChain extends IChain> implements IWeb3Store {
 
     account: string = ''
     chain: IChain = EMPTY_CHAIN
@@ -61,11 +61,9 @@ export class Web3Store implements IWeb3Store {
     }
 
     async connect(chainId: number, connectorName: ConnectorNames): Promise<boolean> {
-        debugger
         await this._connectorProvider.connect(chainId, connectorName)
-        debugger
         if (this._connectorProvider.curConnector) {
-            await this.__initAsync(this._connectorProvider.curConnector)
+            await this.onConnect(this._connectorProvider.curConnector)
             return true
         }
         return false
@@ -82,25 +80,10 @@ export class Web3Store implements IWeb3Store {
         })
     }
 
-    constructor({logger, connectorProvider, chainService}: IWeb3StoreParams) {
+    constructor({logger, connectorProvider, chainService}: IWeb3StoreParams<TChain>) {
         this._logger = logger
         this._chainService = chainService
         this._connectorProvider = connectorProvider;
-
-        connectorProvider.waitInitialisation.then(() => {
-            if (connectorProvider.curConnector) {
-                this.__initAsync(connectorProvider.curConnector).then(() => {
-                    runInAction(() => {
-                        this.isReady = true
-                    })
-                })
-            } else {
-                runInAction(() => {
-                    this.isReady = true
-                })
-            }
-
-        })
 
         makeObservable(this, {
             isReady: observable,
@@ -113,12 +96,27 @@ export class Web3Store implements IWeb3Store {
             connect: action.bound,
             disconnect: action.bound
         });
+
+        this.runInit()
     }
     
     private readonly _logger: ILogger
     private _connector: IConnector | undefined
     private _connectorProvider: ConnectorProvider
-    private readonly _chainService: IChainConfigService
+    private readonly _chainService: IChainService<TChain>
+
+    private runInit = async (): Promise<void> => {
+
+        await this._connectorProvider.waitInitialisation
+
+        if (this._connectorProvider.curConnector) {
+            await this.onConnect(this._connectorProvider.curConnector)
+        }
+
+        runInAction(() => {
+            this.isReady = true
+        })
+    }
 
     private async chainChangeHandler(chainIdStr: string) {
         const chainId = parseInt(chainIdStr)
@@ -143,36 +141,31 @@ export class Web3Store implements IWeb3Store {
         }
     }
 
-    // internal method
-    private async __initAsync(connector: IConnector) {
-        this.connectorName = connector.name
-        this.account = ''
+    private async onConnect(connector: IConnector) {
+        
         this._connector = connector
-        this.signer = await this._connector.getSigner()
-        const acc: string = await this.signer.getAddress()
-        const chainId: number = await this.signer.getChainId()
+        const signer = await this._connector.getSigner()
+        const acc: string = await signer.getAddress()
+        const chainId: number = await signer.getChainId()
 
         const that = this
-        if (acc) {
-            connector.onAccountsChanged((accounts: string[]) => that.accountChangeHandler.call(that, accounts))
-            connector.onChainChanged((chainIdStr: string) => that.chainChangeHandler.call(that, chainIdStr))
-            connector.onDisconnect(() => {
-                that._logger.debug("Web3store. connector.onDisconnect")
-                that.disconnect.call(that)
-            })
-        }
+      
+        connector.onAccountsChanged((accounts: string[]) => that.accountChangeHandler.call(that, accounts))
+        connector.onChainChanged((chainIdStr: string) => that.chainChangeHandler.call(that, chainIdStr))
+        connector.onDisconnect(() => {
+            that._logger.debug("Web3store. connector.onDisconnect")
+            that.disconnect.call(that)
+        })
+        
         runInAction(() => {
-            if (acc) {
-                this.account = acc.toLowerCase()
-            }
-            if (chainId) {
-                this.chain = {
-                    chainId: chainId,
-                    name: this._chainService.chainName(chainId)
-                }
+            this.signer = signer
+            this.connectorName = connector.name
+            this.account = acc.toLowerCase()
+            this.chain = {
+                chainId: chainId,
+                name: this._chainService.chainName(chainId)
             }
         })
-
     }
    
 }

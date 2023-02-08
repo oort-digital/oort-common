@@ -54,27 +54,36 @@ const web3Store = new Web3Store({
 
 const FakeComponent = observer(() => {
 
-  const { isReady, account, canSwitchChain, chain, signer, isConnectedToSupportedChain } = web3Store
+  const { isReady, account, canSwitchChain, chain, signer, isConnectedToSupportedChain, supportedChains } = web3Store
 
+  const isConnected = !!account
 
   const onConnect = () => {
     web3Store.connect(137, ConnectorNames.Injected)
   }
 
   const onSwitch = () => {
-    web3Store.switchChain(1)
+    const newChain = supportedChains.find(c => c.chainId !== chain.chainId)
+    if(newChain) {
+      web3Store.switchChain(newChain.chainId)
+    }
+  }
+
+  const onDisconnect = () => {
+    web3Store.disconnect()
   }
 
   if(!isReady) {
-    debugger
     return <>store is not ready</>
   }
 
   return <div>
-    <button onClick={() => onConnect()}>Connect</button>
-    <button onClick={onSwitch}>Switch</button>
+    <button disabled={isConnected} onClick={onConnect}>Connect</button>
+    <button disabled={!isConnected} onClick={onSwitch}>Switch</button>
+    <button disabled={!isConnected} onClick={onDisconnect}>Disconnect</button>
     <div>isConnectedToSupportedChain: {isConnectedToSupportedChain.toString()}</div>
     <div>account: {account}</div>
+    <div>chainId: {chain.chainId}</div>
   </div>
 })
 
