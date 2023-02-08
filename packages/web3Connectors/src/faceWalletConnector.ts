@@ -1,9 +1,10 @@
 import { ILogger } from "@oort-digital/logger";
 import { Face, Network } from "@haechi-labs/face-sdk";
-import { BaseConnector, IChainInfo } from "./baseConnector";
+import { BaseConnector } from "./baseConnector";
 import { IConnector } from "./iConnector";
 import { ConnectorNames } from "./connectorNames";
 import { connectorStorage } from "./connectorStorage";
+import { IChainInfo } from "./web3Store";
 
 const getNetworkById = (id: number): Network => {
     if(id === 1)        { return Network.ETHEREUM }
@@ -14,11 +15,15 @@ const getNetworkById = (id: number): Network => {
     throw new Error(`Unknow chain id: ${id}`)
 }
 
+export interface IFaceWalletCredentials {
+    testnetApiKey: string | null
+    mainnetApiKey: string | null
+}
+
 export interface IFaceWalletOptions {
     logger: ILogger
     chains: IChainInfo[]
-    testnetApiKey: string | null
-    mainnetApiKey: string | null
+    credentials: IFaceWalletCredentials
 }
 
 
@@ -84,8 +89,10 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         return true
     }
 
-    constructor({ logger, chains, testnetApiKey, mainnetApiKey }: IFaceWalletOptions) {
+    constructor({ logger, chains, credentials }: IFaceWalletOptions) {
         super(logger, ConnectorNames.FaceWallet, chains)
+
+        const { testnetApiKey, mainnetApiKey } = credentials
 
         if(!testnetApiKey && !mainnetApiKey) {
             throw new Error(`Set value for testnetApiKey or mainnetApiKey or both`)

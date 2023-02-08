@@ -3,14 +3,22 @@ import { Signer } from "ethers";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { ConnectorNames } from "../connectorNames";
 import { ConnectorProvider } from "../connectorProvider";
-import { EMPTY_CHAIN, IChain, isChainEmpty } from "./ichain";
+import { EMPTY_CHAIN, IChain, IChainInfo, isChainEmpty } from "./ichain";
 import { IConnector } from "../iConnector";
 import { IChainService } from "./chainService";
+import { BaseConnector } from "../baseConnector";
+import { InjectedConnector } from "../injectedConnector";
+import { WalletConnectConnector } from "../walletConnectConnector";
+import { FaceWalletConnector, IFaceWalletCredentials, IFaceWalletOptions } from "../faceWalletConnector";
 
 export interface IWeb3StoreParams<TChain extends IChain> {
     logger: ILogger,
     chainService: IChainService<TChain>
-    connectorProvider: ConnectorProvider
+    faceWalletCredentials?: IFaceWalletCredentials
+    //for the next version on WC
+    walletConnectProjectId?: string
+    supportedWallets?: ConnectorNames[]
+    supportedChains: IChainInfo[]
 }
 
 export interface IWeb3Store {
@@ -69,10 +77,10 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
         return false
     }
 
-    constructor({logger, connectorProvider, chainService}: IWeb3StoreParams<TChain>) {
-        this.logger = logger
-        this.chainService = chainService
-        this._connectorProvider = connectorProvider;
+    constructor(params: IWeb3StoreParams<TChain>) {
+        this.logger = params.logger
+        this.chainService = params.chainService
+        this._connectorProvider = new ConnectorProvider(params.logger, Web3Store.createWallets(params))
 
         makeObservable(this, {
             isReady: observable,
@@ -87,6 +95,37 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
         this.runInit()
     }
     
+    private static createWallets<TChain extends IChain>({ supportedWallets, supportedChains: supportedChains, logger, faceWalletCredentials, walletConnectProjectId }: IWeb3StoreParams<TChain>): BaseConnector[] {
+
+        const result: BaseConnector[] = []
+    
+        if(!supportedWallets || supportedWallets.some(x => x === ConnectorNames.Injected)) {
+            result.push(new InjectedConnector(logger, supportedChains))
+        }
+    
+        if(!supportedWallets || supportedWallets.some(x => x === ConnectorNames.WalletConnect)) {
+            if(!walletConnectProjectId) {
+                throw new Error('You forgot pass IWeb3StoreParams.walletConnectProjectId')
+            }
+            result.push(new WalletConnectConnector({ projectId: walletConnectProjectId, logger, chains: supportedChains }))
+        }
+        
+        if(!supportedWallets || supportedWallets.some(x => x === ConnectorNames.FaceWallet)) {
+
+            if(!faceWalletCredentials) {
+                throw new Error('You forgot pass IWeb3StoreParams.faceWalletCredentials')
+            }
+            const faceWalletConnectOptions: IFaceWalletOptions = {
+                logger,
+                chains: supportedChains,
+                credentials: faceWalletCredentials
+            }
+            result.push(new FaceWalletConnector(faceWalletConnectOptions))
+        }
+        
+        return result
+    }
+
     protected readonly logger: ILogger
     protected readonly chainService: IChainService<TChain>
 

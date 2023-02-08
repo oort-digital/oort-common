@@ -1,22 +1,12 @@
 import { providers, Signer } from "ethers";
 import { ILogger } from "@oort-digital/logger";
 import { ConnectorNames } from "./connectorNames";
+import { IChainInfo } from "./web3Store";
 
 type AccountChangedHandlerType = (accounts: Array<string>) => void
 type ChainChangedHandlerType = (chainId: string) => void
 type DisconnectHandlerType = (error: any) => void
 
-export interface IChainInfo {
-    name: string
-    chainId: number
-    rpcUrl: string
-    blockExplorer?: string
-    nativeCurrency?: {
-        name: string
-        symbol: string
-        decimals: number
-    }
-}
 export interface IChainMap {
     [chainId: number]: IChainInfo
   }

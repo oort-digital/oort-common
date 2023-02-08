@@ -3,6 +3,16 @@ export interface IChain {
     name: string
 }
 
+export interface IChainInfo extends IChain {
+    rpcUrl: string
+    blockExplorer?: string
+    nativeCurrency?: {
+        name: string
+        symbol: string
+        decimals: number
+    }
+}
+
 export const EMPTY_CHAIN: IChain = {
     chainId: -1,
     name: ''

@@ -1,7 +1,7 @@
-import { logger } from "@oort-digital/logger";
-import { delayAsync } from "./utils";
-import { IChainInfo } from "./baseConnector";
-import { InjectedConnectorForTest, TestRawProvider, TestSigner } from "./testStubs";
+import { logger } from "@oort-digital/logger"
+import { delayAsync } from "./utils"
+import { InjectedConnectorForTest, TestRawProvider, TestSigner } from "./testStubs"
+import { IChainInfo } from "./web3Store";
 
 const chainInfo: IChainInfo = {
   name: 'mumbai',

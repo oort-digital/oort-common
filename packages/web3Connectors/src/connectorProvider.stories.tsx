@@ -3,10 +3,10 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { WalletConnectConnector } from './walletConnectConnector';
 import { logger } from '@oort-digital/logger';
 import { InjectedConnector } from './injectedConnector';
-import { IChainInfo } from './baseConnector';
 import { ConnectorProvider } from './connectorProvider';
 import { ConnectorNames } from './connectorNames';
 import { FaceWalletConnector, IFaceWalletOptions } from './faceWalletConnector';
+import { IChainInfo } from './web3Store';
 
 const FakeComponent = () => <></>
 
@@ -40,8 +40,7 @@ const mainnetApiKey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCX9F3aDaZiPAsbGNbnp
 const faceWalletConnectOptions: IFaceWalletOptions = {
   logger,
   chains,
-  testnetApiKey,
-  mainnetApiKey,
+  credentials: { testnetApiKey, mainnetApiKey }
 }
 
 const options = {

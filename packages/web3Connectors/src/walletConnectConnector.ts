@@ -1,9 +1,10 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { IRPCMap } from "@walletconnect/types";
 import { ILogger } from "@oort-digital/logger";
-import { BaseConnector, IChainInfo } from "./baseConnector";
+import { BaseConnector } from "./baseConnector";
 import { ConnectorNames } from "./connectorNames";
 import { IConnector } from "./iConnector";
+import { IChainInfo } from "./web3Store";
 
 export interface IWalletConnectOptions {
     modalZIndex?: number //actual for v2

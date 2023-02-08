@@ -1,8 +1,8 @@
 import { logger } from "@oort-digital/logger";
-import { IChainInfo } from "./baseConnector";
 import { InjectedConnectorForTest, TestRawProvider, TestSigner } from "./testStubs";
 import { ConnectorProvider } from "./connectorProvider";
 import { ConnectorNames } from "./connectorNames";
+import { IChainInfo } from "./web3Store";
 
 const chainInfo: IChainInfo = {
   name: 'mumbai',

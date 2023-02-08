@@ -1,15 +1,12 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { WalletConnectConnector } from '../walletConnectConnector';
 import { logger } from '@oort-digital/logger';
-import { InjectedConnector } from '../injectedConnector';
-import { IChainInfo } from '../baseConnector';
-import { ConnectorProvider } from '../connectorProvider';
 import { observer } from 'mobx-react';
-import { FaceWalletConnector, IFaceWalletOptions } from '../faceWalletConnector';
+import { IFaceWalletCredentials } from '../faceWalletConnector';
 import { ChainService } from './chainService';
 import { ConnectorNames } from '../connectorNames';
 import { TestWeb3Store } from './testWeb3Store';
+import { IChainInfo } from './ichain';
 
 const chains: IChainInfo[] = [
   {
@@ -25,31 +22,23 @@ const chains: IChainInfo[] = [
 ]
 
 const testnetApiKey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDD7uJnqeI74gH6M-cSeEq82_Zrh-dp9KYH9asKMsjmdZpxjuHifc8lRhkKp5ZDTr9H__bpX8XFSBHt52r_iyP2-pMMh5E-T3uQJLFs0dBUSw2COr2ZgA_QWFHaIoSOtV_b9w5gEzxY623L0_Op9ItpZ51NN1WGEWgate5k-vMaDwIDAQAB'
-
 const mainnetApiKey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCX9F3aDaZiPAsbGNbnpHAyBJNBHi4DtLkHIo1ZSYKSlxVHkg2ejuN1rMmPFGe6cZsZS7eAcNB-AaVTLyDgmYYdYBYwdJEoTejAJ2nC1ntZwmOEDC6nR_oeedEH2lc4zQp05rV0p8DHDUYxiYC6nlG-RSEUOvJhzsoC2tetoEbjuQIDAQAB'
 
-const faceWalletConnectOptions: IFaceWalletOptions = {
-  logger,
-  chains,
+const faceWalletConnectCredentials: IFaceWalletCredentials = {
   testnetApiKey,
   mainnetApiKey,
 }
 
-const options = {
-  projectId: 'c2b4ff7ce76613f93a7edea85b9618f5',
-  logger,
-  chains
-}
-const walletConnect = new WalletConnectConnector(options)
-const injected = new InjectedConnector(logger, chains)
-const faceWallet = new FaceWalletConnector(faceWalletConnectOptions)
-
-const connectorProvider = new ConnectorProvider(logger, [faceWallet, walletConnect, injected])
 
 const chainService = new ChainService(chains)
 
 const web3Store = new TestWeb3Store({ 
-  logger, connectorProvider, chainService
+  supportedChains: chains,
+  walletConnectProjectId: 'c2b4ff7ce76613f93a7edea85b9618f5',
+  faceWalletCredentials: faceWalletConnectCredentials,
+  supportedWallets: [ConnectorNames.Injected, ConnectorNames.FaceWallet, ConnectorNames.WalletConnect],
+  logger,
+  chainService
  })
 
 const FakeComponent = observer(() => {
