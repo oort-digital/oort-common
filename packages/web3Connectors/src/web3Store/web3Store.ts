@@ -25,7 +25,7 @@ export interface IWeb3Store {
     isConnectedToSupportedChain: boolean
     chain: IChain
     account: string
-    signer: Signer | undefined
+    signer: Signer | null
     isReady: boolean
 }
 
@@ -35,7 +35,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
     chain: IChain = EMPTY_CHAIN
     connectorName: ConnectorNames = ConnectorNames.Undefined
     isReady: boolean = false
-    signer: Signer | undefined
+    signer: Signer | null = null
 
     get supportedChains(): IChain[] {
         return this.chainService.supportedChains
@@ -90,7 +90,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
     protected readonly logger: ILogger
     protected readonly chainService: IChainService<TChain>
 
-    private _connector: IConnector | undefined
+    private _connector: IConnector | null = null
     private _connectorProvider: ConnectorProvider
 
     private logDebug = (msg: string) => {
@@ -136,9 +136,9 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
     private async disconnectHandler(): Promise<void> {
         this.logDebug('disconnectHandler')
         await this._connectorProvider.disconnect()
-        this._connector = undefined
+        this._connector = null
         runInAction(() => {
-            this.signer = undefined
+            this.signer = null
             this.account = ''
             this.chain = EMPTY_CHAIN
             this.connectorName = ConnectorNames.Undefined;

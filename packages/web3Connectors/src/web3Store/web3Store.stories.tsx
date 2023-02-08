@@ -5,11 +5,11 @@ import { logger } from '@oort-digital/logger';
 import { InjectedConnector } from '../injectedConnector';
 import { IChainInfo } from '../baseConnector';
 import { ConnectorProvider } from '../connectorProvider';
-import { Web3Store } from './web3Store';
 import { observer } from 'mobx-react';
 import { FaceWalletConnector, IFaceWalletOptions } from '../faceWalletConnector';
 import { ChainService } from './chainService';
 import { ConnectorNames } from '../connectorNames';
+import { TestWeb3Store } from './testWeb3Store';
 
 const chains: IChainInfo[] = [
   {
@@ -48,7 +48,7 @@ const connectorProvider = new ConnectorProvider(logger, [faceWallet, walletConne
 
 const chainService = new ChainService(chains)
 
-const web3Store = new Web3Store({ 
+const web3Store = new TestWeb3Store({ 
   logger, connectorProvider, chainService
  })
 
