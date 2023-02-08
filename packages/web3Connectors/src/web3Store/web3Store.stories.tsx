@@ -54,7 +54,7 @@ const web3Store = new Web3Store({
 
 const FakeComponent = observer(() => {
 
-  const { isReady, account, canSwitchChain, chain, signer, isConnectedToSupportedChain, supportedChains } = web3Store
+  const { isReady, account, chain, isConnectedToSupportedChain, supportedChains } = web3Store
 
   const isConnected = !!account
 
