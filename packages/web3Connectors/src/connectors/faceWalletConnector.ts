@@ -4,7 +4,7 @@ import { BaseConnector } from "./baseConnector";
 import { IConnector } from "./iConnector";
 import { ConnectorNames } from "./connectorNames";
 import { connectorStorage } from "./connectorStorage";
-import { IChainInfo } from "./web3Store";
+import { IChainInfo } from "../internalTypesAndInterfaces";
 
 const getNetworkById = (id: number): Network => {
     if(id === 1)        { return Network.ETHEREUM }

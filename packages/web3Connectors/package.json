@@ -39,6 +39,7 @@
     "mobx": "^6.7.0"
   },
   "devDependencies": {
+    "@oort-digital/utils": "^0.0.1-alfa.0.0.1",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-interactions": "^6.5.15",

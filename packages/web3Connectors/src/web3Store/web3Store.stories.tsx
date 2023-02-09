@@ -2,11 +2,11 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { logger } from '@oort-digital/logger';
 import { observer } from 'mobx-react';
-import { IFaceWalletCredentials } from '../faceWalletConnector';
+import { IFaceWalletCredentials } from '../connectors/faceWalletConnector';
 import { ChainService } from './chainService';
-import { ConnectorNames } from '../connectorNames';
 import { TestWeb3Store } from './testWeb3Store';
-import { IChainInfo } from './ichain';
+import { IChainInfo } from '../internalTypesAndInterfaces';
+import { ConnectorNames } from '../connectors';
 
 const chains: IChainInfo[] = [
   {

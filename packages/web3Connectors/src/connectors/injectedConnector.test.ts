@@ -1,7 +1,7 @@
 import { logger } from "@oort-digital/logger"
-import { delayAsync } from "./utils"
-import { InjectedConnectorForTest, TestRawProvider, TestSigner } from "./testStubs"
-import { IChainInfo } from "./web3Store";
+import { delayAsync } from "@oort-digital/utils"
+import { IChainInfo } from "../internalTypesAndInterfaces";
+import { InjectedConnectorForTest, TestRawProvider, TestSigner } from "../testStubs"
 
 const chainInfo: IChainInfo = {
   name: 'mumbai',
@@ -43,3 +43,4 @@ test('injectedConnector user reject enable return false', async () => {
 
   expect(result).toBeFalsy()
 });
+

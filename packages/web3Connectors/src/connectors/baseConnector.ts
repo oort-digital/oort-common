@@ -1,7 +1,7 @@
 import { providers, Signer } from "ethers";
 import { ILogger } from "@oort-digital/logger";
 import { ConnectorNames } from "./connectorNames";
-import { IChainInfo } from "./web3Store";
+import { IChainInfo } from "../internalTypesAndInterfaces";
 
 type AccountChangedHandlerType = (accounts: Array<string>) => void
 type ChainChangedHandlerType = (chainId: string) => void
@@ -9,7 +9,7 @@ type DisconnectHandlerType = (error: any) => void
 
 export interface IChainMap {
     [chainId: number]: IChainInfo
-  }
+}
 
 export abstract class BaseConnector {
     public readonly name: ConnectorNames;

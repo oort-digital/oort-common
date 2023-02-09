@@ -1,15 +1,11 @@
 import { ILogger } from "@oort-digital/logger";
 import { Signer } from "ethers";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-import { ConnectorNames } from "../connectorNames";
-import { ConnectorProvider } from "../connectorProvider";
-import { EMPTY_CHAIN, IChain, IChainInfo, isChainEmpty } from "./ichain";
-import { IConnector } from "../iConnector";
+import { ConnectorNames, ConnectorProvider, IConnector,WalletConnectConnector, InjectedConnector, BaseConnector } from "../connectors";
 import { IChainService } from "./chainService";
-import { BaseConnector } from "../baseConnector";
-import { InjectedConnector } from "../injectedConnector";
-import { WalletConnectConnector } from "../walletConnectConnector";
-import { FaceWalletConnector, IFaceWalletCredentials, IFaceWalletOptions } from "../faceWalletConnector";
+import { FaceWalletConnector, IFaceWalletCredentials, IFaceWalletOptions } from "../connectors/faceWalletConnector";
+import { EMPTY_CHAIN, IChain, isChainEmpty } from "../publicTypesAndInterfaces";
+import { IChainInfo } from "../internalTypesAndInterfaces";
 
 export interface IWeb3StoreParams<TChain extends IChain> {
     logger: ILogger,

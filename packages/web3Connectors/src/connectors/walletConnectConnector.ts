@@ -4,7 +4,7 @@ import { ILogger } from "@oort-digital/logger";
 import { BaseConnector } from "./baseConnector";
 import { ConnectorNames } from "./connectorNames";
 import { IConnector } from "./iConnector";
-import { IChainInfo } from "./web3Store";
+import { IChainInfo } from "../internalTypesAndInterfaces";
 
 export interface IWalletConnectOptions {
     modalZIndex?: number //actual for v2
