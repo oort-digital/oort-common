@@ -1,6 +1,6 @@
 import { makeObservable, observable } from "mobx";
-import { IChain } from "./ichain";
-import { IWeb3StoreParams, Web3Store } from "./web3Store";
+import { IChain } from "../publicTypesAndInterfaces";
+import { IWeb3StoreParams, Web3Store } from "./web3Store"
 
 export class TestWeb3Store extends Web3Store<IChain> {
 

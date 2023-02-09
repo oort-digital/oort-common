@@ -1,4 +1,4 @@
-import { IChain } from "./ichain"
+import { IChain } from "../publicTypesAndInterfaces"
 
 export enum ChainEnum {
     EthereumMainnet = 1,
