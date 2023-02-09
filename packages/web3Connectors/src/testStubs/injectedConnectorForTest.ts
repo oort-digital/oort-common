@@ -1,7 +1,7 @@
 import { ILogger } from "@oort-digital/logger"
 import { Signer } from "ethers"
-import { IChainInfo } from "../baseConnector"
-import { InjectedConnector } from "../injectedConnector"
+import { InjectedConnector } from "../connectors"
+import { IChainInfo } from "../internalTypesAndInterfaces"
 import { TestRawProvider } from "./testRawProvider"
 import { TestSigner } from "./testSigner"
 

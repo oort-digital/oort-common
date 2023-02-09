@@ -6,7 +6,7 @@ import { ConnectButton } from "./connectButton"
 import { MetamaskIcon } from "./metamaskIcon"
 import { WalletConnectIcon } from "./walletConnectIcon"
 import { IConnectModalProps } from './connectModal';
-import { IChain, isChainEmpty } from "../typesAndInterfaces"
+import { IChain, isChainEmpty } from "@oort-digital/web3-connectors"
 import { Gutter } from "antd/lib/grid/row"
 import { Alert } from "./alert"
 import { Bold } from "./bold"

@@ -1,7 +1,7 @@
 import { Button } from "antd"
-import {IChain} from "../typesAndInterfaces"
 import styles from "./chainButton.module.less"
 import { getChainIconOld } from '../utils';
+import { IChain } from "@oort-digital/web3-connectors";
 
 
 interface IProps {

@@ -1,4 +1,4 @@
-import {IChain} from "../typesAndInterfaces"
+import { IChain } from "@oort-digital/web3-connectors";
 import { ChainButton } from "./chainButton";
 
 interface IProps {

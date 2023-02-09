@@ -1,9 +1,10 @@
 import { ILogger } from "@oort-digital/logger";
 import { Face, Network } from "@haechi-labs/face-sdk";
-import { BaseConnector, IChainInfo } from "./baseConnector";
+import { BaseConnector } from "./baseConnector";
 import { IConnector } from "./iConnector";
 import { ConnectorNames } from "./connectorNames";
 import { connectorStorage } from "./connectorStorage";
+import { IChainInfo } from "../internalTypesAndInterfaces";
 
 const getNetworkById = (id: number): Network => {
     if(id === 1)        { return Network.ETHEREUM }
@@ -14,22 +15,16 @@ const getNetworkById = (id: number): Network => {
     throw new Error(`Unknow chain id: ${id}`)
 }
 
-export interface IFaceWalletOptions {
-    logger: ILogger
-    chains: IChainInfo[]
+export interface IFaceWalletCredentials {
     testnetApiKey: string | null
     mainnetApiKey: string | null
 }
 
-
-let frameCloseCallback: (() => void) | null = null
-window.addEventListener('message', event => {
-    // IMPORTANT: check the origin of the data!
-    if ((event.origin === 'https://app.facewallet.xyz' || event.origin === 'https://app.test.facewallet.xyz')
-        && event.data.method === 'face_closeIframe') {
-        frameCloseCallback && frameCloseCallback()
-    }
-});
+export interface IFaceWalletOptions {
+    logger: ILogger
+    chains: IChainInfo[]
+    credentials: IFaceWalletCredentials
+}
 
 export class FaceWalletConnector extends BaseConnector implements IConnector {
 
@@ -84,8 +79,12 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         return true
     }
 
-    constructor({ logger, chains, testnetApiKey, mainnetApiKey }: IFaceWalletOptions) {
+    constructor({ logger, chains, credentials }: IFaceWalletOptions) {
         super(logger, ConnectorNames.FaceWallet, chains)
+
+        FaceWalletConnector.initFrameEventsListener()
+
+        const { testnetApiKey, mainnetApiKey } = credentials
 
         if(!testnetApiKey && !mainnetApiKey) {
             throw new Error(`Set value for testnetApiKey or mainnetApiKey or both`)
@@ -107,6 +106,18 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
             apiKey: resolveApiKey(Network.MUMBAI)
         })
         */
+    }
+
+    private static _frameCloseCallback: (() => void) | null = null
+    private static initFrameEventsListener = () => {
+        window.addEventListener('message', event => {
+            // IMPORTANT: check the origin of the data!
+            if ((event.origin === 'https://app.facewallet.xyz' || event.origin === 'https://app.test.facewallet.xyz')
+                && event.data.method === 'face_closeIframe') {
+                    FaceWalletConnector._frameCloseCallback && FaceWalletConnector._frameCloseCallback()
+            }
+        })
+
     }
 
     private _curChainId: number | undefined
@@ -170,7 +181,7 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     private waitFrameClose = (): Promise<void> => {
         return new Promise<void>(async ( resolve ) => {
-            frameCloseCallback = resolve
+            FaceWalletConnector._frameCloseCallback = resolve
         })
     }
 
