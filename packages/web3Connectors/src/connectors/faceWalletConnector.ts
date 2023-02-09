@@ -26,16 +26,6 @@ export interface IFaceWalletOptions {
     credentials: IFaceWalletCredentials
 }
 
-
-let frameCloseCallback: (() => void) | null = null
-window.addEventListener('message', event => {
-    // IMPORTANT: check the origin of the data!
-    if ((event.origin === 'https://app.facewallet.xyz' || event.origin === 'https://app.test.facewallet.xyz')
-        && event.data.method === 'face_closeIframe') {
-        frameCloseCallback && frameCloseCallback()
-    }
-});
-
 export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     async disconnect(): Promise<void> {
@@ -92,6 +82,8 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
     constructor({ logger, chains, credentials }: IFaceWalletOptions) {
         super(logger, ConnectorNames.FaceWallet, chains)
 
+        FaceWalletConnector.initFrameEventsListener()
+
         const { testnetApiKey, mainnetApiKey } = credentials
 
         if(!testnetApiKey && !mainnetApiKey) {
@@ -114,6 +106,18 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
             apiKey: resolveApiKey(Network.MUMBAI)
         })
         */
+    }
+
+    private static _frameCloseCallback: (() => void) | null = null
+    private static initFrameEventsListener = () => {
+        window.addEventListener('message', event => {
+            // IMPORTANT: check the origin of the data!
+            if ((event.origin === 'https://app.facewallet.xyz' || event.origin === 'https://app.test.facewallet.xyz')
+                && event.data.method === 'face_closeIframe') {
+                    FaceWalletConnector._frameCloseCallback && FaceWalletConnector._frameCloseCallback()
+            }
+        })
+
     }
 
     private _curChainId: number | undefined
@@ -177,7 +181,7 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     private waitFrameClose = (): Promise<void> => {
         return new Promise<void>(async ( resolve ) => {
-            frameCloseCallback = resolve
+            FaceWalletConnector._frameCloseCallback = resolve
         })
     }
 
