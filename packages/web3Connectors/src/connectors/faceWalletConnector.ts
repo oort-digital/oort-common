@@ -79,6 +79,11 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
         return true
     }
 
+    //override onDisconned to disable CheckConnection
+    public onDisconnect(_handler: (error: any) => void): void {
+        //do nothing
+    }
+
     constructor({ logger, chains, credentials }: IFaceWalletOptions) {
         super(logger, ConnectorNames.FaceWallet, chains)
 
