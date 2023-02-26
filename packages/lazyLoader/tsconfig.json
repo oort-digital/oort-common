@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "exclude": ["**/*.stories.tsx", "node_modules"],
+  "include": [
+    "src/**/*",
+    "typings.d.ts"
+, "../dynamicLoader/lazyLoader", "../ui copy/index.ts", "../dynamicLoader/useDeviceType.tsx"  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "./dist",
+    "emitDeclarationOnly": true,
+    "jsx": "react-jsx",
+    "composite": false
+  }
+}

@@ -10,6 +10,7 @@ yarn.lock
 /packages/urlSearchParams/node_modules
 /packages/utils/node_modules
 /packages/nftProviders/node_modules
+/packages/lazyLoader/node_modules
 
 /packages/logger/dist
 /packages/ui/dist
@@ -18,6 +19,7 @@ yarn.lock
 /packages/urlSearchParams/dist
 /packages/utils/dist
 /packages/oortApiClient/dist
+/packages/lazyLoader/dist
 
 /sites/cra-test-app/node_modules
 /sites/cra-test-app/build
