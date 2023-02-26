@@ -1,8 +1,8 @@
 import React from "react";
 
 import {ListGridType} from "antd/lib/list"
-import { defaultScreenBrakepoints, IScreenBrakepoints, ScreenSize, useScreenSize } from "../effects";
 import { AsyncList } from "../asyncList";
+import { defaultScreenBrakepoints, IScreenBrakepoints, ScreenSize, useScreenSize } from "@oort-digital/lazy-loader";
 
 export interface IAssetListProps<TItem> {
 	items: TItem[]
