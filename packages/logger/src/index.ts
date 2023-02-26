@@ -65,14 +65,20 @@ const parseLogLevel = (str: string): LogLevel => {
 }
 
 const LOG_LEVEL_KEY = 'logLevel'
+const DEFAULT_LOG_LEVEL = LogLevel.Info
 function getCurLogLevel(): LogLevel {
+    // ssr check
+    // because localStorage is not avaible on server side by default
+    if(!localStorage) {
+        return DEFAULT_LOG_LEVEL
+    }
     let str: string | null = localStorage.getItem(LOG_LEVEL_KEY)
     if(str) {
         return parseLogLevel(str)
     }
-    let result: LogLevel = LogLevel.Info;
-    localStorage.setItem(LOG_LEVEL_KEY, LogLevel[result].toLowerCase())
-    return result
+
+    localStorage.setItem(LOG_LEVEL_KEY, LogLevel[DEFAULT_LOG_LEVEL].toLowerCase())
+    return DEFAULT_LOG_LEVEL
 }
 
 export const logger: ILogger = new ConsoleLogger(getCurLogLevel())
