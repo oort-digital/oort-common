@@ -10,6 +10,7 @@ on:
         type: choice
         description: Select package
         options:
+        - lazyLoader
         - logger
         - nftProviders
         - oortApiClient
