@@ -79,8 +79,6 @@ export function useScreenSize({ brakepoints, logger, ssrWidth = 1000 }: IScreenS
 	const [screenSize, setScreenSize] = useState(() => getSreenSize(getWidth(isSSR, ssrWidth), bp))
 	const [screenWidth, setScreenWidth] = useState(() => getWidth(isSSR, ssrWidth))
 
-    console.log(`${isSSR} ${screenWidth}`)
-
 	const handleResize = () => {
 		const w = getWidth(isSSR, ssrWidth)
 		const sz = getSreenSize(w, bp)
