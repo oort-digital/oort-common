@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
-import { logger } from '@oort-digital/logger';
 import { debounceFunction } from '@oort-digital/utils';
+import { ILogger } from '@oort-digital/logger';
 
 export interface IScreenBrakepoints {
 	xs: number
@@ -30,12 +30,12 @@ export enum ScreenSize {
 	xxl = 'xxl',
 }
 
-function getSreenSize(width: number, brakepoints: IScreenBrakepoints): ScreenSize {
+function getSreenSize(width: number, brakepoints: IScreenBrakepoints, logger?: ILogger): ScreenSize {
 	
-	logger.debug(`window.outerWidth: ${width}`)
+	logger?.debug(`window.outerWidth: ${width}`)
 
 	if(!width) {
-		logger.warn(`window.outerWidth is ${width}`)
+		logger?.warn(`window.outerWidth is ${width}`)
 	}
 	const { sm, md, lg, xl, xxl } = brakepoints
 	
@@ -48,12 +48,14 @@ function getSreenSize(width: number, brakepoints: IScreenBrakepoints): ScreenSiz
 	return ScreenSize.xxl
 }
 
-const logWidth = (msg: string) => {
-	logger.debug(`screenSize ${msg}`)
-	logger.debug(`screenSize window.outerWidth: ${window.outerWidth}`)
-	logger.debug(`screenSize window.innerWidth: ${window.innerWidth}`)
-	logger.debug(`screenSize screen.width: 	 ${window.screen.width}`)
-	logger.debug(`screenSize screen.availWidth: ${window.screen.availWidth}`)
+const logWidth = (msg: string, logger?: ILogger) => {
+	if(logger) {
+		logger.debug(`screenSize ${msg}`)
+		logger.debug(`screenSize window.outerWidth: ${window.outerWidth}`)
+		logger.debug(`screenSize window.innerWidth: ${window.innerWidth}`)
+		logger.debug(`screenSize screen.width: 	 ${window.screen.width}`)
+		logger.debug(`screenSize screen.availWidth: ${window.screen.availWidth}`)
+	}
 }
 
 const getWidth = (): number => {
@@ -61,7 +63,7 @@ const getWidth = (): number => {
 	return window.innerWidth
 }
   
-export function useScreenSize(brakepoints?: IScreenBrakepoints): [number, ScreenSize] {
+export function useScreenSize(brakepoints?: IScreenBrakepoints, logger?: ILogger): [number, ScreenSize] {
 	logWidth('init')
 	const bp = brakepoints || defaultScreenBrakepoints
 	const [screenSize, setScreenSize] = useState(getSreenSize(getWidth(), bp));
@@ -70,7 +72,7 @@ export function useScreenSize(brakepoints?: IScreenBrakepoints): [number, Screen
 	const handleResize = () => {
 		const w = getWidth()
 		const sz = getSreenSize(w, bp)
-		logger.debug(`screenSize: ${sz}`)
+		logger?.debug(`screenSize: ${sz}`)
 		logWidth('handleResize')
 		setScreenSize(sz);
 		setScreenWidth(w)

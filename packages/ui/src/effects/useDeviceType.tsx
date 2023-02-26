@@ -1,4 +1,5 @@
 
+import { ILogger } from '@oort-digital/logger';
 import { useScreenSize } from './useScreenSize';
 
 const TabletScreenSizes = {
@@ -12,8 +13,8 @@ export enum DeviceType {
 	Desktop = 'DESKTOP'
 }
 
-export function useDeviceType(): DeviceType {
-	const [screenWidth] = useScreenSize()
+export function useDeviceType(logger?: ILogger): DeviceType {
+	const [screenWidth] = useScreenSize(undefined, logger)
 	if(screenWidth <= TabletScreenSizes.min) {
 		return DeviceType.Phone
 	}
