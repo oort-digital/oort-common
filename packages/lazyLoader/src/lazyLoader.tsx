@@ -7,15 +7,8 @@ interface IProps {
     tablet: ReactNode
 }
 
-interface IPropsNextJs {
-    desktop: ReactNode
-    mobile: ReactNode
-    tablet: ReactNode
-    isSSR: boolean
-}
-
-export const LazyLoaderNextJs = ({ desktop, mobile, tablet, isSSR }: IPropsNextJs) => {
-	const deviceType = useDeviceType({ isSSR })
+export const LazyLoaderNextJs = ({ desktop, mobile, tablet}: IProps) => {
+	const deviceType = useDeviceType()
 
     if(deviceType === DeviceType.Desktop) {
         return <>{desktop}</>
@@ -28,6 +21,6 @@ export const LazyLoaderNextJs = ({ desktop, mobile, tablet, isSSR }: IPropsNextJ
 }
 
 export const LazyLoader = (props: IProps) => {
-	return <Suspense fallback={<span />}> <LazyLoaderNextJs isSSR={false} {...props}/> </Suspense>
+	return <Suspense fallback={<span />}> <LazyLoaderNextJs {...props}/> </Suspense>
 }
 
