@@ -76,8 +76,10 @@ export function useScreenSize({ brakepoints, logger, ssrWidth = 1000 }: IScreenS
 	const isSSR = useSSRCheck()
 	logWidth('init', isSSR, logger)
 	const bp = brakepoints || defaultScreenBrakepoints
-	const [screenSize, setScreenSize] = useState(getSreenSize(getWidth(isSSR, ssrWidth), bp));
-	const [screenWidth, setScreenWidth] = useState(getWidth(isSSR, ssrWidth))
+	const [screenSize, setScreenSize] = useState(() => getSreenSize(getWidth(isSSR, ssrWidth), bp))
+	const [screenWidth, setScreenWidth] = useState(() => getWidth(isSSR, ssrWidth))
+
+    console.log(`${isSSR} ${screenWidth}`)
 
 	const handleResize = () => {
 		const w = getWidth(isSSR, ssrWidth)
@@ -96,7 +98,15 @@ export function useScreenSize({ brakepoints, logger, ssrWidth = 1000 }: IScreenS
 		}
 	  	window.addEventListener('resize', handleResizeDebounced);
 	  	return () => window.removeEventListener('resize', handleResizeDebounced)
-	}, [bp]);
+	}, [bp, isSSR]);
+
+	useEffect(() => {
+		const actualWidth = getWidth(isSSR, ssrWidth)
+		if(actualWidth !== screenWidth) {
+			handleResize()
+		}
+		
+	}, [isSSR])
 
   return [screenWidth, screenSize];
 }
