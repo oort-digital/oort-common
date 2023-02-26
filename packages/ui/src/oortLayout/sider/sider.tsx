@@ -3,13 +3,10 @@ import { Drawer } from "antd"
 import { CloseCircleIcon } from "../../icons"
 import styles from "./sider.module.less"
 import { BurgerMenuIcon } from "./burgerMenuIcon"
-import { logger } from "@oort-digital/logger"
 
 interface IProps {
     children: ReactNode
 }
-
-const debug = (msg: string) => logger.debug(`Sider. ${msg}`)
 
 export const Sider = ({ children }: IProps) => {
 
@@ -34,27 +31,16 @@ export const Sider = ({ children }: IProps) => {
 
         window.history.pushState = function(data: any, unused: string, url?: string | URL | null | undefined) {
             closeMenu()
-            debug('history.pushState')
             pushState.apply(window.history, [data, unused, url]);
         };
 
         window.history.replaceState = function(data: any, unused: string, url?: string | URL | null | undefined) {
             closeMenu()
-            debug('history.replaceState')
             replaceState.apply(window.history, [data, unused, url]);
             closeMenu()
         };
 
-        /*
-        window.addEventListener('popstate', function() {
-            debugger
-            debug('popstate')
-            // window.dispatchEvent(new Event('locationchange'))
-        });
-        */
-
-        window.addEventListener('beforeunload', function() {                 //   8   - Window onload
-            debug('beforeunload')
+        window.addEventListener('beforeunload', function() {
             closeMenu()
         });
     }, [])

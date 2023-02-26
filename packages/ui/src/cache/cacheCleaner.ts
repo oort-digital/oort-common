@@ -1,4 +1,4 @@
-import { logger } from "@oort-digital/logger"
+import { ILogger } from "@oort-digital/logger"
 import { delayAsync, toErrorWithMessage } from "@oort-digital/utils";
 import { ICacheEntry, KEY_PREFIX } from "./icacheProvider";
 
@@ -28,13 +28,13 @@ export class CacheCleaner {
                 const { ttl } = cacheEntry
                 if(ttl && ttl < now) {
                     localStorage.removeItem(key)
-                    logger.debug(`${CacheCleaner.name}. '${key}' removed`)
+                    this._logger?.debug(`${CacheCleaner.name}. '${key}' removed`)
                 }
             }
         }
         catch(ex) {
             const err = toErrorWithMessage(ex)
-            logger.error(`${CacheCleaner.name}. Can't remove '${key}' ${err.message}`)
+            this._logger?.error(`${CacheCleaner.name}. Can't remove '${key}' ${err.message}`)
         }
     }
 
@@ -42,7 +42,7 @@ export class CacheCleaner {
 
         this._isStopped = false
         while(!this._isStopped) {
-            logger.debug(`${CacheCleaner.name} started. localStorage.length: ${localStorage.length}`)
+            this._logger?.debug(`${CacheCleaner.name} started. localStorage.length: ${localStorage.length}`)
             const now = new Date().getTime()
             for(let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
@@ -50,7 +50,7 @@ export class CacheCleaner {
                     this.tryRemove(now, key)
                 }
             }
-            logger.debug(`${CacheCleaner.name} finished. localStorage.length: ${localStorage.length}`)
+            this._logger?.debug(`${CacheCleaner.name} finished. localStorage.length: ${localStorage.length}`)
             await delayAsync(cleanIntervalSec * 1000)
         }
        
@@ -61,5 +61,11 @@ export class CacheCleaner {
     }
 
     private _isStopped: boolean = true
+
+    constructor(logger?: ILogger) {
+        this._logger = logger
+    }
+
+    private readonly _logger?: ILogger
     
 }
