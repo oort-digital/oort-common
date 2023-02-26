@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { debounceFunction } from '@oort-digital/utils';
 import { ILogger } from '@oort-digital/logger';
@@ -48,8 +47,8 @@ function getSreenSize(width: number, brakepoints: IScreenBrakepoints, logger?: I
 	return ScreenSize.xxl
 }
 
-const logWidth = (msg: string, logger?: ILogger) => {
-	if(logger) {
+const logWidth = (msg: string, isSSR: boolean, logger?: ILogger) => {
+	if(logger && isSSR) {
 		logger.debug(`screenSize ${msg}`)
 		logger.debug(`screenSize window.outerWidth: ${window.outerWidth}`)
 		logger.debug(`screenSize window.innerWidth: ${window.innerWidth}`)
@@ -58,22 +57,33 @@ const logWidth = (msg: string, logger?: ILogger) => {
 	}
 }
 
-const getWidth = (): number => {
+const getWidth = (isSSR: boolean, ssrWidth: number): number => {
+	if(isSSR) {
+		return ssrWidth
+	}
 	//return window.screen.availWidth
-	return window.innerWidth
+	return window?.innerWidth	
+}
+
+export interface IScreenSizeParams {
+	brakepoints?: IScreenBrakepoints,
+	logger?: ILogger
+	isSSR?: boolean
+	ssrWidth?: number
 }
   
-export function useScreenSize(brakepoints?: IScreenBrakepoints, logger?: ILogger): [number, ScreenSize] {
-	logWidth('init')
+export function useScreenSize({ brakepoints, logger, isSSR = false, ssrWidth = 1000 }: IScreenSizeParams = {}): [number, ScreenSize] {
+
+	logWidth('init', isSSR, logger)
 	const bp = brakepoints || defaultScreenBrakepoints
-	const [screenSize, setScreenSize] = useState(getSreenSize(getWidth(), bp));
-	const [screenWidth, setScreenWidth] = useState(getWidth())
+	const [screenSize, setScreenSize] = useState(getSreenSize(getWidth(isSSR, ssrWidth), bp));
+	const [screenWidth, setScreenWidth] = useState(getWidth(isSSR, ssrWidth))
 
 	const handleResize = () => {
-		const w = getWidth()
+		const w = getWidth(isSSR, ssrWidth)
 		const sz = getSreenSize(w, bp)
 		logger?.debug(`screenSize: ${sz}`)
-		logWidth('handleResize')
+		logWidth('handleResize', isSSR, logger)
 		setScreenSize(sz);
 		setScreenWidth(w)
 	}
@@ -81,6 +91,9 @@ export function useScreenSize(brakepoints?: IScreenBrakepoints, logger?: ILogger
 	const handleResizeDebounced = debounceFunction(handleResize, 300)
 
 	useEffect(() => {
+		if(isSSR) {
+			return
+		}
 	  	window.addEventListener('resize', handleResizeDebounced);
 	  	return () => window.removeEventListener('resize', handleResizeDebounced)
 	}, [bp]);
