@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { debounceFunction } from '@oort-digital/utils';
 import { ILogger } from '@oort-digital/logger';
-import { useSSRCheck } from './useSSRCheck';
+import { isSsrCheck } from './isSsrCheck';
 
 export interface IScreenBrakepoints {
 	xs: number
@@ -58,9 +58,9 @@ const logWidth = (msg: string, isSSR: boolean, logger?: ILogger) => {
 	}
 }
 
-const getWidth = (isSSR: boolean, ssrWidth: number): number => {
+const getWidth = (isSSR: boolean): number => {
 	if(isSSR) {
-		return ssrWidth
+		return -1
 	}
 	//return window.screen.availWidth
 	return window?.innerWidth	
@@ -69,18 +69,17 @@ const getWidth = (isSSR: boolean, ssrWidth: number): number => {
 export interface IScreenSizeParams {
 	brakepoints?: IScreenBrakepoints,
 	logger?: ILogger
-	ssrWidth?: number
 }
-  
-export function useScreenSize({ brakepoints, logger, ssrWidth = 1000 }: IScreenSizeParams = {}): [number, ScreenSize] {
-	const isSSR = useSSRCheck()
+
+export function useScreenSize({ brakepoints, logger }: IScreenSizeParams = {}): [number, ScreenSize] {
+	const isSSR = isSsrCheck()
 	logWidth('init', isSSR, logger)
 	const bp = brakepoints || defaultScreenBrakepoints
-	const [screenSize, setScreenSize] = useState(() => getSreenSize(getWidth(isSSR, ssrWidth), bp))
-	const [screenWidth, setScreenWidth] = useState(() => getWidth(isSSR, ssrWidth))
+	const [screenSize, setScreenSize] = useState(() => getSreenSize(getWidth(isSSR), bp))
+	const [screenWidth, setScreenWidth] = useState(() => getWidth(isSSR))
 
 	const handleResize = () => {
-		const w = getWidth(isSSR, ssrWidth)
+		const w = getWidth(isSSR)
 		const sz = getSreenSize(w, bp)
 		logger?.debug(`screenSize: ${sz}`)
 		logWidth('handleResize', isSSR, logger)
@@ -99,7 +98,7 @@ export function useScreenSize({ brakepoints, logger, ssrWidth = 1000 }: IScreenS
 	}, [bp, isSSR]);
 
 	useEffect(() => {
-		const actualWidth = getWidth(isSSR, ssrWidth)
+		const actualWidth = getWidth(isSSR)
 		if(actualWidth !== screenWidth) {
 			handleResize()
 		}
