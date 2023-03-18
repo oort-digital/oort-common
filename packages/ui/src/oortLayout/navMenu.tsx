@@ -68,8 +68,8 @@ const rentInternal = {
 const mintInternal = {
     caption: 'minting',
     icon: <MintIcon />,
-    mutation: "Hero Mutation",
-    claim: "Claim Rewards",
+    mutation: "Hero Mutation (Upgrading)",
+    claim: "Claim Heroes 2",
     faucet: "Faucet"
 }
 
