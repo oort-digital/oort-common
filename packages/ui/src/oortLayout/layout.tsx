@@ -1,5 +1,5 @@
+import { DeviceType, useDeviceType } from "@oort-digital/lazy-loader"
 import { lazy, Suspense } from "react"
-import { DeviceType, useDeviceType } from "../effects"
 import { ILayoutProps } from "./typesAndInterfaces"
 
 const Desktop = lazy(() => import("./layoutDesktop"))

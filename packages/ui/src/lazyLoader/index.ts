@@ -1,1 +1,0 @@
-export { LazyLoader } from "./lazyLoader"

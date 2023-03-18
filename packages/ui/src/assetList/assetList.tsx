@@ -1,8 +1,8 @@
 import React from "react";
 
 import {ListGridType} from "antd/lib/list"
-import { defaultScreenBrakepoints, IScreenBrakepoints, ScreenSize, useScreenSize } from "../effects";
 import { AsyncList } from "../asyncList";
+import { defaultScreenBrakepoints, IScreenBrakepoints, ScreenSize, useScreenSize } from "@oort-digital/lazy-loader";
 
 export interface IAssetListProps<TItem> {
 	items: TItem[]
@@ -60,7 +60,7 @@ const toGrid = (screenSize: ScreenSize): ListGridType => {
 
 export const AssetList = <TItem, >({ hasLoadMore, itemRenderer, onLoadMore, items, loading, className }: IAssetListProps<TItem>) => {
 
-	const [, screenSize] = useScreenSize(AssetListBrakepoints)
+	const [, screenSize] = useScreenSize({brakepoints: AssetListBrakepoints })
 
 	// overriding default screen brakepoints not working for Antd List controll
 	// to calculate column number call toColumn(screenSize)

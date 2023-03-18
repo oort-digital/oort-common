@@ -34,7 +34,7 @@
   "dependencies": {
     "@haechi-labs/face-sdk": "^1.7.0",
     "@haechi-labs/face-types": "^1.7.0",
-    "@oort-digital/logger": "^0.0.1-alfa.0.0.1",
+    "@oort-digital/logger": "^0.0.1-alfa.0.0.2",
     "@walletconnect/web3-provider": "^1.8.0",
     "ethers": "5.7.2",
     "mobx": "^6.7.0"

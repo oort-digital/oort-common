@@ -1,4 +1,4 @@
-import { logger } from "@oort-digital/logger";
+import { ILogger } from "@oort-digital/logger";
 import React, { CSSProperties, useState } from "react";
 import { Img } from "../img";
 import './tileCoverAvg.less'
@@ -7,6 +7,7 @@ interface IProps {
 	className?: string
 	imgSrc: string
     href?: string
+    logger?: ILogger
 }
 
 interface IRgb {
@@ -15,7 +16,7 @@ interface IRgb {
 	b: number
 }
 
-const getAverageRGB = (imgEl: any): IRgb => {
+const getAverageRGB = (imgEl: any, logger?: ILogger): IRgb => {
     
     const blockSize = 5 // only visit every 5 pixels
 	const defaultRGB: IRgb = {r:255,g:255,b:255} // for non-supporting envs
@@ -38,7 +39,7 @@ const getAverageRGB = (imgEl: any): IRgb => {
         data = context.getImageData(0, 0, width, height);
     } catch(e) {
         /* security error, img on diff domain */
-		logger.error(e)
+		logger?.error(e)
         return defaultRGB;
     }
     
@@ -61,12 +62,12 @@ const getAverageRGB = (imgEl: any): IRgb => {
 }
 
 
-export const TileCoverAvg = ({ className, imgSrc, href }: IProps) => {
+export const TileCoverAvg = ({ className, imgSrc, href, logger }: IProps) => {
 
 	const [bgColor, setBgColor] = useState<string>()
 
 	const onLoad = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-		const { r, g, b } = getAverageRGB(e.target)
+		const { r, g, b } = getAverageRGB(e.target, logger)
 		setBgColor(`#${r.toString(16)}${g.toString(16)}${b.toString(16)}`)
 	}
 

@@ -1,6 +1,7 @@
 // import Moralis  from "./moralis";
 import { INftOwnerProvider, IFeatchNftOwnerResponse, ProviderKind, IFeatchAccountNftsParams, IFeatchNftImageSrc, IFeatchNftParams, IFeatchNftsResponse, INft, IAssetsProvider, IAssetProvider, NftType } from "../typesAndInterfaces";
-import { ILogger, logger } from "@oort-digital/logger";
+import { ConsoleLogger, ILogger } from "@oort-digital/logger";
+const logger = new ConsoleLogger()
 import axios, { AxiosInstance } from "axios";
 import { toErrorWithMessage } from "@oort-digital/utils";
 import * as https from "https";

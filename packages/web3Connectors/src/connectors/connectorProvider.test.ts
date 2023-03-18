@@ -1,8 +1,10 @@
-import { logger } from "@oort-digital/logger";
+import { ConsoleLogger } from "@oort-digital/logger";
 import { InjectedConnectorForTest, TestRawProvider, TestSigner } from "../testStubs";
 import { ConnectorProvider } from "./connectorProvider";
 import { ConnectorNames } from "./connectorNames";
 import { IChainInfo } from "../internalTypesAndInterfaces";
+
+const logger = new ConsoleLogger()
 
 const chainInfo: IChainInfo = {
   name: 'mumbai',
