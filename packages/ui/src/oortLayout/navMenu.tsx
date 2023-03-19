@@ -69,7 +69,7 @@ const mintInternal = {
     caption: 'minting',
     icon: <MintIcon />,
     mutation: "Hero Mutation (Upgrading)",
-    claim: "Claim Heroes 2",
+    claim: "Claim Heroes",
     faucet: "Faucet"
 }
 
