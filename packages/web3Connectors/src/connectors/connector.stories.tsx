@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { WalletConnectConnector } from './walletConnectConnector';
-import { logger } from '@oort-digital/logger';
 import { InjectedConnector } from './injectedConnector';
 import { BaseConnector } from './baseConnector';
 import { FaceWalletConnector, IFaceWalletOptions } from './faceWalletConnector';
 import { ConnectorNames } from './connectorNames';
 import { IChainInfo } from '../internalTypesAndInterfaces';
+import { ConsoleLogger } from '@oort-digital/logger';
 
+const logger = new ConsoleLogger()
 const FakeComponent = () => <></>
 
 export default {
