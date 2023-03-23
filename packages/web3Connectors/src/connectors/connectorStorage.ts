@@ -10,7 +10,17 @@ export interface ICurConnector {
 class ConnectorStorage {
     read = () : ICurConnector | undefined => {
         const jsonStr = localStorage.getItem(lsKey);
-        return jsonStr ? JSON.parse(jsonStr) : undefined;
+
+        if(!jsonStr) {
+            return undefined
+        }
+
+        try {
+            return JSON.parse(jsonStr)
+        }
+        catch { }
+
+        return undefined
     }
     save = (curConnector: ICurConnector) => localStorage.setItem(lsKey, JSON.stringify(curConnector));
     remove = () => localStorage.removeItem(lsKey);
