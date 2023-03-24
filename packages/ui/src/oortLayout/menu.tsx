@@ -18,6 +18,7 @@ export const MenuItemBtn = ({ className, onClick, caption, iconBefore, iconAfter
 </li>
 
 interface IMenuItemLinkProps {
+    disabled?: boolean
     className?: string
     href: string
     key: string
@@ -26,16 +27,22 @@ interface IMenuItemLinkProps {
     reactRouterLink: boolean
 }
 
-export const MenuItemLink = ({ className, href, caption, icon, reactRouterLink }: IMenuItemLinkProps) => {
+export const MenuItemLink = ({ className, href, caption, icon, reactRouterLink, disabled }: IMenuItemLinkProps) => {
 
     const captionElement = <>{icon}<span>{caption}</span></>
+
+    if(disabled) {
+        return <li className={className}>
+            <a href="" className={styles.disabled}>{captionElement}</a>
+        </li>
+    }
 
     if(reactRouterLink) {
         const path = new URL(href).pathname
         return <li className={className}><Link to={path}>{captionElement}</Link></li>
     }
 
-    return <li className={className}><a href={href}>{captionElement}</a></li>
+    return <li className={className}><a href={href} >{captionElement}</a></li>
 }
 
 interface IMenuItemProps {

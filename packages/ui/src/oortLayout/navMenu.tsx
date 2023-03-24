@@ -17,6 +17,7 @@ export enum MenuItemId {
 export type NavItemType = string | {
     href: string
     reactRouterLink: boolean
+    disabled?: boolean
 }
 
 export interface INavItems {
@@ -147,6 +148,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
 
         let href
         let reactRouterLink = false
+        let disabled = false
 
         if(typeof it === 'string') {
             href = it
@@ -154,11 +156,12 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         else {
             href = it.href
             reactRouterLink = it.reactRouterLink
+            disabled =  it.disabled || false
         }
 
         const activeCss = isActive(href) ? styles.active : ''
         const i = <span className={styles.icon}>{icon}</span>
-        return <MenuItemLink reactRouterLink={reactRouterLink || false} key={caption} className={activeCss} href={href} caption={caption} icon={i} />
+        return <MenuItemLink disabled={disabled} reactRouterLink={reactRouterLink || false} key={caption} className={activeCss} href={href} caption={caption} icon={i} />
     }
 
     const renderCollapse = ([rootItem, navItemMap]: NavItemPairType) => {

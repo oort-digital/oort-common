@@ -4,7 +4,11 @@ import { TestCarousel } from "./testCarousel";
 export const navItems: INavItems = {
     dashboard: 'http://dashboard.oort.local',
     minting: {
-      mutation: 'http://minting.oort.local/hero-mutation',
+      mutation: {
+          reactRouterLink: false,
+          href: 'http://minting.oort.local/hero-mutation',
+          disabled: true
+      },
       claim: 'http://minting.oort.local/claim-rewards',
     },
     rent: {
