@@ -11,6 +11,7 @@ yarn.lock
 /packages/utils/node_modules
 /packages/nftProviders/node_modules
 /packages/lazyLoader/node_modules
+/packages/lazyLoaderNextJs/node_modules
 
 /packages/logger/dist
 /packages/ui/dist
@@ -20,6 +21,7 @@ yarn.lock
 /packages/utils/dist
 /packages/oortApiClient/dist
 /packages/lazyLoader/dist
+/packages/lazyLoaderNextJs/dist
 
 /sites/cra-test-app/node_modules
 /sites/cra-test-app/build
