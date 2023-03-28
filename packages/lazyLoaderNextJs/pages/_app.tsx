@@ -1,10 +1,10 @@
 import type { AppProps } from 'next/app'
-import { IsSsrMobileContext } from '../src'
+import { SsrDeviceTypeContext } from '../src'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <IsSsrMobileContext.Provider value={pageProps.isSsrMobile}>
+  return <SsrDeviceTypeContext.Provider value={pageProps.ssrDeviceType}>
         <Component {...pageProps} />
-    </IsSsrMobileContext.Provider>
+    </SsrDeviceTypeContext.Provider>
 }
 
 export default MyApp
