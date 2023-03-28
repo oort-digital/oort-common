@@ -1,7 +1,6 @@
 
 import { GetServerSidePropsContext } from 'next';
-import { LazyLoaderNextJs } from '../src';
-import { getIsSsrMobileServerSideProps } from "../src/getIsSsrMobileServerSideProps"
+import { LazyLoaderNextJs, getIsSsrMobileServerSideProps } from '../src';
 
 const desktop = () => import('./desktop')
 const mobile = () => import('./mobile')

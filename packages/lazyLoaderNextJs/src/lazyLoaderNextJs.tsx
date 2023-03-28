@@ -1,5 +1,6 @@
-import { DeviceType, useDeviceType } from "@oort-digital/lazy-loader"
+import { DeviceType } from "@oort-digital/lazy-loader"
 import dynamic, { Loader } from "next/dynamic"
+import { useDeviceTypeNext } from "./useDeviceTypeNext"
 
 interface ILLProps {
     desktop: Loader<any>
@@ -9,7 +10,7 @@ interface ILLProps {
   
   export const LazyLoaderNextJs = ({ desktop, mobile, tablet}: ILLProps) => {
   
-    const deviceType = useDeviceType()
+    const deviceType = useDeviceTypeNext()
   
     let DynamicElement: React.ComponentType<{}>
   

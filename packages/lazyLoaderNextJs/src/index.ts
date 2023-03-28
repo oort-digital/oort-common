@@ -1,2 +1,5 @@
 export { LazyLoaderNextJs } from "./lazyLoaderNextJs"
 export { getIsSsrMobileServerSideProps } from "./getIsSsrMobileServerSideProps"
+export { isSsrCheck } from "./isSsrCheck"
+export { IsSsrMobileContext } from "./useIsSsrMobile"
+export { useDeviceTypeNext } from "./useDeviceTypeNext"
