@@ -1,8 +1,8 @@
 import { IScreenSizeParams, useScreenSize } from './useScreenSize';
 
-export type TableBreakPoints = [number, number]
+export type TabletBreakPoints = [number, number]
 
-const tableBreakPointsDefault: TableBreakPoints = [650, 1200]
+const tabletBreakPointsDefault: TabletBreakPoints = [650, 1200]
 
 export enum DeviceType {
 	Phone = "PHONE",
@@ -10,14 +10,14 @@ export enum DeviceType {
 	Desktop = 'DESKTOP'
 }
 
-export function useDeviceType(params: IScreenSizeParams = {}, tableBreakPoints: TableBreakPoints = tableBreakPointsDefault): DeviceType {
+export function useDeviceType(params: IScreenSizeParams = {}, tabletBreakPoints: TabletBreakPoints = tabletBreakPointsDefault): DeviceType {
     const [screenWidth] = useScreenSize(params)
 
-	if(screenWidth <= tableBreakPoints[0]) {
+	if(screenWidth <= tabletBreakPoints[0]) {
 		return DeviceType.Phone
 	}
 
-	if(screenWidth > tableBreakPoints[1]) {
+	if(screenWidth > tabletBreakPoints[1]) {
 		return DeviceType.Desktop
 	}
 
