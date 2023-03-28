@@ -26,3 +26,5 @@ yarn.lock
 /sites/cra-test-app/node_modules
 /sites/cra-test-app/build
 /.idea
+
+/packages/lazyLoaderNextJs/.next
