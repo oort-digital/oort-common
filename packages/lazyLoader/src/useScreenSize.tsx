@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { debounceFunction } from '@oort-digital/utils';
 import { ILogger } from '@oort-digital/logger';
-import { isSsrCheck } from './isSsrCheck';
 
 export interface IScreenBrakepoints {
 	xs: number
@@ -71,8 +70,7 @@ export interface IScreenSizeParams {
 	logger?: ILogger
 }
 
-export function useScreenSize({ brakepoints, logger }: IScreenSizeParams = {}): [number, ScreenSize] {
-	const isSSR = isSsrCheck()
+export function useScreenSize({ brakepoints, logger }: IScreenSizeParams = {}, isSSR: boolean = false): [number, ScreenSize] {
 	logWidth('init', isSSR, logger)
 	const bp = brakepoints || defaultScreenBrakepoints
 	const [screenSize, setScreenSize] = useState(() => getSreenSize(getWidth(isSSR), bp))

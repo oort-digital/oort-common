@@ -2,5 +2,3 @@ export { useScreenSize, defaultScreenBrakepoints, ScreenSize } from "./useScreen
 export type { IScreenBrakepoints, IScreenSizeParams } from "./useScreenSize"
 export { useDeviceType, DeviceType } from "./useDeviceType"
 export { LazyLoader } from "./lazyLoader"
-export { isSsrCheck } from "./isSsrCheck"
-export { IsSsrMobileContext } from "./useIsSsrMobile"
