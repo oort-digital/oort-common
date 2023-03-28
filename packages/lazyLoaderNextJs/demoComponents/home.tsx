@@ -10,5 +10,7 @@ const tablet = () => import('./tablet')
 export const Home = () => <LazyLoaderNextJs desktop={desktop} mobile={mobile} tablet={tablet} />
 
 export function getServerSideProps(context: GetServerSidePropsContext) {
-    return getIsSsrMobileServerSideProps(context)
+    const propsContainer = getIsSsrMobileServerSideProps(context)
+    console.log(`serverProps: ${JSON.stringify(propsContainer.props)}`)
+    return propsContainer
 }
