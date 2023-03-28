@@ -1,3 +1,3 @@
-import Home, { getServerSideProps } from './home'
+import { Home, getServerSideProps } from '../demoComponents'
 export default Home
 export { getServerSideProps }
