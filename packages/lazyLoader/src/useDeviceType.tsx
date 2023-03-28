@@ -10,8 +10,18 @@ export enum DeviceType {
 	Desktop = 'DESKTOP'
 }
 
-export function useDeviceType(params: IScreenSizeParams = {}, tabletBreakPoints: TabletBreakPoints = TABLET_BREAK_POINTS_DEFAULT): DeviceType {
-    const [screenWidth] = useScreenSize(params)
+interface IParams {
+	screenSizeParams: IScreenSizeParams
+	tabletBreakPoints: TabletBreakPoints
+}
+
+const DEFAULT_PARAMS: IParams = {
+	screenSizeParams: {},
+	tabletBreakPoints: TABLET_BREAK_POINTS_DEFAULT
+}
+
+export function useDeviceType({ tabletBreakPoints, screenSizeParams }: IParams = DEFAULT_PARAMS): DeviceType {
+    const [screenWidth] = useScreenSize(screenSizeParams)
 
 	if(screenWidth <= tabletBreakPoints[0]) {
 		return DeviceType.Phone
