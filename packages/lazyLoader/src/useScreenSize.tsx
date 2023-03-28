@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { debounceFunction } from '@oort-digital/utils';
 import { ILogger } from '@oort-digital/logger';
-import { isSsrCheck } from './isSsrCheck';
 
 export interface IScreenBrakepoints {
 	xs: number
@@ -69,20 +68,22 @@ const getWidth = (isSSR: boolean): number => {
 export interface IScreenSizeParams {
 	brakepoints?: IScreenBrakepoints,
 	logger?: ILogger
+	isSsr?: boolean
 }
 
-export function useScreenSize({ brakepoints, logger }: IScreenSizeParams = {}): [number, ScreenSize] {
-	const isSSR = isSsrCheck()
-	logWidth('init', isSSR, logger)
+export function useScreenSize({ brakepoints, logger, isSsr }: IScreenSizeParams = {}): [number, ScreenSize] {
+	
+	const _isSSR = isSsr === undefined ? false : isSsr
+	logWidth('init', _isSSR, logger)
 	const bp = brakepoints || defaultScreenBrakepoints
-	const [screenSize, setScreenSize] = useState(() => getSreenSize(getWidth(isSSR), bp))
-	const [screenWidth, setScreenWidth] = useState(() => getWidth(isSSR))
+	const [screenSize, setScreenSize] = useState(() => getSreenSize(getWidth(_isSSR), bp))
+	const [screenWidth, setScreenWidth] = useState(() => getWidth(_isSSR))
 
 	const handleResize = () => {
-		const w = getWidth(isSSR)
+		const w = getWidth(_isSSR)
 		const sz = getSreenSize(w, bp)
 		logger?.debug(`screenSize: ${sz}`)
-		logWidth('handleResize', isSSR, logger)
+		logWidth('handleResize', _isSSR, logger)
 		setScreenSize(sz);
 		setScreenWidth(w)
 	}
@@ -90,20 +91,20 @@ export function useScreenSize({ brakepoints, logger }: IScreenSizeParams = {}): 
 	const handleResizeDebounced = debounceFunction(handleResize, 300)
 
 	useEffect(() => {
-		if(isSSR) {
+		if(_isSSR) {
 			return
 		}
 	  	window.addEventListener('resize', handleResizeDebounced);
 	  	return () => window.removeEventListener('resize', handleResizeDebounced)
-	}, [bp, isSSR]);
+	}, [bp, _isSSR]);
 
 	useEffect(() => {
-		const actualWidth = getWidth(isSSR)
+		const actualWidth = getWidth(_isSSR)
 		if(actualWidth !== screenWidth) {
 			handleResize()
 		}
 		
-	}, [isSSR])
+	}, [_isSSR])
 
   return [screenWidth, screenSize];
 }

@@ -1,11 +1,8 @@
-import { isSsrCheck } from './isSsrCheck';
-import { useIsSsrMobile } from './useIsSsrMobile';
 import { IScreenSizeParams, useScreenSize } from './useScreenSize';
 
-const TabletScreenSizes = {
-    min: 650,
-    max: 1200
-}
+export type TabletBreakPoints = [number, number]
+
+export const TABLET_BREAK_POINTS_DEFAULT: TabletBreakPoints = [650, 1200]
 
 export enum DeviceType {
 	Phone = "PHONE",
@@ -13,20 +10,24 @@ export enum DeviceType {
 	Desktop = 'DESKTOP'
 }
 
-export function useDeviceType(params: IScreenSizeParams = {}): DeviceType {
-	const isSsrMobile = useIsSsrMobile()
-    const [screenWidth] = useScreenSize(params)
+interface IParams {
+	screenSizeParams: IScreenSizeParams
+	tabletBreakPoints: TabletBreakPoints
+}
 
-    if(isSsrCheck()) {
-        //for ssr only 2 type of devices - Desktop or Phone
-        return isSsrMobile ? DeviceType.Phone : DeviceType.Desktop
-    }
+const DEFAULT_PARAMS: IParams = {
+	screenSizeParams: {},
+	tabletBreakPoints: TABLET_BREAK_POINTS_DEFAULT
+}
 
-	if(screenWidth <= TabletScreenSizes.min) {
+export function useDeviceType({ tabletBreakPoints, screenSizeParams }: IParams = DEFAULT_PARAMS): DeviceType {
+    const [screenWidth] = useScreenSize(screenSizeParams)
+
+	if(screenWidth <= tabletBreakPoints[0]) {
 		return DeviceType.Phone
 	}
 
-	if(screenWidth > TabletScreenSizes.max) {
+	if(screenWidth > tabletBreakPoints[1]) {
 		return DeviceType.Desktop
 	}
 
