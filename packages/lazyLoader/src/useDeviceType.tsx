@@ -1,4 +1,4 @@
-import { IScreenSizeParams, useScreenSize } from './useScreenSize';
+import { useScreenWidth } from './useScreenWidth';
 
 export type TabletBreakPoints = [number, number]
 
@@ -11,17 +11,15 @@ export enum DeviceType {
 }
 
 interface IParams {
-	screenSizeParams: IScreenSizeParams
 	tabletBreakPoints: TabletBreakPoints
 }
 
 const DEFAULT_PARAMS: IParams = {
-	screenSizeParams: {},
 	tabletBreakPoints: TABLET_BREAK_POINTS_DEFAULT
 }
 
-export function useDeviceType({ tabletBreakPoints, screenSizeParams }: IParams = DEFAULT_PARAMS): DeviceType {
-    const [screenWidth] = useScreenSize(screenSizeParams)
+export function useDeviceType({ tabletBreakPoints }: IParams = DEFAULT_PARAMS): DeviceType {
+    const screenWidth = useScreenWidth()
 
 	if(screenWidth <= tabletBreakPoints[0]) {
 		return DeviceType.Phone
