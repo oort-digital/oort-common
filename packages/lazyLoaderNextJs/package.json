@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/lazy-loader-next-js",
-  "version": "0.0.1-alfa.0.0.1",
+  "version": "0.0.1-beta.0.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -13,7 +13,7 @@
     "rm": "rimraf node_modules"
   },
   "dependencies": {
-    "@oort-digital/lazy-loader": "0.0.1-alfa.0.0.2",
+    "@oort-digital/lazy-loader": "0.0.1-beta.0.0.3",
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
     "next": "^13.2.4",
     "react": "^18.2.0",
