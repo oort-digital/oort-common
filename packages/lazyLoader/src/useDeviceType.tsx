@@ -13,7 +13,7 @@ export enum DeviceType {
 
 interface IParams {
 	isSsr: boolean
-	tabletBreakPoints: TabletBreakPoints
+	tabletBreakPoints?: TabletBreakPoints
 	logger?: ILogger
 }
 
@@ -24,6 +24,8 @@ const DEFAULT_PARAMS: IParams = {
 
 export function useDeviceType({ tabletBreakPoints, isSsr, logger }: IParams = DEFAULT_PARAMS): DeviceType {
     const screenWidth = useScreenWidth(isSsr, logger)
+
+	tabletBreakPoints = tabletBreakPoints || TABLET_BREAK_POINTS_DEFAULT
 
 	if(screenWidth <= tabletBreakPoints[0]) {
 		return DeviceType.Phone
