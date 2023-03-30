@@ -1,23 +1,22 @@
-import { DeviceType, IScreenSizeParams, TabletBreakPoints, TABLET_BREAK_POINTS_DEFAULT, useDeviceType } from "@oort-digital/lazy-loader"
+import { DeviceType, TabletBreakPoints, TABLET_BREAK_POINTS_DEFAULT, useDeviceType } from "@oort-digital/lazy-loader"
+import { ILogger } from "@oort-digital/logger"
 import { isSsrCheck } from "./isSsrCheck"
 import { useSsrDeviceType } from "./useSsrDeviceType"
 
 interface IParams {
-	screenSizeParams: IScreenSizeParams
-	tabletBreakPoints: TabletBreakPoints
+	logger?: ILogger,
+	tabletBreakPoints?: TabletBreakPoints
 }
 
 const DEFAULT_PARAMS: IParams = {
-	screenSizeParams: {},
 	tabletBreakPoints: TABLET_BREAK_POINTS_DEFAULT
 }
 
-export function useDeviceTypeNext(params: IParams = DEFAULT_PARAMS): DeviceType {
+export function useDeviceTypeNext({ logger, tabletBreakPoints }: IParams = DEFAULT_PARAMS): DeviceType {
 	const isSsr = isSsrCheck()
 	const ssrDeviceType = useSsrDeviceType()
 
-	params.screenSizeParams.isSsr = isSsr
-	const deviceType = useDeviceType(params)
+	const deviceType = useDeviceType({ tabletBreakPoints, logger, isSsr })
 
     if(isSsr) {
         return ssrDeviceType

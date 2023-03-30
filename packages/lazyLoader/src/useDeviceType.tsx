@@ -1,4 +1,5 @@
-import { IScreenSizeParams, useScreenSize } from './useScreenSize';
+import { ILogger } from '@oort-digital/logger';
+import { useScreenWidth } from './useScreenWidth';
 
 export type TabletBreakPoints = [number, number]
 
@@ -11,17 +12,20 @@ export enum DeviceType {
 }
 
 interface IParams {
-	screenSizeParams: IScreenSizeParams
-	tabletBreakPoints: TabletBreakPoints
+	isSsr: boolean
+	tabletBreakPoints?: TabletBreakPoints
+	logger?: ILogger
 }
 
 const DEFAULT_PARAMS: IParams = {
-	screenSizeParams: {},
+	isSsr: false,
 	tabletBreakPoints: TABLET_BREAK_POINTS_DEFAULT
 }
 
-export function useDeviceType({ tabletBreakPoints, screenSizeParams }: IParams = DEFAULT_PARAMS): DeviceType {
-    const [screenWidth] = useScreenSize(screenSizeParams)
+export function useDeviceType({ tabletBreakPoints, isSsr, logger }: IParams = DEFAULT_PARAMS): DeviceType {
+    const screenWidth = useScreenWidth(isSsr, logger)
+
+	tabletBreakPoints = tabletBreakPoints || TABLET_BREAK_POINTS_DEFAULT
 
 	if(screenWidth <= tabletBreakPoints[0]) {
 		return DeviceType.Phone
