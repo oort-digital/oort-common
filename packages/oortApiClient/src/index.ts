@@ -1,5 +1,2 @@
-export  { OortClient } from "./oortClient"
-export { GameStatusEnum, MissionType, SearchGameHubType } from "./typesAndInterfaces"
-export type { ISaveFeedbackParams, ISaveReviewParams, IReview, LikeType, RatingType,
-    IOortClient, IOortClientSettings, IDasboardResponse, INewGame, IPopularGame,
-    ITopRatedGame, INft, INftsParams, INftsResponse, IPopularTournament, ICurUserReview } from "./typesAndInterfaces"
+export * from "./dasboardApi"
+export * from "./imageApi"
