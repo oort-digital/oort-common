@@ -21,14 +21,15 @@ const oortServerApis = {
 };
 
 export interface IOortImageApi {
-  checkImageExist(params: ICheckImageExistParams): Promise<boolean>;
-  uploadSingleImage(params: IUploadSingleImageParams): Promise<boolean>;
+  checkImageExist(params: ICheckImageExistParams, signal: AbortSignal): Promise<boolean>;
+  uploadSingleImage(params: IUploadSingleImageParams, signal: AbortSignal): Promise<boolean>;
 }
 
 export class OortImageApi implements IOortImageApi {
   // eslint-disable-next-line class-methods-use-this
   public async checkImageExist(
     params: ICheckImageExistParams,
+    signal: AbortSignal
   ): Promise<boolean> {
     const url = oortServerApis.checkImageExist
     const formData = new FormData();
@@ -39,13 +40,14 @@ export class OortImageApi implements IOortImageApi {
       await this._axios.post<
         IOortApiResponse<boolean>,
         AxiosResponse<IOortApiResponse<boolean>>
-      >(url, formData);
+      >(url, formData, { signal });
     return response.data.resultValue;
   }
 
   // eslint-disable-next-line class-methods-use-this
   public async uploadSingleImage(
     params: IUploadSingleImageParams,
+    signal: AbortSignal
   ): Promise<boolean> {
     const url = oortServerApis.uploadSingleImage
     const formData = new FormData();
@@ -58,7 +60,7 @@ export class OortImageApi implements IOortImageApi {
       await this._axios.post<
         IOortApiResponse<boolean>,
         AxiosResponse<IOortApiResponse<boolean>>
-      >(url, formData);
+      >(url, formData, { signal });
     return response.data.resultValue;
   }
 
