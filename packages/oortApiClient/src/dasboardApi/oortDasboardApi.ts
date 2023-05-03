@@ -1,4 +1,4 @@
-import axios, {AxiosHeaders, AxiosResponse, RawAxiosRequestConfig} from "axios"
+import axios, {AxiosHeaders, AxiosInstance, AxiosResponse, RawAxiosRequestConfig} from "axios"
 import { toAuthRequest } from "../isAuthRequest"
 
 import {
@@ -10,6 +10,7 @@ import {
     IOortDasboardApi,
     IOortDasboardApiSettings, IPagingParams, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse
 } from "./typesAndInterfaces"
+import { OortApiInterceptorsGlobal } from "../common"
 
 
 function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParams): RawAxiosRequestConfig<any> {
@@ -29,7 +30,7 @@ function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParam
 export class OortDasboardApi implements IOortDasboardApi {
 
     dashboard = async (signal: AbortSignal): Promise<IDasboardResponse> => {
-        const response: AxiosResponse<IDasboardResponse> = await axios.get<IDasboardResponse, AxiosResponse<IDasboardResponse>>(`${this._apiUrl}/dashboard/`, { signal: signal })
+        const response: AxiosResponse<IDasboardResponse> = await this._axios.get<IDasboardResponse, AxiosResponse<IDasboardResponse>>(`/dashboard/`, { signal: signal })
         return response.data
     }
 
@@ -95,8 +96,8 @@ export class OortDasboardApi implements IOortDasboardApi {
         }
 
         const response: AxiosResponse<INftsResponse> =
-            await axios.get<INftsResponse, AxiosResponse<INftsResponse>>(
-                `${this._apiUrl}/game-hub/nft-collections`,
+            await this._axios.get<INftsResponse, AxiosResponse<INftsResponse>>(
+                `/game-hub/nft-collections`,
                 {params: urlParams, signal: signal})
 
         if(signal.aborted) {
@@ -156,8 +157,8 @@ export class OortDasboardApi implements IOortDasboardApi {
         this.addArrParam(urlParams, 'block-chains', chains);
 
         const response: AxiosResponse<IGamesResponse> =
-            await axios.get<IGamesResponse, AxiosResponse<IGamesResponse>>(
-                `${this._apiUrl}/game-hub/games`,
+            await this._axios.get<IGamesResponse, AxiosResponse<IGamesResponse>>(
+                `/game-hub/games`,
                 {params: urlParams, signal: signal})
 
         if(signal.aborted) {
@@ -176,8 +177,8 @@ export class OortDasboardApi implements IOortDasboardApi {
     gameDetail = async ({gameUri}: IGameDetailParams, signal: AbortSignal): Promise<IGameDetailResponse> => {
 
         const response: AxiosResponse<IGameDetailResponse> =
-            await axios.get<IGameDetailResponse, AxiosResponse<IGameDetailResponse>>(
-                `${this._apiUrl}/game-hub/games/${gameUri}`,
+            await this._axios.get<IGameDetailResponse, AxiosResponse<IGameDetailResponse>>(
+                `/game-hub/games/${gameUri}`,
                 getConfig(false, signal, undefined)
             )
 
@@ -186,8 +187,8 @@ export class OortDasboardApi implements IOortDasboardApi {
 
     nftDetail = async ({nftCollectionId}: INftDetailParams, signal: AbortSignal): Promise<INftDetailResponse> => {
         const response: AxiosResponse<INftDetailResponse> =
-            await axios.get<INftDetailResponse, AxiosResponse<INftDetailResponse>>(
-                `${this._apiUrl}/game-hub/nft-collections/${nftCollectionId}`,
+            await this._axios.get<INftDetailResponse, AxiosResponse<INftDetailResponse>>(
+                `/game-hub/nft-collections/${nftCollectionId}`,
                 getConfig(false, signal)
             )
         return response.data;
@@ -195,8 +196,8 @@ export class OortDasboardApi implements IOortDasboardApi {
 
     nftDetailByAddress = async ({collectionAddress}: INftDetailByAddressParams, signal: AbortSignal): Promise<INftDetailResponse> => {
         const response: AxiosResponse<INftDetailResponse> =
-            await axios.get<INftDetailResponse, AxiosResponse<INftDetailResponse>>(
-                `${this._apiUrl}/game-hub/nft-collections/address/${collectionAddress}`,
+            await this._axios.get<INftDetailResponse, AxiosResponse<INftDetailResponse>>(
+                `/game-hub/nft-collections/address/${collectionAddress}`,
                 getConfig(false, signal)
             )
         return response.data;
@@ -210,8 +211,8 @@ export class OortDasboardApi implements IOortDasboardApi {
         }
 
         const response: AxiosResponse<ISearchResultResponse> =
-            await axios.get<ISearchResultResponse, AxiosResponse<ISearchResultResponse>>(
-                `${this._apiUrl}/game-hub/${url}`,
+            await this._axios.get<ISearchResultResponse, AxiosResponse<ISearchResultResponse>>(
+                `/game-hub/${url}`,
                 {params: urlParams, signal: signal})
 
         return response.data;
@@ -223,8 +224,8 @@ export class OortDasboardApi implements IOortDasboardApi {
             ['action', `${action}`]
         ]);
 
-        await axios.put(
-            `${this._apiUrl}/game-hub/games/${gameUri}/like`,
+        await this._axios.put(
+            `/game-hub/games/${gameUri}/like`,
             null,
             getConfig(true, signal, urlParams)
             )
@@ -236,15 +237,15 @@ export class OortDasboardApi implements IOortDasboardApi {
             ['action', `${action}`]
         ]);
 
-        await axios.put(
-            `${this._apiUrl}/game-hub/${gameUri}/reviews/${reviewId}/like`,
+        await this._axios.put(
+            `/game-hub/${gameUri}/reviews/${reviewId}/like`,
             null,
             getConfig(true, signal, urlParams)
             )
     }
 
-    saveReview = ({ content, gameUri }: ISaveReviewParams, signal: AbortSignal): Promise<void> => axios.put(
-        `${this._apiUrl}/game-hub/games/${gameUri}/reviews`,
+    saveReview = ({ content, gameUri }: ISaveReviewParams, signal: AbortSignal): Promise<void> => this._axios.put(
+        `/game-hub/games/${gameUri}/reviews`,
         { content },
         getConfig(true, signal, undefined))
 
@@ -257,8 +258,8 @@ export class OortDasboardApi implements IOortDasboardApi {
             ['rating', `${rating}`]
         ]);
 
-        return axios.put(
-            `${this._apiUrl}/game-hub/games/${gameUri}/feedback`,
+        return this._axios.put(
+            `/game-hub/games/${gameUri}/feedback`,
             null,
             getConfig(true, signal, urlParams))
     }
@@ -267,8 +268,8 @@ export class OortDasboardApi implements IOortDasboardApi {
         const urlParams = this.addPagingParams({pageSize, pageNum})
 
         const response: AxiosResponse<IReviewResponse> =
-        await axios.get<IReviewResponse, AxiosResponse<IReviewResponse>>(
-            `${this._apiUrl}/game-hub/games/${gameUri}/reviews`,
+        await this._axios.get<IReviewResponse, AxiosResponse<IReviewResponse>>(
+            `$/game-hub/games/${gameUri}/reviews`,
             getConfig(false, signal, urlParams))
 
         return response.data;
@@ -276,18 +277,20 @@ export class OortDasboardApi implements IOortDasboardApi {
 
     getCurrentUserReview = async (gameUri: string, signal: AbortSignal): Promise<ICurUserReview> => {
         const response: AxiosResponse<ICurUserReview> =
-            await axios.get<ICurUserReview, AxiosResponse<ICurUserReview>>(
-                `${this._apiUrl}/game-hub/games/${gameUri}/reviews/cur-user-review`,
+            await this._axios.get<ICurUserReview, AxiosResponse<ICurUserReview>>(
+                `/game-hub/games/${gameUri}/reviews/cur-user-review`,
                 getConfig(true, signal))
 
         return response.data;
     }
 
     constructor({apiUrl}: IOortDasboardApiSettings) {
-        this._apiUrl = apiUrl
+        this._axios = axios.create({ baseURL: apiUrl })
+        OortApiInterceptorsGlobal.__register(this._axios)
     }
 
-    private readonly _apiUrl: string
+    private readonly _axios: AxiosInstance
+
 
     private addArrParam(urlParams: URLSearchParams, name: string, arr: Array<string | number>) {
         if (arr.length) {
