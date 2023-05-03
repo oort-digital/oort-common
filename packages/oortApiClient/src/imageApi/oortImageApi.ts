@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
-import { IOortApiResponse } from "../common";
+import { IOortApiResponse, OortApiInterceptorsGlobal } from "../common";
 
 export interface ICheckImageExistParams {
   chainId: string;
@@ -70,6 +70,7 @@ export class OortImageApi implements IOortImageApi {
       baseURL: baseUrl
     });
 
+    OortApiInterceptorsGlobal.__register(this._axios)
   }
 
   private readonly _axios: AxiosInstance

@@ -1,7 +1,7 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import {IGameHeroesResponse, IHeroMintAvailableResponse, IHeroesResponse, IMintingQueryHeroesParams, IOortHeroApi, IOpenBlindBoxHero, IOpenBlindBoxParams, IQueryHeroesParams} from "./typesAndInterfaces";
 import { toAuthRequest } from "../isAuthRequest";
-import { IOortApiResponse } from "../common";
+import { IOortApiResponse, OortApiInterceptorsGlobal } from "../common";
 
 const oortServerApis = {
     getHeroes:"/hero/getHeroes",
@@ -64,6 +64,8 @@ export class OortHeroApi implements IOortHeroApi {
         this._axios = axios.create({
           baseURL: baseUrl
         });
+
+        OortApiInterceptorsGlobal.__register(this._axios)
     
     }
     
