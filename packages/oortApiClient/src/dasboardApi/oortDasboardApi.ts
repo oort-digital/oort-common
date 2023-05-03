@@ -1,5 +1,5 @@
 import axios, {AxiosHeaders, AxiosResponse, RawAxiosRequestConfig} from "axios"
-import { toAuthRequest } from "./isAuthRequest"
+import { toAuthRequest } from "../isAuthRequest"
 
 import {
     ICurUserReview,

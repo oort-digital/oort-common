@@ -1,0 +1,1 @@
+export { IOortApiResponse } from "./typesAndInterfaces"

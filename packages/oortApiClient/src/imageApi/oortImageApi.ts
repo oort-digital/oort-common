@@ -1,10 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
-
-export interface IOortServerResponse<T> {
-  resultCode: number;
-  resultMessage: string;
-  resultValue: T;
-}
+import { IOortApiResponse } from "../common";
 
 export interface ICheckImageExistParams {
   chainId: string;
@@ -40,10 +35,10 @@ export class OortImageApi implements IOortImageApi {
     formData.append("chainId", params.chainId);
     formData.append("tokenAddress", params.tokenAddress);
     formData.append("tokenId", params.tokenId);
-    const response: AxiosResponse<IOortServerResponse<boolean>> =
+    const response: AxiosResponse<IOortApiResponse<boolean>> =
       await this._axios.post<
-        IOortServerResponse<boolean>,
-        AxiosResponse<IOortServerResponse<boolean>>
+        IOortApiResponse<boolean>,
+        AxiosResponse<IOortApiResponse<boolean>>
       >(url, formData);
     return response.data.resultValue;
   }
@@ -59,10 +54,10 @@ export class OortImageApi implements IOortImageApi {
     formData.append("tokenAddress", params.tokenAddress);
     formData.append("tokenId", params.tokenId);
     formData.append("account", params.account);
-    const response: AxiosResponse<IOortServerResponse<boolean>> =
+    const response: AxiosResponse<IOortApiResponse<boolean>> =
       await this._axios.post<
-        IOortServerResponse<boolean>,
-        AxiosResponse<IOortServerResponse<boolean>>
+        IOortApiResponse<boolean>,
+        AxiosResponse<IOortApiResponse<boolean>>
       >(url, formData);
     return response.data.resultValue;
   }
@@ -75,5 +70,5 @@ export class OortImageApi implements IOortImageApi {
 
   }
 
-  private _axios: AxiosInstance
+  private readonly _axios: AxiosInstance
 }
