@@ -1,7 +1,7 @@
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
+import {AxiosRequestConfig, AxiosResponse} from "axios";
 import {IGameHeroesResponse, IHeroMintAvailableResponse, IHeroesResponse, IMintingQueryHeroesParams, IOortHeroApi, IOpenBlindBoxHero, IOpenBlindBoxParams, IQueryHeroesParams} from "./typesAndInterfaces";
 import { toAuthRequest } from "../isAuthRequest";
-import { IOortApiResponse, OortAxiosInstances } from "../common";
+import { BaseAPI, IOortApiResponse } from "../common";
 
 const oortServerApis = {
     getHeroes:"/hero/getHeroes",
@@ -21,7 +21,9 @@ function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParam
     return isAuth ? toAuthRequest(config) : config
 }
 
-export class OortHeroApi implements IOortHeroApi {
+export class OortHeroApi
+    extends BaseAPI
+    implements IOortHeroApi {
     public async getHeroMintAvailable(signal: AbortSignal): Promise<IOortApiResponse<IHeroMintAvailableResponse>> {
         let url = oortServerApis.getHeroAvailable
         const response: AxiosResponse<IOortApiResponse<IHeroMintAvailableResponse>> = 
@@ -58,14 +60,4 @@ export class OortHeroApi implements IOortHeroApi {
         });
         return response.data;
     }
-
-    constructor(baseUrl: string) {
-        this._axios = axios.create({
-          baseURL: baseUrl
-        });
-        OortAxiosInstances.register(this._axios)
-    }
-    
-    private readonly _axios: AxiosInstance
-
 }

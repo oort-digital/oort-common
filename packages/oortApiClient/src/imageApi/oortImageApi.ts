@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
-import { IOortApiResponse, OortAxiosInstances } from "../common";
+import { AxiosResponse } from "axios";
+import { BaseAPI, IOortApiResponse } from "../common";
 
 export interface ICheckImageExistParams {
   chainId: string;
@@ -25,7 +25,9 @@ export interface IOortImageApi {
   uploadSingleImage(params: IUploadSingleImageParams, signal: AbortSignal): Promise<boolean>;
 }
 
-export class OortImageApi implements IOortImageApi {
+export class OortImageApi
+  extends BaseAPI
+  implements IOortImageApi {
   // eslint-disable-next-line class-methods-use-this
   public async checkImageExist(
     params: ICheckImageExistParams,
@@ -63,15 +65,4 @@ export class OortImageApi implements IOortImageApi {
       >(url, formData, { signal });
     return response.data.resultValue;
   }
-
-  constructor(baseUrl: string) {
-
-    this._axios = axios.create({
-      baseURL: baseUrl
-    });
-
-    OortAxiosInstances.register(this._axios)
-  }
-
-  private readonly _axios: AxiosInstance
 }

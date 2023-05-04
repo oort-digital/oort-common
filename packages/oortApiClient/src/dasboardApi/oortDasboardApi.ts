@@ -1,4 +1,4 @@
-import axios, {AxiosHeaders, AxiosInstance, AxiosResponse, RawAxiosRequestConfig} from "axios"
+import {AxiosHeaders, AxiosResponse, RawAxiosRequestConfig} from "axios"
 import { toAuthRequest } from "../isAuthRequest"
 
 import {
@@ -8,9 +8,9 @@ import {
     INftsParams,
     INftsResponse,
     IOortDasboardApi,
-    IOortDasboardApiSettings, IPagingParams, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse
+    IPagingParams, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse
 } from "./typesAndInterfaces"
-import { OortAxiosInstances } from "../common"
+import { BaseAPI } from "../common"
 
 
 function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParams): RawAxiosRequestConfig<any> {
@@ -27,7 +27,9 @@ function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParam
     return isAuth ? toAuthRequest(config) : config
 }
 
-export class OortDasboardApi implements IOortDasboardApi {
+export class OortDasboardApi
+    extends BaseAPI
+    implements IOortDasboardApi {
 
     dashboard = async (signal: AbortSignal): Promise<IDasboardResponse> => {
         const response: AxiosResponse<IDasboardResponse> = await this._axios.get<IDasboardResponse, AxiosResponse<IDasboardResponse>>(`/dashboard/`, { signal: signal })
@@ -283,14 +285,6 @@ export class OortDasboardApi implements IOortDasboardApi {
 
         return response.data;
     }
-
-    constructor({apiUrl}: IOortDasboardApiSettings) {
-        this._axios = axios.create({ baseURL: apiUrl })
-        OortAxiosInstances.register(this._axios)
-    }
-
-    private readonly _axios: AxiosInstance
-
 
     private addArrParam(urlParams: URLSearchParams, name: string, arr: Array<string | number>) {
         if (arr.length) {

@@ -1,7 +1,7 @@
 import { OortDasboardApi } from "./oortDasboardApi";
-import { IOortDasboardApiSettings } from "./typesAndInterfaces"
 import axios, { AxiosRequestConfig } from "axios"
 import * as https from "https";
+import { IAPIConfig } from "../common";
 
 const abortController = new AbortController()
 export const EMPTY_ABORT_SIGNAL = abortController.signal
@@ -26,8 +26,8 @@ axios.interceptors.request.use(async request => {
     return request
 })
 
-const oortClientSettings: IOortDasboardApiSettings = {
-    apiUrl: 'https://api-test.oort.digital/platform'
+const oortClientSettings: IAPIConfig = {
+    baseURL: 'https://api-test.oort.digital/platform'
 }
 
 test.skip('debug only dasboard', async () => {

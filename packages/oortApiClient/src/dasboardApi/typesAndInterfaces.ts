@@ -181,9 +181,6 @@ export interface IDasboardResponse {
     nftForRents:INFTForRent[]
 }
 
-export interface IOortDasboardApiSettings {
-    apiUrl: string
-}
 
 export type LikeType = 'like' | 'dislike'
 
