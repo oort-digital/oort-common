@@ -9,7 +9,7 @@ export interface IAPIConfig {
 
 export abstract class BaseAPI {
 
-    constructor({ baseURL, logger }: IAPIConfig) {
+    protected constructor({ baseURL, logger }: IAPIConfig) {
         this._logger = logger
         this._axios = axios.create({ baseURL })
         OortAxiosInstances.register(this._axios)

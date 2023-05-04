@@ -32,7 +32,7 @@ const oortClientSettings: IAPIConfig = {
 
 test.skip('debug only dasboard', async () => {
 
-    const client = new OortDasboardApi(oortClientSettings)
+    const client = OortDasboardApi.createSingleton(oortClientSettings)
 
     const response = await client.dashboard(EMPTY_ABORT_SIGNAL)
 
@@ -41,7 +41,7 @@ test.skip('debug only dasboard', async () => {
 
 test.skip('debug only getCurrentUserReview', async () => {
 
-    const client = new OortDasboardApi(oortClientSettings)
+    const client = OortDasboardApi.createSingleton(oortClientSettings)
 
     const response = await client.getCurrentUserReview('oort-heroes-rpg', EMPTY_ABORT_SIGNAL)
 

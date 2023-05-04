@@ -1,7 +1,7 @@
 import {AxiosRequestConfig, AxiosResponse} from "axios";
 import {IGameHeroesResponse, IHeroMintAvailableResponse, IHeroesResponse, IMintingQueryHeroesParams, IOortHeroApi, IOpenBlindBoxHero, IOpenBlindBoxParams, IQueryHeroesParams} from "./typesAndInterfaces";
 import { toAuthRequest } from "../isAuthRequest";
-import { BaseAPI, IOortApiResponse } from "../common";
+import { BaseAPI, IAPIConfig, IOortApiResponse } from "../common";
 
 const oortServerApis = {
     getHeroes:"/hero/getHeroes",
@@ -24,6 +24,15 @@ function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParam
 export class OortHeroApi
     extends BaseAPI
     implements IOortHeroApi {
+
+    private static _singleton: OortHeroApi
+    static createSingleton(config: IAPIConfig): OortHeroApi {
+        if(!OortHeroApi._singleton) {
+            OortHeroApi._singleton = new OortHeroApi(config)
+        }
+        return OortHeroApi._singleton
+    }
+
     public async getHeroMintAvailable(signal: AbortSignal): Promise<IOortApiResponse<IHeroMintAvailableResponse>> {
         let url = oortServerApis.getHeroAvailable
         const response: AxiosResponse<IOortApiResponse<IHeroMintAvailableResponse>> = 

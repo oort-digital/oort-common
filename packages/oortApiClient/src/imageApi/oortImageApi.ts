@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { BaseAPI, IOortApiResponse } from "../common";
+import { BaseAPI, IAPIConfig, IOortApiResponse } from "../common";
 
 export interface ICheckImageExistParams {
   chainId: string;
@@ -28,6 +28,15 @@ export interface IOortImageApi {
 export class OortImageApi
   extends BaseAPI
   implements IOortImageApi {
+
+  private static _singleton: OortImageApi
+  static createSingleton(config: IAPIConfig): OortImageApi {
+      if(!OortImageApi._singleton) {
+          OortImageApi._singleton = new OortImageApi(config)
+      }
+      return OortImageApi._singleton
+  }
+
   // eslint-disable-next-line class-methods-use-this
   public async checkImageExist(
     params: ICheckImageExistParams,

@@ -10,7 +10,7 @@ import {
     IOortDasboardApi,
     IPagingParams, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse
 } from "./typesAndInterfaces"
-import { BaseAPI } from "../common"
+import { BaseAPI, IAPIConfig } from "../common"
 
 
 function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParams): RawAxiosRequestConfig<any> {
@@ -30,6 +30,14 @@ function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParam
 export class OortDasboardApi
     extends BaseAPI
     implements IOortDasboardApi {
+
+    private static _singleton: OortDasboardApi
+    static createSingleton(config: IAPIConfig): OortDasboardApi {
+        if(!OortDasboardApi._singleton) {
+            OortDasboardApi._singleton = new OortDasboardApi(config)
+        }
+        return OortDasboardApi._singleton
+    }
 
     dashboard = async (signal: AbortSignal): Promise<IDasboardResponse> => {
         const response: AxiosResponse<IDasboardResponse> = await this._axios.get<IDasboardResponse, AxiosResponse<IDasboardResponse>>(`/dashboard/`, { signal: signal })
