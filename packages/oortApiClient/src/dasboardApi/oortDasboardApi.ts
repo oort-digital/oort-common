@@ -10,7 +10,7 @@ import {
     IOortDasboardApi,
     IOortDasboardApiSettings, IPagingParams, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse
 } from "./typesAndInterfaces"
-import { OortApiInterceptorsGlobal } from "../common"
+import { OortAxiosInstances } from "../common"
 
 
 function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParams): RawAxiosRequestConfig<any> {
@@ -286,7 +286,7 @@ export class OortDasboardApi implements IOortDasboardApi {
 
     constructor({apiUrl}: IOortDasboardApiSettings) {
         this._axios = axios.create({ baseURL: apiUrl })
-        OortApiInterceptorsGlobal.__register(this._axios)
+        OortAxiosInstances.register(this._axios)
     }
 
     private readonly _axios: AxiosInstance

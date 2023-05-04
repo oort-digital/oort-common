@@ -16,42 +16,63 @@ interface IRegisterData {
     responseIds: number[]
 }
 
+export class OortAxiosInstances {
 
-
-class OortApiInterceptors {
-
-    readonly requestInterceptors: RequestInterceptor[] = []
-    readonly responseInterceptors: ResponseInterceptor[] = []
-    
-    __register(instance: AxiosInstance) {
+    static register(instance: AxiosInstance) {
 
         const requestIds = new Array<number>()
         const responseIds = new Array<number>()
 
-        this.requestInterceptors.forEach(interceptor => {
+        OortApiGlobalInterceptors.requestInterceptors.forEach(interceptor => {
             const id = instance.interceptors.request.use(interceptor.onFulfilled, interceptor.onRejected)
             requestIds.push(id)
         })
 
-        this.responseInterceptors.forEach(interceptor => {
+        OortApiGlobalInterceptors.responseInterceptors.forEach(interceptor => {
             const id = instance.interceptors.response.use(interceptor.onFulfilled, interceptor.onRejected)
             requestIds.push(id)
         })
 
-        this._registredInterceptors.push({ instance, requestIds, responseIds })
+        this.instanceInterceptors.push({ instance, requestIds, responseIds })
         
     }
 
-    unRegisterInterceptors() {
-        this._registredInterceptors.forEach(x => {
+    static unRegisterInterceptors() {
+        this.instanceInterceptors.forEach(x => {
             const { instance, requestIds, responseIds } = x
             requestIds.forEach(instance.interceptors.request.eject)
             responseIds.forEach(instance.interceptors.response.eject)
         })
     }
 
-    private readonly _registredInterceptors: IRegisterData[] = []
+    static readonly instanceInterceptors: IRegisterData[] = []
 }
 
+export class OortApiGlobalInterceptors {
 
-export const OortApiInterceptorsGlobal = new OortApiInterceptors() 
+    static readonly requestInterceptors: RequestInterceptor[] = []
+    static readonly responseInterceptors: ResponseInterceptor[] = []
+    
+    static registerRequest(interceptor: RequestInterceptor) {
+        OortApiGlobalInterceptors.requestInterceptors.push(interceptor)
+
+        OortAxiosInstances.instanceInterceptors.forEach(x => {
+            const id = x.instance.interceptors.request.use(interceptor.onFulfilled, interceptor.onRejected)
+            x.requestIds.push(id)
+        })
+    }
+
+    static registerResponse(interceptor: ResponseInterceptor) {
+        OortApiGlobalInterceptors.responseInterceptors.push(interceptor)
+
+        OortAxiosInstances.instanceInterceptors.forEach(x => {
+            const id = x.instance.interceptors.response.use(interceptor.onFulfilled, interceptor.onRejected)
+            x.responseIds.push(id)
+        })
+    }
+
+    static unRegisterInterceptors() {
+        OortAxiosInstances.unRegisterInterceptors()
+    }
+
+}
