@@ -1,7 +1,6 @@
-import {AxiosRequestConfig, AxiosResponse} from "axios";
+import {AxiosResponse} from "axios";
 import {IGameHeroesResponse, IHeroMintAvailableResponse, IHeroesResponse, IMintingQueryHeroesParams, IOortHeroApi, IOpenBlindBoxHero, IOpenBlindBoxParams, IQueryHeroesParams} from "./typesAndInterfaces";
-import { toAuthRequest } from "../isAuthRequest";
-import { BaseAPI, IAPIConfig, IOortApiResponse } from "../common";
+import { BaseAPI, IAPIConfig, IOortApiResponse, getConfig } from "../common";
 
 const oortServerApis = {
     getHeroes:"/hero/getHeroes",
@@ -9,17 +8,6 @@ const oortServerApis = {
     getHeroAvailable: "/heroMinting/getHeroMintAvailable",
     openBlindBox: "/heroMinting/openBlindBox"
 };
-
-function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParams): AxiosRequestConfig<any> {
-
-    const config: AxiosRequestConfig<any> = { signal }
-
-    if(params) {
-        config.params = params
-    }
-
-    return isAuth ? toAuthRequest(config) : config
-}
 
 export class OortHeroApi
     extends BaseAPI

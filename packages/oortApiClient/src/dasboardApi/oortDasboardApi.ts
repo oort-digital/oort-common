@@ -1,5 +1,4 @@
-import {AxiosHeaders, AxiosResponse, RawAxiosRequestConfig} from "axios"
-import { toAuthRequest } from "../isAuthRequest"
+import {AxiosResponse} from "axios"
 
 import {
     ICurUserReview,
@@ -10,22 +9,7 @@ import {
     IOortDasboardApi,
     IPagingParams, IReviewResponse, IReviewsParams, ISaveFeedbackParams, ISaveReviewParams, ISearchParams, ISearchResultResponse
 } from "./typesAndInterfaces"
-import { BaseAPI, IAPIConfig } from "../common"
-
-
-function getConfig(isAuth: boolean, signal: AbortSignal, params?: URLSearchParams): RawAxiosRequestConfig<any> {
-
-    const config: RawAxiosRequestConfig<any> = {
-        signal: signal,
-        headers: new AxiosHeaders()
-    }
-
-    if(params) {
-        config.params = params
-    }
-
-    return isAuth ? toAuthRequest(config) : config
-}
+import { BaseAPI, IAPIConfig, getConfig } from "../common"
 
 export class OortDasboardApi
     extends BaseAPI
