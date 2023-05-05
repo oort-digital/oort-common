@@ -3,8 +3,10 @@ import { IOortApiResponse } from "../common"
 export interface IOortHeroApi {
     getHeroes(params: IQueryHeroesParams, signal: AbortSignal): Promise<IOortApiResponse<IHeroesResponse>>
     getMintingHeroes(params: IMintingQueryHeroesParams, signal: AbortSignal): Promise<IOortApiResponse<IGameHeroesResponse>>
-    openHeroBlindBox(params: IOpenBlindBoxParams, signal: AbortSignal): Promise<IOortApiResponse<IOpenBlindBoxHero>>
     getHeroMintAvailable(signal: AbortSignal): Promise<IOortApiResponse<IHeroMintAvailableResponse>>
+    generateHero(params: IGenerateHeroParams, signal: AbortSignal): Promise<IOortApiResponse<IGenerateHeroResponse>>
+    /** @deprecated generateHero */
+    openHeroBlindBox(params: IOpenBlindBoxParams, signal: AbortSignal): Promise<IOortApiResponse<IOpenBlindBoxHero>>
 }
 
 export interface IOortHeroesResponse {
@@ -37,6 +39,11 @@ export interface IHeroMintAvailableResponse {
 }
 
 export interface IOpenBlindBoxHero {
+    hero: IOortHeroesResponse
+    image: string
+}
+
+export interface IGenerateHeroResponse {
     hero: IOortHeroesResponse
     image: string
 }
@@ -101,6 +108,11 @@ interface Metadata {
 export interface IOpenBlindBoxParams {
     heroCollection: string
     walletAddress?: string
+    tokenId: string
+}
+
+export interface IGenerateHeroParams {
+    tokenAddress: string
     tokenId: string
 }
 

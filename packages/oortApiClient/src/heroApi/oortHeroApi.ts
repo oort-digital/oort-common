@@ -1,12 +1,13 @@
 import {AxiosResponse} from "axios";
-import {IGameHeroesResponse, IHeroMintAvailableResponse, IHeroesResponse, IMintingQueryHeroesParams, IOortHeroApi, IOpenBlindBoxHero, IOpenBlindBoxParams, IQueryHeroesParams} from "./typesAndInterfaces";
+import {IGameHeroesResponse, IGenerateHeroParams, IGenerateHeroResponse, IHeroMintAvailableResponse, IHeroesResponse, IMintingQueryHeroesParams, IOortHeroApi, IOpenBlindBoxHero, IOpenBlindBoxParams, IQueryHeroesParams} from "./typesAndInterfaces";
 import { BaseAPI, IAPIConfig, IOortApiResponse, getConfig } from "../common";
 
 const oortServerApis = {
     getHeroes:"/hero/getHeroes",
     openMutationBlindBox:"/heroMinting/openHeroMutationBlindBox",
     getHeroAvailable: "/heroMinting/getHeroMintAvailable",
-    openBlindBox: "/heroMinting/openBlindBox"
+    openBlindBox: "/heroMinting/openBlindBox",
+    generateHero: "/heroMinting/generateHero"
 };
 
 export class OortHeroApi
@@ -42,6 +43,15 @@ export class OortHeroApi
         formData.append("heroCollection", params.heroCollection);
         formData.append("tokenId",params.tokenId);
         const response: AxiosResponse<IOortApiResponse<IOpenBlindBoxHero>> = await this._axios.put<IOortApiResponse<IOpenBlindBoxHero>, AxiosResponse<IOortApiResponse<IOpenBlindBoxHero>>>(url, formData, getConfig(false, signal));
+        return response.data;
+    }
+
+    public async generateHero({ tokenAddress, tokenId }: IGenerateHeroParams, signal: AbortSignal): Promise<IOortApiResponse<IGenerateHeroResponse>> {
+        let url = oortServerApis.generateHero
+        const formData = new FormData();
+        formData.append("tokenAddress", tokenAddress);
+        formData.append("tokenId", tokenId);
+        const response: AxiosResponse<IOortApiResponse<IGenerateHeroResponse>> = await this._axios.put<IOortApiResponse<IGenerateHeroResponse>, AxiosResponse<IOortApiResponse<IOpenBlindBoxHero>>>(url, formData, getConfig(true, signal));
         return response.data;
     }
 
