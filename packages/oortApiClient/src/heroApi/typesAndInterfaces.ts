@@ -22,7 +22,7 @@ export interface IOortHeroesResponse {
     strength: number
 }
 
-export interface HeroCampaignRewards {
+export interface IHeroCampaignRewards {
     campaignId: number
     rewardsId: number
     clanId: number
@@ -33,7 +33,7 @@ export interface HeroCampaignRewards {
     merkleProof: string
 }
 export interface IHeroMintAvailableResponse {
-    heroCampaignRewardsList: HeroCampaignRewards[] 
+    heroCampaignRewardsList: IHeroCampaignRewards[] 
 }
 
 export interface IOpenBlindBoxHero {
