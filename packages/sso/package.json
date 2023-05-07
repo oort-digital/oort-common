@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/sso",
-  "version": "0.0.1-beta.0.0.1",
+  "version": "0.0.1-beta.0.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -51,5 +51,5 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "unpkg": "dist/index.umd.js",
-  "types": "dist/types/index.d.ts"
+  "types": "dist/index.d.ts"
 }
