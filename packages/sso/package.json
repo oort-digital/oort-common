@@ -10,7 +10,9 @@
     "build:types": "tsc",
     "build": "vite build",
     "test": "jest",
-    "rm": "rimraf node_modules"
+    "rm": "rimraf node_modules",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "jest": {
     "preset": "ts-jest",
@@ -36,10 +38,18 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript-cookie": "^1.0.6"
-   
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "7.0.9",
+    "@storybook/addon-interactions": "7.0.9",
+    "@storybook/addon-links": "7.0.9",
+    "@storybook/blocks": "7.0.9",
+    "@storybook/react": "7.0.9",
+    "@storybook/react-vite": "7.0.9",
+    "@storybook/testing-library": "0.0.14-next.2",
     "@vitejs/plugin-react": "^4.0.0",
+    "prop-types": "15.8.1",
+    "storybook": "7.0.9",
     "typescript": "^4.9.4",
     "vite": "^4.3.5",
     "vite-plugin-dts": "^2.3.0"
