@@ -1,2 +1,2 @@
-export { SsoStore } from "./ssoStore"
-export type { ISsoStore } from "./ssoStore"
+export * from "./store"
+export * from "./ui"
