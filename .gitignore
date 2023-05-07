@@ -6,6 +6,7 @@ yarn.lock
 /packages/ui/storybook-static
 /packages/logger/node_modules
 /packages/oortApiClient/node_modules
+/packages/sso/node_modules
 /packages/web3Connectors/node_modules
 /packages/urlSearchParams/node_modules
 /packages/utils/node_modules
@@ -20,6 +21,7 @@ yarn.lock
 /packages/urlSearchParams/dist
 /packages/utils/dist
 /packages/oortApiClient/dist
+/packages/sso/dist
 /packages/lazyLoader/dist
 /packages/lazyLoaderNextJs/dist
 
