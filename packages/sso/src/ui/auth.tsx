@@ -2,17 +2,18 @@ import React from "react"
 import { ConnectModal } from "@oort-digital/ui"
 import { showAuthModal } from "./showAuthModal";
 import { useEffect, useState } from "react";
-import { ISsoStore, } from "../store";
 import { observer } from "mobx-react";
 import { registerAuthInterceptors, TokenType, unRegisterAuthInterceptors } from "./interceptors";
 import { ConnectorNames, IWeb3Store } from "@oort-digital/web3-connectors";
 import { ILogger } from "@oort-digital/logger";
+import { SsoStore, TokenStorageType } from "../store";
 
 interface IProps {
     web3Store: IWeb3Store
-    ssoStore: ISsoStore
     logger: ILogger
     supportedWallets: ConnectorNames[]
+    ssoServerBaseUrl: string
+    tokenStorageType: TokenStorageType
 }
 
 interface IResolveReject {
@@ -20,8 +21,12 @@ interface IResolveReject {
     reject: (reason: string) => void
 }
 
-const Impl = ({ web3Store, ssoStore, logger, supportedWallets }: IProps) => {
+const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStorageType }: IProps) => {
     
+    const [ssoStore] = useState(() => new SsoStore({
+        logger, web3Store, ssoServerBaseUrl, tokenStorageType
+    }))
+
     const [ startAuthProcess, setStartAuthProcess ] = useState(false)
     const [ resolveReject, setResolveReject ] = useState<IResolveReject | null>(null)
     

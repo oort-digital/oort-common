@@ -1,2 +1,2 @@
-export * from "./store"
 export * from "./ui"
+export type { TokenStorageType } from "./store"
