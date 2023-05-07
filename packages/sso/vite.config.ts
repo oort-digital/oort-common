@@ -14,7 +14,7 @@ export default defineConfig({
             entry: path.resolve(__dirname, 'src/index.ts'),
             // name: 'MyLib',
             formats: ['es', 'cjs'],
-            fileName: (format) => `ui.${format}.js`,
+            fileName: (format) => `index.${format}.js`,
         },
         rollupOptions: {
             //external: ['axios', 'react', 'react-dom', 'antd', "ethers", 'mobx', 'mobx-react', 'react-router-dom'],
