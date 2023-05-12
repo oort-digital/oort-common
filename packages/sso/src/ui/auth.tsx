@@ -44,7 +44,6 @@ const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStor
 
         if(ssoStore.isAuth) {
             debug('Start. isAuth == true. Return resolved promise immediately')
-            //setAuthState(AuthState.Auth)
             return Promise.resolve(ssoStore.token)
         }
 
@@ -52,13 +51,6 @@ const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStor
             setResolveReject({ resolve, reject })
         })
 
-        /*
-        if(web3Store.isConnectedToSupportedChain) {
-            setAuthState(AuthState.NeedToken)
-            return promise
-        }
-
-        setAuthState(AuthState.NeedWeb3Connect)*/
         setStartAuthProcess(true)
         return promise
     }
