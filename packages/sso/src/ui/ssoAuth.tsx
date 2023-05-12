@@ -1,9 +1,9 @@
-import React, { ReactNode } from "react"
-import { ConnectModal, NotConnected } from "@oort-digital/ui"
+import { ReactNode } from "react"
+import { NotConnected } from "@oort-digital/ui"
 import { showAuthModal } from "./showAuthModal";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import { registerAuthInterceptors, TokenType, unRegisterAuthInterceptors } from "../interceptors";
+import { registerAuthInterceptors, unRegisterAuthInterceptors } from "../interceptors";
 import { ConnectorNames, IWeb3Store } from "@oort-digital/web3-connectors";
 import { ILogger } from "@oort-digital/logger";
 import { SsoStore, TokenStorageType } from "../store";
@@ -17,7 +17,7 @@ export interface IAuthProps {
     children: ReactNode
 }
 
-const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStorageType }: IAuthProps) => {
+const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStorageType, children }: IAuthProps) => {
     
     const debug = (msg: string) => {
         logger.debug(`Auth. ${msg}`)
@@ -49,13 +49,13 @@ const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStor
     }
 
 
-    if(web3Store.isConnectedToSupportedChain) {
+    if(!ssoStore.isAuth) {
         debug('isConnectedToSupportedChain=true')
         showAuthModal(() => ssoStore.auth(), logger)
         return null
     }
-    
 
+    return children
 };
 
 

@@ -6,6 +6,7 @@ import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { SsoAuth } from "../ssoAuth";
 import { Web3StoreStub } from "./web3StoreStub";
 import logger from "./logger";
+import React from "react";
 
 const meta = {
   title: 'src/ui/auth',
@@ -26,7 +27,8 @@ export const Primary: Story = {
     logger,
     supportedWallets: [ConnectorNames.Injected],
     ssoServerBaseUrl: 'https://api-test.oort.digital/sso',
-    tokenStorageType: "fake"
+    tokenStorageType: "cookies",
+    children: <>Content</>
   }
 };
 
