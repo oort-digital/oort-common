@@ -8,7 +8,7 @@ import { ConnectorNames, IWeb3Store } from "@oort-digital/web3-connectors";
 import { ILogger } from "@oort-digital/logger";
 import { SsoStore, TokenStorageType } from "../store";
 
-interface IProps {
+export interface IAuthProps {
     web3Store: IWeb3Store
     logger: ILogger
     supportedWallets: ConnectorNames[]
@@ -21,7 +21,7 @@ interface IResolveReject {
     reject: (reason: string) => void
 }
 
-const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStorageType }: IProps) => {
+const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStorageType }: IAuthProps) => {
     
     const [ssoStore] = useState(() => new SsoStore({
         logger, web3Store, ssoServerBaseUrl, tokenStorageType

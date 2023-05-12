@@ -6,7 +6,7 @@ export interface ITokenStorage {
     clear: (address: string) => void
 }
 
-export type TokenStorageType = 'cookies' | 'localStorage' | 'fake'
+export type TokenStorageType = 'cookies' | 'fake'
 
 class CookieTokenStorage implements ITokenStorage {
     
