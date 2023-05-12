@@ -1,16 +1,15 @@
-// import "../../../.storybook/index.less"
-// import "../../themes/light.less"
+import "../../../.storybook/index.less"
 import type { Meta, StoryObj } from '@storybook/react';
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 
-import { Auth } from "../auth";
+import { SsoAuth } from "../ssoAuth";
 import { Web3StoreStub } from "./web3StoreStub";
 import logger from "./logger";
 
 const meta = {
   title: 'src/ui/auth',
-  component: Auth,
-} satisfies Meta<typeof Auth>;
+  component: SsoAuth,
+} satisfies Meta<typeof SsoAuth>;
 
 
 export default meta;
