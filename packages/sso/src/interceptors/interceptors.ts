@@ -13,16 +13,19 @@ export function registerAuthInterceptors(ssoStore: ISsoStore, logger: ILogger): 
         logger.debug(`AuthInterceptor. ${msg}`)
     }
 
+    const onRequest = rq => requestInterceptor(ssoStore.token, rq, debug)
+    const onRejected = err => onReponseError(err, ssoStore.clearToken, debug)
+
     const responseInterceptor = (res: AxiosResponse<any, any>) => res
-    const requestInterceptorId = axios.interceptors.request.use(rq => requestInterceptor(ssoStore.token, rq, debug))
+    const requestInterceptorId = axios.interceptors.request.use(onRequest)
 
     const responseInterceptorId = axios.interceptors.response.use(
         responseInterceptor,
-        err => onReponseError(err, ssoStore.clearToken, debug)
+        onRejected
     );
 
-    OortApiGlobalInterceptors.registerRequest({ onFulfilled: requestInterceptor })
-    OortApiGlobalInterceptors.registerResponse({ onFulfilled: responseInterceptor, onRejected: onReponseError })
+    OortApiGlobalInterceptors.registerRequest({ onFulfilled: onRequest })
+    OortApiGlobalInterceptors.registerResponse({ onFulfilled: responseInterceptor, onRejected })
 
     return [requestInterceptorId, responseInterceptorId]
 }

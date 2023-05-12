@@ -1,4 +1,3 @@
-import React from "react"
 import { ILogger } from "@oort-digital/logger"
 import {Modal} from "antd"
 

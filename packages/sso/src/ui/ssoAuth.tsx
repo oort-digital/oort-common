@@ -55,7 +55,7 @@ const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStor
         return null
     }
 
-    return children
+    return <>{children}</>
 };
 
 
