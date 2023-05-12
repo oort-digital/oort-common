@@ -1,1 +1,1 @@
-export { registerAuthInterceptors, unRegisterAuthInterceptors } from "./interceptors"
+export { registerAuthInterceptors, unRegisterAuthInterceptors, registerAuthInterceptorsPromise } from "./interceptors"

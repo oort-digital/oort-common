@@ -6,9 +6,13 @@ import { ILogger } from "@oort-digital/logger"
 import { requestInterceptor } from "./requestInterceptor"
 import { onReponseError } from "./onResponseError"
 
+let registerAuthInterceptorsPromiseResolve: (value: void | PromiseLike<void>) => void
+
+export const registerAuthInterceptorsPromise = new Promise<void>(r => {
+    registerAuthInterceptorsPromiseResolve = r
+})
 
 export function registerAuthInterceptors(ssoStore: ISsoStore, logger: ILogger): [number, number] {
-
     const debug = (msg: string) => {
         logger.debug(`AuthInterceptor. ${msg}`)
     }
@@ -26,6 +30,8 @@ export function registerAuthInterceptors(ssoStore: ISsoStore, logger: ILogger): 
 
     OortApiGlobalInterceptors.registerRequest({ onFulfilled: onRequest })
     OortApiGlobalInterceptors.registerResponse({ onFulfilled: responseInterceptor, onRejected })
+
+    registerAuthInterceptorsPromiseResolve()
 
     return [requestInterceptorId, responseInterceptorId]
 }
