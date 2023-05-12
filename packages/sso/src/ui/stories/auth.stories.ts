@@ -1,4 +1,5 @@
 import "../../../.storybook/index.less"
+import "@oort-digital/ui/dist/styles/theme/light.less"
 import type { Meta, StoryObj } from '@storybook/react';
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 
