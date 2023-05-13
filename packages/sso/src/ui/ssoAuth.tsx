@@ -7,6 +7,7 @@ import { registerAuthInterceptors, unRegisterAuthInterceptors } from "../interce
 import { ConnectorNames, IWeb3Store } from "@oort-digital/web3-connectors";
 import { ILogger } from "@oort-digital/logger";
 import { SsoStore, TokenStorageType } from "../store";
+import { AuthModal } from "./authModal";
 
 export interface IAuthProps {
     web3Store: IWeb3Store
@@ -27,10 +28,19 @@ const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStor
         logger, web3Store, ssoServerBaseUrl, tokenStorageType
     }))
 
-    const { isReady, isConnectedToSupportedChain } = web3Store
+    const { isConnectedToSupportedChain } = web3Store
     const { isAuth } = ssoStore
+    const isReady = web3Store.isReady && ssoStore.isReady
 
-    debug(`isReady: ${isReady} isConnectedToSupportedChain: ${isConnectedToSupportedChain} isAuth: ${isAuth}`)
+    debug(`isReady:${isReady} isConnectedToSupportedChain:${isConnectedToSupportedChain} isAuth:${isAuth}`)
+
+    const auth = async () => {
+        try {
+            await ssoStore.auth()
+        } catch (e) {
+            logger.error(e);
+        }
+    }
 
     useEffect(() => {
         if(isReady) {
@@ -51,11 +61,8 @@ const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStor
           />
     }
 
-
     if(!isAuth) {
-        // debug('isConnectedToSupportedChain=true')
-        showAuthModal(() => ssoStore.auth(), logger)
-        return null
+        return <AuthModal authFunc={() => auth()} />
     }
 
     return <>{children}</>

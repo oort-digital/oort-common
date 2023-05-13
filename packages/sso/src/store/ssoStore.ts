@@ -6,8 +6,9 @@ import { ISsoClient, SsoClient } from './ssoClient';
 import { ITokenStorage, TokenStorageType, getTokenStorage } from './tokenStorage';
 
 export interface ISsoStore {
-    auth(): Promise<void>;
+    auth(): Promise<void>
     isAuth: boolean
+    isReady: boolean
     token: string | null
     clearToken: () => void
 }
@@ -45,6 +46,8 @@ export class SsoStore implements ISsoStore {
         return !!this.token
     }
 
+    isReady: boolean = false
+
     token: string | null
 
     constructor({ssoServerBaseUrl, tokenStorageType, web3Store, logger}: ISsoStoreParams) {
@@ -59,12 +62,18 @@ export class SsoStore implements ISsoStore {
             clearToken: action,
             isAuth: computed,
             token: observable,
+            isReady: observable
         });
 
         autorun(() => {
             logger.debug(`SsoStore. web3Store.isReady: ${this._web3Store.isReady} web3Store.account: ${this._web3Store.account}`)
+
             if(this._web3Store.account) {
                 runInAction(() => this.token = this._tokenStorage.getToken(this._web3Store.account) ?? null)
+            }
+
+            if(this._web3Store.isReady) {
+                runInAction(() => this.isReady = true)
             }
         })
     }
