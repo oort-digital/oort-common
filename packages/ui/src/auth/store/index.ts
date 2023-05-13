@@ -1,3 +1,3 @@
-export { SsoStore } from "./ssoStore"
-export type { ISsoStore } from "./ssoStore"
+export { AuthStore } from "./authStore"
+export type { IAuthStore } from "./authStore"
 export type { TokenStorageType } from "./tokenStorage"

@@ -1,4 +1,4 @@
-import {ReactNode, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import {Button} from 'antd';
 import styles from "./auth.module.less"
 import { PageLoader } from '../../pageLoader';
@@ -9,8 +9,10 @@ import { ConnectModal } from '../../connectModal';
 import { IWeb3Store, isChainEmpty } from '@oort-digital/web3-connectors';
 import { getChainName } from '../../utils';
 import { ConnectorNames } from '@oort-digital/web3-connectors';
-import { SsoStore, TokenStorageType } from '../store';
+import { AuthStore, TokenStorageType } from '../store';
 import { ILogger } from '@oort-digital/logger';
+import { registerAuthInterceptors, unRegisterAuthInterceptors } from '../interceptors';
+import { AuthModal } from './authModal';
 
 
 export interface IAuthProps {
@@ -56,29 +58,53 @@ const renderText = ({ web3Store, expectedChainId }: IAuthProps) => {
 
 const Impl = (props: IAuthProps) => {
 
-    const { web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType } = props
+    const { web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType, children } = props
     const [isWalletVisible, setIsWalletVisible] = useState(false)
-    const [ssoStore] = useState(() => new SsoStore({
+    const [ssoStore] = useState(() => new AuthStore({
         logger, web3Store, ssoServerBaseUrl, tokenStorageType
     }))
 
-    const isReady = web3Store.isReady && ssoStore.isReady
+    const { isConnectedToSupportedChain } = web3Store
 
-    const onCancel = () => setIsWalletVisible(false)
+    const { isReady, askAuth } = ssoStore
+
+    useEffect(() => {
+        if(isReady) {
+            const ids = registerAuthInterceptors(ssoStore, logger)
+            return () => unRegisterAuthInterceptors(ids)
+        }
+        return
+    }, [isReady]); // eslint-disable-line react-hooks/exhaustive-deps
+
+
+    const onClose = () => setIsWalletVisible(false)
+
+    const auth = async () => {
+        try {
+            await ssoStore.auth()
+        } catch (e) {
+            logger.error(e);
+        }
+    }
     
     if(!isReady) {
         return <PageLoader />
     }
 
-    return <div className={styles.wrapper}>
-        <WalletSvg />
-        {renderText(props)}
-        <Button className={styles.connect_btn} size='large' type="primary" onClick={() => setIsWalletVisible(true)}>
-            Connect your WEB 3.0 wallet <WalletIcon />
-        </Button>
-        <div className={styles.label_text}>To enter the world of Oort Digital</div>
-        <ConnectModal supportedWallets={supportedWallets} expectedChainId={expectedChainId} web3={web3Store} visible={isWalletVisible} onCancel={onCancel} />
-    </div>
+    if(askAuth || !isConnectedToSupportedChain) {
+        return <div className={styles.wrapper}>
+            <WalletSvg />
+            {renderText(props)}
+            <Button className={styles.connect_btn} size='large' type="primary" onClick={() => setIsWalletVisible(true)}>
+                Connect your WEB 3.0 wallet <WalletIcon />
+            </Button>
+            <div className={styles.label_text}>To enter the world of Oort Digital</div>
+            <ConnectModal supportedWallets={supportedWallets} expectedChainId={expectedChainId} web3={web3Store} visible={isWalletVisible} onClose={onClose} />
+            <AuthModal authFunc={() => auth()} visible={askAuth} />
+        </div>
+    }
+
+    return <>{children}</>
 }
 
 export const Auth = observer(Impl)

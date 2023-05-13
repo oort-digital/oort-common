@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ISsoStore } from "../store"
+import { IAuthStore } from "../store"
 import { AxiosResponse } from "axios"
 import { OortApiGlobalInterceptors } from "@oort-digital/oort-api-client"
 import { ILogger } from "@oort-digital/logger"
@@ -12,7 +12,7 @@ export const registerAuthInterceptorsPromise = new Promise<void>(r => {
     registerAuthInterceptorsPromiseResolve = r
 })
 
-export function registerAuthInterceptors(ssoStore: ISsoStore, logger: ILogger): [number, number] {
+export function registerAuthInterceptors(ssoStore: IAuthStore, logger: ILogger): [number, number] {
     const debug = (msg: string) => {
         logger.debug(`AuthInterceptor. ${msg}`)
     }

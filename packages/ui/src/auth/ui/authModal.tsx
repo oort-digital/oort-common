@@ -1,12 +1,13 @@
 
-import { FooterButtons, IFooterBtn, OortModal } from "../oortModal"
+import { FooterButtons, IFooterBtn, OortModal } from "../../oortModal"
 import styles from "./authModal.module.less"
 
 interface IProps {
     authFunc: () => Promise<void>
+    visible: boolean
 }
 
-export const AuthModal = ({ authFunc }: IProps) => {
+export const AuthModal = ({ authFunc, visible }: IProps) => {
 
     const okBtn: IFooterBtn = {
         text: "Accept and sign",
@@ -16,7 +17,7 @@ export const AuthModal = ({ authFunc }: IProps) => {
     return <OortModal
         width="416px"
         className={styles.modal}
-        visible={true}
+        visible={visible}
         title=""
         footer={<FooterButtons onOk={authFunc} okBtn={okBtn} />}
     >

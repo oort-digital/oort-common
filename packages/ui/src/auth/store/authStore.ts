@@ -5,22 +5,22 @@ import { IWeb3Store } from '@oort-digital/web3-connectors';
 import { ISsoClient, SsoClient } from './ssoClient';
 import { ITokenStorage, TokenStorageType, getTokenStorage } from './tokenStorage';
 
-export interface ISsoStore {
+export interface IAuthStore {
     auth(): Promise<void>
-    isAuth: boolean
+    askAuth: boolean
     isReady: boolean
     token: string | null
     clearToken: () => void
 }
 
-interface ISsoStoreParams {
+interface IAuthStoreParams {
     web3Store: IWeb3Store
     logger: ILogger
     ssoServerBaseUrl: string
     tokenStorageType: TokenStorageType
 }
 
-export class SsoStore implements ISsoStore {
+export class AuthStore implements IAuthStore {
   
     clearToken = () => {
         this._tokenStorage.clear(this._web3Store.account)
@@ -42,15 +42,15 @@ export class SsoStore implements ISsoStore {
         }
     }
 
-    get isAuth(): boolean {
-        return !!this.token
+    get askAuth(): boolean {
+        return this._web3Store.isConnectedToSupportedChain && !this.token
     }
 
     isReady: boolean = false
 
     token: string | null
 
-    constructor({ssoServerBaseUrl, tokenStorageType, web3Store, logger}: ISsoStoreParams) {
+    constructor({ssoServerBaseUrl, tokenStorageType, web3Store, logger}: IAuthStoreParams) {
 
         this._ssoClient = new SsoClient({ baseUrl: ssoServerBaseUrl })
         this._tokenStorage = getTokenStorage(tokenStorageType)
@@ -60,7 +60,7 @@ export class SsoStore implements ISsoStore {
         makeObservable(this, {
             auth: action,
             clearToken: action,
-            isAuth: computed,
+            askAuth: computed,
             token: observable,
             isReady: observable
         });

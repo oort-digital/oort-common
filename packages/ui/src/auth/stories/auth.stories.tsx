@@ -50,7 +50,10 @@ const Content = observer(() => {
   }
 
 
-  return <>Request Done!</>
+  return <>
+    <div>You are authorized</div>
+    <div>Request Done!</div>
+  </>
 
 })
 
