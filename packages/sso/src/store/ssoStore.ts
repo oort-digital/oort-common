@@ -47,7 +47,7 @@ export class SsoStore implements ISsoStore {
 
     token: string | null
 
-    constructor({ssoServerBaseUrl, tokenStorageType, web3Store}: ISsoStoreParams) {
+    constructor({ssoServerBaseUrl, tokenStorageType, web3Store, logger}: ISsoStoreParams) {
 
         this._ssoClient = new SsoClient({ baseUrl: ssoServerBaseUrl })
         this._tokenStorage = getTokenStorage(tokenStorageType)
@@ -62,6 +62,7 @@ export class SsoStore implements ISsoStore {
         });
 
         autorun(() => {
+            logger.debug(`SsoStore. web3Store.isReady: ${this._web3Store.isReady} web3Store.account: ${this._web3Store.account}`)
             if(this._web3Store.account) {
                 runInAction(() => this.token = this._tokenStorage.getToken(this._web3Store.account) ?? null)
             }

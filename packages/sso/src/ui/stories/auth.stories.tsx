@@ -10,6 +10,7 @@ import logger from "./logger";
 import React, { useEffect, useState } from "react";
 import { OortHeroApi } from "@oort-digital/oort-api-client";
 import { registerAuthInterceptorsPromise } from "../../interceptors";
+import { observer } from "mobx-react";
 
 const meta = {
   title: 'src/ui/auth',
@@ -25,7 +26,7 @@ web3Store.connect(80001, ConnectorNames.Injected)
 
 const heroApi = OortHeroApi.createSingleton({ baseURL: 'https://api-test.oort.digital/minting' })
 
-const Content = () => {
+const Content = observer(() => {
 
   const [ requestDone, setRequestDone ] = useState(false)
 
@@ -49,7 +50,7 @@ const Content = () => {
 
   return <>Request Done!</>
 
-}
+})
 
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args

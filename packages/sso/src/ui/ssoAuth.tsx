@@ -20,7 +20,7 @@ export interface IAuthProps {
 const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStorageType, children }: IAuthProps) => {
     
     const debug = (msg: string) => {
-        logger.debug(`Auth. ${msg}`)
+        logger.debug(`SsoAuth. ${msg}`)
     }
 
     const [ssoStore] = useState(() => new SsoStore({
@@ -28,6 +28,9 @@ const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStor
     }))
 
     const { isReady, isConnectedToSupportedChain } = web3Store
+    const { isAuth } = ssoStore
+
+    debug(`isReady: ${isReady} isConnectedToSupportedChain: ${isConnectedToSupportedChain} isAuth: ${isAuth}`)
 
     useEffect(() => {
         if(isReady) {
@@ -49,8 +52,8 @@ const Impl = ({ web3Store, logger, supportedWallets, ssoServerBaseUrl, tokenStor
     }
 
 
-    if(!ssoStore.isAuth) {
-        debug('isConnectedToSupportedChain=true')
+    if(!isAuth) {
+        // debug('isConnectedToSupportedChain=true')
         showAuthModal(() => ssoStore.auth(), logger)
         return null
     }
