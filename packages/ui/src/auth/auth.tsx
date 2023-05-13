@@ -1,6 +1,6 @@
-import {useState} from 'react';
+import {ReactNode, useState} from 'react';
 import {Button} from 'antd';
-import styles from "./notConnected.module.less"
+import styles from "./auth.module.less"
 import { PageLoader } from '../pageLoader';
 import { observer } from 'mobx-react';
 import { WalletSvg } from './walletSvg';
@@ -18,6 +18,7 @@ interface IProps {
     supportedWallets: ConnectorNames[]
     web3Store: IWeb3Store
     expectedChainId?: number
+    children: ReactNode
 }
 
 const renderText = ({ web3Store, expectedChainId }: IProps) => {
@@ -73,5 +74,4 @@ const Impl = (props: IProps) => {
     </div>
 }
 
-// @depricated: use auth
-export const NotConnected = observer(Impl)
+export const Auth = observer(Impl)
