@@ -25,7 +25,7 @@ export class OortHeroApi
     public async getHeroMintAvailable(signal: AbortSignal): Promise<IOortApiResponse<IHeroMintAvailableResponse>> {
         let url = oortServerApis.getHeroAvailable
         const response: AxiosResponse<IOortApiResponse<IHeroMintAvailableResponse>> = 
-            await this._axios.get<IOortApiResponse<IHeroMintAvailableResponse>, AxiosResponse<IOortApiResponse<IHeroMintAvailableResponse>>>(url, getConfig(false, signal));
+            await this._axios.get<IOortApiResponse<IHeroMintAvailableResponse>, AxiosResponse<IOortApiResponse<IHeroMintAvailableResponse>>>(url, getConfig(true, signal));
         return response.data;
     }
 
