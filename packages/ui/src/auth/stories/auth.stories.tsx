@@ -1,21 +1,23 @@
-import "../../../.storybook/index.less"
-import "@oort-digital/ui/dist/styles/theme/light.less"
+import "../../styles/antOverride.less"
+import "../../styles/fonts.css"
+import "../../styles/theme/light.less"
+
 import type { Meta, StoryObj } from '@storybook/react';
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { EMPTY_ABORT_SIGNAL } from "@oort-digital/utils"
 
-import { SsoAuth } from "../ssoAuth";
+import { Auth } from "../ui/auth";
 import { Web3StoreStub } from "./web3StoreStub";
 import logger from "./logger";
 import React, { useEffect, useState } from "react";
 import { OortHeroApi } from "@oort-digital/oort-api-client";
-import { registerAuthInterceptorsPromise } from "../../interceptors";
+import { registerAuthInterceptorsPromise } from "../interceptors";
 import { observer } from "mobx-react";
 
 const meta = {
-  title: 'src/ui/auth',
-  component: SsoAuth,
-} satisfies Meta<typeof SsoAuth>;
+  title: 'oort/auth',
+  component: Auth,
+} satisfies Meta<typeof Auth>;
 
 
 export default meta;

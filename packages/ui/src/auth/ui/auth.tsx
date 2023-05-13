@@ -1,27 +1,29 @@
 import {ReactNode, useState} from 'react';
 import {Button} from 'antd';
 import styles from "./auth.module.less"
-import { PageLoader } from '../pageLoader';
+import { PageLoader } from '../../pageLoader';
 import { observer } from 'mobx-react';
 import { WalletSvg } from './walletSvg';
-import { WalletIcon } from '../icons';
-import { ConnectModal, IWeb3 } from '../connectModal';
-import { isChainEmpty } from '@oort-digital/web3-connectors';
-import { getChainName } from '../utils';
+import { WalletIcon } from '../../icons';
+import { ConnectModal } from '../../connectModal';
+import { IWeb3Store, isChainEmpty } from '@oort-digital/web3-connectors';
+import { getChainName } from '../../utils';
 import { ConnectorNames } from '@oort-digital/web3-connectors';
+import { SsoStore, TokenStorageType } from '../store';
+import { ILogger } from '@oort-digital/logger';
 
-interface IWeb3Store extends IWeb3 {
-    isReady: boolean
-}
 
-interface IProps {
+export interface IAuthProps {
     supportedWallets: ConnectorNames[]
     web3Store: IWeb3Store
     expectedChainId?: number
+    logger: ILogger
+    ssoServerBaseUrl: string
+    tokenStorageType: TokenStorageType
     children: ReactNode
 }
 
-const renderText = ({ web3Store, expectedChainId }: IProps) => {
+const renderText = ({ web3Store, expectedChainId }: IAuthProps) => {
 
     const { chain, supportedChains } = web3Store;
 
@@ -52,14 +54,19 @@ const renderText = ({ web3Store, expectedChainId }: IProps) => {
     return null
 }
 
-const Impl = (props: IProps) => {
+const Impl = (props: IAuthProps) => {
 
-    const { web3Store, expectedChainId, supportedWallets } = props
+    const { web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType } = props
     const [isWalletVisible, setIsWalletVisible] = useState(false)
+    const [ssoStore] = useState(() => new SsoStore({
+        logger, web3Store, ssoServerBaseUrl, tokenStorageType
+    }))
+
+    const isReady = web3Store.isReady && ssoStore.isReady
 
     const onCancel = () => setIsWalletVisible(false)
     
-    if(!web3Store.isReady) {
+    if(!isReady) {
         return <PageLoader />
     }
 
