@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
-    "@oort-digital/oort-api-client": "^0.0.1-beta.0.0.1",
+    "@oort-digital/oort-api-client": "^0.0.1-alfa.0.0.3",
     "@storybook/addon-essentials": "^7.0.11",
     "@storybook/addon-interactions": "^7.0.11",
     "@storybook/addon-links": "^7.0.11",
