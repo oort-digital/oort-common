@@ -5,9 +5,10 @@ import styles from "./authModal.module.less"
 interface IProps {
     authFunc: () => Promise<void>
     visible: boolean
+    loading: boolean
 }
 
-export const AuthModal = ({ authFunc, visible }: IProps) => {
+export const AuthModal = ({ authFunc, visible, loading }: IProps) => {
 
     const okBtn: IFooterBtn = {
         text: "Accept and sign",
@@ -18,8 +19,9 @@ export const AuthModal = ({ authFunc, visible }: IProps) => {
         width="416px"
         className={styles.modal}
         visible={visible}
+        closable={false}
         title=""
-        footer={<FooterButtons onOk={authFunc} okBtn={okBtn} />}
+        footer={<FooterButtons loading={loading} onOk={authFunc} okBtn={okBtn} />}
     >
         <div className={styles.content}>
             <h3>

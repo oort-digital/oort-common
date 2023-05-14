@@ -26,9 +26,10 @@ interface IProps {
     width?: string
     className?: string
     footer?: ReactNode
+    closable?: boolean
 }
 
-export function OortModal({className, title, onCancel, loading, children, visible, width, footer }: IProps) {
+export function OortModal({className, title, onCancel, loading, children, visible, width, footer, closable = true }: IProps) {
 
     const _onCancel = (e: React.MouseEvent<HTMLElement>) => {
         if(!loading && onCancel) { //if loading === true, user can't close modal
@@ -44,7 +45,7 @@ export function OortModal({className, title, onCancel, loading, children, visibl
         title={<OortModalTitle title={title}/>}
         centered
         open={visible}
-        closable={true}
+        closable={closable}
         closeIcon={<CloseIcon />}
         cancelText="Close"
         onCancel={_onCancel}

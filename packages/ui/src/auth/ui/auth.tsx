@@ -60,6 +60,7 @@ const Impl = (props: IAuthProps) => {
 
     const { web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType, children } = props
     const [isWalletVisible, setIsWalletVisible] = useState(false)
+    const [authInProcess, setAuthInProcess] = useState(false)
     const [ssoStore] = useState(() => new AuthStore({
         logger, web3Store, ssoServerBaseUrl, tokenStorageType
     }))
@@ -81,10 +82,12 @@ const Impl = (props: IAuthProps) => {
 
     const auth = async () => {
         try {
+            setAuthInProcess(true)
             await ssoStore.auth()
         } catch (e) {
             logger.error(e);
         }
+        setAuthInProcess(false)
     }
     
     if(!isReady) {
@@ -100,7 +103,7 @@ const Impl = (props: IAuthProps) => {
             </Button>
             <div className={styles.label_text}>To enter the world of Oort Digital</div>
             <ConnectModal supportedWallets={supportedWallets} expectedChainId={expectedChainId} web3={web3Store} visible={isWalletVisible} onClose={onClose} />
-            <AuthModal authFunc={() => auth()} visible={askAuth} />
+            <AuthModal loading={authInProcess} authFunc={() => auth()} visible={askAuth} />
         </div>
     }
 
