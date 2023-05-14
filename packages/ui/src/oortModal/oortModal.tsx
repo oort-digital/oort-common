@@ -19,7 +19,7 @@ export interface IBtn {
 
 interface IProps {
     visible: boolean
-    title: string
+    title?: string
     onCancel?: (e: React.MouseEvent<HTMLElement>) => void
     loading?: boolean
     children: ReactNode
@@ -29,7 +29,7 @@ interface IProps {
     closable?: boolean
 }
 
-export function OortModal({className, title, onCancel, loading, children, visible, width, footer, closable = true }: IProps) {
+export function OortModal({className, title = "", onCancel, loading, children, visible, width, footer, closable = true }: IProps) {
 
     const _onCancel = (e: React.MouseEvent<HTMLElement>) => {
         if(!loading && onCancel) { //if loading === true, user can't close modal

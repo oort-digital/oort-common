@@ -12,7 +12,10 @@ export const AuthModal = ({ authFunc, visible, loading }: IProps) => {
 
     const okBtn: IFooterBtn = {
         text: "Accept and sign",
-        size: "middle"
+        size: "middle",
+        type: "primary",
+        onClick: authFunc,
+        className: styles.btn
     }
     
     return <OortModal
@@ -20,8 +23,7 @@ export const AuthModal = ({ authFunc, visible, loading }: IProps) => {
         className={styles.modal}
         visible={visible}
         closable={false}
-        title=""
-        footer={<FooterButtons loading={loading} onOk={authFunc} okBtn={okBtn} />}
+        footer={<FooterButtons loading={loading} buttons={[okBtn]} />}
     >
         <div className={styles.content}>
             <h3>
