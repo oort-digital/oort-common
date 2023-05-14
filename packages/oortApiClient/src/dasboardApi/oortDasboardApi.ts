@@ -18,7 +18,7 @@ export class OortDasboardApi
     private static _singleton: OortDasboardApi
     static createSingleton(config: IAPIConfig): OortDasboardApi {
         if(!OortDasboardApi._singleton) {
-            OortDasboardApi._singleton = new OortDasboardApi(config)
+            OortDasboardApi._singleton = new OortDasboardApi('OortDasboardApi', config)
         }
         return OortDasboardApi._singleton
     }
