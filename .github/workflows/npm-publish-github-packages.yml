@@ -15,7 +15,6 @@ on:
         - logger
         - nftProviders
         - oortApiClient
-        - sso
         - ui
         - urlSearchParams
         - utils
