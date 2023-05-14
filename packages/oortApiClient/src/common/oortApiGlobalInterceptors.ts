@@ -59,8 +59,8 @@ instanceName: ${name}
 requestIds.length:${requestIds.length}
 responseIds.length:${responseIds.length}
             `)
-            requestIds.forEach(instance.interceptors.request.eject)
-            responseIds.forEach(instance.interceptors.response.eject)
+            requestIds.forEach(id => instance.interceptors.request.eject(id))
+            responseIds.forEach(id => instance.interceptors.response.eject(id))
         })
     }
 
