@@ -28,6 +28,7 @@ export class OortAxiosInstances {
 
         logger.debug(`OortAxiosInstances register interceptors.
 instanceName: ${instanceName}
+instanceInterceptors.length: ${OortAxiosInstances.instanceInterceptors.length}
 requestInterceptors.length: ${OortApiGlobalInterceptors.requestInterceptors.length}
 responseInterceptors.length: ${OortApiGlobalInterceptors.responseInterceptors.length}`)
 
@@ -47,11 +48,11 @@ interceptorName: ${interceptor.name}`)
             requestIds.push(id)
         })
 
-        this.instanceInterceptors.push({ name: instanceName, instance, requestIds, responseIds })
+        OortAxiosInstances.instanceInterceptors.push({ name: instanceName, instance, requestIds, responseIds })
     }
 
     static unRegisterInterceptors(logger: ILogger) {
-        this.instanceInterceptors.forEach(x => {
+        OortAxiosInstances.instanceInterceptors.forEach(x => {
             const { name, instance, requestIds, responseIds } = x
 
             logger.debug(`OortAxiosInstances unregister interceptors.
@@ -62,6 +63,8 @@ responseIds.length:${responseIds.length}
             requestIds.forEach(id => instance.interceptors.request.eject(id))
             responseIds.forEach(id => instance.interceptors.response.eject(id))
         })
+
+        OortAxiosInstances.instanceInterceptors.length = 0
     }
 
     static readonly instanceInterceptors: IRegisterData[] = []
@@ -82,6 +85,8 @@ interceptorName: ${interceptor.name}`)
             const id = x.instance.interceptors.request.use(interceptor.onFulfilled, interceptor.onRejected)
             x.requestIds.push(id)
         })
+
+        logger.debug(`OortApiGlobalInterceptors.requestInterceptors.length:${OortApiGlobalInterceptors.requestInterceptors.length}`)
     }
 
     static registerResponse(interceptor: ResponseInterceptor, logger: ILogger) {
@@ -94,10 +99,14 @@ interceptorName: ${interceptor.name}`)
             const id = x.instance.interceptors.response.use(interceptor.onFulfilled, interceptor.onRejected)
             x.responseIds.push(id)
         })
+
+        logger.debug(`OortApiGlobalInterceptors.responseInterceptors.length:${OortApiGlobalInterceptors.responseInterceptors.length}`)
     }
 
     static unRegisterInterceptors(logger: ILogger) {
         OortAxiosInstances.unRegisterInterceptors(logger)
+        OortApiGlobalInterceptors.requestInterceptors.length = 0
+        OortApiGlobalInterceptors.responseInterceptors.length = 0
     }
 
 }
