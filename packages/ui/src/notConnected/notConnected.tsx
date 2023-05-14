@@ -73,4 +73,7 @@ const Impl = (props: IProps) => {
     </div>
 }
 
+/**
+ * @deprecated Use Auth
+ */
 export const NotConnected = observer(Impl)
