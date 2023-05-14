@@ -1,12 +1,12 @@
 import "../../styles/antOverride.less"
 import "../../styles/fonts.css"
 import "../../styles/theme/light.less"
-
+import {BrowserRouter as Router } from 'react-router-dom';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { EMPTY_ABORT_SIGNAL } from "@oort-digital/utils"
 
-import { Auth } from "../ui/auth";
+import { Auth, IAuthProps } from "../ui/auth";
 import { Web3StoreStub } from "./web3StoreStub";
 import logger from "./logger";
 import React, { useEffect, useState } from "react";
@@ -17,6 +17,9 @@ import { observer } from "mobx-react";
 const meta = {
   title: 'oort/auth',
   component: Auth,
+  render: (props: IAuthProps) => {
+    return <AuthWrap {...props} />
+  },
 } satisfies Meta<typeof Auth>;
 
 
@@ -55,6 +58,12 @@ const Content = observer(() => {
     <div>Request Done!</div>
   </>
 
+})
+
+const AuthWrap = observer((props: IAuthProps) => {
+  return <Router>
+    <Auth { ...props }/>
+  </Router>
 })
 
 

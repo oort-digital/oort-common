@@ -13,16 +13,20 @@ import { AuthStore, TokenStorageType } from '../store';
 import { ILogger } from '@oort-digital/logger';
 import { registerAuthInterceptors, unRegisterAuthInterceptors } from '../interceptors';
 import { AuthModal } from './authModal';
+import { useLocation } from 'react-router-dom';
+import classnames from 'classnames';
 
 
 export interface IAuthProps {
+    className?: string
     supportedWallets: ConnectorNames[]
     web3Store: IWeb3Store
     expectedChainId?: number
     logger: ILogger
     ssoServerBaseUrl: string
-    tokenStorageType: TokenStorageType
+    tokenStorageType?: TokenStorageType
     children: ReactNode
+    excludePathes?: string[]
 }
 
 const renderText = ({ web3Store, expectedChainId }: IAuthProps) => {
@@ -58,12 +62,18 @@ const renderText = ({ web3Store, expectedChainId }: IAuthProps) => {
 
 const Impl = (props: IAuthProps) => {
 
-    const { web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType, children } = props
+    const { className, excludePathes, web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType = 'cookies', children } = props
     const [isWalletVisible, setIsWalletVisible] = useState(false)
     const [authInProcess, setAuthInProcess] = useState(false)
     const [ssoStore] = useState(() => new AuthStore({
         logger, web3Store, ssoServerBaseUrl, tokenStorageType
     }))
+
+    const location = useLocation()
+
+    if(excludePathes?.some(p => location.pathname.includes(p))) {
+        return <>{children}</>
+    }
 
     const { isConnectedToSupportedChain } = web3Store
 
@@ -95,7 +105,7 @@ const Impl = (props: IAuthProps) => {
     }
 
     if(askAuth || !isConnectedToSupportedChain) {
-        return <div className={styles.wrapper}>
+        return <div className={classnames(styles.wrapper, className)}>
             <WalletSvg />
             {renderText(props)}
             <Button className={styles.connect_btn} size='large' type="primary" onClick={() => setIsWalletVisible(true)}>
