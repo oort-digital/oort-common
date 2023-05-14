@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { OortHeroApi } from "@oort-digital/oort-api-client";
 import { registerAuthInterceptorsPromise } from "../interceptors";
 import { observer } from "mobx-react";
+import { ThemeLoader } from "../../internalHelpers";
 
 const meta = {
   title: 'oort/auth',
@@ -62,6 +63,7 @@ const Content = observer(() => {
 
 const AuthWrap = observer((props: IAuthProps) => {
   return <Router>
+    <ThemeLoader />
     <Auth { ...props }/>
   </Router>
 })

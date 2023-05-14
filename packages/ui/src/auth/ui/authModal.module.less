@@ -1,26 +1,18 @@
+@import "../../styles/theme/vars.less";
+
 .modal {
-    
-    :global(.ant-modal-content > .ant-modal-header) {
-        margin-top: 0;
-    }
-
-    :global(.ant-modal-content > .ant-modal-footer .footer-buttons) {
-        padding-top: 0;
-    }
-
     :global(.ant-modal-content > .ant-modal-footer) {
+        background-color: @theme-bg-dark-gradient;
         padding-top: 0;
-        padding-left: 36px;
-        padding-right: 36px;
-        text-align: right;
-    }
-
-    .btn {
-        width: 180px;
+        .buttons {
+            padding-top: 0;
+            button { width: 180px; }
+        }
     }
 }
 
 .content {
     font-size: 14px;
     font-weight: 400;
+    color: @theme-color-10;
 }
