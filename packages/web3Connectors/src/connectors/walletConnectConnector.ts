@@ -78,7 +78,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
     }
 
-    constructor({ logger, chains, projectId }: IWalletConnectOptions) {
+    constructor({ logger, chains, projectId, modalZIndex }: IWalletConnectOptions) {
         super(logger, ConnectorNames.WalletConnect, chains)
         this._rpc = {}
         chains.forEach(x => {
@@ -91,7 +91,10 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         this._web3Modal = new Web3Modal({
             projectId: this._projectId,
             themeMode: 'dark',
-            walletConnectVersion: 2
+            walletConnectVersion: 2,
+            themeVariables: {
+                '--w3m-z-index': `${modalZIndex}`
+            }
         })
         this._waitInit = this.init()
     }
