@@ -3,11 +3,17 @@ import { ConsoleLogger } from "@oort-digital/logger";
 import { INft } from "../typesAndInterfaces";
 
 import { MoralisNftProviderNoSdk } from "./moralisNftProviderNoSdk";
+import { OortHeroApi } from "@oort-digital/oort-api-client";
+import { EMPTY_ABORT_SIGNAL } from "@oort-digital/utils";
 
 const logger = new ConsoleLogger()
 const badAddress = '0x0000000000dDF8e4c57F05d70Ab8444555666777'
 
-const provider = new MoralisNftProviderNoSdk(logger, 80001, { apiKey: "76e3cVcdO0ennLoMfMaAoAhuWnL0l0tJ5Bz7n511UGwmyVfHy3JqVF6XlSgE5cld" }, false)
+const heroApi = OortHeroApi.createSingleton({ baseURL: 'https://api-test.oort.digital/minting', logger})
+
+const provider = new MoralisNftProviderNoSdk({
+    generateHero: p => heroApi.generateHero(p, EMPTY_ABORT_SIGNAL),
+    logger, chainId: 80001, config: { apiKey: "76e3cVcdO0ennLoMfMaAoAhuWnL0l0tJ5Bz7n511UGwmyVfHy3JqVF6XlSgE5cld" }, rejectUnauthorized: false })
 
 const assertNft = (nft: INft) => {
     expect(nft.amount).toBeDefined()
@@ -20,9 +26,9 @@ const assertNft = (nft: INft) => {
 
 test.skip('debug only. Moralis featchAccountNfts', async () => {
    const respose = await provider.featchAccountNfts({
-       ownerAddress: '0x103a9685D26fF05F2fed95dbC6e706B8841E5EC7',
+       ownerAddress: '0x89fcf6222f82D834F01580FfBD44E8e149Af2975',
        cursor: undefined,
-       tokenAddresses: ['0x11a57ee56d1851cb9b0de5244e00716ad3a787f3', '0x7b72f99683f4186f1cb979012c15f7d3bbfdfc19'],
+    //    tokenAddresses: [],
        limit: 10
    })
 
