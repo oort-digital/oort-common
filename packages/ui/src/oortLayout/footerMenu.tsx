@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import styles from './footerMenu.module.less';
 import { Menu, MenuItem, MenuItemBtn } from './menu';
-import { getChainIconOld, toMasskedAddress } from '../utils';
+import { getChainIconOld } from '../utils';
 import { ChevronSortIcon, DiscordIcon, TelegramIcon, TwitterIcon } from '../icons';
 import { ThemeSwitch } from './themeSwitch';
 import { ConnectModal, IWeb3 } from '../connectModal';
 import { BlockieAddress } from '../blockieAddress';
 import { useTheme } from '../effects';
-import { isChainEmpty } from '../typesAndInterfaces';
+import { isChainEmpty } from '@oort-digital/web3-connectors';
 import { observer } from 'mobx-react';
+import { toMasskedAddress } from '@oort-digital/utils';
+import { ConnectorNames } from '@oort-digital/web3-connectors';
 
 const TWITTER = "https://twitter.com/OortDigital";
 const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
@@ -16,6 +18,7 @@ const TELEGRAM = "https://t.me/oortdigital";
 
 
 interface IProps {
+    supportedWallets: ConnectorNames[]
     className?: string
     web3?: IWeb3
 }
@@ -26,7 +29,7 @@ const social = <>
     <a href={DISCORD}><span className={styles.icon}><DiscordIcon/></span></a>
 </>
 
-const Impl = ({ className, web3 }: IProps) => {
+const Impl = ({ className, web3, supportedWallets }: IProps) => {
 
     const [ connectModalVisible, setConnectModalVisible ] = useState(false)
 
@@ -37,6 +40,7 @@ const Impl = ({ className, web3 }: IProps) => {
             onCancel={() => setConnectModalVisible(false)}
             visible={connectModalVisible}
             web3={web3!}
+            supportedWallets={supportedWallets}
         />
     }
 

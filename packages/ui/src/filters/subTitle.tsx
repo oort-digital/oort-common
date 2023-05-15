@@ -1,4 +1,4 @@
-import { cutLongString } from "../utils";
+import { cutLongString } from "@oort-digital/utils";
 
 interface IProps {
 	names: string[]

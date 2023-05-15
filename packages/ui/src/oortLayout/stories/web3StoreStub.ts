@@ -1,9 +1,5 @@
-import { logger } from "@oort-digital/logger";
-import { ConnectorNames, IConnector, InjectedConnector } from "@oort-digital/web3-connectors";
-import { makeObservable, observable, runInAction } from "mobx";
-import { IWeb3 } from "../../connectModal";
-import { EMPTY_CHAIN, IChain } from "../../typesAndInterfaces";
-import { delayAsync } from "../../utils";
+import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
+import { ChainService, ConnectorNames, IChain, IWeb3StoreParams, Web3Store } from "@oort-digital/web3-connectors";
 import { INavItems } from "../navMenu";
 
 export const navItems: INavItems = {
@@ -50,51 +46,22 @@ const supportedChains = [
         decimals: 18,
     }
 }]
-    
-const supportedConnectors: { [name: string]: IConnector } = {}
-supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, supportedChains)
-    
 
-export class Web3StoreStub implements IWeb3 {
-  canSwitchChain: boolean = true;
-  connectorName: ConnectorNames = ConnectorNames.Injected
+const logger = new ConsoleLogger(LogLevel.Debug)
 
-  chain: IChain = EMPTY_CHAIN
-  account: string = ''
-  supportedChains: IChain[] = supportedChains
-  supportedConnectors: { [name: string]: IConnector; } = supportedConnectors
+const chainService = new ChainService<IChain>(supportedChains);
 
-  switchChain = async (newChainId: number) => {
-    await delayAsync(1000)
+const storeParams: IWeb3StoreParams<IChain> = {
+  chainService,
+  logger,
+  supportedChains,
+  walletConnectProjectId: 'fake',
+  supportedWallets: [ ConnectorNames.Injected ]
+}
 
-    const newChain = supportedChains.find(x => x.chainId === newChainId)
-
-    if(newChain) {
-      runInAction(() => {
-        this.chain = { ...newChain }
-      })
-    }
-
-    return true
-    
-  }
-
-  connect = async (_chainId: number, _connectorName: ConnectorNames) => {
-    // await delayAsync(1000)
-    await this.supportedConnectors[ConnectorNames.Injected].connect(1)
-    runInAction(() => {
-      this.chain = { ...supportedChains[0] }
-      this.account = '0x0000000000000000000000000000000000000001'
-    })
-    return true
-  }
+export class Web3StoreStub  extends Web3Store<IChain> {
 
   constructor() {
-    makeObservable(this, {
-      account: observable,
-      chain: observable,
-      connectorName: observable
-    })
+    super(storeParams)
   }
-
 }

@@ -1,5 +1,5 @@
+import { toMasskedAddress } from "@oort-digital/utils";
 import { BigNumber } from "ethers";
-import { toMasskedAddress } from "../utils";
 
 export const getNftTitle = (tokenAddress: string, projectName?: string): string => {
 	if(projectName) {

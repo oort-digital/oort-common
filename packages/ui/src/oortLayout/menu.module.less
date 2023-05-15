@@ -10,7 +10,6 @@
         border-bottom: 1px solid @theme-color-4;
         display: flex;
         align-items: center;
-        cursor: pointer;
 
         & > a {
             // width: 100%;
@@ -23,6 +22,14 @@
             align-items: center;
             color: @theme-color-7;
             text-transform: capitalize;
+
+            cursor: pointer;
+        }
+
+        & > .disabled {
+            pointer-events: none;
+            cursor: default;
+            opacity: 0.5;
         }
 
         & > .btn_caption {

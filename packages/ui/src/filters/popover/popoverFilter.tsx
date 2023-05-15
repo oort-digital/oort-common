@@ -2,7 +2,6 @@ import { CSSProperties, ReactNode, useState } from 'react'
 import styles from "./popoverFilter.module.less"
 import { Button, Popover } from "antd"
 import { ChevronDownOutlineIconSvg, CloseIcon } from '../../icons'
-import { logger } from '@oort-digital/logger'
 import { TooltipPlacement } from 'antd/es/tooltip'
 
 export type RangeValue = number | undefined
@@ -122,7 +121,6 @@ export const PopoverFilter = ({
             //calculate space between bottom of button and bottom of the window
             const rect = btnElement.getBoundingClientRect()
             var bottomSpaceHeight = window.innerHeight - rect.top + btnElement.offsetHeight
-            logger.debug(`Popover filter. BottomSpaceHeight: ${bottomSpaceHeight}`)
             onBottomSpaceHeightChange(bottomSpaceHeight)
         }
     }

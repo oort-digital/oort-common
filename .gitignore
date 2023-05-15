@@ -8,15 +8,23 @@ yarn.lock
 /packages/oortApiClient/node_modules
 /packages/web3Connectors/node_modules
 /packages/urlSearchParams/node_modules
+/packages/utils/node_modules
 /packages/nftProviders/node_modules
+/packages/lazyLoader/node_modules
+/packages/lazyLoaderNextJs/node_modules
 
 /packages/logger/dist
 /packages/ui/dist
 /packages/nftProviders/dist
 /packages/web3Connectors/dist
 /packages/urlSearchParams/dist
+/packages/utils/dist
 /packages/oortApiClient/dist
+/packages/lazyLoader/dist
+/packages/lazyLoaderNextJs/dist
 
 /sites/cra-test-app/node_modules
 /sites/cra-test-app/build
 /.idea
+
+/packages/lazyLoaderNextJs/.next

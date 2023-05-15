@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/antOverride.less';
 import '../styles/fonts.css';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConnectModal, IWeb3 } from '.';
-import { ConnectorNames, IConnector, InjectedConnector, WalletConnectConnector, IWalletConnectOptions } from '@oort/web3-connectors';
-import { logger } from '@oort-digital/logger';
-import { ZERO_ADDR } from '../utils';
-import { EMPTY_CHAIN } from '../typesAndInterfaces';
+import { ConnectorNames, EMPTY_CHAIN, IConnector } from '@oort-digital/web3-connectors';
+import { delayAsync, ZERO_ADDR } from '@oort-digital/utils';
 import { IConnectModalProps } from './connectModal';
-import { Button } from 'antd';
+import { Web3StoreStub } from '../oortLayout/stories/web3StoreStub';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -26,38 +24,20 @@ export default {
 } as ComponentMeta<typeof ConnectModal>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ConnectModal> = (args: IConnectModalProps) => {
+const Template: ComponentStory<typeof ConnectModal> = (args: IConnectModalProps) => <ConnectModal {...args} />;
 
-  const [ visible, setVisible ] = useState(true)
-
-  args.onClose = () => setVisible(false)
-  args.visible = visible
-
-  return <>
-    <Button onClick={() => setVisible(true)}>Show modal</Button>
-    <ConnectModal {...args} />
-  </>
-
-}
-
-const chains = [
+const chains: IChainInfo[] = [
   {
-      name: "rinkeby",
-      chainId: 4,
-      rpcUrl: 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-      blockExplorer: 'https://rinkeby.etherscan.io'
-  },
-  {
-      name: 'mumbai',
-      chainId: 80001,
-      rpcUrl: 'https://rpc-mumbai.maticvigil.com',
-      blockExplorer: 'https://mumbai.polygonscan.com',
-  
-      nativeCurrency: {
-          name: 'MATIC',
-          symbol: 'MATIC',
-          decimals: 18,
-      }
+    name: 'mumbai',
+    chainId: 80001,
+    rpcUrl: 'https://rpc-mumbai.maticvigil.com',
+    blockExplorer: 'https://mumbai.polygonscan.com',
+
+    nativeCurrency: {
+        name: 'MATIC',
+        symbol: 'MATIC',
+        decimals: 18,
+    }
   },
   {
     name: "goerli",
@@ -67,43 +47,35 @@ const chains = [
   }
 ]
 
-const options: IWalletConnectOptions = {
-  modalZIndex: 1001,
-  projectId: 'c2b4ff7ce76613f93a7edea85b9618f5',
-  logger,
-  chains,
-}
-  
-const supportedConnectors: { [name: string]: IConnector } = {}
-supportedConnectors[ConnectorNames.Injected] = new InjectedConnector(logger, chains)
-supportedConnectors[ConnectorNames.WalletConnect] = new WalletConnectConnector(options)
+/*
+https://oortdigital.slack.com/archives/C04EY5MLV50/p1671005355999189
+Oort NFT Rental Marketplace
+[API Key for Testnet]
+*/
 
 
-const web3: IWeb3 = {
-  canSwitchChain: true,
-  connectorName: ConnectorNames.Injected,
-  switchChain: async (_newChainId: number) => {},
-  connect: async (chainId: number, connectorName: ConnectorNames) => {
-    await supportedConnectors[connectorName].connect(chainId)
-  },
-  chain: chains[0],
-  account: ZERO_ADDR,
-  supportedChains: chains,
-  supportedConnectors: supportedConnectors,
-}
 
-const web3NotConnected = { ...web3, ...{ chain: EMPTY_CHAIN, account: '' } }
+const supportedWallets: ConnectorNames[] = [ ConnectorNames.Injected ]
+
+const web3 = new Web3StoreStub()
+const supportedChains = web3.supportedChains
+const supportedConnectors = web3.supportedConnectors
+const web3NotConnected = { ...web3, ...{ chain: EMPTY_CHAIN, account: '', supportedChains, supportedConnectors } }
 
 export const Connected = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Connected.args = {
-  web3: web3
+  web3: web3,
+  visible: true,
+  supportedWallets
 };
 
 export const NotConnected = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 NotConnected.args = {
-  web3: web3NotConnected
+  web3: web3NotConnected,
+  visible: true,
+  supportedWallets
 };
 
 
@@ -111,5 +83,7 @@ export const ExpectedChain = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 ExpectedChain.args = {
   web3: web3,
-  expectedChainId: 5
+  visible: true,
+  expectedChainId: 5,
+  supportedWallets
 };

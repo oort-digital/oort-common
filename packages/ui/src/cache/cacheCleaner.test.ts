@@ -1,4 +1,4 @@
-import { delayAsync } from "../utils";
+import { delayAsync } from "@oort-digital/utils";
 import { CacheCleaner } from "./cacheCleaner";
 import { ExpirationType } from "./icacheProvider";
 import { LocalStorageCacheProvider } from "./localStorageCache";

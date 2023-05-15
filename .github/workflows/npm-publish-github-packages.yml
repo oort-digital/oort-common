@@ -10,11 +10,14 @@ on:
         type: choice
         description: Select package
         options:
+        - lazyLoader
+        - lazyLoaderNextJs
         - logger
         - nftProviders
         - oortApiClient
         - ui
         - urlSearchParams
+        - utils
         - web3Connectors
 
 jobs:

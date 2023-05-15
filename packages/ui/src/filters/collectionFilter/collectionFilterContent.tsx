@@ -6,7 +6,7 @@ import {observer} from "mobx-react"
 import {Tabs} from "antd"
 import { ICollectionFilterItem, ICollectionFilterStore } from "./stores"
 import { AsyncList } from "../../asyncList"
-import { EMPTY_ABORT_SIGNAL } from "../../utils"
+import { EMPTY_ABORT_SIGNAL } from "@oort-digital/utils"
 
 interface IProps {
     itemTitleMaxLen: number

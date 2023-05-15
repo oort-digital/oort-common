@@ -1,5 +1,6 @@
+import { ChainEnum } from '@oort-digital/web3-connectors'
 import React from 'react'
-import { ChainEnum } from '../typesAndInterfaces'
+
 import { BscIcon, BscIconOld, EthIcon, EthIconOld, PolygonIcon, PolygonIconOld } from '../icons'
 
 

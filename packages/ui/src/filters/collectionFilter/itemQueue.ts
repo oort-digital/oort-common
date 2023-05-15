@@ -1,4 +1,4 @@
-import { distinct } from "../../utils"
+import { distinct } from "@oort-digital/utils"
 import { ItemKeyType } from "./stores"
 
 export class ItemQueue<T> {

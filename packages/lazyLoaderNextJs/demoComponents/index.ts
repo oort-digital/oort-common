@@ -1,0 +1,1 @@
+export { Home, getServerSideProps } from "./home"

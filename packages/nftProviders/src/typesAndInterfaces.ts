@@ -1,4 +1,5 @@
 export enum NftType {
+    UNKNOWN = 'UNKNOWN',
     ERC721 = "ERC721",
     ERC1155 = "ERC1155"
 }
@@ -59,15 +60,15 @@ export interface IAssetsProvider {
 
 export interface IAssetProvider {
     chainId: number
-    featchNft: (params: IFeatchNftParams) => Promise<INft>
+    featchNft: (params: IFeatchNftParams) => Promise<INft | null>
 }
 
 export interface IFeatchNftOwnerResponse {
-    asset?: {
+    asset: {
         address: string
         tokenId: string
         ownerAddress: string
-    }
+    } | null
 }
 
 export interface INftOwnerProvider {

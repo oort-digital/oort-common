@@ -1,4 +1,4 @@
-import { logger } from "@oort-digital/logger";
+import { ILogger } from "@oort-digital/logger";
 import axios from "axios";
 
 export interface NftScanApiData {
@@ -31,6 +31,7 @@ export interface INftScanClient {
 export interface INftScanConfig {
     apiKey: string
     apiSecret: string
+    logger?: ILogger
 }
 
 export class NftScanClient implements INftScanClient {
@@ -43,10 +44,13 @@ export class NftScanClient implements INftScanClient {
         return NftScanClient._instance
     }
 
-    constructor ({ apiKey, apiSecret }: INftScanConfig) {
+    constructor ({ apiKey, apiSecret, logger }: INftScanConfig) {
         this._apiKey = apiKey
         this._apiSecret = apiSecret
+        this._logger = logger
     }
+
+    private readonly _logger?: ILogger
 
     getSingleNft = (nftAddress: string, tokenId: string)=> this.getSingleNftInternal(nftAddress, tokenId, 1)
 
@@ -82,7 +86,7 @@ export class NftScanClient implements INftScanClient {
         if(data.code === 401) {
     
             if(attempt > MAX_ATTEMPT) {
-                logger.error('getSingleNftInternal attempts limit error')
+                this._logger?.error('getSingleNftInternal attempts limit error')
                 return data.data
             }
             this._curAccessToken = ''

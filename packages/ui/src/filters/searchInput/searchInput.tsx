@@ -1,7 +1,7 @@
 import { CSSProperties, useRef, useState } from "react"
 import { Input } from "antd"
 import { SearchOutlined } from '@ant-design/icons'
-import { debounceFunction } from "../../utils"
+import { debounceFunction } from "@oort-digital/utils";
 
 interface IProps {
 	style?: CSSProperties | undefined;

@@ -1,2 +1,2 @@
 export * from "./typesAndInterfaces"
-export { MoralisNftProvider } from "./moralis"
+export { /*MoralisNftProvider, */MoralisNftProviderNoSdk } from "./moralis"

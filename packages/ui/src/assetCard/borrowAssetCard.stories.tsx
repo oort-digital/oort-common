@@ -5,10 +5,11 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { BorrowAssetCard, IBorrowAssetCardProps, IBorrowAssetItem } from './borrowAssetCard';
 import { ThemeLoader } from '../internalHelpers';
 import { BigNumber } from 'ethers';
-import { formatUnits, parseUnits, ZERO_ADDR } from '../utils';
+import { formatUnits, parseUnits } from '../utils';
 import { IMarketplaceConfig, MarketplaceEnum } from '../viewOn';
 import { Col, Row } from 'antd';
 import React from 'react';
+import { ZERO_ADDR } from '@oort-digital/utils';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

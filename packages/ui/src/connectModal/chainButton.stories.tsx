@@ -4,7 +4,7 @@ import '../styles/fonts.css';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ChainButton } from './chainButton';
-import { IChain } from '../typesAndInterfaces';
+import { IChain } from '@oort-digital/web3-connectors';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

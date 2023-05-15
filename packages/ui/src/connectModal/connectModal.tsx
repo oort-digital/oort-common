@@ -1,7 +1,7 @@
 import { lazy } from 'react'
-import { LazyLoader } from '../lazyLoader';
 import { ConnectorNames, IConnector } from '@oort-digital/web3-connectors';
-import { IChain } from '../typesAndInterfaces';
+import { IChain } from "@oort-digital/web3-connectors";
+import { LazyLoader } from '@oort-digital/lazy-loader';
 
 const Desktop = lazy(() => import("./connectModalDesktop"));
 const Mobile = lazy(() => import("./connectModalMobile"));
@@ -19,6 +19,7 @@ export interface IWeb3 {
 
 export interface IConnectModalProps {
 	web3: IWeb3
+	supportedWallets: ConnectorNames[]
 	expectedChainId?: number
 	visible: boolean
 	/**
