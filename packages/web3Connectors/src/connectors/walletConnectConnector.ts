@@ -78,7 +78,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
     }
 
-    constructor({ logger, chains, projectId, modalZIndex }: IWalletConnectOptions) {
+    constructor({ logger, chains, projectId, modalZIndex = 2000 }: IWalletConnectOptions) {
         super(logger, ConnectorNames.WalletConnect, chains)
         this._rpc = {}
         chains.forEach(x => {
