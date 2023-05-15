@@ -17,7 +17,7 @@ export class OortHeroApi
     private static _singleton: OortHeroApi
     static createSingleton(config: IAPIConfig): OortHeroApi {
         if(!OortHeroApi._singleton) {
-            OortHeroApi._singleton = new OortHeroApi(config)
+            OortHeroApi._singleton = new OortHeroApi('OortHeroApi', config)
         }
         return OortHeroApi._singleton
     }

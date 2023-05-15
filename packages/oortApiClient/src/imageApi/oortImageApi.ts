@@ -32,7 +32,7 @@ export class OortImageApi
   private static _singleton: OortImageApi
   static createSingleton(config: IAPIConfig): OortImageApi {
       if(!OortImageApi._singleton) {
-          OortImageApi._singleton = new OortImageApi(config)
+          OortImageApi._singleton = new OortImageApi('OortImageApi', config)
       }
       return OortImageApi._singleton
   }
