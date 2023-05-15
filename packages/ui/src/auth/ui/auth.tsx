@@ -1,4 +1,4 @@
-import {ReactNode, useEffect, useState} from 'react';
+import {CSSProperties, ReactNode, useEffect, useState} from 'react';
 import {Button} from 'antd';
 import styles from "./auth.module.less"
 import { PageLoader } from '../../pageLoader';
@@ -19,6 +19,7 @@ import classnames from 'classnames';
 
 export interface IAuthProps {
     className?: string
+    style?: CSSProperties | undefined;
     supportedWallets: ConnectorNames[]
     web3Store: IWeb3Store
     expectedChainId?: number
@@ -62,7 +63,7 @@ const renderText = ({ web3Store, expectedChainId }: IAuthProps) => {
 
 const Impl = (props: IAuthProps) => {
 
-    const { className, excludePathes, web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType = 'cookies', children } = props
+    const { className, style, excludePathes, web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType = 'cookies', children } = props
     const [isWalletVisible, setIsWalletVisible] = useState(false)
     const [authInProcess, setAuthInProcess] = useState(false)
     const [ssoStore] = useState(() => new AuthStore({
@@ -107,7 +108,7 @@ const Impl = (props: IAuthProps) => {
     }
 
     if(askAuth || !isConnectedToSupportedChain) {
-        return <div className={classnames(styles.wrapper, className)}>
+        return <div style={style} className={classnames(styles.wrapper, className)}>
             <WalletSvg />
             {renderText(props)}
             <Button className={styles.connect_btn} size='large' type="primary" onClick={() => setIsWalletVisible(true)}>
