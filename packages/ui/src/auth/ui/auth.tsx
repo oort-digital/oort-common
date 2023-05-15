@@ -82,7 +82,9 @@ const Impl = (props: IAuthProps) => {
     useEffect(() => {
         if(isReady) {
             const ids = registerAuthInterceptors(ssoStore, logger)
-            return () => unRegisterAuthInterceptors(ids)
+            return () => {
+                unRegisterAuthInterceptors(ids, logger)
+            }
         }
         return
     }, [isReady]); // eslint-disable-line react-hooks/exhaustive-deps

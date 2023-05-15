@@ -14,6 +14,7 @@ import { OortHeroApi } from "@oort-digital/oort-api-client";
 import { registerAuthInterceptorsPromise } from "../interceptors";
 import { observer } from "mobx-react";
 import { ThemeLoader } from "../../internalHelpers";
+import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
 
 const meta = {
   title: 'oort/auth',
@@ -30,7 +31,7 @@ type Story = StoryObj<typeof meta>;
 const web3Store = new Web3StoreStub()
 web3Store.connect(80001, ConnectorNames.Injected)
 
-const heroApi = OortHeroApi.createSingleton({ baseURL: 'https://api-test.oort.digital/minting' })
+const heroApi = OortHeroApi.createSingleton({ baseURL: 'https://api-test.oort.digital/minting', logger: new ConsoleLogger(LogLevel.Debug) })
 
 const Content = observer(() => {
 

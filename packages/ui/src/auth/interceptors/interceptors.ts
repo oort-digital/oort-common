@@ -28,16 +28,16 @@ export function registerAuthInterceptors(ssoStore: IAuthStore, logger: ILogger):
         onRejected
     );
 
-    OortApiGlobalInterceptors.registerRequest({ onFulfilled: onRequest })
-    OortApiGlobalInterceptors.registerResponse({ onFulfilled: responseInterceptor, onRejected })
+    OortApiGlobalInterceptors.registerRequest({ name: 'token_request', onFulfilled: onRequest }, logger)
+    OortApiGlobalInterceptors.registerResponse({ name: 'token_response', onFulfilled: responseInterceptor, onRejected }, logger)
 
     registerAuthInterceptorsPromiseResolve()
 
     return [requestInterceptorId, responseInterceptorId]
 }
 
-export function unRegisterAuthInterceptors(ids: [number, number]) {
+export function unRegisterAuthInterceptors(ids: [number, number], logger: ILogger) {
     axios.interceptors.response.eject(ids[0])
     axios.interceptors.response.eject(ids[1])
-    OortApiGlobalInterceptors.unRegisterInterceptors()
+    OortApiGlobalInterceptors.unRegisterInterceptors(logger)
 }
