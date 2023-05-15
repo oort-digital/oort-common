@@ -1,10 +1,11 @@
 import UniversalProvider, { EthereumRpcMap } from "@walletconnect/universal-provider";
 import { ILogger } from "@oort-digital/logger";
-import { BaseConnector, IChainInfo } from "./baseConnector";
+import { BaseConnector } from "./baseConnector";
 import { SessionTypes } from "@walletconnect/types";
 import { Web3Modal } from "@web3modal/standalone";
 import { IConnector } from "./iConnector";
 import { ConnectorNames } from "./connectorNames";
+import { IChainInfo } from "../internalTypesAndInterfaces";
 
 
 export interface IWalletConnectOptions {
@@ -77,7 +78,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
     }
 
-    constructor({ logger, chains, projectId, modalZIndex }: IWalletConnectOptions) {
+    constructor({ logger, chains, projectId }: IWalletConnectOptions) {
         super(logger, ConnectorNames.WalletConnect, chains)
         this._rpc = {}
         chains.forEach(x => {
@@ -88,9 +89,10 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
         this._projectId = projectId
         this._web3Modal = new Web3Modal({
-            themeZIndex: modalZIndex,
+            // themeZIndex: modalZIndex,
             projectId: this._projectId,
             themeMode: "light",
+            walletConnectVersion: 2
         })
         // this._walletConnect = new WalletConnectProvider({ rpc: this._rpc })
         // this.initListeners(this._walletConnect)
@@ -122,7 +124,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
             relayUrl: 'wss://relay.walletconnect.com',
         });
 
-        this.initListeners(this._universalProvider)
+        // this.initListeners(this._universalProvider)
         this.subscribeToProviderEvents(this._universalProvider)
 
         // await this.checkForPersistedSession(this._universalProvider)
