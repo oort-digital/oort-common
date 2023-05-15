@@ -89,13 +89,10 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
         this._projectId = projectId
         this._web3Modal = new Web3Modal({
-            // themeZIndex: modalZIndex,
             projectId: this._projectId,
-            themeMode: "light",
+            themeMode: 'dark',
             walletConnectVersion: 2
         })
-        // this._walletConnect = new WalletConnectProvider({ rpc: this._rpc })
-        // this.initListeners(this._walletConnect)
         this._waitInit = this.init()
     }
     private readonly _projectId: string
@@ -107,7 +104,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         let unSubscribe: (() => void) | undefined
         const promise = new Promise<void>((resolve, _reject) => {
             unSubscribe = this._web3Modal.subscribeModal(state => {
-                this.logger.debug(`modal.open: ${state.open.toString()}`)
+                this.debug(`modal.open: ${state.open.toString()}`)
                 if(state.open === false) {
                     resolve()
                 }
@@ -117,6 +114,10 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         return promise.then(unSubscribe)
     }
 
+    private debug = (msg: string) => {
+        this.logger.debug(`WalletConnectConnector ${msg}`)
+    }
+
     private async init(): Promise<void> {
         this._universalProvider = await UniversalProvider.init({
             projectId: this._projectId,
@@ -124,10 +125,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
             relayUrl: 'wss://relay.walletconnect.com',
         });
 
-        // this.initListeners(this._universalProvider)
         this.subscribeToProviderEvents(this._universalProvider)
-
-        // await this.checkForPersistedSession(this._universalProvider)
         this._session = this._universalProvider.session
     }
 
@@ -138,27 +136,27 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     private async subscribeToProviderEvents(client: UniversalProvider) {
         
         client.on("display_uri", async (uri: string) => {
-            console.log("EVENT", "QR Code Modal open");
+            this.debug("EVENT QR Code Modal open");
             this._web3Modal.openModal({ uri });
         });
 
         // Subscribe to session ping
         client.on("session_ping", ({ id, topic }: { id: number; topic: string }) => {
-            console.log("EVENT", "session_ping");
-            console.log(id, topic);
+            this.debug("EVENT session_ping");
+            this.debug(`${id} ${topic}`);
         });
 
         // Subscribe to session event
         client.on("session_event", ({ event, chainId }: { event: any; chainId: string }) => {
-            console.log("EVENT", "session_event");
-            console.log(event, chainId);
+            this.debug("EVENT session_event");
+            this.debug(`${event} ${chainId}`);
         });
 
         // Subscribe to session updat
         client.on(
             "session_update",
             ({ /*topic,*/ session }: { /*topic: string;*/ session: SessionTypes.Struct }) => {
-                console.log("EVENT", "session_updated");
+                this.debug("EVENT session_updated");
                 this._session = session
             },
         );
@@ -166,8 +164,8 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         // Subscribe to session delete
         
         client.on("session_delete", ({ id, topic }: { id: number; topic: string }) => {
-            console.log("EVENT", "session_deleted");
-            console.log(id, topic);
+            this.debug("EVENT session_deleted");
+            this.debug(`${id}, ${topic}`);
             this._session = undefined
         });
         
