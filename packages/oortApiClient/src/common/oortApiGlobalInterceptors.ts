@@ -63,8 +63,6 @@ responseIds.length:${responseIds.length}
             requestIds.forEach(id => instance.interceptors.request.eject(id))
             responseIds.forEach(id => instance.interceptors.response.eject(id))
         })
-
-        OortAxiosInstances.instanceInterceptors.length = 0
     }
 
     static readonly instanceInterceptors: IRegisterData[] = []
