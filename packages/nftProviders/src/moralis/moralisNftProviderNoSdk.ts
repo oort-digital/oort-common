@@ -1,7 +1,6 @@
 // import Moralis  from "./moralis";
 import { INftOwnerProvider, IFeatchNftOwnerResponse, ProviderKind, IFeatchAccountNftsParams, IFeatchNftImageSrc, IFeatchNftParams, IFeatchNftsResponse, INft, IAssetsProvider, IAssetProvider, NftType } from "../typesAndInterfaces";
-import { ConsoleLogger, ILogger } from "@oort-digital/logger";
-const logger = new ConsoleLogger()
+import {ILogger } from "@oort-digital/logger";
 import axios, { AxiosInstance } from "axios";
 import { toErrorWithMessage } from "@oort-digital/utils";
 import * as https from "https";
@@ -48,6 +47,18 @@ interface IRawNftWithNormMetadata extends IRawNft {
 
 const is404 = (err: any) => {
     return err.response?.status === 404
+}
+
+
+export type GenerateHeroFunc = (params: {tokenAddress: string, tokenId: string}) => Promise<any>
+
+export interface IMoralisNftProvider {
+    logger: ILogger,
+    chainId: number,
+    config: { apiKey: string },
+    generateHero: GenerateHeroFunc,
+    // for test
+    rejectUnauthorized?: boolean
 }
 
 export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider, INftOwnerProvider {
@@ -160,15 +171,18 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
         
     }
 
-    constructor(
-        _logger: ILogger,
-        chainId: number,
-        config: { apiKey: string },
+    constructor({
+        logger,
+        chainId,
+        config,
+        generateHero,
         // for test
-        rejectUnauthorized?: boolean) {
+        rejectUnauthorized }: IMoralisNftProvider) {
 
         const baseURL = 'https://deep-index.moralis.io/api/v2/'
         const headers = {'X-API-Key': config.apiKey}
+
+        this._generateHero = generateHero
 
         if(rejectUnauthorized === false) {
             const httpsAgent = new https.Agent({ rejectUnauthorized: false })
@@ -186,10 +200,16 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
     private readonly _chainIdHex: string
     private readonly _axios: AxiosInstance
     private readonly _logger: ILogger
+    private readonly _generateHero: GenerateHeroFunc
 
-    private async tryFetchMetadataByUri(token_uri: string): Promise<IMoralisMetadata | null> {
+    private async tryFetchMetadata(token_uri: string, tokenAddress: string, tokenId: string): Promise<IMoralisMetadata | null> {
         try {
-            const response = await this._axios.get(token_uri)
+            let response = await this._axios.get(token_uri)
+            if(response.data?.description === 'Oort Hero blind box') {
+                await this._generateHero({tokenAddress, tokenId})
+                response = await this._axios.get(token_uri)
+            }
+  
             const metadata: IMoralisMetadata = {
                 name: response.data?.name,
                 image: response.data?.image,
@@ -235,7 +255,7 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
 
         if(!metadata && token_uri) {
             // sometimes moralis doesn't fetch metadata even if nft has token_uri
-            metadata = await this.tryFetchMetadataByUri(token_uri)
+            metadata = await this.tryFetchMetadata(token_uri, token_address, token_id)
         }
 
         const result: INft = {

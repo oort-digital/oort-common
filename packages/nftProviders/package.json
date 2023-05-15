@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/nft-providers",
-  "version": "0.0.1-alfa.0.0.3",
+  "version": "0.0.1-beta.0.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -32,6 +32,7 @@
     "axios": "^1.2.3"
   },
   "devDependencies": {
+    "@oort-digital/oort-api-client": "^0.0.1-alfa.0.0.4",
     "@types/jest": "^29.1.1",
     "esbuild": "^0.17.0",
     "jest": "^29.1.2",
