@@ -83,6 +83,7 @@ const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
 
   const disconnectHandler = (_error: any) => {
     console.log('disconnect')
+    reset()
   }
 
   const onConnect = async () => {
