@@ -138,7 +138,9 @@ export const useConnectModalCommon = ({ props, isMobile, btnGutter, styles }: IA
 
     const span = isMobile ? 24 : 12
 
+
     const connectChainId = expectedChainId || supportedChains[0].chainId
+
     const content = <>
         {
             !isChainEmpty(chain) && <>
