@@ -13,6 +13,7 @@ export interface IWeb3StoreParams<TChain extends IChain> {
     faceWalletCredentials?: IFaceWalletCredentials
     //for the next version on WC
     walletConnectProjectId?: string
+    walletConnectModalZIndex?: number
     supportedWallets?: ConnectorNames[]
     supportedChains: IChainInfo[]
 }
@@ -91,7 +92,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
         this.runInit()
     }
     
-    private static createWallets<TChain extends IChain>({ supportedWallets, supportedChains: supportedChains, logger, faceWalletCredentials, walletConnectProjectId }: IWeb3StoreParams<TChain>): BaseConnector[] {
+    private static createWallets<TChain extends IChain>({ supportedWallets, supportedChains: supportedChains, logger, faceWalletCredentials, walletConnectProjectId, walletConnectModalZIndex }: IWeb3StoreParams<TChain>): BaseConnector[] {
 
         const result: BaseConnector[] = []
     
@@ -103,7 +104,7 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
             if(!walletConnectProjectId) {
                 throw new Error('You forgot pass IWeb3StoreParams.walletConnectProjectId')
             }
-            result.push(new WalletConnectConnector({ projectId: walletConnectProjectId, logger, chains: supportedChains }))
+            result.push(new WalletConnectConnector({ projectId: walletConnectProjectId, logger, chains: supportedChains, modalZIndex: walletConnectModalZIndex }))
         }
         
         if(!supportedWallets || supportedWallets.some(x => x === ConnectorNames.FaceWallet)) {
