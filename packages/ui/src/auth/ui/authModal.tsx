@@ -11,7 +11,7 @@ interface IProps {
 export const AuthModal = ({ authFunc, visible, loading }: IProps) => {
 
     const okBtn: IFooterBtn = {
-        text: "Accept and sign",
+        text: "Accept and Sign",
         size: "large",
         type: "primary",
         onClick: authFunc
