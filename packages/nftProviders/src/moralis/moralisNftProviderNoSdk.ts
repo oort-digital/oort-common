@@ -56,7 +56,7 @@ export interface IMoralisNftProvider {
     logger: ILogger,
     chainId: number,
     config: { apiKey: string },
-    generateHero: GenerateHeroFunc,
+    generateHero?: GenerateHeroFunc,
     // for test
     rejectUnauthorized?: boolean
 }
@@ -200,12 +200,12 @@ export class MoralisNftProviderNoSdk implements IAssetsProvider, IAssetProvider,
     private readonly _chainIdHex: string
     private readonly _axios: AxiosInstance
     private readonly _logger: ILogger
-    private readonly _generateHero: GenerateHeroFunc
+    private readonly _generateHero?: GenerateHeroFunc
 
     private async tryFetchMetadata(token_uri: string, tokenAddress: string, tokenId: string): Promise<IMoralisMetadata | null> {
         try {
             let response = await this._axios.get(token_uri)
-            if(response.data?.description === 'Oort Hero blind box') {
+            if(response.data?.description === 'Oort Hero blind box' && this._generateHero) {
                 await this._generateHero({tokenAddress, tokenId})
                 response = await this._axios.get(token_uri)
             }
