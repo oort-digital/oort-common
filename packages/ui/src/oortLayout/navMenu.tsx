@@ -37,6 +37,7 @@ export interface INavItems {
         games: NavItemType
         nfts: NavItemType
     }
+    rpgBattle: NavItemType
 }
 
 interface IProps {
@@ -56,6 +57,11 @@ const dashboardInternal = {
     icon: <DashboardIcon />,
 }
 
+const rpgBattleInternal = {
+    caption: 'RPG Battle',
+    icon: <GameHubIcon />
+}
+
 const rentInternal = {
     caption: 'NFT Rental',
     icon: <RentAppIcon />,
@@ -63,7 +69,6 @@ const rentInternal = {
     borrow: 'Borrow',
     heroes: 'Our own NFTs',
     activity: 'Activity'
-
 }
 
 const mintInternal = {
@@ -116,7 +121,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     // to trigger rerendering on react-router pathchange
     useLocation()
 
-    const { dashboard, rent, gameHub, minting } = navItems
+    const { dashboard, rent, gameHub, minting, rpgBattle } = navItems
 
     const collapseNavItemPairs: NavItemPairType[] = [
         [rentInternal, rent],
@@ -194,6 +199,6 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         <Collapse accordion defaultActiveKey={defaultActiveKey.current} ghost expandIconPosition="end">
             {collapseNavItemPairs.map(renderCollapse)}
         </Collapse>
-
+        {renderItem(rpgBattle, rpgBattleInternal)}
     </Menu>
 }

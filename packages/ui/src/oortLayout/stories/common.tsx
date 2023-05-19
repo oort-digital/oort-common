@@ -26,7 +26,8 @@ export const navItems: INavItems = {
         href: 'http://game-hub.oort.local/nfts',
         reactRouterLink: true
       }
-    }
+    },
+    rpgBattle: 'https://battle.oort.digital'  
 }
 
 const minting = { ...navItems.minting, ...{ faucet: "https://faucet.oort.digital/" } }
