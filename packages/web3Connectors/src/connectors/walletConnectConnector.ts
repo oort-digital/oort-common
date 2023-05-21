@@ -31,6 +31,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     async switchChain(chainId: number): Promise<boolean> {
         this.debug(`switchChain to ${chainId}`)
 
+        this.stopCheckConnection()
         // save handlers to temp var
         const handlersTml = this.getExternalHandlers()
         // clear handlers to not triggered onDisconnect

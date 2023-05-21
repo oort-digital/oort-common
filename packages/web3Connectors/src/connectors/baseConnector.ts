@@ -67,15 +67,19 @@ export abstract class BaseConnector {
 
     private readonly _checkConnectionDelayMs : number = 500;
     private _timerId?: NodeJS.Timeout;
-    private _checkConnectionPromise: Promise<void> | null = null
 
     protected runCheckConnection() {
         if(!this._timerId) {
             // run check connection cycle
             const self = this;
-            this._checkConnectionPromise = new Promise<void>(resolve => {
-                this._timerId = setInterval(() => self.CheckConnection(resolve), this._checkConnectionDelayMs)
-            })
+            this._timerId = setInterval(() => self.CheckConnection(), this._checkConnectionDelayMs)
+        }
+    }
+
+    protected stopCheckConnection() {
+        if(this._timerId) {
+            clearInterval(this._timerId)
+            this._timerId = undefined
         }
     }
 
@@ -85,16 +89,12 @@ export abstract class BaseConnector {
         this._externalDisconnectHandlers = []
     }
     
-    private async CheckConnection(resolve: () => void): Promise<void> {
+    private async CheckConnection(): Promise<void> {
         if(!await this.isConnected)
         {
             //do disconnect
-            if(this._timerId) {
-                clearInterval(this._timerId)
-                this._timerId = undefined
-            }
+            this.stopCheckConnection()
             this.disconnectHandler(undefined)
-            resolve()
             await this.disconnect()
             this.logger.debug(`${this.name}Connector. CheckConnection stopped`)
         }
