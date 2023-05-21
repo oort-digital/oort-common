@@ -35,6 +35,11 @@ export class ConnectorProvider {
         return !!this._curConnector?.canSwitchChain
     }
 
+    async disconnect () {
+        await this._curConnector?.disconnect()
+        this.removeCurConnector()
+    }
+
     removeCurConnector() {
         connectorStorage.remove()
         this._curConnector = undefined

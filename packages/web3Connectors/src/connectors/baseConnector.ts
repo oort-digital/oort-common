@@ -45,12 +45,6 @@ export abstract class BaseConnector {
     }
 
     public async disconnect(): Promise<void> {
-
-        if(this._checkConnectionPromise) {
-            await this._checkConnectionPromise
-            this._checkConnectionPromise = null
-        }
-
         this.clearExternalHandlers()
         return Promise.resolve()
     }
