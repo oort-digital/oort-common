@@ -20,7 +20,10 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     async disconnect(): Promise<void> {
         await this._waitInit
         await super.disconnect()
-        await this._universalProvider!.disconnect()
+
+        if(await this.isConnected) {
+            await this._universalProvider!.disconnect()
+        }
     }
     
     get canSwitchChain() { return true }
@@ -123,10 +126,6 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
     private async init(): Promise<void> {
 
-        if(this._universalProvider) {
-            this.unSubscribeToProviderEvents(this._universalProvider)
-        }
-
         this._universalProvider = await UniversalProvider.init({
             projectId: this._projectId,
             logger: 'debug',
@@ -155,12 +154,6 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         this.debug("EVENT session_deleted");
         this.debug(`${id}, ${topic}`);
         this._session = undefined
-    }
-
-    private unSubscribeToProviderEvents(client: UniversalProvider) {
-        client.off("display_uri", this.displayUriHandler);
-        client.off("session_update", this.sessionUpdateHandler);
-        client.off("session_delete", this.sessionDeleteHandler);
     }
 
     private subscribeToProviderEvents(client: UniversalProvider) {

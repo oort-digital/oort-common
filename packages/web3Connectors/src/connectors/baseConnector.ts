@@ -69,6 +69,7 @@ export abstract class BaseConnector {
         {
             if(this._timerId) {
                 clearInterval(this._timerId)
+                this._timerId = undefined
                 this.logger.debug(`${this.name}Connector. CheckConnection stopped`)
             }
 
