@@ -40,15 +40,7 @@ export abstract class BaseConnector {
     }
 
     public onDisconnect(handler: (error: any) => void): void {
-
-        if(!this._timerId) {
-            // run check connection cycle
-            const self = this;
-            this._checkConnectionPromise = new Promise<void>(resolve => {
-                this._timerId = setInterval(() => self.CheckConnection(resolve), this._checkConnectionDelayMs)
-            })
-        }
-        
+        this.runCheckConnection()
         this._externalDisconnectHandlers.push(handler);
     }
 
@@ -76,6 +68,16 @@ export abstract class BaseConnector {
     private readonly _checkConnectionDelayMs : number = 500;
     private _timerId?: NodeJS.Timeout;
     private _checkConnectionPromise: Promise<void> | null = null
+
+    protected runCheckConnection() {
+        if(!this._timerId) {
+            // run check connection cycle
+            const self = this;
+            this._checkConnectionPromise = new Promise<void>(resolve => {
+                this._timerId = setInterval(() => self.CheckConnection(resolve), this._checkConnectionDelayMs)
+            })
+        }
+    }
 
     protected clearExternalHandlers() {
         this._externalAccountChangedHandlers = []

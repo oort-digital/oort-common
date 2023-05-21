@@ -39,6 +39,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         await this.disconnect()
        
         if(await this.connect(chainId)) {
+            this.runCheckConnection()
              // restore handlers
             this.setExternalHandlers(handlersTml)
             // trigger onChainChange event
@@ -158,26 +159,27 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         return this._waitInit.then(() => this._universalProvider!)
     }
 
-    private displayUriHandler = (uri: string) => {
-        this.debug("EVENT QR Code Modal open");
-        this._web3Modal.openModal({ uri });
+    private displayUriHandler = (cnn: WalletConnectConnector, uri: string) => {
+        cnn.debug("EVENT QR Code Modal open");
+        cnn._web3Modal.openModal({ uri });
     }
 
-    private sessionUpdateHandler = ({ /*topic,*/ session }: { /*topic: string;*/ session: SessionTypes.Struct }) => {
-        this.debug("EVENT session_updated");
-        this._session = session
+    private sessionUpdateHandler = (cnn: WalletConnectConnector, { /*topic,*/ session }: { /*topic: string;*/ session: SessionTypes.Struct }) => {
+        cnn.debug("EVENT session_updated");
+        cnn._session = session
     }
 
-    private sessionDeleteHandler = ({ id, topic }: { id: number; topic: string }) => {
-        this.debug("EVENT session_deleted");
-        this.debug(`${id}, ${topic}`);
-        this._session = undefined
+    private sessionDeleteHandler = (cnn: WalletConnectConnector, { id, topic }: { id: number; topic: string }) => {
+        cnn.debug("EVENT session_deleted");
+        cnn.debug(`${id}, ${topic}`);
+        cnn._session = undefined
     }
 
     private subscribeToProviderEvents(client: UniversalProvider) {
-        client.on("display_uri", this.displayUriHandler);
-        client.on("session_update", this.sessionUpdateHandler);
-        client.on("session_delete", this.sessionDeleteHandler);
+        const that = this
+        client.on("display_uri", data => that.displayUriHandler(that, data));
+        client.on("session_update", data =>  that.sessionUpdateHandler(that, data));
+        client.on("session_delete", data => that.sessionDeleteHandler(that, data));
 
         /*
         client.on("session_ping", ({ id, topic }: { id: number; topic: string }) => {
