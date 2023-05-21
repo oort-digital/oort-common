@@ -154,27 +154,25 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
     private async subscribeToProviderEvents(client: UniversalProvider) {
         
-        client.on("display_uri", this.displayUriHandler);
+        client.off("display_uri", this.displayUriHandler);
+        client.off("session_update", this.sessionUpdateHandler);
+        client.off("session_delete", this.sessionDeleteHandler);
 
-        // Subscribe to session ping
+        client.on("display_uri", this.displayUriHandler);
+        client.on("session_update", this.sessionUpdateHandler);
+        client.on("session_delete", this.sessionDeleteHandler);
+
         /*
         client.on("session_ping", ({ id, topic }: { id: number; topic: string }) => {
             this.debug("EVENT session_ping");
             this.debug(`${id} ${topic}`);
-        });*/
+        });
 
-        // Subscribe to session event
-        /*
         client.on("session_event", ({ event, chainId }: { event: any; chainId: string }) => {
             this.debug("EVENT session_event");
             this.debug(`${event} ${chainId}`);
-        });*/
-
-        // Subscribe to session updat
-        client.on("session_update", this.sessionUpdateHandler);
-
-        // Subscribe to session delete
-        client.on("session_delete", this.sessionDeleteHandler);
+        });
+        */
     }
 
     private _universalProvider: UniversalProvider | undefined
