@@ -11,6 +11,12 @@ export interface IChainMap {
     [chainId: number]: IChainInfo
 }
 
+export interface IExternalHandlers {
+    accountChangedHandlers: AccountChangedHandlerType[]
+    chainChangedHandlers: ChainChangedHandlerType[]
+    disconnectHandlers: DisconnectHandlerType[]
+}
+
 export abstract class BaseConnector {
     public readonly name: ConnectorNames;
     public abstract get isInstalled(): boolean
@@ -34,20 +40,12 @@ export abstract class BaseConnector {
     }
 
     public onDisconnect(handler: (error: any) => void): void {
-
-        if(!this._timerId) {
-            // run check connection cycle
-            const self = this;
-            this._timerId = setInterval(() => self.CheckConnection(), this._checkConnectionDelayMs)
-        }
-        
+        this.runCheckConnection()
         this._externalDisconnectHandlers.push(handler);
     }
 
-    public disconnect(): Promise<void> {
-        this._externalAccountChangedHandlers = []
-        this._externalChainChangedHandlers = []
-        this._externalDisconnectHandlers = []
+    public async disconnect(): Promise<void> {
+        this.clearExternalHandlers()
         return Promise.resolve()
     }
 
@@ -63,17 +61,36 @@ export abstract class BaseConnector {
 
     private readonly _checkConnectionDelayMs : number = 500;
     private _timerId?: NodeJS.Timeout;
+
+    protected runCheckConnection() {
+        if(!this._timerId) {
+            // run check connection cycle
+            const self = this;
+            this._timerId = setInterval(() => self.CheckConnection(), this._checkConnectionDelayMs)
+        }
+    }
+
+    protected stopCheckConnection() {
+        if(this._timerId) {
+            clearInterval(this._timerId)
+            this._timerId = undefined
+        }
+    }
+
+    protected clearExternalHandlers() {
+        this._externalAccountChangedHandlers = []
+        this._externalChainChangedHandlers = []
+        this._externalDisconnectHandlers = []
+    }
     
     private async CheckConnection(): Promise<void> {
         if(!await this.isConnected)
         {
-            if(this._timerId) {
-                clearInterval(this._timerId)
-                this.logger.debug(`${this.name}Connector. CheckConnection stopped`)
-            }
-
-            this._externalDisconnectHandlers.forEach(h => h(undefined));
-            this._externalDisconnectHandlers = [];
+            //do disconnect
+            this.stopCheckConnection()
+            this.disconnectHandler(undefined)
+            await this.disconnect()
+            this.logger.debug(`${this.name}Connector. CheckConnection stopped`)
         }
     }
 
@@ -93,5 +110,19 @@ export abstract class BaseConnector {
     protected disconnectHandler: DisconnectHandlerType = (error: any) => {
         this.logger.debug(`${this.name}.disconnectHandler ${JSON.stringify(error)}`)
         this._externalDisconnectHandlers.forEach(h => h(error));
-    }    
+    }
+
+    protected getExternalHandlers(): IExternalHandlers {
+        return {
+            accountChangedHandlers: this._externalAccountChangedHandlers,
+            chainChangedHandlers: this._externalChainChangedHandlers,
+            disconnectHandlers: this._externalDisconnectHandlers
+        }
+    }
+
+    protected setExternalHandlers(handlers: IExternalHandlers) {
+        this._externalAccountChangedHandlers = handlers.accountChangedHandlers
+        this._externalChainChangedHandlers = handlers.chainChangedHandlers
+        this._externalDisconnectHandlers = handlers.disconnectHandlers
+    }
 }

@@ -18,16 +18,36 @@ export interface IWalletConnectOptions {
 export class WalletConnectConnector extends BaseConnector implements IConnector {
 
     async disconnect(): Promise<void> {
-        await this._waitInit
+        await this._waitInit        
+        if(await this.isConnected) {
+            await this._universalProvider!.disconnect()
+        }
+        this._session = undefined
         await super.disconnect()
-        await this._universalProvider!.disconnect()
     }
     
     get canSwitchChain() { return true }
 
     async switchChain(chainId: number): Promise<boolean> {
+        this.debug(`switchChain to ${chainId}`)
+
+        this.stopCheckConnection()
+        // save handlers to temp var
+        const handlersTml = this.getExternalHandlers()
+        // clear handlers to not triggered onDisconnect
+        this.clearExternalHandlers()
+
         await this.disconnect()
-        return await this.connect(chainId)
+       
+        if(await this.connect(chainId)) {
+            this.runCheckConnection()
+             // restore handlers
+            this.setExternalHandlers(handlersTml)
+            // trigger onChainChange event
+            this.chainChangedHandler(chainId.toString())
+            return true
+        }
+        return false
     }
 
     get isConnected(): Promise<boolean> {
@@ -43,8 +63,12 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     }
 
     async connect(chainId: number): Promise<boolean> {
-
         const ethereumProvider = await this.universalProvider
+
+        //prevent open modal on page reloading
+        if(this._session) {
+            return true
+        }
 
         const closePromise = this.waitModalClose()
         const sessionPromise = ethereumProvider.connect({
@@ -63,19 +87,18 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
               },
             },
             // pairingTopic: pairing?.topic,
-          });
+        });
 
-          const session = await Promise.race([closePromise, sessionPromise])
+        const session = await Promise.race([closePromise, sessionPromise])
 
-          if(session && session.expiry) {
+        if(session && session.expiry) {
             this._session = session
             this._web3Modal.closeModal()
             return true
-          }
+        }
 
-          //user close web3Modal
-          return false
-
+        //user close web3Modal
+        return false
     }
 
     constructor({ logger, chains, projectId, modalZIndex = 2000 }: IWalletConnectOptions) {
@@ -122,6 +145,7 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     }
 
     private async init(): Promise<void> {
+
         this._universalProvider = await UniversalProvider.init({
             projectId: this._projectId,
             logger: 'debug',
@@ -134,44 +158,40 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
     private get universalProvider(): Promise<UniversalProvider> {
         return this._waitInit.then(() => this._universalProvider!)
-    } 
+    }
 
-    private async subscribeToProviderEvents(client: UniversalProvider) {
-        
-        client.on("display_uri", async (uri: string) => {
-            this.debug("EVENT QR Code Modal open");
-            this._web3Modal.openModal({ uri });
-        });
+    private displayUriHandler = (uri: string) => {
+        this.debug("EVENT QR Code Modal open");
+        this._web3Modal.openModal({ uri });
+    }
 
-        // Subscribe to session ping
+    private sessionUpdateHandler = ({ /*topic,*/ session }: { /*topic: string;*/ session: SessionTypes.Struct }) => {
+        this.debug("EVENT session_updated");
+        this._session = session
+    }
+
+    private sessionDeleteHandler = ({ id, topic }: { id: number; topic: string }) => {
+        this.debug("EVENT session_deleted");
+        this.debug(`${id}, ${topic}`);
+        this._session = undefined
+    }
+
+    private subscribeToProviderEvents(client: UniversalProvider) {
+        client.on("display_uri", this.displayUriHandler);
+        client.on("session_update", this.sessionUpdateHandler);
+        client.on("session_delete", this.sessionDeleteHandler);
+
+        /*
         client.on("session_ping", ({ id, topic }: { id: number; topic: string }) => {
             this.debug("EVENT session_ping");
             this.debug(`${id} ${topic}`);
         });
 
-        // Subscribe to session event
         client.on("session_event", ({ event, chainId }: { event: any; chainId: string }) => {
             this.debug("EVENT session_event");
             this.debug(`${event} ${chainId}`);
         });
-
-        // Subscribe to session updat
-        client.on(
-            "session_update",
-            ({ /*topic,*/ session }: { /*topic: string;*/ session: SessionTypes.Struct }) => {
-                this.debug("EVENT session_updated");
-                this._session = session
-            },
-        );
-
-        // Subscribe to session delete
-        
-        client.on("session_delete", ({ id, topic }: { id: number; topic: string }) => {
-            this.debug("EVENT session_deleted");
-            this.debug(`${id}, ${topic}`);
-            this._session = undefined
-        });
-        
+        */
     }
 
     private _universalProvider: UniversalProvider | undefined
