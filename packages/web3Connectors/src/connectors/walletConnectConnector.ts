@@ -17,20 +17,33 @@ export interface IWalletConnectOptions {
 
 export class WalletConnectConnector extends BaseConnector implements IConnector {
 
-    async disconnect(): Promise<void> {
-        await this._waitInit
-        await super.disconnect()
-
-        if(await this.isConnected) {
-            await this._universalProvider!.disconnect()
-        }
+    disconnect(): Promise<void> {
+        debugger
+        return this.disconnectInternal(true)    
     }
     
     get canSwitchChain() { return true }
 
     async switchChain(chainId: number): Promise<boolean> {
-        await this.disconnect()
-        return await this.connect(chainId)
+        this.debug(`switchChain to ${chainId}`)
+
+        if(await this.connect(chainId)) {
+            debugger
+            this.chainChangedHandler(chainId.toString())
+            return true
+        }
+        debugger
+        return false
+/*
+        await this.disconnectInternal(false)
+        debugger
+        if(await this.connect(chainId)) {
+            debugger
+            this.chainChangedHandler(chainId.toString())
+            return true
+        }
+        debugger
+        return false*/
     }
 
     get isConnected(): Promise<boolean> {
@@ -46,8 +59,12 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     }
 
     async connect(chainId: number): Promise<boolean> {
-
         const ethereumProvider = await this.universalProvider
+
+        //prevent open modal on page reloading
+        if(this._session) {
+            return true
+        }
 
         const closePromise = this.waitModalClose()
         const sessionPromise = ethereumProvider.connect({
@@ -66,19 +83,18 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
               },
             },
             // pairingTopic: pairing?.topic,
-          });
+        });
 
-          const session = await Promise.race([closePromise, sessionPromise])
+        const session = await Promise.race([closePromise, sessionPromise])
 
-          if(session && session.expiry) {
+        if(session && session.expiry) {
             this._session = session
             this._web3Modal.closeModal()
             return true
-          }
+        }
 
-          //user close web3Modal
-          return false
-
+        //user close web3Modal
+        return false
     }
 
     constructor({ logger, chains, projectId, modalZIndex = 2000 }: IWalletConnectOptions) {
@@ -105,6 +121,19 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     private readonly _web3Modal: Web3Modal
     private readonly _rpc: EthereumRpcMap
     private _waitInit: Promise<void>
+
+    private async disconnectInternal(removeHandlers: boolean): Promise<void> {
+        await this._waitInit
+
+        if(removeHandlers) {
+            await super.disconnect()
+        }
+
+        if(await this.isConnected) {
+            await this._universalProvider!.disconnect()
+        }
+        this._session = undefined
+    }
 
     private waitModalClose = (): Promise<void> => {
         let unSubscribe: (() => void) | undefined

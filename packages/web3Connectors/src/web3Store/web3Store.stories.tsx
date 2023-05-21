@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConsoleLogger } from '@oort-digital/logger';
 import { observer } from 'mobx-react';
@@ -61,6 +61,12 @@ const FakeComponent = observer(() => {
       web3Store.switchChain(newChain.chainId)
     }
   }
+
+  useEffect(() => {
+    if(isReady && web3Store.connectorName !== ConnectorNames.Undefined) {
+      setCurConnector(web3Store.connectorName)
+    }
+  }, [isReady])
 
   if(!isReady) {
     return <>store is not ready</>
