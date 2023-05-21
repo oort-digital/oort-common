@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-alfa.0.0.8",
+  "version": "0.0.1-alfa.0.0.9",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
