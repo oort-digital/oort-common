@@ -17,9 +17,13 @@ export interface IWalletConnectOptions {
 
 export class WalletConnectConnector extends BaseConnector implements IConnector {
 
-    disconnect(): Promise<void> {
-        debugger
-        return this.disconnectInternal(true)    
+    async disconnect(): Promise<void> {
+        await this._waitInit        
+        if(await this.isConnected) {
+            await this._universalProvider!.disconnect()
+        }
+        this._session = undefined
+        await super.disconnect()
     }
     
     get canSwitchChain() { return true }
@@ -27,23 +31,21 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     async switchChain(chainId: number): Promise<boolean> {
         this.debug(`switchChain to ${chainId}`)
 
+        // save handlers to temp var
+        const handlersTml = this.getExternalHandlers()
+        // clear handlers to not triggered onDisconnect
+        this.clearExternalHandlers()
+
+        await this.disconnect()
+       
         if(await this.connect(chainId)) {
-            debugger
+             // restore handlers
+            this.setExternalHandlers(handlersTml)
+            // trigger onChainChange event
             this.chainChangedHandler(chainId.toString())
             return true
         }
-        debugger
         return false
-/*
-        await this.disconnectInternal(false)
-        debugger
-        if(await this.connect(chainId)) {
-            debugger
-            this.chainChangedHandler(chainId.toString())
-            return true
-        }
-        debugger
-        return false*/
     }
 
     get isConnected(): Promise<boolean> {
@@ -121,19 +123,6 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     private readonly _web3Modal: Web3Modal
     private readonly _rpc: EthereumRpcMap
     private _waitInit: Promise<void>
-
-    private async disconnectInternal(removeHandlers: boolean): Promise<void> {
-        await this._waitInit
-
-        if(removeHandlers) {
-            await super.disconnect()
-        }
-
-        if(await this.isConnected) {
-            await this._universalProvider!.disconnect()
-        }
-        this._session = undefined
-    }
 
     private waitModalClose = (): Promise<void> => {
         let unSubscribe: (() => void) | undefined
