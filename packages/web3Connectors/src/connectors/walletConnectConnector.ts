@@ -122,6 +122,11 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
     }
 
     private async init(): Promise<void> {
+
+        if(this._universalProvider) {
+            this.unSubscribeToProviderEvents(this._universalProvider)
+        }
+
         this._universalProvider = await UniversalProvider.init({
             projectId: this._projectId,
             logger: 'debug',
@@ -152,12 +157,13 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
         this._session = undefined
     }
 
-    private async subscribeToProviderEvents(client: UniversalProvider) {
-        
+    private unSubscribeToProviderEvents(client: UniversalProvider) {
         client.off("display_uri", this.displayUriHandler);
         client.off("session_update", this.sessionUpdateHandler);
         client.off("session_delete", this.sessionDeleteHandler);
+    }
 
+    private subscribeToProviderEvents(client: UniversalProvider) {
         client.on("display_uri", this.displayUriHandler);
         client.on("session_update", this.sessionUpdateHandler);
         client.on("session_delete", this.sessionDeleteHandler);
