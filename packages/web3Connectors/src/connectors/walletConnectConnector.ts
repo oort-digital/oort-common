@@ -134,44 +134,47 @@ export class WalletConnectConnector extends BaseConnector implements IConnector 
 
     private get universalProvider(): Promise<UniversalProvider> {
         return this._waitInit.then(() => this._universalProvider!)
-    } 
+    }
+
+    private displayUriHandler = (uri: string) => {
+        this.debug("EVENT QR Code Modal open");
+        this._web3Modal.openModal({ uri });
+    }
+
+    private sessionUpdateHandler = ({ /*topic,*/ session }: { /*topic: string;*/ session: SessionTypes.Struct }) => {
+        this.debug("EVENT session_updated");
+        this._session = session
+    }
+
+    private sessionDeleteHandler = ({ id, topic }: { id: number; topic: string }) => {
+        this.debug("EVENT session_deleted");
+        this.debug(`${id}, ${topic}`);
+        this._session = undefined
+    }
 
     private async subscribeToProviderEvents(client: UniversalProvider) {
         
-        client.on("display_uri", async (uri: string) => {
-            this.debug("EVENT QR Code Modal open");
-            this._web3Modal.openModal({ uri });
-        });
+        client.on("display_uri", this.displayUriHandler);
 
         // Subscribe to session ping
+        /*
         client.on("session_ping", ({ id, topic }: { id: number; topic: string }) => {
             this.debug("EVENT session_ping");
             this.debug(`${id} ${topic}`);
-        });
+        });*/
 
         // Subscribe to session event
+        /*
         client.on("session_event", ({ event, chainId }: { event: any; chainId: string }) => {
             this.debug("EVENT session_event");
             this.debug(`${event} ${chainId}`);
-        });
+        });*/
 
         // Subscribe to session updat
-        client.on(
-            "session_update",
-            ({ /*topic,*/ session }: { /*topic: string;*/ session: SessionTypes.Struct }) => {
-                this.debug("EVENT session_updated");
-                this._session = session
-            },
-        );
+        client.on("session_update", this.sessionUpdateHandler);
 
         // Subscribe to session delete
-        
-        client.on("session_delete", ({ id, topic }: { id: number; topic: string }) => {
-            this.debug("EVENT session_deleted");
-            this.debug(`${id}, ${topic}`);
-            this._session = undefined
-        });
-        
+        client.on("session_delete", this.sessionDeleteHandler);
     }
 
     private _universalProvider: UniversalProvider | undefined

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ConsoleLogger } from '@oort-digital/logger';
 import { observer } from 'mobx-react';
@@ -47,10 +47,12 @@ const FakeComponent = observer(() => {
 
   const { isReady, account, chain, isConnectedToSupportedChain, supportedChains } = web3Store
 
+  const [ curConnector, setCurConnector ] = useState<ConnectorNames>(ConnectorNames.FaceWallet)
+
   const isConnected = !!account
 
   const onConnect = () => {
-    web3Store.connect(137, ConnectorNames.Injected)
+    web3Store.connect(137, curConnector)
   }
 
   const onSwitch = () => {
@@ -65,6 +67,11 @@ const FakeComponent = observer(() => {
   }
 
   return <div>
+    <select value={curConnector} onChange={(ev: any) => setCurConnector(ev.target.value)}>
+      <option value={ConnectorNames.FaceWallet}>face wallet</option>
+      <option value={ConnectorNames.WalletConnect}>wallet connect</option>
+      <option value={ConnectorNames.Injected}>injected</option>
+    </select>
     <button disabled={isConnected} onClick={onConnect}>Connect</button>
     <button disabled={!isConnected} onClick={onSwitch}>Switch</button>
     <div>isConnectedToSupportedChain: {isConnectedToSupportedChain.toString()}</div>
