@@ -1,5 +1,5 @@
 import {AxiosResponse} from "axios";
-import {IGameHeroesResponse, IGenerateHeroParams, IGenerateHeroResponse, IHeroMintAvailableResponse, IHeroesResponse, IMintingQueryHeroesParams, IOortHeroApi, IOpenBlindBoxHero, IOpenBlindBoxParams, IQueryHeroesParams} from "./typesAndInterfaces";
+import {IGameHeroesResponse, IGenerateHeroParams, IGenerateHeroResponse, IHeroMintAvailableResponse, IHeroesResponse, IMintingQueryHeroesParams, IOortHeroApi, IOpenBlindBoxHero, IOpenBlindBoxParams, IOpenseaHeroParams, IOpenseaHeroResponse, IQueryHeroesParams} from "./typesAndInterfaces";
 import { BaseAPI, IAPIConfig, IOortApiResponse, getConfig } from "../common";
 
 const oortServerApis = {
@@ -7,7 +7,8 @@ const oortServerApis = {
     openMutationBlindBox:"/heroMinting/openHeroMutationBlindBox",
     getHeroAvailable: "/heroMinting/getHeroMintAvailable",
     openBlindBox: "/heroMinting/openBlindBox",
-    generateHero: "/heroMinting/generateHero"
+    generateHero: "/heroMinting/generateHero",
+    getOpenseaHeroes: "/metadata/getOpenseaHeroes"
 };
 
 export class OortHeroApi
@@ -62,6 +63,18 @@ export class OortHeroApi
                 wallet,
                 pageNum,
                 pageSize
+            },
+            signal
+        });
+        return response.data;
+    }
+
+    public async getOpenseaHeroes({startTokenId, endTokenId}: IOpenseaHeroParams, signal: AbortSignal): Promise<IOortApiResponse<IOpenseaHeroResponse>> {
+        let url = oortServerApis.getOpenseaHeroes
+        const response = await this._axios.get<IOortApiResponse<IOpenseaHeroResponse>, AxiosResponse<IOortApiResponse<IOpenseaHeroResponse>>>(url, {
+            params: {
+                startTokenId,
+                endTokenId
             },
             signal
         });

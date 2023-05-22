@@ -7,6 +7,7 @@ export interface IOortHeroApi {
     generateHero(params: IGenerateHeroParams, signal: AbortSignal): Promise<IOortApiResponse<IGenerateHeroResponse>>
     /** @deprecated generateHero */
     openHeroBlindBox(params: IOpenBlindBoxParams, signal: AbortSignal): Promise<IOortApiResponse<IOpenBlindBoxHero>>
+    getOpenseaHeroes(params: IOpenseaHeroParams, signal: AbortSignal): Promise<IOortApiResponse<IOpenseaHeroResponse>>
 }
 
 export interface IOortHeroesResponse {
@@ -41,6 +42,15 @@ export interface IHeroMintAvailableResponse {
 export interface IOpenBlindBoxHero {
     hero: IOortHeroesResponse
     image: string
+}
+
+export interface IOpenseaAsset {
+    tokenId: string
+    assetHash: string
+}
+
+export interface IOpenseaHeroResponse {
+    openseaHeroList: IOpenseaAsset[]
 }
 
 export interface IGenerateHeroResponse {
@@ -109,6 +119,11 @@ export interface IOpenBlindBoxParams {
     heroCollection: string
     walletAddress?: string
     tokenId: string
+}
+
+export interface IOpenseaHeroParams {
+    startTokenId: number
+    endTokenId: number
 }
 
 export interface IGenerateHeroParams {

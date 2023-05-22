@@ -26,6 +26,7 @@ export interface INavItems {
         mutation: NavItemType
         claim: NavItemType
         faucet?: NavItemType
+        refreshMetadata?: NavItemType
     }
     rent: {
         lend: NavItemType
@@ -76,7 +77,8 @@ const mintInternal = {
     icon: <MintIcon />,
     mutation: "Hero Mutation (Upgrading)",
     claim: "Claim Heroes",
-    faucet: "Faucet"
+    faucet: "Faucet",
+    refreshMetadata: "Refresh Metadata"
 }
 
 const gameHubInternal = {
