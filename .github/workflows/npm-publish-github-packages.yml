@@ -16,6 +16,7 @@ on:
         - nftProviders
         - oortApiClient
         - ui
+        - uiNext
         - urlSearchParams
         - utils
         - web3Connectors
