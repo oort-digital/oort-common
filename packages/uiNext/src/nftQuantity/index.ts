@@ -1,0 +1,1 @@
+export { NftQuantity } from "./nftQuantity"

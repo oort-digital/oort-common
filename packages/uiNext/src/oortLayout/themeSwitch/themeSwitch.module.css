@@ -1,0 +1,29 @@
+
+.root {
+    height: 33px !important;
+    width: 60px !important;
+    background-image: url('./bg-light.webp') !important;
+    border: 1px solid #6E7882 !important;
+}
+
+.root :global(.ant-switch-handle) {
+    top: 3px;
+}
+
+.root :global(.ant-switch-handle::before) {
+    height: 26px;
+    width: 26px;
+    border-radius: 13px;
+}
+
+.root:global(.ant-switch-checked) {
+    background-image: url('./bg-dark.webp') !important;
+}
+
+.root:global(.ant-switch-checked .ant-switch-handle) {
+    left: 30px;
+}
+
+.root:global(.ant-switch-checked .ant-switch-handle::before) {
+    background-color: #EFCE7A;
+}
