@@ -1,6 +1,5 @@
 import "../styles/antOverride.less";
 import "../styles/fonts.css";
-import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { IBreadcrumbItem, OortBreadcrumb } from ".";
 import { ThemeLoader } from "../internalHelpers";
@@ -16,10 +15,7 @@ const Template: ComponentStory<typeof OortBreadcrumb> = (args) => {
 
   return <>
     <ThemeLoader />
-
-    <Router>
-      <OortBreadcrumb {...args} />
-    </Router>
+    <OortBreadcrumb {...args} />
   </>
 }
 

@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { Img } from '../img'
 import './tileCoverSimple.less'
 
@@ -20,7 +20,7 @@ export const TileCoverSimple = ({ className, imgSrc, href, reactRouterLink, size
     const cssClass = `tile-cover-simple ${className || ''}`
 
     if(reactRouterLink) {
-        return <Link to={reactRouterLink} className={cssClass}>{body}</Link>
+        return <Link href={reactRouterLink} className={cssClass}>{body}</Link>
     }
     if(href) {
 	    return <a href={href}  rel="noreferrer" className={cssClass}>{body}</a>

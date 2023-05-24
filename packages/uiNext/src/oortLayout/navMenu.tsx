@@ -1,6 +1,6 @@
 import { Collapse } from "antd";
 import { useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useRouter } from 'next/router';
 import { DashboardIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
 import styles from './navMenu.module.less';
@@ -121,7 +121,8 @@ type NavItemPairType = [INavItemInternal, NavItemMap]
 export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
 
     // to trigger rerendering on react-router pathchange
-    useLocation()
+    // useLocation()
+    useRouter()
 
     const { dashboard, rent, gameHub, minting, rpgBattle } = navItems
 

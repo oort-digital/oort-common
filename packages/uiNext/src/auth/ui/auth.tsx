@@ -13,7 +13,7 @@ import { AuthStore, TokenStorageType } from '../store';
 import { ILogger } from '@oort-digital/logger';
 import { registerAuthInterceptors, unRegisterAuthInterceptors } from '../interceptors';
 import { AuthModal } from './authModal';
-import { useLocation } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import classnames from 'classnames';
 
 
@@ -70,7 +70,8 @@ const Impl = (props: IAuthProps) => {
         logger, web3Store, ssoServerBaseUrl, tokenStorageType
     }))
 
-    const location = useLocation()
+    // const location = useLocation()
+    const location = useRouter()
 
     if(excludePathes?.some(p => location.pathname.includes(p))) {
         return <>{children}</>

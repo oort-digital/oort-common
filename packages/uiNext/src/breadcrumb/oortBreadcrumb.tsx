@@ -1,7 +1,7 @@
 import { Breadcrumb } from "antd";
-import { Link } from "react-router-dom";
 import { BreadcrumbArrowIcon } from "./breadcrumbArrowIcon";
 import styles from "./oortBreadcrumb.module.less"
+import Link from "next/link";
 
 export interface IBreadcrumbItem {
     path?: string
@@ -19,7 +19,7 @@ export const OortBreadcrumb = ({ items, className } : IPros) => {
 
         if(path) {
             return <Breadcrumb.Item key={name}>
-                <Link to={path}>{name}</Link>
+                <Link href={path}>{name}</Link>
             </Breadcrumb.Item>
         }
 

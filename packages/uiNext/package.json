@@ -28,7 +28,7 @@
     }
   },
   "dependencies": {
-    "@oort-digital/lazy-loader": "0.0.1-alfa.0.0.1",
+    "@oort-digital/lazy-loader-next-js": "0.0.1-alfa.0.0.2",
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
     "@oort-digital/oort-api-client": "0.0.1-alfa.0.0.4",
     "@oort-digital/utils": "0.0.1-alfa.0.0.1",
@@ -42,7 +42,6 @@
     "next": "13.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.6.2",
     "typescript-cookie": "^1.0.4"
   },
   "devDependencies": {

@@ -1,6 +1,5 @@
 import "../../styles/antOverride.less";
 import "../../styles/fonts.css";
-import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React, { lazy } from "react";
 import { useTheme } from "../../effects";
@@ -36,10 +35,7 @@ const Template: ComponentStory<typeof Layout> = (args: ILayoutProps) => {
 
   return <>
     { isDark ? <DarkTheme /> : <LightTheme /> }
-    <Router>
-      <Layout {...args} />
-    </Router>
-    
+    <Layout {...args} />
   </>
 }
 

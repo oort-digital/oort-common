@@ -2,7 +2,6 @@
 import React from "react";
 import "../../styles/antOverride.less";
 import "../../styles/fonts.css";
-import {BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { lazy } from "react";
 import { useTheme } from "../../effects";
@@ -35,10 +34,7 @@ const Template: ComponentStory<typeof LayoutMobile> = (args) => {
 
   return <>
     { isDark ? <DarkTheme /> : <LightTheme /> }
-    <Router>
-      <LayoutMobile {...args} />
-    </Router>
-    
+    <LayoutMobile {...args} />
   </>
 }
 

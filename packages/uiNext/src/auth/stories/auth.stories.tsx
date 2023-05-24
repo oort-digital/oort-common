@@ -1,7 +1,6 @@
 import "../../styles/antOverride.less"
 import "../../styles/fonts.css"
 import "../../styles/theme/light.less"
-import {BrowserRouter as Router } from 'react-router-dom';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { EMPTY_ABORT_SIGNAL } from "@oort-digital/utils"
@@ -63,10 +62,10 @@ const Content = observer(() => {
 })
 
 const AuthWrap = observer((props: IAuthProps) => {
-  return <Router>
+  return <>
     <ThemeLoader />
     <Auth { ...props }/>
-  </Router>
+  </>
 })
 
 

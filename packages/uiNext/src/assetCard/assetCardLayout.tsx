@@ -8,7 +8,7 @@ import { NftQuantity } from '../nftQuantity';
 import { IMarketplaceConfig, INftScanConfig, ViewOnButton } from '../viewOn';
 import { BigNumber } from 'ethers';
 import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { cutLongString, toMasskedAddress } from '@oort-digital/utils';
 
 interface IProps<TAssetItem extends IAssetItem> {
@@ -72,10 +72,10 @@ export const AssetCardLayout = <TAsset extends IAssetItem, >({assetItem, owner, 
 
     const renderAssetData = () => {
         if(reactRouterLink) {
-            return <Link to={reactRouterLink}>{assetData}</Link>
+            return <Link href={reactRouterLink}>{assetData}</Link>
         }
         if (href) {
-            return <a href={href}>{assetData}</a>
+            return <Link href={href}>{assetData}</Link>
         }
         return assetData
     }

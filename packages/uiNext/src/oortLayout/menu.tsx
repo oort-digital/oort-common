@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import styles from './menu.module.less';
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 interface IMenuItemBtnProps {
     className?: string
@@ -39,7 +39,7 @@ export const MenuItemLink = ({ className, href, caption, icon, reactRouterLink, 
 
     if(reactRouterLink) {
         const path = new URL(href).pathname
-        return <li className={className}><Link to={path}>{captionElement}</Link></li>
+        return <li className={className}><Link href={path}>{captionElement}</Link></li>
     }
 
     return <li className={className}><a href={href} >{captionElement}</a></li>
