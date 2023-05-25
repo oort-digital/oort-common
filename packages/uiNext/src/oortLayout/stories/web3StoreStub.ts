@@ -24,7 +24,9 @@ export const navItems: INavItems = {
         href: 'http://game-hub.oort.local/nfts',
         reactRouterLink: true
       }
-    }
+    },
+
+    rpgBattle: 'https://battle.oort.digital'
   }
 
 const supportedChains = [
@@ -56,7 +58,7 @@ const storeParams: IWeb3StoreParams<IChain> = {
   logger,
   supportedChains,
   walletConnectProjectId: 'fake',
-  supportedWallets: [ ConnectorNames.Injected ]
+  supportedWallets: [ ConnectorNames.Injected, ConnectorNames.WalletConnect ]
 }
 
 export class Web3StoreStub  extends Web3Store<IChain> {

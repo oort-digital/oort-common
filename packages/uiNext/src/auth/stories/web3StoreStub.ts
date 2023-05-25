@@ -27,14 +27,15 @@ export class Web3StoreStub extends Web3Store<IChain> {
       super({
         logger,
         chainService: new ChainServiceStub(),
-    faceWalletCredentials,
-    walletConnectProjectId: 'c2b4ff7ce76613f93a7edea85b9618f5',
-    supportedWallets: [ConnectorNames.Injected],
-    supportedChains
+        faceWalletCredentials,
+        walletConnectProjectId: 'c2b4ff7ce76613f93a7edea85b9618f5',
+        supportedWallets: [ConnectorNames.Injected, ConnectorNames.WalletConnect],
+        supportedChains
       });
-        makeObservable(this, {
-            signMessage: action.bound
-        });
+
+      makeObservable(this, {
+          signMessage: action.bound
+      });
     }
 
     async signMessage(message: string): Promise<string> {

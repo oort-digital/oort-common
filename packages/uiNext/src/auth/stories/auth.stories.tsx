@@ -74,7 +74,7 @@ export const Primary: Story = {
   args: {
     web3Store,
     logger,
-    supportedWallets: [ConnectorNames.Injected],
+    supportedWallets: [ConnectorNames.Injected, ConnectorNames.WalletConnect],
     ssoServerBaseUrl: 'https://api-test.oort.digital/sso',
     tokenStorageType: "cookies",
     children: <Content />

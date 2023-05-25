@@ -41,7 +41,7 @@ const Template: ComponentStory<typeof Layout> = (args: ILayoutProps) => {
 }
 
 const web3 = new Web3StoreStub()
-const supportedWallets: ConnectorNames[] = [ConnectorNames.Injected]
+const supportedWallets: ConnectorNames[] = [ConnectorNames.Injected, ConnectorNames.WalletConnect]
 
 export const WithWeb3 = Template.bind({});
 WithWeb3.args = {
