@@ -18,9 +18,15 @@ const ErrorCodes = {
   UnknownChain: 4902
 }
 
+export interface IRawProvider {
+  request(params: any): Promise<any>
+  isMetaMask: boolean | undefined
+  removeListener: (string, any) => void
+}
+
 export class InjectedConnector extends BaseConnector implements IConnector
 {
-  get canSwitchChain() { return !!this.rawProvider.isMetaMask }
+  get canSwitchChain() { return !!this.rawProvider?.isMetaMask }
 
   async connect(_chainId: number): Promise<boolean> {
     if(this._ethRequestAccounts) {
@@ -48,6 +54,9 @@ export class InjectedConnector extends BaseConnector implements IConnector
     try {
         if(!this._chains[chainId]) {
             throw new Error(`Chain ${chainId} not supported`)
+        }
+        if(!this.rawProvider) {
+          return false
         }
         await this.rawProvider.request({
           method: 'wallet_switchEthereumChain',
@@ -81,9 +90,11 @@ export class InjectedConnector extends BaseConnector implements IConnector
   }
 
   async disconnect(): Promise<void> {
-    this.rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
-    this.rawProvider.removeListener('chainChanged', this.chainChangedHandler);
-    // this.rawProvider.removeListener("disconnect", this.disconnectHandler);
+    if(this.rawProvider) {
+      this.rawProvider.removeListener('accountsChanged', this.accountsChangedHandler);
+      this.rawProvider.removeListener('chainChanged', this.chainChangedHandler);
+      // this.rawProvider.removeListener("disconnect", this.disconnectHandler);
+    }
     await super.disconnect()
 }
 
@@ -109,6 +120,9 @@ export class InjectedConnector extends BaseConnector implements IConnector
     try {
       const chain = this._chains[chainId]
       const blockExplorerUrls = chain.blockExplorer ? [chain.blockExplorer] : undefined
+      if(!this.rawProvider) {
+        return false
+      }
       await this.rawProvider.request({
         method: 'wallet_addEthereumChain',
         params: [{
@@ -132,8 +146,8 @@ export class InjectedConnector extends BaseConnector implements IConnector
   }
 
   //use this method to override window.ethereum in unit tests
-  protected get rawProvider(): any | null {
-     // nextjs ssr
+  protected get rawProvider(): IRawProvider | null {
+    // nextjs ssr
     if (typeof window !== "undefined") {
       return window.ethereum
     }
@@ -148,6 +162,9 @@ export class InjectedConnector extends BaseConnector implements IConnector
 
   private async prvEnable(): Promise<boolean> {
     try {
+      if(this.rawProvider === null) {
+        return false
+      }
       await this.rawProvider.request({ method: 'eth_requestAccounts' })
     }
     catch(error: any) {
@@ -163,6 +180,9 @@ export class InjectedConnector extends BaseConnector implements IConnector
   }
 
   private async isConnectedAsync(): Promise<boolean> {
+    if(!this.rawProvider) {
+      return false
+    }
     const response: string[] = await this.rawProvider.request({ method: 'eth_accounts' })
     return response.length > 0
   }
