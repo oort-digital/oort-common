@@ -13,16 +13,16 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
             // name: 'MyLib',
-            formats: ['es', 'cjs'],
+            formats: ['es'],
             fileName: (format) => `cnn.${format}.js`,
         },
         rollupOptions: {
             external: Object.keys(dependencies),
             output: {
-                globals: {
-                    react: 'React',
-                    'react-dom': 'ReactDOM'
-                },
+                // globals: {
+                //     react: 'React',
+                //     'react-dom': 'ReactDOM'
+                // },
                 sourcemap: true
             }
         },
