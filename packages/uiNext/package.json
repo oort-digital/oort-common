@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/ui-next",
-  "version": "0.0.1-beta.0.0.4",
+  "version": "0.0.1-beta.0.0.5",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -45,7 +45,6 @@
     "typescript-cookie": "^1.0.4"
   },
   "devDependencies": {
-    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@storybook/addon-essentials": "^7.0.17",
     "@storybook/addon-interactions": "^7.0.17",
     "@storybook/addon-links": "^7.0.17",
@@ -78,7 +77,7 @@
   "files": [
     "dist"
   ],
-  "main": "dist/ui.cjs.js",
+  "main": "dist/ui.es.js",
   "module": "dist/ui.es.js",
   "types": "dist/index.d.ts"
 }

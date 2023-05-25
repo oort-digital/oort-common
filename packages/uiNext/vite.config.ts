@@ -1,4 +1,3 @@
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import react from '@vitejs/plugin-react';
 import path from 'node:path';
@@ -10,11 +9,6 @@ import { dependencies } from "./package.json"
 export default defineConfig({
     plugins: [
         nodePolyfills({
-            // To exclude specific polyfills, add them to this list.
-            // exclude: [
-            //   'fs', // Excludes the polyfill for `fs` and `node:fs`.
-            // ],
-            // Whether to polyfill `node:` protocol imports.
             protocolImports: true,
         }),
 
@@ -36,7 +30,7 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
             // name: 'MyLib',
-            formats: ['es', 'cjs'],
+            formats: ['es'],
             fileName: (format) => `ui.${format}.js`,
         },
         rollupOptions: {
@@ -55,9 +49,9 @@ export default defineConfig({
     optimizeDeps: {
         esbuildOptions: {
             // Node.js global to browser globalThis
-            define: {
-                global: 'globalThis'
-            },
+            // define: {
+            //     global: 'globalThis'
+            // },
             // Enable esbuild polyfill plugins
             // plugins: [
             //     NodeGlobalsPolyfillPlugin({
