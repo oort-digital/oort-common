@@ -132,8 +132,12 @@ export class InjectedConnector extends BaseConnector implements IConnector
   }
 
   //use this method to override window.ethereum in unit tests
-  protected get rawProvider(): any {
-    return window.ethereum
+  protected get rawProvider(): any | null {
+     // nextjs ssr
+    if (typeof window !== "undefined") {
+      return window.ethereum
+    }
+    return null
   }
 
   protected getRawProvider(): Promise<any> {

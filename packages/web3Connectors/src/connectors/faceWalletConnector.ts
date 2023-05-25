@@ -115,6 +115,8 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
 
     private static _frameCloseCallback: (() => void) | null = null
     private static initFrameEventsListener = () => {
+       // nextjs ssr
+      if (typeof window !== "undefined") {
         window.addEventListener('message', event => {
             // IMPORTANT: check the origin of the data!
             if ((event.origin === 'https://app.facewallet.xyz' || event.origin === 'https://app.test.facewallet.xyz')
@@ -122,7 +124,7 @@ export class FaceWalletConnector extends BaseConnector implements IConnector {
                     FaceWalletConnector._frameCloseCallback && FaceWalletConnector._frameCloseCallback()
             }
         })
-
+      }
     }
 
     private _curChainId: number | undefined
