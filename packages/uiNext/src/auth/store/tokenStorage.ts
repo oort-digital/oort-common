@@ -34,6 +34,10 @@ class CookieTokenStorage implements ITokenStorage {
     }
   
     private getCookieDomain = (): string | undefined => {
+         // nextjs: check ssr
+        if(typeof window === "undefined") {
+            return undefined
+        }
         const host = window.location.hostname;
         const arr = host.split('.')
 

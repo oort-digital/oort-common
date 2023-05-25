@@ -12,7 +12,10 @@ export const useTheme = (sourceType: ThemeSourceType = 'cookies'): [boolean, Set
     const initialValue = themeSource.isDarkMode;
     if (initialValue !== darkMode) {
       themeSource.setDarkMode(darkMode)
-      window.location.reload()
+      // nextjs ssr
+      if (typeof window !== "undefined") {
+        window.location.reload()
+      }
     }
   }, [darkMode]);
 

@@ -33,6 +33,8 @@ class CookiesSource implements IThemeSource {
       return JSON.parse(json) || false;
     }
     setDarkMode = (isDark: boolean) => {
+      // nextjs: check ssr
+      if(typeof window !== "undefined") {
         const domain = getCookieDomain(window.location.hostname)
         const expires = new Date()
         expires.setFullYear(expires.getFullYear() + 10)
@@ -41,6 +43,7 @@ class CookiesSource implements IThemeSource {
             expires: expires,
             path: '/'
         })
+      }
     }
 }
 
