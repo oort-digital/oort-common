@@ -1,7 +1,7 @@
 import "../../styles/antOverride.less";
 import "../../styles/fonts.css";
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import React, { lazy } from "react";
+import React from "react";
 import { useTheme } from "../../effects";
 import { Layout } from "..";
 import {isActiveFunc, navItems, TestContent, testNavItems} from "./common";
@@ -9,9 +9,10 @@ import { Web3StoreStub } from "./web3StoreStub";
 import { ILayoutProps } from "../typesAndInterfaces";
 import { Button } from "antd";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
+import dynamic from "next/dynamic"
 
-const DarkTheme = lazy(() => import("../../styles/theme/darkTheme"));
-const LightTheme = lazy(() => import("../../styles/theme/lightTheme"));
+const DarkTheme = dynamic(() => import("../../styles/theme/darkTheme"));
+const LightTheme = dynamic(() => import("../../styles/theme/lightTheme"));
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

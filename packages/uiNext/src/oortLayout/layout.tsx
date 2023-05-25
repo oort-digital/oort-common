@@ -1,24 +1,17 @@
-import { DeviceType, useDeviceType } from "@oort-digital/lazy-loader"
-import { lazy, Suspense } from "react"
+import { LazyLoaderNextJs } from "@oort-digital/lazy-loader-next-js"
 import { ILayoutProps } from "./typesAndInterfaces"
+import dynamic, { Loader } from "next/dynamic"
 
-const Desktop = lazy(() => import("./layoutDesktop"))
-const Mobile = lazy(() => import("./layoutMobile"))
+const desktopLoader: Loader<ILayoutProps> = () => import("./layoutDesktop")
+const mobileLoader: Loader<ILayoutProps> = () => import("./layoutMobile")
+
+const DesktopEl = dynamic(desktopLoader)
+const MobileEl = dynamic(mobileLoader)
 
 export const Layout = (props: ILayoutProps) => {
 
-	const deviceType = useDeviceType()
+    const desktop = <DesktopEl {...props}/>
+    const mobile = <MobileEl {...props}/>
 
-    const renderDevice = () => {
-        if(deviceType === DeviceType.Desktop) {
-            return <Desktop {...props} />
-        }
-        if(deviceType === DeviceType.Phone) {
-            return <Mobile {...props} />
-        }
-
-        return <Mobile {...props} />
-    }
-
-	return <Suspense fallback={<span />}> { renderDevice() } </Suspense>
+    return <LazyLoaderNextJs desktop={desktop} mobile={mobile} tablet={mobile} />
 }

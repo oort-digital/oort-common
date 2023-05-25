@@ -1,10 +1,10 @@
-import { lazy } from 'react'
 import { ConnectorNames, IConnector } from '@oort-digital/web3-connectors';
 import { IChain } from "@oort-digital/web3-connectors";
-import { LazyLoader } from '@oort-digital/lazy-loader';
+import { LazyLoaderNextJs } from '@oort-digital/lazy-loader-next-js';
+import dynamic, { Loader } from 'next/dynamic';
 
-const Desktop = lazy(() => import("./connectModalDesktop"));
-const Mobile = lazy(() => import("./connectModalMobile"));
+const desktopLoader: Loader<IConnectModalProps> = () => import('./connectModalDesktop')
+const mobileLoader: Loader<IConnectModalProps> = () => import('./connectModalMobile')
 
 export interface IWeb3 {
     canSwitchChain: boolean
@@ -35,12 +35,12 @@ export interface IConnectModalProps {
 
 export const ConnectModal = (props: IConnectModalProps) => {
 
-	const desktop = <Desktop {...props} />
-	const mobile = <Mobile {...props} />
+	const DesktopEl = dynamic(desktopLoader)
+    const MobileEl = dynamic(mobileLoader)
 
-	return <LazyLoader
-		desktop={desktop}
-		tablet={desktop}
-		mobile={mobile}
+	return <LazyLoaderNextJs
+		desktop={<DesktopEl {...props}/>}
+		tablet={<DesktopEl {...props}/>}
+		mobile={<MobileEl {...props}/>}
 	/>
 }

@@ -1,15 +1,17 @@
 import { Button } from "antd";
-import { lazy, Suspense } from "react"
 import { useTheme } from "../../effects"
+import dynamic from "next/dynamic"
 
-const DarkTheme = lazy(() => import("../../styles/theme/darkTheme"));
-const LightTheme = lazy(() => import("../../styles/theme/lightTheme"));
+
+const dynamicOptions = {
+  loading: () => <>...loading</>
+}
+const DarkTheme = dynamic(() => import("../../styles/theme/darkTheme"), dynamicOptions);
+const LightTheme = dynamic(() => import("../../styles/theme/lightTheme"), dynamicOptions);
 
 // use it on storybook page
 export const ThemeLoader = () => {
     const [isDark, setDarkMode] = useTheme()
-
-
 
     const renderTheme = () => {
 
@@ -34,7 +36,5 @@ export const ThemeLoader = () => {
         </>
     }
 
-    return <>
-      <Suspense fallback="loading..."> { renderTheme() } </Suspense>
-    </>
+    return renderTheme()
 }
