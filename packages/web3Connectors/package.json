@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-alfa.0.0.9",
+  "version": "0.0.1-beta.0.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -32,6 +32,7 @@
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-typescript": "^7.21.5",
     "@oort-digital/utils": "^0.0.1-alfa.0.0.1",
+    "@rollup/plugin-commonjs": "^25.0.0",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-interactions": "^6.5.13",
@@ -42,6 +43,7 @@
     "@storybook/preset-create-react-app": "^4.1.2",
     "@storybook/react": "^6.5.13",
     "@storybook/testing-library": "^0.0.13",
+    "@types/jest": "^29.5.1",
     "babel-jest": "^29.5.0",
     "esbuild": "^0.17.2",
     "jest": "^29.5.0",
