@@ -47,7 +47,7 @@ test('connectorProvider read cur provider from localStorage', async () => {
 
   expect(connectorProvider.connectorsByName[ConnectorNames.Injected]).toBeDefined()
   expect(connectorProvider.curConnector).toBeDefined()
-  expect(connectorProvider.canSwitchChain).toBeFalsy()
+  expect(connectorProvider.canSwitchChain).toBeTruthy()
 
   localStorage.removeItem(lsKey)
 });

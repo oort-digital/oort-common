@@ -4,6 +4,7 @@ import { InjectedConnector } from "../connectors"
 import { IChainInfo } from "../internalTypesAndInterfaces"
 import { TestRawProvider } from "./testRawProvider"
 import { TestSigner } from "./testSigner"
+import { IRawProvider } from "../connectors/injectedConnector"
 
 interface IOptions {
     rawProvider: TestRawProvider
@@ -22,7 +23,7 @@ export class InjectedConnectorForTest extends InjectedConnector {
       this._signer = signer
     }
   
-    protected get rawProvider(): any {
+    protected get rawProvider(): IRawProvider | null {
       return this._rawProvider
     }
   
