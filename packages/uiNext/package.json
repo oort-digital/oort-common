@@ -1,6 +1,7 @@
 {
   "name": "@oort-digital/ui-next",
-  "version": "0.0.1-beta.0.0.7",
+  "version": "0.0.1-beta.0.0.8",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -32,7 +33,7 @@
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
     "@oort-digital/oort-api-client": "0.0.1-alfa.0.0.4",
     "@oort-digital/utils": "0.0.1-alfa.0.0.1",
-    "@oort-digital/web3-connectors": "0.0.1-beta.0.0.8",
+    "@oort-digital/web3-connectors": "0.0.1-beta.0.1.0",
     "antd": "4.23.0",
     "blockies-ts": "^1.0.0",
     "classnames": "^2.3.2",
@@ -77,7 +78,6 @@
   "files": [
     "dist"
   ],
-  "main": "dist/ui.cjs.js",
   "module": "dist/ui.es.js",
   "types": "dist/index.d.ts"
 }
