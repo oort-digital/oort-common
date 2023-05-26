@@ -1,6 +1,7 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-beta.0.0.8",
+  "version": "0.0.1-beta.0.0.9",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -56,7 +57,7 @@
   "files": [
     "dist"
   ],
-  "main": "dist/cnn.cjs.js",
+  
   "module": "dist/cnn.es.js",
   "types": "dist/index.d.ts"
 }
