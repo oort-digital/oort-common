@@ -13,7 +13,7 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
             // name: 'MyLib',
-            formats: ['es'],
+            formats: ['es', 'cjs'],
             fileName: (format) => `cnn.${format}.js`,
         },
         rollupOptions: {
