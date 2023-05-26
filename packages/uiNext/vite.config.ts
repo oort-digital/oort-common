@@ -22,6 +22,10 @@ export default defineConfig({
                 {
                     src: 'src/styles',
                     dest: './'
+                },
+                {
+                    src: 'dist/style.css',
+                    dest: './styles'
                 }
             ]
         })
