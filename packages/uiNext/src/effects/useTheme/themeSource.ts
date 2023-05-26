@@ -1,5 +1,6 @@
 import { getCookie, setCookie } from 'typescript-cookie'
 import { getCookieDomain } from './utils';
+import { isSsrCheck } from '@oort-digital/lazy-loader-next-js';
 
 const DARK_MODE = "dark-mode";
 export type ThemeSourceType = 'localstorage' | 'cookies'
@@ -11,6 +12,9 @@ export interface IThemeSource {
 
 class LocalStorageSource implements IThemeSource {
   get isDarkMode(): boolean {
+    if(isSsrCheck()) {
+      return false
+    }
     const json = localStorage.getItem(DARK_MODE)
     if(!json) {
       return false
@@ -19,12 +23,17 @@ class LocalStorageSource implements IThemeSource {
     return JSON.parse(json) || false;
   }
   setDarkMode = (isDark: boolean) => {
-    localStorage.setItem(DARK_MODE, isDark.toString());
+    if(!isSsrCheck()) {
+      localStorage.setItem(DARK_MODE, isDark.toString());
+    }
   }
 }
 
 class CookiesSource implements IThemeSource {
     get isDarkMode(): boolean {
+      if(isSsrCheck()) {
+        return false
+      }
       const json = getCookie(DARK_MODE)
       if(!json) {
         return false
@@ -34,7 +43,7 @@ class CookiesSource implements IThemeSource {
     }
     setDarkMode = (isDark: boolean) => {
       // nextjs: check ssr
-      if(typeof window !== "undefined") {
+      if(!isSsrCheck()) {
         const domain = getCookieDomain(window.location.hostname)
         const expires = new Date()
         expires.setFullYear(expires.getFullYear() + 10)
