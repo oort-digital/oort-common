@@ -13,7 +13,7 @@ import { AuthStore, TokenStorageType } from '../store';
 import { ILogger } from '@oort-digital/logger';
 import { registerAuthInterceptors, unRegisterAuthInterceptors } from '../interceptors';
 import { AuthModal } from './authModal';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import classnames from 'classnames';
 
 
@@ -71,9 +71,9 @@ const Impl = (props: IAuthProps) => {
     }))
 
     // const location = useLocation()
-    const location = useRouter()
+    const pathname = usePathname()
 
-    if(excludePathes?.some(p => location.pathname.includes(p))) {
+    if(excludePathes?.some(p => pathname.includes(p))) {
         return <>{children}</>
     }
 
