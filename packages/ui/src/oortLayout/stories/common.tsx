@@ -30,8 +30,10 @@ export const navItems: INavItems = {
     rpgBattle: 'https://battle.oort.digital'  
 }
 
-const minting = { ...navItems.minting, ...{ faucet: "https://faucet.oort.digital/", refreshMetadata: "https://faucet.oort.digital/refreshMetadata" } }
-export const testNavItems: INavItems = { ...navItems, ...{ minting } }
+export const testNavItems: INavItems = { ...navItems, ...{ developTools: {
+  faucet: 'http://develop.oort.local/faucet',
+  refreshMetadata: "http://develop.oort.local/refresh-metadata"
+}, } }
 
 const style = { 
   // background: 'red'
