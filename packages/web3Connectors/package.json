@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-beta.0.0.9",
+  "version": "0.0.1-beta.0.1.0",
   "type": "module",
   "repository": {
     "type": "git",
@@ -23,7 +23,8 @@
     "@walletconnect/utils": "^2.7.3",
     "@web3modal/standalone": "^2.4.1",
     "ethers": "5.7.2",
-    "mobx": "^6.9.0"
+    "mobx": "^6.9.0",
+    "lokijs": "^1.5.12"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
