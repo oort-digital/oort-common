@@ -20,6 +20,7 @@ on:
         - urlSearchParams
         - utils
         - web3Connectors
+        - test
 
 jobs:
 
