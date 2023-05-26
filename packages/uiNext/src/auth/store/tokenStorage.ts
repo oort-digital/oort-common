@@ -1,3 +1,4 @@
+import { isSsrCheck } from "@oort-digital/lazy-loader-next-js";
 import { getCookie, removeCookie, setCookie } from "typescript-cookie";
 
 export interface ITokenStorage {
@@ -11,6 +12,9 @@ export type TokenStorageType = 'cookies' | 'fake'
 class CookieTokenStorage implements ITokenStorage {
     
     clear = (address: string) => {
+        if(isSsrCheck()) {
+            return;
+        }
         const domain = this.getCookieDomain()
         removeCookie(this.getKey(address), { 
             domain: domain,
@@ -19,10 +23,16 @@ class CookieTokenStorage implements ITokenStorage {
     }
 
     getToken = (address: string): string | undefined => {
+        if(isSsrCheck()) {
+            return undefined
+        }
         return getCookie(this.getKey(address))
     }
 
     setToken = (address: string, token: string) => {
+        if(isSsrCheck()) {
+            return;
+        }
         const domain = this.getCookieDomain()
         const expires = new Date()
         expires.setFullYear(expires.getFullYear() + 10)

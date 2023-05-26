@@ -27,10 +27,11 @@ export default defineConfig({
         })
     ],
     build: {
+        minify: false,
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
             // name: 'MyLib',
-            formats: ['es', 'cjs'],
+            formats: ['es'],
             fileName: (format) => `ui.${format}.js`,
         },
         rollupOptions: {
