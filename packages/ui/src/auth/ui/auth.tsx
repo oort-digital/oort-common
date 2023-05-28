@@ -81,9 +81,13 @@ const Impl = (props: IAuthProps) => {
     const { isReady, askAuth } = ssoStore
 
     useEffect(() => {
+        debugger
+
+        logger.debug(`Auth.useEffect. isReady:${isReady}`)
         if(isReady) {
             const ids = registerAuthInterceptors(ssoStore, logger)
             return () => {
+                logger.debug(`Auth.useEffect. isReady:${isReady} unmount`)
                 unRegisterAuthInterceptors(ids, logger)
             }
         }
