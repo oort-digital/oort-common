@@ -1,0 +1,49 @@
+@import "../styles/theme/vars.less";
+
+.menu {
+    padding: 0; margin: 0;
+
+    & > li {
+        list-style-type: none;
+
+        /* Dark / 4 */
+        border-bottom: 1px solid @theme-color-4;
+        display: flex;
+        align-items: center;
+
+        & > a {
+            // width: 100%;
+            padding: 16px 24px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16px;
+            display: flex;
+            align-items: center;
+            color: @theme-color-7;
+            text-transform: capitalize;
+
+            cursor: pointer;
+        }
+
+        & > .disabled {
+            pointer-events: none;
+            cursor: default;
+            opacity: 0.5;
+        }
+
+        & > .btn_caption {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            color: @theme-color-7;
+        }
+
+        & > .btn_icon_after {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

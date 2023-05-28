@@ -1,0 +1,28 @@
+@import "../styles/typography.less";
+@import "../styles/palette.less";
+@import "../styles/theme/vars.less";
+
+.settings {
+
+	margin-top: 15px;
+	margin-bottom: 8px;
+
+	.name {
+		.footnote-10-caps-mixin;
+		color: @theme-color-7;
+	}
+
+	.value {
+		margin-top: 5px;
+		.body-16-medium-mixin;
+		text-transform: uppercase;
+		color: @theme-color-10;
+	}
+
+	.zero_value {
+		margin-top: 5px;
+		.body-16-medium-mixin;
+		text-transform: uppercase;
+		color: @violet-med;
+	}
+}

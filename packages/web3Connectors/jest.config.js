@@ -1,4 +1,4 @@
-module.exports = {  
+const config = {  
     transformIgnorePatterns: [
       'node_modules/(?!(@web3modal)/)'
     ],
@@ -7,4 +7,6 @@ module.exports = {
     },
     "resetMocks": false,
     "setupFiles": ["jest-localstorage-mock"]
-  }
+}
+
+export default config

@@ -56,7 +56,7 @@ const storeParams: IWeb3StoreParams<IChain> = {
   logger,
   supportedChains,
   walletConnectProjectId: 'fake',
-  supportedWallets: [ ConnectorNames.Injected ]
+  supportedWallets: [ ConnectorNames.Injected, ConnectorNames.WalletConnect ]
 }
 
 export class Web3StoreStub  extends Web3Store<IChain> {

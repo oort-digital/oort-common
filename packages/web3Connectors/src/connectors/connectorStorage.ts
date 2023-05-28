@@ -9,6 +9,11 @@ export interface ICurConnector {
 
 class ConnectorStorage {
     read = () : ICurConnector | undefined => {
+        // nextjs ssr
+        if (typeof localStorage === "undefined") {
+            return undefined
+        }
+        
         const jsonStr = localStorage.getItem(lsKey);
 
         if(!jsonStr) {
@@ -22,8 +27,18 @@ class ConnectorStorage {
 
         return undefined
     }
-    save = (curConnector: ICurConnector) => localStorage.setItem(lsKey, JSON.stringify(curConnector));
-    remove = () => localStorage.removeItem(lsKey);
+    save = (curConnector: ICurConnector) => {
+        // nextjs ssr
+        if (typeof localStorage !== "undefined") {
+            localStorage.setItem(lsKey, JSON.stringify(curConnector));
+        }
+    }
+    remove = () => {
+        // nextjs ssr
+        if (typeof localStorage !== "undefined") {
+            localStorage.removeItem(lsKey);
+        }
+    }
 }
 
 export const connectorStorage = new ConnectorStorage()

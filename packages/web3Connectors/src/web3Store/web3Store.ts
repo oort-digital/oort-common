@@ -165,7 +165,10 @@ export class Web3Store<TChain extends IChain> implements IWeb3Store {
         if (accounts && accounts.length > 0 &&
             this.account && this.account.length > 0 &&
             accounts[0].toLowerCase() !== this.account.toLowerCase()) {
-            window.location.reload()
+            // nextjs ssr
+            if (typeof window !== "undefined") {
+                window.location.reload()
+            }
         }
     }
 

@@ -2,8 +2,12 @@
 yarn.lock
 
 /node_modules
+/packages/test/node_modules
+/packages/test/dist
 /packages/ui/node_modules
 /packages/ui/storybook-static
+/packages/uiNext/node_modules
+/packages/uiNext/dist
 /packages/logger/node_modules
 /packages/oortApiClient/node_modules
 /packages/web3Connectors/node_modules

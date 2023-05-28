@@ -1,0 +1,64 @@
+@import "../../styles/theme/vars.less";
+
+.content {
+
+	.callout-medium-mixin() {
+		width: 100%;
+		/* Callout Medium */
+		font-style: normal;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 21px;
+		/* identical to box height, or 131% */
+		letter-spacing: -0.0031em;
+	}
+
+	:global(.ant-tabs) {
+		:global(.ant-tabs-nav::before) {
+			border-bottom: 1px solid @theme-color-4;
+		}
+		:global(.ant-tabs-tab) {
+			.callout-medium-mixin();
+			color: @theme-color-7;
+		}
+	}
+
+	.list {
+		margin-top: 16px;
+		margin-bottom: 24px;
+		// max-height: 300px;
+		// height: 300px;
+		overflow: auto;
+
+		:global(.ant-list-item) {
+
+			padding-top: 8px;
+			padding-bottom: 8px;
+
+			.list_item {
+				width: 100%;
+				.callout-medium-mixin();
+
+				.item_name { color: @theme-color-9; }
+				:global(.item-icon) { 
+					height: 32px; width: 32px;
+					& > img {
+						width: 100%;
+						height: 100%;
+					}
+				}
+
+				:global(.ant-checkbox-wrapper), :global(.ant-radio-wrapper) {
+					margin-left: 3px;
+				}
+			}
+			.circle_icons {
+				:global(.item-icon) {
+					& > img {
+						border-radius: 50%;
+					}
+				}
+			}
+		}
+	}
+}
