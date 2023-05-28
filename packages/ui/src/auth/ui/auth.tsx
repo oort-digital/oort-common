@@ -1,7 +1,7 @@
 import {CSSProperties, ReactNode, useEffect, useState} from 'react';
 import {Button} from 'antd';
 import styles from "./auth.module.less"
-import { PageLoader } from '../../pageLoader';
+import { PageLoaderOld } from '../../pageLoader';
 import { observer } from 'mobx-react';
 import { WalletSvg } from './walletSvg';
 import { WalletIcon } from '../../icons';
@@ -81,8 +81,6 @@ const Impl = (props: IAuthProps) => {
     const { isReady, askAuth } = ssoStore
 
     useEffect(() => {
-        debugger
-
         logger.debug(`Auth.useEffect. isReady:${isReady}`)
         if(isReady) {
             const ids = registerAuthInterceptors(ssoStore, logger)
@@ -108,7 +106,7 @@ const Impl = (props: IAuthProps) => {
     }
     
     if(!isReady) {
-        return <PageLoader />
+        return <PageLoaderOld />
     }
 
     if(askAuth || !isConnectedToSupportedChain) {

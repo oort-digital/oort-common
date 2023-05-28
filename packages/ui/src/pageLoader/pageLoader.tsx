@@ -1,20 +1,18 @@
 import {Spin} from 'antd';
-import { CSSProperties } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 
-interface IProps { style?: CSSProperties, className?: string }
+export interface IPageLoaderProps {
+    style?: CSSProperties,
+    className?: string,
+    visible: boolean,
+    children?: ReactNode
+}
 
-export const PageLoader = ({style, className}: IProps) => {
-    const internalStyle = style ?? {}
+export const PageLoader = ({style, className, visible, children}: IPageLoaderProps) => {
 
-    if(!internalStyle.textAlign) {
-        internalStyle.textAlign = "center"
+    if(visible) {
+        return <Spin size="large" className={className} style={style}>{children}</Spin>
     }
 
-    if(!internalStyle.marginTop) {
-        internalStyle.marginTop = '150px'
-    }
-
-    return <div className={className} style={internalStyle}>
-        <Spin size="large" style={{verticalAlign: "middle"}}/>
-    </div>
+    return <>{children}</>
 }

@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Button} from 'antd';
 import styles from "./notConnected.module.less"
-import { PageLoader } from '../pageLoader';
+import { PageLoaderOld } from '../pageLoader';
 import { observer } from 'mobx-react';
 import { WalletSvg } from './walletSvg';
 import { WalletIcon } from '../icons';
@@ -59,7 +59,7 @@ const Impl = (props: IProps) => {
     const onCancel = () => setIsWalletVisible(false)
     
     if(!web3Store.isReady) {
-        return <PageLoader />
+        return <PageLoaderOld />
     }
 
     return <div className={styles.wrapper}>
