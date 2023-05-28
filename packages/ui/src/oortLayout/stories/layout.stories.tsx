@@ -44,10 +44,13 @@ const Template: ComponentStory<typeof Layout> = (args: ILayoutProps) => {
 }
 
 const web3 = new Web3StoreStub()
+const supportedWallets: ConnectorNames[] = [ConnectorNames.Injected, ConnectorNames.WalletConnect]
+
 export const WithWeb3 = Template.bind({});
 WithWeb3.args = {
   navItems: navItems,
   web3: web3,
+  supportedWallets,
   children: <>
     <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
     {TestContent}
@@ -57,14 +60,16 @@ WithWeb3.args = {
 export const WithoutWeb3 = Template.bind({});
 WithoutWeb3.args = {
   navItems: navItems,
-  children: TestContent
+  children: TestContent,
+  supportedWallets,
 };
 
 export const ActiveCollapse = Template.bind({});
 ActiveCollapse.args = {
   navItems: navItems,
   children: TestContent,
-  isActiveFunc: isActiveFunc
+  isActiveFunc: isActiveFunc,
+  supportedWallets,
 };
 
 
@@ -72,6 +77,7 @@ export const WithFaucet = Template.bind({});
 WithFaucet.args = {
     navItems: testNavItems,
     web3: web3,
+    supportedWallets,
     children: <>
         <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
         {TestContent}
