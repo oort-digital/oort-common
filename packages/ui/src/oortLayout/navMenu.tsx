@@ -1,7 +1,7 @@
 import { Collapse } from "antd";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { DashboardIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
+import { DashboardIcon, DevelopToolsIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
 import styles from './navMenu.module.less';
 import { isHrefActive } from "./utils";
@@ -11,7 +11,8 @@ const { Panel } = Collapse;
 export enum MenuItemId {
     Dasboard = 'dasboard',
     Rent = 'rent',
-    Minting = 'minting'
+    Minting = 'minting',
+    Develop = "develop"
 }
 
 export type NavItemType = string | {
@@ -25,8 +26,6 @@ export interface INavItems {
     minting: {
         mutation: NavItemType
         claim: NavItemType
-        faucet?: NavItemType
-        refreshMetadata?: NavItemType
     }
     rent: {
         lend: NavItemType
@@ -37,6 +36,10 @@ export interface INavItems {
     gameHub: {
         games: NavItemType
         nfts: NavItemType
+    },
+    developTools?: {
+        faucet: NavItemType
+        refreshMetadata: NavItemType
     }
     rpgBattle: NavItemType
 }
@@ -58,11 +61,6 @@ const dashboardInternal = {
     icon: <DashboardIcon />,
 }
 
-const rpgBattleInternal = {
-    caption: 'RPG Battle',
-    icon: <GameHubIcon />
-}
-
 const rentInternal = {
     caption: 'NFT Rental',
     icon: <RentAppIcon />,
@@ -76,9 +74,7 @@ const mintInternal = {
     caption: 'minting',
     icon: <MintIcon />,
     mutation: "Hero Mutation (Upgrading)",
-    claim: "Claim Heroes",
-    faucet: "Faucet",
-    refreshMetadata: "Refresh Metadata"
+    claim: "Claim Heroes"
 }
 
 const gameHubInternal = {
@@ -86,6 +82,18 @@ const gameHubInternal = {
     icon: <GameHubIcon />,
     games: 'Game Library',
     nfts: "NFT Library"
+}
+
+const developInternal = {
+    caption: 'Develop Tools',
+    icon : <DevelopToolsIcon />,
+    faucet: "Faucet",
+    refreshMetadata: "Refresh Metadata"
+}
+
+const rpgBattleInternal = {
+    caption: 'RPG Battle',
+    icon: <GameHubIcon />,
 }
 
 type StringMap = { [id: string]: string; }
@@ -123,13 +131,19 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     // to trigger rerendering on react-router pathchange
     useLocation()
 
-    const { dashboard, rent, gameHub, minting, rpgBattle } = navItems
+    const { dashboard, rent, gameHub, minting, developTools, rpgBattle } = navItems
 
     const collapseNavItemPairs: NavItemPairType[] = [
         [rentInternal, rent],
         [gameHubInternal, gameHub],
-        [mintInternal,  minting]
+        [mintInternal,  minting],
     ]
+
+    if (developTools) {
+         collapseNavItemPairs.push(
+            [developInternal, developTools]
+         )
+    }
 
     const isActive = isActiveFunc || _isHrefActive;
 

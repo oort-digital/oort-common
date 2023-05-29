@@ -16,6 +16,7 @@ export { PolygonIconOld } from "./polygonIconOld"
 export { EthIconOld } from "./ethIconOld"
 
 export { GameHubIcon } from "./gameHubIcon"
+export { DevelopToolsIcon } from "./developToolsIcon"
 
 export { NoDataIcon } from "./noDataIcon"
 export { NoImageIcon } from "./noImageIcon"
