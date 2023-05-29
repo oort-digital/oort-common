@@ -21,14 +21,57 @@ interface IRegisterData {
 
 export class OortAxiosInstances {
 
-    static register(instanceName: string, instance: AxiosInstance, logger: ILogger) {
+    
+}
+
+export class OortApiGlobalInterceptors {
+
+    static readonly requestInterceptors: RequestInterceptor[] = []
+    static readonly responseInterceptors: ResponseInterceptor[] = []
+    private static readonly instanceInterceptors: IRegisterData[] = []
+    
+    static registerRequest(interceptor: RequestInterceptor, logger: ILogger) {
+        OortApiGlobalInterceptors.requestInterceptors.push(interceptor)
+
+        OortApiGlobalInterceptors.instanceInterceptors.forEach(x => {
+            logger.debug(`OortApiGlobalInterceptors add request interceptor.
+instanceName: ${x.name}
+interceptorName: ${interceptor.name}`)
+            const id = x.instance.interceptors.request.use(interceptor.onFulfilled, interceptor.onRejected)
+            x.requestIds.push(id)
+        })
+
+        logger.debug(`OortApiGlobalInterceptors.requestInterceptors.length:${OortApiGlobalInterceptors.requestInterceptors.length}`)
+    }
+
+    static registerResponse(interceptor: ResponseInterceptor, logger: ILogger) {
+        OortApiGlobalInterceptors.responseInterceptors.push(interceptor)
+
+        OortApiGlobalInterceptors.instanceInterceptors.forEach(x => {
+            logger.debug(`OortApiGlobalInterceptors add response interceptor.
+instanceName: ${x.name}
+interceptorName: ${interceptor.name}`)
+            const id = x.instance.interceptors.response.use(interceptor.onFulfilled, interceptor.onRejected)
+            x.responseIds.push(id)
+        })
+
+        logger.debug(`OortApiGlobalInterceptors.responseInterceptors.length:${OortApiGlobalInterceptors.responseInterceptors.length}`)
+    }
+
+    static unRegisterInterceptors(logger: ILogger) {
+        OortApiGlobalInterceptors.ejectAllInstanceInterceptors(logger)
+        OortApiGlobalInterceptors.requestInterceptors.length = 0
+        OortApiGlobalInterceptors.responseInterceptors.length = 0
+    }
+
+    static registerInstance(instanceName: string, instance: AxiosInstance, logger: ILogger) {
 
         const requestIds = new Array<number>()
         const responseIds = new Array<number>()
 
         logger.debug(`OortAxiosInstances register interceptors.
 instanceName: ${instanceName}
-instanceInterceptors.length: ${OortAxiosInstances.instanceInterceptors.length}
+instanceInterceptors.length: ${OortApiGlobalInterceptors.instanceInterceptors.length}
 requestInterceptors.length: ${OortApiGlobalInterceptors.requestInterceptors.length}
 responseInterceptors.length: ${OortApiGlobalInterceptors.responseInterceptors.length}`)
 
@@ -48,11 +91,11 @@ interceptorName: ${interceptor.name}`)
             requestIds.push(id)
         })
 
-        OortAxiosInstances.instanceInterceptors.push({ name: instanceName, instance, requestIds, responseIds })
+        OortApiGlobalInterceptors.instanceInterceptors.push({ name: instanceName, instance, requestIds, responseIds })
     }
 
-    static unRegisterInterceptors(logger: ILogger) {
-        OortAxiosInstances.instanceInterceptors.forEach(x => {
+    static ejectAllInstanceInterceptors(logger: ILogger) {
+        OortApiGlobalInterceptors.instanceInterceptors.forEach(x => {
             const { name, instance, requestIds, responseIds } = x
 
             logger.debug(`OortAxiosInstances unregister interceptors.
@@ -65,46 +108,6 @@ responseIds.length:${responseIds.length}
         })
     }
 
-    static readonly instanceInterceptors: IRegisterData[] = []
-}
-
-export class OortApiGlobalInterceptors {
-
-    static readonly requestInterceptors: RequestInterceptor[] = []
-    static readonly responseInterceptors: ResponseInterceptor[] = []
     
-    static registerRequest(interceptor: RequestInterceptor, logger: ILogger) {
-        OortApiGlobalInterceptors.requestInterceptors.push(interceptor)
-
-        OortAxiosInstances.instanceInterceptors.forEach(x => {
-            logger.debug(`OortApiGlobalInterceptors add request interceptor.
-instanceName: ${x.name}
-interceptorName: ${interceptor.name}`)
-            const id = x.instance.interceptors.request.use(interceptor.onFulfilled, interceptor.onRejected)
-            x.requestIds.push(id)
-        })
-
-        logger.debug(`OortApiGlobalInterceptors.requestInterceptors.length:${OortApiGlobalInterceptors.requestInterceptors.length}`)
-    }
-
-    static registerResponse(interceptor: ResponseInterceptor, logger: ILogger) {
-        OortApiGlobalInterceptors.responseInterceptors.push(interceptor)
-
-        OortAxiosInstances.instanceInterceptors.forEach(x => {
-            logger.debug(`OortApiGlobalInterceptors add response interceptor.
-instanceName: ${x.name}
-interceptorName: ${interceptor.name}`)
-            const id = x.instance.interceptors.response.use(interceptor.onFulfilled, interceptor.onRejected)
-            x.responseIds.push(id)
-        })
-
-        logger.debug(`OortApiGlobalInterceptors.responseInterceptors.length:${OortApiGlobalInterceptors.responseInterceptors.length}`)
-    }
-
-    static unRegisterInterceptors(logger: ILogger) {
-        OortAxiosInstances.unRegisterInterceptors(logger)
-        OortApiGlobalInterceptors.requestInterceptors.length = 0
-        OortApiGlobalInterceptors.responseInterceptors.length = 0
-    }
 
 }
