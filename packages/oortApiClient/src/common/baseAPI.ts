@@ -1,18 +1,19 @@
 import { ILogger } from "@oort-digital/logger"
 import axios, { AxiosInstance } from "axios"
-import { OortApiGlobalInterceptors } from "./oortApiGlobalInterceptors"
+import { OortApiInterceptors } from "./oortApiInterceptors"
 
 export interface IAPIConfig {
     baseURL: string
     logger: ILogger
+    interceptors: OortApiInterceptors
 }
 
 export abstract class BaseAPI {
 
-    protected constructor(name: string, { baseURL, logger }: IAPIConfig) {
+    protected constructor(name: string, { baseURL, logger, interceptors }: IAPIConfig) {
         this._logger = logger
         this._axios = axios.create({ baseURL })
-        OortApiGlobalInterceptors.registerInstance(name, this._axios, logger)
+        interceptors.registerInstance(name, this._axios)
     }
 
     protected readonly _axios: AxiosInstance

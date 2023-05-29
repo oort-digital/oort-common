@@ -1,13 +1,16 @@
 import { OortHeroApi } from "./oortHeroApi";
-import { IAPIConfig } from "../common";
+import { IAPIConfig, OortApiInterceptors } from "../common";
 import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
 
 const abortController = new AbortController()
 export const EMPTY_ABORT_SIGNAL = abortController.signal
 
+
+const logger = new ConsoleLogger(LogLevel.Debug)
 const oortClientSettings: IAPIConfig = {
     baseURL: 'https://api-test.oort.digital/minting',
-    logger: new ConsoleLogger(LogLevel.Debug)
+    logger,
+    interceptors: new OortApiInterceptors(logger)
 }
 
 test.skip('debug opensea hero', async () => {
