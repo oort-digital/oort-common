@@ -10,7 +10,7 @@ import { Auth, IAuthProps } from "../ui/auth";
 import { Web3StoreStub } from "./web3StoreStub";
 import logger from "./logger";
 import React, { useEffect, useState } from "react";
-import { OortHeroApi } from "@oort-digital/oort-api-client";
+import { OortApiInterceptors, OortHeroApi } from "@oort-digital/oort-api-client";
 import { observer } from "mobx-react";
 import { ThemeLoader } from "../../internalHelpers";
 import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
@@ -30,7 +30,9 @@ type Story = StoryObj<typeof meta>;
 const web3Store = new Web3StoreStub()
 web3Store.connect(80001, ConnectorNames.Injected)
 
-const heroApi = OortHeroApi.createSingleton({ baseURL: 'https://api-test.oort.digital/minting', logger: new ConsoleLogger(LogLevel.Debug) })
+const interceptors = OortApiInterceptors.createInstance(logger)
+
+const heroApi = OortHeroApi.createSingleton({ interceptors, baseURL: 'https://api-test.oort.digital/minting', logger })
 
 const Content = observer(() => {
 
@@ -73,6 +75,7 @@ export const Primary: Story = {
   args: {
     web3Store,
     logger,
+    interceptors,
     supportedWallets: [ConnectorNames.Injected],
     ssoServerBaseUrl: 'https://api-test.oort.digital/sso',
     tokenStorageType: "cookies",
@@ -84,6 +87,7 @@ export const LocalStorageTokenStore: Story = {
   args: {
     web3Store,
     logger,
+    interceptors,
     supportedWallets: [ConnectorNames.Injected],
     ssoServerBaseUrl: 'https://api-test.oort.digital/sso',
     tokenStorageType: "localStorage",

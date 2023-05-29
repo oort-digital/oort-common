@@ -1,12 +1,12 @@
 import axios from "axios"
 import { IAuthStore } from "../store"
 import { AxiosResponse } from "axios"
-import { OortApiGlobalInterceptors } from "@oort-digital/oort-api-client"
+import { OortApiInterceptors } from "@oort-digital/oort-api-client"
 import { ILogger } from "@oort-digital/logger"
 import { requestInterceptor } from "./requestInterceptor"
 import { onReponseError } from "./onResponseError"
 
-export function registerAuthInterceptors(ssoStore: IAuthStore, logger: ILogger): [number, number] {
+export function registerAuthInterceptors(oortInterceptors: OortApiInterceptors, ssoStore: IAuthStore, logger: ILogger): [number, number] {
     const debug = (msg: string) => {
         logger.debug(`AuthInterceptor. ${msg}`)
     }
@@ -22,14 +22,14 @@ export function registerAuthInterceptors(ssoStore: IAuthStore, logger: ILogger):
         onRejected
     );
 
-    OortApiGlobalInterceptors.registerRequest({ name: 'token_request', onFulfilled: onRequest }, logger)
-    OortApiGlobalInterceptors.registerResponse({ name: 'token_response', onFulfilled: responseInterceptor, onRejected }, logger)
+    oortInterceptors.registerRequest({ name: 'token_request', onFulfilled: onRequest })
+    oortInterceptors.registerResponse({ name: 'token_response', onFulfilled: responseInterceptor, onRejected })
 
     return [requestInterceptorId, responseInterceptorId]
 }
 
-export function unRegisterAuthInterceptors(ids: [number, number], logger: ILogger) {
+export function unRegisterAuthInterceptors(oortInterceptors: OortApiInterceptors, ids: [number, number]) {
     axios.interceptors.response.eject(ids[0])
     axios.interceptors.response.eject(ids[1])
-    OortApiGlobalInterceptors.unRegisterInterceptors(logger)
+    oortInterceptors.unRegisterInterceptors()
 }

@@ -15,6 +15,7 @@ import { registerAuthInterceptors, unRegisterAuthInterceptors } from '../interce
 import { AuthModal } from './authModal';
 import { useLocation } from 'react-router-dom';
 import classnames from 'classnames';
+import { OortApiInterceptors } from '@oort-digital/oort-api-client';
 
 
 export interface IAuthProps {
@@ -27,7 +28,8 @@ export interface IAuthProps {
     ssoServerBaseUrl: string
     tokenStorageType?: TokenStorageType
     children: ReactNode
-    excludePathes?: string[]
+    excludePathes?: string[],
+    interceptors: OortApiInterceptors
 }
 
 const renderText = ({ web3Store, expectedChainId }: IAuthProps) => {
@@ -63,7 +65,11 @@ const renderText = ({ web3Store, expectedChainId }: IAuthProps) => {
 
 const Impl = (props: IAuthProps) => {
 
-    const { className, style, excludePathes, web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType = 'cookies', children } = props
+    const { className, style, excludePathes,
+        web3Store, expectedChainId, supportedWallets,
+        logger, ssoServerBaseUrl, tokenStorageType = 'cookies',
+        children, interceptors } = props
+
     const [isWalletVisible, setIsWalletVisible] = useState(false)
     const [authInProcess, setAuthInProcess] = useState(false)
 
@@ -105,12 +111,12 @@ const Impl = (props: IAuthProps) => {
         debug(`useEffect. authStore.isReady:${authStore.isReady}`)
         if(authStore.isReady) {
             debug('registerAuthInterceptors')
-            const ids = registerAuthInterceptors(authStore, logger)
+            const ids = registerAuthInterceptors(interceptors, authStore, logger)
             debug('registerAuthInterceptors done')
             setRenderChildren(true)
             return () => {
                 debug(`useEffect. authStore.isReady:${authStore.isReady} unmount`)
-                unRegisterAuthInterceptors(ids, logger)
+                unRegisterAuthInterceptors(interceptors, ids)
             }
         }
         return
