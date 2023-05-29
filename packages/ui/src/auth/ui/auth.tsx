@@ -66,7 +66,7 @@ const Impl = (props: IAuthProps) => {
     const { className, style, excludePathes, web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType = 'cookies', children } = props
     const [isWalletVisible, setIsWalletVisible] = useState(false)
     const [authInProcess, setAuthInProcess] = useState(false)
-    const [ssoStore] = useState(() => new AuthStore({
+    const [authStore] = useState(() => new AuthStore({
         logger, web3Store, ssoServerBaseUrl, tokenStorageType
     }))
 
@@ -78,12 +78,12 @@ const Impl = (props: IAuthProps) => {
 
     const { isConnectedToSupportedChain } = web3Store
 
-    const { isReady, askAuth } = ssoStore
+    const { isReady, askAuth } = authStore
 
     useEffect(() => {
         logger.debug(`Auth.useEffect. isReady:${isReady}`)
         if(isReady) {
-            const ids = registerAuthInterceptors(ssoStore, logger)
+            const ids = registerAuthInterceptors(authStore, logger)
             return () => {
                 logger.debug(`Auth.useEffect. isReady:${isReady} unmount`)
                 unRegisterAuthInterceptors(ids, logger)
@@ -98,7 +98,7 @@ const Impl = (props: IAuthProps) => {
     const auth = async () => {
         try {
             setAuthInProcess(true)
-            await ssoStore.auth()
+            await authStore.auth()
         } catch (e) {
             logger.error(e);
         }

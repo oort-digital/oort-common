@@ -82,3 +82,14 @@ export const Primary: Story = {
   }
 };
 
+export const LocalStorageTokenStore: Story = {
+  args: {
+    web3Store,
+    logger,
+    supportedWallets: [ConnectorNames.Injected],
+    ssoServerBaseUrl: 'https://api-test.oort.digital/sso',
+    tokenStorageType: "localStorage",
+    children: <Content />
+  }
+};
+

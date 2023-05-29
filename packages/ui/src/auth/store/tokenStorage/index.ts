@@ -1,2 +1,2 @@
 export { getTokenStorage } from "./getTokenStorage"
-export { ITokenStorage, TokenStorageType, } from "./typesAndinterfaces"
+export type { ITokenStorage, TokenStorageType, } from "./typesAndinterfaces"

@@ -1,25 +1,26 @@
 import { getCookie, removeCookie, setCookie } from "typescript-cookie";
 import { ITokenStorage } from "./typesAndinterfaces";
+import { getKey } from "./getKey";
     
 export class CookieTokenStorage implements ITokenStorage {
     
     clear = (address: string) => {
         const domain = this.getCookieDomain()
-        removeCookie(this.getKey(address), { 
+        removeCookie(getKey(address), { 
             domain: domain,
             path: '/'
         })
     }
 
     getToken = (address: string): string | undefined => {
-        return getCookie(this.getKey(address))
+        return getCookie(getKey(address))
     }
 
     setToken = (address: string, token: string) => {
         const domain = this.getCookieDomain()
         const expires = new Date()
         expires.setFullYear(expires.getFullYear() + 10)
-        setCookie(this.getKey(address), token, { 
+        setCookie(getKey(address), token, { 
             domain: domain,
             expires: expires,
             path: '/'
@@ -35,9 +36,5 @@ export class CookieTokenStorage implements ITokenStorage {
         }
 
         return undefined
-    }
-
-    private getKey = (account:string) => {
-        return `oort_token_${account.toLowerCase()}`;
     }
 }

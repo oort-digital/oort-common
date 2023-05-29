@@ -4,5 +4,5 @@ export interface ITokenStorage {
     clear: (address: string) => void
 }
 
-export type TokenStorageType = 'cookies' | 'fake'
+export type TokenStorageType = 'cookies' | 'localStorage' | 'fake'
 
