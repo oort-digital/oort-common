@@ -32,7 +32,7 @@ const logger = new ConsoleLogger(LogLevel.Debug)
 const oortClientSettings: IAPIConfig = {
     baseURL: 'https://api-test.oort.digital/platform',
     logger,
-    interceptors: new OortApiInterceptors(logger)
+    interceptors: OortApiInterceptors.createInstance(logger)
 }
 
 test.skip('debug only dasboard', async () => {

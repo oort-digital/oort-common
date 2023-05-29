@@ -24,8 +24,16 @@ export class OortApiInterceptors {
     readonly requestInterceptors: RequestInterceptor[] = []
     readonly responseInterceptors: ResponseInterceptor[] = []
     private readonly instanceInterceptors: IRegisterData[] = []
+
+    private static instance: OortApiInterceptors
+    static createInstance(logger: ILogger): OortApiInterceptors {
+        if(!OortApiInterceptors.instance) {
+            OortApiInterceptors.instance = new OortApiInterceptors(logger)
+        }
+        return OortApiInterceptors.instance
+    }
     
-    constructor(logger: ILogger) {
+    private constructor(logger: ILogger) {
         this._logger = logger
     }
     
