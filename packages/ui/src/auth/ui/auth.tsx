@@ -104,7 +104,9 @@ const Impl = (props: IAuthProps) => {
     useEffect(() => {
         debug(`useEffect. authStore.isReady:${authStore.isReady}`)
         if(authStore.isReady) {
+            debug('registerAuthInterceptors')
             const ids = registerAuthInterceptors(authStore, logger)
+            debug('registerAuthInterceptors done')
             setRenderChildren(true)
             return () => {
                 debug(`useEffect. authStore.isReady:${authStore.isReady} unmount`)

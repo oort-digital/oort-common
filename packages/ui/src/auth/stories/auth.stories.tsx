@@ -11,7 +11,6 @@ import { Web3StoreStub } from "./web3StoreStub";
 import logger from "./logger";
 import React, { useEffect, useState } from "react";
 import { OortHeroApi } from "@oort-digital/oort-api-client";
-import { registerAuthInterceptorsPromise } from "../interceptors";
 import { observer } from "mobx-react";
 import { ThemeLoader } from "../../internalHelpers";
 import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
@@ -38,7 +37,6 @@ const Content = observer(() => {
   const [ requestDone, setRequestDone ] = useState(false)
 
   const authRequest = async () => {
-    await registerAuthInterceptorsPromise;
     return await heroApi.getHeroMintAvailable(EMPTY_ABORT_SIGNAL)
   }
 
