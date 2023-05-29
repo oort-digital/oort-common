@@ -1,7 +1,7 @@
 import {CSSProperties, ReactNode, useEffect, useState} from 'react';
 import {Button} from 'antd';
 import styles from "./auth.module.less"
-import { PageLoaderOld } from '../../pageLoader';
+import { PageLoader } from '../../pageLoader';
 import { observer } from 'mobx-react';
 import { WalletSvg } from './walletSvg';
 import { WalletIcon } from '../../icons';
@@ -122,8 +122,9 @@ const Impl = (props: IAuthProps) => {
         return
     }, [authStore.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
     
+    const loaderStyle: CSSProperties = { textAlign: "center", marginTop: "150px", width: '100%' }
     if(!authStore.isReady) {
-        return <PageLoaderOld />
+        return <PageLoader delay={100} visible style={loaderStyle} />
     }
 
     if(askAuth || !isConnectedToSupportedChain) {
@@ -139,11 +140,12 @@ const Impl = (props: IAuthProps) => {
         </div>
     }
 
-    if(!renderChildren) {
-        return <PageLoaderOld />
+    if(renderChildren) {
+        // return <PageLoader delay={100} visible style={loaderStyle} />
+        return <>{children}</>
     }
 
-    return <>{children}</>
+    return <></>
 }
 
 export const Auth = observer(Impl)
