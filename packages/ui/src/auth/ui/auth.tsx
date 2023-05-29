@@ -66,32 +66,18 @@ const Impl = (props: IAuthProps) => {
     const { className, style, excludePathes, web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType = 'cookies', children } = props
     const [isWalletVisible, setIsWalletVisible] = useState(false)
     const [authInProcess, setAuthInProcess] = useState(false)
+
+    const [renderChildren, setRenderChildren] = useState(false)
+
     const [authStore] = useState(() => new AuthStore({
         logger, web3Store, ssoServerBaseUrl, tokenStorageType
     }))
 
     const location = useLocation()
 
-    if(excludePathes?.some(p => location.pathname.includes(p))) {
-        return <>{children}</>
+    const debug = (msg: string) => {
+        logger.debug(`Auth. ${msg}`)
     }
-
-    const { isConnectedToSupportedChain } = web3Store
-
-    const { isReady, askAuth } = authStore
-
-    useEffect(() => {
-        logger.debug(`Auth.useEffect. isReady:${isReady}`)
-        if(isReady) {
-            const ids = registerAuthInterceptors(authStore, logger)
-            return () => {
-                logger.debug(`Auth.useEffect. isReady:${isReady} unmount`)
-                unRegisterAuthInterceptors(ids, logger)
-            }
-        }
-        return
-    }, [isReady]); // eslint-disable-line react-hooks/exhaustive-deps
-
 
     const onClose = () => setIsWalletVisible(false)
 
@@ -104,8 +90,31 @@ const Impl = (props: IAuthProps) => {
         }
         setAuthInProcess(false)
     }
+
+    debug(`renderChildren: ${renderChildren}`)
+
+    if(excludePathes?.some(p => location.pathname.includes(p))) {
+        return <>{children}</>
+    }
+
+    const { isConnectedToSupportedChain } = web3Store
+
+    const { askAuth } = authStore
+
+    useEffect(() => {
+        debug(`useEffect. authStore.isReady:${authStore.isReady}`)
+        if(authStore.isReady) {
+            const ids = registerAuthInterceptors(authStore, logger)
+            setRenderChildren(true)
+            return () => {
+                debug(`useEffect. authStore.isReady:${authStore.isReady} unmount`)
+                unRegisterAuthInterceptors(ids, logger)
+            }
+        }
+        return
+    }, [authStore.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
     
-    if(!isReady) {
+    if(!authStore.isReady) {
         return <PageLoaderOld />
     }
 
@@ -120,6 +129,10 @@ const Impl = (props: IAuthProps) => {
             <ConnectModal supportedWallets={supportedWallets} expectedChainId={expectedChainId} web3={web3Store} visible={isWalletVisible} onClose={onClose} />
             <AuthModal loading={authInProcess} authFunc={() => auth()} visible={askAuth} />
         </div>
+    }
+
+    if(!renderChildren) {
+        return <PageLoaderOld />
     }
 
     return <>{children}</>
