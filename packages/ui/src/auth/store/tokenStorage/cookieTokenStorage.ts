@@ -1,14 +1,7 @@
 import { getCookie, removeCookie, setCookie } from "typescript-cookie";
-
-export interface ITokenStorage {
-    setToken: (address: string, token: string) => void
-    getToken: (address: string) => string | undefined
-    clear: (address: string) => void
-}
-
-export type TokenStorageType = 'cookies' | 'fake'
-
-class CookieTokenStorage implements ITokenStorage {
+import { ITokenStorage } from "./typesAndinterfaces";
+    
+export class CookieTokenStorage implements ITokenStorage {
     
     clear = (address: string) => {
         const domain = this.getCookieDomain()
@@ -47,29 +40,4 @@ class CookieTokenStorage implements ITokenStorage {
     private getKey = (account:string) => {
         return `oort_token_${account.toLowerCase()}`;
     }
-}
-
-class FakeStorage implements ITokenStorage {
-    clear = (_address: string) => { }
-    setToken = (_address: string, _token: string) => {
-
-    }
-    getToken = (address: string) => `fake_token_${address}`
-}
-
-let cookiesStorage: CookieTokenStorage | undefined
-let fakeStorage: FakeStorage | undefined
-
-export function getTokenStorage(storageType: TokenStorageType): ITokenStorage {
-
-  if(storageType === "cookies") {
-    if(!cookiesStorage) { cookiesStorage = new CookieTokenStorage() }
-    return cookiesStorage
-  }
-  else if(storageType === "fake") {
-    if(!fakeStorage) { fakeStorage = new FakeStorage() }
-    return fakeStorage
-  }
-
-  throw new Error(`Unknown storage type: ${storageType}`)
 }
