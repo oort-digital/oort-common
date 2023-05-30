@@ -11,6 +11,7 @@
     "build:source": "rollup -c",
     "build": "yarn build:source && yarn build:types",
     "test": "jest",
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js",
     "rm": "rimraf node_modules"
   },
   "jest": {
