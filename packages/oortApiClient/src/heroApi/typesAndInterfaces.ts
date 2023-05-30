@@ -35,8 +35,17 @@ export interface IHeroCampaignRewards {
     rewardType: string
     merkleProof: string
 }
+
+export interface ICampaign {
+    campaignId: number
+    campaignName: string
+    brandName: string
+    brandUrl: string
+}
+
 export interface IHeroMintAvailableResponse {
-    heroCampaignRewardsList: IHeroCampaignRewards[] 
+    heroCampaignRewardsList: IHeroCampaignRewards[]
+    campaigns: ICampaign[]
 }
 
 export interface IOpenBlindBoxHero {
