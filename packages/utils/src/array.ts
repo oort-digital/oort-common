@@ -40,10 +40,9 @@ export function toDictionary<T>(arr: T[], keyFunc: (item: T) => KeyType): Dictio
 
 type SortPropertyType = number | string
 type SortDirection = 'ask' | 'desc'
-type SortPropertyFn = <T>(item: T) => SortPropertyType
 type CompareFnResult = -1 | 0 | 1
 
-function compareFn<T>(a: T, b: T, getSortProperty: SortPropertyFn): CompareFnResult {
+function compareFn<T>(a: T, b: T, getSortProperty: (item: T) => SortPropertyType): CompareFnResult {
   const propertyA = getSortProperty(a)
   const propertyB = getSortProperty(b)
 
@@ -52,7 +51,7 @@ function compareFn<T>(a: T, b: T, getSortProperty: SortPropertyFn): CompareFnRes
       return 0
 }
 
-export function sortBy<T>(rewards: T[], getSortProperty: SortPropertyFn, direction: SortDirection = 'ask'): T[] {
+export function sortBy<T>(rewards: T[], getSortProperty: (item: T) => SortPropertyType, direction: SortDirection = 'ask'): T[] {
   if(direction === 'ask') {
    return rewards.sort((a, b) => compareFn(a, b, getSortProperty))
   }
