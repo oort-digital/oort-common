@@ -38,3 +38,24 @@ export function toDictionary<T>(arr: T[], keyFunc: (item: T) => KeyType): Dictio
     return map
 }
 
+type SortPropertyType = number | string
+type SortDirection = 'ask' | 'desc'
+type SortPropertyFn = <T>(item: T) => SortPropertyType
+type CompareFnResult = -1 | 0 | 1
+
+function compareFn<T>(a: T, b: T, getSortProperty: SortPropertyFn): CompareFnResult {
+  const propertyA = getSortProperty(a)
+  const propertyB = getSortProperty(b)
+
+  if(propertyA > propertyB) { return 1 }
+      if(propertyA < propertyB) { return -1 }
+      return 0
+}
+
+export function sortBy<T>(rewards: T[], getSortProperty: SortPropertyFn, direction: SortDirection = 'ask'): T[] {
+  if(direction === 'ask') {
+   return rewards.sort((a, b) => compareFn(a, b, getSortProperty))
+  }
+  return rewards.sort((a, b) => compareFn(b, a, getSortProperty))
+}
+
