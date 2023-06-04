@@ -14,7 +14,7 @@ export default defineConfig({
             entry: path.resolve(__dirname, 'src/index.ts'),
             // name: 'MyLib',
             formats: ['es'],
-            fileName: (format) => `cnn.${format}.js`,
+            fileName: (format) => `index.js`,
         },
         rollupOptions: {
             external: Object.keys(dependencies),

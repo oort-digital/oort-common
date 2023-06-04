@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-alfa.0.1.0",
+  "version": "0.0.1-fix.0.0.1",
   "type": "module",
   "repository": {
     "type": "git",
@@ -59,6 +59,6 @@
     "dist"
   ],
   
-  "module": "dist/cnn.es.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts"
 }
