@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-alfa.0.1.0",
+  "version": "0.0.1-alfa.0.1.1",
   "type": "module",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
   "dependencies": {
     "@haechi-labs/face-sdk": "^1.7.0",
     "@haechi-labs/face-types": "^1.7.0",
-    "@oort-digital/logger": "0.0.1-alfa.0.0.2",
+    "@oort-digital/logger": "^0.0.1-alfa.0.0.2",
     "@walletconnect/encoding": "^1.0.2",
     "@walletconnect/types": "^2.7.3",
     "@walletconnect/universal-provider": "^2.7.3",
@@ -31,7 +31,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.21.5",
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-typescript": "^7.21.5",
-    "@oort-digital/utils": "^0.0.1-alfa.0.0.1",
+    "@oort-digital/utils": "^0.0.1-alfa.0.0.2",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-interactions": "^6.5.13",
@@ -59,6 +59,6 @@
     "dist"
   ],
   
-  "module": "dist/cnn.es.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts"
 }

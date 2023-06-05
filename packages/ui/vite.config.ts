@@ -26,7 +26,7 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
             // name: 'MyLib',
-            formats: ['es', 'cjs'],
+            formats: ['es'],
             fileName: (format) => `ui.${format}.js`,
         },
         rollupOptions: {

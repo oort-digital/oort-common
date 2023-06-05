@@ -2240,15 +2240,15 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@oort-digital/logger@0.0.1-alfa.0.0.2":
+"@oort-digital/logger@^0.0.1-alfa.0.0.2":
   version "0.0.1-alfa.0.0.2"
   resolved "https://npm.pkg.github.com/download/@oort-digital/logger/0.0.1-alfa.0.0.2/c932dc0fc657d77cda2f73a3d72ad9a37a6b8abf#c932dc0fc657d77cda2f73a3d72ad9a37a6b8abf"
   integrity sha512-g1R/5nTD3Qi8+c6MvE8WbelOnqnz7R49leBnOsrOzmlb/NPnevjclSytfM1ijFLkRLbYYZVj9bpfAl5EEBhLrA==
 
-"@oort-digital/utils@^0.0.1-alfa.0.0.1":
-  version "0.0.1-alfa.0.0.1"
-  resolved "https://npm.pkg.github.com/download/@oort-digital/utils/0.0.1-alfa.0.0.1/87cbc5ea5b5dcea22b69b97fb88ecd8577d02f43#87cbc5ea5b5dcea22b69b97fb88ecd8577d02f43"
-  integrity sha512-QSHbpTeklZbDWy6V5H74XLq+m6+4tJk9BUxz66mQyWtC3om4ndIVVoCuvNksRMOhMTmcFpXxh+9KcelVIxXiig==
+"@oort-digital/utils@^0.0.1-alfa.0.0.2":
+  version "0.0.1-alfa.0.0.2"
+  resolved "https://npm.pkg.github.com/download/@oort-digital/utils/0.0.1-alfa.0.0.2/e4d65b439bb3f7084ab222f95a77a238f2ae1a63#e4d65b439bb3f7084ab222f95a77a238f2ae1a63"
+  integrity sha512-WKaBzanpfme+j+44mV0QkelJmBuQNCqbjBN9XaWLY3V6cgI5mzN1OzuaLY1XCKlccsYclHyVDh0RO9wcxz8sUA==
 
 "@pedrouid/environment@^1.0.1":
   version "1.0.1"

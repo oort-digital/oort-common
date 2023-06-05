@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactNode } from "react"
 import {Button, List, ConfigProvider} from "antd"
 import {ListGridType} from "antd/lib/list"
 import styles from "./asyncList.module.less"
@@ -17,13 +17,15 @@ export interface IProps<TItem> {
     className?: string
     style?: React.CSSProperties
     noDataText?: string
+    noDataHint?: ReactNode
 }
 
 export const AsyncList = <TItem, >({
     hasLoadMore, itemRenderer,
     loadMoreButtonRendered, onLoadMore, items,
-    loading, grid, className, style,
-    noDataText, loadMoreButtonSize = 'large'}: IProps<TItem>) => {
+    loading, grid, className,
+    style, noDataHint, noDataText,
+    loadMoreButtonSize = 'large'}: IProps<TItem>) => {
 
     const loadFirstPage = loading && items.length === 0
     const renderLoadMoreBtn = () => {
@@ -40,12 +42,17 @@ export const AsyncList = <TItem, >({
         </div>
     }
 
-    const customizeRenderEmpty = () => (
-        <div className={styles.empty_hint}>
+    const customizeRenderEmpty = () => {
+
+        if(noDataHint) {
+            return noDataHint
+        }
+        
+        return <div className={styles.empty_hint}>
 			<NoDataIcon></NoDataIcon>
 			<div>{ noDataText || 'No data' }</div>
         </div>
-    );
+    }
 
     return (
         <ConfigProvider renderEmpty={customizeRenderEmpty}>

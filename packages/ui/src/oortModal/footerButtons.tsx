@@ -111,7 +111,7 @@ export function FooterButtons(props: IProps) {
             btnDisabled = true
         }
 
-        return <Button className={className} loading={btnLoading} disabled={btnDisabled} size={size ?? 'large'} type={type} onClick={onClick}>{text}</Button>
+        return <Button key={btn.text} className={className} loading={btnLoading} disabled={btnDisabled} size={size ?? 'large'} type={type} onClick={onClick}>{text}</Button>
     }
 
     return <div className={cssClass}>

@@ -12,17 +12,12 @@ export default defineConfig({
     build: {
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
-            // name: 'MyLib',
             formats: ['es'],
             fileName: (format) => `index.js`,
         },
         rollupOptions: {
             external: Object.keys(dependencies),
             output: {
-                // globals: {
-                //     react: 'React',
-                //     'react-dom': 'ReactDOM'
-                // },
                 sourcemap: true
             }
         },

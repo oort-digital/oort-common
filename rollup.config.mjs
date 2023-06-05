@@ -25,13 +25,13 @@ export default function createConfig(pluginsData, packageName, packageDependenci
       plugins,
       external: packageDependencies,
       output: [
-        {
-          dir: "./dist/cjs",
-          format: "cjs",
-          exports: "named",
-          name: packageName,
-          sourcemap: true,
-        },
+        // {
+        //   dir: "./dist/cjs",
+        //   format: "cjs",
+        //   exports: "named",
+        //   name: packageName,
+        //   sourcemap: true,
+        // },
         {
           dir: "./dist/es",
           format: "es",

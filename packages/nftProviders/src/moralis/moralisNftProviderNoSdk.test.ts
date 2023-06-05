@@ -3,13 +3,17 @@ import { ConsoleLogger } from "@oort-digital/logger";
 import { INft } from "../typesAndInterfaces";
 
 import { MoralisNftProviderNoSdk } from "./moralisNftProviderNoSdk";
-import { OortHeroApi } from "@oort-digital/oort-api-client";
+import { OortApiInterceptors, OortHeroApi } from "@oort-digital/oort-api-client";
 import { EMPTY_ABORT_SIGNAL } from "@oort-digital/utils";
 
 const logger = new ConsoleLogger()
 const badAddress = '0x0000000000dDF8e4c57F05d70Ab8444555666777'
 
-const heroApi = OortHeroApi.createSingleton({ baseURL: 'https://api-test.oort.digital/minting', logger})
+const heroApi = OortHeroApi.createSingleton({
+    baseURL: 'https://api-test.oort.digital/minting',
+    logger,
+    interceptors: OortApiInterceptors.createInstance(logger)
+})
 
 const provider = new MoralisNftProviderNoSdk({
     generateHero: p => heroApi.generateHero(p, EMPTY_ABORT_SIGNAL),

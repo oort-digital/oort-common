@@ -1,7 +1,7 @@
 import { OortDasboardApi } from "./oortDasboardApi";
 import axios, { AxiosRequestConfig } from "axios"
 import * as https from "https";
-import { IAPIConfig } from "../common";
+import { IAPIConfig, OortApiInterceptors } from "../common";
 import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
 
 const abortController = new AbortController()
@@ -27,9 +27,12 @@ axios.interceptors.request.use(async request => {
     return request
 })
 
+const logger = new ConsoleLogger(LogLevel.Debug)
+
 const oortClientSettings: IAPIConfig = {
     baseURL: 'https://api-test.oort.digital/platform',
-    logger: new ConsoleLogger(LogLevel.Debug)
+    logger,
+    interceptors: OortApiInterceptors.createInstance(logger)
 }
 
 test.skip('debug only dasboard', async () => {

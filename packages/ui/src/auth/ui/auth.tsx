@@ -15,6 +15,7 @@ import { registerAuthInterceptors, unRegisterAuthInterceptors } from '../interce
 import { AuthModal } from './authModal';
 import { useLocation } from 'react-router-dom';
 import classnames from 'classnames';
+import { OortApiInterceptors } from '@oort-digital/oort-api-client';
 
 
 export interface IAuthProps {
@@ -27,7 +28,8 @@ export interface IAuthProps {
     ssoServerBaseUrl: string
     tokenStorageType?: TokenStorageType
     children: ReactNode
-    excludePathes?: string[]
+    excludePathes?: string[],
+    interceptors: OortApiInterceptors
 }
 
 const renderText = ({ web3Store, expectedChainId }: IAuthProps) => {
@@ -63,14 +65,39 @@ const renderText = ({ web3Store, expectedChainId }: IAuthProps) => {
 
 const Impl = (props: IAuthProps) => {
 
-    const { className, style, excludePathes, web3Store, expectedChainId, supportedWallets, logger, ssoServerBaseUrl, tokenStorageType = 'cookies', children } = props
+    const { className, style, excludePathes,
+        web3Store, expectedChainId, supportedWallets,
+        logger, ssoServerBaseUrl, tokenStorageType = 'cookies',
+        children, interceptors } = props
+
     const [isWalletVisible, setIsWalletVisible] = useState(false)
     const [authInProcess, setAuthInProcess] = useState(false)
-    const [ssoStore] = useState(() => new AuthStore({
+
+    const [renderChildren, setRenderChildren] = useState(false)
+
+    const [authStore] = useState(() => new AuthStore({
         logger, web3Store, ssoServerBaseUrl, tokenStorageType
     }))
 
     const location = useLocation()
+
+    const debug = (msg: string) => {
+        logger.debug(`Auth. ${msg}`)
+    }
+
+    const onClose = () => setIsWalletVisible(false)
+
+    const auth = async () => {
+        try {
+            setAuthInProcess(true)
+            await authStore.auth()
+        } catch (e) {
+            logger.error(e);
+        }
+        setAuthInProcess(false)
+    }
+
+    debug(`renderChildren: ${renderChildren}`)
 
     if(excludePathes?.some(p => location.pathname.includes(p))) {
         return <>{children}</>
@@ -78,33 +105,26 @@ const Impl = (props: IAuthProps) => {
 
     const { isConnectedToSupportedChain } = web3Store
 
-    const { isReady, askAuth } = ssoStore
+    const { askAuth } = authStore
 
     useEffect(() => {
-        if(isReady) {
-            const ids = registerAuthInterceptors(ssoStore, logger)
+        debug(`useEffect. authStore.isReady:${authStore.isReady}`)
+        if(authStore.isReady) {
+            debug('registerAuthInterceptors')
+            const ids = registerAuthInterceptors(interceptors, authStore, logger)
+            debug('registerAuthInterceptors done')
+            setRenderChildren(true)
             return () => {
-                unRegisterAuthInterceptors(ids, logger)
+                debug(`useEffect. authStore.isReady:${authStore.isReady} unmount`)
+                unRegisterAuthInterceptors(interceptors, ids)
             }
         }
         return
-    }, [isReady]); // eslint-disable-line react-hooks/exhaustive-deps
-
-
-    const onClose = () => setIsWalletVisible(false)
-
-    const auth = async () => {
-        try {
-            setAuthInProcess(true)
-            await ssoStore.auth()
-        } catch (e) {
-            logger.error(e);
-        }
-        setAuthInProcess(false)
-    }
+    }, [authStore.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
     
-    if(!isReady) {
-        return <PageLoader />
+    const loaderStyle: CSSProperties = { textAlign: "center", marginTop: "150px", width: '100%' }
+    if(!authStore.isReady) {
+        return <PageLoader delay={100} visible style={loaderStyle} />
     }
 
     if(askAuth || !isConnectedToSupportedChain) {
@@ -120,7 +140,12 @@ const Impl = (props: IAuthProps) => {
         </div>
     }
 
-    return <>{children}</>
+    if(renderChildren) {
+        // return <PageLoader delay={100} visible style={loaderStyle} />
+        return <>{children}</>
+    }
+
+    return <></>
 }
 
 export const Auth = observer(Impl)

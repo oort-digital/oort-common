@@ -10,7 +10,13 @@ export function isZeroAddress(str: string): boolean {
 };
 
 const CHUNK_LENGTH_DEFAULT = 4;
+
+/** @deprecated use toMassked*/
 export function toMasskedAddress(str: string, chunkLength?: number): string {
+  return toMassked(str, chunkLength)
+}
+
+export function toMassked(str: string, chunkLength?: number): string {
   const cLen = chunkLength || CHUNK_LENGTH_DEFAULT
 
   if (!str || str.length <= cLen) {
