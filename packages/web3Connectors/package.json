@@ -31,7 +31,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.21.5",
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-typescript": "^7.21.5",
-    "@oort-digital/utils": "^0.0.1-alfa.0.0.1",
+    "@oort-digital/utils": "^0.0.1-alfa.0.0.2",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-interactions": "^6.5.13",
