@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-fix.0.0.1",
+  "version": "0.0.1-alfa.0.1.1",
   "type": "module",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
   "dependencies": {
     "@haechi-labs/face-sdk": "^1.7.0",
     "@haechi-labs/face-types": "^1.7.0",
-    "@oort-digital/logger": "0.0.1-alfa.0.0.2",
+    "@oort-digital/logger": "^0.0.1-alfa.0.0.2",
     "@walletconnect/encoding": "^1.0.2",
     "@walletconnect/types": "^2.7.3",
     "@walletconnect/universal-provider": "^2.7.3",
