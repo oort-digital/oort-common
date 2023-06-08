@@ -1,4 +1,3 @@
-import { Tag } from "antd";
 import "./txModalDesktop.less";
 import { ITxModalProps } from "./common";
 import { TransactionInfo } from "./transactionInfo";
@@ -13,18 +12,9 @@ function TxModalDesktop({
   waiting,
   description,
   txItems,
-  visible,
-  note,
+  visible
 }: ITxModalProps) {
-  let noteDiv: JSX.Element | null = null;
-  if (note) {
-    noteDiv = (
-      <div style={{ marginBottom: "5px" }}>
-        <Tag color="orange">{note}</Tag>
-      </div>
-    );
-  }
-
+  
   const onCancelInternal = () => {
     if (!waiting && onCancel) {
       // if waiting === true, user can't close modal
@@ -55,7 +45,6 @@ function TxModalDesktop({
       <>
         <div className="tx-modal-description">{description}</div>
         <TransactionInfo items={txItems} />
-        {noteDiv}
       </>
     </OortModal>
   );

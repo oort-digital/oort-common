@@ -44,7 +44,6 @@ const props: ITxModalProps = {
   onOk,
   onCancel,
   txItems,
-  note: 'some note',
   waiting: false
 }
 

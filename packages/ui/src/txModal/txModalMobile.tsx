@@ -1,4 +1,3 @@
-import { Tag } from "antd";
 import "./txModalMobile.less";
 import { FooterButtonsMobile, OortModalMobile } from "../oortModal";
 import { ITxModalProps } from "./common";
@@ -13,17 +12,8 @@ function TxModalMobile({
   waiting,
   description,
   txItems,
-  visible,
-  note,
+  visible
 }: ITxModalProps) {
-  let noteDiv: JSX.Element | null = null;
-  if (note) {
-    noteDiv = (
-      <div style={{ marginBottom: "5px" }}>
-        <Tag color="orange">{note}</Tag>
-      </div>
-    );
-  }
 
   const onCancelInternal = () => {
     if (!waiting && onCancel) {
@@ -54,7 +44,6 @@ function TxModalMobile({
       <>
         <div className="tx-modal-description">{description}</div>
         <TransactionInfo items={txItems} />
-        {noteDiv}
       </>
     </OortModalMobile>
   );

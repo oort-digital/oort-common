@@ -15,5 +15,4 @@ export interface ITxModalProps {
   onCancel?: () => void;
   waiting: boolean;
   txItems: ITransactionInfoItem[];
-  note?: string;
 }
