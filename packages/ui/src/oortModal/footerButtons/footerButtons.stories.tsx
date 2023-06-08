@@ -1,7 +1,7 @@
-import "../styles/antOverride.less";
-import "../styles/fonts.css";
+import "../../styles/antOverride.less";
+import "../../styles/fonts.css";
 import { Meta, StoryObj } from '@storybook/react';
-import { IFooterBtn, FooterButtons } from "./footerButtons";
+import { IFooterBtn, FooterButtons } from "./";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
