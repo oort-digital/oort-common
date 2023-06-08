@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { toMasskedAddress } from "@oort-digital/utils";
 import { Spin, Typography } from "antd";
 import { CheckCircleTwoTone } from '@ant-design/icons';
@@ -8,8 +7,10 @@ import classNames from "classnames";
 const { Link } = Typography;
 
 export const addTralingSlash = (url: string) => {
-  if (url.substring(-1) !== '/') url += '/'
-  return url
+  if(url[url.length - 1] === '/') {
+    return url
+  }
+  return `${url}/`
 }
 
 export type TxStatus = 'pending' | 'completed'
