@@ -1,7 +1,6 @@
 import { Button} from 'antd'
 import classNames from 'classnames';
 import { IFooterBtn } from './footerButtons';
-import { ReactNode } from 'react';
 
 interface IProps {
     buttons?: IFooterBtn[]
@@ -9,7 +8,7 @@ interface IProps {
     className?: string
 }
 
-export function useFooterButtons(props: IProps, styles: any): ReactNode {
+export function useFooterButtons(props: IProps, styles: any): JSX.Element {
 
     const {buttons = [], loading, className } = props
 
@@ -35,10 +34,5 @@ export function useFooterButtons(props: IProps, styles: any): ReactNode {
         { [`${styles.single_button}`]: buttons.length === 1 },
         { [`${styles.two_buttons}`]: buttons.length === 2 })
 
-
-    return <div className={cssClass}>
-        {
-            buttons.map(renderBtn)
-        }
-    </div>
+    return <div className={cssClass}>{buttons.map(renderBtn)}</div>
 }
