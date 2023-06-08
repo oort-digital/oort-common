@@ -76,7 +76,7 @@ function FooterButtonsMobileDepricated({ okBtn, cancelBtn, onCancel, onOk, loadi
     }
 
     return <div className={cssClass}>
-    { cancelBtn ? renderButton('cancel-btn', cancelBtn, 'Cancel',disable , loading, cancelBtn.type ?? "default", onCancel) : null }
+    { cancelBtn ? renderButton('cancel-btn', cancelBtn, 'Cancel', disable || loading, false, cancelBtn.type ?? "default", onCancel) : null }
     { okBtn ? renderButton('ok-btn', okBtn, 'Ok', disable, loading, okBtn.type ?? "primary", onOk) : null }
     </div>
 }
