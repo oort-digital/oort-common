@@ -1,9 +1,8 @@
 import { Button} from 'antd'
-import "./footerButtonsMobile.less"
+import styles from "./footerButtonsMobile.module.less"
 import React from 'react'
 import { ButtonType } from 'antd/lib/button';
 import { IFooterBtn } from './footerButtons';
-
 
 interface IProps extends IDepricatedProps {
     buttons?: IFooterBtn[]
@@ -63,21 +62,21 @@ function renderButton(
 
 function FooterButtonsMobileDepricated({ okBtn, cancelBtn, onCancel, onOk, loading, className, disable }: IProps) {
 
-    let cssClass = 'footer-buttons-mobile'
+    let cssClass = styles.footer_buttons
     if(className) {
         cssClass = `${cssClass} ${className}`
     }
 
     if(cancelBtn && okBtn) {
-        cssClass = `${cssClass} two-buttons`
+        cssClass = `${cssClass} ${styles.two_buttons}`
     }
     else {
-        cssClass = `${cssClass} single-button`
+        cssClass = `${cssClass} ${styles.single_button}`
     }
 
     return <div className={cssClass}>
-    { cancelBtn ? renderButton('cancel-btn', cancelBtn, 'Cancel', disable || loading, false, cancelBtn.type ?? "default", onCancel) : null }
-    { okBtn ? renderButton('ok-btn', okBtn, 'Ok', disable, loading, okBtn.type ?? "primary", onOk) : null }
+    { cancelBtn ? renderButton(styles.cancel_btn, cancelBtn, 'Cancel', disable || loading, false, cancelBtn.type ?? "default", onCancel) : null }
+    { okBtn ? renderButton(styles.ok_btn, okBtn, 'Ok', disable, loading, okBtn.type ?? "primary", onOk) : null }
     </div>
 }
 

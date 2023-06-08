@@ -1,0 +1,22 @@
+.footer_buttons {
+    width: 100%;
+    :global(.ant-btn) {
+        border-radius: 0;
+    }
+    
+    &.single_button {
+        :global(.ant-btn) {
+            width: 100%;
+        }
+    }
+
+    &.two_buttons {
+        .cancel_btn {
+            width: 40%;
+        }
+
+        .ok_btn {
+            width: 60%;
+        }
+    }
+}
