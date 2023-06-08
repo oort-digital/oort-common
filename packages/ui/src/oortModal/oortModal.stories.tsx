@@ -1,38 +1,46 @@
 import React from "react";
 import "../styles/antOverride.less";
 import "../styles/fonts.css";
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { FooterButtons, IFooterBtn, OortModal } from ".";
 import { ThemeLoader } from "../internalHelpers";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const meta = {
   title: 'oort/modal',
   component: OortModal,
-} as ComponentMeta<typeof OortModal>;
+} satisfies Meta<typeof OortModal>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof OortModal> = (args) => {
-  return <OortModal {...args} />
-}
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const main = Template.bind({});
-main.args = {
-  visible: true,
-  title: 'modal title',
-  onCancel: (e: React.MouseEvent<HTMLElement>) => {},
-  children: <ThemeLoader />
+export const Primary: Story = {
+  args: {
+    visible: true,
+    title: 'modal title',
+    onCancel: (e: React.MouseEvent<HTMLElement>) => {},
+    children: <ThemeLoader />
+  },
+
+  render: (props) => {
+    return <OortModal {...props} />
+  }
 };
 
 const okBtn: IFooterBtn = {
   text: 'ok'
 }
 
-export const footerButtons = Template.bind({});
-footerButtons.args = {
-  visible: true,
-  title: 'modal title',
-  onCancel: (e: React.MouseEvent<HTMLElement>) => {},
-  children: <ThemeLoader />,
-  footer: <FooterButtons okBtn={okBtn} />
+export const CustomFooterButtons: Story = {
+  args: {
+    visible: true,
+    title: 'modal title',
+    onCancel: (e: React.MouseEvent<HTMLElement>) => {},
+    children: <ThemeLoader />,
+    footer: <FooterButtons okBtn={okBtn} />
+  },
+
+  render: (props) => {
+    return <OortModal {...props} />
+  }
 };
