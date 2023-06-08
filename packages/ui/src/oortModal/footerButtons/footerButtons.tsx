@@ -1,25 +1,8 @@
+import React from 'react'
 import { Button} from 'antd'
 import styles from "./footerButtons.module.less"
-import React from 'react'
-import { SizeType } from 'antd/lib/config-provider/SizeContext'
-import { ButtonType } from 'antd/lib/button';
 import { useFooterButtons } from './useFooterButtons';
-
-export interface IFooterBtn {
-    className?: string
-    text: string | undefined
-    size?: SizeType
-    type?: ButtonType
-    icon?: React.ReactNode
-    href?: string
-    onClick?: (e: React.MouseEvent<HTMLElement>) => void
-    isMainButton?: boolean
-    /**
-    * @deprecated Use showLoadingIcon
-    */
-    loading?: boolean
-    disabled?: boolean
-}
+import { IFooterBtn, IFooterProps } from './typesAndInterfaces';
 
 interface IDepricatedProps {
     /**
@@ -56,11 +39,7 @@ interface IDepricatedProps {
     onSecondOk?: (e: React.MouseEvent<HTMLElement>) => void
 }
 
-interface IProps extends IDepricatedProps {
-    buttons?: IFooterBtn[]
-    loading?: boolean
-    className?: string
-}
+interface IProps extends IDepricatedProps, IFooterProps { }
 
 function DepricatedFooterButtons({okBtn, cancelBtn, onCancel, onOk, loading, className, firstBtn, secondBtn, onFistOk, onSecondOk }: IProps) {
 

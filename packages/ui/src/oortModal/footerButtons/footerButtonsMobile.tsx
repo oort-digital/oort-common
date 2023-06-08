@@ -2,14 +2,10 @@ import { Button} from 'antd'
 import styles from "./footerButtonsMobile.module.less"
 import React from 'react'
 import { ButtonType } from 'antd/lib/button';
-import { IFooterBtn } from './footerButtons';
 import { useFooterButtons } from './useFooterButtons';
+import { IFooterBtn, IFooterProps } from './typesAndInterfaces';
 
-interface IProps extends IDepricatedProps {
-    buttons?: IFooterBtn[]
-    loading?: boolean
-    className?: string
-}
+interface IProps extends IDepricatedProps, IFooterProps { }
 
 interface IDepricatedProps {
     /**

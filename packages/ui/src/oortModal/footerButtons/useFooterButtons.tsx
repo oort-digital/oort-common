@@ -1,14 +1,9 @@
 import { Button} from 'antd'
 import classNames from 'classnames';
-import { IFooterBtn } from './footerButtons';
+import { IFooterBtn } from '.';
+import { IFooterProps } from './typesAndInterfaces';
 
-interface IProps {
-    buttons?: IFooterBtn[]
-    loading?: boolean
-    className?: string
-}
-
-export function useFooterButtons(props: IProps, styles: any): JSX.Element {
+export function useFooterButtons(props: IFooterProps, styles: any): JSX.Element {
 
     const {buttons = [], loading, className } = props
 
