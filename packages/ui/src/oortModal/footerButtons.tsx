@@ -12,6 +12,10 @@ export interface IFooterBtn {
     icon?: React.ReactNode
     href?: string
     onClick?: (e: React.MouseEvent<HTMLElement>) => void
+    showLoadingIcon?: boolean
+    /**
+    * @deprecated Use showLoadingIcon
+    */
     loading?: boolean
     disabled?: boolean
 }
@@ -96,18 +100,13 @@ export function FooterButtons(props: IProps) {
         cssClass = `${cssClass} ${className}`
     }
 
-    const renderBtn = (btn: IFooterBtn, idx: number) => {
+    const renderBtn = (btn: IFooterBtn) => {
 
         const { className, size, type, onClick, text } = btn
-        let btnLoading = btn.loading
+        let btnLoading = loading && !!btn.showLoadingIcon
         let btnDisabled = btn.disabled
-        // first button show loading indicator
-        if(loading && idx === 0) {
-            btnLoading = true
-        }
-
-        // other buttons disabled on loading
-        if(loading && idx) {
+        
+        if(loading && !btnLoading) {
             btnDisabled = true
         }
 

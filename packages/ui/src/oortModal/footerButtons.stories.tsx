@@ -17,7 +17,9 @@ const onClick = () => { alert('onClick') }
 
 const okButton: IFooterBtn = {
   text: 'Ok',
-  onClick
+  onClick,
+  showLoadingIcon: true,
+  type: "primary"
 }
 
 const cancelBtn: IFooterBtn = {
@@ -27,6 +29,6 @@ const cancelBtn: IFooterBtn = {
 
 export const Primary: Story = {
   args: {
-    buttons: [okButton, cancelBtn]
+    buttons: [cancelBtn, okButton]
   }
 };
