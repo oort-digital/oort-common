@@ -62,7 +62,7 @@ function renderButton(
 
 function FooterButtonsMobileDepricated({ okBtn, cancelBtn, onCancel, onOk, loading, className, disable }: IProps) {
 
-    let cssClass = styles.footer_buttons
+    let cssClass = styles.footer_buttons_depricated
     if(className) {
         cssClass = `${cssClass} ${className}`
     }
