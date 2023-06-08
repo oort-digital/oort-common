@@ -8,7 +8,7 @@ import { FooterButtons, IFooterBtn } from "./footerButtons";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
-  title: 'oort/modal',
+  title: 'oort/oortModal/oortModal',
   component: OortModal,
 } satisfies Meta<typeof OortModal>;
 
