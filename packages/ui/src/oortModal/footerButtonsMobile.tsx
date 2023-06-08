@@ -5,14 +5,33 @@ import { ButtonType } from 'antd/lib/button';
 import { IFooterBtn } from './footerButtons';
 
 
-interface IProps {
-    okBtn?: IFooterBtn
-    cancelBtn?: IFooterBtn
-    onOk?: (e: React.MouseEvent<HTMLElement>) => void
-    onCancel?: (e: React.MouseEvent<HTMLElement>) => void
+interface IProps extends IDepricatedProps {
+    buttons?: IFooterBtn[]
     loading?: boolean
     className?: string
-    disable?:boolean
+}
+
+interface IDepricatedProps {
+    /**
+    * @deprecated Use Buttons
+    */
+    okBtn?: IFooterBtn
+    /**
+    * @deprecated Use Buttons
+    */
+    cancelBtn?: IFooterBtn
+    /**
+    * @deprecated Use IFooterBtn.onClick
+    */
+    onOk?: (e: React.MouseEvent<HTMLElement>) => void
+    /**
+    * @deprecated Use IFooterBtn.onClick
+    */
+    onCancel?: (e: React.MouseEvent<HTMLElement>) => void
+    /**
+    * @deprecated Use Buttons
+    */
+    disable?: boolean
 }
 
 function renderButton(
@@ -42,7 +61,7 @@ function renderButton(
 
 }
 
-export function FooterButtonsMobile({okBtn, cancelBtn, onCancel, onOk, loading, className,disable }: IProps) {
+function FooterButtonsMobileDepricated({ okBtn, cancelBtn, onCancel, onOk, loading, className, disable }: IProps) {
 
     let cssClass = 'footer-buttons-mobile'
     if(className) {
@@ -60,4 +79,15 @@ export function FooterButtonsMobile({okBtn, cancelBtn, onCancel, onOk, loading, 
     { cancelBtn ? renderButton('cancel-btn', cancelBtn, 'Cancel',disable , loading, cancelBtn.type ?? "default", onCancel) : null }
     { okBtn ? renderButton('ok-btn', okBtn, 'Ok', disable, loading, okBtn.type ?? "primary", onOk) : null }
     </div>
+}
+
+export function FooterButtonsMobile(props: IProps) {
+
+    const {buttons = [], loading, className } = props
+
+    if(buttons.length === 0) {
+        return FooterButtonsMobileDepricated(props)
+    }
+
+    return FooterButtonsMobileDepricated(props)
 }
