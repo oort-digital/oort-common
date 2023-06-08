@@ -3,6 +3,7 @@ import styles from "./footerButtonsMobile.module.less"
 import React from 'react'
 import { ButtonType } from 'antd/lib/button';
 import { IFooterBtn } from './footerButtons';
+import { useFooterButtons } from './useFooterButtons';
 
 interface IProps extends IDepricatedProps {
     buttons?: IFooterBtn[]
@@ -82,11 +83,11 @@ function FooterButtonsMobileDepricated({ okBtn, cancelBtn, onCancel, onOk, loadi
 
 export function FooterButtonsMobile(props: IProps) {
 
-    const {buttons = [], loading, className } = props
+    const {buttons = [] } = props
 
     if(buttons.length === 0) {
         return FooterButtonsMobileDepricated(props)
     }
 
-    return FooterButtonsMobileDepricated(props)
+    return useFooterButtons(props, styles)
 }
