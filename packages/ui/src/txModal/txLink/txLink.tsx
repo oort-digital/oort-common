@@ -9,7 +9,7 @@ const { Link } = Typography;
 
 export type TxStatus = 'pending' | 'completed'
 
-interface IProps {
+export interface ITxLinkProps {
   hash: string
   blockExplorer: string
   status: TxStatus
@@ -21,7 +21,7 @@ export function TxLink({
   blockExplorer,
   status,
   className
-}: IProps) {
+}: ITxLinkProps) {
     const url = `${addTralingSlash(blockExplorer)}tx/${hash}`;
 
     return <div className={classNames(styles.tx_link, className)}>
