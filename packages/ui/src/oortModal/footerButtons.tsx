@@ -3,6 +3,7 @@ import styles from "./footerButtons.module.less"
 import React from 'react'
 import { SizeType } from 'antd/lib/config-provider/SizeContext'
 import { ButtonType } from 'antd/lib/button';
+import classNames from 'classnames';
 
 export interface IFooterBtn {
     className?: string
@@ -12,7 +13,7 @@ export interface IFooterBtn {
     icon?: React.ReactNode
     href?: string
     onClick?: (e: React.MouseEvent<HTMLElement>) => void
-    showLoadingIcon?: boolean
+    isMainButton?: boolean
     /**
     * @deprecated Use showLoadingIcon
     */
@@ -63,7 +64,7 @@ interface IProps extends IDepricatedProps {
 
 function DepricatedFooterButtons({okBtn, cancelBtn, onCancel, onOk, loading, className, firstBtn, secondBtn, onFistOk, onSecondOk }: IProps) {
 
-    let cssClass = `${styles.footer_buttons} footer-buttons`
+    let cssClass = styles.footer_buttons_depricated
     if(className) {
         cssClass = `${cssClass} ${className}`
     }
@@ -95,23 +96,28 @@ export function FooterButtons(props: IProps) {
         return DepricatedFooterButtons(props)
     }
 
-    let cssClass = `${styles.footer_buttons} footer-buttons`
-    if(className) {
-        cssClass = `${cssClass} ${className}`
-    }
-
     const renderBtn = (btn: IFooterBtn) => {
 
-        const { className, size, type, onClick, text } = btn
-        let btnLoading = loading && !!btn.showLoadingIcon
+        const { size, type, onClick, text } = btn
+
+        const className = btn.isMainButton ? styles.main_btn : styles.btn
+
+        let btnLoading = loading && !!btn.isMainButton
         let btnDisabled = btn.disabled
         
         if(loading && !btnLoading) {
             btnDisabled = true
         }
 
-        return <Button key={btn.text} className={className} loading={btnLoading} disabled={btnDisabled} size={size ?? 'large'} type={type} onClick={onClick}>{text}</Button>
+        return <Button key={btn.text} className={classNames(btn.className, className)} loading={btnLoading} disabled={btnDisabled} size={size ?? 'large'} type={type} onClick={onClick}>{text}</Button>
     }
+
+    const cssClass = classNames(
+        className,
+        styles.footer_buttons,
+        { [`${styles.single_button}`]: buttons.length === 1 },
+        { [`${styles.two_buttons}`]: buttons.length === 2 })
+
 
     return <div className={cssClass}>
         {

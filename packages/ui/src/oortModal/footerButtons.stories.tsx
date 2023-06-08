@@ -18,7 +18,7 @@ const onClick = () => { alert('onClick') }
 const okButton: IFooterBtn = {
   text: 'Ok',
   onClick,
-  showLoadingIcon: true,
+  isMainButton: true,
   type: "primary"
 }
 
@@ -27,8 +27,30 @@ const cancelBtn: IFooterBtn = {
   onClick
 }
 
-export const Primary: Story = {
+export const SingleButtons: Story = {
+  args: {
+    buttons: [okButton]
+  }
+};
+
+export const TwoButtons: Story = {
   args: {
     buttons: [cancelBtn, okButton]
+  }
+};
+
+export const SingleBtnDepricated: Story = {
+  args: {
+    okBtn: okButton,
+    onOk: onClick
+  }
+};
+
+export const TwoButtonsDepricated: Story = {
+  args: {
+    okBtn: okButton,
+    cancelBtn,
+    onCancel: onClick,
+    onOk: onClick
   }
 };
