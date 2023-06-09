@@ -4,8 +4,7 @@ import "../styles/fonts.css";
 import { Meta, StoryObj } from '@storybook/react';
 import { ThemeLoader } from "../internalHelpers";
 import { OortModalMobile } from "./oortModalMobile"
-import { IFooterBtn } from "./footerButtons";
-import { FooterButtonsMobile } from "./footerButtonsMobile";
+import { IFooterBtn, FooterButtonsMobile } from "./footerButtons";
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
