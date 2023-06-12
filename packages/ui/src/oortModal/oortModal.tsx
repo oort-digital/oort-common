@@ -1,20 +1,11 @@
 import styles from "./oortModal.module.less"
 import {Modal, Typography } from 'antd'
 import React, { ReactNode } from 'react'
-import { SizeType } from 'antd/lib/config-provider/SizeContext'
-import { ButtonType } from 'antd/lib/button';
 import { CloseIcon } from "../icons";
 const {Title} = Typography
 
 function OortModalTitle(props: { title: string }) {
     return <Title level={4} style={{marginBottom: 0}}>{props.title}</Title>
-}
-
-export interface IBtn {
-    text: string
-    size?: SizeType
-    type?: ButtonType
-    icon?: React.ReactNode
 }
 
 interface IProps {

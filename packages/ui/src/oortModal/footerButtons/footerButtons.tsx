@@ -1,20 +1,8 @@
+import React from 'react'
 import { Button} from 'antd'
 import styles from "./footerButtons.module.less"
-import React from 'react'
-import { SizeType } from 'antd/lib/config-provider/SizeContext'
-import { ButtonType } from 'antd/lib/button';
-
-export interface IFooterBtn {
-    className?: string
-    text: string | undefined
-    size?: SizeType
-    type?: ButtonType
-    icon?: React.ReactNode
-    href?: string
-    onClick?: (e: React.MouseEvent<HTMLElement>) => void
-    loading?: boolean
-    disabled?: boolean
-}
+import { useFooterButtons } from './useFooterButtons';
+import { IFooterBtn, IFooterProps } from './typesAndInterfaces';
 
 interface IDepricatedProps {
     /**
@@ -51,15 +39,11 @@ interface IDepricatedProps {
     onSecondOk?: (e: React.MouseEvent<HTMLElement>) => void
 }
 
-interface IProps extends IDepricatedProps {
-    buttons?: IFooterBtn[]
-    loading?: boolean
-    className?: string
-}
+interface IProps extends IDepricatedProps, IFooterProps { }
 
 function DepricatedFooterButtons({okBtn, cancelBtn, onCancel, onOk, loading, className, firstBtn, secondBtn, onFistOk, onSecondOk }: IProps) {
 
-    let cssClass = `${styles.footer_buttons} footer-buttons`
+    let cssClass = styles.footer_buttons_depricated
     if(className) {
         cssClass = `${cssClass} ${className}`
     }
@@ -85,38 +69,11 @@ function DepricatedFooterButtons({okBtn, cancelBtn, onCancel, onOk, loading, cla
 
 export function FooterButtons(props: IProps) {
 
-    const {buttons = [], loading, className } = props
+    const {buttons = [] } = props
 
     if(buttons.length === 0) {
         return DepricatedFooterButtons(props)
     }
 
-    let cssClass = `${styles.footer_buttons} footer-buttons`
-    if(className) {
-        cssClass = `${cssClass} ${className}`
-    }
-
-    const renderBtn = (btn: IFooterBtn, idx: number) => {
-
-        const { className, size, type, onClick, text } = btn
-        let btnLoading = btn.loading
-        let btnDisabled = btn.disabled
-        // first button show loading indicator
-        if(loading && idx === 0) {
-            btnLoading = true
-        }
-
-        // other buttons disabled on loading
-        if(loading && idx) {
-            btnDisabled = true
-        }
-
-        return <Button key={btn.text} className={className} loading={btnLoading} disabled={btnDisabled} size={size ?? 'large'} type={type} onClick={onClick}>{text}</Button>
-    }
-
-    return <div className={cssClass}>
-        {
-            buttons.map(renderBtn)
-        }
-    </div>
+    return useFooterButtons(props, styles)
 }
