@@ -3,6 +3,7 @@ import { TestCarousel } from "./testCarousel";
 
 export const navItems: INavItems = {
     dashboard: 'http://dashboard.oort.local',
+    leaderboard: 'http://leaderboard.oort.local',
     minting: {
       mutation: {
           reactRouterLink: false,

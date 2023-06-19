@@ -23,6 +23,7 @@ export type NavItemType = string | {
 
 export interface INavItems {
     dashboard: NavItemType
+    leaderboard: NavItemType
     minting: {
         mutation: NavItemType
         claim: NavItemType
@@ -58,6 +59,11 @@ interface INavItemInternal {
 
 const dashboardInternal = {
     caption: 'dashboard',
+    icon: <DashboardIcon />,
+}
+
+const leaderboardInternal = {
+    caption: 'leaderboard',
     icon: <DashboardIcon />,
 }
 
@@ -131,7 +137,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     // to trigger rerendering on react-router pathchange
     useLocation()
 
-    const { dashboard, rent, gameHub, minting, developTools, rpgBattle } = navItems
+    const { dashboard, rent, gameHub, minting, developTools, rpgBattle, leaderboard } = navItems
 
     const collapseNavItemPairs: NavItemPairType[] = [
         [rentInternal, rent],
@@ -216,5 +222,6 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
             {collapseNavItemPairs.map(renderCollapse)}
         </Collapse>
         {renderItem(rpgBattle, rpgBattleInternal)}
+        {renderItem(leaderboard, leaderboardInternal)}
     </Menu>
 }
