@@ -13,7 +13,6 @@ import React, { useEffect, useState } from "react";
 import { OortApiInterceptors, OortHeroApi } from "@oort-digital/oort-api-client";
 import { observer } from "mobx-react";
 import { ThemeLoader } from "../../internalHelpers";
-import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
 
 const meta = {
   title: 'oort/auth',
