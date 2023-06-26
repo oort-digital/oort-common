@@ -3,10 +3,10 @@ import styles from './footerMenu.module.less';
 import { Menu, MenuItem, MenuItemBtn } from './menu';
 import { getChainIconOld } from '../utils';
 import { ChevronSortIcon, DiscordIcon, TelegramIcon, TwitterIcon } from '../icons';
-import { ThemeSwitch } from './themeSwitch';
+// import { ThemeSwitch } from './themeSwitch';
 import { ConnectModal, IWeb3 } from '../connectModal';
 import { BlockieAddress } from '../blockieAddress';
-import { useTheme } from '../effects';
+// import { useTheme } from '../effects';
 import { isChainEmpty } from '@oort-digital/web3-connectors';
 import { observer } from 'mobx-react';
 import { toMasskedAddress } from '@oort-digital/utils';
@@ -33,7 +33,7 @@ const Impl = ({ className, web3, supportedWallets }: IProps) => {
 
     const [ connectModalVisible, setConnectModalVisible ] = useState(false)
 
-    const [ isDarkMode, setDarkMode ] = useTheme()
+    // const [ isDarkMode, setDarkMode ] = useTheme()
 
     const renderConnectModal = () => {
         return <ConnectModal
@@ -70,10 +70,10 @@ const Impl = ({ className, web3, supportedWallets }: IProps) => {
         <Menu className={cssClass}>
             <MenuItem key="social" className={styles.social}>{social}</MenuItem>
             {renderWeb3()}
-            <MenuItem className={styles.theme_switch} key="theme-switch">
+            {/* <MenuItem className={styles.theme_switch} key="theme-switch">
                 <ThemeSwitch isDarkMode={isDarkMode} onChange={() => setDarkMode(!isDarkMode)} />
                 <span className={styles.theme_name}>{isDarkMode ? 'light' : 'dark'}</span>
-            </MenuItem>
+            </MenuItem> */}
         </Menu>
     </>
 }
