@@ -29,6 +29,7 @@ export interface ICampaign {
     amount: number;
     type: string;
     image: string;
+    name: string;
     distributionMethod: string;
     eligible: boolean;
   }
