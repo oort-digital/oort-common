@@ -1,5 +1,7 @@
-export { OortDasboardApi } from "./oortCampaignApi"
-export { GameStatusEnum, MissionType, SearchGameHubType } from "./typesAndInterfaces"
-export type { ISaveFeedbackParams, ISaveReviewParams, IReview, LikeType, RatingType,
-    IOortDasboardApi, IDasboardResponse, INewGame, IPopularGame,
-    ITopRatedGame, INft, INftsParams, INftsResponse, IPopularTournament, ICurUserReview } from "./typesAndInterfaces"
+export { OortCampaignApi } from "./oortCampaignApi"
+export type {
+    ICampaign,
+    IBrand,
+    IBrandBattleResult,
+    IReward,
+  } from "./typesAndInterfaces";

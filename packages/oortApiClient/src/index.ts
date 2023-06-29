@@ -1,5 +1,6 @@
 export * from "./dasboardApi"
 export * from "./imageApi"
 export * from "./heroApi"
+export * from "./campaignApi"
 export { OortApiInterceptors } from "./common"
 export type { IAPIConfig, IOortApiResponse } from "./common"

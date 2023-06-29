@@ -36,7 +36,7 @@ export interface IHeroCampaignRewards {
     merkleProof: string
 }
 
-export interface ICampaign {
+export interface IHeroCampaign {
     campaignId: number
     campaignName: string
     brandName: string
@@ -45,7 +45,7 @@ export interface ICampaign {
 
 export interface IHeroMintAvailableResponse {
     heroCampaignRewardsList: IHeroCampaignRewards[]
-    campaigns: ICampaign[]
+    campaigns: IHeroCampaign[]
 }
 
 export interface IOpenBlindBoxHero {
