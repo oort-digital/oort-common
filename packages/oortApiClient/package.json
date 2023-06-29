@@ -26,7 +26,7 @@
     }
   },
   "dependencies": {
-    "axios": "^1.1.2",
+    "axios": "^1.4.0",
     "@oort-digital/logger": "0.0.1-alfa.0.0.2"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { BaseAPI, IAPIConfig, IOortApiResponse, getConfig } from "../common";
+import { BaseAPI, IAPIConfig, getConfig } from "../common";
 import {
     IGetBrandsInCurrentLeaderboardResponse,
     IGetCampaignResponse,
@@ -27,7 +27,7 @@ export class OortCampaignApi extends BaseAPI {
     public async getCampaings(
       { brandIds, keywords, pageNum, pageSize }: IGetCampaingsParams,
       signal: AbortSignal,
-    ): Promise<IOortApiResponse<IGetCampaignsResponse>> {
+    ): Promise<IGetCampaignsResponse> {
       const url = oortServerApis.getCampaigns;
       const params: URLSearchParams = new URLSearchParams();
   
@@ -41,7 +41,7 @@ export class OortCampaignApi extends BaseAPI {
         params.append("keywords", keywords.join(","));
       }
   
-      const response = await this.get<IOortApiResponse<IGetCampaignsResponse>>(
+      const response = await this.get<IGetCampaignsResponse>(
         url,
         getConfig(false, signal, params),
       );
