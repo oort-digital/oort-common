@@ -1,3 +1,24 @@
+export interface IOortCampaignApi {
+  getCampaings: (
+    { brandIds, keywords, pageNum, pageSize }: IGetCampaingsParams,
+    signal: AbortSignal,
+  ) => Promise<IGetCampaignsResponse>
+
+  getCampaing: (
+    { campaignId }: IGetCampaingParams,
+    signal: AbortSignal,
+  ) => Promise<IGetCampaignResponse> 
+
+  getRewards: (
+    { campaignId }: IGetCampaingParams,
+    signal: AbortSignal,
+  ) => Promise<IGetRewardsResponse>
+
+  getBrandsInCurrentLeaderboard: (
+    signal: AbortSignal,
+  ) => Promise<IGetBrandsInCurrentLeaderboardResponse> 
+}
+
 export interface ICampaign {
     brandLogo: string;
     brandName: string;

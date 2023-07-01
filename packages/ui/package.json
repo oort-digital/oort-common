@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/ui",
-  "version": "0.0.1-leaderboard.0.0.5",
+  "version": "0.0.1-leaderboard.0.0.6",
   "type": "module",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   "dependencies": {
     "@oort-digital/lazy-loader": "0.0.1-alfa.0.0.1",
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
-    "@oort-digital/oort-api-client": "0.0.1-leaderboard.0.0.3",
+    "@oort-digital/oort-api-client": "0.0.1-leaderboard.0.0.4",
     "@oort-digital/utils": "0.0.1-alfa.0.0.2",
     "@oort-digital/web3-connectors": "0.0.1-alfa.0.1.1",
     "antd": "4.23.0",

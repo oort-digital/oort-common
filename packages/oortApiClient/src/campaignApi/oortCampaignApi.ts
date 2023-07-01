@@ -6,6 +6,7 @@ import {
     IGetCampaingParams,
     IGetCampaingsParams,
     IGetRewardsResponse,
+    IOortCampaignApi,
 } from "./typesAndInterfaces";
   
 const oortServerApis = {
@@ -14,7 +15,7 @@ const oortServerApis = {
     getBrandsInCurrentLeaderboard: "/leaderboard/brands",
 };
   
-export class OortCampaignApi extends BaseAPI {
+export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
     private static _singleton: OortCampaignApi;
   
     static createSingleton(config: IAPIConfig): OortCampaignApi {
