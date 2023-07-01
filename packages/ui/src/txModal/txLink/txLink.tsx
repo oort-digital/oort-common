@@ -1,9 +1,8 @@
-import { toMassked } from "@oort-digital/utils";
+import { addTrailingSlash, toMassked } from "@oort-digital/utils";
 import { Spin, Typography } from "antd";
 import { CheckCircleTwoTone } from '@ant-design/icons';
 import styles from "./txLink.module.less"
 import classNames from "classnames";
-import { addTralingSlash } from "../utils";
 
 const { Link } = Typography;
 
@@ -22,7 +21,7 @@ export function TxLink({
   status,
   className
 }: ITxLinkProps) {
-    const url = `${addTralingSlash(blockExplorer)}tx/${hash}`;
+    const url = `${addTrailingSlash(blockExplorer)}tx/${hash}`;
 
     return <div className={classNames(styles.tx_link, className)}>
       { status === 'pending' && <Spin className={styles.tx_indicator} size="small" />  }

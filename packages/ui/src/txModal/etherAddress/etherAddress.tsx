@@ -1,6 +1,5 @@
 import { Typography } from "antd";
-import { toMassked } from "@oort-digital/utils";
-import { addTralingSlash } from "../utils";
+import { addTrailingSlash, toMassked } from "@oort-digital/utils";
 
 const { Link } = Typography;
 
@@ -11,7 +10,7 @@ interface IEtherAddressProps {
 
 export function EtherAddress(props: IEtherAddressProps) {
   const { address, blockExplorer } = props;
-  const href = `${addTralingSlash(blockExplorer)}address/${address}`;
+  const href = `${addTrailingSlash(blockExplorer)}address/${address}`;
 
   return (
     <Link href={href} target="_blank">

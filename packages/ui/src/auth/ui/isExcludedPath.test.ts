@@ -3,26 +3,47 @@ import { PathType, isExcludedPath } from "./isExcludedPath"
 
 test("include", () => {
 
-    const path = "campaigns"
-    const pathType: PathType = {
-        path,
-        compareMethod: "include"
+    const pathStr = "campaigns"
+    const pathAddTrailingSlash: PathType = {
+        path: pathStr,
+        compareMethod: "include",
+        addTrailingSlash: true
     }
 
-    expect(isExcludedPath("/campaigns", [path])).toBeTruthy()
-    expect(isExcludedPath("/campaigns/qwerty", [path])).toBeTruthy()
-    expect(isExcludedPath("/campaigns", [pathType])).toBeTruthy()
-    expect(isExcludedPath("/campaigns/qwerty", [pathType])).toBeTruthy()
+    const path: PathType = {
+        path: pathStr,
+        compareMethod: "include",
+        addTrailingSlash: false
+    }
 
+    function assert(p: PathType) {
+        expect(isExcludedPath("/campaigns", [p])).toBeTruthy()
+        expect(isExcludedPath("/campaigns/qwerty", [p])).toBeTruthy()
+    }
+
+    assert(pathStr)
+    assert(path)
+    assert(pathAddTrailingSlash)
 })
 
 test("equal", () => {
 
-    const pathType: PathType = {
+    const path: PathType = {
         path: "/campaigns",
-        compareMethod: "equal"
+        compareMethod: "equal",
+        addTrailingSlash: false
     }
-    expect(isExcludedPath("/campaigns", [pathType])).toBeTruthy()
-    expect(isExcludedPath("/campaigns/qwerty", [pathType])).toBeFalsy()
+    expect(isExcludedPath("/campaigns", [path])).toBeTruthy()
+    expect(isExcludedPath("/campaigns/", [path])).toBeFalsy()
+    expect(isExcludedPath("/campaigns/qwerty", [path])).toBeFalsy()
+
+    const pathAddTrailignSlash: PathType = {
+        path: "/campaigns",
+        compareMethod: "equal",
+        addTrailingSlash: true
+    }
+    expect(isExcludedPath("/campaigns", [pathAddTrailignSlash])).toBeTruthy()
+    expect(isExcludedPath("/campaigns/", [pathAddTrailignSlash])).toBeTruthy()
+    expect(isExcludedPath("/campaigns/qwerty", [pathAddTrailignSlash])).toBeFalsy()
 
 })
