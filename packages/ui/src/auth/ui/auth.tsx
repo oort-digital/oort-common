@@ -16,6 +16,7 @@ import { AuthModal } from './authModal';
 import { useLocation } from 'react-router-dom';
 import classnames from 'classnames';
 import { OortApiInterceptors } from '@oort-digital/oort-api-client';
+import { PathType, isExcludedPath } from './isExcludedPath';
 
 
 export interface IAuthProps {
@@ -28,7 +29,7 @@ export interface IAuthProps {
     ssoServerBaseUrl: string
     tokenStorageType?: TokenStorageType
     children: ReactNode
-    excludePathes?: string[],
+    excludePathes?: PathType[],
     interceptors: OortApiInterceptors
 }
 
@@ -99,7 +100,7 @@ const Impl = (props: IAuthProps) => {
 
     debug(`renderChildren: ${renderChildren}`)
 
-    if(excludePathes?.some(p => location.pathname.includes(p))) {
+    if(excludePathes && isExcludedPath(location.pathname, excludePathes)) {
         return <>{children}</>
     }
 
