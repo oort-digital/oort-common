@@ -81,9 +81,34 @@ const Impl = (props: IAuthProps) => {
     }))
 
     const location = useLocation()
+    const notNeedAuth = excludePathes && isExcludedPath(location.pathname, excludePathes)
 
     const debug = (msg: string) => {
         logger.debug(`Auth. ${msg}`)
+    }
+
+    useEffect(() => {
+        debug(`useEffect. authStore.isReady:${authStore.isReady}`)
+
+        if(notNeedAuth) {
+            debug(`useEffect. notNeedAuth`)
+            return
+        }
+        if(authStore.isReady) {
+            debug('registerAuthInterceptors')
+            const ids = registerAuthInterceptors(interceptors, authStore, logger)
+            debug('registerAuthInterceptors done')
+            setRenderChildren(true)
+            return () => {
+                debug(`useEffect. authStore.isReady:${authStore.isReady} unmount`)
+                unRegisterAuthInterceptors(interceptors, ids)
+            }
+        }
+        return
+    }, [authStore.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    if(notNeedAuth) {
+        return <>{children}</>
     }
 
     const onClose = () => setIsWalletVisible(false)
@@ -100,28 +125,9 @@ const Impl = (props: IAuthProps) => {
 
     debug(`renderChildren: ${renderChildren}`)
 
-    if(excludePathes && isExcludedPath(location.pathname, excludePathes)) {
-        return <>{children}</>
-    }
-
     const { isConnectedToSupportedChain } = web3Store
 
     const { askAuth } = authStore
-
-    useEffect(() => {
-        debug(`useEffect. authStore.isReady:${authStore.isReady}`)
-        if(authStore.isReady) {
-            debug('registerAuthInterceptors')
-            const ids = registerAuthInterceptors(interceptors, authStore, logger)
-            debug('registerAuthInterceptors done')
-            setRenderChildren(true)
-            return () => {
-                debug(`useEffect. authStore.isReady:${authStore.isReady} unmount`)
-                unRegisterAuthInterceptors(interceptors, ids)
-            }
-        }
-        return
-    }, [authStore.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
     
     const loaderStyle: CSSProperties = { textAlign: "center", marginTop: "150px", width: '100%' }
     if(!authStore.isReady) {
