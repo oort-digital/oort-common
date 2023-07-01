@@ -81,7 +81,6 @@ const Impl = (props: IAuthProps) => {
     }))
 
     const location = useLocation()
-    const notNeedAuth = excludePathes && isExcludedPath(location.pathname, excludePathes)
 
     const debug = (msg: string) => {
         logger.debug(`Auth. ${msg}`)
@@ -90,10 +89,6 @@ const Impl = (props: IAuthProps) => {
     useEffect(() => {
         debug(`useEffect. authStore.isReady:${authStore.isReady}`)
 
-        if(notNeedAuth) {
-            debug(`useEffect. notNeedAuth`)
-            return
-        }
         if(authStore.isReady) {
             debug('registerAuthInterceptors')
             const ids = registerAuthInterceptors(interceptors, authStore, logger)
@@ -107,7 +102,8 @@ const Impl = (props: IAuthProps) => {
         return
     }, [authStore.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    if(notNeedAuth) {
+    if(excludePathes && isExcludedPath(location.pathname, excludePathes)) {
+        debug(`${location.pathname} was excluded`)
         return <>{children}</>
     }
 
