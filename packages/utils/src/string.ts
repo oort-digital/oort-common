@@ -32,3 +32,10 @@ export function cutLongString(str: string, maxLen: number): string {
   if(str.length <= maxLen) { return str }
   return `${str.substring(0, maxLen - 3)}...`  
 }
+
+export const addTrailingSlash = (url: string) => {
+  if(url[url.length - 1] === '/') {
+    return url
+  }
+  return `${url}/`
+}
