@@ -5,4 +5,10 @@ export type {
     IBrand,
     IBrandBattleResult,
     IReward,
+    IGetCampaingsParams,
+    IGetCampaignsResponse,
+    IGetCampaingParams,
+    IGetCampaignResponse,
+    IGetRewardsResponse,
+    IGetBrandsInCurrentLeaderboardResponse,
   } from "./typesAndInterfaces";
