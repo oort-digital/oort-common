@@ -8,9 +8,11 @@ export const navItems: INavItems = {
       mutation: {
           reactRouterLink: false,
           href: 'http://minting.oort.local/hero-mutation',
-          disabled: true
+          disabled: true,
+          // hide: true
       },
       claim: 'http://minting.oort.local/claim-rewards',
+      campaigns: 'http://minting.oort.local/campaigns',
     },
     rent: {
       activity: 'http://rent.oort.local/avtivities',

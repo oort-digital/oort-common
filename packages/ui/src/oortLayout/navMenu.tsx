@@ -19,6 +19,7 @@ export type NavItemType = string | {
     href: string
     reactRouterLink: boolean
     disabled?: boolean
+    hide?: boolean
 }
 
 export interface INavItems {
@@ -27,6 +28,7 @@ export interface INavItems {
     minting: {
         mutation: NavItemType
         claim: NavItemType
+        campaigns: NavItemType
     }
     rent: {
         lend: NavItemType
@@ -80,7 +82,8 @@ const mintInternal = {
     caption: 'minting',
     icon: <MintIcon />,
     mutation: "Hero Mutation (Upgrading)",
-    claim: "Claim Heroes"
+    claim: "Claim Heroes",
+    campaigns: "Campaigns"
 }
 
 const gameHubInternal = {
@@ -176,6 +179,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         let href
         let reactRouterLink = false
         let disabled = false
+        let hide = false
 
         if(typeof it === 'string') {
             href = it
@@ -183,7 +187,12 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         else {
             href = it.href
             reactRouterLink = it.reactRouterLink
-            disabled =  it.disabled || false
+            disabled =  !!it.disabled
+            hide = !!it.hide
+        }
+
+        if(hide) {
+           return null;
         }
 
         const activeCss = isActive(href) ? styles.active : ''
