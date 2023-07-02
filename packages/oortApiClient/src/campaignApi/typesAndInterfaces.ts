@@ -23,7 +23,7 @@ export interface ICampaign {
     brandLogo: string;
     brandName: string;
     brandUrl: string;
-    campaignId: string;
+    campaignId: number;
     campaignName: string;
     endTime: string;
     startTime: string;
