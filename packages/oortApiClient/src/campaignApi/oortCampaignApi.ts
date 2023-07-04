@@ -1,16 +1,19 @@
 import { BaseAPI, IAPIConfig, getConfig } from "../common";
 import {
     IGetBrandsInCurrentLeaderboardResponse,
+    IGetBrandsResponse,
     IGetCampaignResponse,
     IGetCampaignsResponse,
     IGetCampaingParams,
     IGetCampaingsParams,
+    IGetPageBaseParams,
     IGetRewardsResponse,
     IOortCampaignApi,
 } from "./typesAndInterfaces";
   
 const oortServerApis = {
     getCampaigns: "/campaign/campaigns",
+    getBrands: "/brand/brands",
     getRewards: "/reward/rewards",
     getBrandsInCurrentLeaderboard: "/leaderboard/brands",
 };
@@ -25,6 +28,20 @@ export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
       return OortCampaignApi._singleton;
     }
   
+    public async getBrands({ pageNum, pageSize }: IGetPageBaseParams, signal: AbortSignal): Promise<IGetBrandsResponse> {
+      const url = oortServerApis.getBrands;
+      const params: URLSearchParams = new URLSearchParams();
+      params.append("page-num", pageNum.toString());
+      params.append("page-size", pageSize.toString());
+      
+  
+      const response = await this.get<IGetBrandsResponse>(
+        url,
+        getConfig(false, signal, params),
+      );
+      return response;
+    }
+
     public async getCampaings(
       { brandIds, keywords, pageNum, pageSize }: IGetCampaingsParams,
       signal: AbortSignal,
@@ -34,12 +51,12 @@ export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
   
       params.append("page-num", pageNum.toString());
       params.append("page-size", pageSize.toString());
-  
-      if (brandIds) {
-        params.append("brand-ids", brandIds.join(","));
+      if (brandIds && brandIds.length) {
+        this.addArrParam(params, 'brand-ids', brandIds);
       }
+      
       if (keywords) {
-        params.append("keywords", keywords.join(","));
+        params.append("keywords", keywords);
       }
   
       const response = await this.get<IGetCampaignsResponse>(
@@ -89,4 +106,12 @@ export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
       );
       return response;
     }
+
+    private addArrParam(urlParams: URLSearchParams, name: string, arr: Array<string | number>) {
+      if (arr.length) {
+          arr.forEach(x => {
+              urlParams.append(name, x.toString())
+          })
+      }
+  }
   }

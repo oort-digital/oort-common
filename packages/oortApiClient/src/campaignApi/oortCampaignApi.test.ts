@@ -39,7 +39,7 @@ test.skip('debug only getCampaings', async () => {
 
     const client = OortCampaignApi.createSingleton(oortClientSettings)
 
-    const response = await client.getCampaings({ pageNum: 1, pageSize: 10 }, EMPTY_ABORT_SIGNAL)
+    const response = await client.getCampaings({ pageNum: 1, pageSize: 10, brandIds: [1,2], keywords: "oort" }, EMPTY_ABORT_SIGNAL)
 
     console.log(JSON.stringify(response))
 })
