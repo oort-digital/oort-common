@@ -1,6 +1,7 @@
 export interface IOortCampaignApi {
   getBrands: (
     { pageNum, pageSize} : IGetPageBaseParams,
+    signal: AbortSignal,
   ) => Promise<IGetBrandsResponse>
   getCampaings: (
     { brandIds, keywords, pageNum, pageSize }: IGetCampaingsParams,
