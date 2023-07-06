@@ -28,13 +28,15 @@ export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
       return OortCampaignApi._singleton;
     }
   
-    public async getBrands({ pageNum, pageSize }: IGetPageBaseParams, signal: AbortSignal): Promise<IGetBrandsResponse> {
+    public async getBrands({ pageNum, pageSize, keywords }: IGetPageBaseParams, signal: AbortSignal): Promise<IGetBrandsResponse> {
       const url = oortServerApis.getBrands;
       const params: URLSearchParams = new URLSearchParams();
       params.append("page-num", pageNum.toString());
       params.append("page-size", pageSize.toString());
       
-  
+      if (keywords) {
+        params.append("keywords", keywords);
+      }
       const response = await this.get<IGetBrandsResponse>(
         url,
         getConfig(false, signal, params),

@@ -102,6 +102,7 @@ export interface ICampaign {
   }
 
   export interface IGetPageBaseParams {
+    keywords?: string;
     pageNum: number,
     pageSize: number
   }
