@@ -12,9 +12,7 @@ export interface IOortLeaderboardApi {
 
   getCurrentUserResult(_signal: AbortSignal): Promise<IBrandBattleResult>;
 
-  getLeaderboardInfo(
-    _signal: AbortSignal,
-  ): Promise<IGetLeaderboardInfoResponse>;
+  getLeaderboardInfo(_signal: AbortSignal): Promise<ILeaderboardInfo>;
 
   join(_params: IJoinParams, _signal: AbortSignal): Promise<void>;
 
@@ -47,7 +45,7 @@ export interface ISponsor {
   logo: string;
 }
 
-export interface IGetLeaderboardInfoResponse {
+export interface ILeaderboardInfo {
   campaignName: string;
   startTime: string;
   endTime: string;

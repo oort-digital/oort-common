@@ -4,7 +4,7 @@ import {
   GetBrandsInCurrentLeaderboardResponse,
   IBrandBattleResult,
   IGetBattleResultsRequest,
-  IGetLeaderboardInfoResponse,
+  ILeaderboardInfo,
   IGetRewardsInCurrentLeaderboardResponse,
   IJoinParams,
   IOortLeaderboardApi,
@@ -74,10 +74,10 @@ export class OortLeaderboardApi extends BaseAPI implements IOortLeaderboardApi {
 
   public async getLeaderboardInfo(
     signal: AbortSignal,
-  ): Promise<IGetLeaderboardInfoResponse> {
+  ): Promise<ILeaderboardInfo> {
     const url = oortServerApis.getLeaderboardInfo;
 
-    const response = await this.get<IGetLeaderboardInfoResponse>(
+    const response = await this.get<ILeaderboardInfo>(
       url,
       getConfig(true, signal),
     );

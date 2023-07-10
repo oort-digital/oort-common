@@ -4,4 +4,5 @@ export type {
   IBrandBattleResult,
   GetBrandsInCurrentLeaderboardResponse,
   GetBattleResultsResponse,
+  ILeaderboardInfo,
 } from "./typesAndInterfaces";
