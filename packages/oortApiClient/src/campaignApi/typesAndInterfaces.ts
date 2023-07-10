@@ -35,6 +35,7 @@ export interface ICampaign {
     brandUrl: string;
     campaignId: number;
     campaignName: string;
+    campaignImage: string;
     endTime: string;
     startTime: string;
   }
