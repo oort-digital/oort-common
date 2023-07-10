@@ -1,5 +1,5 @@
 import { Typography } from "antd";
-import { addTrailingSlash, toMassked } from "@oort-digital/utils";
+import { addTrailingSlash, toMasked } from "@oort-digital/utils";
 
 const { Link } = Typography;
 
@@ -14,7 +14,7 @@ export function EtherAddress(props: IEtherAddressProps) {
 
   return (
     <Link href={href} target="_blank">
-      {toMassked(address)}
+      {toMasked(address)}
     </Link>
   );
 }
