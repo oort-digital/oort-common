@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/oort-api-client",
-  "version": "0.0.1-leaderboard.0.0.9",
+  "version": "0.0.1-leaderboard.0.1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
