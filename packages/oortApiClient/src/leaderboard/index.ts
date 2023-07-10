@@ -1,6 +1,7 @@
-export { OortLeaderboardApi } from "./oortLeaderboardApi"
+export { OortLeaderboardApi } from "./oortLeaderboardApi";
 export type {
-    IOortLeaderboardApi,
-    IBrandBattleResult,
-    IGetBrandsInCurrentLeaderboardResponse,
-  } from "./typesAndInterfaces";
+  IOortLeaderboardApi,
+  IBrandBattleResult,
+  GetBrandsInCurrentLeaderboardResponse,
+  GetBattleResultsResponse,
+} from "./typesAndInterfaces";

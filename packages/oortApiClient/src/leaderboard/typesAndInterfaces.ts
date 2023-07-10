@@ -1,17 +1,29 @@
+import { IPagingParams, IPagingResponse } from "../common";
+
 export interface IOortLeaderboardApi {
   getBrandsInCurrentLeaderboard: (
-    // eslint-disable-next-line no-unused-vars
-    signal: AbortSignal,
-  ) => Promise<IGetBrandsInCurrentLeaderboardResponse>;
+    _signal: AbortSignal,
+  ) => Promise<GetBrandsInCurrentLeaderboardResponse>;
+
+  getBattleResults(
+    _params: IGetBattleResultsRequest,
+    _signal: AbortSignal,
+  ): Promise<GetBattleResultsResponse>;
 }
 
-export interface IGetBrandsInCurrentLeaderboardResponse {
-  brands: IBrandBattleResult[];
+export interface IGetBattleResultsRequest extends IPagingParams {
+  brandId: string;
 }
+
+export type GetBattleResultsResponse = IPagingResponse<IBrandBattleResult>;
+export type GetBrandsInCurrentLeaderboardResponse =
+  IPagingResponse<IBrandBattleResult>;
 
 export interface IBrandBattleResult {
-  id: number;
-  logo: string;
-  name: string;
-  totalWins: number;
+  battles: number;
+  brandLogo: string;
+  brandName: string;
+  place: number;
+  wallet: string;
+  wins: number;
 }
