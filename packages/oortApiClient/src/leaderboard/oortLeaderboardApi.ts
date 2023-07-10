@@ -4,6 +4,9 @@ import {
   GetBrandsInCurrentLeaderboardResponse,
   IBrandBattleResult,
   IGetBattleResultsRequest,
+  IGetLeaderboardInfoResponse,
+  IGetRewardsInCurrentLeaderboardResponse,
+  IJoinParams,
   IOortLeaderboardApi,
 } from "./typesAndInterfaces";
 
@@ -51,6 +54,58 @@ export class OortLeaderboardApi extends BaseAPI implements IOortLeaderboardApi {
     const url = oortServerApis.getBrandsInCurrentLeaderboard;
 
     const response = await this.get<IPagingResponse<IBrandBattleResult>>(
+      url,
+      getConfig(false, signal),
+    );
+    return response;
+  }
+
+  public async getCurrentUserResult(
+    signal: AbortSignal,
+  ): Promise<IBrandBattleResult> {
+    const url = oortServerApis.getCurrentUserResult;
+
+    const response = await this.get<IBrandBattleResult>(
+      url,
+      getConfig(true, signal),
+    );
+    return response;
+  }
+
+  public async getLeaderboardInfo(
+    signal: AbortSignal,
+  ): Promise<IGetLeaderboardInfoResponse> {
+    const url = oortServerApis.getLeaderboardInfo;
+
+    const response = await this.get<IGetLeaderboardInfoResponse>(
+      url,
+      getConfig(true, signal),
+    );
+    return response;
+  }
+
+  public async join(
+    { brandId }: IJoinParams,
+    signal: AbortSignal,
+  ): Promise<void> {
+    const url = oortServerApis.join;
+    const urlParams = new URLSearchParams();
+    urlParams.append("brand-id", `${brandId}`);
+    const response = await this.put<void>(url, getConfig(true, signal));
+    return response;
+  }
+
+  public async getJoinedBrand(signal: AbortSignal): Promise<number> {
+    const url = oortServerApis.getJoinedBrand;
+    const response = await this.get<number>(url, getConfig(true, signal));
+    return response;
+  }
+
+  public async getRewardsInCurrentLeaderboard(
+    signal: AbortSignal,
+  ): Promise<IGetRewardsInCurrentLeaderboardResponse> {
+    const url = oortServerApis.getRewardsInCurrentLeaderboard;
+    const response = await this.get<IGetRewardsInCurrentLeaderboardResponse>(
       url,
       getConfig(false, signal),
     );
