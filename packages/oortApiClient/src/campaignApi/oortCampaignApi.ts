@@ -1,6 +1,5 @@
 import { BaseAPI, IAPIConfig, getConfig } from "../common";
 import {
-    IGetBrandsInCurrentLeaderboardResponse,
     IGetBrandsResponse,
     IGetCampaignResponse,
     IGetCampaignsResponse,
@@ -97,18 +96,6 @@ export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
       return response;
     }
   
-    public async getBrandsInCurrentLeaderboard(
-      signal: AbortSignal,
-    ): Promise<IGetBrandsInCurrentLeaderboardResponse> {
-      const url = oortServerApis.getBrandsInCurrentLeaderboard;
-  
-      const response = await this.get<IGetBrandsInCurrentLeaderboardResponse>(
-        url,
-        getConfig(false, signal),
-      );
-      return response;
-    }
-
     private addArrParam(urlParams: URLSearchParams, name: string, arr: Array<string | number>) {
       if (arr.length) {
           arr.forEach(x => {

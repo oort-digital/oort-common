@@ -17,10 +17,6 @@ export interface IOortCampaignApi {
     { campaignId }: IGetCampaingParams,
     signal: AbortSignal,
   ) => Promise<IGetRewardsResponse>
-
-  getBrandsInCurrentLeaderboard: (
-    signal: AbortSignal,
-  ) => Promise<IGetBrandsInCurrentLeaderboardResponse> 
 }
 
 export interface IBrand {
@@ -47,12 +43,7 @@ export interface ICampaign {
     url: string;
   }
   
-  export interface IBrandBattleResult {
-    id: number;
-    logo: string;
-    name: string;
-    totalWins: number;
-  }
+
   
   export interface IReward {
     id: number;
@@ -91,9 +82,7 @@ export interface ICampaign {
     sponsorBrands: IBrand[];
   }
   
-  export interface IGetBrandsInCurrentLeaderboardResponse {
-    brands: IBrandBattleResult[];
-  }
+ 
   
   export interface IGetCampaingsParams {
     brandIds?: number[];
