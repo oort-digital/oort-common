@@ -7,4 +7,7 @@ export type {
   ILeaderboardInfo,
   ISponsorBrand,
   ILeaderboardReward,
+  IGetBattleResultsRequest,
+  IJoinParams,
+  IGetRewardsInCurrentLeaderboardResponse,
 } from "./typesAndInterfaces";

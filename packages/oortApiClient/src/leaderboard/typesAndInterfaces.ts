@@ -24,7 +24,7 @@ export interface IOortLeaderboardApi {
 }
 
 export interface IGetBattleResultsRequest extends IPagingParams {
-  brandId: string;
+  brandId?: string;
 }
 
 export type GetBattleResultsResponse = IPagingResponse<IBrandBattleResult>;
