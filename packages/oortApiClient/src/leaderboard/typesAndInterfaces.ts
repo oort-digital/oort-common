@@ -40,7 +40,7 @@ export interface IBrandBattleResult {
   wins: number;
 }
 
-export interface ISponsor {
+export interface ISponsorBrand {
   name: string;
   logo: string;
 }
@@ -51,14 +51,14 @@ export interface ILeaderboardInfo {
   endTime: string;
   hostName: string;
   hostLogo: string;
-  sponsors: ISponsor[];
+  sponsors: ISponsorBrand[];
 }
 
 export interface IJoinParams {
   brandId: number;
 }
 
-export interface IReward {
+export interface ILeaderboardReward {
   description: string;
   image: string;
   name: string;
@@ -66,5 +66,5 @@ export interface IReward {
 }
 
 export interface IGetRewardsInCurrentLeaderboardResponse {
-  rewards: IReward[];
+  rewards: ILeaderboardReward[];
 }
