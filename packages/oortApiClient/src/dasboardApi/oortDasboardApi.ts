@@ -16,7 +16,6 @@ import {
   INftsParams,
   INftsResponse,
   IOortDasboardApi,
-  IPagingParams,
   IReviewResponse,
   IReviewsParams,
   ISaveFeedbackParams,
@@ -378,26 +377,4 @@ export class OortDasboardApi extends BaseAPI implements IOortDasboardApi {
 
     return response.data;
   };
-
-  private addArrParam(
-    urlParams: URLSearchParams,
-    name: string,
-    arr: Array<string | number>,
-  ) {
-    if (arr.length) {
-      arr.forEach((x) => {
-        urlParams.append(name, x.toString());
-      });
-    }
-  }
-
-  private addPagingParams(
-    { pageNum, pageSize }: IPagingParams,
-    urlParams?: URLSearchParams,
-  ): URLSearchParams {
-    urlParams = urlParams || new URLSearchParams();
-    urlParams.append("page-num", `${pageNum}`);
-    urlParams.append("page-size", `${pageSize}`);
-    return urlParams;
-  }
 }

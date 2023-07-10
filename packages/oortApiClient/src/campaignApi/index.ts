@@ -1,12 +1,12 @@
-export { OortCampaignApi } from "./oortCampaignApi"
+export { OortCampaignApi } from "./oortCampaignApi";
 export type {
-    IOortCampaignApi,
-    ICampaign,
-    IBrand,
-    IReward,
-    IGetCampaingsParams,
-    IGetCampaignsResponse,
-    IGetCampaingParams,
-    IGetCampaignResponse,
-    IGetRewardsResponse,
-  } from "./typesAndInterfaces";
+  IOortCampaignApi,
+  ICampaign,
+  IBrand,
+  IReward,
+  IGetCampaingsParams,
+  GetCampaignsResponse,
+  IGetCampaingParams,
+  IGetCampaignResponse,
+  IGetRewardsResponse,
+} from "./typesAndInterfaces";

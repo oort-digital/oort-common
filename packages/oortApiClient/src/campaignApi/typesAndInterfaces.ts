@@ -1,14 +1,17 @@
 /* eslint-disable import/export */
+
+import { IPagingParams, IPagingResponse } from "../common";
+
 /* eslint-disable no-unused-vars */
 export interface IOortCampaignApi {
   getBrands: (
     { pageNum, pageSize }: IGetPageBaseParams,
     signal: AbortSignal,
-  ) => Promise<IGetBrandsResponse>;
+  ) => Promise<GetBrandsResponse>;
   getCampaings: (
     { brandIds, keywords, pageNum, pageSize }: IGetCampaingsParams,
     signal: AbortSignal,
-  ) => Promise<IGetCampaignsResponse>;
+  ) => Promise<GetCampaignsResponse>;
 
   getCampaing: (
     { campaignId }: IGetCampaingParams,
@@ -57,21 +60,9 @@ export interface IReward {
   eligible: boolean;
 }
 
-export interface IGetCampaignsResponse {
-  pageNum: number;
-  pageSize: number;
-  totalNum: number;
-  totalPage: number;
-  dataList: ICampaign[];
-}
+export type GetCampaignsResponse = IPagingResponse<ICampaign>;
 
-export interface IGetBrandsResponse {
-  pageNum: number;
-  pageSize: number;
-  totalNum: number;
-  totalPage: number;
-  dataList: IBrand[];
-}
+export type GetBrandsResponse = IPagingResponse<IBrand>;
 
 export interface IGetRewardsResponse {
   rewards: IReward[];
@@ -82,17 +73,13 @@ export interface IGetCampaignResponse {
   sponsorBrands: IBrand[];
 }
 
-export interface IGetCampaingsParams {
+export interface IGetCampaingsParams extends IPagingParams {
   brandIds?: number[];
   keywords?: string;
-  pageNum: number;
-  pageSize: number;
 }
 
-export interface IGetPageBaseParams {
+export interface IGetPageBaseParams extends IPagingParams {
   keywords?: string;
-  pageNum: number;
-  pageSize: number;
 }
 
 export interface IGetCampaingParams {

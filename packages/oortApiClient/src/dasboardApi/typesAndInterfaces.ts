@@ -1,19 +1,8 @@
+import { IPagingParams, IPagingResponse } from "../common";
+
 /* eslint-disable no-unused-vars */
 type NumOrUndef = number | undefined;
 type NumRange = [NumOrUndef, NumOrUndef];
-
-export interface IPagingParams {
-  pageNum: number;
-  pageSize: number;
-}
-
-interface IPagingResponse<T> {
-  dataList: T[];
-  pageNum: number;
-  pageSize: number;
-  totalNum: number;
-  totalPage: number;
-}
 
 export enum GameStatusEnum {
   Live = "Live",
