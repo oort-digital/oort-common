@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode, useEffect, useState } from "react";
+import { CSSProperties, ReactNode, useState } from "react";
 import styles from "./auth.module.less";
 import { PageLoader } from "../../pageLoader";
 import { observer } from "mobx-react";
