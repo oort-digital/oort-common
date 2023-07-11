@@ -2,7 +2,7 @@ import { ConnectorNames, IWeb3Store } from "@oort-digital/web3-connectors";
 import { ConnectModal } from "../../connectModal";
 import { SignModal } from "./signModal";
 import { useState } from "react";
-import { AuthStore } from "../store";
+import { IAuthStore } from "../store";
 import { ILogger } from "@oort-digital/logger";
 
 export interface IConnectAndSignProps {
@@ -12,7 +12,7 @@ export interface IConnectAndSignProps {
   expectedChainId?: number;
   visible: boolean;
   onClose: () => void;
-  authStore: AuthStore;
+  authStore: IAuthStore;
   logger: ILogger;
 }
 

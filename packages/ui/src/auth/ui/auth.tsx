@@ -4,15 +4,10 @@ import { PageLoader } from "../../pageLoader";
 import { observer } from "mobx-react";
 import { IWeb3Store } from "@oort-digital/web3-connectors";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
-import { AuthStore, TokenStorageType } from "../store";
+import { IAuthStore } from "../store";
 import { ILogger } from "@oort-digital/logger";
-import {
-  registerAuthInterceptors,
-  unRegisterAuthInterceptors,
-} from "../interceptors";
 import { useLocation } from "react-router-dom";
 import classnames from "classnames";
-import { OortApiInterceptors } from "@oort-digital/oort-api-client";
 import { PathType, isExcludedPath } from "./isExcludedPath";
 import { ConnectButtonBlock } from "./connectButtonBlock";
 import { ConnectAndSignModal } from "./connectAndSignModal";
@@ -22,13 +17,11 @@ export interface IAuthProps {
   style?: CSSProperties | undefined;
   supportedWallets: ConnectorNames[];
   web3Store: IWeb3Store;
+  authStore: IAuthStore;
   expectedChainId?: number;
   logger: ILogger;
-  ssoServerBaseUrl: string;
-  tokenStorageType?: TokenStorageType;
   children?: ReactNode;
   excludePathes?: PathType[];
-  interceptors: OortApiInterceptors;
 }
 
 const Impl = (props: IAuthProps) => {
@@ -37,29 +30,17 @@ const Impl = (props: IAuthProps) => {
     style,
     excludePathes,
     web3Store,
+    authStore,
     expectedChainId,
     supportedWallets,
     logger,
-    ssoServerBaseUrl,
-    tokenStorageType = "cookies",
     children,
-    interceptors,
   } = props;
 
   const [renderChildren, setRenderChildren] = useState(false);
   const [isConnectModalVisible, setVisibility] = useState(false);
 
   const onClose = () => setVisibility(false);
-
-  const [authStore] = useState(
-    () =>
-      new AuthStore({
-        logger,
-        web3Store,
-        ssoServerBaseUrl,
-        tokenStorageType,
-      })
-  );
 
   const location = useLocation();
 
@@ -69,16 +50,8 @@ const Impl = (props: IAuthProps) => {
 
   useEffect(() => {
     debug(`useEffect. authStore.isReady:${authStore.isReady}`);
-
     if (authStore.isReady) {
-      debug("registerAuthInterceptors");
-      const ids = registerAuthInterceptors(interceptors, authStore, logger);
-      debug("registerAuthInterceptors done");
       setRenderChildren(true);
-      return () => {
-        debug(`useEffect. authStore.isReady:${authStore.isReady} unmount`);
-        unRegisterAuthInterceptors(interceptors, ids);
-      };
     }
     return;
   }, [authStore.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
