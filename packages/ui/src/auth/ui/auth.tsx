@@ -1,13 +1,8 @@
 import { CSSProperties, ReactNode, useEffect, useState } from "react";
-import { Button } from "antd";
 import styles from "./auth.module.less";
 import { PageLoader } from "../../pageLoader";
 import { observer } from "mobx-react";
-import { WalletSvg } from "./walletSvg";
-import { WalletIcon } from "../../icons";
-import { ConnectModal } from "../../connectModal";
-import { IWeb3Store, isChainEmpty } from "@oort-digital/web3-connectors";
-import { getChainName } from "../../utils";
+import { IWeb3Store } from "@oort-digital/web3-connectors";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { AuthStore, TokenStorageType } from "../store";
 import { ILogger } from "@oort-digital/logger";
@@ -15,15 +10,12 @@ import {
   registerAuthInterceptors,
   unRegisterAuthInterceptors,
 } from "../interceptors";
-import { AuthModal } from "./authModal";
 import { useLocation } from "react-router-dom";
 import classnames from "classnames";
 import { OortApiInterceptors } from "@oort-digital/oort-api-client";
 import { PathType, isExcludedPath } from "./isExcludedPath";
-import {
-  ConnectButtonBlock,
-  IConnectButtonBlockProps,
-} from "./connectButtonBlock";
+import { ConnectButtonBlock } from "./connectButtonBlock";
+import { ConnectAndSignModal } from "./connectAndSignModal";
 
 export interface IAuthProps {
   className?: string;
@@ -37,7 +29,6 @@ export interface IAuthProps {
   children?: ReactNode;
   excludePathes?: PathType[];
   interceptors: OortApiInterceptors;
-  renderConnectButtonBlock?: (props: IConnectButtonBlockProps) => JSX.Element;
 }
 
 const Impl = (props: IAuthProps) => {
@@ -53,13 +44,12 @@ const Impl = (props: IAuthProps) => {
     tokenStorageType = "cookies",
     children,
     interceptors,
-    renderConnectButtonBlock,
   } = props;
 
-  const [isConnectModalVisible, setConnectModalVisible] = useState(false);
-  const [authInProcess, setAuthInProcess] = useState(false);
-
   const [renderChildren, setRenderChildren] = useState(false);
+  const [isConnectModalVisible, setVisibility] = useState(false);
+
+  const onClose = () => setVisibility(false);
 
   const [authStore] = useState(
     () =>
@@ -98,18 +88,6 @@ const Impl = (props: IAuthProps) => {
     return <>{children}</>;
   }
 
-  const onClose = () => setConnectModalVisible(false);
-
-  const auth = async () => {
-    try {
-      setAuthInProcess(true);
-      await authStore.auth();
-    } catch (e) {
-      logger.error(e);
-    }
-    setAuthInProcess(false);
-  };
-
   debug(`renderChildren: ${renderChildren}`);
 
   const { isConnectedToSupportedChain } = web3Store;
@@ -128,37 +106,25 @@ const Impl = (props: IAuthProps) => {
   if (askAuth || !isConnectedToSupportedChain) {
     return (
       <div style={style} className={classnames(styles.wrapper, className)}>
-        {renderConnectButtonBlock ? (
-          renderConnectButtonBlock({
-            web3Store,
-            expectedChainId,
-            onClick: () => setConnectModalVisible(true),
-          })
-        ) : (
-          <ConnectButtonBlock
-            web3Store={web3Store}
-            expectedChainId={expectedChainId}
-            onClick={() => setConnectModalVisible(true)}
-          />
-        )}
-        <ConnectModal
+        <ConnectButtonBlock
+          web3Store={web3Store}
+          expectedChainId={expectedChainId}
+          onClick={() => setVisibility(true)}
+        />
+        <ConnectAndSignModal
           supportedWallets={supportedWallets}
           expectedChainId={expectedChainId}
-          web3={web3Store}
+          web3Store={web3Store}
           visible={isConnectModalVisible}
           onClose={onClose}
-        />
-        <AuthModal
-          loading={authInProcess}
-          authFunc={() => auth()}
-          visible={askAuth}
+          authStore={authStore}
+          logger={logger}
         />
       </div>
     );
   }
 
   if (renderChildren) {
-    // return <PageLoader delay={100} visible style={loaderStyle} />
     return <>{children}</>;
   }
 
