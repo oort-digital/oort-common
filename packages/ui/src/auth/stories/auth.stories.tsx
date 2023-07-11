@@ -16,8 +16,6 @@ import {
 } from "@oort-digital/oort-api-client";
 import { observer } from "mobx-react";
 import { ThemeLoader } from "../../internalHelpers";
-import { Button } from "antd";
-import { IConnectModalProps } from "../ui/connectModalEffect";
 
 const meta = {
   title: "oort/auth",
@@ -99,51 +97,5 @@ export const LocalStorageTokenStore: Story = {
     ssoServerBaseUrl: "https://api-test.oort.digital/sso",
     tokenStorageType: "localStorage",
     children: <Content />,
-  },
-};
-
-export const CustomConnectButtonBlock: Story = {
-  args: {
-    web3Store,
-    logger,
-    interceptors,
-    supportedWallets: [ConnectorNames.Injected],
-    ssoServerBaseUrl: "https://api-test.oort.digital/sso",
-    tokenStorageType: "cookies",
-    renderConnectButtonBlock: (props) => {
-      return <Button onClick={props.onClick}>Custom Connect Button</Button>;
-    },
-  },
-};
-
-export const ShowModal: Story = {
-  args: {
-    web3Store,
-    logger,
-    interceptors,
-    supportedWallets: [ConnectorNames.Injected],
-    ssoServerBaseUrl: "https://api-test.oort.digital/sso",
-    tokenStorageType: "localStorage",
-    renderConnectButtonBlock: () => <></>,
-  },
-
-  render: (props) => {
-    const [isModalVisible, setModalVisible] = useState(false);
-
-    const connectModal: IConnectModalProps = {
-      visible: isModalVisible,
-      onClose: () => setModalVisible(false),
-    };
-
-    const mergedProps: IAuthProps = { ...props, ...{ connectModal } };
-
-    return (
-      <>
-        <AuthWrap {...mergedProps} />
-        <Button onClick={() => setModalVisible(true)}>
-          Show connect modal
-        </Button>
-      </>
-    );
   },
 };
