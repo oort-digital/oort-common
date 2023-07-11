@@ -72,7 +72,7 @@ export class AuthStore implements IAuthStore {
   token: string | null;
 
   private static _store: AuthStore | undefined;
-  public static createAuthStore(params: IAuthStoreParams): AuthStore {
+  public static createInstance(params: IAuthStoreParams): AuthStore {
     if (!AuthStore._store) {
       params.logger.debug("AuthStore. Create new instance");
       AuthStore._store = new AuthStore(params);
