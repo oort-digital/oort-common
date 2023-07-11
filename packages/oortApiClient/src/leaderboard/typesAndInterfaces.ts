@@ -43,6 +43,7 @@ export interface IBrandBattleResult {
 export interface ISponsorBrand {
   name: string;
   logo: string;
+  url: string;
 }
 
 export interface ILeaderboardInfo {
