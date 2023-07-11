@@ -4,6 +4,7 @@ import { SignModal } from "./signModal";
 import { useState } from "react";
 import { IAuthStore } from "../store";
 import { ILogger } from "@oort-digital/logger";
+import { observer } from "mobx-react";
 
 export interface IConnectAndSignProps {
   className?: string;
@@ -16,7 +17,7 @@ export interface IConnectAndSignProps {
   logger: ILogger;
 }
 
-export function ConnectAndSignModal(props: IConnectAndSignProps) {
+function Impl(props: IConnectAndSignProps) {
   const {
     supportedWallets,
     expectedChainId,
@@ -29,7 +30,8 @@ export function ConnectAndSignModal(props: IConnectAndSignProps) {
 
   const [authInProcess, setAuthInProcess] = useState(false);
 
-  const { askAuth } = authStore;
+  const { isConnectedToSupportedChain } = web3Store;
+  const { askAuth, isReady } = authStore;
 
   const auth = async () => {
     try {
@@ -41,20 +43,28 @@ export function ConnectAndSignModal(props: IConnectAndSignProps) {
     setAuthInProcess(false);
   };
 
+  if (!isReady) {
+    return null;
+  }
+
+  logger.debug(`ConnectAndSignModal. askAuth: ${askAuth}`);
+
   return (
     <>
       <ConnectModal
         supportedWallets={supportedWallets}
         expectedChainId={expectedChainId}
         web3={web3Store}
-        visible={visible}
+        visible={visible && !isConnectedToSupportedChain}
         onClose={onClose}
       />
       <SignModal
         loading={authInProcess}
         authFunc={() => auth()}
-        visible={askAuth}
+        visible={askAuth && visible && isConnectedToSupportedChain}
       />
     </>
   );
 }
+
+export const ConnectAndSignModal = observer(Impl);

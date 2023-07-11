@@ -64,6 +64,9 @@ export class AuthStore implements IAuthStore {
   }
 
   get askAuth(): boolean {
+    this._logger.debug(
+      `AuthStore. askAuth isConnectedToSupportedChain: ${this._web3Store.isConnectedToSupportedChain} token: ${this.token}`
+    );
     return this._web3Store.isConnectedToSupportedChain && !this.token;
   }
 
@@ -92,6 +95,7 @@ export class AuthStore implements IAuthStore {
     this._tokenStorage = getTokenStorage(tokenStorageType);
     this._web3Store = web3Store;
     this.token = null;
+    this._logger = logger;
 
     makeObservable(this, {
       auth: action,
@@ -136,4 +140,5 @@ export class AuthStore implements IAuthStore {
   private readonly _ssoClient: ISsoClient;
   private readonly _tokenStorage: ITokenStorage;
   private readonly _web3Store: IWeb3Store;
+  private readonly _logger: ILogger;
 }

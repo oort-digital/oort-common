@@ -1,6 +1,6 @@
 import "../../styles/antOverride.less";
 import "../../styles/fonts.css";
-import "../../styles/theme/light.less";
+import "../../styles/theme/dark.less";
 import { BrowserRouter as Router } from "react-router-dom";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
@@ -15,11 +15,10 @@ import {
   OortHeroApi,
 } from "@oort-digital/oort-api-client";
 import { observer } from "mobx-react";
-import { ThemeLoader } from "../../internalHelpers";
 import { AuthStore } from "../store";
 
 const meta = {
-  title: "oort/auth",
+  title: "oort/auth/auth",
   component: Auth,
   render: (props: IAuthProps) => {
     return <AuthWrap {...props} />;
@@ -37,7 +36,7 @@ const interceptors = OortApiInterceptors.createInstance(logger);
 const authStore = AuthStore.createInstance({
   web3Store,
   ssoServerBaseUrl: "https://api-test.oort.digital/sso",
-  tokenStorageType: "cookies",
+  tokenStorageType: "localStorage",
   logger,
   interceptors,
 });
@@ -78,7 +77,6 @@ const Content = observer(() => {
 const AuthWrap = observer((props: IAuthProps) => {
   return (
     <Router>
-      <ThemeLoader />
       <Auth {...props} />
     </Router>
   );
@@ -86,16 +84,6 @@ const AuthWrap = observer((props: IAuthProps) => {
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Primary: Story = {
-  args: {
-    web3Store,
-    authStore,
-    logger,
-    supportedWallets: [ConnectorNames.Injected],
-    children: <Content />,
-  },
-};
-
-export const LocalStorageTokenStore: Story = {
   args: {
     web3Store,
     authStore,

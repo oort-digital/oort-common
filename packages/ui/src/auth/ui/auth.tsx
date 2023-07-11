@@ -37,8 +37,10 @@ const Impl = (props: IAuthProps) => {
     children,
   } = props;
 
-  const [renderChildren, setRenderChildren] = useState(false);
   const [isConnectModalVisible, setVisibility] = useState(false);
+
+  const { askAuth, isReady } = authStore;
+  const { isConnectedToSupportedChain } = web3Store;
 
   const onClose = () => setVisibility(false);
 
@@ -48,31 +50,21 @@ const Impl = (props: IAuthProps) => {
     logger.debug(`Auth. ${msg}`);
   };
 
-  useEffect(() => {
-    debug(`useEffect. authStore.isReady:${authStore.isReady}`);
-    if (authStore.isReady) {
-      setRenderChildren(true);
-    }
-    return;
-  }, [authStore.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
-
   if (excludePathes && isExcludedPath(location.pathname, excludePathes)) {
     debug(`${location.pathname} was excluded`);
     return <>{children}</>;
   }
 
-  debug(`renderChildren: ${renderChildren}`);
-
-  const { isConnectedToSupportedChain } = web3Store;
-
-  const { askAuth } = authStore;
+  debug(`isReady: ${isReady}`);
+  debug(`askAuth: ${askAuth}`);
+  debug(`isConnectedToSupportedChain: ${isConnectedToSupportedChain}`);
 
   const loaderStyle: CSSProperties = {
     textAlign: "center",
     marginTop: "150px",
     width: "100%",
   };
-  if (!authStore.isReady) {
+  if (!isReady) {
     return <PageLoader delay={100} visible style={loaderStyle} />;
   }
 
@@ -97,11 +89,7 @@ const Impl = (props: IAuthProps) => {
     );
   }
 
-  if (renderChildren) {
-    return <>{children}</>;
-  }
-
-  return <></>;
+  return <>{children}</>;
 };
 
 export const Auth = observer(Impl);
