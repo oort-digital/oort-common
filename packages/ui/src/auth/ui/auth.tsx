@@ -1,43 +1,27 @@
-import { CSSProperties, ReactNode, useEffect, useState } from "react";
-import { Button } from "antd";
+import { CSSProperties, ReactNode, useState } from "react";
 import styles from "./auth.module.less";
 import { PageLoader } from "../../pageLoader";
 import { observer } from "mobx-react";
-import { WalletSvg } from "./walletSvg";
-import { WalletIcon } from "../../icons";
-import { ConnectModal } from "../../connectModal";
-import { IWeb3Store, isChainEmpty } from "@oort-digital/web3-connectors";
-import { getChainName } from "../../utils";
+import { IWeb3Store } from "@oort-digital/web3-connectors";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
-import { AuthStore, TokenStorageType } from "../store";
+import { IAuthStore } from "../store";
 import { ILogger } from "@oort-digital/logger";
-import {
-  registerAuthInterceptors,
-  unRegisterAuthInterceptors,
-} from "../interceptors";
-import { AuthModal } from "./authModal";
 import { useLocation } from "react-router-dom";
 import classnames from "classnames";
-import { OortApiInterceptors } from "@oort-digital/oort-api-client";
 import { PathType, isExcludedPath } from "./isExcludedPath";
-import {
-  ConnectButtonBlock,
-  IConnectButtonBlockProps,
-} from "./connectButtonBlock";
+import { ConnectButtonBlock } from "./connectButtonBlock";
+import { ConnectAndSignModal } from "./connectAndSignModal";
 
 export interface IAuthProps {
   className?: string;
   style?: CSSProperties | undefined;
   supportedWallets: ConnectorNames[];
   web3Store: IWeb3Store;
+  authStore: IAuthStore;
   expectedChainId?: number;
   logger: ILogger;
-  ssoServerBaseUrl: string;
-  tokenStorageType?: TokenStorageType;
   children?: ReactNode;
   excludePathes?: PathType[];
-  interceptors: OortApiInterceptors;
-  renderConnectButtonBlock?: (props: IConnectButtonBlockProps) => JSX.Element;
 }
 
 const Impl = (props: IAuthProps) => {
@@ -46,30 +30,19 @@ const Impl = (props: IAuthProps) => {
     style,
     excludePathes,
     web3Store,
+    authStore,
     expectedChainId,
     supportedWallets,
     logger,
-    ssoServerBaseUrl,
-    tokenStorageType = "cookies",
     children,
-    interceptors,
-    renderConnectButtonBlock,
   } = props;
 
-  const [isConnectModalVisible, setConnectModalVisible] = useState(false);
-  const [authInProcess, setAuthInProcess] = useState(false);
+  const [isConnectModalVisible, setVisibility] = useState(false);
 
-  const [renderChildren, setRenderChildren] = useState(false);
+  const { askAuth, isReady } = authStore;
+  const { isConnectedToSupportedChain } = web3Store;
 
-  const [authStore] = useState(
-    () =>
-      new AuthStore({
-        logger,
-        web3Store,
-        ssoServerBaseUrl,
-        tokenStorageType,
-      })
-  );
+  const onClose = () => setVisibility(false);
 
   const location = useLocation();
 
@@ -77,92 +50,46 @@ const Impl = (props: IAuthProps) => {
     logger.debug(`Auth. ${msg}`);
   };
 
-  useEffect(() => {
-    debug(`useEffect. authStore.isReady:${authStore.isReady}`);
-
-    if (authStore.isReady) {
-      debug("registerAuthInterceptors");
-      const ids = registerAuthInterceptors(interceptors, authStore, logger);
-      debug("registerAuthInterceptors done");
-      setRenderChildren(true);
-      return () => {
-        debug(`useEffect. authStore.isReady:${authStore.isReady} unmount`);
-        unRegisterAuthInterceptors(interceptors, ids);
-      };
-    }
-    return;
-  }, [authStore.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
-
   if (excludePathes && isExcludedPath(location.pathname, excludePathes)) {
     debug(`${location.pathname} was excluded`);
     return <>{children}</>;
   }
 
-  const onClose = () => setConnectModalVisible(false);
-
-  const auth = async () => {
-    try {
-      setAuthInProcess(true);
-      await authStore.auth();
-    } catch (e) {
-      logger.error(e);
-    }
-    setAuthInProcess(false);
-  };
-
-  debug(`renderChildren: ${renderChildren}`);
-
-  const { isConnectedToSupportedChain } = web3Store;
-
-  const { askAuth } = authStore;
+  debug(`isReady: ${isReady}`);
+  debug(`askAuth: ${askAuth}`);
+  debug(`isConnectedToSupportedChain: ${isConnectedToSupportedChain}`);
 
   const loaderStyle: CSSProperties = {
     textAlign: "center",
     marginTop: "150px",
     width: "100%",
   };
-  if (!authStore.isReady) {
+  if (!isReady) {
     return <PageLoader delay={100} visible style={loaderStyle} />;
   }
 
   if (askAuth || !isConnectedToSupportedChain) {
     return (
       <div style={style} className={classnames(styles.wrapper, className)}>
-        {renderConnectButtonBlock ? (
-          renderConnectButtonBlock({
-            web3Store,
-            expectedChainId,
-            onClick: () => setConnectModalVisible(true),
-          })
-        ) : (
-          <ConnectButtonBlock
-            web3Store={web3Store}
-            expectedChainId={expectedChainId}
-            onClick={() => setConnectModalVisible(true)}
-          />
-        )}
-        <ConnectModal
+        <ConnectButtonBlock
+          web3Store={web3Store}
+          expectedChainId={expectedChainId}
+          onClick={() => setVisibility(true)}
+        />
+        <ConnectAndSignModal
           supportedWallets={supportedWallets}
           expectedChainId={expectedChainId}
-          web3={web3Store}
+          web3Store={web3Store}
           visible={isConnectModalVisible}
           onClose={onClose}
-        />
-        <AuthModal
-          loading={authInProcess}
-          authFunc={() => auth()}
-          visible={askAuth}
+          authStore={authStore}
+          logger={logger}
         />
       </div>
     );
   }
 
-  if (renderChildren) {
-    // return <PageLoader delay={100} visible style={loaderStyle} />
-    return <>{children}</>;
-  }
-
-  return <></>;
+  return <>{children}</>;
 };
 
 export const Auth = observer(Impl);

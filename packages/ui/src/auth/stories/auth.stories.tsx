@@ -1,6 +1,6 @@
 import "../../styles/antOverride.less";
 import "../../styles/fonts.css";
-import "../../styles/theme/light.less";
+import "../../styles/theme/dark.less";
 import { BrowserRouter as Router } from "react-router-dom";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
@@ -15,11 +15,10 @@ import {
   OortHeroApi,
 } from "@oort-digital/oort-api-client";
 import { observer } from "mobx-react";
-import { ThemeLoader } from "../../internalHelpers";
-import { Button } from "antd";
+import { AuthStore } from "../store";
 
 const meta = {
-  title: "oort/auth",
+  title: "oort/auth/auth",
   component: Auth,
   render: (props: IAuthProps) => {
     return <AuthWrap {...props} />;
@@ -33,6 +32,14 @@ const web3Store = new Web3StoreStub();
 web3Store.connect(80001, ConnectorNames.Injected);
 
 const interceptors = OortApiInterceptors.createInstance(logger);
+
+const authStore = AuthStore.createInstance({
+  web3Store,
+  ssoServerBaseUrl: "https://api-test.oort.digital/sso",
+  tokenStorageType: "localStorage",
+  logger,
+  interceptors,
+});
 
 const heroApi = OortHeroApi.createSingleton({
   interceptors,
@@ -70,7 +77,6 @@ const Content = observer(() => {
 const AuthWrap = observer((props: IAuthProps) => {
   return (
     <Router>
-      <ThemeLoader />
       <Auth {...props} />
     </Router>
   );
@@ -80,37 +86,9 @@ const AuthWrap = observer((props: IAuthProps) => {
 export const Primary: Story = {
   args: {
     web3Store,
+    authStore,
     logger,
-    interceptors,
     supportedWallets: [ConnectorNames.Injected],
-    ssoServerBaseUrl: "https://api-test.oort.digital/sso",
-    tokenStorageType: "cookies",
     children: <Content />,
-  },
-};
-
-export const LocalStorageTokenStore: Story = {
-  args: {
-    web3Store,
-    logger,
-    interceptors,
-    supportedWallets: [ConnectorNames.Injected],
-    ssoServerBaseUrl: "https://api-test.oort.digital/sso",
-    tokenStorageType: "localStorage",
-    children: <Content />,
-  },
-};
-
-export const CustomConnectButtonBlock: Story = {
-  args: {
-    web3Store,
-    logger,
-    interceptors,
-    supportedWallets: [ConnectorNames.Injected],
-    ssoServerBaseUrl: "https://api-test.oort.digital/sso",
-    tokenStorageType: "cookies",
-    renderConnectButtonBlock: (props) => {
-      return <Button onClick={props.onClick}>Custom Connect Button</Button>;
-    },
   },
 };
