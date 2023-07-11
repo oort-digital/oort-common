@@ -27,8 +27,7 @@ export interface INavItems {
     leaderboard: NavItemType
     minting: {
         mutation: NavItemType
-        claim: NavItemType
-        campaigns: NavItemType
+        claimRewards: NavItemType
     }
     rent: {
         lend: NavItemType
@@ -82,8 +81,7 @@ const mintInternal = {
     caption: 'minting',
     icon: <MintIcon />,
     mutation: "Hero Mutation (Upgrading)",
-    claim: "Claim Heroes",
-    campaigns: "Campaigns"
+    claimRewards: "Claim Rewards"
 }
 
 const gameHubInternal = {
@@ -95,7 +93,7 @@ const gameHubInternal = {
 
 const developInternal = {
     caption: 'Develop Tools',
-    icon : <DevelopToolsIcon />,
+    icon: <DevelopToolsIcon />,
     faucet: "Faucet",
     refreshMetadata: "Refresh Metadata"
 }
@@ -114,9 +112,9 @@ const getChildCaptions = (item: INavItemInternal): StringMap => {
 
     Object.entries(item).forEach(kvp => {
 
-        const [ key, value ] = kvp
+        const [key, value] = kvp
 
-        if(key !== 'caption' || kvp[0] !== 'icon') {
+        if (key !== 'caption' || kvp[0] !== 'icon') {
             map[key] = value
         }
     })
@@ -131,7 +129,7 @@ const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
     return <div className={styles.header}>{i}{caption}</div>
 }
 
-const getHRef = (it: NavItemType) => typeof it  === 'string' ? it : it.href
+const getHRef = (it: NavItemType) => typeof it === 'string' ? it : it.href
 
 type NavItemPairType = [INavItemInternal, NavItemMap]
 
@@ -145,13 +143,13 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     const collapseNavItemPairs: NavItemPairType[] = [
         [rentInternal, rent],
         [gameHubInternal, gameHub],
-        [mintInternal,  minting],
+        [mintInternal, minting],
     ]
 
     if (developTools) {
-         collapseNavItemPairs.push(
+        collapseNavItemPairs.push(
             [developInternal, developTools]
-         )
+        )
     }
 
     const isActive = isActiveFunc || _isHrefActive;
@@ -165,7 +163,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
             return hasActiveHref(hrefs)
         })
 
-        if(activePair) {
+        if (activePair) {
             return activePair[0].caption
         }
 
@@ -181,18 +179,18 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         let disabled = false
         let hide = false
 
-        if(typeof it === 'string') {
+        if (typeof it === 'string') {
             href = it
         }
         else {
             href = it.href
             reactRouterLink = it.reactRouterLink
-            disabled =  !!it.disabled
+            disabled = !!it.disabled
             hide = !!it.hide
         }
 
-        if(hide) {
-           return null;
+        if (hide) {
+            return null;
         }
 
         const activeCss = isActive(href) ? styles.active : ''
@@ -206,7 +204,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         const isPanelActive = key === defaultActiveKey.current
         let panelClass = styles.collapse_panel
 
-        if(isPanelActive) {
+        if (isPanelActive) {
             panelClass = `${styles.active_header} ${panelClass}`
         }
 
@@ -214,15 +212,15 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         const hrefEntries = Object.entries(navItemMap)
 
         return <Panel key={key} className={panelClass} header={RenderPanelHeader(rootItem)}>
-                    <Menu>
-                        {
-                            hrefEntries.map(kvp => {
-                                const [key, navItem] = kvp
-                                return renderItem(navItem, { caption: childCaptionsMap[key] } )
-                            })
-                        }
-                    </Menu>
-                </Panel>
+            <Menu>
+                {
+                    hrefEntries.map(kvp => {
+                        const [key, navItem] = kvp
+                        return renderItem(navItem, { caption: childCaptionsMap[key] })
+                    })
+                }
+            </Menu>
+        </Panel>
     }
 
     return <Menu className={`${styles.root} ${className || ''}`}>
