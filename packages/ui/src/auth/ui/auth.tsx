@@ -34,7 +34,7 @@ export interface IAuthProps {
   logger: ILogger;
   ssoServerBaseUrl: string;
   tokenStorageType?: TokenStorageType;
-  children: ReactNode;
+  children?: ReactNode;
   excludePathes?: PathType[];
   interceptors: OortApiInterceptors;
   renderConnectButtonBlock?: (props: IConnectButtonBlockProps) => JSX.Element;
@@ -56,7 +56,7 @@ const Impl = (props: IAuthProps) => {
     renderConnectButtonBlock,
   } = props;
 
-  const [isWalletVisible, setIsWalletVisible] = useState(false);
+  const [isConnectModalVisible, setConnectModalVisible] = useState(false);
   const [authInProcess, setAuthInProcess] = useState(false);
 
   const [renderChildren, setRenderChildren] = useState(false);
@@ -98,7 +98,7 @@ const Impl = (props: IAuthProps) => {
     return <>{children}</>;
   }
 
-  const onClose = () => setIsWalletVisible(false);
+  const onClose = () => setConnectModalVisible(false);
 
   const auth = async () => {
     try {
@@ -132,20 +132,20 @@ const Impl = (props: IAuthProps) => {
           renderConnectButtonBlock({
             web3Store,
             expectedChainId,
-            onClick: () => setIsWalletVisible(true),
+            onClick: () => setConnectModalVisible(true),
           })
         ) : (
           <ConnectButtonBlock
             web3Store={web3Store}
             expectedChainId={expectedChainId}
-            onClick={() => setIsWalletVisible(true)}
+            onClick={() => setConnectModalVisible(true)}
           />
         )}
         <ConnectModal
           supportedWallets={supportedWallets}
           expectedChainId={expectedChainId}
           web3={web3Store}
-          visible={isWalletVisible}
+          visible={isConnectModalVisible}
           onClose={onClose}
         />
         <AuthModal
