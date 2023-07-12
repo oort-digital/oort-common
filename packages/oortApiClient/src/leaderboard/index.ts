@@ -5,7 +5,7 @@ export type {
   GetBrandsInCurrentLeaderboardResponse,
   GetBattleResultsResponse,
   ILeaderboardInfo,
-  ISponsorBrand,
+  ILeaderboardBrand,
   ILeaderboardReward,
   IGetBattleResultsRequest,
   IJoinParams,
