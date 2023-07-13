@@ -16,8 +16,8 @@ export function distinct<T>(
   return result;
 }
 
-type KeyType = number | string;
-type Dictionary<T> = { [id: KeyType]: T };
+export type KeyType = number | string;
+export type Dictionary<T> = { [id: KeyType]: T };
 export function groupBy<T>(
   arr: T[],
   keyFunc: (item: T) => KeyType
