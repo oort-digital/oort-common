@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./footerMenu.module.less";
 import { Menu, MenuItem, MenuItemBtn } from "./menu";
-import { getChainIconOld } from "../utils";
+import { getChainIconOld, formatUnits } from "../utils";
 import {
   ChevronSortIcon,
   DiscordIcon,
   EyeIcon,
+  HideEyeIcon,
   TelegramIcon,
   TokenIcon,
   TwitterIcon,
@@ -18,6 +19,7 @@ import { isChainEmpty } from "@oort-digital/web3-connectors";
 import { observer } from "mobx-react";
 import { toMasked } from "@oort-digital/utils";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
+import { Erc20__factory } from "../contracts";
 
 const TWITTER = "https://twitter.com/OortDigital";
 const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
@@ -25,9 +27,9 @@ const TELEGRAM = "https://t.me/oortdigital";
 
 interface IProps {
   supportedWallets: ConnectorNames[];
-  balance?: number;
   className?: string;
   web3?: IWeb3;
+  oortTokenAddress: string
 }
 
 const social = (
@@ -50,10 +52,23 @@ const social = (
   </>
 );
 
-const Impl = ({ className, balance, web3, supportedWallets }: IProps) => {
+const Impl = ({ className, web3, supportedWallets, oortTokenAddress }: IProps) => {
   const [connectModalVisible, setConnectModalVisible] = useState(false);
 
+  const [balance, setBalance] = useState<string | undefined>();
+  const [isEyeOpen, setEyeOpen] = useState(true);
+
   // const [ isDarkMode, setDarkMode ] = useTheme()
+  useEffect(() => {
+    if (web3?.chain.chainId === 80001 && oortTokenAddress) {
+      Erc20__factory.connect(oortTokenAddress, web3.signer)!
+        .balanceOf(web3.account)
+        .then(balance => {
+          setBalance(formatUnits(balance, 18));
+        })
+    }
+  }, [web3?.account]);
+
 
   const renderConnectModal = () => {
     return (
@@ -98,8 +113,8 @@ const Impl = ({ className, balance, web3, supportedWallets }: IProps) => {
     )
 
     const balanceIcon = (
-      <span className={styles.icon_after}>
-        <EyeIcon />
+      <span className={styles.icon_after} onClick={() => setEyeOpen(!isEyeOpen)}>
+        {isEyeOpen ? <EyeIcon /> : <HideEyeIcon />}
       </span>
     )
     return (
@@ -108,10 +123,10 @@ const Impl = ({ className, balance, web3, supportedWallets }: IProps) => {
         {balance && <MenuItemBtn
           className={`${styles.menu_item_btn} ${styles.chain_name}`}
           key="balance"
-          onClick={() => setConnectModalVisible(true)}
+          onClick={() => setEyeOpen(!isEyeOpen)}
           iconBefore={tokenIcon}
           iconAfter={balanceIcon}
-          caption={balance.toString()}
+          caption={isEyeOpen ? Number(balance).toLocaleString() : '******'}
         />}
         <MenuItemBtn
           className={`${styles.menu_item_btn} ${styles.chain_name}`}

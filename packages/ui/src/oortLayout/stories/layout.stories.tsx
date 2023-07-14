@@ -47,6 +47,7 @@ export const WithWeb3 = Template.bind({});
 WithWeb3.args = {
   navItems: navItems,
   web3: web3,
+  oortTokenAddress: '0xD8341A4978a68Ed0ad558D745af5578e51102725',
   supportedWallets,
   children: <>
     <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
@@ -74,18 +75,7 @@ export const WithFaucet = Template.bind({});
 WithFaucet.args = {
   navItems: testNavItems,
   web3: web3,
-  supportedWallets,
-  children: <>
-    <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
-    {TestContent}
-  </>
-}
-
-export const WithTokenBalance = Template.bind({});
-WithTokenBalance.args = {
-  navItems: testNavItems,
-  web3: web3,
-  balance: 12333,
+  oortTokenAddress: '0xD8341A4978a68Ed0ad558D745af5578e51102725',
   supportedWallets,
   children: <>
     <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>

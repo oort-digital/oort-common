@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import { ConnectorNames, IConnector } from '@oort-digital/web3-connectors';
 import { IChain } from "@oort-digital/web3-connectors";
 import { LazyLoader } from '@oort-digital/lazy-loader';
+import { Signer } from 'ethers';
 
 const Desktop = lazy(() => import("./connectModalDesktop"));
 const Mobile = lazy(() => import("./connectModalMobile"));
@@ -15,6 +16,7 @@ export interface IWeb3 {
 	supportedChains: IChain[]
 	chain: IChain
 	account: string
+	signer: Signer
 }
 
 export interface IConnectModalProps {

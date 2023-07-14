@@ -31,4 +31,5 @@ export { NFTScanIcon } from "./nftscanIcon"
 export { WalletIcon } from "./walletIcon"
 
 export { EyeIcon } from "./eyeIcon";
+export { HideEyeIcon } from "./hideEyeIcon";
 export { TokenIcon } from "./tokenIcon";

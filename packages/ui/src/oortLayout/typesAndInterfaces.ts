@@ -7,7 +7,7 @@ export interface ILayoutProps {
     children: ReactNode
     navItems: INavItems
     supportedWallets: ConnectorNames[]
-    balance?: number
+    oortTokenAddress: string
     web3?: IWeb3
     className?: string
     //for testing
