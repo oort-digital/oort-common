@@ -40,18 +40,20 @@ export interface IBrandBattleResult {
   wins: number;
 }
 
-export interface ISponsorBrand {
+export interface ILeaderboardBrand {
+  id: number;
   name: string;
   logo: string;
+  url: string;
+  wins: number;
 }
 
 export interface ILeaderboardInfo {
   campaignName: string;
   startTime: string;
   endTime: string;
-  hostName: string;
-  hostLogo: string;
-  sponsors: ISponsorBrand[];
+  host: ILeaderboardBrand;
+  sponsors: ILeaderboardBrand[];
 }
 
 export interface IJoinParams {
