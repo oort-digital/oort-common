@@ -73,7 +73,7 @@ export interface IRewardDetail {
   distributorContract: {
     address: string;
     type: null; // this field for the future
-  };
+  } | null;
   eligible: boolean;
   merkleProof: string | null;
 }
