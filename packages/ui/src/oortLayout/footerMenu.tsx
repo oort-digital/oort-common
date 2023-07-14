@@ -15,7 +15,7 @@ import {
 import { ConnectModal, IWeb3 } from "../connectModal";
 import { BlockieAddress } from "../blockieAddress";
 // import { useTheme } from '../effects';
-import { isChainEmpty } from "@oort-digital/web3-connectors";
+import { ChainEnum, isChainEmpty } from "@oort-digital/web3-connectors";
 import { observer } from "mobx-react";
 import { toMasked } from "@oort-digital/utils";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
@@ -65,14 +65,16 @@ const Impl = ({
 
   // const [ isDarkMode, setDarkMode ] = useTheme()
   useEffect(() => {
-    if (web3?.chain.chainId === 80001 && web3.signer && oortTokenAddress) {
+    if (web3?.chain.chainId === ChainEnum.MaticMumbai && web3.signer && oortTokenAddress) {
       Erc20__factory.connect(oortTokenAddress, web3.signer)
         .balanceOf(web3.account)
         .then((balance) => {
           setBalance(formatUnits(balance, 18));
         });
+    } else {
+      setBalance(undefined);
     }
-  }, [web3?.account]);
+  }, [web3?.account, web3?.chain]);
 
   const renderConnectModal = () => {
     return (
