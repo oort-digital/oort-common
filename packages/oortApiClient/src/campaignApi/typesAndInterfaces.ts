@@ -30,6 +30,22 @@ export interface IBrand {
   logo: string;
 }
 
+export interface ICampaignReward {
+  name: string;
+  brandLogo: string;
+}
+export interface ICampaigns {
+  brandLogo: string;
+  brandName: string;
+  brandUrl: string; i
+  campaignId: number;
+  campaignName: string;
+  campaignImage: string;
+  endTime: string;
+  startTime: string;
+  rewards: ICampaignReward[]
+}
+
 export interface ICampaign {
   brandLogo: string;
   brandName: string;
@@ -40,6 +56,7 @@ export interface ICampaign {
   endTime: string;
   startTime: string;
   description: string;
+  rewards: IReward[]
 }
 
 export interface IBrand {
@@ -61,7 +78,7 @@ export interface IReward {
   eligible: boolean;
 }
 
-export type GetCampaignsResponse = IPagingResponse<ICampaign>;
+export type GetCampaignsResponse = IPagingResponse<ICampaigns>;
 
 export type GetBrandsResponse = IPagingResponse<IBrand>;
 
