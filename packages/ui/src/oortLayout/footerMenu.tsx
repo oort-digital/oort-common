@@ -29,7 +29,7 @@ interface IProps {
   supportedWallets: ConnectorNames[];
   className?: string;
   web3?: IWeb3;
-  oortTokenAddress: string
+  oortTokenAddress: string;
 }
 
 const social = (
@@ -52,7 +52,12 @@ const social = (
   </>
 );
 
-const Impl = ({ className, web3, supportedWallets, oortTokenAddress }: IProps) => {
+const Impl = ({
+  className,
+  web3,
+  supportedWallets,
+  oortTokenAddress,
+}: IProps) => {
   const [connectModalVisible, setConnectModalVisible] = useState(false);
 
   const [balance, setBalance] = useState<string | undefined>();
@@ -60,15 +65,14 @@ const Impl = ({ className, web3, supportedWallets, oortTokenAddress }: IProps) =
 
   // const [ isDarkMode, setDarkMode ] = useTheme()
   useEffect(() => {
-    if (web3?.chain.chainId === 80001 && oortTokenAddress) {
-      Erc20__factory.connect(oortTokenAddress, web3.signer)!
+    if (web3?.chain.chainId === 80001 && web3.signer && oortTokenAddress) {
+      Erc20__factory.connect(oortTokenAddress, web3.signer)
         .balanceOf(web3.account)
-        .then(balance => {
+        .then((balance) => {
           setBalance(formatUnits(balance, 18));
-        })
+        });
     }
   }, [web3?.account]);
-
 
   const renderConnectModal = () => {
     return (
@@ -110,24 +114,29 @@ const Impl = ({ className, web3, supportedWallets, oortTokenAddress }: IProps) =
       <span className={styles.icon_before}>
         <TokenIcon />
       </span>
-    )
+    );
 
     const balanceIcon = (
-      <span className={styles.icon_after} onClick={() => setEyeOpen(!isEyeOpen)}>
+      <span
+        className={styles.icon_after}
+        onClick={() => setEyeOpen(!isEyeOpen)}
+      >
         {isEyeOpen ? <EyeIcon /> : <HideEyeIcon />}
       </span>
-    )
+    );
     return (
       <>
         {renderConnectModal()}
-        {balance && <MenuItemBtn
-          className={`${styles.menu_item_btn} ${styles.chain_name}`}
-          key="balance"
-          onClick={() => setEyeOpen(!isEyeOpen)}
-          iconBefore={tokenIcon}
-          iconAfter={balanceIcon}
-          caption={isEyeOpen ? Number(balance).toLocaleString() : '******'}
-        />}
+        {balance && (
+          <MenuItemBtn
+            className={`${styles.menu_item_btn} ${styles.chain_name}`}
+            key="balance"
+            onClick={() => setEyeOpen(!isEyeOpen)}
+            iconBefore={tokenIcon}
+            iconAfter={balanceIcon}
+            caption={isEyeOpen ? Number(balance).toLocaleString() : "******"}
+          />
+        )}
         <MenuItemBtn
           className={`${styles.menu_item_btn} ${styles.chain_name}`}
           key="chain"
