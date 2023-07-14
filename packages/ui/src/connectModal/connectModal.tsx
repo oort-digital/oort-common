@@ -7,14 +7,14 @@ const Desktop = lazy(() => import("./connectModalDesktop"));
 const Mobile = lazy(() => import("./connectModalMobile"));
 
 export interface IWeb3 {
-    canSwitchChain: boolean
-    connectorName: ConnectorNames
-    supportedConnectors: { [name: string]: IConnector }
-    switchChain: (newChainId: number) => Promise<boolean>
-    connect: (chainId: number, connectorName: ConnectorNames) => Promise<boolean>
-    supportedChains: IChain[]
-    chain: IChain
-    account: string
+	canSwitchChain: boolean
+	connectorName: ConnectorNames
+	supportedConnectors: { [name: string]: IConnector }
+	switchChain: (newChainId: number) => Promise<boolean>
+	connect: (chainId: number, connectorName: ConnectorNames) => Promise<boolean>
+	supportedChains: IChain[]
+	chain: IChain
+	account: string
 }
 
 export interface IConnectModalProps {

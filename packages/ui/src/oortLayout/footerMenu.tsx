@@ -5,7 +5,9 @@ import { getChainIconOld } from "../utils";
 import {
   ChevronSortIcon,
   DiscordIcon,
+  EyeIcon,
   TelegramIcon,
+  TokenIcon,
   TwitterIcon,
 } from "../icons";
 // import { ThemeSwitch } from './themeSwitch';
@@ -23,6 +25,7 @@ const TELEGRAM = "https://t.me/oortdigital";
 
 interface IProps {
   supportedWallets: ConnectorNames[];
+  balance?: number;
   className?: string;
   web3?: IWeb3;
 }
@@ -47,7 +50,7 @@ const social = (
   </>
 );
 
-const Impl = ({ className, web3, supportedWallets }: IProps) => {
+const Impl = ({ className, balance, web3, supportedWallets }: IProps) => {
   const [connectModalVisible, setConnectModalVisible] = useState(false);
 
   // const [ isDarkMode, setDarkMode ] = useTheme()
@@ -88,9 +91,28 @@ const Impl = ({ className, web3, supportedWallets }: IProps) => {
         <ChevronSortIcon />
       </span>
     );
+    const tokenIcon = (
+      <span className={styles.icon_before}>
+        <TokenIcon />
+      </span>
+    )
+
+    const balanceIcon = (
+      <span className={styles.icon_after}>
+        <EyeIcon />
+      </span>
+    )
     return (
       <>
         {renderConnectModal()}
+        {balance && <MenuItemBtn
+          className={`${styles.menu_item_btn} ${styles.chain_name}`}
+          key="balance"
+          onClick={() => setConnectModalVisible(true)}
+          iconBefore={tokenIcon}
+          iconAfter={balanceIcon}
+          caption={balance.toString()}
+        />}
         <MenuItemBtn
           className={`${styles.menu_item_btn} ${styles.chain_name}`}
           key="chain"

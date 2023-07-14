@@ -1,18 +1,17 @@
 import "../../styles/antOverride.less";
 import "../../styles/fonts.css";
-import {BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React, { lazy } from "react";
 import { useTheme } from "../../effects";
 import { Layout } from "..";
-import {isActiveFunc, navItems, TestContent, testNavItems} from "./common";
+import { isActiveFunc, navItems, TestContent, testNavItems } from "./common";
 import { Web3StoreStub } from "./web3StoreStub";
 import { ILayoutProps } from "../typesAndInterfaces";
 import { Button } from "antd";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 
 const DarkTheme = lazy(() => import("../../styles/theme/darkTheme"));
-const LightTheme = lazy(() => import("../../styles/theme/lightTheme"));
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -32,14 +31,12 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Layout> = (args: ILayoutProps) => {
 
-  const [isDark] = useTheme()
-
   return <>
-    { isDark ? <DarkTheme /> : <LightTheme /> }
+    <DarkTheme />
     <Router>
       <Layout {...args} />
     </Router>
-    
+
   </>
 }
 
@@ -54,7 +51,7 @@ WithWeb3.args = {
   children: <>
     <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
     {TestContent}
-    </>
+  </>
 };
 
 export const WithoutWeb3 = Template.bind({});
@@ -75,12 +72,23 @@ ActiveCollapse.args = {
 
 export const WithFaucet = Template.bind({});
 WithFaucet.args = {
-    navItems: testNavItems,
-    web3: web3,
-    supportedWallets,
-    children: <>
-        <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
-        {TestContent}
-    </>
+  navItems: testNavItems,
+  web3: web3,
+  supportedWallets,
+  children: <>
+    <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
+    {TestContent}
+  </>
 }
 
+export const WithTokenBalance = Template.bind({});
+WithTokenBalance.args = {
+  navItems: testNavItems,
+  web3: web3,
+  balance: 12333,
+  supportedWallets,
+  children: <>
+    <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
+    {TestContent}
+  </>
+}

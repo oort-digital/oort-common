@@ -29,3 +29,6 @@ export { OpenseaIcon } from "./openseaIcon"
 export { NFTScanIcon } from "./nftscanIcon"
 
 export { WalletIcon } from "./walletIcon"
+
+export { EyeIcon } from "./eyeIcon";
+export { TokenIcon } from "./tokenIcon";

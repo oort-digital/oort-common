@@ -39,6 +39,7 @@ export interface ICampaign {
   campaignImage: string;
   endTime: string;
   startTime: string;
+  description: string;
 }
 
 export interface IBrand {
