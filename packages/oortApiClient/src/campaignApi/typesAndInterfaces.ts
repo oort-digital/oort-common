@@ -24,28 +24,6 @@ export interface IOortCampaignApi {
   ) => Promise<IGetRewardsResponse>;
 }
 
-export interface IBrand {
-  id: number;
-  name: string;
-  logo: string;
-}
-
-export interface ICampaignReward {
-  name: string;
-  brandLogo: string;
-}
-export interface ICampaigns {
-  brandLogo: string;
-  brandName: string;
-  brandUrl: string; i
-  campaignId: number;
-  campaignName: string;
-  campaignImage: string;
-  endTime: string;
-  startTime: string;
-  rewards: ICampaignReward[]
-}
-
 export interface ICampaign {
   brandLogo: string;
   brandName: string;
@@ -55,18 +33,35 @@ export interface ICampaign {
   campaignImage: string;
   endTime: string;
   startTime: string;
-  description: string;
-  rewards: IReward[]
+  rewards: { name: string; brandLogo: string }[];
 }
 
-export interface IBrand {
+export interface ICampaignDetail {
+  brandLogo: string;
+  brandName: string;
+  brandUrl: string;
+  campaignId: number;
+  campaignName: string;
+  campaignImage: string;
+  endTime: string;
+  startTime: string;
+  description: string;
+}
+
+export interface IBrandDetail {
   id: number;
   logo: string;
   name: string;
   url: string;
 }
 
-export interface IReward {
+export interface IBrand {
+  id: number;
+  logo: string;
+  name: string;
+}
+
+export interface IRewardDetail {
   id: number;
   chainId: number;
   contractAddress: string;
@@ -74,21 +69,26 @@ export interface IReward {
   type: string;
   image: string;
   name: string;
-  distributionMethod: string;
+  description: string;
+  distributorContract: {
+    address: string;
+    type: null; // this field for the future
+  };
   eligible: boolean;
+  merkleProof: string | null;
 }
 
-export type GetCampaignsResponse = IPagingResponse<ICampaigns>;
+export type GetCampaignsResponse = IPagingResponse<ICampaign>;
 
 export type GetBrandsResponse = IPagingResponse<IBrand>;
 
 export interface IGetRewardsResponse {
-  rewards: IReward[];
+  rewards: IRewardDetail[];
 }
 
 export interface IGetCampaignResponse {
-  campaign: ICampaign;
-  sponsorBrands: IBrand[];
+  campaign: ICampaignDetail;
+  sponsorBrands: IBrandDetail[];
 }
 
 export interface IGetCampaingsParams extends IPagingParams {

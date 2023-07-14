@@ -2,8 +2,10 @@ export { OortCampaignApi } from "./oortCampaignApi";
 export type {
   IOortCampaignApi,
   ICampaign,
+  ICampaignDetail,
   IBrand,
-  IReward,
+  IBrandDetail,
+  IRewardDetail,
   IGetCampaingsParams,
   GetCampaignsResponse,
   IGetCampaingParams,
