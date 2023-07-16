@@ -1,5 +1,3 @@
-/* eslint-disable import/export */
-
 import { IPagingParams, IPagingResponse } from "../common";
 
 /* eslint-disable no-unused-vars */
@@ -24,19 +22,13 @@ export interface IOortCampaignApi {
   ) => Promise<IGetRewardsResponse>;
 }
 
-export interface HostBrand {
-  id: number,
-  name: string,
-  logo: string,
-  url: string
-}
 export interface ICampaign {
   campaignId: number;
   campaignName: string;
   campaignImage: string;
   endTime: string;
   startTime: string;
-  host: HostBrand;
+  host: IBrandDetail;
   rewards: { name: string; brandLogo: string }[];
 }
 
