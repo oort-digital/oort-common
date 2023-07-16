@@ -17,7 +17,7 @@ export interface IOortCampaignApi {
   ) => Promise<IGetCampaignResponse>;
 
   getRewards: (
-    { campaignId }: IGetCampaingParams,
+    { campaignId }: IGetRewardsParams,
     signal: AbortSignal,
   ) => Promise<IGetRewardsResponse>;
 }
@@ -96,8 +96,8 @@ export interface IGetPageBaseParams extends IPagingParams {
 
 export interface IGetCampaingParams {
   campaignId: number;
-  wallet: string;
 }
 export interface IGetRewardsParams {
   campaignId: number;
+  wallet: string;
 }

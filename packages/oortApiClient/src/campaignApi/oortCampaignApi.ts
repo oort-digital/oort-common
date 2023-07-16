@@ -8,6 +8,7 @@ import {
   IGetPageBaseParams,
   IGetRewardsResponse,
   IOortCampaignApi,
+  IGetRewardsParams,
 } from "./typesAndInterfaces";
 
 const oortServerApis = {
@@ -81,7 +82,7 @@ export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
   }
 
   public async getRewards(
-    { campaignId, wallet }: IGetCampaingParams,
+    { campaignId, wallet }: IGetRewardsParams,
     signal: AbortSignal,
   ): Promise<IGetRewardsResponse> {
     const url = oortServerApis.getRewards;
