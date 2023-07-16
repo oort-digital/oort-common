@@ -24,15 +24,19 @@ export interface IOortCampaignApi {
   ) => Promise<IGetRewardsResponse>;
 }
 
+export interface HostBrand {
+  id: number,
+  name: string,
+  logo: string,
+  url: string
+}
 export interface ICampaign {
-  brandLogo: string;
-  brandName: string;
-  brandUrl: string;
   campaignId: number;
   campaignName: string;
   campaignImage: string;
   endTime: string;
   startTime: string;
+  host: HostBrand;
   rewards: { name: string; brandLogo: string }[];
 }
 
