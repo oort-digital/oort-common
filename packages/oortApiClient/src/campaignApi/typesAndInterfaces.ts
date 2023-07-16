@@ -33,9 +33,7 @@ export interface ICampaign {
 }
 
 export interface ICampaignDetail {
-  brandLogo: string;
-  brandName: string;
-  brandUrl: string;
+  host: IBrandDetail;
   campaignId: number;
   campaignName: string;
   campaignImage: string;
