@@ -81,12 +81,13 @@ export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
   }
 
   public async getRewards(
-    { campaignId }: IGetCampaingParams,
+    { campaignId, wallet }: IGetCampaingParams,
     signal: AbortSignal,
   ): Promise<IGetRewardsResponse> {
     const url = oortServerApis.getRewards;
     const params: URLSearchParams = new URLSearchParams();
     params.append("campaign-id", campaignId.toString());
+    params.append("wallet", wallet);
 
     const response = await this.get<IGetRewardsResponse>(
       url,

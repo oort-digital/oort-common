@@ -96,6 +96,7 @@ export interface IGetPageBaseParams extends IPagingParams {
 
 export interface IGetCampaingParams {
   campaignId: number;
+  wallet: string;
 }
 export interface IGetRewardsParams {
   campaignId: number;
