@@ -88,13 +88,13 @@ export class OortLeaderboardApi extends BaseAPI implements IOortLeaderboardApi {
     { brandId }: IJoinParams,
     signal: AbortSignal,
   ): Promise<void> {
-    const url = `${oortServerApis.join}?brandId=${brandId}`;
-    // url params is not working for put.
-    // const urlParams = new URLSearchParams();
-    // urlParams.append("brandId", `${brandId}`);
+    const url = oortServerApis.join;
+    const urlParams = new URLSearchParams();
+    urlParams.append("brandId", `${brandId}`);
     const response = await this.put<void>(
       url,
-      getConfig(true, signal /*, urlParams*/),
+      null,
+      getConfig(true, signal, urlParams),
     );
     return response;
   }
