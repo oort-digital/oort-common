@@ -91,7 +91,10 @@ export class OortLeaderboardApi extends BaseAPI implements IOortLeaderboardApi {
     const url = oortServerApis.join;
     const urlParams = new URLSearchParams();
     urlParams.append("brand-id", `${brandId}`);
-    const response = await this.put<void>(url, getConfig(true, signal));
+    const response = await this.put<void>(
+      url,
+      getConfig(true, signal, urlParams),
+    );
     return response;
   }
 
