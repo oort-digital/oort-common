@@ -1,7 +1,7 @@
 import { Collapse } from "antd";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { DashboardIcon, DevelopToolsIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
+import { DashboardIcon, DevelopToolsIcon, GameHubIcon, LeaderboardIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
 import styles from './navMenu.module.less';
 import { isHrefActive } from "./utils";
@@ -65,7 +65,7 @@ const dashboardInternal = {
 
 const leaderboardInternal = {
     caption: 'leaderboard',
-    icon: <DashboardIcon />,
+    icon: <LeaderboardIcon />,
 }
 
 const rentInternal = {

@@ -3,6 +3,7 @@ export { RentAppIcon } from './rentAppIcon'
 export { DashboardIcon } from "./dashboardIcon"
 export { MintIcon } from "./mintIcon"
 export { ChevronSortIcon } from "./chevronSortIcon"
+export { LeaderboardIcon } from "./leaderboardIcon";
 // social
 export { DiscordIcon } from "./discordIcon"
 export { TelegramIcon } from "./telegramIcon"
