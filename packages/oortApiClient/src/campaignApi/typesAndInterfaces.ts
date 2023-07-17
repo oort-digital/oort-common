@@ -70,6 +70,7 @@ export interface IRewardDetail {
   } | null;
   eligible: boolean;
   merkleProof: string | null;
+  clanId: number | null;
 }
 
 export type GetCampaignsResponse = IPagingResponse<ICampaign>;
