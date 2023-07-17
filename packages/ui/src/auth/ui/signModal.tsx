@@ -13,6 +13,7 @@ export const SignModal = ({ authFunc, visible, loading }: IProps) => {
     size: "large",
     type: "primary",
     onClick: authFunc,
+    isMainButton: true
   };
 
   return (
