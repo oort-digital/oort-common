@@ -21,6 +21,11 @@ export interface IOortLeaderboardApi {
   getRewardsInCurrentLeaderboard(
     _signal: AbortSignal,
   ): Promise<IGetRewardsInCurrentLeaderboardResponse>;
+
+  checkHaveBrandHeroes(
+    _params: ICheckHaveBrandHeroesParams,
+    _signal: AbortSignal,
+  ): Promise<CheckHaveBrandHeroesResponse>;
 }
 
 export interface IGetBattleResultsRequest extends IPagingParams {
@@ -70,3 +75,9 @@ export interface ILeaderboardReward {
 export interface IGetRewardsInCurrentLeaderboardResponse {
   rewards: ILeaderboardReward[];
 }
+
+export interface ICheckHaveBrandHeroesParams {
+  brandIds: number[];
+}
+
+export type CheckHaveBrandHeroesResponse = number[];
