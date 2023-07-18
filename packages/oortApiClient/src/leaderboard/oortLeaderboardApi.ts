@@ -128,7 +128,7 @@ export class OortLeaderboardApi extends BaseAPI implements IOortLeaderboardApi {
     const url = oortServerApis.checkHaveBrandHeroes;
     const response = await this.get<CheckHaveBrandHeroesResponse>(
       url,
-      getConfig(false, signal, urlParams),
+      getConfig(true, signal, urlParams),
     );
     return response;
   }
