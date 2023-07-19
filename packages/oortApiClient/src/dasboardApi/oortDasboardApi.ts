@@ -356,7 +356,7 @@ export class OortDasboardApi extends BaseAPI implements IOortDasboardApi {
       IReviewResponse,
       AxiosResponse<IReviewResponse>
     >(
-      `$/game-hub/games/${gameUri}/reviews`,
+      `/game-hub/games/${gameUri}/reviews`,
       getConfig(false, signal, urlParams),
     );
 
