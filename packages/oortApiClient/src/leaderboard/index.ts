@@ -10,4 +10,6 @@ export type {
   IGetBattleResultsRequest,
   IJoinParams,
   IGetRewardsInCurrentLeaderboardResponse,
+  CheckHaveBrandHeroesResponse,
+  ICheckHaveBrandHeroesParams,
 } from "./typesAndInterfaces";

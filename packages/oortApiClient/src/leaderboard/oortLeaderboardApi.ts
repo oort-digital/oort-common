@@ -8,6 +8,8 @@ import {
   IGetRewardsInCurrentLeaderboardResponse,
   IJoinParams,
   IOortLeaderboardApi,
+  CheckHaveBrandHeroesResponse,
+  ICheckHaveBrandHeroesParams,
 } from "./typesAndInterfaces";
 
 const oortServerApis = {
@@ -18,6 +20,7 @@ const oortServerApis = {
   join: "/leaderboard/join",
   getJoinedBrand: "/leaderboard/joined-brand-id",
   getRewardsInCurrentLeaderboard: "/leaderboard/rewards",
+  checkHaveBrandHeroes: "/leaderboard/check-have-brand-heroes",
 };
 
 export class OortLeaderboardApi extends BaseAPI implements IOortLeaderboardApi {
@@ -112,6 +115,20 @@ export class OortLeaderboardApi extends BaseAPI implements IOortLeaderboardApi {
     const response = await this.get<IGetRewardsInCurrentLeaderboardResponse>(
       url,
       getConfig(false, signal),
+    );
+    return response;
+  }
+
+  public async checkHaveBrandHeroes(
+    { brandIds }: ICheckHaveBrandHeroesParams,
+    signal: AbortSignal,
+  ): Promise<CheckHaveBrandHeroesResponse> {
+    const urlParams = new URLSearchParams();
+    brandIds.forEach((id) => urlParams.append("brandIds", `${id}`));
+    const url = oortServerApis.checkHaveBrandHeroes;
+    const response = await this.get<CheckHaveBrandHeroesResponse>(
+      url,
+      getConfig(true, signal, urlParams),
     );
     return response;
   }
