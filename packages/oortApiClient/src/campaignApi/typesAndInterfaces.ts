@@ -29,7 +29,7 @@ export interface ICampaign {
   endTime: string;
   startTime: string;
   host: IBrandDetail;
-  rewards: { name: string; brandLogo: string }[];
+  rewards: { name: string; image: string }[];
 }
 
 export interface ICampaignDetail {
