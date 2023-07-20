@@ -75,7 +75,7 @@ export const WithFaucet = Template.bind({});
 WithFaucet.args = {
   navItems: testNavItems,
   web3: web3,
-  oortTokenAddress: '0xD8341A4978a68Ed0ad558D745af5578e51102725',
+  oortTokenAddress: '0xcce87c5b269c94b31ec437b1d7d85bf1413b7804',
   supportedWallets,
   children: <>
     <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>

@@ -15,7 +15,7 @@ import {
 import { ConnectModal, IWeb3 } from "../connectModal";
 import { BlockieAddress } from "../blockieAddress";
 // import { useTheme } from '../effects';
-import { ChainEnum, isChainEmpty } from "@oort-digital/web3-connectors";
+import { isChainEmpty } from "@oort-digital/web3-connectors";
 import { observer } from "mobx-react";
 import { toMasked } from "@oort-digital/utils";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
@@ -29,7 +29,7 @@ interface IProps {
   supportedWallets: ConnectorNames[];
   className?: string;
   web3?: IWeb3;
-  oortTokenAddress: string;
+  oortTokenAddress?: string;
 }
 
 const social = (
@@ -60,17 +60,21 @@ const Impl = ({
 }: IProps) => {
   const [connectModalVisible, setConnectModalVisible] = useState(false);
 
-  const [balance, setBalance] = useState<string | undefined>();
+  const [balance, setBalance] = useState<string | undefined>(undefined);
   const [isEyeOpen, setEyeOpen] = useState(true);
 
   // const [ isDarkMode, setDarkMode ] = useTheme()
   useEffect(() => {
-    if (web3?.chain.chainId === ChainEnum.MaticMumbai && web3.signer && oortTokenAddress) {
-      Erc20__factory.connect(oortTokenAddress, web3.signer)
-        .balanceOf(web3.account)
-        .then((balance) => {
-          setBalance(formatUnits(balance, 18));
-        });
+    if (web3 && web3.signer && oortTokenAddress && web3.supportedChains.filter(val => val.chainId === web3.chain.chainId).length > 0) {
+      try {
+        Erc20__factory.connect(oortTokenAddress, web3.signer)
+          .balanceOf(web3.account)
+          .then((balance) => {
+            setBalance(formatUnits(balance, 18));
+          });
+      } catch (e) {
+        setBalance(undefined);
+      }
     } else {
       setBalance(undefined);
     }
