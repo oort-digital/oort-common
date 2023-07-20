@@ -7,7 +7,7 @@ import { ConnectorNames } from "@oort-digital/web3-connectors";
 
 interface IProps extends IAsideProps {
     supportedWallets: ConnectorNames[]
-    oortTokenAddress: string
+    oortTokenAddress?: string | undefined
     className: string
     logoLink?: ReactNode
 }

@@ -6,7 +6,7 @@ export interface IAsideProps {
     supportedWallets: ConnectorNames[]
     navItems: INavItems
     web3?: IWeb3
-    oortTokenAddress: string
+    oortTokenAddress?: string
     isDev?: boolean
     //for testing
     isActiveFunc?: (href: string) => boolean
