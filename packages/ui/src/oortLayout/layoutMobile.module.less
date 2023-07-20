@@ -2,29 +2,32 @@
 @import "../styles/common.less";
 
 .root {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 @topHeaderHeight: 52px;
 
 .root > .top_header {
-    .responsive-layout-padding-mixin();
-    position: fixed;
-    width: 100%;
-    height: @topHeaderHeight;
-    z-index: 10;
-    background-color: @theme-color-4;
-    display: flex;
-    align-items: center;
+  .responsive-layout-padding-mixin();
+  position: fixed;
+  width: 100%;
+  height: @topHeaderHeight;
+  z-index: 10;
+  background-color: @theme-color-4;
+  display: flex;
+  align-items: center;
 
-    & > .logo {
-        margin-left: 18px;
-        height: 24px;
-    }
+  & > .logo {
+    margin-left: 18px;
+    height: 24px;
+  }
 }
 
 .root > .content {
-    margin-top: @topHeaderHeight;
-    background: @theme-bg-dark-gradient;
+  margin-top: @topHeaderHeight;
+}
+
+.root > .content.top_gradient {
+  background: @theme-bg-dark-gradient;
 }

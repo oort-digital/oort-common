@@ -1,27 +1,46 @@
+import classNames from "classnames";
 import { AsideMobile } from "./aside";
-import styles from './layoutMobile.module.less';
+import styles from "./layoutMobile.module.less";
 import { LogoLink } from "./logoLink/logoLink";
 import { Sider } from "./sider";
 import { ILayoutProps } from "./typesAndInterfaces";
 
-const LayoutMobile = ({ navItems, children, web3, oortTokenAddress, isActiveFunc, className, supportedWallets }: ILayoutProps) => {
+const LayoutMobile = ({
+  navItems,
+  children,
+  web3,
+  oortTokenAddress,
+  isActiveFunc,
+  className,
+  supportedWallets,
+  useTopGradient,
+}: ILayoutProps) => {
+  const _useTopGradient = useTopGradient === undefined ? true : useTopGradient;
 
-    const cssClass = className ? `${styles.root} ${className}` : styles.root
+  return (
+    <div className={classNames(className, styles.root)}>
+      <div className={classNames("oort-mobile-top-header", styles.top_header)}>
+        <Sider>
+          <AsideMobile
+            oortTokenAddress={oortTokenAddress}
+            supportedWallets={supportedWallets}
+            navItems={navItems}
+            isActiveFunc={isActiveFunc}
+            web3={web3}
+          />
+        </Sider>
+        <LogoLink className={styles.logo} />
+      </div>
 
-    return <div className={cssClass}>
-
-        <div className={`oort-mobile-top-header ${styles.top_header}`}>
-            <Sider>
-                <AsideMobile oortTokenAddress={oortTokenAddress} supportedWallets={supportedWallets} navItems={navItems} isActiveFunc={isActiveFunc} web3={web3} />
-            </Sider>
-            <LogoLink className={styles.logo} />
-        </div>
-
-        <div className={`oort-mobile-content ${styles.content}`}>
-            {children}
-        </div>
-
+      <div
+        className={classNames("oort-mobile-content", styles.content, {
+          [`${styles.top_gradient}`]: _useTopGradient,
+        })}
+      >
+        {children}
+      </div>
     </div>
-}
+  );
+};
 
-export default LayoutMobile
+export default LayoutMobile;

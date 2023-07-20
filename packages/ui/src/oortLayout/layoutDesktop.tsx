@@ -1,12 +1,24 @@
+import classNames from "classnames";
 import { AsideDesktop } from "./aside";
-import styles from './layoutDesktop.module.less';
+import styles from "./layoutDesktop.module.less";
 import { ILayoutProps } from "./typesAndInterfaces";
 
-const LayoutDesktop = (props: ILayoutProps) => <div className={styles.root}>
-    <AsideDesktop {...props} />
-    <div className={styles.content}>
-        {props.children}
-    </div>
-</div>
+const LayoutDesktop = (props: ILayoutProps) => {
+  const useTopGradient =
+    props.useTopGradient === undefined ? true : props.useTopGradient;
 
-export default LayoutDesktop
+  return (
+    <div className={styles.root}>
+      <AsideDesktop {...props} />
+      <div
+        className={classNames(styles.content, {
+          [`${styles.top_gradient}`]: useTopGradient,
+        })}
+      >
+        {props.children}
+      </div>
+    </div>
+  );
+};
+
+export default LayoutDesktop;
