@@ -51,6 +51,7 @@ export interface ILeaderboardBrand {
   logo: string;
   url: string;
   wins: number;
+  galxeCampaignUrl: string;
 }
 
 export interface ILeaderboardInfo {
