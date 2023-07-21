@@ -5,8 +5,6 @@ import { getChainIconOld, formatUnits } from "../utils";
 import {
   ChevronSortIcon,
   DiscordIcon,
-  EyeIcon,
-  HideEyeIcon,
   TelegramIcon,
   TokenIcon,
   TwitterIcon,
@@ -61,7 +59,6 @@ const Impl = ({
   const [connectModalVisible, setConnectModalVisible] = useState(false);
 
   const [balance, setBalance] = useState<string | undefined>(undefined);
-  const [isEyeOpen, setEyeOpen] = useState(true);
 
   // const [ isDarkMode, setDarkMode ] = useTheme()
   useEffect(() => {
@@ -122,14 +119,6 @@ const Impl = ({
       </span>
     );
 
-    const balanceIcon = (
-      <span
-        className={styles.icon_after}
-        onClick={() => setEyeOpen(!isEyeOpen)}
-      >
-        {isEyeOpen ? <EyeIcon /> : <HideEyeIcon />}
-      </span>
-    );
     return (
       <>
         {renderConnectModal()}
@@ -137,10 +126,9 @@ const Impl = ({
           <MenuItemBtn
             className={`${styles.menu_item_btn} ${styles.chain_name}`}
             key="balance"
-            onClick={() => setEyeOpen(!isEyeOpen)}
             iconBefore={tokenIcon}
-            iconAfter={balanceIcon}
-            caption={isEyeOpen ? Number(balance).toLocaleString() : "******"}
+            iconAfter={null}
+            caption={Number(balance).toLocaleString()}
           />
         )}
         <MenuItemBtn
