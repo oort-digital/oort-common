@@ -1,3 +1,4 @@
+import "../styles/theme/dark.less";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Checkbox } from "antd";
