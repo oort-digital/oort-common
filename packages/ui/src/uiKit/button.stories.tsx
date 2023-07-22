@@ -1,3 +1,5 @@
+import "../../.storybook/stories.less";
+
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from "antd";

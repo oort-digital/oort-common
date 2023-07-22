@@ -1,0 +1,49 @@
+// Input
+@input-height-lg: 52px;
+@input-number-handler-border-color: @input-border-color;
+@input-number-handler-active-bg: @input-bg;
+@input-number-handler-bg: @input-bg;
+@input-disabled-bg: @input-bg;
+
+.ant-input {
+  .body-14-regular-mixin();
+}
+
+.ant-input-affix-wrapper
+  > .ant-input-suffix
+  > .ant-input-clear-icon
+  > .anticon {
+  color: @input-color;
+  vertical-align: middle;
+}
+
+.ant-input-number {
+  border-color: @input-border-color;
+  .ant-input-number-handler-wrap {
+    opacity: 1;
+    width: 28px;
+    .ant-input-number-handler-down {
+      border-color: @input-border-color;
+    }
+
+    .ant-input-number-handler-down-inner,
+    .ant-input-number-handler-up-inner {
+      left: 7px;
+    }
+
+    .ant-input-number-handler-up-inner,
+    .ant-input-number-handler-down-inner {
+      color: @input-color;
+    }
+  }
+}
+
+.ant-input-number-wrapper {
+  .ant-input-number-group-addon {
+    padding-left: 16px;
+    padding-right: 16px;
+    .anticon {
+      vertical-align: middle;
+    }
+  }
+}

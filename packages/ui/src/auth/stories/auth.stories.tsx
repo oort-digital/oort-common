@@ -1,6 +1,4 @@
-import "../../styles/antOverride.less";
-import "../../styles/fonts.css";
-import "../../styles/theme/dark.less";
+import "../../../.storybook/stories.less";
 import { BrowserRouter as Router } from "react-router-dom";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ConnectorNames } from "@oort-digital/web3-connectors";

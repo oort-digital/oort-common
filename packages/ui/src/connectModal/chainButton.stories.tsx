@@ -1,14 +1,13 @@
-import React from 'react';
-import '../styles/antOverride.less';
-import '../styles/fonts.css';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from "react";
+import "../../.storybook/stories.less";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { ChainButton } from './chainButton';
-import { IChain } from '@oort-digital/web3-connectors';
+import { ChainButton } from "./chainButton";
+import { IChain } from "@oort-digital/web3-connectors";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'oort/connectModal/chainButton',
+  title: "oort/connectModal/chainButton",
   component: ChainButton,
 
   parameters: {
@@ -22,16 +21,18 @@ export default {
 } as ComponentMeta<typeof ChainButton>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ChainButton> = (args) => <ChainButton {...args} />;
+const Template: ComponentStory<typeof ChainButton> = (args) => (
+  <ChainButton {...args} />
+);
 
 const chain: IChain = {
   chainId: 1,
-  name: 'Ethereum'
-}
+  name: "Ethereum",
+};
 
 const onClick = () => {
-  alert('clicked')
-}
+  alert("clicked");
+};
 
 export const Active = Template.bind({});
 Active.args = {
@@ -39,7 +40,7 @@ Active.args = {
   chain: chain,
   isActive: true,
   canSwitchChain: true,
-  onClick: onClick
+  onClick: onClick,
 };
 
 export const NotActive = Template.bind({});
@@ -48,7 +49,7 @@ NotActive.args = {
   chain: chain,
   isActive: false,
   canSwitchChain: true,
-  onClick: onClick
+  onClick: onClick,
 };
 
 export const Loading = Template.bind({});
@@ -57,7 +58,7 @@ Loading.args = {
   chain: chain,
   isActive: false,
   canSwitchChain: true,
-  onClick: onClick
+  onClick: onClick,
 };
 
 export const Disabled = Template.bind({});
@@ -67,5 +68,5 @@ Disabled.args = {
   chain: chain,
   isActive: false,
   canSwitchChain: true,
-  onClick: onClick
+  onClick: onClick,
 };
