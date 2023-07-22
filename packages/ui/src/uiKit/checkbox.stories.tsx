@@ -1,4 +1,5 @@
 import "../styles/theme/dark.less";
+import "../styles/antOverride/override.less";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Checkbox } from "antd";
