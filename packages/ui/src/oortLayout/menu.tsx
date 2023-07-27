@@ -1,8 +1,10 @@
 import { ReactNode } from "react";
 import styles from './menu.module.less';
 import { Link } from "react-router-dom";
+import { Tooltip } from "antd";
 
 interface IMenuItemBtnProps {
+    tip?: string
     className?: string
     onClick?: () => void
     key?: string
@@ -16,6 +18,13 @@ export const MenuItemBtn = ({ className, onClick, caption, iconBefore, iconAfter
     <span className={styles.btn_caption}>{caption}</span>
     <span className={styles.btn_icon_after}>{iconAfter}</span>
 </li>
+
+export const MenuItemBtnWithTip = ({ tip, className, onClick, caption, iconBefore }: IMenuItemBtnProps) => <Tooltip title={tip}>
+    <li onClick={onClick} className={className}>
+        {iconBefore}
+        <span className={styles.btn_caption}>{caption}</span>
+    </li>
+</Tooltip >
 
 interface IMenuItemLinkProps {
     disabled?: boolean
@@ -31,13 +40,13 @@ export const MenuItemLink = ({ className, href, caption, icon, reactRouterLink, 
 
     const captionElement = <>{icon}<span>{caption}</span></>
 
-    if(disabled) {
+    if (disabled) {
         return <li className={className}>
             <a href="" className={styles.disabled}>{captionElement}</a>
         </li>
     }
 
-    if(reactRouterLink) {
+    if (reactRouterLink) {
         const path = new URL(href).pathname
         return <li className={className}><Link to={path}>{captionElement}</Link></li>
     }

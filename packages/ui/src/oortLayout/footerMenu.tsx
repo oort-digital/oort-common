@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./footerMenu.module.less";
-import { Menu, MenuItem, MenuItemBtn } from "./menu";
+import { Menu, MenuItem, MenuItemBtn, MenuItemBtnWithTip } from "./menu";
 import { getChainIconOld, formatUnits } from "../utils";
 import {
   ChevronSortIcon,
@@ -123,8 +123,9 @@ const Impl = ({
       <>
         {renderConnectModal()}
         {balance && (
-          <MenuItemBtn
-            className={`${styles.menu_item_btn} ${styles.chain_name}`}
+          <MenuItemBtnWithTip
+            tip='$OORT currently in testnet, stay tuned for TGE, when you can convert to mainnet $OORT at 1:1 ratio'
+            className={`${styles.menu_item_btn_tip} ${styles.chain_name}`}
             key="balance"
             iconBefore={tokenIcon}
             iconAfter={null}
