@@ -10,7 +10,7 @@ export interface IOortLeaderboardApi {
     _signal: AbortSignal,
   ): Promise<GetBattleResultsResponse>;
 
-  getCurrentUserResult(_signal: AbortSignal): Promise<IBrandBattleResult>;
+  getCurrentUserResult(_signal: AbortSignal): Promise<IBrandBattleResult | undefined>;
 
   getLeaderboardInfo(_signal: AbortSignal): Promise<ILeaderboardInfo>;
 

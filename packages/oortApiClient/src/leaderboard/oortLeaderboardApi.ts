@@ -65,7 +65,7 @@ export class OortLeaderboardApi extends BaseAPI implements IOortLeaderboardApi {
 
   public async getCurrentUserResult(
     signal: AbortSignal,
-  ): Promise<IBrandBattleResult> {
+  ): Promise<IBrandBattleResult | undefined> {
     const url = oortServerApis.getCurrentUserResult;
 
     const response = await this.get<IBrandBattleResult>(
