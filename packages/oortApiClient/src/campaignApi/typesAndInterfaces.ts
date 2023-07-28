@@ -47,6 +47,7 @@ export interface IBrandDetail {
   logo: string;
   name: string;
   url: string;
+  galxeCampaignUrl: string;
 }
 
 export interface IBrand {
