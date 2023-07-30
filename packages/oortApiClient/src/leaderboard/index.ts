@@ -9,6 +9,7 @@ export type {
   ILeaderboardReward,
   IGetBattleResultsRequest,
   IJoinParams,
+  INotifyHeroMintedParams,
   IGetRewardsInCurrentLeaderboardResponse,
   CheckHaveBrandHeroesResponse,
   ICheckHaveBrandHeroesParams,

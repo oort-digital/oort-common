@@ -10,6 +10,7 @@ import {
   IOortLeaderboardApi,
   CheckHaveBrandHeroesResponse,
   ICheckHaveBrandHeroesParams,
+  INotifyHeroMintedParams,
 } from "./typesAndInterfaces";
 
 const oortServerApis = {
@@ -18,6 +19,7 @@ const oortServerApis = {
   getCurrentUserResult: "/leaderboard/current-user-result",
   getLeaderboardInfo: "/leaderboard/info",
   join: "/leaderboard/join",
+  notifyHeroMinted: "/leaderboard/notify-hero-minted",
   getJoinedBrand: "/leaderboard/joined-brand-id",
   getRewardsInCurrentLeaderboard: "/leaderboard/rewards",
   checkHaveBrandHeroes: "/leaderboard/check-have-brand-heroes",
@@ -92,6 +94,21 @@ export class OortLeaderboardApi extends BaseAPI implements IOortLeaderboardApi {
     signal: AbortSignal,
   ): Promise<void> {
     const url = oortServerApis.join;
+    const urlParams = new URLSearchParams();
+    urlParams.append("brandId", `${brandId}`);
+    const response = await this.put<void>(
+      url,
+      null,
+      getConfig(true, signal, urlParams),
+    );
+    return response;
+  }
+
+  public async notifyHeroMinted(
+    { brandId }: INotifyHeroMintedParams,
+    signal: AbortSignal,
+  ): Promise<void> {
+    const url = oortServerApis.notifyHeroMinted;
     const urlParams = new URLSearchParams();
     urlParams.append("brandId", `${brandId}`);
     const response = await this.put<void>(

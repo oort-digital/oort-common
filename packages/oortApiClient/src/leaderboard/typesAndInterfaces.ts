@@ -10,11 +10,18 @@ export interface IOortLeaderboardApi {
     _signal: AbortSignal,
   ): Promise<GetBattleResultsResponse>;
 
-  getCurrentUserResult(_signal: AbortSignal): Promise<IBrandBattleResult | undefined>;
+  getCurrentUserResult(
+    _signal: AbortSignal,
+  ): Promise<IBrandBattleResult | undefined>;
 
   getLeaderboardInfo(_signal: AbortSignal): Promise<ILeaderboardInfo>;
 
   join(_params: IJoinParams, _signal: AbortSignal): Promise<void>;
+
+  notifyHeroMinted(
+    _params: INotifyHeroMintedParams,
+    _signal: AbortSignal,
+  ): Promise<void>;
 
   getJoinedBrand(_signal: AbortSignal): Promise<number>;
 
@@ -63,6 +70,10 @@ export interface ILeaderboardInfo {
 }
 
 export interface IJoinParams {
+  brandId: number;
+}
+
+export interface INotifyHeroMintedParams {
   brandId: number;
 }
 
