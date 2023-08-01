@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import styles from "./menu.module.less";
 import { Link } from "react-router-dom";
-import { Tooltip } from "antd";
 
 interface IMenuItemBtnProps {
   className?: string;
