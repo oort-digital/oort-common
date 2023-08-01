@@ -19,6 +19,7 @@ import { observer } from "mobx-react";
 import { toMasked } from "@oort-digital/utils";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { Erc20__factory } from "../contracts";
+import { Tooltip } from "antd";
 
 const TWITTER = "https://twitter.com/OortDigital";
 const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
@@ -63,7 +64,13 @@ const Impl = ({
 
   // const [ isDarkMode, setDarkMode ] = useTheme()
   useEffect(() => {
-    if (web3 && web3.signer && oortTokenAddress && web3.supportedChains.filter(val => val.chainId === web3.chain.chainId).length > 0) {
+    if (
+      web3 &&
+      web3.signer &&
+      oortTokenAddress &&
+      web3.supportedChains.filter((val) => val.chainId === web3.chain.chainId)
+        .length > 0
+    ) {
       try {
         Erc20__factory.connect(oortTokenAddress, web3.signer)
           .balanceOf(web3.account)
@@ -124,18 +131,24 @@ const Impl = ({
       <span className={styles.icon_after}>
         <TokenAfterIcon />
       </span>
-    )
+    );
 
     return (
       <>
         {renderConnectModal()}
         {balance && (
           <MenuItemBtn
-            tip='$OORT currently in testnet, stay tuned for TGE, when you can convert to mainnet $OORT at 1:1 ratio'
-            className={`${styles.menu_item_btn} ${styles.chain_name}`}
+            className={styles.menu_item_btn}
             key="balance"
             iconBefore={tokenIcon}
-            iconAfter={tokenIconAfter}
+            iconAfter={
+              <Tooltip
+                trigger="click"
+                title="$OORT currently in testnet, stay tuned for TGE, when you can convert to mainnet $OORT at 1:1 ratio"
+              >
+                {tokenIconAfter}
+              </Tooltip>
+            }
             caption={Number(balance).toLocaleString()}
           />
         )}
