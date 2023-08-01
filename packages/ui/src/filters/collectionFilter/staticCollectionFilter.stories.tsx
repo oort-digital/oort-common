@@ -3,7 +3,6 @@ import "../../../.storybook/stories.less";
 import { Meta, StoryObj } from "@storybook/react";
 import { InMemoryStoreStub } from "./testStores";
 
-import { ThemeLoader } from "../../internalHelpers";
 import { ICollectionFilterItem } from "./stores";
 import { BscIcon, PolygonIcon, EthIcon } from "../../icons";
 import { Button } from "antd";
@@ -81,14 +80,11 @@ export const NoTriggerButton: Story = {
     };
 
     return (
-      <>
-        <ThemeLoader />
-        <div style={templateStyle}>
-          <div>selected: {JSON.stringify(applied)}</div>
-          <Button onClick={() => onVisibleChange(true)}>Open</Button>
-          <StaticCollectionFilter {...mergedProps} />
-        </div>
-      </>
+      <div style={templateStyle}>
+        <div>selected: {JSON.stringify(applied)}</div>
+        <Button onClick={() => onVisibleChange(true)}>Open</Button>
+        <StaticCollectionFilter {...mergedProps} />
+      </div>
     );
   },
 };

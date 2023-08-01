@@ -2,7 +2,7 @@ import "../../../.storybook/stories.less";
 import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { RangeFilter } from ".";
-import { ThemeLoader } from "../../internalHelpers";
+
 import { RangeValue } from "./rangeFilterContent";
 import { Button } from "antd";
 import { IRangeFilterProps } from "./rangeFilter";
@@ -35,7 +35,6 @@ const Template: ComponentStory<typeof RangeFilter> = (args) => {
 
   return (
     <>
-      <ThemeLoader />
       <div>
         {values[0]}-{values[1]}
       </div>

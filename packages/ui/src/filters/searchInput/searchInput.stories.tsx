@@ -2,7 +2,6 @@ import "../../../.storybook/stories.less";
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { SearchInput } from ".";
-import { ThemeLoader } from "../../internalHelpers";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -29,14 +28,7 @@ const Template: ComponentStory<typeof SearchInput> = (args) => {
     ...{ style },
   };
 
-  return (
-    <>
-      <ThemeLoader />
-      <div>
-        <SearchInput {...mergedArgs} />
-      </div>
-    </>
-  );
+  return <SearchInput {...mergedArgs} />;
 };
 
 export const Empty = Template.bind({});

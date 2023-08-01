@@ -1,7 +1,6 @@
 import React from "react";
 import "../../.storybook/stories.less";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { ThemeLoader } from "../internalHelpers";
 import { IAssetListProps, AssetList } from "./assetList";
 import { BorrowAssetCard, IBorrowAssetItem } from "../assetCard";
 import { BigNumber } from "ethers";
@@ -19,12 +18,7 @@ export default {
 const Template: ComponentStory<typeof AssetList> = (
   args: IAssetListProps<IItem>
 ) => {
-  return (
-    <>
-      <ThemeLoader />
-      <AssetList {...args} />
-    </>
-  );
+  return <AssetList {...args} />;
 };
 
 interface IItem {

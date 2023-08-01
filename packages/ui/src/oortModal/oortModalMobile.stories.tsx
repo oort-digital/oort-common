@@ -1,7 +1,6 @@
 import React from "react";
 import "../../.storybook/stories.less";
 import { Meta, StoryObj } from "@storybook/react";
-import { ThemeLoader } from "../internalHelpers";
 import { OortModalMobile } from "./oortModalMobile";
 import { IFooterBtn, FooterButtonsMobile } from "./footerButtons";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
@@ -33,7 +32,7 @@ export const Primary: Story = {
     visible: true,
     title: "modal title",
     onCancel,
-    children: <ThemeLoader />,
+    children: <></>,
   },
 };
 
@@ -46,7 +45,7 @@ export const CustomFooterButtons: Story = {
     visible: true,
     title: "modal title",
     onCancel,
-    children: <ThemeLoader />,
+    children: <></>,
     footer: <FooterButtonsMobile okBtn={okBtn} />,
   },
 };

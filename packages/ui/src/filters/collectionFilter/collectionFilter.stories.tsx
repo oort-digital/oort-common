@@ -8,7 +8,7 @@ import {
   NftsCollectionStore,
   NoDataStoreStub,
 } from "./testStores";
-import { ThemeLoader } from "../../internalHelpers";
+
 import {
   StaticCollectionFilterStore,
   ICollectionFilterItem,
@@ -24,12 +24,9 @@ const meta = {
   component: CollectionFilter,
   render: (props: ICollectionFilterProps) => {
     return (
-      <>
-        <ThemeLoader />
-        <div style={templateStyle}>
-          <CollectionFilter {...props} />
-        </div>
-      </>
+      <div style={templateStyle}>
+        <CollectionFilter {...props} />
+      </div>
     );
   },
 } satisfies Meta<typeof CollectionFilter>;
