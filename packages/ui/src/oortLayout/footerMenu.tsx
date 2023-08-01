@@ -20,6 +20,7 @@ import { toMasked } from "@oort-digital/utils";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { Erc20__factory } from "../contracts";
 import { Tooltip } from "antd";
+import classNames from "classnames";
 
 const TWITTER = "https://twitter.com/OortDigital";
 const DISCORD = "https://t.co/6eYdGdfUK7?amp=1";
@@ -144,6 +145,7 @@ const Impl = ({
             iconAfter={
               <Tooltip
                 trigger="click"
+                className={styles.clickable}
                 title="$OORT currently in testnet, stay tuned for TGE, when you can convert to mainnet $OORT at 1:1 ratio"
               >
                 {tokenIconAfter}
@@ -153,7 +155,11 @@ const Impl = ({
           />
         )}
         <MenuItemBtn
-          className={`${styles.menu_item_btn} ${styles.chain_name}`}
+          className={classNames(
+            styles.clickable,
+            styles.menu_item_btn,
+            styles.chain_name
+          )}
           key="chain"
           onClick={() => setConnectModalVisible(true)}
           iconBefore={chainIcon}
@@ -161,7 +167,7 @@ const Impl = ({
           caption={name}
         />
         <MenuItemBtn
-          className={styles.menu_item_btn}
+          className={classNames(styles.clickable, styles.menu_item_btn)}
           key="account"
           onClick={() => setConnectModalVisible(true)}
           iconBefore={accountImg}
