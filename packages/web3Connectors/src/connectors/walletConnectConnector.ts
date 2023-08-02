@@ -96,7 +96,7 @@ export class WalletConnectConnector
     logger,
     chains,
     projectId,
-    modalZIndex,
+    modalZIndex = 2000,
   }: IWalletConnectOptions) {
     super(logger, ConnectorNames.WalletConnect, chains);
     this._rpc = {};
