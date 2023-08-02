@@ -1,18 +1,20 @@
 @import "../../styles/theme/vars.less";
 
 .modal {
-    :global(.ant-modal-content > .ant-modal-footer) {
-        background-color: @theme-bg-dark-gradient;
-        padding-top: 0;
-        .buttons {
-            padding-top: 0;
-            button { width: 180px; }
-        }
+  :global(.ant-modal-content > .ant-modal-footer) {
+    background: none;
+    padding-top: 0;
+    .buttons {
+      padding-top: 0;
+      button {
+        width: 180px;
+      }
     }
+  }
 }
 
 .content {
-    font-size: 14px;
-    font-weight: 400;
-    color: @theme-color-10;
+  font-size: 14px;
+  font-weight: 400;
+  color: @theme-color-10;
 }
