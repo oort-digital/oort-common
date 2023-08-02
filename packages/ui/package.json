@@ -21,7 +21,7 @@
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
     "@oort-digital/oort-api-client": "0.0.1-leaderboard.0.3.5",
     "@oort-digital/utils": "0.0.1-leaderboard.0.0.5",
-    "@oort-digital/web3-connectors": "0.0.1-leaderboard.0.0.2",
+    "@oort-digital/web3-connectors": "0.0.1-leaderboard.0.0.4",
     "@typechain/ethers-v5": "^10.1.0",
     "antd": "4.23.0",
     "blockies-ts": "^1.0.0",
