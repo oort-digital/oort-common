@@ -54,6 +54,7 @@ const options = {
   projectId: "c2b4ff7ce76613f93a7edea85b9618f5",
   logger,
   chains,
+  modalZIndex: 1234,
 };
 const walletConnect = new WalletConnectConnector(options);
 const injected = new InjectedConnector(logger, chains);

@@ -92,7 +92,12 @@ export class WalletConnectConnector
     return false;
   }
 
-  constructor({ logger, chains, projectId }: IWalletConnectOptions) {
+  constructor({
+    logger,
+    chains,
+    projectId,
+    modalZIndex,
+  }: IWalletConnectOptions) {
     super(logger, ConnectorNames.WalletConnect, chains);
     this._rpc = {};
     chains.forEach((x) => {
@@ -103,7 +108,7 @@ export class WalletConnectConnector
 
     this._projectId = projectId;
 
-    this._waitInit = this.init();
+    this._waitInit = this.init(modalZIndex);
   }
   private readonly _projectId: string;
   private readonly _rpc: EthereumRpcMap;
@@ -132,10 +137,16 @@ export class WalletConnectConnector
     this.logger.debug(`WalletConnectConnector ${msg}`);
   };
 
-  private async init(): Promise<void> {
+  private async init(modalZIndex: number | undefined): Promise<void> {
     this._universalProvider = await EthereumProvider.init({
       projectId: this._projectId,
       showQrModal: true,
+      qrModalOptions: {
+        themeMode: "dark",
+        themeVariables: {
+          "--wcm-z-index": modalZIndex?.toString(),
+        },
+      },
       events: ["chainChanged", "accountsChanged"],
       // methods: ["eth_sendTransaction", "personal_sign"],
       chains: [1],
