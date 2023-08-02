@@ -1,32 +1,32 @@
 @import "../styles/typography.less";
-@import "../styles/theme/vars.less";
+@import "../styles/vars.less";
 
 .modal {
-	:global(.ant-modal-body) {
-        padding-top: 64px;
-    }
-    .description {
-        margin-bottom: 24px;
-        text-align: center;
-        color: @theme-color-13;
-        .body-16-regular-mixin;
-    }
+  :global(.ant-modal-body) {
+    padding-top: 64px;
+  }
+  .description {
+    margin-bottom: 24px;
+    text-align: center;
+    color: @theme-color-13;
+    .body-16-regular-mixin;
+  }
 
-    .chain_buttons {
-        margin-bottom: 56px;
-    }
+  .chain_buttons {
+    margin-bottom: 56px;
+  }
 
-    :global(.ant-modal-content) {
-        padding-bottom: 0 !important;
+  :global(.ant-modal-content) {
+    padding-bottom: 0 !important;
 
-        :global(.ant-modal-footer) {
-            margin-top: 22px;
-            padding: 17px 100px;
-            color: @theme-color-13;
-            background: @theme-color-3;
-            text-align: center;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-        }
+    :global(.ant-modal-footer) {
+      margin-top: 22px;
+      padding: 17px 100px;
+      color: @theme-color-13;
+      background: @theme-color-3;
+      text-align: center;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
     }
+  }
 }
