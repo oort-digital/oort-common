@@ -1,4 +1,4 @@
-@import "theme/vars.less";
+@import "./vars.less";
 
 @xs-side-indent: 23px;
 @sm-side-indent: 32px;
@@ -45,26 +45,25 @@
 }
 
 .scrollbar-mixin() {
-    @scroll-bg: @theme-color-2;
-    @scroll-color: @theme-color-4;
+  @scroll-bg: @theme-color-2;
+  @scroll-color: @theme-color-4;
 
-    // mobile and tablet already override scroll by default
-    @media (min-width: 1200px) {
-      /* Works on Chrome, Edge, and Safari */
-      *::-webkit-scrollbar {
-        width: 18px;
-      }
-    
-      *::-webkit-scrollbar-track {
-        background: @scroll-bg;
-        border-radius: 4px;
-      }
-    
-      *::-webkit-scrollbar-thumb {
-        background-color: @scroll-color;
-        border-radius: 40px;
-        border: 3px solid @scroll-bg;
-      }
+  // mobile and tablet already override scroll by default
+  @media (min-width: 1200px) {
+    /* Works on Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+      width: 18px;
     }
-    
+
+    *::-webkit-scrollbar-track {
+      background: @scroll-bg;
+      border-radius: 4px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: @scroll-color;
+      border-radius: 40px;
+      border: 3px solid @scroll-bg;
+    }
+  }
 }

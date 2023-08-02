@@ -1,1 +1,0 @@
-export { CollectionFilterPage } from "./collectionFilterPage"

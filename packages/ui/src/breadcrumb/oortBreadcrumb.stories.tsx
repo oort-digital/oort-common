@@ -2,7 +2,6 @@ import "../../.storybook/stories.less";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { IBreadcrumbItem, OortBreadcrumb } from ".";
-import { ThemeLoader } from "../internalHelpers";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -13,13 +12,9 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof OortBreadcrumb> = (args) => {
   return (
-    <>
-      <ThemeLoader />
-
-      <Router>
-        <OortBreadcrumb {...args} />
-      </Router>
-    </>
+    <Router>
+      <OortBreadcrumb {...args} />
+    </Router>
   );
 };
 

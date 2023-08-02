@@ -1,6 +1,5 @@
 import React from "react";
 import "../../.storybook/stories.less";
-import "../styles/theme/dark.less";
 
 import { Meta, StoryObj } from "@storybook/react";
 import { TxModal } from "./txModal";

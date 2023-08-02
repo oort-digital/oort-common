@@ -1,42 +1,47 @@
 @import "../../styles/palette.less";
-@import "../../styles/theme/vars.less";
+@import "../../styles/vars.less";
 @import "../../styles/typography.less";
 
 .mobile > div > .filters_btn {
-    color: @trigger-btn-color !important;
-    background: @theme-bg-1 !important;
+  color: @trigger-btn-color !important;
+  background: @theme-bg-1 !important;
 
-    .body-14-regular-mixin() !important;
-    .active_filters_counter {
-        margin-left: 8px;
-        background-color: @primary-6;
-        color: @theme-color-1;
-        border-radius: 50%;
-        height: 20px;
-        width: 20px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 20px;
-    }
+  .body-14-regular-mixin() !important;
+  .active_filters_counter {
+    margin-left: 8px;
+    background-color: @primary-6;
+    color: @theme-color-1;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+  }
 }
 
+.filter_modal
+  > :global(
+    .ant-drawer-content-wrapper
+      > .ant-drawer-content
+      > .ant-drawer-wrapper-body
+      > .ant-drawer-header
+  ) {
+  border-bottom: 1px solid @theme-color-5;
 
-.filter_modal > :global(.ant-drawer-content-wrapper > .ant-drawer-content > .ant-drawer-wrapper-body > .ant-drawer-header) {
-    border-bottom: 1px solid @theme-color-5;
-
-    & > :global(.ant-drawer-header-title > .ant-drawer-title) > .clear_all {
-        &.not_active {
-            opacity: 0.3;
-            cursor: default;
-        }
-        .body-14-medium-mixin;
-        color: @primary-6;
-        text-transform: capitalize;
-        margin-left: 19px;
-        cursor: pointer;
+  & > :global(.ant-drawer-header-title > .ant-drawer-title) > .clear_all {
+    &.not_active {
+      opacity: 0.3;
+      cursor: default;
     }
+    .body-14-medium-mixin;
+    color: @primary-6;
+    text-transform: capitalize;
+    margin-left: 19px;
+    cursor: pointer;
+  }
 }

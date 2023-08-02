@@ -1,10 +1,15 @@
-@import '../styles/theme/vars.less';
+@import "../styles/vars.less";
 
 .tile-cover-skeleton {
-	background: linear-gradient(90deg,rgba(190,190,190,.2) 25%,rgba(129,129,129,.24) 37%,rgba(190,190,190,.2) 63%);
-	background-size: 400% 100%;
-	animation: ant-skeleton-loading 1.4s ease infinite;
-	border: 1px solid @theme-color-5;
-	border-radius: 2px;
-	height: 250px;
+  background: linear-gradient(
+    90deg,
+    rgba(190, 190, 190, 0.2) 25%,
+    rgba(129, 129, 129, 0.24) 37%,
+    rgba(190, 190, 190, 0.2) 63%
+  );
+  background-size: 400% 100%;
+  animation: ant-skeleton-loading 1.4s ease infinite;
+  border: 1px solid @theme-color-5;
+  border-radius: 2px;
+  height: 250px;
 }

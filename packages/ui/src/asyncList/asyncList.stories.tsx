@@ -1,7 +1,6 @@
 import "../../.storybook/stories.less";
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { ThemeLoader } from "../internalHelpers";
 import { IProps, AsyncList } from "./asyncList";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -12,12 +11,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof AsyncList> = (args: IProps<IItem>) => {
-  return (
-    <>
-      <ThemeLoader />
-      <AsyncList {...args} />
-    </>
-  );
+  return <AsyncList {...args} />;
 };
 
 interface IItem {

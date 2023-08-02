@@ -2,14 +2,9 @@ import React from "react";
 import "../../../.storybook/stories.less";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { lazy } from "react";
-import { useTheme } from "../../effects";
 import LayoutMobile from "../layoutMobile";
 import { navItems, TestContent, testNavItems } from "./common";
 import { Web3StoreStub } from "./web3StoreStub";
-
-const DarkTheme = lazy(() => import("../../styles/theme/darkTheme"));
-const LightTheme = lazy(() => import("../../styles/theme/lightTheme"));
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -28,15 +23,10 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof LayoutMobile> = (args) => {
-  const [isDark] = useTheme();
-
   return (
-    <>
-      {isDark ? <DarkTheme /> : <LightTheme />}
-      <Router>
-        <LayoutMobile {...args} />
-      </Router>
-    </>
+    <Router>
+      <LayoutMobile {...args} />
+    </Router>
   );
 };
 

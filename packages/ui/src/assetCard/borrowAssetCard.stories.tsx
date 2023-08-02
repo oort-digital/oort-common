@@ -5,7 +5,6 @@ import {
   IBorrowAssetCardProps,
   IBorrowAssetItem,
 } from "./borrowAssetCard";
-import { ThemeLoader } from "../internalHelpers";
 import { BigNumber } from "ethers";
 import { formatUnits, parseUnits } from "../utils";
 import { IMarketplaceConfig, MarketplaceEnum } from "../viewOn";
@@ -33,7 +32,6 @@ const Template: ComponentStory<typeof BorrowAssetCard> = (
   args: IBorrowAssetCardProps<IBorrowAssetItem>
 ) => (
   <>
-    <ThemeLoader />
     <Row>
       <Col xs={24} sm={24} md={10} lg={8} xl={6} xxl={6}>
         <BorrowAssetCard {...args} />

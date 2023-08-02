@@ -1,29 +1,32 @@
-@import "../styles/theme/vars.less";
+@import "../styles/vars.less";
 @import "../styles/typography.less";
 
 .img-fallback {
-
-    .icon-and-text-mix(@icon-size, @txt-margin) {
-        .anticon {
-            svg {
-                height: @icon-size;
-                width: @icon-size;
-            }
-        }
-    
-        .txt {
-            .body-14-regular-mixin;
-            margin-top: @txt-margin;
-        }
+  .icon-and-text-mix(@icon-size, @txt-margin) {
+    .anticon {
+      svg {
+        height: @icon-size;
+        width: @icon-size;
+      }
     }
 
-    &.md { .icon-and-text-mix(64px, 16px) }
+    .txt {
+      .body-14-regular-mixin;
+      margin-top: @txt-margin;
+    }
+  }
 
-    &.sm { .icon-and-text-mix(48px, 8px) }
+  &.md {
+    .icon-and-text-mix(64px, 16px);
+  }
 
-    color: @theme-color-7;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  &.sm {
+    .icon-and-text-mix(48px, 8px);
+  }
+
+  color: @theme-color-7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
