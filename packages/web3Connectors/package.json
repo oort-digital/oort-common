@@ -15,8 +15,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@haechi-labs/face-sdk": "^1.7.0",
-    "@haechi-labs/face-types": "^1.7.0",
+    "@haechi-labs/face-sdk": "^1.10.8",
+    "@haechi-labs/face-types": "^1.10.8",
     "@oort-digital/logger": "^0.0.1-alfa.0.0.2",
     "@walletconnect/ethereum-provider": "^2.9.2",
     "@walletconnect/modal": "^2.6.1",

@@ -1703,7 +1703,7 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.1.1.tgz#1a5b1959a528e374e8037c4396c3e825d6cf4a83"
   integrity sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==
 
-"@haechi-labs/face-sdk@^1.7.0":
+"@haechi-labs/face-sdk@^1.10.8":
   version "1.10.8"
   resolved "https://registry.yarnpkg.com/@haechi-labs/face-sdk/-/face-sdk-1.10.8.tgz#fecfdb66f3e341db9ed8bb56031e5e9260806128"
   integrity sha512-jSgzwFTmWslM2jRYFH7EepgObCwu0QYbEHOvB5hJkuRz2j4xr61IIxRD/R2DuiBOErJKdr4f33QXd+uPwCIKdQ==
@@ -1714,7 +1714,7 @@
     aptos "1.6.0"
     near-api-js "^1.1.0"
 
-"@haechi-labs/face-types@^1.7.0":
+"@haechi-labs/face-types@^1.10.8":
   version "1.10.8"
   resolved "https://registry.yarnpkg.com/@haechi-labs/face-types/-/face-types-1.10.8.tgz#bf9d742150fbf5f8cc40c3d746c501bcc4f52777"
   integrity sha512-+j6zrERj3HPVgUld19ipMUAxH7qmLRsqLJ6buD6zu/5YKWiDmddhjrQGkQe/idTnAOAf1v/nm/ofSOBbPJGUyw==
@@ -9565,6 +9565,7 @@ wordwrap@^1.0.0:
   integrity sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
