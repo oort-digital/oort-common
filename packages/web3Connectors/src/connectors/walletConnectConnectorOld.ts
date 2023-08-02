@@ -1,13 +1,13 @@
-import Provider, { EthereumProvider } from "@walletconnect/ethereum-provider";
+import UniversalProvider, {
+  EthereumRpcMap,
+} from "@walletconnect/universal-provider";
 import { ILogger } from "@oort-digital/logger";
 import { BaseConnector } from "./baseConnector";
 import { SessionTypes } from "@walletconnect/types";
+import { Web3Modal } from "@web3modal/standalone";
 import { IConnector } from "./iConnector";
 import { ConnectorNames } from "./connectorNames";
 import { IChainInfo } from "../publicTypesAndInterfaces";
-import { WalletConnectModal } from "@walletconnect/modal";
-import { ProviderRpcError } from "@walletconnect/ethereum-provider/dist/types/types";
-import { EthereumRpcMap } from "@walletconnect/ethereum-provider/dist/types/EthereumProvider";
 
 export interface IWalletConnectOptions {
   modalZIndex?: number;
@@ -38,7 +38,7 @@ export class WalletConnectConnector
 
     this.stopCheckConnection();
     // save handlers to temp var
-    const handlersTmp = this.getExternalHandlers();
+    const handlersTml = this.getExternalHandlers();
     // clear handlers to not triggered onDisconnect
     this.clearExternalHandlers();
 
@@ -47,7 +47,7 @@ export class WalletConnectConnector
     if (await this.connect(chainId)) {
       this.runCheckConnection();
       // restore handlers
-      this.setExternalHandlers(handlersTmp);
+      this.setExternalHandlers(handlersTml);
       // trigger onChainChange event
       this.chainChangedHandler(chainId.toString());
       return true;
@@ -75,24 +75,43 @@ export class WalletConnectConnector
       return true;
     }
 
+    const closePromise = this.waitModalClose();
     const sessionPromise = ethereumProvider.connect({
-      chains: [chainId],
+      namespaces: {
+        eip155: {
+          methods: [
+            "eth_sendTransaction",
+            "eth_signTransaction",
+            "eth_sign",
+            "personal_sign",
+            "eth_signTypedData",
+          ],
+          chains: [`eip155:${chainId}`],
+          events: ["chainChanged", "accountsChanged"],
+          rpcMap: this._rpc,
+        },
+      },
+      // pairingTopic: pairing?.topic,
     });
 
-    const closePromise = this.waitModalClose(ethereumProvider.modal!);
+    const session = await Promise.race([closePromise, sessionPromise]);
 
-    await Promise.race([closePromise, sessionPromise]);
-
-    if (ethereumProvider.session && ethereumProvider.session.expiry) {
-      this._session = ethereumProvider.session;
+    if (session && session.expiry) {
+      this._session = session;
+      this._web3Modal.closeModal();
       return true;
     }
 
-    //user close walletconnectModal
+    //user close web3Modal
     return false;
   }
 
-  constructor({ logger, chains, projectId }: IWalletConnectOptions) {
+  constructor({
+    logger,
+    chains,
+    projectId,
+    modalZIndex = 2000,
+  }: IWalletConnectOptions) {
     super(logger, ConnectorNames.WalletConnect, chains);
     this._rpc = {};
     chains.forEach((x) => {
@@ -102,17 +121,25 @@ export class WalletConnectConnector
     });
 
     this._projectId = projectId;
-
+    this._web3Modal = new Web3Modal({
+      projectId: this._projectId,
+      themeMode: "dark",
+      walletConnectVersion: 2,
+      themeVariables: {
+        "--w3m-z-index": `${modalZIndex}`,
+      },
+    });
     this._waitInit = this.init();
   }
   private readonly _projectId: string;
+  private readonly _web3Modal: Web3Modal;
   private readonly _rpc: EthereumRpcMap;
   private _waitInit: Promise<void>;
 
-  private waitModalClose = (modal: WalletConnectModal): Promise<void> => {
+  private waitModalClose = (): Promise<void> => {
     let unSubscribe: (() => void) | undefined;
     const promise = new Promise<void>((resolve, _reject) => {
-      unSubscribe = modal.subscribeModal((state) => {
+      unSubscribe = this._web3Modal.subscribeModal((state) => {
         this.debug(`modal.open: ${state.open.toString()}`);
         if (state.open === false) {
           resolve();
@@ -120,12 +147,7 @@ export class WalletConnectConnector
       });
     });
 
-    promise.then(() => {
-      if (unSubscribe) {
-        unSubscribe();
-      }
-    });
-    return promise;
+    return promise.then(unSubscribe);
   };
 
   private debug = (msg: string) => {
@@ -133,46 +155,65 @@ export class WalletConnectConnector
   };
 
   private async init(): Promise<void> {
-    this._universalProvider = await EthereumProvider.init({
+    this._universalProvider = await UniversalProvider.init({
       projectId: this._projectId,
-      showQrModal: true,
-      events: ["chainChanged", "accountsChanged"],
-      // methods: ["eth_sendTransaction", "personal_sign"],
-      chains: [1],
+      logger: "debug",
+      relayUrl: "wss://relay.walletconnect.com",
     });
 
     this.subscribeToProviderEvents(this._universalProvider);
     this._session = this._universalProvider.session;
   }
 
-  private get universalProvider(): Promise<Provider> {
+  private get universalProvider(): Promise<UniversalProvider> {
     return this._waitInit.then(() => this._universalProvider!);
   }
 
-  /*
+  private displayUriHandler = (uri: string) => {
+    this.debug("EVENT QR Code Modal open");
+    this._web3Modal.openModal({ uri });
+  };
+
   private sessionUpdateHandler = ({
-    session,
+    /*topic,*/ session,
   }: {
-    session: SessionTypes.Struct;
+    /*topic: string;*/ session: SessionTypes.Struct;
   }) => {
     this.debug("EVENT session_updated");
     this._session = session;
-  };*/
+  };
 
-  private sessionDeleteHandler = (args: ProviderRpcError) => {
-    this.debug("EVENT disconnect");
-    this.debug(JSON.stringify(args));
+  private sessionDeleteHandler = ({
+    id,
+    topic,
+  }: {
+    id: number;
+    topic: string;
+  }) => {
+    this.debug("EVENT session_deleted");
+    this.debug(`${id}, ${topic}`);
     this._session = undefined;
   };
 
-  private subscribeToProviderEvents(client: Provider) {
-    // client.on("display_uri", this.displayUriHandler);
-    // client.on("session_update", this.sessionUpdateHandler);
-    // client.on("session_delete", this.sessionDeleteHandler);
-    client.on("disconnect", this.sessionDeleteHandler);
+  private subscribeToProviderEvents(client: UniversalProvider) {
+    client.on("display_uri", this.displayUriHandler);
+    client.on("session_update", this.sessionUpdateHandler);
+    client.on("session_delete", this.sessionDeleteHandler);
+
+    /*
+        client.on("session_ping", ({ id, topic }: { id: number; topic: string }) => {
+            this.debug("EVENT session_ping");
+            this.debug(`${id} ${topic}`);
+        });
+
+        client.on("session_event", ({ event, chainId }: { event: any; chainId: string }) => {
+            this.debug("EVENT session_event");
+            this.debug(`${event} ${chainId}`);
+        });
+        */
   }
 
-  private _universalProvider: Provider | undefined;
+  private _universalProvider: UniversalProvider | undefined;
 
   protected getRawProvider = () => this.universalProvider;
 
