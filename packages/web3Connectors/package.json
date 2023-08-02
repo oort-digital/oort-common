@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-leaderboard.0.0.1",
+  "version": "0.0.1-leaderboard.0.0.2",
   "type": "module",
   "repository": {
     "type": "git",
@@ -15,17 +15,14 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@haechi-labs/face-sdk": "^1.7.0",
-    "@haechi-labs/face-types": "^1.7.0",
+    "@haechi-labs/face-sdk": "^1.10.8",
+    "@haechi-labs/face-types": "^1.10.8",
     "@oort-digital/logger": "^0.0.1-alfa.0.0.2",
-    "@walletconnect/encoding": "^1.0.2",
-    "@walletconnect/types": "^2.7.3",
-    "@walletconnect/universal-provider": "^2.7.3",
-    "@walletconnect/utils": "^2.7.3",
-    "@web3modal/standalone": "^2.4.1",
+    "@walletconnect/ethereum-provider": "^2.9.2",
+    "@walletconnect/modal": "^2.6.1",
     "ethers": "5.7.2",
-    "mobx": "^6.9.0",
-    "lokijs": "^1.5.12"
+    "lokijs": "^1.5.12",
+    "mobx": "^6.9.0"
   },
   "devDependencies": {
     "@oort-digital/utils": "^0.0.1-alfa.0.0.2",
