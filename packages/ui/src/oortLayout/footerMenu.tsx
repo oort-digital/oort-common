@@ -20,6 +20,7 @@ import { toMasked } from "@oort-digital/utils";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { Erc20__factory } from "../contracts";
 import { Tooltip } from "antd";
+import { ethers } from "ethers";
 import classNames from "classnames";
 
 const TWITTER = "https://twitter.com/OortDigital";
@@ -67,24 +68,29 @@ const Impl = ({
   useEffect(() => {
     if (
       web3 &&
-      web3.signer &&
-      oortTokenAddress &&
+      web3.signer
+      /**oortTokenAddress &&
       web3.supportedChains.filter((val) => val.chainId === web3.chain.chainId)
-        .length > 0
+        .length > 0*/
     ) {
       try {
-        Erc20__factory.connect(oortTokenAddress, web3.signer)
-          .balanceOf(web3.account)
-          .then((balance) => {
-            setBalance(formatUnits(balance, 18));
-          });
+        // Erc20__factory.connect(oortTokenAddress, web3.signer)
+        //   .balanceOf(web3.account)
+        //   .then((balance) => {
+        //     setBalance(formatUnits(balance, 18));
+        //   });
+        const provider = new ethers.providers.JsonRpcBatchProvider('https://rpc-mumbai.maticvigil.com');
+        const ERC20 = Erc20__factory.connect("0xD8341A4978a68Ed0ad558D745af5578e51102725", provider);
+        ERC20.balanceOf(web3.account).then(balance => {
+          setBalance(formatUnits(balance, 18));
+        })
       } catch (e) {
         setBalance(undefined);
       }
     } else {
       setBalance(undefined);
     }
-  }, [web3?.account, web3?.chain]);
+  }, [web3?.account]);
 
   const renderConnectModal = () => {
     return (
