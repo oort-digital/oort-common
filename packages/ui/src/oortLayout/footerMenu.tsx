@@ -152,7 +152,7 @@ const Impl = ({
               <Tooltip
                 trigger="click"
                 className={styles.clickable}
-                title="$OORT currently in testnet, stay tuned for TGE, when you can convert to mainnet $OORT at 1:1 ratio"
+                title="$OORT is currently in Testnet. After launch, you'll be able to convert to Mainnet at a specified ratio."
               >
                 {tokenIconAfter}
               </Tooltip>
