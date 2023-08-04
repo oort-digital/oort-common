@@ -1,34 +1,34 @@
 @import "../../styles/typography.less";
-@import "../../styles/theme/vars.less";
+@import "../../styles/vars.less";
 
 .settings-list {
-    .settings-common-mixin {
-        padding-top: 12px;
-        padding-bottom: 12px;
-    }
-    
-    .setting-border {
-        border-bottom: 1px solid @theme-color-4;
-    }
+  .settings-common-mixin {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 
-    .setting-value {
-        .settings-common-mixin();
-        .body-16-medium-mixin;
-        color: @theme-color-10;
-        text-align: right;
-    }
+  .setting-border {
+    border-bottom: 1px solid @theme-color-4;
+  }
 
-    .setting-name {
-        .settings-common-mixin();
-        .body-16-regular-mixin;
-        color: @theme-color-8;
-        
-        .anticon {
-            vertical-align: middle;
-            margin-right: 8px;
-        }
-        .txt {
-            vertical-align: middle;
-        }
+  .setting-value {
+    .settings-common-mixin();
+    .body-16-medium-mixin;
+    color: @theme-color-10;
+    text-align: right;
+  }
+
+  .setting-name {
+    .settings-common-mixin();
+    .body-16-regular-mixin;
+    color: @theme-color-8;
+
+    .anticon {
+      vertical-align: middle;
+      margin-right: 8px;
     }
+    .txt {
+      vertical-align: middle;
+    }
+  }
 }

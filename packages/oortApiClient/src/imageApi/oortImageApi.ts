@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { AxiosResponse } from "axios";
 import { BaseAPI, IAPIConfig, IOortApiResponse } from "../common";
 
@@ -21,28 +22,31 @@ const oortServerApis = {
 };
 
 export interface IOortImageApi {
-  checkImageExist(params: ICheckImageExistParams, signal: AbortSignal): Promise<boolean>;
-  uploadSingleImage(params: IUploadSingleImageParams, signal: AbortSignal): Promise<boolean>;
+  checkImageExist(
+    _params: ICheckImageExistParams,
+    _signal: AbortSignal,
+  ): Promise<boolean>;
+  uploadSingleImage(
+    _params: IUploadSingleImageParams,
+    _signal: AbortSignal,
+  ): Promise<boolean>;
 }
 
-export class OortImageApi
-  extends BaseAPI
-  implements IOortImageApi {
-
-  private static _singleton: OortImageApi
+export class OortImageApi extends BaseAPI implements IOortImageApi {
+  private static _singleton: OortImageApi;
   static createSingleton(config: IAPIConfig): OortImageApi {
-      if(!OortImageApi._singleton) {
-          OortImageApi._singleton = new OortImageApi('OortImageApi', config)
-      }
-      return OortImageApi._singleton
+    if (!OortImageApi._singleton) {
+      OortImageApi._singleton = new OortImageApi("OortImageApi", config);
+    }
+    return OortImageApi._singleton;
   }
 
   // eslint-disable-next-line class-methods-use-this
   public async checkImageExist(
     params: ICheckImageExistParams,
-    signal: AbortSignal
+    signal: AbortSignal,
   ): Promise<boolean> {
-    const url = oortServerApis.checkImageExist
+    const url = oortServerApis.checkImageExist;
     const formData = new FormData();
     formData.append("chainId", params.chainId);
     formData.append("tokenAddress", params.tokenAddress);
@@ -58,9 +62,9 @@ export class OortImageApi
   // eslint-disable-next-line class-methods-use-this
   public async uploadSingleImage(
     params: IUploadSingleImageParams,
-    signal: AbortSignal
+    signal: AbortSignal,
   ): Promise<boolean> {
-    const url = oortServerApis.uploadSingleImage
+    const url = oortServerApis.uploadSingleImage;
     const formData = new FormData();
     formData.append("image", params.image);
     formData.append("chainId", params.chainId);

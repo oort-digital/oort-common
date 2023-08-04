@@ -1,7 +1,7 @@
 import { Collapse } from "antd";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { DashboardIcon, DevelopToolsIcon, GameHubIcon, MintIcon, RentAppIcon } from "../icons";
+import { DashboardIcon, DevelopToolsIcon, GameHubIcon, LeaderboardIcon, MintIcon, RentAppIcon } from "../icons";
 import { Menu, MenuItemLink } from "./menu";
 import styles from './navMenu.module.less';
 import { isHrefActive } from "./utils";
@@ -19,13 +19,15 @@ export type NavItemType = string | {
     href: string
     reactRouterLink: boolean
     disabled?: boolean
+    hide?: boolean
 }
 
 export interface INavItems {
     dashboard: NavItemType
+    leaderboard: NavItemType
     minting: {
         mutation: NavItemType
-        claim: NavItemType
+        claimRewards: NavItemType
     }
     rent: {
         lend: NavItemType
@@ -61,6 +63,11 @@ const dashboardInternal = {
     icon: <DashboardIcon />,
 }
 
+const leaderboardInternal = {
+    caption: 'leaderboard',
+    icon: <LeaderboardIcon />,
+}
+
 const rentInternal = {
     caption: 'NFT Rental',
     icon: <RentAppIcon />,
@@ -74,7 +81,7 @@ const mintInternal = {
     caption: 'minting',
     icon: <MintIcon />,
     mutation: "Hero Mutation (Upgrading)",
-    claim: "Claim Heroes"
+    claimRewards: "Claim Rewards"
 }
 
 const gameHubInternal = {
@@ -86,7 +93,7 @@ const gameHubInternal = {
 
 const developInternal = {
     caption: 'Develop Tools',
-    icon : <DevelopToolsIcon />,
+    icon: <DevelopToolsIcon />,
     faucet: "Faucet",
     refreshMetadata: "Refresh Metadata"
 }
@@ -105,9 +112,9 @@ const getChildCaptions = (item: INavItemInternal): StringMap => {
 
     Object.entries(item).forEach(kvp => {
 
-        const [ key, value ] = kvp
+        const [key, value] = kvp
 
-        if(key !== 'caption' || kvp[0] !== 'icon') {
+        if (key !== 'caption' || kvp[0] !== 'icon') {
             map[key] = value
         }
     })
@@ -122,7 +129,7 @@ const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
     return <div className={styles.header}>{i}{caption}</div>
 }
 
-const getHRef = (it: NavItemType) => typeof it  === 'string' ? it : it.href
+const getHRef = (it: NavItemType) => typeof it === 'string' ? it : it.href
 
 type NavItemPairType = [INavItemInternal, NavItemMap]
 
@@ -131,18 +138,18 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
     // to trigger rerendering on react-router pathchange
     useLocation()
 
-    const { dashboard, rent, gameHub, minting, developTools, rpgBattle } = navItems
+    const { dashboard, rent, gameHub, minting, developTools, rpgBattle, leaderboard } = navItems
 
     const collapseNavItemPairs: NavItemPairType[] = [
         [rentInternal, rent],
         [gameHubInternal, gameHub],
-        [mintInternal,  minting],
+        [mintInternal, minting],
     ]
 
     if (developTools) {
-         collapseNavItemPairs.push(
+        collapseNavItemPairs.push(
             [developInternal, developTools]
-         )
+        )
     }
 
     const isActive = isActiveFunc || _isHrefActive;
@@ -156,7 +163,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
             return hasActiveHref(hrefs)
         })
 
-        if(activePair) {
+        if (activePair) {
             return activePair[0].caption
         }
 
@@ -170,14 +177,20 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         let href
         let reactRouterLink = false
         let disabled = false
+        let hide = false
 
-        if(typeof it === 'string') {
+        if (typeof it === 'string') {
             href = it
         }
         else {
             href = it.href
             reactRouterLink = it.reactRouterLink
-            disabled =  it.disabled || false
+            disabled = !!it.disabled
+            hide = !!it.hide
+        }
+
+        if (hide) {
+            return null;
         }
 
         const activeCss = isActive(href) ? styles.active : ''
@@ -191,7 +204,7 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         const isPanelActive = key === defaultActiveKey.current
         let panelClass = styles.collapse_panel
 
-        if(isPanelActive) {
+        if (isPanelActive) {
             panelClass = `${styles.active_header} ${panelClass}`
         }
 
@@ -199,15 +212,15 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
         const hrefEntries = Object.entries(navItemMap)
 
         return <Panel key={key} className={panelClass} header={RenderPanelHeader(rootItem)}>
-                    <Menu>
-                        {
-                            hrefEntries.map(kvp => {
-                                const [key, navItem] = kvp
-                                return renderItem(navItem, { caption: childCaptionsMap[key] } )
-                            })
-                        }
-                    </Menu>
-                </Panel>
+            <Menu>
+                {
+                    hrefEntries.map(kvp => {
+                        const [key, navItem] = kvp
+                        return renderItem(navItem, { caption: childCaptionsMap[key] })
+                    })
+                }
+            </Menu>
+        </Panel>
     }
 
     return <Menu className={`${styles.root} ${className || ''}`}>
@@ -216,5 +229,6 @@ export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
             {collapseNavItemPairs.map(renderCollapse)}
         </Collapse>
         {renderItem(rpgBattle, rpgBattleInternal)}
+        {renderItem(leaderboard, leaderboardInternal)}
     </Menu>
 }

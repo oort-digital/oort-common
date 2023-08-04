@@ -3,6 +3,7 @@ export { RentAppIcon } from './rentAppIcon'
 export { DashboardIcon } from "./dashboardIcon"
 export { MintIcon } from "./mintIcon"
 export { ChevronSortIcon } from "./chevronSortIcon"
+export { LeaderboardIcon } from "./leaderboardIcon";
 // social
 export { DiscordIcon } from "./discordIcon"
 export { TelegramIcon } from "./telegramIcon"
@@ -29,3 +30,6 @@ export { OpenseaIcon } from "./openseaIcon"
 export { NFTScanIcon } from "./nftscanIcon"
 
 export { WalletIcon } from "./walletIcon"
+
+export { TokenAfterIcon } from "./tokenIconAfter";
+export { TokenIcon } from "./tokenIcon";

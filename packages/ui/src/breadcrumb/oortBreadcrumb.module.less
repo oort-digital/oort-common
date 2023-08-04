@@ -1,23 +1,22 @@
-@import "../styles/theme/vars.less";
+@import "../styles/vars.less";
 @import "../styles/typography.less";
 @import "../styles/palette.less";
 
 .root {
+  :global(.ant-breadcrumb-separator) {
+    display: inline-block;
+    height: 24px;
+    vertical-align: middle;
+    color: @theme-color-6;
+  }
 
-    :global(.ant-breadcrumb-separator) {
-        display: inline-block;
-        height: 24px;
-        vertical-align: middle;
-        color: @theme-color-6;
+  li {
+    :global(.ant-breadcrumb-link) {
+      .body-16-regular-mixin();
+      color: @theme-color-7;
+      a {
+        color: @primary-6;
+      }
     }
-
-    li {
-        :global(.ant-breadcrumb-link) {
-            .body-16-regular-mixin();
-            color: @theme-color-7;
-            a {
-                color: @primary-6;
-            }
-        }
-    }
+  }
 }

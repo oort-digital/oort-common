@@ -1,27 +1,22 @@
-import "../../styles/antOverride.less";
-import "../../styles/fonts.css";
-import {BrowserRouter as Router } from 'react-router-dom';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import React, { lazy } from "react";
-import { useTheme } from "../../effects";
+import "../../../.storybook/stories.less";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import React from "react";
 import { Layout } from "..";
-import {isActiveFunc, navItems, TestContent, testNavItems} from "./common";
+import { isActiveFunc, navItems, TestContent, testNavItems } from "./common";
 import { Web3StoreStub } from "./web3StoreStub";
 import { ILayoutProps } from "../typesAndInterfaces";
 import { Button } from "antd";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 
-const DarkTheme = lazy(() => import("../../styles/theme/darkTheme"));
-const LightTheme = lazy(() => import("../../styles/theme/lightTheme"));
-
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'oort/layout',
+  title: "oort/layout",
   component: Layout,
 
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
@@ -31,30 +26,33 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Layout> = (args: ILayoutProps) => {
-
-  const [isDark] = useTheme()
-
-  return <>
-    { isDark ? <DarkTheme /> : <LightTheme /> }
+  return (
     <Router>
       <Layout {...args} />
     </Router>
-    
-  </>
-}
+  );
+};
 
-const web3 = new Web3StoreStub()
-const supportedWallets: ConnectorNames[] = [ConnectorNames.Injected, ConnectorNames.WalletConnect]
+const web3 = new Web3StoreStub();
+const supportedWallets: ConnectorNames[] = [
+  ConnectorNames.Injected,
+  ConnectorNames.WalletConnect,
+];
 
 export const WithWeb3 = Template.bind({});
 WithWeb3.args = {
   navItems: navItems,
   web3: web3,
+  oortTokenAddress: "0xD8341A4978a68Ed0ad558D745af5578e51102725",
   supportedWallets,
-  children: <>
-    <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
-    {TestContent}
+  children: (
+    <>
+      <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>
+        Connect
+      </Button>
+      {TestContent}
     </>
+  ),
 };
 
 export const WithoutWeb3 = Template.bind({});
@@ -72,15 +70,18 @@ ActiveCollapse.args = {
   supportedWallets,
 };
 
-
 export const WithFaucet = Template.bind({});
 WithFaucet.args = {
-    navItems: testNavItems,
-    web3: web3,
-    supportedWallets,
-    children: <>
-        <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>Connect</Button>
-        {TestContent}
+  navItems: testNavItems,
+  web3: web3,
+  oortTokenAddress: "0xcce87c5b269c94b31ec437b1d7d85bf1413b7804",
+  supportedWallets,
+  children: (
+    <>
+      <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>
+        Connect
+      </Button>
+      {TestContent}
     </>
-}
-
+  ),
+};

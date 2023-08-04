@@ -1,30 +1,29 @@
-@import '../styles/typography.less';
-@import '../styles/theme/vars.less';
+@import "../styles/typography.less";
+@import "../styles/vars.less";
 
 .tx-modal-desktop {
+  .ant-modal-body {
+    padding: 36px;
+    .body-16-regular-mixin;
+  }
 
-    .ant-modal-body {
-        padding: 36px;
-        .body-16-regular-mixin;
-    }
+  .ant-modal-header {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-style: none;
+  }
 
-    .ant-modal-header {
-        padding-top: 0;
-        padding-bottom: 0;
-        border-style: none;
-    }
+  .tx-modal-description {
+    color: @theme-color-10;
+    padding: 12px;
+    background-color: @oort-modal-description-bg;
+    text-align: center;
+    border-radius: 4px;
+  }
 
-    .tx-modal-description {
-        color: @theme-color-10;
-        padding: 12px;
-        background-color: @oort-modal-description-bg;
-        text-align: center;
-        border-radius: 4px;
-    }
-
-    .tx-info {
-        padding-top: 32px;
-        padding-left: 36px;
-        padding-right: 36px;
-    }
+  .tx-info {
+    padding-top: 32px;
+    padding-left: 36px;
+    padding-right: 36px;
+  }
 }

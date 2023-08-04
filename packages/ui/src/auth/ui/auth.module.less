@@ -1,31 +1,8 @@
-@import "../../styles/theme/vars.less";
+@import "../../styles/vars.less";
 @import "../../styles/typography.less";
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    & > svg {
-        margin-bottom: 24px;
-    }
-
-    .label_text {
-        .body-14-regular-mixin();
-        color: @theme-color-7;
-    }
-
-    .connect_btn {
-        margin-top: 24px;
-        margin-bottom: 16px;
-        :global(.anticon) {
-            vertical-align: middle;
-        }
-    }
-
-    .wrong_chain_text {
-        .body-14-regular-mixin();
-        color: @theme-color-7;
-        text-align: center;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

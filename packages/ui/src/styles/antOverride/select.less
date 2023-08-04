@@ -1,0 +1,32 @@
+// Select
+
+@select-background: @btn-default-bg;
+@select-dropdown-bg: @btn-default-bg;
+@select-item-selected-color: @btn-primary-color;
+@select-item-selected-bg: @primary-color;
+@select-item-active-bg: @theme-color-3;
+
+@select-single-item-height-lg: 52px;
+
+// to apply this styles do <Select dropdownClassName='ant-select-dropdown-lg'
+.ant-select-dropdown-lg .ant-select-item > .ant-select-item-option-content {
+  line-height: 40px;
+}
+
+// .ant-select-lg > .ant-select-selector > .ant-select-selection-item > .currency-select-option {
+//   line-height: 50px;
+// }
+
+.ant-select {
+  color: @btn-default-color;
+  background-color: @btn-default-bg;
+  border-radius: 4px;
+  .ant-select-arrow {
+    color: @btn-default-color;
+  }
+}
+
+.ant-select-item-option,
+.ant-select-item-option-active {
+  color: @btn-default-color;
+}

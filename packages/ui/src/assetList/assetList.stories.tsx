@@ -1,72 +1,70 @@
-import React from "react"
-import "../styles/antOverride.less"
-import "../styles/fonts.css"
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { ThemeLoader } from "../internalHelpers"
-import { IAssetListProps, AssetList } from "./assetList"
-import { BorrowAssetCard, IBorrowAssetItem } from "../assetCard"
-import { BigNumber } from "ethers"
+import React from "react";
+import "../../.storybook/stories.less";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { IAssetListProps, AssetList } from "./assetList";
+import { BorrowAssetCard, IBorrowAssetItem } from "../assetCard";
+import { BigNumber } from "ethers";
 
-import { IMarketplaceConfig, MarketplaceEnum } from "../viewOn"
-import { ZERO_ADDR } from "@oort-digital/utils"
+import { IMarketplaceConfig, MarketplaceEnum } from "../viewOn";
+import { ZERO_ADDR } from "@oort-digital/utils";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'oort/assetList',
+  title: "oort/assetList",
   component: AssetList,
 } as ComponentMeta<typeof AssetList>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof AssetList> = (args: IAssetListProps<IItem>) => {
-  return <>
-    <ThemeLoader />
-    <AssetList {...args} />
-  </> 
-  
-}
+const Template: ComponentStory<typeof AssetList> = (
+  args: IAssetListProps<IItem>
+) => {
+  return <AssetList {...args} />;
+};
 
 interface IItem {
-  name: string
+  name: string;
 }
-
-
 
 const getItems = (count: number): IBorrowAssetItem[] => {
-  const result: IBorrowAssetItem[] = []
-  for(let i = 0; i < count; i++) {
+  const result: IBorrowAssetItem[] = [];
+  for (let i = 0; i < count; i++) {
     result.push({
-      nftName: 'test nft',
+      nftName: "test nft",
       tokenAddress: ZERO_ADDR,
       tokenId: BigNumber.from(1),
-      projectName: 'test project',
+      projectName: "test project",
       nftAmount: 5,
-      imgSrc: 'https://static.oort.digital/137/0x5a68f10109228ce53a46b5ce60e2db4af74192cb/1822',
+      imgSrc:
+        "https://static.oort.digital/137/0x5a68f10109228ce53a46b5ce60e2db4af74192cb/1822",
       earningGoal: BigNumber.from(1),
       durationHours: 2,
-      currency: { uiName: 'DAI', decimals: 18 },
-      collateral: BigNumber.from(1)
-    })
+      currency: { uiName: "DAI", decimals: 18 },
+      collateral: BigNumber.from(1),
+    });
   }
-  return result
-}
+  return result;
+};
 
 const marketplaceConfig: IMarketplaceConfig = {
-  assetItemUrlTemplate: 'https://testnets.opensea.io/assets/{chain-name}/{address}/{token-id}',
-  name: MarketplaceEnum.opensea
-}
+  assetItemUrlTemplate:
+    "https://testnets.opensea.io/assets/{chain-name}/{address}/{token-id}",
+  name: MarketplaceEnum.opensea,
+};
 
-const itemRenderer = (item: IBorrowAssetItem) => <BorrowAssetCard
-  assetItem={item}
-  owner={ZERO_ADDR}
-  chainId={1}
-  marketplace={marketplaceConfig}
-  onClick={(asset: IBorrowAssetItem) => {}}
-  href={'https://rental.oort.digital/borrow'}
-/>
+const itemRenderer = (item: IBorrowAssetItem) => (
+  <BorrowAssetCard
+    assetItem={item}
+    owner={ZERO_ADDR}
+    chainId={1}
+    marketplace={marketplaceConfig}
+    onClick={(asset: IBorrowAssetItem) => {}}
+    href={"https://rental.oort.digital/borrow"}
+  />
+);
 
 export const main = Template.bind({});
 main.args = {
   items: getItems(100),
   itemRenderer: itemRenderer,
-  loading: true
-}
+  loading: true,
+};

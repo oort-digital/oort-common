@@ -1,18 +1,21 @@
-@import "../styles/theme/vars.less";
+@import "../styles/vars.less";
 @import "./aside/vars.less";
 
 .root {
-    display: flex;
-    flex-direction: row;
-    background: @theme-color-2;
-    height: 100vh;
+  display: flex;
+  flex-direction: row;
+  background: @theme-color-2;
+  height: 100vh;
 }
 
 .root > .content {
-    width: 100%;
-    overflow-y: auto;
-    box-shadow: 0px 0px 68px rgba(0, 0, 0, 0.12);
-    border-radius: 24px 0px 0px 0px;
-    background: @theme-bg-dark-gradient;
-    margin-left: @aside-width;
+  width: 100%;
+  overflow-y: auto;
+  box-shadow: 0px 0px 68px rgba(0, 0, 0, 0.12);
+  border-radius: 24px 0px 0px 0px;
+  margin-left: @aside-width;
+}
+
+.root > .content.top_gradient {
+  background: @theme-bg-dark-gradient;
 }

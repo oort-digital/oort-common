@@ -1,28 +1,27 @@
 @import "../styles/typography.less";
 @import "../styles/palette.less";
-@import "../styles/theme/vars.less";
+@import "../styles/vars.less";
 
 .settings {
+  margin-top: 15px;
+  margin-bottom: 8px;
 
-	margin-top: 15px;
-	margin-bottom: 8px;
+  .name {
+    .footnote-10-caps-mixin;
+    color: @theme-color-7;
+  }
 
-	.name {
-		.footnote-10-caps-mixin;
-		color: @theme-color-7;
-	}
+  .value {
+    margin-top: 5px;
+    .body-16-medium-mixin;
+    text-transform: uppercase;
+    color: @theme-color-10;
+  }
 
-	.value {
-		margin-top: 5px;
-		.body-16-medium-mixin;
-		text-transform: uppercase;
-		color: @theme-color-10;
-	}
-
-	.zero_value {
-		margin-top: 5px;
-		.body-16-medium-mixin;
-		text-transform: uppercase;
-		color: @violet-med;
-	}
+  .zero_value {
+    margin-top: 5px;
+    .body-16-medium-mixin;
+    text-transform: uppercase;
+    color: @violet-med;
+  }
 }

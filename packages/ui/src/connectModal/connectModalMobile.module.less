@@ -1,27 +1,31 @@
 @import "../styles/typography.less";
-@import "../styles/theme/vars.less";
+@import "../styles/vars.less";
 
-.modal > :global(.ant-drawer-content-wrapper > .ant-drawer-content > .ant-drawer-wrapper-body) {
-    & > :global(.ant-drawer-header) {
-        border-bottom: 1px solid @theme-color-5;
+.modal
+  > :global(
+    .ant-drawer-content-wrapper > .ant-drawer-content > .ant-drawer-wrapper-body
+  ) {
+  & > :global(.ant-drawer-header) {
+    border-bottom: 1px solid @theme-color-5;
+  }
+
+  & > :global(.ant-drawer-body) {
+    & > .description {
+      margin-bottom: 24px;
+      color: @theme-color-13;
+      .body-16-regular-mixin;
     }
 
-    & > :global(.ant-drawer-body) {
-        & > .description {
-            margin-bottom: 24px;
-            color: @theme-color-13;
-            .body-16-regular-mixin;
-        }
-    
-        & > .chain_buttons { margin-bottom: 56px; }
+    & > .chain_buttons {
+      margin-bottom: 56px;
     }
+  }
 
-    & > :global(.ant-drawer-footer) {
-        .footnote-12-description-mixin();
-        padding: 12px 24px;
-        color: @theme-color-13;
-        background: @theme-color-3;
-        text-align: center;
-    }
+  & > :global(.ant-drawer-footer) {
+    .footnote-12-description-mixin();
+    padding: 12px 24px;
+    color: @theme-color-13;
+    background: @theme-color-3;
+    text-align: center;
+  }
 }
-    
