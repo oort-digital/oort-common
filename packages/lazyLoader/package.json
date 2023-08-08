@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/lazy-loader",
-  "version": "0.0.1-alfa.0.0.3",
+  "version": "0.0.1-alfa.0.0.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -9,7 +9,7 @@
     "clean": "rimraf dist",
     "build:types": "tsc",
     "build": "vite build",
-    "rm": "rimraf node_modules"
+    "rm": "rimraf node_modules && rimraf yarn.lock"
   },
   "dependencies": {
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
