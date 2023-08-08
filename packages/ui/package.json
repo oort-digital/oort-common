@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/ui",
-  "version": "0.0.1-alfa.0.3.0",
+  "version": "0.0.1-alfa.0.3.1",
   "type": "module",
   "repository": {
     "type": "git",
@@ -11,13 +11,13 @@
     "build:types": "tsc",
     "build": "vite build",
     "test": "jest",
-    "rm": "rimraf node_modules",
+    "rm": "rimraf node_modules && rimraf yarn.lock",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "generate-types": "typechain --target=ethers-v5 --out-dir src/contracts/generated src/contracts/abi/erc20.json"
   },
   "dependencies": {
-    "@oort-digital/lazy-loader": "0.0.1-alfa.0.0.1",
+    "@oort-digital/lazy-loader": "0.0.1-alfa.0.0.3",
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
     "@oort-digital/oort-api-client": "0.0.1-alfa.0.0.7",
     "@oort-digital/utils": "0.0.1-alfa.0.0.3",
