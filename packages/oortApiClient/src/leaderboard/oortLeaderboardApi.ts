@@ -46,6 +46,10 @@ export class OortLeaderboardApi extends BaseAPI implements IOortLeaderboardApi {
 
     const urlParams = this.addPagingParams(params);
 
+    if(params.brandId !== null) {
+      urlParams.append('brand-id', params.brandId.toString())
+    }
+    
     const response = await this.get<IPagingResponse<IBrandBattleResult>>(
       url,
       getConfig(false, signal, urlParams),
