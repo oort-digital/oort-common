@@ -72,6 +72,8 @@ export interface IRewardDetail {
   eligible: boolean;
   merkleProof: string | null;
   clanId: number | null;
+  claimMessage: string | null;
+  claimUrl: string | null;
 }
 
 export type GetCampaignsResponse = IPagingResponse<ICampaign>;
