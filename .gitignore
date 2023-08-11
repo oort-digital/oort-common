@@ -2,12 +2,9 @@
 yarn.lock
 
 /node_modules
-/packages/test/node_modules
-/packages/test/dist
+
 /packages/ui/node_modules
 /packages/ui/storybook-static
-/packages/uiNext/node_modules
-/packages/uiNext/dist
 /packages/logger/node_modules
 /packages/oortApiClient/node_modules
 /packages/web3Connectors/node_modules
@@ -27,8 +24,6 @@ yarn.lock
 /packages/lazyLoader/dist
 /packages/lazyLoaderNextJs/dist
 
-/sites/cra-test-app/node_modules
-/sites/cra-test-app/build
 /.idea
 
 /packages/lazyLoaderNextJs/.next
