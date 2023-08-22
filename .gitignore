@@ -2,12 +2,9 @@
 yarn.lock
 
 /node_modules
-/packages/test/node_modules
-/packages/test/dist
+
 /packages/ui/node_modules
 /packages/ui/storybook-static
-/packages/uiNext/node_modules
-/packages/uiNext/dist
 /packages/logger/node_modules
 /packages/oortApiClient/node_modules
 /packages/web3Connectors/node_modules
@@ -27,8 +24,26 @@ yarn.lock
 /packages/lazyLoader/dist
 /packages/lazyLoaderNextJs/dist
 
-/sites/cra-test-app/node_modules
-/sites/cra-test-app/build
+/packages/logger/yarn.lock
+/packages/ui/yarn.lock
+/packages/nftProviders/yarn.lock
+/packages/web3Connectors/yarn.lock
+/packages/urlSearchParams/yarn.lock
+/packages/utils/yarn.lock
+/packages/oortApiClient/yarn.lock
+/packages/lazyLoader/yarn.lock
+/packages/lazyLoaderNextJs/yarn.lock
+
+/packages/logger/package-lock.json
+/packages/ui/package-lock.json
+/packages/nftProviders/package-lock.json
+/packages/web3Connectors/package-lock.json
+/packages/urlSearchParams/package-lock.json
+/packages/utils/package-lock.json
+/packages/oortApiClient/package-lock.json
+/packages/lazyLoader/package-lock.json
+/packages/lazyLoaderNextJs/package-lock.json
+
 /.idea
 
 /packages/lazyLoaderNextJs/.next
