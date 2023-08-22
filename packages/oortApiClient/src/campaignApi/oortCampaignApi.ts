@@ -46,23 +46,24 @@ export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
   }
 
   public async getCampaings(
-    { brandIds, keywords, pageNum, pageSize }: IGetCampaingsParams,
+    { brandIds, keywords, claimOnly, pageNum, pageSize }: IGetCampaingsParams,
     signal: AbortSignal,
   ): Promise<GetCampaignsResponse> {
     const url = oortServerApis.getCampaigns;
-    const params = this.addPagingParams({ pageNum, pageSize });
+    const urlParams = new URLSearchParams([["available-to-claim", `${claimOnly}`]]);
+    this.addPagingParams({ pageNum, pageSize }, urlParams);
 
     if (brandIds && brandIds.length) {
-      this.addArrParam(params, "brand-ids", brandIds);
+      this.addArrParam(urlParams, "brand-ids", brandIds);
     }
 
     if (keywords) {
-      params.append("keywords", keywords);
+      urlParams.append("keywords", keywords);
     }
 
     const response = await this.get<GetCampaignsResponse>(
       url,
-      getConfig(false, signal, params),
+      getConfig(false, signal, urlParams),
     );
     return response;
   }

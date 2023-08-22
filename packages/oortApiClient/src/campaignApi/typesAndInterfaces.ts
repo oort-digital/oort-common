@@ -90,6 +90,7 @@ export interface IGetCampaignResponse {
 export interface IGetCampaingsParams extends IPagingParams {
   brandIds?: number[];
   keywords?: string;
+  claimOnly?: boolean;
 }
 
 export interface IGetPageBaseParams extends IPagingParams {
