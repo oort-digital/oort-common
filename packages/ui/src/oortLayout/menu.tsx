@@ -61,10 +61,9 @@ export const MenuItemLink = ({
   }
 
   if (reactRouterLink) {
-    const path = new URL(href).pathname;
     return (
       <li className={className}>
-        <Link to={path}>{captionElement}</Link>
+        <Link to={href}>{captionElement}</Link>
       </li>
     );
   }
