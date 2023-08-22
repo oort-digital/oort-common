@@ -1,234 +1,277 @@
 import { Collapse } from "antd";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { DashboardIcon, DevelopToolsIcon, GameHubIcon, LeaderboardIcon, MintIcon, RentAppIcon } from "../icons";
+import {
+  DashboardIcon,
+  DevelopToolsIcon,
+  GameHubIcon,
+  LeaderboardIcon,
+  MintIcon,
+  RentAppIcon,
+} from "../icons";
 import { Menu, MenuItemLink } from "./menu";
-import styles from './navMenu.module.less';
+import styles from "./navMenu.module.less";
 import { isHrefActive } from "./utils";
 
 const { Panel } = Collapse;
 
 export enum MenuItemId {
-    Dasboard = 'dasboard',
-    Rent = 'rent',
-    Minting = 'minting',
-    Develop = "develop"
+  Dasboard = "dasboard",
+  Rent = "rent",
+  Minting = "minting",
+  Develop = "develop",
 }
 
-export type NavItemType = string | {
-    href: string
-    reactRouterLink: boolean
-    disabled?: boolean
-    hide?: boolean
-}
+export type NavItemType =
+  | string
+  | {
+      href: string;
+      reactRouterLink: boolean;
+      disabled?: boolean;
+      hide?: boolean;
+    };
 
 export interface INavItems {
-    dashboard: NavItemType
-    leaderboard: NavItemType
-    minting: {
-        mutation: NavItemType
-        claimRewards: NavItemType
-    }
-    rent: {
-        lend: NavItemType
-        borrow: NavItemType
-        heroes: NavItemType
-        activity: NavItemType
-    }
-    gameHub: {
-        games: NavItemType
-        nfts: NavItemType
-    },
-    developTools?: {
-        faucet: NavItemType
-        refreshMetadata: NavItemType
-    }
-    rpgBattle: NavItemType
+  dashboard: NavItemType;
+  leaderboard: NavItemType;
+  minting: {
+    mutation: NavItemType;
+    claimRewards: NavItemType;
+  };
+  rent: {
+    lend: NavItemType;
+    borrow: NavItemType;
+    heroes: NavItemType;
+    activity: NavItemType;
+  };
+  gameHub: {
+    games: NavItemType;
+    nfts: NavItemType;
+  };
+  developTools?: {
+    faucet: NavItemType;
+    refreshMetadata: NavItemType;
+  };
+  rpgBattle: NavItemType;
 }
 
 interface IProps {
-    //for testing
-    isActiveFunc?: (href: string) => boolean
-    className?: string,
-    navItems: INavItems
+  //for testing
+  isActiveFunc?: (href: string) => boolean;
+  className?: string;
+  navItems: INavItems;
+  baseName?: string;
 }
 
 interface INavItemInternal {
-    caption: string
-    icon?: JSX.Element
+  caption: string;
+  icon?: JSX.Element;
 }
 
 const dashboardInternal = {
-    caption: 'dashboard',
-    icon: <DashboardIcon />,
-}
+  caption: "dashboard",
+  icon: <DashboardIcon />,
+};
 
 const leaderboardInternal = {
-    caption: 'leaderboard',
-    icon: <LeaderboardIcon />,
-}
+  caption: "leaderboard",
+  icon: <LeaderboardIcon />,
+};
 
 const rentInternal = {
-    caption: 'NFT Rental',
-    icon: <RentAppIcon />,
-    lend: 'Lend',
-    borrow: 'Borrow',
-    heroes: 'Our own NFTs',
-    activity: 'Activity'
-}
+  caption: "NFT Rental",
+  icon: <RentAppIcon />,
+  lend: "Lend",
+  borrow: "Borrow",
+  heroes: "Our own NFTs",
+  activity: "Activity",
+};
 
 const mintInternal = {
-    caption: 'minting',
-    icon: <MintIcon />,
-    mutation: "Hero Mutation (Upgrading)",
-    claimRewards: "Claim Rewards"
-}
+  caption: "minting",
+  icon: <MintIcon />,
+  mutation: "Hero Mutation (Upgrading)",
+  claimRewards: "Claim Rewards",
+};
 
 const gameHubInternal = {
-    caption: 'NFT Play',
-    icon: <GameHubIcon />,
-    games: 'Game Library',
-    nfts: "NFT Library"
-}
+  caption: "NFT Play",
+  icon: <GameHubIcon />,
+  games: "Game Library",
+  nfts: "NFT Library",
+};
 
 const developInternal = {
-    caption: 'Develop Tools',
-    icon: <DevelopToolsIcon />,
-    faucet: "Faucet",
-    refreshMetadata: "Refresh Metadata"
-}
+  caption: "Develop Tools",
+  icon: <DevelopToolsIcon />,
+  faucet: "Faucet",
+  refreshMetadata: "Refresh Metadata",
+};
 
 const rpgBattleInternal = {
-    caption: 'RPG Battle',
-    icon: <GameHubIcon />,
-}
+  caption: "RPG Battle",
+  icon: <GameHubIcon />,
+};
 
-type StringMap = { [id: string]: string; }
-type NavItemMap = { [id: string]: NavItemType; }
+type StringMap = { [id: string]: string };
+type NavItemMap = { [id: string]: NavItemType };
 
 const getChildCaptions = (item: INavItemInternal): StringMap => {
+  const map: StringMap = {};
 
-    const map: StringMap = {}
+  Object.entries(item).forEach((kvp) => {
+    const [key, value] = kvp;
 
-    Object.entries(item).forEach(kvp => {
+    if (key !== "caption" || kvp[0] !== "icon") {
+      map[key] = value;
+    }
+  });
 
-        const [key, value] = kvp
+  return map;
+};
 
-        if (key !== 'caption' || kvp[0] !== 'icon') {
-            map[key] = value
-        }
-    })
-
-    return map
-}
-
-const _isHrefActive = (href: string) => isHrefActive(window.location, href)
+const _isHrefActive = (href: string) => isHrefActive(window.location, href);
 
 const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
-    const i = <span className={styles.icon}>{icon}</span>
-    return <div className={styles.header}>{i}{caption}</div>
-}
+  const i = <span className={styles.icon}>{icon}</span>;
+  return (
+    <div className={styles.header}>
+      {i}
+      {caption}
+    </div>
+  );
+};
 
-const getHRef = (it: NavItemType) => typeof it === 'string' ? it : it.href
+const getHRef = (it: NavItemType) => (typeof it === "string" ? it : it.href);
 
-type NavItemPairType = [INavItemInternal, NavItemMap]
+type NavItemPairType = [INavItemInternal, NavItemMap];
 
-export const NavMenu = ({ className, navItems, isActiveFunc }: IProps) => {
+export const NavMenu = ({
+  className,
+  navItems,
+  isActiveFunc,
+  baseName,
+}: IProps) => {
+  // to trigger rerendering on react-router pathchange
+  useLocation();
 
-    // to trigger rerendering on react-router pathchange
-    useLocation()
+  const {
+    dashboard,
+    rent,
+    gameHub,
+    minting,
+    developTools,
+    rpgBattle,
+    leaderboard,
+  } = navItems;
 
-    const { dashboard, rent, gameHub, minting, developTools, rpgBattle, leaderboard } = navItems
+  const collapseNavItemPairs: NavItemPairType[] = [
+    [rentInternal, rent],
+    [gameHubInternal, gameHub],
+    [mintInternal, minting],
+  ];
 
-    const collapseNavItemPairs: NavItemPairType[] = [
-        [rentInternal, rent],
-        [gameHubInternal, gameHub],
-        [mintInternal, minting],
-    ]
+  if (developTools) {
+    collapseNavItemPairs.push([developInternal, developTools]);
+  }
 
-    if (developTools) {
-        collapseNavItemPairs.push(
-            [developInternal, developTools]
-        )
+  const isActive = isActiveFunc || _isHrefActive;
+
+  const hasActiveHref = (hrefs: string[]): boolean => hrefs.some(isActive);
+
+  const getCollapseActiveKey = (): string | undefined => {
+    const activePair = collapseNavItemPairs.find((pair) => {
+      const hrefEntries = Object.entries(pair[1]);
+      const hrefs = hrefEntries.map((kvp) => getHRef(kvp[1]));
+      return hasActiveHref(hrefs);
+    });
+
+    if (activePair) {
+      return activePair[0].caption;
     }
 
-    const isActive = isActiveFunc || _isHrefActive;
+    return undefined;
+  };
 
-    const hasActiveHref = (hrefs: string[]): boolean => hrefs.some(isActive)
+  const defaultActiveKey = useRef(getCollapseActiveKey());
 
-    const getCollapseActiveKey = (): string | undefined => {
-        const activePair = collapseNavItemPairs.find(pair => {
-            const hrefEntries = Object.entries(pair[1])
-            const hrefs = hrefEntries.map(kvp => getHRef(kvp[1]))
-            return hasActiveHref(hrefs)
-        })
+  const renderItem = (it: NavItemType, { caption, icon }: INavItemInternal) => {
+    let href;
+    let reactRouterLink = false;
+    let disabled = false;
+    let hide = false;
 
-        if (activePair) {
-            return activePair[0].caption
-        }
-
-        return undefined
+    if (typeof it === "string") {
+      href = it;
+    } else {
+      href = it.href;
+      reactRouterLink = it.reactRouterLink;
+      disabled = !!it.disabled;
+      hide = !!it.hide;
     }
 
-    const defaultActiveKey = useRef(getCollapseActiveKey())
-
-    const renderItem = (it: NavItemType, { caption, icon }: INavItemInternal) => {
-
-        let href
-        let reactRouterLink = false
-        let disabled = false
-        let hide = false
-
-        if (typeof it === 'string') {
-            href = it
-        }
-        else {
-            href = it.href
-            reactRouterLink = it.reactRouterLink
-            disabled = !!it.disabled
-            hide = !!it.hide
-        }
-
-        if (hide) {
-            return null;
-        }
-
-        const activeCss = isActive(href) ? styles.active : ''
-        const i = <span className={styles.icon}>{icon}</span>
-        return <MenuItemLink disabled={disabled} reactRouterLink={reactRouterLink || false} key={caption} className={activeCss} href={href} caption={caption} icon={i} />
+    if (hide) {
+      return null;
     }
 
-    const renderCollapse = ([rootItem, navItemMap]: NavItemPairType) => {
-        const key = rootItem.caption;
+    const activeCss = isActive(href) ? styles.active : "";
+    const i = <span className={styles.icon}>{icon}</span>;
+    return (
+      <MenuItemLink
+        disabled={disabled}
+        reactRouterLink={reactRouterLink || false}
+        key={caption}
+        className={activeCss}
+        href={href}
+        baseName={baseName ?? null}
+        caption={caption}
+        icon={i}
+      />
+    );
+  };
 
-        const isPanelActive = key === defaultActiveKey.current
-        let panelClass = styles.collapse_panel
+  const renderCollapse = ([rootItem, navItemMap]: NavItemPairType) => {
+    const key = rootItem.caption;
 
-        if (isPanelActive) {
-            panelClass = `${styles.active_header} ${panelClass}`
-        }
+    const isPanelActive = key === defaultActiveKey.current;
+    let panelClass = styles.collapse_panel;
 
-        const childCaptionsMap = getChildCaptions(rootItem)
-        const hrefEntries = Object.entries(navItemMap)
-
-        return <Panel key={key} className={panelClass} header={RenderPanelHeader(rootItem)}>
-            <Menu>
-                {
-                    hrefEntries.map(kvp => {
-                        const [key, navItem] = kvp
-                        return renderItem(navItem, { caption: childCaptionsMap[key] })
-                    })
-                }
-            </Menu>
-        </Panel>
+    if (isPanelActive) {
+      panelClass = `${styles.active_header} ${panelClass}`;
     }
 
-    return <Menu className={`${styles.root} ${className || ''}`}>
-        {renderItem(dashboard, dashboardInternal)}
-        <Collapse accordion defaultActiveKey={defaultActiveKey.current} ghost expandIconPosition="end">
-            {collapseNavItemPairs.map(renderCollapse)}
-        </Collapse>
-        {renderItem(rpgBattle, rpgBattleInternal)}
-        {renderItem(leaderboard, leaderboardInternal)}
+    const childCaptionsMap = getChildCaptions(rootItem);
+    const hrefEntries = Object.entries(navItemMap);
+
+    return (
+      <Panel
+        key={key}
+        className={panelClass}
+        header={RenderPanelHeader(rootItem)}
+      >
+        <Menu>
+          {hrefEntries.map((kvp) => {
+            const [key, navItem] = kvp;
+            return renderItem(navItem, { caption: childCaptionsMap[key] });
+          })}
+        </Menu>
+      </Panel>
+    );
+  };
+
+  return (
+    <Menu className={`${styles.root} ${className || ""}`}>
+      {renderItem(dashboard, dashboardInternal)}
+      <Collapse
+        accordion
+        defaultActiveKey={defaultActiveKey.current}
+        ghost
+        expandIconPosition="end"
+      >
+        {collapseNavItemPairs.map(renderCollapse)}
+      </Collapse>
+      {renderItem(rpgBattle, rpgBattleInternal)}
+      {renderItem(leaderboard, leaderboardInternal)}
     </Menu>
-}
+  );
+};
