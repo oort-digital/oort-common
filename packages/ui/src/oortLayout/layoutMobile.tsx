@@ -14,6 +14,7 @@ const LayoutMobile = ({
   className,
   supportedWallets,
   useTopGradient,
+  baseName,
 }: ILayoutProps) => {
   const _useTopGradient = useTopGradient === undefined ? true : useTopGradient;
 
@@ -22,6 +23,7 @@ const LayoutMobile = ({
       <div className={classNames("oort-mobile-top-header", styles.top_header)}>
         <Sider>
           <AsideMobile
+            baseName={baseName}
             oortTokenAddress={oortTokenAddress}
             supportedWallets={supportedWallets}
             navItems={navItems}

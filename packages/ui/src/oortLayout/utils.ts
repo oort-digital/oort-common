@@ -1,31 +1,44 @@
-
-
 type LocationType = {
-    origin: string
-    pathname: string
-}
+  origin: string;
+  pathname: string;
+};
 
 const removeTrailingSlash = (href: string) => {
-    if(href[href.length - 1] === '/') {
-        return href.substring(0, href.length - 1)
-    }
+  if (href[href.length - 1] === "/") {
+    return href.substring(0, href.length - 1);
+  }
 
-    return href
-}
+  return href;
+};
 
 export function isHrefActive(curLocation: LocationType, href: string): boolean {
+  const location = new URL(removeTrailingSlash(href));
 
-    const location = new URL(removeTrailingSlash(href))
-
-    if(curLocation.origin === location.origin) {
-        if(curLocation.pathname === '/' /*|| curLocation.pathname === location.pathname*/) {
-            return true
-        }
-
-        if(curLocation.pathname.includes(location.pathname)) {
-            return true
-        }
+  if (curLocation.origin === location.origin) {
+    if (
+      curLocation.pathname ===
+      "/" /*|| curLocation.pathname === location.pathname*/
+    ) {
+      return true;
     }
 
-    return false
+    if (curLocation.pathname.includes(location.pathname)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+export function removeBaseName(baseName: string | null, href: string): string {
+  const path = new URL(href).pathname;
+
+  if (!baseName) {
+    return path;
+  }
+
+  if (baseName === path.substring(0, baseName.length)) {
+    return path.substring(baseName.length);
+  }
+  return path;
 }

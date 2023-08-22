@@ -13,4 +13,5 @@ export interface ILayoutProps {
   //for testing
   isActiveFunc?: (href: string) => boolean;
   useTopGradient?: boolean;
+  baseName?: string;
 }

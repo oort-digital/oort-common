@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import styles from "./menu.module.less";
 import { Link } from "react-router-dom";
+import { removeBaseName } from "./utils";
 
 interface IMenuItemBtnProps {
   className?: string;
@@ -29,6 +30,7 @@ interface IMenuItemLinkProps {
   disabled?: boolean;
   className?: string;
   href: string;
+  baseName: string | null;
   key: string;
   caption: string;
   icon: ReactNode;
@@ -38,6 +40,7 @@ interface IMenuItemLinkProps {
 export const MenuItemLink = ({
   className,
   href,
+  baseName,
   caption,
   icon,
   reactRouterLink,
@@ -61,10 +64,9 @@ export const MenuItemLink = ({
   }
 
   if (reactRouterLink) {
-    const path = new URL(href).pathname;
     return (
       <li className={className}>
-        <Link to={path}>{captionElement}</Link>
+        <Link to={removeBaseName(baseName, href)}>{captionElement}</Link>
       </li>
     );
   }
