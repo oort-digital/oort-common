@@ -55,12 +55,36 @@ export const WithoutWeb3: Story = {
   },
 };
 
-export const ActiveCollapse: Story = {
+export const ActiveDashboard: Story = {
   args: {
     navItems: navItems,
     children: TestContent,
     _stubs: {
-      isHrefActive: isActiveFunc,
+      getCurLocation: () => new URL("https://app-test.oort.digital"),
+    },
+    supportedWallets,
+  },
+};
+
+export const ActiveRent: Story = {
+  args: {
+    navItems: navItems,
+    children: TestContent,
+    _stubs: {
+      getCurLocation: () =>
+        new URL("https://app-test.oort.digital/rent/avtivities"),
+    },
+    supportedWallets,
+  },
+};
+
+export const ActiveLeaderboard: Story = {
+  args: {
+    navItems: navItems,
+    children: TestContent,
+    _stubs: {
+      getCurLocation: () =>
+        new URL("https://app-test.oort.digital/leaderboard"),
     },
     supportedWallets,
   },

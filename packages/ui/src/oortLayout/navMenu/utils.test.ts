@@ -1,4 +1,4 @@
-import { isHrefActive, removeBaseName } from "./utils";
+import { isHrefActive } from "./utils";
 
 function toBeActive(current: string, href: string) {
   const actual = isHrefActive(new URL(current), href);
@@ -19,6 +19,14 @@ test("to be active", async () => {
 });
 
 test("to be not active", async () => {
+  toBeNotActive(
+    "https://app-test.oort.digital",
+    "https://app-test.oort.digital/rent/avtivities"
+  );
+  toBeNotActive(
+    "https://app-test.oort.digital/rent/avtivities",
+    "https://app-test.oort.digital"
+  );
   toBeNotActive("http://oort.digital", "http://oort2.digital");
   toBeNotActive("http://oort/leasing/", "http://oort/leasing/borrow");
 });

@@ -15,17 +15,14 @@ const removeTrailingSlash = (href: string) => {
 };
 
 export function isHrefActive(curLocation: LocationType, href: string): boolean {
-  const location = new URL(removeTrailingSlash(href));
+  const hrefLocation = new URL(removeTrailingSlash(href));
 
-  if (curLocation.origin === location.origin) {
-    if (
-      curLocation.pathname ===
-      "/" /*|| curLocation.pathname === location.pathname*/
-    ) {
-      return true;
+  if (curLocation.origin === hrefLocation.origin) {
+    if (hrefLocation.pathname === "/") {
+      return curLocation.pathname === "/";
     }
 
-    if (curLocation.pathname.includes(location.pathname)) {
+    if (curLocation.pathname.includes(hrefLocation.pathname)) {
       return true;
     }
   }
