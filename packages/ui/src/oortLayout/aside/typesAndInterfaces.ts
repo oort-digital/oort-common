@@ -1,6 +1,6 @@
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { IWeb3 } from "../../connectModal";
-import { INavItems } from "../navMenu";
+import { INavItems } from "../typesAndInterfaces";
 
 export interface IAsideProps {
   supportedWallets: ConnectorNames[];

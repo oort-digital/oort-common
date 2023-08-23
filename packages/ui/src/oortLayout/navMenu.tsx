@@ -12,48 +12,9 @@ import {
 import { Menu, MenuItemLink } from "./menu";
 import styles from "./navMenu.module.less";
 import { isHrefActive } from "./utils";
+import { INavItems, NavItemType } from "./typesAndInterfaces";
 
 const { Panel } = Collapse;
-
-export enum MenuItemId {
-  Dasboard = "dasboard",
-  Rent = "rent",
-  Minting = "minting",
-  Develop = "develop",
-}
-
-export type NavItemType =
-  | string
-  | {
-      href: string;
-      reactRouterLink: boolean;
-      disabled?: boolean;
-      hide?: boolean;
-    };
-
-export interface INavItems {
-  dashboard: NavItemType;
-  leaderboard: NavItemType;
-  minting: {
-    mutation: NavItemType;
-    claimRewards: NavItemType;
-  };
-  rent: {
-    lend: NavItemType;
-    borrow: NavItemType;
-    heroes: NavItemType;
-    activity: NavItemType;
-  };
-  gameHub: {
-    games: NavItemType;
-    nfts: NavItemType;
-  };
-  developTools?: {
-    faucet: NavItemType;
-    refreshMetadata: NavItemType;
-  };
-  rpgBattle: NavItemType;
-}
 
 interface IProps {
   //for testing
