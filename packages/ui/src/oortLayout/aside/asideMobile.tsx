@@ -5,7 +5,7 @@ import { IAsideProps } from "./typesAndInterfaces";
 export const AsideMobile = ({
   navItems,
   web3,
-  isActiveFunc,
+  _stubs,
   oortTokenAddress,
   supportedWallets,
   baseName,
@@ -16,7 +16,7 @@ export const AsideMobile = ({
     className={styles.aside_mobile}
     navItems={navItems}
     web3={web3}
-    isActiveFunc={isActiveFunc}
+    _stubs={_stubs}
     baseName={baseName}
   />
 );

@@ -38,3 +38,14 @@ export interface INavItemInternal {
 
 export type StringMap = { [id: string]: string };
 export type NavItemMap = { [id: string]: NavItemType };
+
+export type IsHrefActiveFunc = (href: string) => boolean;
+export interface IStubs {
+  isHrefActive?: IsHrefActiveFunc;
+  getCurLocation?: () => LocationType;
+}
+
+export type LocationType = {
+  origin: string;
+  pathname: string;
+};

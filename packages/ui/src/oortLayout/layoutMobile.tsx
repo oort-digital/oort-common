@@ -10,7 +10,7 @@ const LayoutMobile = ({
   children,
   web3,
   oortTokenAddress,
-  isActiveFunc,
+  _stubs,
   className,
   supportedWallets,
   useTopGradient,
@@ -27,7 +27,7 @@ const LayoutMobile = ({
             oortTokenAddress={oortTokenAddress}
             supportedWallets={supportedWallets}
             navItems={navItems}
-            isActiveFunc={isActiveFunc}
+            _stubs={_stubs}
             web3={web3}
           />
         </Sider>

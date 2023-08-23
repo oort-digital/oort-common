@@ -18,7 +18,7 @@ export const Aside = ({
   className,
   navItems,
   web3,
-  isActiveFunc,
+  _stubs,
   logoLink,
   baseName,
 }: IProps) => (
@@ -26,7 +26,7 @@ export const Aside = ({
     {logoLink}
     <NavMenu
       className={styles.nav_menu}
-      isActiveFunc={isActiveFunc}
+      _stubs={_stubs}
       navItems={navItems}
       baseName={baseName}
     />

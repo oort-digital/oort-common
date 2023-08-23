@@ -1,9 +1,10 @@
-import { INavItemInternal, StringMap } from "./typesAndInterfaces";
-
-type LocationType = {
-  origin: string;
-  pathname: string;
-};
+import {
+  INavItemInternal,
+  IStubs,
+  IsHrefActiveFunc,
+  LocationType,
+  StringMap,
+} from "./typesAndInterfaces";
 
 const removeTrailingSlash = (href: string) => {
   if (href[href.length - 1] === "/") {
@@ -44,4 +45,19 @@ export function getChildCaptions(item: INavItemInternal): StringMap {
   });
 
   return map;
+}
+
+export function createIsHrefActiveFunc(
+  stubs: IStubs | undefined
+): IsHrefActiveFunc {
+  if (stubs?.isHrefActive) {
+    return stubs.isHrefActive;
+  }
+
+  if (stubs?.getCurLocation) {
+    const location = stubs.getCurLocation();
+    return (href: string) => isHrefActive(location, href);
+  }
+
+  return (href: string) => isHrefActive(window.location, href);
 }

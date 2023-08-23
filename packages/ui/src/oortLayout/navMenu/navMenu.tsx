@@ -11,10 +11,11 @@ import {
 } from "../../icons";
 import { Menu, MenuItemLink } from "../menu";
 import styles from "./navMenu.module.less";
-import { getChildCaptions, isHrefActive } from "./utils";
+import { createIsHrefActiveFunc, getChildCaptions } from "./utils";
 import {
   INavItemInternal,
   INavItems,
+  IStubs,
   NavItemMap,
   NavItemType,
 } from "./typesAndInterfaces";
@@ -24,7 +25,7 @@ const { Panel } = Collapse;
 
 interface IProps {
   //for testing
-  isActiveFunc?: (href: string) => boolean;
+  _stubs?: IStubs;
   className?: string;
   navItems: INavItems;
   baseName?: string;
@@ -75,8 +76,6 @@ const rpgBattleInternal = {
   icon: <GameHubIcon />,
 };
 
-const _isHrefActive = (href: string) => isHrefActive(window.location, href);
-
 const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
   const i = <span className={styles.icon}>{icon}</span>;
   return (
@@ -91,12 +90,7 @@ const getHRef = (it: NavItemType) => (typeof it === "string" ? it : it.href);
 
 type NavItemPairType = [INavItemInternal, NavItemMap];
 
-export const NavMenu = ({
-  className,
-  navItems,
-  isActiveFunc,
-  baseName,
-}: IProps) => {
+export const NavMenu = ({ className, navItems, _stubs, baseName }: IProps) => {
   // to trigger rerendering on react-router pathchange
   useLocation();
 
@@ -120,7 +114,7 @@ export const NavMenu = ({
     collapseNavItemPairs.push([developInternal, developTools]);
   }
 
-  const isActive = isActiveFunc || _isHrefActive;
+  const isActive = createIsHrefActiveFunc(_stubs);
 
   const hasActiveHref = (hrefs: string[]): boolean => hrefs.some(isActive);
 
