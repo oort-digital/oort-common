@@ -2,54 +2,56 @@ import { INavItems } from "../navMenu";
 import { TestCarousel } from "./testCarousel";
 
 export const navItems: INavItems = {
-  dashboard: 'http://dashboard.oort.local',
-  leaderboard: 'http://leaderboard.oort.local',
+  dashboard: "https://app-test.oort.digital",
+  leaderboard: "https://app-test.oort.digital/leaderboard",
   minting: {
     mutation: {
       reactRouterLink: false,
-      href: 'http://minting.oort.local/hero-mutation',
+      href: "https://app-test.oort.digital/mint/hero-mutation",
       disabled: true,
-      // hide: true
     },
-    claimRewards: 'http://minting.oort.local/campaigns',
+    claimRewards: "http://app-test.oort.digital/mint/campaigns",
   },
   rent: {
-    activity: 'http://rent.oort.local/avtivities',
-    borrow: 'http://rent.oort.local/borrow',
-    heroes: 'http://rent.oort.local/heroes',
-    lend: 'http://rent.oort.local/lend'
+    activity: "https://app-test.oort.digital/rent/avtivities",
+    borrow: "https://app-test.oort.digital/rent/borrow",
+    heroes: "https://app-test.oort.digital/rent/heroes",
+    lend: "https://app-test.oort.digital/rent/lend",
   },
   gameHub: {
     games: {
-      href: 'http://game-hub.oort.local/games',
-      reactRouterLink: true
+      href: "http://game-hub.oort.local/games",
+      reactRouterLink: true,
     },
     nfts: {
-      href: 'http://game-hub.oort.local/nfts',
-      reactRouterLink: true
-    }
+      href: "http://game-hub.oort.local/nfts",
+      reactRouterLink: true,
+    },
   },
-  rpgBattle: 'https://battle.oort.digital'
-}
+  rpgBattle: "https://battle.oort.digital",
+};
 
 export const testNavItems: INavItems = {
-  ...navItems, ...{
+  ...navItems,
+  ...{
     developTools: {
-      faucet: 'http://develop.oort.local/faucet',
-      refreshMetadata: "http://develop.oort.local/refresh-metadata"
+      faucet: "http://develop.oort.local/faucet",
+      refreshMetadata: "http://develop.oort.local/refresh-metadata",
     },
-  }
-}
+  },
+};
 
 const style = {
   // background: 'red'
-  height: '1000px'
-}
+  height: "1000px",
+};
 
-export const TestContent = <div style={style}>
-  <TestCarousel />
-</div>
+export const TestContent = (
+  <div style={style}>
+    <TestCarousel />
+  </div>
+);
 
 export const isActiveFunc = (href: string) => {
-  return href.includes('game-hub.oort.local/nfts');
-}
+  return href.includes("game-hub.oort.local/nfts");
+};

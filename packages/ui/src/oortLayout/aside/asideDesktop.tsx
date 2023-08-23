@@ -6,7 +6,7 @@ import { LogoLink } from "../logoLink";
 export const AsideDesktop = ({
   navItems,
   web3,
-  isActiveFunc,
+  _stubs,
   supportedWallets,
   oortTokenAddress,
   baseName,
@@ -18,7 +18,7 @@ export const AsideDesktop = ({
     oortTokenAddress={oortTokenAddress}
     web3={web3}
     baseName={baseName}
-    isActiveFunc={isActiveFunc}
+    _stubs={_stubs}
     logoLink={<LogoLink className={styles.logo} />}
   />
 );

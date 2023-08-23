@@ -1,6 +1,6 @@
 import "../../../.storybook/stories.less";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { StoryObj, Meta } from "@storybook/react";
 import React from "react";
 import { Layout } from "..";
 import { isActiveFunc, navItems, TestContent, testNavItems } from "./common";
@@ -9,29 +9,20 @@ import { ILayoutProps } from "../typesAndInterfaces";
 import { Button } from "antd";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const meta = {
   title: "oort/layout",
   component: Layout,
-
-  parameters: {
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-    layout: "fullscreen",
+  render: (props: ILayoutProps) => {
+    return (
+      <Router>
+        <Layout {...props} />
+      </Router>
+    );
   },
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    //backgroundColor: { control: 'color' },
-  },
-} as ComponentMeta<typeof Layout>;
+} satisfies Meta<typeof Layout>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Layout> = (args: ILayoutProps) => {
-  return (
-    <Router>
-      <Layout {...args} />
-    </Router>
-  );
-};
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 const web3 = new Web3StoreStub();
 const supportedWallets: ConnectorNames[] = [
@@ -39,49 +30,79 @@ const supportedWallets: ConnectorNames[] = [
   ConnectorNames.WalletConnect,
 ];
 
-export const WithWeb3 = Template.bind({});
-WithWeb3.args = {
-  navItems: navItems,
-  web3: web3,
-  oortTokenAddress: "0xD8341A4978a68Ed0ad558D745af5578e51102725",
-  supportedWallets,
-  children: (
-    <>
-      <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>
-        Connect
-      </Button>
-      {TestContent}
-    </>
-  ),
+export const WithWeb3: Story = {
+  args: {
+    navItems: navItems,
+    web3: web3,
+    oortTokenAddress: "0xD8341A4978a68Ed0ad558D745af5578e51102725",
+    supportedWallets,
+    children: (
+      <>
+        <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>
+          Connect
+        </Button>
+        {TestContent}
+      </>
+    ),
+  },
 };
 
-export const WithoutWeb3 = Template.bind({});
-WithoutWeb3.args = {
-  navItems: navItems,
-  children: TestContent,
-  supportedWallets,
+export const WithoutWeb3: Story = {
+  args: {
+    navItems: navItems,
+    children: TestContent,
+    supportedWallets,
+  },
 };
 
-export const ActiveCollapse = Template.bind({});
-ActiveCollapse.args = {
-  navItems: navItems,
-  children: TestContent,
-  isActiveFunc: isActiveFunc,
-  supportedWallets,
+export const ActiveDashboard: Story = {
+  args: {
+    navItems: navItems,
+    children: TestContent,
+    _stubs: {
+      getCurLocation: () => new URL("https://app-test.oort.digital"),
+    },
+    supportedWallets,
+  },
 };
 
-export const WithFaucet = Template.bind({});
-WithFaucet.args = {
-  navItems: testNavItems,
-  web3: web3,
-  oortTokenAddress: "0xcce87c5b269c94b31ec437b1d7d85bf1413b7804",
-  supportedWallets,
-  children: (
-    <>
-      <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>
-        Connect
-      </Button>
-      {TestContent}
-    </>
-  ),
+export const ActiveRent: Story = {
+  args: {
+    navItems: navItems,
+    children: TestContent,
+    _stubs: {
+      getCurLocation: () =>
+        new URL("https://app-test.oort.digital/rent/avtivities"),
+    },
+    supportedWallets,
+  },
+};
+
+export const ActiveLeaderboard: Story = {
+  args: {
+    navItems: navItems,
+    children: TestContent,
+    _stubs: {
+      getCurLocation: () =>
+        new URL("https://app-test.oort.digital/leaderboard"),
+    },
+    supportedWallets,
+  },
+};
+
+export const WithFaucet: Story = {
+  args: {
+    navItems: testNavItems,
+    web3: web3,
+    oortTokenAddress: "0xcce87c5b269c94b31ec437b1d7d85bf1413b7804",
+    supportedWallets,
+    children: (
+      <>
+        <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>
+          Connect
+        </Button>
+        {TestContent}
+      </>
+    ),
+  },
 };

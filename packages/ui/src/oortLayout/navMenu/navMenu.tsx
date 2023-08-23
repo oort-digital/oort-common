@@ -8,64 +8,27 @@ import {
   LeaderboardIcon,
   MintIcon,
   RentAppIcon,
-} from "../icons";
-import { Menu, MenuItemLink } from "./menu";
+} from "../../icons";
+import { Menu, MenuItemLink } from "../menu";
 import styles from "./navMenu.module.less";
-import { isHrefActive } from "./utils";
+import { createIsHrefActiveFunc, getChildCaptions } from "./utils";
+import {
+  INavItemInternal,
+  INavItems,
+  IStubs,
+  NavItemMap,
+  NavItemType,
+} from "./typesAndInterfaces";
+import classNames from "classnames";
 
 const { Panel } = Collapse;
 
-export enum MenuItemId {
-  Dasboard = "dasboard",
-  Rent = "rent",
-  Minting = "minting",
-  Develop = "develop",
-}
-
-export type NavItemType =
-  | string
-  | {
-      href: string;
-      reactRouterLink: boolean;
-      disabled?: boolean;
-      hide?: boolean;
-    };
-
-export interface INavItems {
-  dashboard: NavItemType;
-  leaderboard: NavItemType;
-  minting: {
-    mutation: NavItemType;
-    claimRewards: NavItemType;
-  };
-  rent: {
-    lend: NavItemType;
-    borrow: NavItemType;
-    heroes: NavItemType;
-    activity: NavItemType;
-  };
-  gameHub: {
-    games: NavItemType;
-    nfts: NavItemType;
-  };
-  developTools?: {
-    faucet: NavItemType;
-    refreshMetadata: NavItemType;
-  };
-  rpgBattle: NavItemType;
-}
-
 interface IProps {
   //for testing
-  isActiveFunc?: (href: string) => boolean;
+  _stubs?: IStubs;
   className?: string;
   navItems: INavItems;
   baseName?: string;
-}
-
-interface INavItemInternal {
-  caption: string;
-  icon?: JSX.Element;
 }
 
 const dashboardInternal = {
@@ -113,25 +76,6 @@ const rpgBattleInternal = {
   icon: <GameHubIcon />,
 };
 
-type StringMap = { [id: string]: string };
-type NavItemMap = { [id: string]: NavItemType };
-
-const getChildCaptions = (item: INavItemInternal): StringMap => {
-  const map: StringMap = {};
-
-  Object.entries(item).forEach((kvp) => {
-    const [key, value] = kvp;
-
-    if (key !== "caption" || kvp[0] !== "icon") {
-      map[key] = value;
-    }
-  });
-
-  return map;
-};
-
-const _isHrefActive = (href: string) => isHrefActive(window.location, href);
-
 const RenderPanelHeader = ({ caption, icon }: INavItemInternal) => {
   const i = <span className={styles.icon}>{icon}</span>;
   return (
@@ -146,12 +90,7 @@ const getHRef = (it: NavItemType) => (typeof it === "string" ? it : it.href);
 
 type NavItemPairType = [INavItemInternal, NavItemMap];
 
-export const NavMenu = ({
-  className,
-  navItems,
-  isActiveFunc,
-  baseName,
-}: IProps) => {
+export const NavMenu = ({ className, navItems, _stubs, baseName }: IProps) => {
   // to trigger rerendering on react-router pathchange
   useLocation();
 
@@ -175,7 +114,7 @@ export const NavMenu = ({
     collapseNavItemPairs.push([developInternal, developTools]);
   }
 
-  const isActive = isActiveFunc || _isHrefActive;
+  const isActive = createIsHrefActiveFunc(_stubs);
 
   const hasActiveHref = (hrefs: string[]): boolean => hrefs.some(isActive);
 
@@ -260,7 +199,7 @@ export const NavMenu = ({
   };
 
   return (
-    <Menu className={`${styles.root} ${className || ""}`}>
+    <Menu className={classNames(styles.root, className)}>
       {renderItem(dashboard, dashboardInternal)}
       <Collapse
         accordion

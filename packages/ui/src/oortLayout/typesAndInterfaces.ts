@@ -1,7 +1,7 @@
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { ReactNode } from "react";
 import { IWeb3 } from "../connectModal";
-import { INavItems } from "./navMenu";
+import { INavItems, IStubs } from "./navMenu";
 
 export interface ILayoutProps {
   children: ReactNode;
@@ -11,7 +11,7 @@ export interface ILayoutProps {
   web3?: IWeb3;
   className?: string;
   //for testing
-  isActiveFunc?: (href: string) => boolean;
+  _stubs?: IStubs;
   useTopGradient?: boolean;
   baseName?: string;
 }

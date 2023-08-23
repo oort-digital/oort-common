@@ -1,6 +1,6 @@
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { IWeb3 } from "../../connectModal";
-import { INavItems } from "../navMenu";
+import { INavItems, IStubs } from "../navMenu";
 
 export interface IAsideProps {
   supportedWallets: ConnectorNames[];
@@ -10,5 +10,5 @@ export interface IAsideProps {
   oortTokenAddress?: string;
   isDev?: boolean;
   //for testing
-  isActiveFunc?: (href: string) => boolean;
+  _stubs?: IStubs;
 }
