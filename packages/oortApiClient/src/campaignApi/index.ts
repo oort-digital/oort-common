@@ -6,9 +6,9 @@ export type {
   IBrand,
   IBrandDetail,
   IRewardDetail,
-  IGetCampaingsParams,
+  IGetCampaignsParams,
   GetCampaignsResponse,
-  IGetCampaingParams,
+  IGetCampaignParams,
   IGetCampaignResponse,
   IGetRewardsResponse,
 } from "./typesAndInterfaces";

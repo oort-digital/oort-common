@@ -6,13 +6,13 @@ export interface IOortCampaignApi {
     { pageNum, pageSize }: IGetPageBaseParams,
     signal: AbortSignal,
   ) => Promise<GetBrandsResponse>;
-  getCampaings: (
-    { brandIds, keywords, pageNum, pageSize }: IGetCampaingsParams,
+  getCampaigns: (
+    { brandIds, keywords, pageNum, pageSize }: IGetCampaignsParams,
     signal: AbortSignal,
   ) => Promise<GetCampaignsResponse>;
 
-  getCampaing: (
-    { campaignId }: IGetCampaingParams,
+  getCampaign: (
+    { campaignId }: IGetCampaignParams,
     signal: AbortSignal,
   ) => Promise<IGetCampaignResponse>;
 
@@ -89,7 +89,7 @@ export interface IGetCampaignResponse {
   sponsorBrands: IBrandDetail[];
 }
 
-export interface IGetCampaingsParams extends IPagingParams {
+export interface IGetCampaignsParams extends IPagingParams {
   brandIds?: number[];
   keywords?: string;
   claimOnly?: boolean;
@@ -99,7 +99,7 @@ export interface IGetPageBaseParams extends IPagingParams {
   keywords?: string;
 }
 
-export interface IGetCampaingParams {
+export interface IGetCampaignParams {
   campaignId: number;
 }
 export interface IGetRewardsParams {

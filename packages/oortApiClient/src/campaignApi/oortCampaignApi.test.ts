@@ -38,10 +38,10 @@ const oortClientSettings: IAPIConfig = {
   interceptors: OortApiInterceptors.createInstance(logger),
 };
 
-test.skip("debug only getCampaings", async () => {
+test.skip("debug only getCampaigns", async () => {
   const client = OortCampaignApi.createSingleton(oortClientSettings);
 
-  const response = await client.getCampaings(
+  const response = await client.getCampaigns(
     { pageNum: 1, pageSize: 10, brandIds: [1, 2], keywords: "oort" },
     EMPTY_ABORT_SIGNAL,
   );
