@@ -30,3 +30,11 @@ export interface INavItems {
   };
   rpgBattle: NavItemType;
 }
+
+export interface INavItemInternal {
+  caption: string;
+  icon?: JSX.Element;
+}
+
+export type StringMap = { [id: string]: string };
+export type NavItemMap = { [id: string]: NavItemType };

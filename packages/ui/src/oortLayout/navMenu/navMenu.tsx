@@ -11,8 +11,14 @@ import {
 } from "../../icons";
 import { Menu, MenuItemLink } from "../menu";
 import styles from "./navMenu.module.less";
-import { isHrefActive } from "./utils";
-import { INavItems, NavItemType } from "./typesAndInterfaces";
+import { getChildCaptions, isHrefActive } from "./utils";
+import {
+  INavItemInternal,
+  INavItems,
+  NavItemMap,
+  NavItemType,
+} from "./typesAndInterfaces";
+import classNames from "classnames";
 
 const { Panel } = Collapse;
 
@@ -22,11 +28,6 @@ interface IProps {
   className?: string;
   navItems: INavItems;
   baseName?: string;
-}
-
-interface INavItemInternal {
-  caption: string;
-  icon?: JSX.Element;
 }
 
 const dashboardInternal = {
@@ -72,23 +73,6 @@ const developInternal = {
 const rpgBattleInternal = {
   caption: "RPG Battle",
   icon: <GameHubIcon />,
-};
-
-type StringMap = { [id: string]: string };
-type NavItemMap = { [id: string]: NavItemType };
-
-const getChildCaptions = (item: INavItemInternal): StringMap => {
-  const map: StringMap = {};
-
-  Object.entries(item).forEach((kvp) => {
-    const [key, value] = kvp;
-
-    if (key !== "caption" || kvp[0] !== "icon") {
-      map[key] = value;
-    }
-  });
-
-  return map;
 };
 
 const _isHrefActive = (href: string) => isHrefActive(window.location, href);
@@ -221,7 +205,7 @@ export const NavMenu = ({
   };
 
   return (
-    <Menu className={`${styles.root} ${className || ""}`}>
+    <Menu className={classNames(styles.root, className)}>
       {renderItem(dashboard, dashboardInternal)}
       <Collapse
         accordion

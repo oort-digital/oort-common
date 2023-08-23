@@ -1,3 +1,5 @@
+import { INavItemInternal, StringMap } from "./typesAndInterfaces";
+
 type LocationType = {
   origin: string;
   pathname: string;
@@ -28,4 +30,18 @@ export function isHrefActive(curLocation: LocationType, href: string): boolean {
   }
 
   return false;
+}
+
+export function getChildCaptions(item: INavItemInternal): StringMap {
+  const map: StringMap = {};
+
+  Object.entries(item).forEach((kvp) => {
+    const [key, value] = kvp;
+
+    if (key !== "caption" || kvp[0] !== "icon") {
+      map[key] = value;
+    }
+  });
+
+  return map;
 }
