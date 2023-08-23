@@ -3,8 +3,8 @@ import {
   GetBrandsResponse,
   IGetCampaignResponse,
   GetCampaignsResponse,
-  IGetCampaingParams,
-  IGetCampaingsParams,
+  IGetCampaignParams,
+  IGetCampaignsParams,
   IGetPageBaseParams,
   IGetRewardsResponse,
   IOortCampaignApi,
@@ -45,8 +45,8 @@ export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
     return response;
   }
 
-  public async getCampaings(
-    { brandIds, keywords, claimOnly, pageNum, pageSize }: IGetCampaingsParams,
+  public async getCampaigns(
+    { brandIds, keywords, claimOnly, pageNum, pageSize }: IGetCampaignsParams,
     signal: AbortSignal,
   ): Promise<GetCampaignsResponse> {
     const url = oortServerApis.getCampaigns;
@@ -68,8 +68,8 @@ export class OortCampaignApi extends BaseAPI implements IOortCampaignApi {
     return response;
   }
 
-  public async getCampaing(
-    { campaignId }: IGetCampaingParams,
+  public async getCampaign(
+    { campaignId }: IGetCampaignParams,
     signal: AbortSignal,
   ): Promise<IGetCampaignResponse> {
     const url = `${oortServerApis.getCampaigns}/${campaignId}`;
