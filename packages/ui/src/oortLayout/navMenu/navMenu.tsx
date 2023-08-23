@@ -8,8 +8,8 @@ import {
   LeaderboardIcon,
   MintIcon,
   RentAppIcon,
-} from "../icons";
-import { Menu, MenuItemLink } from "./menu";
+} from "../../icons";
+import { Menu, MenuItemLink } from "../menu";
 import styles from "./navMenu.module.less";
 import { isHrefActive } from "./utils";
 import { INavItems, NavItemType } from "./typesAndInterfaces";

@@ -3,4 +3,4 @@ import LayoutMobile from "./layoutMobile";
 
 export { Layout } from "./layout";
 export { LayoutDesktop, LayoutMobile };
-export type { INavItems, NavItemType } from "./typesAndInterfaces";
+export type { INavItems, NavItemType } from "./navMenu";
