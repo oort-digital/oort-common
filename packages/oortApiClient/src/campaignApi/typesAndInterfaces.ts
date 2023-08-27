@@ -71,6 +71,7 @@ export interface IRewardDetail {
   } | null;
   eligible: boolean;
   merkleProof: string | null;
+  claimed: boolean | null;
   clanId: number | null;
   claimMessage: string | null;
   claimUrl: string | null;
