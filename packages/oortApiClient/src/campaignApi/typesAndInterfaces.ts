@@ -26,10 +26,11 @@ export interface ICampaign {
   campaignId: number;
   campaignName: string;
   campaignImage: string;
+  campaignType: string;
   endTime: string;
   startTime: string;
   host: IBrandDetail;
-  rewards: { name: string; image: string }[];
+  rewards: { name: string; image: string, chainId: number }[];
 }
 
 export interface ICampaignDetail {

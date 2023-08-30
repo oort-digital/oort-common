@@ -59,6 +59,7 @@ export interface ILeaderboardBrand {
   url: string;
   wins: number;
   campaignUrl: string;
+  campaignId: number
 }
 
 export interface ILeaderboardInfo {
