@@ -1,6 +1,7 @@
 {
   "name": "@oort-digital/lazy-loader",
-  "version": "0.0.1-alfa.0.0.4",
+  "version": "0.0.1-site-fix.0.0.1",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -29,7 +30,6 @@
   "files": [
     "dist"
   ],
-  "main": "dist/lazy-loader.cjs.js",
-  "module": "dist/lazy-loader.es.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts"
 }
