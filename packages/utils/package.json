@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/utils",
-  "version": "0.0.1-alfa.0.0.3",
+  "version": "0.0.1-site-fix.0.0.1",
   "type": "module",
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "files": [
     "dist"
   ],
-  "module": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts"
 }
