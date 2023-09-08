@@ -150,7 +150,7 @@ const Impl = ({
             iconBefore={tokenIcon}
             iconAfter={
               <Tooltip
-                trigger="click"
+                trigger={["hover", "click"]}
                 className={styles.clickable}
                 title="$OORT is currently in Testnet. After launch, you'll be able to convert to Mainnet at a specified ratio."
               >
