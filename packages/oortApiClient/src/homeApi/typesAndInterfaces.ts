@@ -2,6 +2,7 @@ import { IPagingParams, IPagingResponse } from "../common";
 
 export type GetClansResponse = IPagingResponse<IClan>;
 
+/* eslint-disable no-unused-vars */
 export interface IHomeApi {
     getClans: (
         { keywords, pageNum, pageSize }: IGetClansParams,
@@ -14,6 +15,7 @@ export interface IClan {
     logo: string;
     url: string;
     supply: number;
+    brandColor: string;
     campaigns: number;
 }
 
