@@ -13,6 +13,7 @@ yarn.lock
 /packages/nftProviders/node_modules
 /packages/lazyLoader/node_modules
 /packages/lazyLoaderNextJs/node_modules
+/packages/siteLayout/node_modules
 
 /packages/logger/dist
 /packages/ui/dist
@@ -23,6 +24,7 @@ yarn.lock
 /packages/oortApiClient/dist
 /packages/lazyLoader/dist
 /packages/lazyLoaderNextJs/dist
+/packages/siteLayout/dist
 
 /packages/logger/yarn.lock
 /packages/ui/yarn.lock
@@ -33,6 +35,7 @@ yarn.lock
 /packages/oortApiClient/yarn.lock
 /packages/lazyLoader/yarn.lock
 /packages/lazyLoaderNextJs/yarn.lock
+/packages/siteLayout/yarn.lock
 
 /packages/logger/package-lock.json
 /packages/ui/package-lock.json
@@ -47,3 +50,4 @@ yarn.lock
 /.idea
 
 /packages/lazyLoaderNextJs/.next
+/packages/siteLayout/.next

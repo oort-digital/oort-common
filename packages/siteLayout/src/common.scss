@@ -1,0 +1,56 @@
+$header-height-desktop: 92px;
+$header-height-mobile: 77px;
+
+$xs-side-indent: 6%;
+$sm-side-indent: 16.7%;
+$md-side-indent: 16.7%;
+$xl-side-indent: 16.7%;
+
+$xs-header-indent: 6%;
+$sm-header-indent: 8%;
+$md-header-indent: 10%;
+$xl-header-indent: 14%;
+
+$sm-screen-size: 1280px;
+$md-screen-size: 1680px;
+$xl-screen-size: 1920px;
+
+$max-tablet-screen-size: 1200px;
+$min-table-screen-size: 650px;
+
+@mixin responsive-header-padding-mixin-r {
+  padding-right: $xs-header-indent;
+
+  @media (min-width: $sm-screen-size) {
+    padding-right: $sm-header-indent;
+  }
+
+  @media (min-width: $md-screen-size) {
+    padding-right: $md-header-indent;
+  }
+
+  @media (min-width: $xl-screen-size) {
+    padding-right: $xl-header-indent;
+  }
+}
+
+@mixin responsive-header-padding-mixin-l {
+  padding-left: $xs-header-indent;
+
+  @media (min-width: $sm-screen-size) {
+    padding-left: $sm-header-indent;
+  }
+
+  @media (min-width: $md-screen-size) {
+    padding-left: $md-header-indent;
+  }
+
+  @media (min-width: $xl-screen-size) {
+    padding-left: $xl-header-indent;
+  }
+}
+
+@mixin responsive-header-padding-mixin {
+  @include responsive-header-padding-mixin-l;
+  @include responsive-header-padding-mixin-r;
+}

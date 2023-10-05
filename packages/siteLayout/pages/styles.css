@@ -1,0 +1,16 @@
+@import url("reset.css");
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap');
+
+* {
+    font-size: 100%;
+    font-family: 'Lato';
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+}
+
+body {
+    background-color: #222831;
+    overflow-x: hidden;
+    width: 100%;
+}

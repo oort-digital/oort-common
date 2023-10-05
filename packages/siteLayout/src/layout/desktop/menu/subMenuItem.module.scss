@@ -1,0 +1,46 @@
+.menuItem {
+  padding-top: 14px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+
+  &:global(.active) {
+    border-left: 5px solid #55AFBC;
+    background: #2A313C;
+    cursor: default;
+    & > :global(.icon) { flex: 0 0 75px; }
+  }
+  
+  &:hover
+  {
+    background: #2A313C;
+  }
+
+  > :global(.icon) {
+    display: flex;
+    color: #55AFBC;
+  }
+
+  > .content {
+    
+    flex: 1 1 auto;
+  
+    > h3 {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 16.4px;
+      color: #D7D7D7;
+    }
+  
+    > p {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 130%;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.6);
+      width: 298px;
+    }
+  }
+}

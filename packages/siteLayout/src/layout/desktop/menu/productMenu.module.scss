@@ -1,0 +1,13 @@
+.submenu {
+    width: 418px;
+    left: -190px;
+    .item {
+        padding-top: 14px;
+        padding-bottom: 9px;
+        
+        :global(.icon) {
+            flex: 0 0 80px;
+            justify-content: center;
+        }
+    }
+}

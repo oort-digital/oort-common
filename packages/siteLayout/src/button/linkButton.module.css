@@ -1,0 +1,5 @@
+.link_btn {
+    display: inline-flex;
+}
+
+.link_btn > button { width: 100%; z-index: 0; }
