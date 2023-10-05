@@ -6,3 +6,4 @@ export * from "./emptyAbortSignal";
 export * from "./error";
 export * from "./string";
 export * from "./vars";
+export * from "./parseLongValue";
