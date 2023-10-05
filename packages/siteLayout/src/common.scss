@@ -54,3 +54,10 @@ $min-table-screen-size: 650px;
   @include responsive-header-padding-mixin-l;
   @include responsive-header-padding-mixin-r;
 }
+
+@mixin phone-side-padding-mixin {
+  @media (max-width: $max-tablet-screen-size) {
+    padding-right: $xs-side-indent;
+    padding-left: $xs-side-indent;
+  }
+}

@@ -1,0 +1,52 @@
+
+.subscribe {
+  width: 100%;
+  min-width: 320px;
+  display: flex;
+  height: 48px;
+  background: #323C4D;
+  border: 1px solid rgba(227, 243, 249, 0.7);
+  border-radius: 140px;
+  align-items: center;
+
+  input {
+    flex: auto;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-left: 24px;
+    color: #ffffff;
+  }
+
+  @mixin footer_placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: rgba(227, 243, 249, 0.3);
+  }
+
+  ::-webkit-input-placeholder {
+    @include footer_placeholder();
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    @include footer_placeholder();
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    @include footer_placeholder();
+  }
+  :-ms-input-placeholder {
+    @include footer_placeholder();
+  }
+
+  button {
+    height: 42px;
+    flex: 150px;
+    margin-right: 3px;
+    background: rgba(227, 243, 249, 0.7);
+
+    :after {
+      background: rgba(227, 243, 249, 0.7);
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "../common.scss";
+.container_10 {
+  width: 100%;
+  // 72*10 + 44*9 =
+  max-width: 1116px;
+  display: flex;
+
+  @include phone-side-padding-mixin;
+}
