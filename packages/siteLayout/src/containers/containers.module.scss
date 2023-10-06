@@ -4,6 +4,6 @@
   // 72*10 + 44*9 =
   max-width: 1116px;
   display: flex;
-
+  flex-flow: row wrap;
   @include phone-side-padding-mixin;
 }
