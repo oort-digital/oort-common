@@ -13,11 +13,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        {/* <div className={styles.footer}>
-          <div className={styles.container}>
-            <FooterSection />
-          </div>
-        </div> */}
         <Footer>
           <FooterSection />
         </Footer>

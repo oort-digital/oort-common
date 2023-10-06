@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/site-layout",
-  "version": "0.0.1-beta.0.0.1",
+  "version": "0.0.1-beta.0.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -18,7 +18,7 @@
     "antd": "^5.9.4",
     "classnames": "^2.3.2",
     "jsonp": "^0.2.1",
-    "next": "^13.5.4",
+    "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.68.0"
