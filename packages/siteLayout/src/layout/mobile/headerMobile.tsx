@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import React from "react";
 import {
   communities,
@@ -28,7 +28,7 @@ const Footer = () => {
 };
 
 const HeaderMobile = () => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   const renderLink = (text: string, subMenu: SubMenu[]) => (
     <>
@@ -36,7 +36,7 @@ const HeaderMobile = () => {
       {subMenu.map((item) => (
         <Link
           className={classNames({
-            [styles.active]: router.pathname === item.href,
+            [styles.active]: pathname === item.href,
           })}
           key={item.title}
           href={item.href}
