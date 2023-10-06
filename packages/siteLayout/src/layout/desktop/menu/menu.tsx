@@ -31,7 +31,9 @@ export const Menu = ({
   const pathname = usePathname();
   const isActive = subMenu.some((x) => x.href === pathname);
 
-  logger.debug(`OortSiteMenu. Pathname: ${pathname} isActive: ${isActive}`);
+  logger.debug(
+    `OortSiteMenu. Title:${title} Pathname:${pathname} isActive:${isActive}`
+  );
 
   const onAnimationEnd = (event: React.AnimationEvent<HTMLUListElement>) => {
     if (event.animationName.includes("fadeOut")) {
