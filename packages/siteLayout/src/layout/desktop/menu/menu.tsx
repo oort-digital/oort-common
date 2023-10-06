@@ -5,8 +5,10 @@ import classNames from "classnames";
 import { SubMenuItem } from "./subMenuItem";
 import { usePathname } from "next/navigation";
 import { CSSProperties } from "react";
+import { ILogger } from "@oort-digital/logger";
 
 export interface IMenuProps {
+  logger: ILogger;
   title: string;
   subMenu?: SubMenu[];
   href?: string;
@@ -24,10 +26,12 @@ export const Menu = ({
   subMenu = [],
   maxDescriptionLen,
   subMenuStyle,
+  logger,
 }: IMenuProps) => {
   const pathname = usePathname();
-
   const isActive = subMenu.some((x) => x.href === pathname);
+
+  logger.debug(`OortSiteMenu. Pathname: ${pathname} isActive: ${isActive}`);
 
   const onAnimationEnd = (event: React.AnimationEvent<HTMLUListElement>) => {
     if (event.animationName.includes("fadeOut")) {
