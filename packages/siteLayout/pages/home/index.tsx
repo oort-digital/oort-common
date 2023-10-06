@@ -1,16 +1,16 @@
-import { CSSProperties } from "react";
+import { Contaner10 } from "../../src";
+import styles from "./home.module.css";
 
 function Home() {
-  const styles: CSSProperties = {
-    marginTop: "92px",
-    padding: "100px 0 100px 0",
-    width: "100%",
-    textAlign: "center",
-    color: "white",
-    fontSize: "36px",
-  };
+  return (
+    <div className={styles.home}>
+      <Contaner10 className={styles.c10}>Container10</Contaner10>
 
-  return <div style={styles}>Some content</div>;
+      <Contaner10 className={styles.c10} setStylesToChild>
+        <div>Container10 - setStylesToChild</div>
+      </Contaner10>
+    </div>
+  );
 }
 
 export default Home;
