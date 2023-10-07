@@ -1,27 +1,42 @@
-import { DeviceType, TabletBreakPoints } from "@oort-digital/lazy-loader"
-import { ILogger } from "@oort-digital/logger"
-import { useDeviceTypeNext } from "./useDeviceTypeNext"
+import { ILogger } from "@oort-digital/logger";
+import { TabletBreakPoints } from "./client";
+import { LazyLoaderSsr } from "./lazyLoaderSsr";
+import { LazyLoaderClient } from "./lazyLoaderClient";
+import { isSsrCheck } from "./isSsrCheck";
 
 interface ILLProps {
-    desktop: JSX.Element
-    mobile: JSX.Element
-    tablet: JSX.Element
-    logger?: ILogger
-    tabletBreakPoints?: TabletBreakPoints
-  }
-  
-export const LazyLoaderNextJs = ({ desktop, mobile, tablet, logger, tabletBreakPoints}: ILLProps) => {
-
-  const deviceType = useDeviceTypeNext({ logger, tabletBreakPoints })
-
-  if(deviceType === DeviceType.Desktop) {
-    return <>{desktop}</>
-  }
-  else if(deviceType === DeviceType.Phone) {
-    return <>{mobile}</>
-  }
-
-  return <>{tablet}</>
+  desktop: JSX.Element;
+  mobile: JSX.Element;
+  tablet: JSX.Element;
+  logger?: ILogger;
+  tabletBreakPoints?: TabletBreakPoints;
 }
 
+export const LazyLoaderNextJs = ({
+  desktop,
+  mobile,
+  tablet,
+  logger,
+  tabletBreakPoints,
+}: ILLProps) => {
+  if (isSsrCheck()) {
+    return (
+      <LazyLoaderSsr
+        logger={logger}
+        desktop={desktop}
+        mobile={mobile}
+        tablet={tablet}
+      />
+    );
+  }
 
+  return (
+    <LazyLoaderClient
+      logger={logger}
+      tabletBreakPoints={tabletBreakPoints}
+      desktop={desktop}
+      mobile={mobile}
+      tablet={tablet}
+    />
+  );
+};

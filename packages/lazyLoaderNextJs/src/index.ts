@@ -1,5 +1,4 @@
-export { LazyLoaderNextJs } from "./lazyLoaderNextJs"
-export { getSsrDeviceTypeProps } from "./getSsrDeviceTypeProps"
-export { isSsrCheck } from "./isSsrCheck"
-export { SsrDeviceTypeContext } from "./useSsrDeviceType"
-export { useDeviceTypeNext } from "./useDeviceTypeNext"
+export { LazyLoaderNextJs } from "./lazyLoaderNextJs";
+export { getSsrDeviceType } from "./getSsrDeviceType";
+export { isSsrCheck } from "./isSsrCheck";
+export type { DeviceType } from "./client";
