@@ -8,7 +8,9 @@
     "src/**/*",
     "typings.d.ts",
     "pages",
-    "demoComponents"],
+    "demoComponents",
+    ".next/types/**/*.ts"
+  ],
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "./dist",
@@ -17,6 +19,11 @@
     "composite": false,
     "noEmit": true,
     "incremental": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   }
 }
