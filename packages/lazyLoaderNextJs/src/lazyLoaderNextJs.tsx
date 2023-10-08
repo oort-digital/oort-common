@@ -9,6 +9,7 @@ interface ILLProps {
   mobile: JSX.Element;
   tablet: JSX.Element;
   logger?: ILogger;
+  userAgent: string | null;
   tabletBreakPoints?: TabletBreakPoints;
 }
 
@@ -18,10 +19,12 @@ export const LazyLoaderNextJs = ({
   tablet,
   logger,
   tabletBreakPoints,
+  userAgent,
 }: ILLProps) => {
   if (isSsrCheck()) {
     return (
       <LazyLoaderSsr
+        userAgent={userAgent}
         logger={logger}
         desktop={desktop}
         mobile={mobile}
