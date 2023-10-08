@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/site-layout",
-  "version": "0.0.1-beta.0.1.1",
+  "version": "0.0.1-beta.0.1.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -13,7 +13,7 @@
     "rm": "rimraf node_modules"
   },
   "dependencies": {
-    "@oort-digital/lazy-loader-next-js": "0.0.1-site-layout.0.0.5",
+    "@oort-digital/lazy-loader-next-js": "0.0.1-site-layout.0.0.6",
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
     "@oort-digital/utils": "^0.0.1-alfa.0.0.5",
     "antd": "^5.9.4",
