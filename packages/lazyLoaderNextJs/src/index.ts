@@ -1,3 +1,3 @@
 export { LazyLoaderNextJs } from "./lazyLoaderNextJs";
 export { isSsrCheck } from "./isSsrCheck";
-export type { DeviceType } from "./client";
+export type { DeviceType, useDeviceType } from "./client";
