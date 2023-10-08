@@ -27,6 +27,8 @@ export const Menu = ({
   subMenuStyle,
 }: IMenuProps) => {
   const pathname = usePathname();
+
+  console.log(">>>> path: ", pathname);
   const isActive = subMenu.some((x) => x.href === pathname);
 
   const onAnimationEnd = (event: React.AnimationEvent<HTMLUListElement>) => {
