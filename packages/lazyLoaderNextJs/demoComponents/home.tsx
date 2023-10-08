@@ -24,7 +24,7 @@ export const Home = () => {
 
   return (
     <LazyLoaderNextJs
-      userAgent={ua}
+      deviceType={ua.device.type}
       logger={logger}
       desktop={<DesktopEl {...desktopProps} />}
       mobile={<MobileEl />}
