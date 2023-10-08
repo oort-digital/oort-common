@@ -1,6 +1,7 @@
 import { ILogger } from "@oort-digital/logger";
 import { DeviceType } from "./client";
 import { getSsrDeviceType } from "./getSsrDeviceType";
+import { headers } from "next/headers";
 
 interface ILLProps {
   desktop: JSX.Element;
@@ -15,7 +16,10 @@ export const LazyLoaderSsr = ({
   tablet,
   logger,
 }: ILLProps) => {
-  const ssrDeviceType = getSsrDeviceType(logger);
+  const headerList = headers();
+  const userAgent = headerList.get("user-agent");
+
+  const ssrDeviceType = getSsrDeviceType(userAgent, logger);
 
   if (ssrDeviceType === DeviceType.Desktop) {
     return <>{desktop}</>;

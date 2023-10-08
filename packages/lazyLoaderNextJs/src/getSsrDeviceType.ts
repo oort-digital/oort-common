@@ -2,7 +2,6 @@ import { ILogger } from "@oort-digital/logger";
 import { UAParser } from "ua-parser-js";
 import { toErrorWithMessage } from "@oort-digital/utils";
 import { DeviceType } from "./client";
-import { headers } from "next/headers";
 
 type UADeviceType = "desktop" | "mobile" | "tablet";
 interface IDeviceInfo {
@@ -33,9 +32,16 @@ function parseDeviceType(
   return DeviceType.Desktop;
 }
 
-export function getSsrDeviceType(logger: ILogger | undefined): DeviceType {
-  const headerList = headers();
-  const userAgent = headerList.get("user-agent");
+export function getSsrDeviceType(
+  userAgent: string | null,
+  logger: ILogger | undefined
+): DeviceType {
+  if (userAgent === null) {
+    logger?.warn("Empty user-agent header");
+    return DeviceType.Desktop;
+  }
+
+  logger?.debug(`UA: ${userAgent}`);
 
   if (userAgent === null) {
     logger?.warn("Empty user-agent header");
