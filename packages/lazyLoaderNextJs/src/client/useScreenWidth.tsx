@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect } from "react";
 import { debounceFunction } from "@oort-digital/utils";
 import { ILogger } from "@oort-digital/logger";
@@ -30,8 +29,8 @@ export enum ScreenSize {
   xxl = "xxl",
 }
 
-const logWidth = (msg: string, logger?: ILogger) => {
-  if (logger) {
+const logWidth = (msg: string, isSSR: boolean, logger?: ILogger) => {
+  if (logger && isSSR) {
     logger.debug(`screenSize ${msg}`);
     logger.debug(`screenSize window.outerWidth: ${window.outerWidth}`);
     logger.debug(`screenSize window.innerWidth: ${window.innerWidth}`);
@@ -40,38 +39,48 @@ const logWidth = (msg: string, logger?: ILogger) => {
   }
 };
 
-const getWidth = (): number => {
+const getWidth = (isSSR: boolean): number => {
+  if (isSSR) {
+    return -1;
+  }
   //return window.screen.availWidth
   return window?.innerWidth;
 };
 
 export interface IScreenSizeParams {
   logger?: ILogger;
+  isSsr?: boolean;
 }
 
-export function useScreenWidth(logger?: ILogger): number {
-  logWidth("init", logger);
-  const [screenWidth, setScreenWidth] = useState(() => getWidth());
+export function useScreenWidth(
+  isSsr: boolean = false,
+  logger?: ILogger
+): number {
+  logWidth("init", isSsr, logger);
+  const [screenWidth, setScreenWidth] = useState(() => getWidth(isSsr));
 
   const handleResize = () => {
-    const w = getWidth();
-    logWidth("handleResize", logger);
+    const w = getWidth(isSsr);
+    logWidth("handleResize", isSsr, logger);
     setScreenWidth(w);
   };
 
   const handleResizeDebounced = debounceFunction(handleResize, 300);
 
   useEffect(() => {
+    if (isSsr) {
+      return;
+    }
     window.addEventListener("resize", handleResizeDebounced);
     return () => window.removeEventListener("resize", handleResizeDebounced);
-  }, []);
+  }, [isSsr]);
 
   useEffect(() => {
-    const actualWidth = getWidth();
+    const actualWidth = getWidth(isSsr);
     if (actualWidth !== screenWidth) {
       handleResize();
     }
-  }, []);
+  }, [isSsr]);
 
   return screenWidth;
 }

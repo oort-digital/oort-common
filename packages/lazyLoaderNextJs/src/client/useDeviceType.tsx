@@ -1,5 +1,6 @@
 import { ILogger } from "@oort-digital/logger";
 import { useScreenWidth } from "./useScreenWidth";
+import { isSsrCheck } from "../isSsrCheck";
 
 export type TabletBreakPoints = [number, number];
 
@@ -24,7 +25,9 @@ export function useDeviceType({
   tabletBreakPoints,
   logger,
 }: IParams = DEFAULT_PARAMS): DeviceType {
-  const screenWidth = useScreenWidth(logger);
+  const isSsr = isSsrCheck();
+
+  const screenWidth = useScreenWidth(isSsr, logger);
 
   tabletBreakPoints = tabletBreakPoints || TABLET_BREAK_POINTS_DEFAULT;
 
