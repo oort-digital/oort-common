@@ -8,8 +8,8 @@ interface IProps {
   deviceType?: string;
 }
 
-const desktopLoader: Loader<{ logger: ILogger }> = () => import("./desktop");
-const mobileLoader: Loader<{ logger: ILogger }> = () => import("./mobile");
+const desktopLoader: Loader = () => import("./desktop");
+const mobileLoader: Loader = () => import("./mobile");
 
 export const OortSiteLayout = ({ children, logger, deviceType }: IProps) => {
   const DesktopEl = dynamic(desktopLoader);
@@ -17,10 +17,11 @@ export const OortSiteLayout = ({ children, logger, deviceType }: IProps) => {
   return (
     <>
       <LazyLoaderNextJs
+        logger={logger}
         deviceType={deviceType}
-        desktop={<DesktopEl logger={logger} />}
-        mobile={<MobileEl logger={logger} />}
-        tablet={<MobileEl logger={logger} />}
+        desktop={<DesktopEl />}
+        mobile={<MobileEl />}
+        tablet={<MobileEl />}
       />
       {children}
     </>

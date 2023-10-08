@@ -5,13 +5,8 @@ import { LogoLink } from "./logoLink";
 import { communities, ecosystem, products, resources } from "../subMenu";
 import { CommunityMenu, EcosystemMenu, ProductMenu } from "./menu";
 import { GAMEHUB_URL } from "../../constants";
-import { ILogger } from "@oort-digital/logger";
 
-interface IProps {
-  logger: ILogger;
-}
-
-const Header = ({ logger }: IProps) => {
+const Header = () => {
   return (
     <div className={styles.header}>
       <LogoLink className={styles.logo} />
