@@ -4,6 +4,10 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import { dependencies } from "./package.json";
 
+const external = [...Object.keys(dependencies), ...["react/jsx-runtime"]];
+
+console.log(JSON.stringify(external));
+
 export default defineConfig({
   plugins: [
     react(),
@@ -12,17 +16,19 @@ export default defineConfig({
     }),
   ],
   build: {
+    minify: false,
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
       formats: ["es", "cjs"],
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: Object.keys(dependencies),
+      external,
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          "react/jsx-runtime": "react/jsx-runtime",
         },
         sourcemap: true,
       },
