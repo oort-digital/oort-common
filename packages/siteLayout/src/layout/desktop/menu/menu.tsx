@@ -4,11 +4,11 @@ import { SubMenu } from "../../subMenu";
 import Link from "next/link";
 import classNames from "classnames";
 import { SubMenuItem } from "./subMenuItem";
-import { usePathname } from "next/navigation";
 import { CSSProperties } from "react";
 
 export interface IMenuProps {
   title: string;
+  pathname: string;
   subMenu?: SubMenu[];
   href?: string;
   maxDescriptionLen?: number;
@@ -19,6 +19,7 @@ export interface IMenuProps {
 
 export const Menu = ({
   title,
+  pathname,
   href,
   subMenuClassName,
   subMenuItemClassName,
@@ -26,9 +27,6 @@ export const Menu = ({
   maxDescriptionLen,
   subMenuStyle,
 }: IMenuProps) => {
-  const pathname = usePathname();
-
-  console.log(">>>> path: ", pathname);
   const isActive = subMenu.some((x) => x.href === pathname);
 
   const onAnimationEnd = (event: React.AnimationEvent<HTMLUListElement>) => {
@@ -60,6 +58,7 @@ export const Menu = ({
       <div className={styles.arrow}></div>
       {subMenu.map((menu) => (
         <SubMenuItem
+          pathname={pathname}
           key={menu.title}
           item={menu}
           className={subMenuItemClassName}

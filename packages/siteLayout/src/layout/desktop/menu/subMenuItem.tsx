@@ -1,6 +1,5 @@
 import styles from "./subMenuItem.module.scss";
 import { SubMenu } from "../../subMenu";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cutLongString } from "@oort-digital/utils";
 import classNames from "classnames";
@@ -9,12 +8,17 @@ interface IProps {
   item: SubMenu;
   maxDescriptionLen?: number;
   className?: string;
+  pathname: string;
 }
 
-export const SubMenuItem = ({ item, maxDescriptionLen, className }: IProps) => {
-  const pathName = usePathname();
+export const SubMenuItem = ({
+  item,
+  maxDescriptionLen,
+  className,
+  pathname,
+}: IProps) => {
   const { href, title, description, icon } = item;
-  const isActive = pathName === href;
+  const isActive = pathname === href;
 
   return (
     <li>

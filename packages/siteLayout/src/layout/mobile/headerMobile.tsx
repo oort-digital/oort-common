@@ -1,7 +1,6 @@
 "use client";
 import classNames from "classnames";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React from "react";
 import {
   communities,
@@ -15,6 +14,7 @@ import { LogoMobileLink } from "./logoMobile";
 import { SideMenu } from "./sideMenu";
 import { Button } from "../../button";
 import { GAMEHUB_URL } from "../../constants";
+import { IHeaderProps } from "../desktop";
 
 const Footer = () => {
   return (
@@ -28,9 +28,7 @@ const Footer = () => {
   );
 };
 
-const HeaderMobile = () => {
-  const pathname = usePathname();
-
+const HeaderMobile = ({ pathname }: IHeaderProps) => {
   const renderLink = (text: string, subMenu: SubMenu[]) => (
     <>
       <div>{text}</div>

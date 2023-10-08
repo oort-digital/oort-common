@@ -5,6 +5,7 @@ import { Menu } from "./menu";
 interface IProductMenu {
   title: string;
   subMenu: SubMenu[];
+  pathname: string;
 }
 
 export const ProductMenu = (props: IProductMenu) => {

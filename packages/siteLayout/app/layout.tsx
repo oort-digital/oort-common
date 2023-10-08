@@ -1,10 +1,9 @@
 import React from "react";
-import { Footer, FooterSection, OortSiteLayout } from "../src";
+import { Footer, FooterSection } from "../src";
 import "./styles.css";
-import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
 import { userAgent } from "next/server";
 import { headers } from "next/headers";
-const logger = new ConsoleLogger(LogLevel.Debug);
+import { SiteLayout } from "./siteLayout";
 
 export default function RootLayout({
   children,
@@ -18,12 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <OortSiteLayout deviceType={ua.device.type} logger={logger}>
+        <SiteLayout deviceType={ua.device.type}>
           <main>{children}</main>
           <Footer>
             <FooterSection />
           </Footer>
-        </OortSiteLayout>
+        </SiteLayout>
       </body>
     </html>
   );

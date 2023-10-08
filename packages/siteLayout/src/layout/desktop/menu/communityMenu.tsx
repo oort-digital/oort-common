@@ -4,6 +4,7 @@ import { Menu } from "./menu";
 
 interface IProps {
   title: string;
+  pathname: string;
   subMenu: SubMenu[];
   width: number;
   left: number;

@@ -7,6 +7,7 @@ interface IProps {
   subMenu: SubMenu[];
   width: number;
   left: number;
+  pathname: string;
 }
 
 export const EcosystemMenu = (props: IProps) => {
