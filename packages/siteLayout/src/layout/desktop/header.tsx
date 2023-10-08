@@ -16,23 +16,20 @@ const Header = ({ logger }: IProps) => {
     <div className={styles.header}>
       <LogoLink className={styles.logo} />
       <nav>
-        <ProductMenu logger={logger} title="Products" subMenu={products} />
+        <ProductMenu title="Products" subMenu={products} />
         <EcosystemMenu
-          logger={logger}
           title="Ecosystem"
           subMenu={ecosystem}
           width={450}
           left={-190}
         />
         <CommunityMenu
-          logger={logger}
           title="Community"
           subMenu={communities}
           width={252}
           left={-90}
         />
         <CommunityMenu
-          logger={logger}
           title="Resources"
           subMenu={resources}
           width={290}

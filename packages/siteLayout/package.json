@@ -13,7 +13,7 @@
     "rm": "rimraf node_modules"
   },
   "dependencies": {
-    "@oort-digital/lazy-loader-next-js": "0.0.1-site-layout.0.0.1",
+    "@oort-digital/lazy-loader-next-js": "0.0.1-site-layout.0.0.3",
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
     "@oort-digital/utils": "^0.0.1-alfa.0.0.5",
     "antd": "^5.9.4",

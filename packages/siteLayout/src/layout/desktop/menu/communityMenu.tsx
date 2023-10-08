@@ -1,10 +1,8 @@
 import styles from "./communityMenu.module.scss";
 import { SubMenu } from "../../subMenu";
 import { Menu } from "./menu";
-import { ILogger } from "@oort-digital/logger";
 
 interface IProps {
-  logger: ILogger;
   title: string;
   subMenu: SubMenu[];
   width: number;
