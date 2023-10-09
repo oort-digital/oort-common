@@ -20,7 +20,7 @@ import {
 import Link from "next/link";
 import classNames from "classnames";
 import { Subscribe, SubscribeType } from "../../subscribe";
-import { Contaner10 } from "../../containers";
+import { Container10 } from "../../containers";
 
 const bottomSocialIcon = [
   {
@@ -40,7 +40,7 @@ interface IProps {
 export const FooterSection = ({ className }: IProps) => {
   return (
     <>
-      <Contaner10 className={classNames(className, styles.section)}>
+      <Container10 className={classNames(className, styles.section)}>
         <nav>
           <span>Products</span>
           <Link href="/nft-rental">NFT Rental</Link>
@@ -70,7 +70,7 @@ export const FooterSection = ({ className }: IProps) => {
           <Link href={TUTORIALS_URL}>Tutorials</Link>
           <Link href={ANNOUNCEMENT_URL}>Announcement</Link>
         </nav>
-      </Contaner10>
+      </Container10>
       <div className={styles.subscribe}>
         <Subscribe style={SubscribeType.FooterSubscribe} />
       </div>

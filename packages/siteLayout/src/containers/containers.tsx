@@ -9,7 +9,7 @@ interface IProps {
   setStylesToChild?: boolean;
 }
 
-export function Contaner10({
+export function Container10({
   className,
   children,
   setStylesToChild = false,
