@@ -1,0 +1,31 @@
+{
+  "name": "@oort-digital/antd-components",
+  "version": "0.0.1-beta.0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oort-digital/oort-common.git"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:types": "tsc",
+    "build": "vite build",
+    "rm": "rimraf node_modules && rimraf yarn.lock"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "18.7.14",
+    "@types/react": "^18.2.28",
+    "@types/react-dom": "^18.2.13",
+    "@vitejs/plugin-react": "^4.1.0",
+    "typescript": "^5",
+    "vite": "^4.4.11",
+    "vite-plugin-dts": "^3.6.0"
+  },
+  "license": "UNLICENSED",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts"
+}
