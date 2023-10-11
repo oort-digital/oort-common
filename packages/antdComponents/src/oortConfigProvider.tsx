@@ -1,7 +1,7 @@
 import { ConfigProvider, ThemeConfig } from "antd";
 import { ReactNode } from "react";
 
-export const OortAntdThemeConfig: ThemeConfig = {
+const OortAntdThemeConfig: ThemeConfig = {
   token: {
     colorPrimary: "#2FB4AC", // @primary-6:
   },
