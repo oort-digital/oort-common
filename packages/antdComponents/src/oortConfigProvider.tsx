@@ -1,9 +1,10 @@
 import { ConfigProvider, ThemeConfig } from "antd";
 import { ReactNode } from "react";
+import { primary6 } from "./styles/palette";
 
 const OortAntdThemeConfig: ThemeConfig = {
   token: {
-    colorPrimary: "#2FB4AC", // @primary-6:
+    colorPrimary: primary6,
   },
 };
 
