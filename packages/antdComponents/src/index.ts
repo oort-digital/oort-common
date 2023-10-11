@@ -1,2 +1,2 @@
-export * from "./oortAntdThemeConfig";
+export * from "./oortConfigProvider";
 export * from "./pageLoader";
