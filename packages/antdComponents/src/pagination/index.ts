@@ -1,1 +1,1 @@
-export { Pagination } from "antd";
+export { OortPagination as Pagination } from "./pagination";

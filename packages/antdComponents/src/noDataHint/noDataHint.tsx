@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { NoDataIcon } from "../icons";
+import classNames from "classnames";
 import styles from "./noDataHint.module.scss";
 
 interface IProps {
@@ -13,7 +14,7 @@ export const NoDataHint = ({
   text = "No data",
   icon = <NoDataIcon />,
 }: IProps) => (
-  <div className={`${styles.empty_hint} ${className}`}>
+  <div className={classNames(styles.empty_hint, className)}>
     {icon}
     {text}
   </div>
