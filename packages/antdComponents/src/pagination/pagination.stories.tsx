@@ -14,7 +14,11 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   render: () => (
     <OortConfigProvider>
-      <Pagination defaultCurrent={1} total={50} />
+      <Pagination
+        style={{ background: "gray" }}
+        defaultCurrent={1}
+        total={50}
+      />
     </OortConfigProvider>
   ),
 };

@@ -1,3 +1,20 @@
-.oort_pagination {
-  background-color: red;
+@import "../styles/palette.scss";
+
+.oort_pagination:global(.ant-pagination) {
+  > li {
+    &:global(.ant-pagination-item-active) {
+      border-color: $primary-6;
+    }
+
+    &:global(.ant-pagination-disabled) > button {
+      color: $dark-5;
+
+      &:hover {
+        color: $dark-5;
+      }
+    }
+
+    background-color: $dark-4;
+    border: 1px solid $dark-5;
+  }
 }

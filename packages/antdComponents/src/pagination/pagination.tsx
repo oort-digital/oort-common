@@ -10,7 +10,5 @@ export function OortPagination(props: PaginationData) {
     ...{ className },
   };
 
-  debugger;
-
   return <Pagination {...mergedProps} />;
 }
