@@ -11,23 +11,9 @@ const OortAntdThemeConfig: ThemeConfig = {
   components: {
     Pagination: {
       colorText: dark9,
-
       colorBorder: "red",
       colorBorderSecondary: "red",
-
-      // colorFillAlter: "red",
       colorBgContainer: dark4,
-      // colorBgContainerDisabled: "red",
-      // colorBgBase: "red",
-      // colorBgBlur: "red",
-      // colorBgElevated: "red",
-      // colorBgLayout: "red",
-      // itemBg: "red",
-      // colorPrimaryBg: "red",
-      // itemActiveBg: "red",
-      // itemActiveBgDisabled: "red",
-      // colorBgMask: "red",
-      // itemInputBg: "red",
     },
   },
 };
