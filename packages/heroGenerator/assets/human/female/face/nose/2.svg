@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2020 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="129.436mm" height="197.988mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 2946.25 4506.65"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:none}
+    .fil2 {fill:#501D33}
+    .fil1 {fill:#D77D75}
+    .fil3 {fill:#FFCFA5}
+    .fil4 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Слой_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <rect id="_166536576" class="fil0" width="2946.25" height="4506.65"/>
+  <g id="_843347504">
+   <path class="fil1" d="M1295.18 1644.53c0,0 110.82,85.21 81.91,245.73l36.73 -22.79c0,0 23.48,-120.88 -118.64,-222.94z"/>
+   <path class="fil1" d="M1608.61 1647.63c-57.33,68.02 -73.12,110.34 -80.75,183.68 0,0 -44.12,-112.31 80.75,-183.68z"/>
+   <g>
+    <path class="fil2" d="M1385.67 2022.3c-27.76,0.99 -42.94,-12.21 -50.81,-25.86 -19.2,-33.29 -11.09,-88.99 26.36,-125.01 52.57,-50.56 137.35,-51.77 191.87,-3.89 57.31,50.31 51.21,145.51 -8.46,153.26 -64.43,-9.43 -94.54,-7.92 -158.97,1.5z"/>
+    <path class="fil3" d="M1387.39 2023.41c-48.77,-9.29 -53.43,-79.12 -9.13,-121.73 44.09,-42.4 115.18,-43.41 160.91,-3.26 48.06,42.2 44.46,115.46 -5.58,124.99 -54.04,-7.91 -92.16,-7.91 -146.19,0z"/>
+    <path class="fil1" d="M1387.39 2023.41c-40.66,-7.74 -50.65,-57.56 -27.19,-98.61 23.86,18 107.58,70.19 199.92,-1.13 24.3,41.25 14.5,91.92 -26.53,99.73 -32.64,9.87 -77.81,17.24 -146.19,0z"/>
+    <g>
+     <path class="fil2" d="M1381.09 2000.62c0,0 -5.42,-28.31 21.68,-27.7 27.1,0.6 48.18,24.69 46.37,40.95 -1.81,16.26 -25.29,-19.27 -68.05,-13.25z"/>
+     <path class="fil2" d="M1546.98 2000.62c0,0 5.42,-28.31 -21.68,-27.7 -27.1,0.6 -48.18,24.69 -46.37,40.95 1.81,16.26 25.29,-19.27 68.05,-13.25z"/>
+    </g>
+    <ellipse class="fil4" cx="1457.81" cy="1899.44" rx="57.52" ry="26.12"/>
+   </g>
+  </g>
+ </g>
+</svg>
