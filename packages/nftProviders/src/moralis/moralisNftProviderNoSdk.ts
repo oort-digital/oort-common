@@ -29,7 +29,7 @@ interface IMoralisResponse<TResult> {
 }
 
 interface IMoralisPagingResponse<TResult> extends IMoralisResponse<TResult> {
-  total: number;
+  //   total: number;
   page: number;
   page_size: number;
   cursor: string;
@@ -195,7 +195,6 @@ export class MoralisNftProviderNoSdk
     return {
       page: moralisResponse.page,
       pageSize: moralisResponse.page_size,
-      total: moralisResponse.total,
       data: await Promise.all(promises),
       cursor: moralisResponse.cursor,
     };
