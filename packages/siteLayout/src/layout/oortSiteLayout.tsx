@@ -1,3 +1,4 @@
+import "./oortSiteLayout.css";
 import { LazyLoaderNextJs } from "@oort-digital/lazy-loader-next-js";
 import { ILogger } from "@oort-digital/logger";
 import dynamic, { Loader } from "next/dynamic";
