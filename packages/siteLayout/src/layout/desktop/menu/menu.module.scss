@@ -1,64 +1,59 @@
-@import "./animations.scss";
-
 .menu {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    padding: 40px 0 38px 0;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    color: #D9E4DE;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  padding: 40px 0 38px 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #d9e4de;
 
-    .submenu {
-        margin-top: 19px;
-        border-radius: 4px;
-        background: #262D36;
-        text-transform: none;
-        padding: 32px 0 23px 0;
-        position: absolute;
+  .submenu {
+    margin-top: 19px;
+    border-radius: 4px;
+    background: #262d36;
+    text-transform: none;
+    padding: 32px 0 23px 0;
+    position: absolute;
 
-        filter: drop-shadow(0px 251px 100px rgba(0, 0, 0, 0.01)) drop-shadow(0px 141px 85px rgba(0, 0, 0, 0.05)) drop-shadow(0px 63px 63px rgba(0, 0, 0, 0.09)) drop-shadow(0px 16px 35px rgba(0, 0, 0, 0.1)) drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.1));
-        &.fade_in {
-            @include fade-in;
-        }
+    filter: drop-shadow(0px 251px 100px rgba(0, 0, 0, 0.01))
+      drop-shadow(0px 141px 85px rgba(0, 0, 0, 0.05))
+      drop-shadow(0px 63px 63px rgba(0, 0, 0, 0.09))
+      drop-shadow(0px 16px 35px rgba(0, 0, 0, 0.1))
+      drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.1));
 
-        &.fade_out {
-            @include fade-out;
-        }
-
-        &.hide {
-            display: none
-        }
-        > .arrow {
-            position: absolute;
-            transform: rotate(45deg);
-            width: 26px;
-            height: 26px;
-            top: -10px;
-            left: calc(50% - 9px);
-            background: #262D36;
-        }
+    &.hide {
+      display: none;
     }
-
-    $active-color: #55AFBC;
-    &.active {
-        color: $active-color;
-        padding-top: 32px;
-        padding-bottom: 36px;
-        border-top: 4px solid $active-color;
+    > .arrow {
+      position: absolute;
+      transform: rotate(45deg);
+      width: 26px;
+      height: 26px;
+      top: -10px;
+      left: calc(50% - 9px);
+      background: #262d36;
     }
+  }
+
+  $active-color: #55afbc;
+  &.active {
+    color: $active-color;
+    padding-top: 32px;
+    padding-bottom: 36px;
+    border-top: 4px solid $active-color;
+  }
+
+  &:hover {
+    color: $active-color;
+  }
+
+  a {
+    color: #d9e4de;
 
     &:hover {
-        color: $active-color;
+      color: $active-color;
     }
-
-    a {
-        color: #D9E4DE;
-
-        &:hover {
-            color: $active-color;
-        }
-    }
+  }
 }
