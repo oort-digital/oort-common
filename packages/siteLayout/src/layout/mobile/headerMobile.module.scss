@@ -1,0 +1,83 @@
+@import "../../common.scss";
+
+.header {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  left: 0;
+  @include responsive-header-padding-mixin;
+  display: flex;
+  flex-flow: row;
+  background: rgba(26, 30, 37, 0.4);
+  backdrop-filter: blur(12px);
+  align-items: center;
+  justify-content: space-between;
+  height: $header-height-mobile;
+}
+
+.header > .logo {
+  display: flex;
+}
+
+.navigation {
+  $side-indent: 32px;
+  & > div {
+    margin-top: 31px;
+    margin-bottom: 20px;
+    padding-left: $side-indent;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #97a1b0;
+  }
+
+  & > a {
+    align-items: center;
+    padding-left: $side-indent;
+    padding-right: $side-indent;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: flex;
+    flex-flow: row wrap;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    color: #c1c7ce;
+
+    & > svg {
+      margin-right: 16px;
+      color: #55afbc;
+    }
+
+    &.active {
+      background-color: #2f3b46;
+    }
+  }
+
+  & > .btn_link > button {
+    border-radius: 88px;
+    margin-top: 3px;
+    margin-bottom: 31px;
+    width: 100%;
+  }
+}
+
+.social {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #c1c7ce;
+  background: #1c2128;
+  box-shadow: 0px 20.2427px 7.95251px rgba(0, 0, 0, 0.01),
+    0px 11.5673px 7.22955px rgba(0, 0, 0, 0.05),
+    0px 5.06069px 5.06069px rgba(0, 0, 0, 0.09),
+    0px 1.44591px 2.89182px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 13.0132px;
+}

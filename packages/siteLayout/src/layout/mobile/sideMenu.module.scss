@@ -1,0 +1,27 @@
+.menu {
+  background-color: #222831 !important;
+
+  & > :global(.ant-drawer-wrapper-body) {
+
+    & > :global(.ant-drawer-header) {
+      border-bottom: none;
+      & > :global(.ant-drawer-header-title) {
+        justify-content: end;
+        & > button { color: #939DA8 }
+      }
+    }
+
+    & > :global(.ant-drawer-body) {
+      padding:0;
+    }
+
+    & > :global(.ant-drawer-footer) {
+      display: flex;
+      justify-content: space-evenly;
+      padding-top: 24px;
+      padding-bottom: 24px;
+      border-top: 1px solid rgba(147, 157, 168, 0.2);
+    }
+    
+  }
+}

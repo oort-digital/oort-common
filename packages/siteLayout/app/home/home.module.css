@@ -1,0 +1,15 @@
+.home {
+  margin-top: 92px;
+  width: 100%;
+  color: red;
+  justify-content: center;
+
+  display: flex;
+  flex-flow: row wrap;
+
+  .c10 {
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}

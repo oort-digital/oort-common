@@ -1,0 +1,17 @@
+.footer {
+  background-position: bottom center;
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+}
+
+.footer::after {
+  background: url("./footer_bg_mobile.webp") no-repeat;
+  background-position: center;
+  background-size: cover;
+  mix-blend-mode: color-dodge;
+  position: absolute;
+  content: "";
+  inset: 0;
+  z-index: -1;
+}

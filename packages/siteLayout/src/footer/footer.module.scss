@@ -1,0 +1,27 @@
+.footer {
+  width: 100%;
+  background-position: bottom center;
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer::after {
+  background: url("./footer_bg.webp") no-repeat;
+  background-position: center;
+  background-size: cover;
+  mix-blend-mode: color-dodge;
+  position: absolute;
+  content: "";
+  inset: 0;
+  z-index: -1;
+}
+
+@media (max-width: 1280px) {
+  .footer::after {
+    background-position-x: 50%;
+    background-size: 150% 102%;
+  }
+}

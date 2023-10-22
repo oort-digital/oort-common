@@ -1,0 +1,60 @@
+
+.subscribe {
+  width: 100%;
+  min-width: 320px;
+  display: flex;
+  height: 48px;
+  background: rgba(85, 175, 188, 0.1);
+  border: 1px solid #55AFBC;
+  border-radius: 140px;
+  align-items: center;
+
+  input {
+    flex: auto;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-left: 24px;
+    color: #ffffff;
+  }
+
+  @mixin placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: rgba(85, 175, 188, 0.6);
+  }
+
+  @mixin footer_placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: rgba(227, 243, 249, 0.3);
+  }
+
+  ::-webkit-input-placeholder { @include placeholder(); }
+  :-moz-placeholder { /* Firefox 18- */ @include placeholder(); }
+  ::-moz-placeholder { /* Firefox 19+ */ @include placeholder(); }
+  :-ms-input-placeholder { @include placeholder(); }
+  
+  button {
+    height: 42px;
+    flex: 150px;
+    margin-right: 3px;
+    z-index: 0;
+  }
+
+  .footer_section {
+    background: rgba(227, 243, 249, 0.7);
+    ::-webkit-input-placeholder { @include footer_placeholder(); }
+    :-moz-placeholder { /* Firefox 18- */ @include footer_placeholder(); }
+    ::-moz-placeholder { /* Firefox 19+ */ @include footer_placeholder(); }
+    :-ms-input-placeholder { @include footer_placeholder(); }
+
+    :after {
+      background: rgba(227, 243, 249, 0.7);
+    }
+  }
+}

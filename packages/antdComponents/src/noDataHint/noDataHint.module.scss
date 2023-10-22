@@ -1,0 +1,11 @@
+@import "../styles/palette.scss";
+
+.empty_hint {
+  color: $dark-6;
+  text-align: center;
+
+  :global(.anticon) {
+    display: block;
+    margin-bottom: 18px;
+  }
+}
