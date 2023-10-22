@@ -4,8 +4,8 @@ import Link from "next/link";
 import React from "react";
 import {
   communities,
-  ecosystem,
-  products,
+  getEcosystemSubmenu,
+  getProductsSubMenu,
   resources,
   SubMenu,
 } from "../subMenu";
@@ -28,7 +28,7 @@ const Footer = () => {
   );
 };
 
-const HeaderMobile = ({ pathname }: IHeaderProps) => {
+const HeaderMobile = ({ pathname, baseUrl: basePath }: IHeaderProps) => {
   const renderLink = (text: string, subMenu: SubMenu[]) => (
     <>
       <div>{text}</div>
@@ -52,8 +52,8 @@ const HeaderMobile = ({ pathname }: IHeaderProps) => {
       <LogoMobileLink />
       <SideMenu footer={<Footer />}>
         <nav className={styles.navigation}>
-          {renderLink("Products", products)}
-          {renderLink("Partners", ecosystem)}
+          {renderLink("Products", getProductsSubMenu(basePath))}
+          {renderLink("Ecosystem", getEcosystemSubmenu(basePath))}
           {renderLink("Resources", resources)}
           <Link href={GAMEHUB_URL} className={styles.btn_link}>
             <Button>PLAY</Button>

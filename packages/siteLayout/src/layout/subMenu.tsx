@@ -18,7 +18,6 @@ import {
   ANNOUNCEMENT_URL,
   BLOG_URL,
   DISCORD_URL,
-  ECOSYSTEM_URL,
   TELEGRAM_URL,
   TUTORIALS_URL,
   TWITTER_URL,
@@ -32,36 +31,45 @@ export interface SubMenu {
   description: string;
 }
 
-export const products: SubMenu[] = [
-  {
-    icon: <RentalMenuIcon />,
-    href: "/nft-rental",
-    title: "NFT Rental",
-    description:
-      "Lend your NFTs to earn extra income, or borrow NFTs to start playing with lower cost.",
-  },
-  {
-    icon: <PlayMenuIcon />,
-    href: "/nft-play",
-    title: "NFT Play",
-    description:
-      "NFT Play is a one-stop place where you can activate your NFTs to earn rewards, play games and enjoy token-gated experiences.",
-  },
-  {
-    icon: <GameMenuIcon />,
-    href: "/battle",
-    title: "PvS Battle",
-    description:
-      "With your custom branded hero NFTs, you can participate in our battle with a unique mode called Player vs. Staker (PvS).",
-  },
-  {
-    icon: <BrandedMenuIcon />,
-    href: "/heroes",
-    title: "Custom Branded Heroes",
-    description:
-      "Oort Digital is the perfect solution to create custom branded NFTs and utilities that will bring fun, rewards, and social experiences to your online community.",
-  },
-];
+function getUrl(path: string, baseUrl: string | undefined): string {
+  if (baseUrl) {
+    return new URL(path, baseUrl).href;
+  }
+  return path;
+}
+
+export function getProductsSubMenu(baseUrl?: string): SubMenu[] {
+  return [
+    {
+      icon: <RentalMenuIcon />,
+      href: getUrl("/nft-rental", baseUrl),
+      title: "NFT Rental",
+      description:
+        "Lend your NFTs to earn extra income, or borrow NFTs to start playing with lower cost.",
+    },
+    {
+      icon: <PlayMenuIcon />,
+      href: getUrl("/nft-play", baseUrl),
+      title: "NFT Play",
+      description:
+        "NFT Play is a one-stop place where you can activate your NFTs to earn rewards, play games and enjoy token-gated experiences.",
+    },
+    {
+      icon: <GameMenuIcon />,
+      href: getUrl("/battle", baseUrl),
+      title: "PvS Battle",
+      description:
+        "With your custom branded hero NFTs, you can participate in our battle with a unique mode called Player vs. Staker (PvS).",
+    },
+    {
+      icon: <BrandedMenuIcon />,
+      href: getUrl("/heroes", baseUrl),
+      title: "Custom Branded Heroes",
+      description:
+        "Oort Digital is the perfect solution to create custom branded NFTs and utilities that will bring fun, rewards, and social experiences to your online community.",
+    },
+  ];
+}
 
 export const communities: SubMenu[] = [
   {
@@ -111,11 +119,13 @@ export const resources: SubMenu[] = [
   },
 ];
 
-export const ecosystem: SubMenu[] = [
-  {
-    icon: <EcosystemMenuIcon />,
-    href: ECOSYSTEM_URL,
-    title: "Ecosystem",
-    description: "See all brands onboarded as clans.",
-  },
-];
+export function getEcosystemSubmenu(baseUrl?: string): SubMenu[] {
+  return [
+    {
+      icon: <EcosystemMenuIcon />,
+      href: getUrl("/ecosystem", baseUrl),
+      title: "Ecosystem",
+      description: "See all brands onboarded as clans.",
+    },
+  ];
+}

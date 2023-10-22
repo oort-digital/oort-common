@@ -11,4 +11,3 @@ export const TUTORIALS_URL = "https://docs.oort.digital/tutorial/overview";
 export const ANNOUNCEMENT_URL = "https://t.me/oortchannel";
 
 export const BLOG_URL = "/blog";
-export const ECOSYSTEM_URL = "/ecosystem";

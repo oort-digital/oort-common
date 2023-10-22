@@ -2,24 +2,34 @@ import { LinkButton } from "../../button";
 import React from "react";
 import styles from "./header.module.scss";
 import { LogoLink } from "./logoLink";
-import { communities, ecosystem, products, resources } from "../subMenu";
+import {
+  communities,
+  getEcosystemSubmenu,
+  getProductsSubMenu,
+  resources,
+} from "../subMenu";
 import { CommunityMenu, EcosystemMenu, ProductMenu } from "./menu";
 import { GAMEHUB_URL } from "../../constants";
 
 export interface IHeaderProps {
   pathname: string;
+  baseUrl?: string;
 }
 
-const Header = ({ pathname }: IHeaderProps) => {
+const Header = ({ pathname, baseUrl }: IHeaderProps) => {
   return (
     <div className={styles.header}>
       <LogoLink className={styles.logo} />
       <nav>
-        <ProductMenu pathname={pathname} title="Products" subMenu={products} />
+        <ProductMenu
+          pathname={pathname}
+          title="Products"
+          subMenu={getProductsSubMenu(baseUrl)}
+        />
         <EcosystemMenu
           pathname={pathname}
           title="Ecosystem"
-          subMenu={ecosystem}
+          subMenu={getEcosystemSubmenu(baseUrl)}
           width={450}
           left={-190}
         />

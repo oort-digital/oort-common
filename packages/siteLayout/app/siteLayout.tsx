@@ -17,7 +17,12 @@ export function SiteLayout({ deviceType, children }: IProps) {
   const pathname = usePathname();
 
   return (
-    <OortSiteLayout pathname={pathname} deviceType={deviceType} logger={logger}>
+    <OortSiteLayout
+      baseUrl="http://localhost:3000"
+      pathname={pathname}
+      deviceType={deviceType}
+      logger={logger}
+    >
       {children}
     </OortSiteLayout>
   );

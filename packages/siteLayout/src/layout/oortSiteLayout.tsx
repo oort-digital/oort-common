@@ -9,6 +9,7 @@ interface IProps {
   children: ReactNode;
   deviceType?: string;
   pathname: string;
+  baseUrl?: string;
 }
 
 const desktopLoader: Loader<IHeaderProps> = () => import("./desktop");
@@ -19,6 +20,7 @@ export const OortSiteLayout = ({
   logger,
   deviceType,
   pathname,
+  baseUrl,
 }: IProps) => {
   const DesktopEl = dynamic(desktopLoader);
   const MobileEl = dynamic(mobileLoader);
@@ -27,9 +29,9 @@ export const OortSiteLayout = ({
       <LazyLoaderNextJs
         logger={logger}
         deviceType={deviceType}
-        desktop={<DesktopEl pathname={pathname} />}
-        mobile={<MobileEl pathname={pathname} />}
-        tablet={<MobileEl pathname={pathname} />}
+        desktop={<DesktopEl baseUrl={baseUrl} pathname={pathname} />}
+        mobile={<MobileEl baseUrl={baseUrl} pathname={pathname} />}
+        tablet={<MobileEl baseUrl={baseUrl} pathname={pathname} />}
       />
       {children}
     </>
