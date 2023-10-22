@@ -28,7 +28,7 @@ const Footer = () => {
   );
 };
 
-const HeaderMobile = ({ pathname, baseUrl: basePath }: IHeaderProps) => {
+const HeaderMobile = ({ pathname, baseUrl }: IHeaderProps) => {
   const renderLink = (text: string, subMenu: SubMenu[]) => (
     <>
       <div>{text}</div>
@@ -52,8 +52,8 @@ const HeaderMobile = ({ pathname, baseUrl: basePath }: IHeaderProps) => {
       <LogoMobileLink />
       <SideMenu footer={<Footer />}>
         <nav className={styles.navigation}>
-          {renderLink("Products", getProductsSubMenu(basePath))}
-          {renderLink("Ecosystem", getEcosystemSubmenu(basePath))}
+          {renderLink("Products", getProductsSubMenu(baseUrl))}
+          {renderLink("Ecosystem", getEcosystemSubmenu(baseUrl))}
           {renderLink("Resources", resources)}
           <Link href={GAMEHUB_URL} className={styles.btn_link}>
             <Button>PLAY</Button>
