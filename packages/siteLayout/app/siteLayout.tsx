@@ -9,16 +9,17 @@ import React from "react";
 interface IProps {
   deviceType?: string;
   children: ReactNode;
+  baseUrl: string;
 }
 
 const logger = new ConsoleLogger(LogLevel.Debug);
 
-export function SiteLayout({ deviceType, children }: IProps) {
+export function SiteLayout({ deviceType, children, baseUrl }: IProps) {
   const pathname = usePathname();
 
   return (
     <OortSiteLayout
-      baseUrl="http://localhost:3000"
+      baseUrl={baseUrl}
       pathname={pathname}
       deviceType={deviceType}
       logger={logger}

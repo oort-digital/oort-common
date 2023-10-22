@@ -21,6 +21,7 @@ import Link from "next/link";
 import classNames from "classnames";
 import { Subscribe, SubscribeType } from "../../subscribe";
 import { Container10 } from "../../containers";
+import { getProductsSubMenu, getUrl } from "../../layout/subMenu";
 
 const bottomSocialIcon = [
   {
@@ -35,25 +36,28 @@ const bottomSocialIcon = [
 
 interface IProps {
   className?: string;
+  baseUrl?: string;
 }
 
-export const FooterSection = ({ className }: IProps) => {
+export const FooterSection = ({ className, baseUrl }: IProps) => {
+  const products = getProductsSubMenu(baseUrl);
   return (
     <>
       <Container10 className={classNames(className, styles.section)}>
         <nav>
           <span>Products</span>
-          <Link href="/nft-rental">NFT Rental</Link>
-          <Link href="/nft-play">NFT Play</Link>
-          <Link href="/battle">RPG Battle Game</Link>
-          <Link href="/heroes">Custom Branded Heroes</Link>
+          {products.map(({ href, title }) => (
+            <Link key={href} href={href}>
+              {title}
+            </Link>
+          ))}
         </nav>
         <nav>
           <span>Contact</span>
-          <Link href="/privacy-policy">Privacy Policy</Link>
-          <Link href="/terms">Terms of Use</Link>
-          <Link href="/cookies-policy">Cookie Policy</Link>
-          <Link href="/contact-us">Contact us</Link>
+          <Link href={getUrl("/privacy-policy", baseUrl)}>Privacy Policy</Link>
+          <Link href={getUrl("/terms", baseUrl)}>Terms of Use</Link>
+          <Link href={getUrl("/cookies-policy", baseUrl)}>Cookie Policy</Link>
+          <Link href={getUrl("/contact-us", baseUrl)}>Contact us</Link>
         </nav>
         <nav>
           <span>Community</span>

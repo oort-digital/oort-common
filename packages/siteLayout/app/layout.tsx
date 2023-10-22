@@ -17,10 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SiteLayout deviceType={ua.device.type}>
+        <SiteLayout baseUrl="http://localhost:3000" deviceType={ua.device.type}>
           <main>{children}</main>
           <Footer>
-            <FooterSection />
+            <FooterSection baseUrl="http://localhost:3000" />
           </Footer>
         </SiteLayout>
       </body>

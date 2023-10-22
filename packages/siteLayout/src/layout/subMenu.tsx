@@ -1,5 +1,3 @@
-"use client";
-
 import {
   BlogMenuIcon,
   BrandedMenuIcon,
@@ -31,7 +29,7 @@ export interface SubMenu {
   description: string;
 }
 
-function getUrl(path: string, baseUrl: string | undefined): string {
+export function getUrl(path: string, baseUrl: string | undefined): string {
   if (baseUrl) {
     return new URL(path, baseUrl).href;
   }
