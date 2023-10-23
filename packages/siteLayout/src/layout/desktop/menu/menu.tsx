@@ -1,4 +1,3 @@
-"use client";
 import styles from "./menu.module.scss";
 import { SubMenu } from "../../subMenu";
 import Link from "next/link";
@@ -29,25 +28,14 @@ export const Menu = ({
 }: IMenuProps) => {
   const isActive = subMenu.some((x) => x.href === pathname);
 
-  const onAnimationEnd = (event: React.AnimationEvent<HTMLUListElement>) => {
-    if (event.animationName.includes("fadeOut")) {
-      log("onMenuAnimationEnd:fadeOut");
-      setClasses(event, styles.hide, styles.fade_out);
-    }
-  };
-
   const onMouseEnter = (event: React.MouseEvent<HTMLUListElement>) => {
-    log("onMenuMouseEnter");
-    setClasses(event, styles.fade_in, [styles.fade_out, styles.hide]);
+    log(`${title} onMenuMouseEnter`);
+    setClasses(event, null, styles.hide);
   };
 
   const onMouseLeave = (event: React.MouseEvent<HTMLUListElement>) => {
-    log("onMenuMouseLeave");
-    setClasses(event, styles.fade_out, styles.fade_in);
-  };
-
-  const onClick = (event: React.MouseEvent<HTMLUListElement>) => {
-    setClasses(event, styles.fade_out, styles.fade_in);
+    log(`${title} onMenuMouseLeave`);
+    setClasses(event, styles.hide, null);
   };
 
   const renderSubMenu = (subMenu: SubMenu[], maxDescriptionLen?: number) => (
@@ -72,8 +60,6 @@ export const Menu = ({
     <ul
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      onClick={onClick}
-      onAnimationEnd={onAnimationEnd}
       className={`${styles.menu} ${isActive && styles.active}`}
     >
       <li>
@@ -89,21 +75,21 @@ type EventType =
   | React.AnimationEvent<HTMLUListElement>;
 const setClasses = (
   event: EventType,
-  addClass: string,
-  removeClass: string | string[]
+  addClass: string | null,
+  removeClass: string | null
 ) => {
   const subMenu = event.currentTarget.getElementsByTagName("ul")[0];
   if (subMenu) {
-    subMenu.classList.add(addClass);
+    if (addClass) {
+      subMenu.classList.add(addClass);
+    }
 
-    if (typeof removeClass === "string") {
+    if (removeClass) {
       subMenu.classList.remove(removeClass);
-    } else {
-      removeClass.forEach((cl) => subMenu.classList.remove(cl));
     }
   }
 };
 
 const log = (message: string) => {
-  // console.log(message)
+  // console.log(message);
 };

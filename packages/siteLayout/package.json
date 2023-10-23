@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/site-layout",
-  "version": "0.0.1-alfa.0.0.1",
+  "version": "0.0.1-alfa.0.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -10,6 +10,7 @@
     "clean": "rimraf dist",
     "build:types": "tsc",
     "build": "vite build",
+    "next_build": "next build",
     "rm": "rimraf yarn.lock && rimraf node_modules"
   },
   "dependencies": {
