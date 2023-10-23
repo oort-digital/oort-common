@@ -1,101 +1,93 @@
 import "../../../.storybook/stories.less";
 import React, { useState } from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { RangeFilter } from ".";
 
-import { RangeValue } from "./rangeFilterContent";
 import { Button } from "antd";
 import { IRangeFilterProps } from "./rangeFilter";
 import { emptyRange, NumRange } from "../../typesAndInterfaces";
+import { RangeValue } from "../popover/popoverFilter";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const meta = {
   title: "oort/filters/range",
   component: RangeFilter,
+} satisfies Meta<typeof RangeFilter>;
 
-  parameters: {
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-    // layout: 'fullscreen',
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Main: Story = {
+  args: {
+    title: "Range filter",
+    popoverTitle: "Enter values",
+    values: [1, 10],
+    min: 1,
+    max: 10,
   },
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    //backgroundColor: { control: 'color' },
+
+  render(args: IRangeFilterProps) {
+    const [values, setValues] = useState<[RangeValue, RangeValue]>([1, 10]);
+
+    const props = {
+      values,
+      onChange: setValues,
+    };
+
+    const mergedProps = { ...args, ...props };
+
+    return (
+      <>
+        <div>
+          {values[0]}-{values[1]}
+        </div>
+        <div>
+          <RangeFilter {...mergedProps} />
+        </div>
+      </>
+    );
   },
-} as ComponentMeta<typeof RangeFilter>;
-
-const Template: ComponentStory<typeof RangeFilter> = (args) => {
-  const [values, setValues] = useState<[RangeValue, RangeValue]>([1, 10]);
-
-  const props = {
-    values,
-    onChange: setValues,
-  };
-
-  const mergedProps = { ...args, ...props };
-
-  return (
-    <>
-      <div>
-        {values[0]}-{values[1]}
-      </div>
-      <div>
-        <RangeFilter {...mergedProps} />
-      </div>
-    </>
-  );
 };
 
-const NoTriggerButtonTemplate: ComponentStory<typeof RangeFilter> = (
-  args: IRangeFilterProps
-) => {
-  const [values, setValues] = useState<NumRange>(emptyRange());
+export const NoTriggerButton: Story = {
+  args: {
+    title: "Range filter",
+    popoverTitle: "Enter values",
+    // min: 1,
+    // max: 10,
+    showClose: true,
+    showCancel: false,
+    showClear: true,
+  },
 
-  const [visible, onVisibleChange] = useState(false);
+  render(args: IRangeFilterProps) {
+    const [values, setValues] = useState<NumRange>(emptyRange());
 
-  const onChange = (newVals: NumRange) => {
-    setValues(newVals);
-  };
+    const [visible, onVisibleChange] = useState(false);
 
-  const props = {
-    values,
-    onChange,
-    showTriggerButton: false,
-    visible,
-    onVisibleChange,
-  };
+    const onChange = (newVals: NumRange) => {
+      setValues(newVals);
+    };
 
-  const mergedProps = { ...args, ...props };
+    const props = {
+      values,
+      onChange,
+      showTriggerButton: false,
+      visible,
+      onVisibleChange,
+    };
 
-  return (
-    <>
-      <ThemeLoader />
-      <div>
-        {values[0]}-{values[1]}
-      </div>
-      <div>
-        <Button onClick={() => onVisibleChange(true)}>Open</Button>
-        <RangeFilter {...mergedProps} />
-      </div>
-    </>
-  );
-};
+    const mergedProps = { ...args, ...props };
 
-export const Main = Template.bind({});
-Main.args = {
-  title: "Range filter",
-  popoverTitle: "Enter values",
-  values: [1, 10],
-  min: 1,
-  max: 10,
-};
-
-export const NoTriggerButton = NoTriggerButtonTemplate.bind({});
-NoTriggerButton.args = {
-  title: "Range filter",
-  popoverTitle: "Enter values",
-  // min: 1,
-  // max: 10,
-  showClose: true,
-  showCancel: false,
-  showClear: true,
+    return (
+      <>
+        <div>
+          {values[0]}-{values[1]}
+        </div>
+        <div>
+          <Button onClick={() => onVisibleChange(true)}>Open</Button>
+          <RangeFilter {...mergedProps} />
+        </div>
+      </>
+    );
+  },
 };
