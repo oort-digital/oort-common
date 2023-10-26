@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { AsideDesktop } from "./aside";
-import styles from "./layoutDesktop.module.less";
+import styles from "./layoutDesktop.module.scss";
 import { ILayoutProps } from "./typesAndInterfaces";
 
 const LayoutDesktop = (props: ILayoutProps) => {

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { AsideMobile } from "./aside";
-import styles from "./layoutMobile.module.less";
+import styles from "./layoutMobile.module.scss";
 import { LogoLink } from "./logoLink/logoLink";
 import { Sider } from "./sider";
 import { ILayoutProps } from "./typesAndInterfaces";

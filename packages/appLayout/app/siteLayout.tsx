@@ -1,30 +1,37 @@
 "use client";
 
 import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
-import { OortSiteLayout } from "../src";
-import { usePathname } from "next/navigation";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Layout } from "../src";
+import { Web3StoreStub } from "../src/stories/web3StoreStub";
+import { navItems } from "../src/stories/common";
 import { ReactNode } from "react";
 import React from "react";
+import { ConnectorNames } from "@oort-digital/web3-connectors";
 
 interface IProps {
-  deviceType?: string;
   children: ReactNode;
-  baseUrl: string;
 }
+
+const web3 = new Web3StoreStub();
+const supportedWallets: ConnectorNames[] = [
+  ConnectorNames.Injected,
+  ConnectorNames.WalletConnect,
+];
 
 const logger = new ConsoleLogger(LogLevel.Debug);
 
-export function SiteLayout({ deviceType, children, baseUrl }: IProps) {
-  const pathname = usePathname();
-
+export function SiteLayout({ children }: IProps) {
   return (
-    <OortSiteLayout
-      baseUrl={baseUrl}
-      pathname={pathname}
-      deviceType={deviceType}
-      logger={logger}
-    >
-      {children}
-    </OortSiteLayout>
+    <Router>
+      <Layout
+        navItems={navItems}
+        web3={web3}
+        oortTokenAddress={"0xD8341A4978a68Ed0ad558D745af5578e51102725"}
+        supportedWallets={supportedWallets}
+      >
+        {children}
+      </Layout>
+    </Router>
   );
 }

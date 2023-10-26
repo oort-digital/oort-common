@@ -1,5 +1,5 @@
-@import "../../styles/vars.less";
-@import "./vars.less";
+@import "../styles/vars.scss";
+@import "./vars.scss";
 
 .aside_desktop {
   display: flex;
@@ -10,10 +10,10 @@
   left: 0px;
   top: 0px;
   bottom: 0px;
-  flex: 0 0 @aside-width;
-  max-width: @aside-width;
-  min-width: @aside-width;
-  width: @aside-width;
+  flex: 0 0 $aside-width;
+  max-width: $aside-width;
+  min-width: $aside-width;
+  width: $aside-width;
 
   & > .logo {
     margin-top: 34px;

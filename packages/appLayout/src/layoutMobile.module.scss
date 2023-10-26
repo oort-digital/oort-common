@@ -1,21 +1,21 @@
-@import "../styles/common.less";
+@import "./styles/common.scss";
 
 .root {
   display: flex;
   flex-direction: column;
-  background: @dark-3;
+  background: $dark-3;
   min-height: 100%;
 }
 
-@topHeaderHeight: 52px;
+$topHeaderHeight: 52px;
 
 .root > .top_header {
-  .responsive-layout-padding-mixin();
+  @include responsive-layout-padding-mixin();
   position: fixed;
   width: 100%;
-  height: @topHeaderHeight;
+  height: $topHeaderHeight;
   z-index: 10;
-  background-color: @theme-color-4;
+  background-color: $theme-color-4;
   display: flex;
   align-items: center;
 
@@ -27,9 +27,9 @@
 }
 
 .root > .content {
-  margin-top: @topHeaderHeight;
+  margin-top: $topHeaderHeight;
 }
 
 .root > .content.top_gradient {
-  background: @theme-bg-dark-gradient;
+  background: $theme-bg-dark-gradient;
 }

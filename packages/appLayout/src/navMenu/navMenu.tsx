@@ -1,3 +1,4 @@
+"use client";
 import { Collapse } from "antd";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
@@ -8,9 +9,9 @@ import {
   LeaderboardIcon,
   MintIcon,
   RentAppIcon,
-} from "../../icons";
+} from "@oort-digital/ui";
 import { Menu, MenuItemLink } from "../menu";
-import styles from "./navMenu.module.less";
+import styles from "./navMenu.module.scss";
 import { createIsHrefActiveFunc, getChildCaptions } from "./utils";
 import {
   INavItemInternal,

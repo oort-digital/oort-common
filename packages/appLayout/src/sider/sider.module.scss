@@ -1,26 +1,26 @@
-@import "../../styles/vars.less";
-@import "../../styles/typography.less";
+@import "../styles/vars.scss";
+@import "../styles/typography.scss";
 
 .top_header_menu {
   :global(.ant-drawer-content-wrapper) {
     width: 95% !important;
     max-width: 400px;
     :global(.ant-drawer-content) {
-      background-color: @theme-bg-2;
+      background-color: $theme-bg-2;
       :global(.ant-drawer-header) {
-        background-color: @theme-bg-2;
+        background-color: $theme-bg-2;
         border-bottom: none;
         :global(.ant-drawer-header-title) {
           justify-content: end;
           :global(.ant-drawer-title) {
-            color: @theme-color-10;
-            .h3-semibold-mixin();
+            color: $theme-color-10;
+            @include h3-semibold-mixin();
           }
 
           :global(.ant-drawer-close) {
             margin: 0;
             padding: 0;
-            color: @theme-color-10;
+            color: $theme-color-10;
             display: flex;
             order: 2;
           }
@@ -39,5 +39,5 @@
 .burger_icon {
   cursor: pointer;
   display: flex;
-  color: @theme-color-8 !important;
+  color: $theme-color-8 !important;
 }

@@ -1,5 +1,5 @@
 import { FooterMenu } from "../footerMenu";
-import styles from "./aside.module.less";
+import styles from "./aside.module.scss";
 import { NavMenu } from "../navMenu";
 import { IAsideProps } from "./typesAndInterfaces";
 import { ReactNode } from "react";

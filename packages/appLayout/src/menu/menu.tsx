@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import styles from "./menu.module.less";
+import styles from "./menu.module.scss";
 import { Link } from "react-router-dom";
 import { removeBaseName } from "./utils";
 

@@ -1,7 +1,13 @@
+"use client";
 import { useState, useEffect } from "react";
-import styles from "./footerMenu.module.less";
+import styles from "./footerMenu.module.scss";
 import { Menu, MenuItem, MenuItemBtn } from "./menu";
-import { getChainIconOld, formatUnits } from "../utils";
+import {
+  getChainIconOld,
+  formatUnits,
+  ConnectModal,
+  IWeb3,
+} from "@oort-digital/ui";
 import {
   ChevronSortIcon,
   DiscordIcon,
@@ -9,16 +15,14 @@ import {
   TokenAfterIcon,
   TokenIcon,
   TwitterIcon,
-} from "../icons";
-// import { ThemeSwitch } from './themeSwitch';
-import { ConnectModal, IWeb3 } from "../connectModal";
-import { BlockieAddress } from "../blockieAddress";
-// import { useTheme } from '../effects';
+  BlockieAddress,
+} from "@oort-digital/ui";
+
 import { isChainEmpty } from "@oort-digital/web3-connectors";
 import { observer } from "mobx-react";
 import { toMasked } from "@oort-digital/utils";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
-import { Erc20__factory } from "../contracts";
+import { Erc20__factory } from "./contracts";
 import { Tooltip } from "antd";
 import { ethers } from "ethers";
 import classNames from "classnames";
@@ -79,11 +83,16 @@ const Impl = ({
         //   .then((balance) => {
         //     setBalance(formatUnits(balance, 18));
         //   });
-        const provider = new ethers.providers.JsonRpcBatchProvider('https://rpc-mumbai.maticvigil.com');
-        const ERC20 = Erc20__factory.connect("0xD8341A4978a68Ed0ad558D745af5578e51102725", provider);
-        ERC20.balanceOf(web3.account).then(balance => {
+        const provider = new ethers.providers.JsonRpcBatchProvider(
+          "https://rpc-mumbai.maticvigil.com"
+        );
+        const ERC20 = Erc20__factory.connect(
+          "0xD8341A4978a68Ed0ad558D745af5578e51102725",
+          provider
+        );
+        ERC20.balanceOf(web3.account).then((balance) => {
           setBalance(formatUnits(balance, 18));
-        })
+        });
       } catch (e) {
         setBalance(undefined);
       }

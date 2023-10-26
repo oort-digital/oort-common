@@ -1,11 +1,11 @@
-@import "../../styles/palette.less";
-@import "../../styles/vars.less";
+@import "../styles/palette.scss";
+@import "../styles/vars.scss";
 
 .root {
-  @active-bg: @theme-color-1;
-  @active-color: @theme-color-10;
+  $active-bg: $theme-color-1;
+  $active-color: $theme-color-10;
 
-  .font-mixin {
+  @mixin font-mixin {
     /* Body 14 – Medium */
     font-weight: 500;
     line-height: 22px !important;
@@ -20,13 +20,13 @@
   .collapse_panel {
     :global(.ant-collapse-header) {
       padding: 16px 24px !important;
-      color: @theme-color-7 !important;
+      color: $theme-color-7 !important;
       border-radius: 0 !important;
       :global(.ant-collapse-header-text) {
         height: 23px;
       }
       .header {
-        .font-mixin;
+        @include font-mixin;
         display: inline-flex;
         align-items: center;
         text-transform: capitalize;
@@ -43,31 +43,31 @@
 
   .collapse_panel.active_header {
     :global(.ant-collapse-header) {
-      color: @active-color !important;
-      background-color: @active-bg;
-      box-shadow: inset 4px 0px 0px @primary-6;
+      color: $active-color !important;
+      background-color: $active-bg;
+      box-shadow: inset 4px 0px 0px $primary-6;
 
       .icon {
-        color: @primary-6;
+        color: $primary-6;
       }
     }
 
     li {
-      box-shadow: inset 4px 0px 0px @primary-6;
+      box-shadow: inset 4px 0px 0px $primary-6;
     }
   }
 
   li.active {
-    background: @active-bg;
-    box-shadow: inset 4px 0px 0px @primary-6;
+    background: $active-bg;
+    box-shadow: inset 4px 0px 0px $primary-6;
 
     & > a {
-      .font-mixin;
-      color: @active-color;
+      @include font-mixin;
+      color: $active-color;
     }
 
     .icon {
-      color: @primary-6;
+      color: $primary-6;
     }
   }
 }

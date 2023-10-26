@@ -1,0 +1,34 @@
+// Modal
+// @modal-content-bg: @theme-bg-2;
+@modal-header-bg: none;
+@modal-mask-bg: fade(@black, 80%);
+
+.ant-modal {
+  .ant-modal-content {
+    background: @theme-bg-dark-gradient;
+    border-radius: 8px;
+    padding-top: 32px;
+    // padding-bottom: 46px;
+    .ant-modal-header {
+      .ant-modal-title {
+        h4 {
+          .h3-semibold-mixin;
+          text-align: center;
+          color: @theme-color-13;
+        }
+      }
+    }
+
+    .ant-modal-footer {
+      text-align: center;
+      border: none;
+    }
+  }
+}
+
+.ant-modal-confirm-body .ant-modal-confirm-title {
+  color: @theme-color-13;
+}
+.ant-modal-confirm-body .ant-modal-confirm-content {
+  color: @theme-color-13;
+}

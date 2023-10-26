@@ -1,10 +1,10 @@
-@import "../styles/vars.less";
-@import "./aside/vars.less";
+@import "./styles/vars.scss";
+@import "./aside/vars.scss";
 
 .root {
   display: flex;
   flex-direction: row;
-  background: @theme-color-2;
+  background: $theme-color-2;
   height: 100vh;
 }
 
@@ -13,9 +13,9 @@
   overflow-y: auto;
   box-shadow: 0px 0px 68px rgba(0, 0, 0, 0.12);
   border-radius: 24px 0px 0px 0px;
-  margin-left: @aside-width;
+  margin-left: $aside-width;
 }
 
 .root > .content.top_gradient {
-  background: @theme-bg-dark-gradient;
+  background: $theme-bg-dark-gradient;
 }

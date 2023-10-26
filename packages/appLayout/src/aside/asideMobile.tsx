@@ -1,5 +1,5 @@
 import { Aside } from "./aside";
-import styles from "./asideMobile.module.less";
+import styles from "./asideMobile.module.css";
 import { IAsideProps } from "./typesAndInterfaces";
 
 export const AsideMobile = ({

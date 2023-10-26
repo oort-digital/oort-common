@@ -1,4 +1,4 @@
-import styles from "./asideDesktop.module.less";
+import styles from "./asideDesktop.module.scss";
 import { IAsideProps } from "./typesAndInterfaces";
 import { Aside } from "./aside";
 import { LogoLink } from "../logoLink";

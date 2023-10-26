@@ -1,4 +1,4 @@
-@import "../../styles/vars.less";
+@import "../styles/vars.scss";
 
 .menu {
   padding: 0;
@@ -8,7 +8,7 @@
     list-style-type: none;
 
     /* Dark / 4 */
-    border-bottom: 1px solid @theme-color-4;
+    border-bottom: 1px solid $theme-color-4;
     display: flex;
     align-items: center;
 
@@ -21,7 +21,7 @@
       line-height: 16px;
       display: flex;
       align-items: center;
-      color: @theme-color-7;
+      color: $theme-color-7;
       text-transform: capitalize;
 
       cursor: pointer;
@@ -38,7 +38,7 @@
       font-weight: 500;
       font-size: 14px;
       line-height: 16px;
-      color: @theme-color-7;
+      color: $theme-color-7;
     }
 
     > .btn_icon_after {

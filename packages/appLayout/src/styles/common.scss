@@ -1,0 +1,69 @@
+@import "./vars.scss";
+
+$xs-side-indent: 23px;
+$sm-side-indent: 32px;
+$md-side-indent: 6%;
+$xl-side-indent: 12%;
+
+$sm-screen-size: 650px;
+$md-screen-size: 1680px;
+$xl-screen-size: 1920px;
+
+@mixin responsive-layout-padding-mixin() {
+  padding-right: $xs-side-indent;
+  padding-left: $xs-side-indent;
+
+  @media (min-width: $sm-screen-size) {
+    padding-right: $sm-side-indent;
+    padding-left: $sm-side-indent;
+  }
+
+  @media (min-width: $md-screen-size) {
+    padding-right: $md-side-indent;
+    padding-left: $md-side-indent;
+  }
+
+  @media (min-width: $xl-screen-size) {
+    padding-right: $xl-side-indent;
+    padding-left: $xl-side-indent;
+  }
+}
+
+@mixin responsive-layout-margin-mixin() {
+  margin-right: $sm-side-indent;
+  margin-left: $sm-side-indent;
+
+  @media (min-width: $md-screen-size) {
+    margin-right: $md-side-indent;
+    margin-left: $md-side-indent;
+  }
+
+  @media (min-width: $xl-screen-size) {
+    margin-right: $xl-side-indent;
+    margin-left: $xl-side-indent;
+  }
+}
+
+@mixin scrollbar-mixin() {
+  $scroll-bg: $theme-color-2;
+  $scroll-color: $theme-color-4;
+
+  // mobile and tablet already override scroll by default
+  @media (min-width: 1200px) {
+    /* Works on Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+      width: 18px;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: $scroll-bg;
+      border-radius: 4px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: $scroll-color;
+      border-radius: 40px;
+      border: 3px solid $scroll-bg;
+    }
+  }
+}
