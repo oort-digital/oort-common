@@ -4,6 +4,10 @@
 /packages/antdComponents/yarn.lock
 /packages/antdComponents/dist
 
+/packages/appLayout/node_modules
+/packages/appLayout/yarn.lock
+/packages/appLayout/dist
+
 /packages/lazyLoader/node_modules
 /packages/lazyLoader/yarn.lock
 /packages/lazyLoader/package-lock.json
