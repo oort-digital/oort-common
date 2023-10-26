@@ -1,0 +1,35 @@
+@import "../styles/common.less";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  background: @dark-3;
+  min-height: 100%;
+}
+
+@topHeaderHeight: 52px;
+
+.root > .top_header {
+  .responsive-layout-padding-mixin();
+  position: fixed;
+  width: 100%;
+  height: @topHeaderHeight;
+  z-index: 10;
+  background-color: @theme-color-4;
+  display: flex;
+  align-items: center;
+
+  & > .logo {
+    margin-left: 18px;
+    height: 24px;
+    max-width: 120px;
+  }
+}
+
+.root > .content {
+  margin-top: @topHeaderHeight;
+}
+
+.root > .content.top_gradient {
+  background: @theme-bg-dark-gradient;
+}
