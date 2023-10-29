@@ -43,6 +43,10 @@ const OortAntdThemeConfig: ThemeConfig = {
       defaultBg: dark4,
       defaultBorderColor: dark5,
 
+      colorBgContainerDisabled: dark3,
+      colorTextDisabled: "rgba(242, 243, 245, 0.25);",
+      borderColorDisabled: dark5,
+
       fontWeight: 500,
       fontSizeLG: 16,
       fontSize: 14,
