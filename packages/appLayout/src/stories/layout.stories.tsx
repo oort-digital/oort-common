@@ -1,4 +1,4 @@
-import "../../../.storybook/stories.less";
+import "../../.storybook/index.scss";
 import { BrowserRouter as Router } from "react-router-dom";
 import { StoryObj, Meta } from "@storybook/react";
 import React from "react";

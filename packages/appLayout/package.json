@@ -11,7 +11,9 @@
     "build:types": "tsc",
     "build": "vite build",
     "next_build": "next build",
-    "rm": "rimraf yarn.lock && rimraf node_modules"
+    "rm": "rimraf yarn.lock && rimraf node_modules",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@oort-digital/lazy-loader": "^0.0.1-alfa.0.0.5",
@@ -28,11 +30,20 @@
     "react-router-dom": "^6.17.0"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "7.5.1",
+    "@storybook/addon-interactions": "7.5.1",
+    "@storybook/addon-links": "7.5.1",
+    "@storybook/addon-onboarding": "1.0.8",
+    "@storybook/blocks": "7.5.1",
+    "@storybook/nextjs": "7.5.1",
+    "@storybook/react": "7.5.1",
+    "@storybook/testing-library": "0.2.2",
     "@types/node": "18.7.14",
     "@types/react": "^18.2.25",
     "@types/react-dom": "^18.2.10",
     "@vitejs/plugin-react": "^4.1.0",
     "sass": "^1.69.5",
+    "storybook": "7.5.1",
     "typescript": "^4.9.4",
     "vite": "^4.5.0",
     "vite-plugin-dts": "^3.6.2"

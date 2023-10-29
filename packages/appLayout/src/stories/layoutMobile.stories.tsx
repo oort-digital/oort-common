@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../.storybook/stories.less";
+import "../../.storybook/index.scss";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import LayoutMobile from "../layoutMobile";
