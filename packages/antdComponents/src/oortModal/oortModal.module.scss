@@ -1,0 +1,31 @@
+@import "../styles/typography.scss";
+@import "../styles/palette.scss";
+
+.modal {
+  .content {
+    border-radius: 8px;
+    padding-top: 32px;
+    padding-bottom: 0;
+
+    > :global(.ant-modal-close) {
+      color: $dark-10;
+      height: 54px;
+      width: 54px;
+      > span {
+        padding: 19px;
+      }
+    }
+
+    > .header {
+      margin-top: 20px;
+      margin-bottom: 0;
+      padding-left: 24px;
+      padding-right: 24px;
+
+      > :global(.ant-modal-title) {
+        @include h3-semibold-mixin;
+        text-align: center;
+      }
+    }
+  }
+}

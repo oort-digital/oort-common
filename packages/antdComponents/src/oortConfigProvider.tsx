@@ -1,6 +1,6 @@
 import { ConfigProvider, ThemeConfig } from "antd";
 import { ReactNode } from "react";
-import { dark3, dark4, dark9, primary6 } from "./styles/palette";
+import { dark13, dark2, dark3, dark4, dark9, primary6 } from "./styles/palette";
 
 const OortAntdThemeConfig: ThemeConfig = {
   token: {
@@ -9,6 +9,18 @@ const OortAntdThemeConfig: ThemeConfig = {
   },
 
   components: {
+    Modal: {
+      contentBg: dark3,
+      headerBg: dark3,
+      footerBg: dark2,
+      titleColor: dark13,
+      paddingContentHorizontalLG: 0,
+      // paddingLG: 0,
+      padding: 0,
+      // borderRadius: 8,
+      // borderRadiusOuter: 8,
+    },
+
     Pagination: {
       colorText: dark9,
       colorBorder: "red",
