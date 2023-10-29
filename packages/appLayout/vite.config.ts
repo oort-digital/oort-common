@@ -6,8 +6,6 @@ import { dependencies } from "./package.json";
 
 const external = Object.keys(dependencies);
 
-console.log(JSON.stringify(external));
-
 export default defineConfig({
   plugins: [
     react(),
