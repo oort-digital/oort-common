@@ -1,5 +1,5 @@
 @import "../styles/palette.scss";
 
-button:global(.ant-btn).btn:hover {
+button:global(.ant-btn-primary).btn:hover {
   color: $dark-3 !important;
 }

@@ -1,6 +1,14 @@
 import { ConfigProvider, ThemeConfig } from "antd";
 import { ReactNode } from "react";
-import { dark13, dark2, dark3, dark4, dark9, primary6 } from "./styles/palette";
+import {
+  dark13,
+  dark2,
+  dark3,
+  dark4,
+  dark5,
+  dark9,
+  primary6,
+} from "./styles/palette";
 
 const OortAntdThemeConfig: ThemeConfig = {
   token: {
@@ -23,18 +31,27 @@ const OortAntdThemeConfig: ThemeConfig = {
 
     Pagination: {
       colorText: dark9,
-      colorBorder: "red",
-      colorBorderSecondary: "red",
+      // colorBorder: "red",
+      // colorBorderSecondary: "red",
       colorBgContainer: dark4,
     },
 
     Button: {
       // Text color of primary button
       primaryColor: dark3,
+      defaultColor: dark9,
+      defaultBg: dark4,
+      defaultBorderColor: dark5,
+
       fontWeight: 500,
+      fontSizeLG: 16,
+      fontSize: 14,
+
       borderRadius: 4,
       borderRadiusLG: 4,
+
       controlHeightLG: 52,
+      controlHeight: 40,
     },
   },
 };
