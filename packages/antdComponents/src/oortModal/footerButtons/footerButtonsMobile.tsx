@@ -5,7 +5,9 @@ import { ButtonType } from "antd/lib/button";
 import { useFooterButtons } from "./useFooterButtons";
 import { IFooterBtn, IFooterProps } from "./typesAndInterfaces";
 
-interface IProps extends IDepricatedProps, IFooterProps {}
+export interface IFooterButtonsMobileProps
+  extends IDepricatedProps,
+    IFooterProps {}
 
 interface IDepricatedProps {
   /**
@@ -69,7 +71,7 @@ function FooterButtonsMobileDepricated({
   loading,
   className,
   disable,
-}: IProps) {
+}: IFooterButtonsMobileProps) {
   let cssClass = styles.footer_buttons_depricated;
   if (className) {
     cssClass = `${cssClass} ${className}`;

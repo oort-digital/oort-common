@@ -1,12 +1,24 @@
-// import "../../../.storybook/stories.less";
 import { Meta, StoryObj } from "@storybook/react";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
-import { IFooterBtn, FooterButtonsMobile } from "./";
+import { OortConfigProvider } from "../../oortConfigProvider";
+import React from "react";
+import {
+  IFooterButtonsMobileProps,
+  FooterButtonsMobile,
+} from "./footerButtonsMobile";
+import { IFooterBtn } from "./typesAndInterfaces";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+function Wrap(props: IFooterButtonsMobileProps) {
+  return (
+    <OortConfigProvider>
+      <FooterButtonsMobile {...props} />
+    </OortConfigProvider>
+  );
+}
+
 const meta = {
   title: "src/oortModal/footerButtonsMobile",
-  component: FooterButtonsMobile,
+  component: Wrap,
   parameters: {
     //👇 The viewports object from the Essentials addon
     viewport: {
