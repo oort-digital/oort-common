@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Drawer } from "antd";
+import { ConfigProvider, Drawer } from "antd";
 import styles from "./oortModalMobile.module.scss";
 import { CloseCircleIcon } from "../icons";
 import classNames from "classnames";
@@ -68,19 +68,35 @@ export const OortModalMobile = ({
   const titles = renderTitles(title);
 
   return (
-    <Drawer
-      className={cssClass}
-      height={height}
-      title={titles[0]}
-      closeIcon={<CloseCircleIcon />}
-      placement="bottom"
-      closable={true}
-      onClose={_onCancel}
-      open={visible}
-      footer={footer}
+    <ConfigProvider
+      theme={{
+        components: {
+          Drawer: {
+            colorBgElevated: "#222831",
+            colorText: "#C1C7CE",
+            colorIcon: "#C1C7CE",
+            colorIconHover: "#C1C7CE",
+          },
+        },
+      }}
     >
-      {titles[1]}
-      {children}
-    </Drawer>
+      <Drawer
+        className={cssClass}
+        classNames={{
+          header: styles.header,
+        }}
+        height={height}
+        title={titles[0]}
+        closeIcon={<CloseCircleIcon />}
+        placement="bottom"
+        closable={true}
+        onClose={_onCancel}
+        open={visible}
+        footer={footer}
+      >
+        {titles[1]}
+        {children}
+      </Drawer>
+    </ConfigProvider>
   );
 };

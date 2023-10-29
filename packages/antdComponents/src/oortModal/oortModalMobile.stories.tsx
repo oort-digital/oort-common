@@ -1,5 +1,4 @@
 import React from "react";
-// import "../../.storybook/stories.less";
 import { Meta, StoryObj } from "@storybook/react";
 import { OortModalMobile } from "./oortModalMobile";
 import { IFooterBtn, FooterButtonsMobile } from "./footerButtons";
