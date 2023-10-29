@@ -1,13 +1,22 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { OortModalMobile } from "./oortModalMobile";
+import { IOortModalMobileProps, OortModalMobile } from "./oortModalMobile";
 import { IFooterBtn, FooterButtonsMobile } from "./footerButtons";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import { OortConfigProvider } from "../oortConfigProvider";
+
+function Wrap(props: IOortModalMobileProps) {
+  return (
+    <OortConfigProvider>
+      <OortModalMobile {...props} />
+    </OortConfigProvider>
+  );
+}
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
   title: "src/oortModal/oortModalMobile",
-  component: OortModalMobile,
+  component: Wrap,
   parameters: {
     //👇 The viewports object from the Essentials addon
     viewport: {

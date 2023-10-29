@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button } from "../../button";
 import styles from "./footerButtonsMobile.module.scss";
 import React from "react";
 import { ButtonType } from "antd/lib/button";

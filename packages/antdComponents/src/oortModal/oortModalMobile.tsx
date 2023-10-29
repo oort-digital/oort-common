@@ -13,7 +13,7 @@ type TitleType = string | ReactNode | IModalTitle;
 
 const isModalTitle = (title: any) => title.underHeader !== undefined;
 
-interface IProps {
+export interface IOortModalMobileProps {
   visible: boolean;
   title?: TitleType;
   onCancel?: () => void;
@@ -48,7 +48,7 @@ export const OortModalMobile = ({
   title,
   className,
   viewMode,
-}: IProps) => {
+}: IOortModalMobileProps) => {
   const _onCancel = () => {
     if (!loading && onCancel) {
       //if loading === true, user can't close modal
