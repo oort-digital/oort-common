@@ -1,11 +1,21 @@
-// import "../../../.storybook/stories.less";
+import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { IFooterBtn, FooterButtons } from "./";
+import { IButtonsProps } from "./footerButtons";
+import { OortConfigProvider } from "../../oortConfigProvider";
+
+function Wrap(props: IButtonsProps) {
+  return (
+    <OortConfigProvider>
+      <FooterButtons {...props} />
+    </OortConfigProvider>
+  );
+}
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
   title: "src/oortModal/footerButtons",
-  component: FooterButtons,
+  component: Wrap,
 } satisfies Meta<typeof FooterButtons>;
 
 export default meta;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "antd";
+import { Button } from "../../button";
 import styles from "./footerButtons.module.scss";
 import { useFooterButtons } from "./useFooterButtons";
 import { IFooterBtn, IFooterProps } from "./typesAndInterfaces";
@@ -39,7 +39,7 @@ interface IDepricatedProps {
   onSecondOk?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-interface IProps extends IDepricatedProps, IFooterProps {}
+export interface IButtonsProps extends IDepricatedProps, IFooterProps {}
 
 function DepricatedFooterButtons({
   okBtn,
@@ -52,7 +52,7 @@ function DepricatedFooterButtons({
   secondBtn,
   onFistOk,
   onSecondOk,
-}: IProps) {
+}: IButtonsProps) {
   let cssClass = styles.footer_buttons_depricated;
   if (className) {
     cssClass = `${cssClass} ${className}`;
@@ -118,7 +118,7 @@ function DepricatedFooterButtons({
   );
 }
 
-export function FooterButtons(props: IProps) {
+export function FooterButtons(props: IButtonsProps) {
   const { buttons = [] } = props;
 
   if (buttons.length === 0) {
