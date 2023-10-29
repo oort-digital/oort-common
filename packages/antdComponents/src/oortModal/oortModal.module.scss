@@ -27,5 +27,11 @@
         text-align: center;
       }
     }
+
+    > .footer {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      padding: 10px 16px;
+    }
   }
 }

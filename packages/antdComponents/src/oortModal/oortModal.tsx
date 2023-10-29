@@ -39,6 +39,7 @@ export function OortModal({
       classNames={{
         header: styles.header,
         content: styles.content,
+        footer: styles.footer,
       }}
       className={classNames(className, styles.modal)}
       width={width || "640px"}
