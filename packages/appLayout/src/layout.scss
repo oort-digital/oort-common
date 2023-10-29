@@ -1,0 +1,9 @@
+@import "./styles/fonts.css";
+@import "./styles/common.scss";
+
+* {
+  @include scrollbar-mixin();
+  font-family: Epilogue;
+  margin: 0;
+  padding: 0;
+}
