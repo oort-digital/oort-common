@@ -7,7 +7,7 @@ import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
-  title: "oort/oortModal/oortModalMobile",
+  title: "src/oortModal/oortModalMobile",
   component: OortModalMobile,
   parameters: {
     //👇 The viewports object from the Essentials addon

@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
 import { Drawer } from "antd";
-// import "./oortModalMobile.less"
+import styles from "./oortModalMobile.module.scss";
 import { CloseCircleIcon } from "../icons";
+import classNames from "classnames";
 
 interface IModalTitle {
   txt: string;
@@ -55,14 +56,12 @@ export const OortModalMobile = ({
     }
   };
 
-  let cssClass = className
-    ? `oort-modal-mobile ${className}`
-    : "oort-modal-mobile";
+  let cssClass = classNames(styles.modal, className);
 
   if (viewMode === undefined) {
     viewMode = "fullScreen";
   } else if (viewMode === "topGap") {
-    cssClass = `${cssClass} top-gap`;
+    cssClass = `${cssClass} ${styles.top_gap}`;
   }
 
   const height = viewMode === "fullScreen" ? "100%" : "90%";
