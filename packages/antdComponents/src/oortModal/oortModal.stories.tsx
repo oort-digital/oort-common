@@ -36,6 +36,8 @@ export const Primary: Story = {
 
 const okBtn: IFooterBtn = {
   text: "ok",
+  type: "primary",
+  isMainButton: true,
 };
 
 export const CustomFooterButtons: Story = {
