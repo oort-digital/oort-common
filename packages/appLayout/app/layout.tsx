@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.scss";
+import "./reset.css";
 import { SiteLayout } from "./siteLayout";
 
 export default function RootLayout({
