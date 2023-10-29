@@ -44,6 +44,6 @@ export const CustomFooterButtons: Story = {
     title: "modal title",
     onCancel,
     children: <></>,
-    footer: <FooterButtons okBtn={okBtn} />,
+    footer: <FooterButtons buttons={[okBtn]} />,
   },
 };
