@@ -2107,10 +2107,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oort-digital/antd-components@^0.0.1-applayout.0.0.1":
-  version "0.0.1-applayout.0.0.1"
-  resolved "https://npm.pkg.github.com/download/@oort-digital/antd-components/0.0.1-applayout.0.0.1/fa447d4bb1a9e522c3a2fa746102b3c94d73c115#fa447d4bb1a9e522c3a2fa746102b3c94d73c115"
-  integrity sha512-lI5U1OzCZwHEx1mq47KZF41d7VkKM+9iIlH1EyfvuHnWn0S8eqXCsiyXHU6R9MVDg2XHyo6X+ktXltx9GgG/yw==
+"@oort-digital/antd-components@^0.0.1-applayout.0.0.2":
+  version "0.0.1-applayout.0.0.2"
+  resolved "https://npm.pkg.github.com/download/@oort-digital/antd-components/0.0.1-applayout.0.0.2/3c67117cf194645313cc5b6ec76419e6efff2204#3c67117cf194645313cc5b6ec76419e6efff2204"
+  integrity sha512-Z65Lf69Vg+E4cMl6JtU7s3McGAza2rOQm5xKoUoPdRB5y/4YI55T0jLN4B3muz6okXScyq6H+7GvbWPfKOfASQ==
   dependencies:
     antd "^5.10.0"
     classnames "^2.3.2"
