@@ -6,6 +6,7 @@ import { SubTitle } from "../subTitle";
 import { CSSProperties, useState } from "react";
 import { ICommonProps } from "./typesAndInterfaces";
 import { TooltipPlacement } from "antd/es/tooltip";
+import classNames from "classnames";
 
 export interface ICollectionFilterProps extends ICommonProps {
   triggerBtnClassName?: string;
@@ -79,18 +80,17 @@ const Impl = ({
     setBottomSpaceHeight(h);
   };
 
-  const triggerBtnCss = triggerBtnClassName
-    ? `${triggerBtnClassName} ${styles.collection_trigger_btn}`
-    : styles.collection_trigger_btn;
-  const popoverCss = popoverClassName
-    ? `${popoverClassName} ${styles.collection_popover_content}`
-    : styles.collection_popover_content;
-
   return (
     <PopoverFilter
       onBottomSpaceHeightChange={onBottomSpaceHeightChange}
-      triggerBtnClassName={triggerBtnCss}
-      popoverClassName={popoverCss}
+      triggerBtnClassName={classNames(
+        triggerBtnClassName,
+        styles.collection_trigger_btn
+      )}
+      popoverClassName={classNames(
+        popoverClassName,
+        styles.collection_popover_content
+      )}
       popoverStyle={popoverStyle}
       popoverTitleClassName={styles.title}
       // applyButtonClassName={styles.apply}
