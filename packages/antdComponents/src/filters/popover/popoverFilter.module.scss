@@ -30,10 +30,12 @@
 }
 
 .trigger_btn {
-  // color: @trigger-btn-color !important;
-  // background: $dark-1 !important;
+  display: flex;
+  justify-content: center;
+  color: $dark-7 !important;
+  background: $dark-2 !important;
   .single_title {
-    // @include body-14-regular-mixin() !important;
+    @include body-14-regular-important-mixin();
   }
 
   .title_outer {
