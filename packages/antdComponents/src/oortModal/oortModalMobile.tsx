@@ -3,7 +3,9 @@ import { ConfigProvider, Drawer } from "antd";
 import styles from "./oortModalMobile.module.scss";
 import { CloseCircleIcon } from "../icons";
 import classNames from "classnames";
-import { dark10, dark3 } from "../styles/palette";
+import { Palette } from "../styles";
+
+const { dark10, dark3 } = Palette;
 
 interface IModalTitle {
   txt: string;
