@@ -2,6 +2,7 @@
 
 /packages/antdComponents/node_modules
 /packages/antdComponents/yarn.lock
+/packages/antdComponents/package-lock.json
 /packages/antdComponents/dist
 
 /packages/appLayout/node_modules

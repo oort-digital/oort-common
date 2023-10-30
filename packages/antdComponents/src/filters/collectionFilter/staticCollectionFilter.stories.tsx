@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../../../.storybook/stories.less";
 import { Meta, StoryObj } from "@storybook/react";
 import { InMemoryStoreStub } from "./testStores";
 
