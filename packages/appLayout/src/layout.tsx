@@ -1,4 +1,4 @@
-import "./layout.scss";
+import "./styles.scss";
 import { DeviceType, useDeviceType } from "@oort-digital/lazy-loader";
 import { lazy, Suspense } from "react";
 import { ILayoutProps } from "./typesAndInterfaces";

@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { AsideMobile } from "./aside";
+import "./styles.scss";
 import styles from "./layoutMobile.module.scss";
 import { LogoLink } from "./logoLink/logoLink";
 import { Sider } from "./sider";

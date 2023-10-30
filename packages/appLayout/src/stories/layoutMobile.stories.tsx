@@ -7,12 +7,13 @@ import { navItems, TestContent, testNavItems } from "./common";
 import { Web3StoreStub } from "./web3StoreStub";
 import { OortConfigProvider } from "@oort-digital/antd-components";
 import { ILayoutProps } from "../typesAndInterfaces";
-import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+// import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 
 const meta = {
   title: "oort/layout/mobile",
   component: LayoutMobile,
+  /*
   parameters: {
     //👇 The viewports object from the Essentials addon
     viewport: {
@@ -22,6 +23,7 @@ const meta = {
       defaultViewport: "iphone6",
     },
   },
+  */
   render: (props: ILayoutProps) => {
     return (
       <OortConfigProvider>

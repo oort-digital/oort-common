@@ -2,37 +2,32 @@
 @import "../styles/typography.scss";
 
 .top_header_menu {
-  :global(.ant-drawer-content-wrapper) {
-    width: 95% !important;
-    max-width: 400px;
-    :global(.ant-drawer-content) {
-      background-color: $theme-bg-2;
-      :global(.ant-drawer-header) {
-        background-color: $theme-bg-2;
-        border-bottom: none;
-        :global(.ant-drawer-header-title) {
-          justify-content: end;
-          :global(.ant-drawer-title) {
-            color: $theme-color-10;
-            @include h3-semibold-mixin();
-          }
+  max-width: 400px;
+  .header {
+    padding: 16px 24px;
+    border: none;
 
-          :global(.ant-drawer-close) {
-            margin: 0;
-            padding: 0;
-            color: $theme-color-10;
-            display: flex;
-            order: 2;
-          }
-        }
+    > :global(.ant-drawer-header-title) {
+      justify-content: end;
+      :global(.ant-drawer-title) {
+        color: $dark-10;
+        @include h3-semibold-mixin();
       }
 
-      :global(.ant-drawer-body) {
-        padding-left: 0;
-        padding-right: 0;
-        padding-bottom: 0;
+      :global(.ant-drawer-close) {
+        margin: 0;
+        padding: 0;
+        color: $dark-10;
+        display: flex;
+        order: 2;
       }
     }
+  }
+
+  .body {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
   }
 }
 

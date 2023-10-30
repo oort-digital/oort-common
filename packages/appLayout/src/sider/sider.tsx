@@ -1,9 +1,12 @@
 "use client";
 import { ReactNode, useEffect, useState } from "react";
-import { Drawer } from "antd";
+import { ConfigProvider, Drawer } from "antd";
 import { CloseCircleIcon } from "@oort-digital/ui";
 import styles from "./sider.module.scss";
 import { BurgerMenuIcon } from "./burgerMenuIcon";
+import { Palette } from "@oort-digital/antd-components";
+
+const { dark3, dark10 } = Palette;
 
 interface IProps {
   children: ReactNode;
@@ -15,16 +18,34 @@ export const Sider = ({ children }: IProps) => {
   const closeMenu = () => setMenuVisible(false);
 
   const RenderDrawer = () => (
-    <Drawer
-      title="Menu"
-      className={styles.top_header_menu}
-      closeIcon={<CloseCircleIcon />}
-      placement="left"
-      onClose={closeMenu}
-      open={isMenuVisible}
+    <ConfigProvider
+      theme={{
+        components: {
+          Drawer: {
+            colorBgElevated: dark3,
+            colorText: dark10,
+            colorIcon: dark10,
+            colorIconHover: dark10,
+          },
+        },
+      }}
     >
-      {children}
-    </Drawer>
+      <Drawer
+        width={"95%"}
+        title="Menu"
+        className={styles.top_header_menu}
+        classNames={{
+          header: styles.header,
+          body: styles.body,
+        }}
+        closeIcon={<CloseCircleIcon />}
+        placement="left"
+        onClose={closeMenu}
+        open={isMenuVisible}
+      >
+        {children}
+      </Drawer>
+    </ConfigProvider>
   );
 
   useEffect(() => {
