@@ -3,6 +3,7 @@ import { ConfigProvider, Drawer } from "antd";
 import styles from "./oortModalMobile.module.scss";
 import { CloseCircleIcon } from "../icons";
 import classNames from "classnames";
+import { dark10, dark3 } from "../styles/palette";
 
 interface IModalTitle {
   txt: string;
@@ -72,10 +73,10 @@ export const OortModalMobile = ({
       theme={{
         components: {
           Drawer: {
-            colorBgElevated: "#222831",
-            colorText: "#C1C7CE",
-            colorIcon: "#C1C7CE",
-            colorIconHover: "#C1C7CE",
+            colorBgElevated: dark3,
+            colorText: dark10,
+            colorIcon: dark10,
+            colorIconHover: dark10,
           },
         },
       }}

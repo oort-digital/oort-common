@@ -1,14 +1,7 @@
 import { ConfigProvider, ThemeConfig } from "antd";
 import { ReactNode } from "react";
-import {
-  dark13,
-  dark2,
-  dark3,
-  dark4,
-  dark5,
-  dark9,
-  primary6,
-} from "./styles/palette";
+import { Palette } from "./styles";
+const { dark13, dark2, dark3, dark4, dark5, dark9, primary6 } = Palette;
 
 const OortAntdThemeConfig: ThemeConfig = {
   token: {

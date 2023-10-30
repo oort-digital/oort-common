@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/antd-components",
-  "version": "0.0.1-applayout.0.0.1",
+  "version": "0.0.1-applayout.0.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -36,7 +36,8 @@
     "storybook": "7.4.6",
     "typescript": "^5",
     "vite": "^4.4.11",
-    "vite-plugin-dts": "^3.6.0"
+    "vite-plugin-dts": "^3.6.0",
+    "vite-plugin-static-copy": "^0.17.0"
   },
   "license": "UNLICENSED",
   "files": [
