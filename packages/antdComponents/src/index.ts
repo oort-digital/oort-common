@@ -6,3 +6,4 @@ export * from "./pagination";
 export * from "./button";
 export * from "./styles";
 export * from "./oortModal";
+export * from "./filters";

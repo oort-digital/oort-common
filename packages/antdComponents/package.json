@@ -14,8 +14,10 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@oort-digital/utils": "^0.0.1-alfa.0.0.6",
     "antd": "^5.10.0",
     "classnames": "^2.3.2",
+    "mobx-react-lite": "^4.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
