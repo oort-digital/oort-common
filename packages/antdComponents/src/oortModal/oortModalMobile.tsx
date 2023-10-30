@@ -84,6 +84,7 @@ export const OortModalMobile = ({
         className={cssClass}
         classNames={{
           header: styles.header,
+          footer: styles.footer,
         }}
         height={height}
         title={titles[0]}
