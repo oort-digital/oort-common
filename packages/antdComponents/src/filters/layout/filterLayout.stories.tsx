@@ -1,12 +1,11 @@
 import React from "react";
-import "../../../.storybook/stories.less";
 
 import { Meta, StoryObj } from "@storybook/react";
 import { FilterLayout } from "./filterLayout";
 import { SearchInput } from "../searchInput";
 
 const meta = {
-  title: "oort/filters/layout/desktop",
+  title: "src/filters/layout/desktop",
   component: FilterLayout,
 } satisfies Meta<typeof FilterLayout>;
 

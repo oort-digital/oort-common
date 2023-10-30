@@ -1,12 +1,11 @@
 import React from "react";
-import "../../../.storybook/stories.less";
 
 import { Meta, StoryObj } from "@storybook/react";
 import { FilterLayoutMobile } from "./filterLayoutMobile";
 import { SearchInputMobile } from "../searchInput";
 
 const meta = {
-  title: "oort/filters/layout/mobile",
+  title: "src/filters/layout/mobile",
   component: FilterLayoutMobile,
 } satisfies Meta<typeof FilterLayoutMobile>;
 

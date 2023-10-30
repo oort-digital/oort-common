@@ -4,7 +4,7 @@ import {
   collectionItemRenderer,
   ISelectedParameter,
 } from "./collectionFilterItemRenderer";
-import styles from "./collectionFilterContent.module.less";
+import styles from "./collectionFilterContent.module.scss";
 import { observer } from "mobx-react-lite";
 import { Tabs } from "antd";
 import { ICollectionFilterItem, ICollectionFilterStore } from "./stores";

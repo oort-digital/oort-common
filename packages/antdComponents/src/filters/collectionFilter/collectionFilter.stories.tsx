@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../../.storybook/stories.less";
+// import "../../../.storybook/stories.less";
 import { Meta, StoryObj } from "@storybook/react";
 import { CollectionFilter, ICollectionFilterProps } from "./collectionFilter";
 import {
@@ -20,7 +20,7 @@ import { Button } from "antd";
 const templateStyle = { height: "1000px" };
 
 const meta = {
-  title: "oort/filters/collection",
+  title: "src/filters/collection",
   component: CollectionFilter,
   render: (props: ICollectionFilterProps) => {
     return (

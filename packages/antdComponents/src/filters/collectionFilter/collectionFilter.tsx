@@ -1,4 +1,4 @@
-import styles from "./collectionFilter.module.less";
+import styles from "./collectionFilter.module.scss";
 import { PopoverFilter } from "../popover";
 import { observer } from "mobx-react-lite";
 import { CollectionFilterContent } from "./collectionFilterContent";

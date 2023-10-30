@@ -1,0 +1,29 @@
+@import "../styles/palette.scss";
+
+.async_list {
+  .load_more_btn_container {
+    margin-top: 36px;
+    text-align: center;
+
+    .load_more_btn {
+      width: 270px;
+    }
+  }
+
+  .empty_hint {
+    color: $dark-6;
+    text-align: center;
+
+    :global(.anticon) {
+      margin-bottom: 18px;
+    }
+  }
+
+  :global(.ant-spin-blur) {
+    opacity: 0;
+  }
+
+  :global(.ant-spin-container) {
+    transition: none;
+  }
+}

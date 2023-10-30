@@ -1,24 +1,24 @@
-@import "../../styles/vars.less";
+@import "../../styles/palette.scss";
+
+@mixin callout-medium-mixin() {
+  width: 100%;
+  /* Callout Medium */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  /* identical to box height, or 131% */
+  letter-spacing: -0.0031em;
+}
 
 .content {
-  .callout-medium-mixin() {
-    width: 100%;
-    /* Callout Medium */
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 21px;
-    /* identical to box height, or 131% */
-    letter-spacing: -0.0031em;
-  }
-
   :global(.ant-tabs) {
     :global(.ant-tabs-nav::before) {
-      border-bottom: 1px solid @theme-color-4;
+      border-bottom: 1px solid $dark-4;
     }
     :global(.ant-tabs-tab) {
-      .callout-medium-mixin();
-      color: @theme-color-7;
+      @include callout-medium-mixin();
+      color: $dark-7;
     }
   }
 
@@ -35,10 +35,10 @@
 
       .list_item {
         width: 100%;
-        .callout-medium-mixin();
+        @include callout-medium-mixin();
 
         .item_name {
-          color: @theme-color-9;
+          color: $dark-9;
         }
         :global(.item-icon) {
           height: 32px;

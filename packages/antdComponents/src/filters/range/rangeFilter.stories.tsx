@@ -1,4 +1,3 @@
-import "../../../.storybook/stories.less";
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { RangeFilter } from ".";
@@ -9,7 +8,7 @@ import { emptyRange, NumRange } from "../../typesAndInterfaces";
 import { RangeValue } from "../popover/popoverFilter";
 
 const meta = {
-  title: "oort/filters/range",
+  title: "src/filters/range",
   component: RangeFilter,
 } satisfies Meta<typeof RangeFilter>;
 

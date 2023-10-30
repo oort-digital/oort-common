@@ -9,7 +9,7 @@ import { Button } from "antd";
 import { StaticCollectionFilter } from "./staticCollectionFilter";
 
 const meta = {
-  title: "oort/filters/staticCollection",
+  title: "src/filters/staticCollection",
   component: StaticCollectionFilter,
 } satisfies Meta<typeof StaticCollectionFilter>;
 

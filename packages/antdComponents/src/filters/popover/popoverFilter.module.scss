@@ -1,10 +1,10 @@
-@import "../../styles/typography.less";
-@import "../../styles/vars.less";
+@import "../../styles/typography.scss";
+@import "../../styles/palette.scss";
 
 .popover_content {
   .title {
-    .body-16-medium-mixin();
-    color: @theme-color-10;
+    @include body-16-medium-mixin();
+    color: $dark-10;
     margin-bottom: 32px;
   }
 
@@ -16,13 +16,13 @@
     }
     .apply {
       flex: 3;
-      color: @theme-color-1;
+      color: $dark-1;
     }
   }
 
   .close_icon_wrap {
     cursor: pointer;
-    color: @theme-color-10;
+    color: $dark-10;
     height: 15px;
     width: 15px;
     float: right;
@@ -30,10 +30,10 @@
 }
 
 .trigger_btn {
-  color: @trigger-btn-color !important;
-  background: @theme-bg-1 !important;
+  // color: @trigger-btn-color !important;
+  // background: $dark-1 !important;
   .single_title {
-    .body-14-regular-mixin() !important;
+    // @include body-14-regular-mixin() !important;
   }
 
   .title_outer {

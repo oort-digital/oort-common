@@ -1,5 +1,4 @@
-import "../../../.storybook/stories.less";
-
+// import "../../../.storybook/stories.less";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useFilterListeners } from "./useFilterListeners";
 import React from "react";
@@ -13,7 +12,7 @@ import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "oort/filters/collectionMobile",
+  title: "src/filters/collectionMobile",
   component: CollectionFilterMobile,
 
   parameters: {
