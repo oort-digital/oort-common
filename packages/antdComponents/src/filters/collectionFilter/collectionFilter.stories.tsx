@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-// import "../../../.storybook/stories.less";
+import "../../../.storybook/index.scss";
 import { Meta, StoryObj } from "@storybook/react";
 import { CollectionFilter, ICollectionFilterProps } from "./collectionFilter";
+import { OortConfigProvider } from "../../oortConfigProvider";
 import {
   InMemoryStoreStub,
   LoadingStoreStub,
@@ -24,9 +25,11 @@ const meta = {
   component: CollectionFilter,
   render: (props: ICollectionFilterProps) => {
     return (
-      <div style={templateStyle}>
-        <CollectionFilter {...props} />
-      </div>
+      <OortConfigProvider>
+        <div style={templateStyle}>
+          <CollectionFilter {...props} />
+        </div>
+      </OortConfigProvider>
     );
   },
 } satisfies Meta<typeof CollectionFilter>;
