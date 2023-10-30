@@ -1,61 +1,79 @@
 import React from "react";
 import "../../.storybook/index.scss";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import LayoutMobile from "../layoutMobile";
 import { navItems, TestContent, testNavItems } from "./common";
 import { Web3StoreStub } from "./web3StoreStub";
+import { OortConfigProvider } from "@oort-digital/antd-components";
+import { ILayoutProps } from "../typesAndInterfaces";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import { ConnectorNames } from "@oort-digital/web3-connectors";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const meta = {
   title: "oort/layout/mobile",
   component: LayoutMobile,
-
   parameters: {
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-    layout: "fullscreen",
+    //👇 The viewports object from the Essentials addon
+    viewport: {
+      //👇 The viewports you want to use
+      viewports: INITIAL_VIEWPORTS,
+      //👇 Your own default viewport
+      defaultViewport: "iphone6",
+    },
   },
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    //backgroundColor: { control: 'color' },
+  render: (props: ILayoutProps) => {
+    return (
+      <OortConfigProvider>
+        <Router>
+          <LayoutMobile {...props} />
+        </Router>
+      </OortConfigProvider>
+    );
   },
-} as ComponentMeta<typeof LayoutMobile>;
+} satisfies Meta<typeof LayoutMobile>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof LayoutMobile> = (args) => {
-  return (
-    <Router>
-      <LayoutMobile {...args} />
-    </Router>
-  );
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+const web3 = new Web3StoreStub();
+const supportedWallets: ConnectorNames[] = [
+  ConnectorNames.Injected,
+  ConnectorNames.WalletConnect,
+];
+
+export const WithWeb3: Story = {
+  args: {
+    navItems: navItems,
+    children: TestContent,
+    supportedWallets,
+    web3,
+  },
 };
 
-export const WithWeb3 = Template.bind({});
-WithWeb3.args = {
-  navItems: navItems,
-  web3: new Web3StoreStub(),
-  children: TestContent,
+export const WithoutWeb3: Story = {
+  args: {
+    navItems: navItems,
+    children: TestContent,
+    supportedWallets,
+  },
 };
 
-export const WithoutWeb3 = Template.bind({});
-WithoutWeb3.args = {
-  navItems: navItems,
-  children: TestContent,
+export const ActiveCollapse: Story = {
+  args: {
+    navItems: navItems,
+    children: TestContent,
+    _stubs: {
+      getCurLocation: () => new URL("https://game-hub.oort.local/nfts"),
+    },
+    supportedWallets,
+  },
 };
 
-const isActiveFunc = (href: string) => {
-  return href.includes("game-hub.oort.local/nfts");
-};
-
-export const ActiveCollapse = Template.bind({});
-ActiveCollapse.args = {
-  navItems: navItems,
-  children: TestContent,
-  isActiveFunc: isActiveFunc,
-};
-
-export const WithFaucet = Template.bind({});
-WithFaucet.args = {
-  navItems: testNavItems,
-  children: TestContent,
+export const WithFaucet: Story = {
+  args: {
+    navItems: testNavItems,
+    children: TestContent,
+    supportedWallets,
+  },
 };
