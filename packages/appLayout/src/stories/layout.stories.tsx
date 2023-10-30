@@ -8,6 +8,7 @@ import { Web3StoreStub } from "./web3StoreStub";
 import { ILayoutProps } from "../typesAndInterfaces";
 import { Button } from "antd";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
+import { OortConfigProvider } from "@oort-digital/antd-components";
 
 const meta = {
   title: "oort/layout",
@@ -37,12 +38,12 @@ export const WithWeb3: Story = {
     oortTokenAddress: "0xD8341A4978a68Ed0ad558D745af5578e51102725",
     supportedWallets,
     children: (
-      <>
+      <OortConfigProvider>
         <Button onClick={() => web3.connect(1, ConnectorNames.Injected)}>
           Connect
         </Button>
         {TestContent}
-      </>
+      </OortConfigProvider>
     ),
   },
 };

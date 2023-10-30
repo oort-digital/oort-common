@@ -2107,6 +2107,16 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@oort-digital/antd-components@^0.0.1-applayout.0.0.1":
+  version "0.0.1-applayout.0.0.1"
+  resolved "https://npm.pkg.github.com/download/@oort-digital/antd-components/0.0.1-applayout.0.0.1/fa447d4bb1a9e522c3a2fa746102b3c94d73c115#fa447d4bb1a9e522c3a2fa746102b3c94d73c115"
+  integrity sha512-lI5U1OzCZwHEx1mq47KZF41d7VkKM+9iIlH1EyfvuHnWn0S8eqXCsiyXHU6R9MVDg2XHyo6X+ktXltx9GgG/yw==
+  dependencies:
+    antd "^5.10.0"
+    classnames "^2.3.2"
+    react "18.2.0"
+    react-dom "18.2.0"
+
 "@oort-digital/lazy-loader-next-js@0.0.1-alfa.0.0.5":
   version "0.0.1-alfa.0.0.5"
   resolved "https://npm.pkg.github.com/download/@oort-digital/lazy-loader-next-js/0.0.1-alfa.0.0.5/7ff4923b340123c03bd4329dee4b8a5bb9f15b6d#7ff4923b340123c03bd4329dee4b8a5bb9f15b6d"
@@ -4801,7 +4811,7 @@ antd@4.23.0:
     rc-util "^5.22.5"
     scroll-into-view-if-needed "^2.2.25"
 
-antd@^5.9.4:
+antd@^5.10.0, antd@^5.9.4:
   version "5.10.2"
   resolved "https://registry.yarnpkg.com/antd/-/antd-5.10.2.tgz#9b8c72b92f25fef4b93c186358bcba9cd68b94a8"
   integrity sha512-0kV6PmlJi7vhPmYH9GCAlU62ZhiuLF+gE3REJ/9MZTo++/3i5q6SALNoRgHLMsa+rX50U3RO3wJVY+fPib594Q==
@@ -10130,7 +10140,7 @@ react-docgen@^5.0.0:
     node-dir "^0.1.10"
     strip-indent "^3.0.0"
 
-react-dom@^18.2.0:
+react-dom@18.2.0, react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -10225,7 +10235,7 @@ react-style-singleton@^2.2.1:
     invariant "^2.2.4"
     tslib "^2.0.0"
 
-react@^18.2.0:
+react@18.2.0, react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
@@ -11839,6 +11849,7 @@ wordwrapjs@^4.0.0:
     typical "^5.2.0"
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
