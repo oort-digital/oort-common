@@ -14,7 +14,11 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@oort-digital/lazy-loader": "^0.0.1-alfa.0.0.5",
+    "@oort-digital/logger": "^0.0.1-alfa.0.0.2",
+    "@oort-digital/oort-api-client": "^0.0.1-alfa.0.1.7",
     "@oort-digital/utils": "^0.0.1-alfa.0.0.6",
+    "@oort-digital/web3-connectors": "^0.0.1-alfa.0.1.2",
     "antd": "^5.10.0",
     "blockies-ts": "^1.0.0",
     "classnames": "^2.3.2",
@@ -22,7 +26,8 @@
     "mobx": "^6.10.2",
     "mobx-react-lite": "^4.0.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "typescript-cookie": "^1.0.6"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "7.5.2",
@@ -38,6 +43,7 @@
     "@types/react-dom": "^18.2.13",
     "@vitejs/plugin-react": "^4.1.0",
     "axios": "^1.6.0",
+    "react-router-dom": "^6.18.0",
     "sass": "^1.69.2",
     "storybook": "7.5.2",
     "typescript": "^5",

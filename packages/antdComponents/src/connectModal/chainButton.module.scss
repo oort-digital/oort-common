@@ -1,0 +1,29 @@
+@import "../styles/typography.scss";
+@import "../styles/palette.scss";
+
+@mixin btn-cmn-mixin() {
+  @include body-16-medium-important-mixin;
+  height: 64px !important;
+  padding: 16px 26px 16px 16px !important;
+  box-sizing: border-box !important;
+  border-radius: 8px !important;
+
+  span {
+    vertical-align: middle;
+  }
+}
+
+.btn {
+  @include btn-cmn-mixin();
+}
+
+.active {
+  @include btn-cmn-mixin();
+  color: $primary-6 !important;
+  background: rgba(47, 180, 172, 0.1) !important;
+  border: 2px solid $primary-6 !important;
+}
+
+.can_not_switch {
+  cursor: default !important;
+}

@@ -94,6 +94,14 @@
   letter-spacing: 0em;
 }
 
+@mixin body-16-medium-important-mixin() {
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: 24px !important;
+  letter-spacing: 0em !important;
+}
+
 //styleName: Body 16 – Regular;
 @mixin body-16-regular-mixin() {
   font-size: 16px;

@@ -1,0 +1,25 @@
+@import "../../styles/typography.scss";
+@import "../../styles/palette.scss";
+
+.svg {
+  margin-bottom: 24px;
+}
+
+.label_text {
+  @include body-14-regular-mixin();
+  color: $dark-7;
+}
+
+.connect_btn {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  :global(.anticon) {
+    vertical-align: middle;
+  }
+}
+
+.wrong_chain_text {
+  @include body-14-regular-mixin();
+  color: $dark-7;
+  text-align: center;
+}

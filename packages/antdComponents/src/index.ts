@@ -15,3 +15,13 @@ export * from "./input";
 export * from "./popover";
 export * from "./checkbox";
 export * from "./radio";
+export * from "./connectModal";
+export * from "./auth";
+export {
+  getChainIcon,
+  getChainIconOld,
+  getChainName,
+  parseUnits,
+  formatUnits,
+  parsePrice,
+} from "./utils";

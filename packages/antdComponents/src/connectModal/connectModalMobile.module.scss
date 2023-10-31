@@ -1,0 +1,31 @@
+@import "../styles/typography.scss";
+@import "../styles/palette.scss";
+
+.modal
+  > :global(
+    .ant-drawer-content-wrapper > .ant-drawer-content > .ant-drawer-wrapper-body
+  ) {
+  > :global(.ant-drawer-header) {
+    border-bottom: 1px solid $dark-5;
+  }
+
+  > :global(.ant-drawer-body) {
+    > .description {
+      margin-bottom: 24px;
+      color: $dark-13;
+      @include body-16-regular-mixin;
+    }
+
+    > .chain_buttons {
+      margin-bottom: 56px;
+    }
+  }
+
+  > :global(.ant-drawer-footer) {
+    @include footnote-12-description-mixin();
+    padding: 12px 24px;
+    color: $dark-13;
+    background: $dark-3;
+    text-align: center;
+  }
+}
