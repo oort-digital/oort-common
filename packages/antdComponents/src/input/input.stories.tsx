@@ -5,7 +5,7 @@ import React from "react";
 import { OortConfigProvider } from "../oortConfigProvider";
 
 const onChange = (e: any) => {
-  alert("changed");
+  console.log("changed");
 };
 
 const meta = {
@@ -26,10 +26,10 @@ const meta = {
         >
           <Input
             style={{
-              width: "100px",
+              width: "300px",
             }}
             size="large"
-            defaultValue={3}
+            placeholder="Enter some text"
             onChange={onChange}
           />
         </div>
