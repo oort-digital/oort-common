@@ -3,10 +3,19 @@ import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { FilterLayoutMobile } from "./filterLayoutMobile";
 import { SearchInputMobile } from "../searchInput";
+import { OortConfigProvider } from "../../oortConfigProvider";
 
 const meta = {
   title: "src/filters/layout/mobile",
   component: FilterLayoutMobile,
+
+  render: (args) => {
+    return (
+      <OortConfigProvider>
+        <FilterLayoutMobile {...args} />
+      </OortConfigProvider>
+    );
+  },
 } satisfies Meta<typeof FilterLayoutMobile>;
 
 export default meta;

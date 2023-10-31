@@ -111,7 +111,7 @@ function FooterButtonsMobileDepricated({
   );
 }
 
-export function FooterButtonsMobile(props: IProps) {
+export function FooterButtonsMobile(props: IFooterButtonsMobileProps) {
   const { buttons = [] } = props;
 
   if (buttons.length === 0) {

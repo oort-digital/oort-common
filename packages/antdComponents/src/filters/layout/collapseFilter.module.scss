@@ -1,5 +1,5 @@
-@import "../../styles/vars.less";
-@import "../../styles/typography.less";
+@import "../../styles/palette.scss";
+@import "../../styles/typography.scss";
 
 // .ant-collapse-icon-position-end > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
 //     left: 90% !important;
@@ -7,13 +7,13 @@
 
 .collapse_filter {
   :global(.ant-collapse-item) {
-    border-bottom: 1px solid @theme-color-5 !important;
+    border-bottom: 1px solid $dark-5 !important;
     border-radius: 0 !important;
     :global(.ant-collapse-header) {
       padding-right: 0 !important;
       padding-left: 0 !important;
-      color: @theme-color-8 !important;
-      .body-16-medium-mixin;
+      color: $dark-8 !important;
+      @include body-16-medium-mixin;
 
       :global(.anticon) {
         height: 24px;
