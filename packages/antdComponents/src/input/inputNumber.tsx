@@ -26,4 +26,5 @@ export const InputNumberDesignToken = {
   handleBorderColor: "#384048",
   colorBorder: "#384048",
   colorText: "#A9B1BA",
+  fontFamily: "inherit",
 };

@@ -1,4 +1,4 @@
-// import "../../.storybook/stories.less";
+import "../../.storybook/index.scss";
 import { Meta, StoryObj } from "@storybook/react";
 import { InputNumber } from "./inputNumber";
 import React from "react";
