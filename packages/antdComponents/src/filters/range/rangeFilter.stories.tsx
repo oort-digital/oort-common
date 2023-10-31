@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { RangeFilter } from ".";
+import { OortConfigProvider } from "../../oortConfigProvider";
 
 import { Button } from "antd";
 import { IRangeFilterProps } from "./rangeFilter";
@@ -10,6 +11,14 @@ import { RangeValue } from "../popover/popoverFilter";
 const meta = {
   title: "src/filters/range",
   component: RangeFilter,
+
+  render: (props: IRangeFilterProps) => {
+    return (
+      <OortConfigProvider>
+        <RangeFilter {...props}></RangeFilter>
+      </OortConfigProvider>
+    );
+  },
 } satisfies Meta<typeof RangeFilter>;
 
 export default meta;
@@ -35,14 +44,14 @@ export const Main: Story = {
     const mergedProps = { ...args, ...props };
 
     return (
-      <>
+      <OortConfigProvider>
         <div>
           {values[0]}-{values[1]}
         </div>
         <div>
           <RangeFilter {...mergedProps} />
         </div>
-      </>
+      </OortConfigProvider>
     );
   },
 };

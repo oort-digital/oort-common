@@ -1,8 +1,9 @@
 import { CSSProperties, ReactNode, useState } from "react";
 import styles from "./popoverFilter.module.scss";
-import { Button, Popover } from "antd";
 import { ChevronDownOutlineIconSvg, CloseIcon } from "../../icons";
 import { TooltipPlacement } from "antd/es/tooltip";
+import { Button } from "../../button";
+import { Popover } from "../../popover";
 
 export type RangeValue = number | undefined;
 
@@ -190,7 +191,6 @@ export const PopoverFilter = ({
   return (
     <Popover
       overlayClassName={styles.overlay}
-      style={{ backgroundColor: "#11151A" }}
       onOpenChange={onVisibleChange_}
       open={visibleInternal}
       placement={placement}
@@ -198,7 +198,7 @@ export const PopoverFilter = ({
       trigger="click"
     >
       {showTriggerButton && (
-        <Button ref={setBtnRef} className={btnClassName} size="large">
+        <Button className={btnClassName} size="large">
           {subTitle ? renderTitleAndSubTitle() : renderSingleTitle()}
         </Button>
       )}
