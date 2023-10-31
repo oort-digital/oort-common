@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Space } from "antd";
 import styles from "./rangeFilterContent.module.scss";
 import { NumOrUndef, NumRange } from "../../typesAndInterfaces";
-import { InputNumber } from "../../input";
+import { InputNumber } from "../../inputNumber";
 
 interface IProps {
   values: NumRange;
