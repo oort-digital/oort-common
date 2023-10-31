@@ -9,7 +9,7 @@ const onChange = (value: number | string | null) => {
 };
 
 const meta = {
-  title: "src/input",
+  title: "src/inputNumber",
   component: InputNumber,
 
   render: (args) => {

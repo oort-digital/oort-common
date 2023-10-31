@@ -1,8 +1,9 @@
 import { ConfigProvider, ThemeConfig } from "antd";
 import { ReactNode } from "react";
 import { Palette } from "./styles";
-import { InputNumberDesignToken } from "./input";
+import { InputNumberDesignToken } from "./inputNumber";
 import { PopoverDesignToken } from "./popover";
+import { InputDesignToken } from "./input";
 const { dark13, dark2, dark3, dark4, dark5, dark9, primary6 } = Palette;
 
 const OortAntdThemeConfig: ThemeConfig = {
@@ -13,6 +14,7 @@ const OortAntdThemeConfig: ThemeConfig = {
 
   components: {
     InputNumber: InputNumberDesignToken,
+    Input: InputDesignToken,
     Popover: PopoverDesignToken,
 
     Modal: {
