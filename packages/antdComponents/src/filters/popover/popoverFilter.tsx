@@ -190,6 +190,7 @@ export const PopoverFilter = ({
 
   return (
     <Popover
+      arrow={false}
       overlayClassName={styles.overlay}
       onOpenChange={onVisibleChange_}
       open={visibleInternal}

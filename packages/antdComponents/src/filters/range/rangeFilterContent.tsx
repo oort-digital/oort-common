@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
-import { InputNumber, Space } from "antd";
-import "./rangeFilterContent.scss";
+import { Space } from "antd";
+import styles from "./rangeFilterContent.module.scss";
 import { NumOrUndef, NumRange } from "../../typesAndInterfaces";
+import { InputNumber } from "../../input";
 
 interface IProps {
   values: NumRange;
@@ -19,31 +20,31 @@ export const RangeFilterContent = ({
   min,
   max,
 }: IProps) => (
-  <Space className="range-filter-content">
-    <span className="label">From</span>
+  <Space rootClassName={styles.range_filter_content}>
+    <span className={styles.label}>From</span>
     <InputNumber
-      className="from-input"
+      className={styles.from_input}
       size="large"
       min={min}
       max={values[1] || max}
       value={values[0]}
       onChange={(value) => {
         if (value) {
-          onMinValueChange(value);
+          onMinValueChange(value as NumOrUndef);
         }
       }}
     />
 
-    <span className="label">To</span>
+    <span className={styles.label}>To</span>
     <InputNumber
-      className="to-input"
+      className={styles.to_input}
       size="large"
       min={values[0] || min}
       max={max}
       value={values[1]}
       onChange={(value) => {
         if (value) {
-          onMaxValueChange(value);
+          onMaxValueChange(value as NumOrUndef);
         }
       }}
     />

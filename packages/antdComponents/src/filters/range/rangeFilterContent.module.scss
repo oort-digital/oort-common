@@ -1,24 +1,24 @@
 @import "../../styles/palette.scss";
 
-.range-filter-content {
+.range_filter_content {
   margin-bottom: 32px;
 
   .label {
     color: $dark-13;
   }
 
-  .ant-input-number.from-input {
+  .from_input {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     width: 82px;
   }
 
-  .ant-input-number.to-input {
+  .to_input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
 
-  .ant-input-number-group-wrapper.to-input {
+  .ant-input-number-group-wrapper.to_input {
     width: 170px;
   }
 }
