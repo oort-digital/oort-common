@@ -23,24 +23,20 @@
   }
 }
 
-.filter_modal
-  > :global(
-    .ant-drawer-content-wrapper
-      > .ant-drawer-content
-      > .ant-drawer-wrapper-body
-      > .ant-drawer-header
-  ) {
-  border-bottom: 1px solid $dark-5;
+.filter_modal {
+  > div > .header {
+    border-bottom: 1px solid $dark-5;
 
-  > :global(.ant-drawer-header-title > .ant-drawer-title) > .clear_all {
-    &.not_active {
-      opacity: 0.3;
-      cursor: default;
+    .clear_all {
+      &.not_active {
+        opacity: 0.3;
+        cursor: default;
+      }
+      @include body-14-medium-mixin;
+      color: $primary-6;
+      text-transform: capitalize;
+      margin-left: 19px;
+      cursor: pointer;
     }
-    @include body-14-medium-mixin;
-    color: $primary-6;
-    text-transform: capitalize;
-    margin-left: 19px;
-    cursor: pointer;
   }
 }

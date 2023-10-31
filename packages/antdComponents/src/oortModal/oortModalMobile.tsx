@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { ConfigProvider, Drawer } from "antd";
 import styles from "./oortModalMobile.module.scss";
 import { CloseCircleIcon } from "../icons";
-import classNames from "classnames";
+import cn from "classnames";
 import { Palette } from "../styles";
 
 const { dark10, dark3 } = Palette;
@@ -16,6 +16,10 @@ type TitleType = string | ReactNode | IModalTitle;
 
 const isModalTitle = (title: any) => title.underHeader !== undefined;
 
+export interface IOortModalMobileClassNames {
+  header?: string;
+}
+
 export interface IOortModalMobileProps {
   visible: boolean;
   title?: TitleType;
@@ -23,6 +27,7 @@ export interface IOortModalMobileProps {
   loading?: boolean;
   children: ReactNode;
   className?: string;
+  classNames?: IOortModalMobileClassNames;
   footer?: ReactNode;
   viewMode?: "fullScreen" | "topGap";
 }
@@ -50,6 +55,7 @@ export const OortModalMobile = ({
   loading,
   title,
   className,
+  classNames,
   viewMode = "fullScreen",
 }: IOortModalMobileProps) => {
   const _onCancel = () => {
@@ -76,12 +82,12 @@ export const OortModalMobile = ({
       }}
     >
       <Drawer
-        rootClassName={classNames(styles.root, {
+        rootClassName={cn(styles.root, {
           [`${styles.top_gap}`]: viewMode === "topGap",
         })}
-        className={classNames(styles.modal, className)}
+        className={cn(styles.modal, className)}
         classNames={{
-          header: styles.header,
+          header: cn(styles.header, classNames?.header),
           footer: styles.footer,
         }}
         height={height}

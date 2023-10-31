@@ -97,6 +97,7 @@ export const FilterLayoutMobile = ({
       </Row>
 
       <OortModalMobile
+        classNames={{ header: styles.header }}
         className={styles.filter_modal}
         onCancel={() => onCancelInternal()}
         title={title}
