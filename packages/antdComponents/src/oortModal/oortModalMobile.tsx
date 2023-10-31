@@ -50,7 +50,7 @@ export const OortModalMobile = ({
   loading,
   title,
   className,
-  viewMode,
+  viewMode = "fullScreen",
 }: IOortModalMobileProps) => {
   const _onCancel = () => {
     if (!loading && onCancel) {
@@ -58,14 +58,6 @@ export const OortModalMobile = ({
       onCancel();
     }
   };
-
-  let cssClass = classNames(styles.modal, className);
-
-  if (viewMode === undefined) {
-    viewMode = "fullScreen";
-  } else if (viewMode === "topGap") {
-    cssClass = `${cssClass} ${styles.top_gap}`;
-  }
 
   const height = viewMode === "fullScreen" ? "100%" : "90%";
   const titles = renderTitles(title);
@@ -84,7 +76,10 @@ export const OortModalMobile = ({
       }}
     >
       <Drawer
-        className={cssClass}
+        rootClassName={classNames(styles.root, {
+          [`${styles.top_gap}`]: viewMode === "topGap",
+        })}
+        className={classNames(styles.modal, className)}
         classNames={{
           header: styles.header,
           footer: styles.footer,

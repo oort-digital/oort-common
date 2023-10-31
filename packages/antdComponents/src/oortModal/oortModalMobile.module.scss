@@ -28,3 +28,11 @@
     padding: 0;
   }
 }
+
+.root.top_gap {
+  .modal,
+  :global(.ant-drawer-content-wrapper) {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+}
