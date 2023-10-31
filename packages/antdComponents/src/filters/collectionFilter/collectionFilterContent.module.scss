@@ -1,4 +1,5 @@
 @import "../../styles/palette.scss";
+@import "../../styles/common.scss";
 
 @mixin callout-medium-mixin() {
   width: 100%;
@@ -23,6 +24,7 @@
   }
 
   .list {
+    @include scrollbar-mixin;
     margin-top: 16px;
     margin-bottom: 24px;
     // max-height: 300px;
