@@ -1,6 +1,7 @@
 import { ConfigProvider, ThemeConfig } from "antd";
 import { ReactNode } from "react";
 import { Palette } from "./styles";
+import { InputNumberDesignToken } from "./input";
 const { dark13, dark2, dark3, dark4, dark5, dark9, primary6 } = Palette;
 
 const OortAntdThemeConfig: ThemeConfig = {
@@ -10,6 +11,8 @@ const OortAntdThemeConfig: ThemeConfig = {
   },
 
   components: {
+    InputNumber: InputNumberDesignToken,
+
     Modal: {
       contentBg: dark3,
       headerBg: dark3,
