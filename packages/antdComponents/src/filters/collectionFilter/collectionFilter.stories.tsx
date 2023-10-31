@@ -199,13 +199,12 @@ export const NoTriggerButton: Story = {
     const mergedProps = { ...args, ...{ visible, onVisibleChange } };
 
     return (
-      <>
-        <ThemeLoader />
+      <OortConfigProvider>
         <div style={templateStyle}>
           <Button onClick={() => onVisibleChange(true)}>Open</Button>
           <CollectionFilter {...mergedProps} />
         </div>
-      </>
+      </OortConfigProvider>
     );
   },
 };
