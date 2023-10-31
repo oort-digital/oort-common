@@ -4,6 +4,7 @@ import { Palette } from "./styles";
 import { InputNumberDesignToken } from "./inputNumber";
 import { PopoverDesignToken } from "./popover";
 import { InputDesignToken } from "./input";
+import { CheckboxDesignToken } from "./checkbox";
 const { dark13, dark2, dark3, dark4, dark5, dark9, primary6 } = Palette;
 
 const OortAntdThemeConfig: ThemeConfig = {
@@ -13,6 +14,7 @@ const OortAntdThemeConfig: ThemeConfig = {
   },
 
   components: {
+    Checkbox: CheckboxDesignToken,
     InputNumber: InputNumberDesignToken,
     Input: InputDesignToken,
     Popover: PopoverDesignToken,

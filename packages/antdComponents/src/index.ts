@@ -13,3 +13,4 @@ export * from "./cache";
 export * from "./blockieAddress";
 export * from "./input";
 export * from "./popover";
+export * from "./checkbox";
