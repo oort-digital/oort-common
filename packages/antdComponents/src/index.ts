@@ -11,3 +11,5 @@ export * from "./typesAndInterfaces";
 export * from "./asyncList";
 export * from "./cache";
 export * from "./blockieAddress";
+export * from "./input";
+export * from "./popover";
