@@ -2107,13 +2107,18 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oort-digital/antd-components@^0.0.1-applayout.0.0.2":
-  version "0.0.1-applayout.0.0.2"
-  resolved "https://npm.pkg.github.com/download/@oort-digital/antd-components/0.0.1-applayout.0.0.2/3c67117cf194645313cc5b6ec76419e6efff2204#3c67117cf194645313cc5b6ec76419e6efff2204"
-  integrity sha512-Z65Lf69Vg+E4cMl6JtU7s3McGAza2rOQm5xKoUoPdRB5y/4YI55T0jLN4B3muz6okXScyq6H+7GvbWPfKOfASQ==
+"@oort-digital/antd-components@0.0.1-applayout.0.0.4":
+  version "0.0.1-applayout.0.0.4"
+  resolved "https://npm.pkg.github.com/download/@oort-digital/antd-components/0.0.1-applayout.0.0.4/3ca57e01d8cde09e9f3b667de12d7d476a1de0c0#3ca57e01d8cde09e9f3b667de12d7d476a1de0c0"
+  integrity sha512-I1njvUAxSAC/uzBOk0+Da3SS4Uwz+ON14XvdQi1jOmm9XhuCzObWYn3gjnRlAsMwIKe65xavUf8+L2lEh8MeRQ==
   dependencies:
+    "@oort-digital/utils" "^0.0.1-alfa.0.0.6"
     antd "^5.10.0"
+    blockies-ts "^1.0.0"
     classnames "^2.3.2"
+    ethers "5.7.2"
+    mobx "^6.10.2"
+    mobx-react-lite "^4.0.5"
     react "18.2.0"
     react-dom "18.2.0"
 
@@ -2183,7 +2188,7 @@
   resolved "https://npm.pkg.github.com/download/@oort-digital/utils/0.0.1-alfa.0.0.4/79782bf75cb595c30a3a8368145bab41e535a933#79782bf75cb595c30a3a8368145bab41e535a933"
   integrity sha512-tOpxnrHVi2KodPLOLfiIXTT5VxnAKxRJuyorDZgtM4hRyh5pW9t9tsT4F27V1f11fpIGmpl1HCM/PISEGBFcHA==
 
-"@oort-digital/utils@0.0.1-alfa.0.0.6":
+"@oort-digital/utils@0.0.1-alfa.0.0.6", "@oort-digital/utils@^0.0.1-alfa.0.0.6":
   version "0.0.1-alfa.0.0.6"
   resolved "https://npm.pkg.github.com/download/@oort-digital/utils/0.0.1-alfa.0.0.6/fd84987905604cbb86a4a3976576577e9d94198b#fd84987905604cbb86a4a3976576577e9d94198b"
   integrity sha512-u5l2iOmUBjctoGwSTwK6v8AjjweMKTvBMtMiJdKcCBxX2JJaPKqIXFPNma4AF71Hb3gr9phkOA8ITbTwHUNQDg==
@@ -8500,6 +8505,13 @@ mobx-react-lite@^3.4.0:
   resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-3.4.3.tgz#3a4c22c30bfaa8b1b2aa48d12b2ba811c0947ab7"
   integrity sha512-NkJREyFTSUXR772Qaai51BnE1voWx56LOL80xG7qkZr6vo8vEaLF3sz1JNUVh+rxmUzxYaqOhfuxTfqUh0FXUg==
 
+mobx-react-lite@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-4.0.5.tgz#e2cb98f813e118917bcc463638f5bf6ea053a67b"
+  integrity sha512-StfB2wxE8imKj1f6T8WWPf4lVMx3cYH9Iy60bbKXEs21+HQ4tvvfIBZfSmMXgQAefi8xYEwQIz4GN9s0d2h7dg==
+  dependencies:
+    use-sync-external-store "^1.2.0"
+
 mobx-react@^7.6.0:
   version "7.6.0"
   resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-7.6.0.tgz#ebf0456728a9bd2e5c24fdcf9b36e285a222a7d6"
@@ -8507,7 +8519,7 @@ mobx-react@^7.6.0:
   dependencies:
     mobx-react-lite "^3.4.0"
 
-mobx@^6.9.0:
+mobx@^6.10.2, mobx@^6.9.0:
   version "6.10.2"
   resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.10.2.tgz#96e123deef140750360ca9a5b02a8b91fbffd4d9"
   integrity sha512-B1UGC3ieK3boCjnMEcZSwxqRDMdzX65H/8zOHbuTY8ZhvrIjTUoLRR2TP2bPqIgYRfb3+dUigu8yMZufNjn0LQ==
@@ -11568,7 +11580,7 @@ use-sidecar@^1.1.2:
     detect-node-es "^1.1.0"
     tslib "^2.0.0"
 
-use-sync-external-store@1.2.0:
+use-sync-external-store@1.2.0, use-sync-external-store@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
