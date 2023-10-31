@@ -7,7 +7,7 @@ import {
   NumRange,
 } from "../../typesAndInterfaces";
 import { PopoverFilter } from "../popover";
-import "./rangeFilter.scss";
+import styles from "./rangeFilter.module.scss";
 import { RangeFilterContent } from "./rangeFilterContent";
 
 export interface IRangeFilterProps {
@@ -68,14 +68,14 @@ export const RangeFilter = ({
     }
     return (
       <>
-        <span className="label">{label}</span>
-        <span className="value">{value}</span>
+        <span className={styles.label}>{label}</span>
+        <span className={styles.value}>{value}</span>
       </>
     );
   };
 
   const subTitle = isClear ? null : (
-    <span className="sub-title">
+    <span className={styles.sub_title}>
       {renderTitleVal("From", values[0])}
       {renderTitleVal("To", values[1])}
     </span>
@@ -83,7 +83,7 @@ export const RangeFilter = ({
 
   return (
     <PopoverFilter
-      triggerBtnClassName="range-trigger-btn"
+      triggerBtnClassName={styles.range_trigger_btn}
       onSubmit={onSubmit}
       title={title}
       subTitle={subTitle}

@@ -87,7 +87,7 @@ export const NoTriggerButton: Story = {
     const mergedProps = { ...args, ...props };
 
     return (
-      <>
+      <OortConfigProvider>
         <div>
           {values[0]}-{values[1]}
         </div>
@@ -95,7 +95,7 @@ export const NoTriggerButton: Story = {
           <Button onClick={() => onVisibleChange(true)}>Open</Button>
           <RangeFilter {...mergedProps} />
         </div>
-      </>
+      </OortConfigProvider>
     );
   },
 };

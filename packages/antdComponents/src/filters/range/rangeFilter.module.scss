@@ -1,8 +1,8 @@
 @import "../../styles/typography.scss";
 @import "../../styles/palette.scss";
 
-.range-trigger-btn {
-  .sub-title {
+.range_trigger_btn {
+  .sub_title {
     .label {
       color: $dark-10;
       @include body-14-regular-mixin;
