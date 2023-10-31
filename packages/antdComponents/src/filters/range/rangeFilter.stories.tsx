@@ -65,6 +65,7 @@ export const NoTriggerButton: Story = {
     showClose: true,
     showCancel: false,
     showClear: true,
+    placement: "bottom",
   },
 
   render(args: IRangeFilterProps) {
