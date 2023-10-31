@@ -1,4 +1,4 @@
-import "../../../.storybook/stories.less";
+import "../../../.storybook/index.scss";
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { SearchInput } from ".";
