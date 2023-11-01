@@ -7,8 +7,8 @@ export interface IPopoverFilterContentProps {
   popoverClassName?: string;
   popoverStyle?: CSSProperties | undefined;
   popoverTitleClassName?: string;
-  applyButtonClassName;
-  cancelButtonClassName;
+  applyButtonClassName?: string;
+  cancelButtonClassName?: string;
   showClose?: boolean;
   showCancel?: boolean;
   showClear?: boolean;
