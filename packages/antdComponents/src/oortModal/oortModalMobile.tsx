@@ -18,6 +18,7 @@ const isModalTitle = (title: any) => title.underHeader !== undefined;
 
 export interface IOortModalMobileClassNames {
   header?: string;
+  footer?: string;
 }
 
 export interface IOortModalMobileProps {
@@ -88,7 +89,7 @@ export const OortModalMobile = ({
         className={cn(styles.modal, className)}
         classNames={{
           header: cn(styles.header, classNames?.header),
-          footer: styles.footer,
+          footer: cn(styles.footer, classNames?.footer),
         }}
         height={height}
         title={titles[0]}

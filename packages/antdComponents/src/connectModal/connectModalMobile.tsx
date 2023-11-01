@@ -27,6 +27,10 @@ const ConnectModalMobile = (props: IConnectModalProps) => {
       loading={loading}
       footer={footer}
       className={styles.modal}
+      classNames={{
+        header: styles.header,
+        footer: styles.footer,
+      }}
       title="Network & Wallet"
       visible={visible}
       onCancel={() => onCancel()}
