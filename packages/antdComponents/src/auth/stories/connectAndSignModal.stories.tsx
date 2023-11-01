@@ -11,6 +11,7 @@ import { OortApiInterceptors } from "@oort-digital/oort-api-client";
 import { observer } from "mobx-react-lite";
 import { AuthStore } from "../store";
 import { Button } from "antd";
+import { OortConfigProvider } from "../../oortConfigProvider";
 
 const meta = {
   title: "src/auth/connectAndSignModal",
@@ -47,11 +48,13 @@ const Wrap = observer((props: IConnectAndSignProps) => {
   };
 
   return (
-    <Router>
-      <Button onClick={() => setVisible(true)}>Connect</Button>
-      <ConnectAndSignModal {...mergedProps} />
-      <div>token: {authStore.token}</div>
-    </Router>
+    <OortConfigProvider>
+      <Router>
+        <Button onClick={() => setVisible(true)}>Connect</Button>
+        <ConnectAndSignModal {...mergedProps} />
+        <div>token: {authStore.token}</div>
+      </Router>
+    </OortConfigProvider>
   );
 });
 
