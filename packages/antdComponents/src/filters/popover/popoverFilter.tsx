@@ -4,6 +4,7 @@ import { ChevronDownOutlineIconSvg, CloseIcon } from "../../icons";
 import { TooltipPlacement } from "antd/es/tooltip";
 import { Button } from "../../button";
 import { Popover } from "../../popover";
+import { PopoverFilterContent } from "./popoverFilterContent";
 
 export type RangeValue = number | undefined;
 
@@ -89,46 +90,23 @@ export const PopoverFilter = ({
 
   const renderContent = () => {
     return (
-      <div
-        style={popoverStyle}
-        className={`${styles.popover_content} ${popoverClassName || ""}`}
+      <PopoverFilterContent
+        popoverClassName={popoverClassName}
+        popoverStyle={popoverStyle}
+        popoverTitleClassName={popoverTitleClassName}
+        cancelButtonClassName={cancelButtonClassName}
+        applyButtonClassName={applyButtonClassName}
+        showCancel={showCancel}
+        showClear={showClear}
+        showClose={showClose}
+        popoverTitle={popoverTitle}
+        onCancel={cancel}
+        onClear={clear}
+        onSubmit={submit}
+        submitDisabled={submitDisabled}
       >
-        {showClose && (
-          <div onClick={cancel} className={styles.close_icon_wrap}>
-            <CloseIcon />
-          </div>
-        )}
-        <div className={`${styles.title} ${popoverTitleClassName}`}>
-          {popoverTitle}
-        </div>
         {children}
-        <div className={styles.buttons}>
-          {showClear && (
-            <Button
-              className={`${styles.cancel} ${cancelButtonClassName}`}
-              onClick={clear}
-            >
-              Clear
-            </Button>
-          )}
-          {showCancel && (
-            <Button
-              className={`${styles.cancel} ${cancelButtonClassName}`}
-              onClick={cancel}
-            >
-              Cancel
-            </Button>
-          )}
-          <Button
-            className={`${styles.apply} ${applyButtonClassName}`}
-            onClick={submit}
-            disabled={submitDisabled}
-            type="primary"
-          >
-            Apply
-          </Button>
-        </div>
-      </div>
+      </PopoverFilterContent>
     );
   };
 
