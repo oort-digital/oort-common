@@ -5,7 +5,7 @@ import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { EMPTY_ABORT_SIGNAL } from "@oort-digital/utils";
 
 import { Auth, IAuthProps } from "../ui/auth";
-import { Web3StoreStub } from "./web3StoreStub";
+import { Web3StoreStub } from "../../stubs";
 import logger from "./logger";
 import React, { useEffect, useState } from "react";
 import {

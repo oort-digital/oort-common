@@ -1,5 +1,5 @@
 import React from "react";
-import "../../.storybook/stories.less";
+import "../../.storybook/index.scss";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ConnectModal, IWeb3 } from ".";
 import {
@@ -9,7 +9,7 @@ import {
 } from "@oort-digital/web3-connectors";
 import { delayAsync, ZERO_ADDR } from "@oort-digital/utils";
 import { IConnectModalProps } from "./connectModal";
-import { Web3StoreStub } from "../oortLayout/stories/web3StoreStub";
+import { Web3StoreStub } from "../stubs";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

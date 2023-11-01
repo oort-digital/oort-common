@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 
 import { Auth, ConnectAndSignModal, IConnectAndSignProps } from "../ui";
-import { Web3StoreStub } from "./web3StoreStub";
+import { Web3StoreStub } from "../../stubs";
 import logger from "./logger";
 import React, { useState } from "react";
 import { OortApiInterceptors } from "@oort-digital/oort-api-client";
@@ -13,7 +13,7 @@ import { AuthStore } from "../store";
 import { Button } from "antd";
 
 const meta = {
-  title: "oort/auth/connectAndSignModal",
+  title: "src/auth/connectAndSignModal",
   component: Auth,
   render: (props: IConnectAndSignProps) => {
     return <Wrap {...props} />;

@@ -1,4 +1,4 @@
-import "../../.storybook/stories.less";
+import "../../.storybook/index.scss";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { ConnectButton } from "./connectButton";
@@ -7,7 +7,7 @@ import React from "react";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "oort/connectModal/connectButton",
+  title: "src/connectModal/connectButton",
   component: ConnectButton,
 
   parameters: {

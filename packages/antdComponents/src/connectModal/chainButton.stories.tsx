@@ -1,5 +1,5 @@
 import React from "react";
-import "../../.storybook/stories.less";
+import "../../.storybook/index.scss";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { ChainButton } from "./chainButton";
@@ -7,7 +7,7 @@ import { IChain } from "@oort-digital/web3-connectors";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "oort/connectModal/chainButton",
+  title: "src/connectModal/chainButton",
   component: ChainButton,
 
   parameters: {

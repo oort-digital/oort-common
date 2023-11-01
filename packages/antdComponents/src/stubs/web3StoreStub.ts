@@ -1,5 +1,5 @@
 import { action, makeObservable } from "mobx";
-import logger from "./logger";
+import logger from "../auth/stories/logger";
 import {
   IChain,
   Web3Store,
@@ -7,7 +7,7 @@ import {
   ConnectorNames,
   IChainInfo,
 } from "@oort-digital/web3-connectors";
-import { ChainServiceStub } from "./chainServiceStub";
+import { ChainServiceStub } from "../auth/stories/chainServiceStub";
 
 const testnetApiKey =
   "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDD7uJnqeI74gH6M-cSeEq82_Zrh-dp9KYH9asKMsjmdZpxjuHifc8lRhkKp5ZDTr9H__bpX8XFSBHt52r_iyP2-pMMh5E-T3uQJLFs0dBUSw2COr2ZgA_QWFHaIoSOtV_b9w5gEzxY623L0_Op9ItpZ51NN1WGEWgate5k-vMaDwIDAQAB";
