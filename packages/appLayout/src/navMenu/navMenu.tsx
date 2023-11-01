@@ -9,7 +9,7 @@ import {
   LeaderboardIcon,
   MintIcon,
   RentAppIcon,
-} from "@oort-digital/ui";
+} from "@oort-digital/antd-components";
 import { Menu, MenuItemLink } from "../menu";
 import styles from "./navMenu.module.scss";
 import { createIsHrefActiveFunc, getChildCaptions } from "./utils";

@@ -1,10 +1,9 @@
 "use client";
 import { ReactNode, useEffect, useState } from "react";
 import { ConfigProvider, Drawer } from "antd";
-import { CloseCircleIcon } from "@oort-digital/ui";
+import { CloseCircleIcon, Palette } from "@oort-digital/antd-components";
 import styles from "./sider.module.scss";
 import { BurgerMenuIcon } from "./burgerMenuIcon";
-import { Palette } from "@oort-digital/antd-components";
 
 const { dark3, dark10 } = Palette;
 

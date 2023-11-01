@@ -7,8 +7,6 @@ import {
   formatUnits,
   ConnectModal,
   IWeb3,
-} from "@oort-digital/ui";
-import {
   ChevronSortIcon,
   DiscordIcon,
   TelegramIcon,
@@ -16,10 +14,10 @@ import {
   TokenIcon,
   TwitterIcon,
   BlockieAddress,
-} from "@oort-digital/ui";
+} from "@oort-digital/antd-components";
 
 import { isChainEmpty } from "@oort-digital/web3-connectors";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { toMasked } from "@oort-digital/utils";
 import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { Erc20__factory } from "./contracts";
