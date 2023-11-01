@@ -1,34 +1,6 @@
 @import "../../styles/typography.scss";
 @import "../../styles/palette.scss";
 
-.popover_content {
-  .title {
-    @include body-16-medium-mixin();
-    color: $dark-10;
-    margin-bottom: 32px;
-  }
-
-  .buttons {
-    display: flex;
-    .cancel {
-      flex: 1;
-      margin-right: 16px;
-    }
-    .apply {
-      flex: 3;
-      color: $dark-1;
-    }
-  }
-
-  .close_icon_wrap {
-    cursor: pointer;
-    color: $dark-10;
-    height: 15px;
-    width: 15px;
-    float: right;
-  }
-}
-
 .trigger_btn {
   display: flex;
   justify-content: center;

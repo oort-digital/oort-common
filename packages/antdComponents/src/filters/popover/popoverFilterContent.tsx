@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode } from "react";
-import styles from "./popoverFilter.module.scss";
+import styles from "./popoverFilterContent.module.scss";
 import { CloseIcon } from "../../icons";
 import { Button } from "../../button";
 
