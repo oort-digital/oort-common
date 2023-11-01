@@ -14,9 +14,10 @@ import {
 } from "@oort-digital/oort-api-client";
 import { observer } from "mobx-react-lite";
 import { AuthStore } from "../store";
+import { OortConfigProvider } from "../../oortConfigProvider";
 
 const meta = {
-  title: "oort/auth/auth",
+  title: "src/auth/auth",
   component: Auth,
   render: (props: IAuthProps) => {
     return <AuthWrap {...props} />;
@@ -74,9 +75,11 @@ const Content = observer(() => {
 
 const AuthWrap = observer((props: IAuthProps) => {
   return (
-    <Router>
-      <Auth {...props} />
-    </Router>
+    <OortConfigProvider>
+      <Router>
+        <Auth {...props} />
+      </Router>
+    </OortConfigProvider>
   );
 });
 

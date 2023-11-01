@@ -8,6 +8,7 @@
     text-align: right;
   }
 
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -19,7 +20,7 @@
 
   background-color: $dark-4;
   /* Neutral / 5 */
-  border: 1px solid $dark-4;
+  border: 1px solid $dark-5;
   border-radius: 8px;
 
   .wallet_name {
