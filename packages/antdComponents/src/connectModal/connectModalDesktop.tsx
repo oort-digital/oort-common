@@ -26,6 +26,9 @@ const ConnectModalDesktop = (props: IConnectModalProps) => {
       loading={loading}
       footer={footer}
       className={styles.modal}
+      classNames={{
+        footer: styles.footer,
+      }}
       title="Network & Wallet"
       width="690px"
       visible={visible}

@@ -2,7 +2,11 @@ import styles from "./oortModal.module.scss";
 import { Modal } from "antd";
 import React, { ReactNode } from "react";
 import { CloseIcon } from "../icons";
-import classNames from "classnames";
+import cn from "classnames";
+
+export interface IOortModalClassNames {
+  footer?: string;
+}
 
 export interface IModalProps {
   visible: boolean;
@@ -12,12 +16,14 @@ export interface IModalProps {
   children: ReactNode;
   width?: string;
   className?: string;
+  classNames?: IOortModalClassNames;
   footer?: ReactNode;
   closable?: boolean;
 }
 
 export function OortModal({
   className,
+  classNames,
   title = "",
   onCancel,
   loading,
@@ -39,10 +45,10 @@ export function OortModal({
       classNames={{
         header: styles.header,
         content: styles.content,
-        footer: styles.footer,
+        footer: cn(styles.footer, classNames?.footer),
         body: styles.body,
       }}
-      className={classNames(className, styles.modal)}
+      className={cn(className, styles.modal)}
       width={width || "640px"}
       title={title}
       centered
