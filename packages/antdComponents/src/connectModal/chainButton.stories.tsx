@@ -1,29 +1,25 @@
 import React from "react";
 import "../../.storybook/index.scss";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-
+import { Meta, StoryObj } from "@storybook/react";
 import { ChainButton } from "./chainButton";
 import { IChain } from "@oort-digital/web3-connectors";
+import { OortConfigProvider } from "../oortConfigProvider";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const meta = {
   title: "src/connectModal/chainButton",
   component: ChainButton,
 
-  parameters: {
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-    // layout: 'fullscreen',
+  render: (args) => {
+    return (
+      <OortConfigProvider>
+        <ChainButton {...args} />
+      </OortConfigProvider>
+    );
   },
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    //backgroundColor: { control: 'color' },
-  },
-} as ComponentMeta<typeof ChainButton>;
+} satisfies Meta<typeof ChainButton>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ChainButton> = (args) => (
-  <ChainButton {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 const chain: IChain = {
   chainId: 1,
@@ -34,39 +30,43 @@ const onClick = () => {
   alert("clicked");
 };
 
-export const Active = Template.bind({});
-Active.args = {
-  loading: false,
-  chain: chain,
-  isActive: true,
-  canSwitchChain: true,
-  onClick: onClick,
+export const Active: Story = {
+  args: {
+    loading: false,
+    chain: chain,
+    isActive: true,
+    canSwitchChain: true,
+    onClick: onClick,
+  },
 };
 
-export const NotActive = Template.bind({});
-NotActive.args = {
-  loading: false,
-  chain: chain,
-  isActive: false,
-  canSwitchChain: true,
-  onClick: onClick,
+export const NotActive: Story = {
+  args: {
+    loading: false,
+    chain: chain,
+    isActive: false,
+    canSwitchChain: true,
+    onClick: onClick,
+  },
 };
 
-export const Loading = Template.bind({});
-Loading.args = {
-  loading: true,
-  chain: chain,
-  isActive: false,
-  canSwitchChain: true,
-  onClick: onClick,
+export const Loading: Story = {
+  args: {
+    loading: true,
+    chain: chain,
+    isActive: false,
+    canSwitchChain: true,
+    onClick: onClick,
+  },
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-  loading: false,
-  disabled: true,
-  chain: chain,
-  isActive: false,
-  canSwitchChain: true,
-  onClick: onClick,
+export const Disabled: Story = {
+  args: {
+    loading: false,
+    disabled: true,
+    chain: chain,
+    isActive: false,
+    canSwitchChain: true,
+    onClick: onClick,
+  },
 };
