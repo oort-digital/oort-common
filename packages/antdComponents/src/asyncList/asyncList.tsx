@@ -4,6 +4,7 @@ import { ListGridType } from "antd/lib/list";
 import styles from "./asyncList.module.scss";
 import { ArrowDownIcon, NoDataIcon } from "../icons";
 import { SizeType } from "antd/lib/config-provider/SizeContext";
+import classNames from "classnames";
 
 export interface IProps<TItem> {
   items: TItem[];
@@ -77,7 +78,7 @@ export const AsyncList = <TItem,>({
     <ConfigProvider renderEmpty={customizeRenderEmpty}>
       <List
         style={style}
-        className={`${styles.async_list} ${className || ""}`}
+        className={classNames(styles.async_list, className)}
         // if set loading=true, Ant List hide already loaded items, until loading not finished
         // thats why set loading only for first page
         loading={loadFirstPage}
