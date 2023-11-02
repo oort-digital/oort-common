@@ -1,17 +1,23 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { IProps, AsyncList } from "./asyncList";
+import { OortConfigProvider } from "../oortConfigProvider";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const meta = {
   title: "src/asyncList",
   component: AsyncList,
-} as ComponentMeta<typeof AsyncList>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof AsyncList> = (args: IProps<IItem>) => {
-  return <AsyncList {...args} />;
-};
+  render: (args: IProps<IItem>) => {
+    return (
+      <OortConfigProvider>
+        <AsyncList {...args} />
+      </OortConfigProvider>
+    );
+  },
+} satisfies Meta<typeof AsyncList>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 interface IItem {
   name: string;
@@ -27,16 +33,18 @@ const getItems = (count: number): IItem[] => {
 
 const itemRenderer = (item: IItem): React.ReactElement => <>{item.name}</>;
 
-export const main = Template.bind({});
-main.args = {
-  items: getItems(100),
-  itemRenderer: itemRenderer,
-  loading: true,
+export const Main: Story = {
+  args: {
+    items: getItems(100),
+    itemRenderer: itemRenderer,
+    loading: true,
+  },
 };
 
-export const loading = Template.bind({});
-loading.args = {
-  items: [],
-  itemRenderer: itemRenderer,
-  loading: true,
+export const Loading: Story = {
+  args: {
+    items: [],
+    itemRenderer: itemRenderer,
+    loading: true,
+  },
 };
