@@ -1,5 +1,6 @@
 export { CollectionFilter } from "./collectionFilter";
 export * from "./collectionFilterPopoverContent";
+export * from "./staticCollectionFilterPopoverContent";
 export { CollectionFilterMobile } from "./collectionFilterMobile";
 export type {
   ICollectionFilterItem,
