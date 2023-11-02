@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/app-layout",
-  "version": "0.0.1-beta.0.0.7",
+  "version": "0.0.1-beta.0.0.8",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -16,7 +16,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@oort-digital/antd-components": "0.0.1-applayout.0.0.5",
+    "@oort-digital/antd-components": "0.0.1-applayout.0.0.6",
     "@oort-digital/lazy-loader": "^0.0.1-alfa.0.0.5",
     "@oort-digital/lazy-loader-next-js": "0.0.1-alfa.0.0.5",
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
