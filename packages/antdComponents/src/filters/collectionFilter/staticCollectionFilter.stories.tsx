@@ -7,6 +7,7 @@ import { ICollectionFilterItem } from "./stores";
 import { BscIcon, PolygonIcon, EthIcon } from "../../icons";
 import { Button } from "antd";
 import { StaticCollectionFilter } from "./staticCollectionFilter";
+import { OortConfigProvider } from "../../oortConfigProvider";
 
 const meta = {
   title: "src/filters/staticCollection",
@@ -80,11 +81,13 @@ export const NoTriggerButton: Story = {
     };
 
     return (
-      <div style={templateStyle}>
-        <div>selected: {JSON.stringify(applied)}</div>
-        <Button onClick={() => onVisibleChange(true)}>Open</Button>
-        <StaticCollectionFilter {...mergedProps} />
-      </div>
+      <OortConfigProvider>
+        <div style={templateStyle}>
+          <div>selected: {JSON.stringify(applied)}</div>
+          <Button onClick={() => onVisibleChange(true)}>Open</Button>
+          <StaticCollectionFilter {...mergedProps} />
+        </div>
+      </OortConfigProvider>
     );
   },
 };

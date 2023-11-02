@@ -9,6 +9,7 @@ import {
   ICollectionFilterMobileProps,
 } from "./collectionFilterMobile";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import { OortConfigProvider } from "../../oortConfigProvider";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -32,7 +33,7 @@ const Template: ComponentStory<typeof CollectionFilterMobile> = (
   args.removeFilterEventListeners = remove;
 
   return (
-    <>
+    <OortConfigProvider>
       <div style={{ marginBottom: "20px" }}>
         <button onClick={() => listeners.submit()}>submit</button>
         <button onClick={() => listeners.clear()}>clear</button>
@@ -40,7 +41,7 @@ const Template: ComponentStory<typeof CollectionFilterMobile> = (
       </div>
 
       <CollectionFilterMobile {...args} />
-    </>
+    </OortConfigProvider>
   );
 };
 
