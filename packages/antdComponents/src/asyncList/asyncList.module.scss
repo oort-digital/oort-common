@@ -1,6 +1,10 @@
 @import "../styles/palette.scss";
 
 .async_list {
+  .item {
+    border-block-end: 1px solid $dark-4;
+  }
+
   .load_more_btn_container {
     margin-top: 36px;
     text-align: center;

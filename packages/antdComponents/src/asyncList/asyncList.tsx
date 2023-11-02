@@ -85,7 +85,9 @@ export const AsyncList = <TItem,>({
         loadMore={renderLoadMoreBtn()}
         grid={grid}
         dataSource={items}
-        renderItem={(item) => <List.Item>{itemRenderer(item)}</List.Item>}
+        renderItem={(item) => (
+          <List.Item className={styles.item}>{itemRenderer(item)}</List.Item>
+        )}
       ></List>
     </ConfigProvider>
   );
