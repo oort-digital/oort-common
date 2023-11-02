@@ -15,17 +15,15 @@ export interface IStaticCollectionFilterPopoverContentProps {
   title: string;
   applied: ItemKeyType[];
   onChange: (collections: ICollectionFilterItem[]) => void;
+  onCancel: () => void;
   searchable?: boolean;
   searchPlaceholder?: string;
   circleIcons?: boolean;
   noClear?: boolean;
   popoverTitle: string;
-  visible?: boolean;
-  showTriggerButton?: boolean;
   showClose?: boolean;
   showCancel?: boolean;
   showClear?: boolean;
-  onVisibleChange?: (isVisible: boolean) => void;
   selectMode?: SelectMode;
 }
 
@@ -60,6 +58,7 @@ const Impl = (props: IStaticCollectionFilterPopoverContentProps) => {
       filterStore={filterStore}
       circleIcons={props.circleIcons}
       noClear={props.noClear}
+      onCancel={props.onCancel}
     ></CollectionFilterPopoverContent>
   );
 };

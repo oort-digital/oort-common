@@ -2,6 +2,7 @@ import { CSSProperties, ReactNode } from "react";
 import styles from "./popoverFilterContent.module.scss";
 import { CloseIcon } from "../../icons";
 import { Button } from "../../button";
+import classNames from "classnames";
 
 export interface IPopoverFilterContentProps {
   popoverClassName?: string;
@@ -39,21 +40,21 @@ export function PopoverFilterContent({
   return (
     <div
       style={popoverStyle}
-      className={`${styles.popover_content} ${popoverClassName || ""}`}
+      className={classNames(styles.popover_content, popoverClassName)}
     >
       {showClose && (
         <div onClick={onCancel} className={styles.close_icon_wrap}>
           <CloseIcon />
         </div>
       )}
-      <div className={`${styles.title} ${popoverTitleClassName}`}>
+      <div className={classNames(styles.title, popoverTitleClassName)}>
         {popoverTitle}
       </div>
       {children}
       <div className={styles.buttons}>
         {showClear && (
           <Button
-            className={`${styles.cancel} ${cancelButtonClassName}`}
+            className={classNames(styles.cancel, cancelButtonClassName)}
             onClick={onClear}
           >
             Clear
@@ -61,14 +62,14 @@ export function PopoverFilterContent({
         )}
         {showCancel && (
           <Button
-            className={`${styles.cancel} ${cancelButtonClassName}`}
+            className={classNames(styles.cancel, cancelButtonClassName)}
             onClick={onCancel}
           >
             Cancel
           </Button>
         )}
         <Button
-          className={`${styles.apply} ${applyButtonClassName}`}
+          className={classNames(styles.apply, applyButtonClassName)}
           onClick={onSubmit}
           disabled={submitDisabled}
           type="primary"

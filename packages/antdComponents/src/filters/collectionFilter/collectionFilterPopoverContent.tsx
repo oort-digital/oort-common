@@ -15,6 +15,7 @@ export interface ICollectionFilterPopoverContentProps {
   showClear?: boolean;
   itemTitleMaxLen?: number;
   onChange: (collections: ICollectionFilterItem[]) => void;
+  onCancel: () => void;
   searchable?: boolean;
   searchPlaceholder?: string;
   filterStore: ICollectionFilterStore;
@@ -25,6 +26,7 @@ export interface ICollectionFilterPopoverContentProps {
 function Impl({
   popoverTitle,
   onChange,
+  onCancel,
   popoverClassName,
   popoverStyle,
   itemTitleMaxLen = 20,
@@ -66,9 +68,7 @@ function Impl({
       showClear={showClear}
       // submitDisabled={!notSubmited.length}
       onClear={noClear ? () => {} : onClear}
-      onCancel={function (): void {
-        throw new Error("Function not implemented.");
-      }}
+      onCancel={onCancel}
     >
       <CollectionFilterContent
         calcOptimalListHeight={false}
