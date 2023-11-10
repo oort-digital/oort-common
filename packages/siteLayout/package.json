@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/site-layout",
-  "version": "0.0.1-site-fix.0.0.3",
+  "version": "0.0.1-site-fix.0.0.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -39,7 +39,6 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts"
 }
