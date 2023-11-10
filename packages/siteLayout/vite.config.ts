@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import { dependencies } from "./package.json";
 
-const external = [...Object.keys(dependencies), ...["react/jsx-runtime"]];
+const external = Object.keys(dependencies);
 
 console.log(JSON.stringify(external));
 
