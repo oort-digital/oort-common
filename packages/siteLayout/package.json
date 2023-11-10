@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/site-layout",
-  "version": "0.0.1-site-fix.0.0.2",
+  "version": "0.0.1-site-fix.0.0.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "sass": "^1.68.0"
   },
+  "type": "module",
   "devDependencies": {
     "@types/node": "18.7.14",
     "@types/react": "^18.2.25",

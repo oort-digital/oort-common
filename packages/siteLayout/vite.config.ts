@@ -16,7 +16,7 @@ export default defineConfig({
     }),
   ],
   build: {
-    minify: false,
+    minify: true,
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
       formats: ["es", "cjs"],
