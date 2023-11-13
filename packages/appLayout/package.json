@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/app-layout",
-  "version": "0.0.1-beta.0.1.0",
+  "version": "0.0.1-alfa.0.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -11,7 +11,7 @@
     "build:types": "tsc",
     "build": "vite build",
     "next_build": "next build",
-    "rm": "rimraf yarn.lock && rimraf node_modules",
+    "rm": "rimraf package-lock && yarn.lock && rimraf yarn.lock && rimraf node_modules",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
