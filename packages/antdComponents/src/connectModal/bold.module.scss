@@ -1,0 +1,5 @@
+@import "../styles/typography.scss";
+
+.bold {
+  @include body-16-bold-mixin;
+}

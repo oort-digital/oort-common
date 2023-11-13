@@ -1,0 +1,11 @@
+@import "../styles/palette.scss";
+
+.btn {
+  &:global(.ant-btn-primary):hover {
+    color: $dark-3 !important;
+  }
+
+  &:global(.ant-btn-primary):disabled {
+    color: rgba(242, 243, 245, 0.25) !important;
+  }
+}

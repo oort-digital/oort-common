@@ -1,0 +1,24 @@
+@import "../../styles/palette.scss";
+
+.range_filter_content {
+  margin-bottom: 32px;
+
+  .label {
+    color: $dark-13;
+  }
+
+  .from_input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 82px;
+  }
+
+  .to_input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  // .ant-input-number-group-wrapper.to_input {
+  //   width: 170px;
+  // }
+}

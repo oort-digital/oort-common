@@ -1,0 +1,25 @@
+@import "../styles/typography.scss";
+@import "../styles/palette.scss";
+
+.modal {
+  .description {
+    margin-bottom: 24px;
+    text-align: center;
+    color: $dark-13;
+    @include body-16-regular-mixin;
+  }
+
+  .chain_buttons {
+    margin-bottom: 56px;
+  }
+
+  .footer {
+    color: $dark-13;
+    background: $dark-3;
+    margin-top: 22px !important;
+    padding: 17px 100px !important;
+    a {
+      color: $primary-6;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@import "../../styles/typography.scss";
+@import "../../styles/palette.scss";
+
+.trigger_btn {
+  display: flex;
+  justify-content: center;
+  color: $dark-7 !important;
+  background: $dark-2 !important;
+  .single_title {
+    @include body-14-regular-important-mixin();
+  }
+
+  .title_outer {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+
+  .sub_title_outer {
+    margin-top: -5px;
+  }
+
+  .icon {
+    vertical-align: middle;
+    margin-left: 15px;
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+  }
+
+  .icon.close {
+    height: 8px;
+  }
+
+  :global(.anticon) {
+    vertical-align: middle;
+  }
+}
+
+.trigger_btn.filled {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.overlay {
+  @media (max-width: 400px) {
+    width: 95%;
+  }
+}

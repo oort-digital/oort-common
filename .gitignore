@@ -2,7 +2,14 @@
 
 /packages/antdComponents/node_modules
 /packages/antdComponents/yarn.lock
+/packages/antdComponents/package-lock.json
 /packages/antdComponents/dist
+
+/packages/appLayout/node_modules
+/packages/appLayout/yarn.lock
+/packages/appLayout/package-lock.json
+/packages/appLayout/dist
+/packages/appLayout/.next
 
 /packages/lazyLoader/node_modules
 /packages/lazyLoader/yarn.lock

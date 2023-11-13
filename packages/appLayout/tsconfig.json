@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.json",
+  "exclude": [
+    "**/*.stories.tsx",
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*",
+    "typings.d.ts",
+    "pages",
+    "demoComponents",
+    ".next/types/**/*.ts"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "./dist",
+    "emitDeclarationOnly": true,
+    "jsx": "preserve",
+    "composite": false,
+    "noEmit": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  }
+}

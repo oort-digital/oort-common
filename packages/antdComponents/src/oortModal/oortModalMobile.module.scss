@@ -1,0 +1,38 @@
+@import "../styles/palette.scss";
+@import "../styles/typography.scss";
+
+.modal {
+  .header {
+    border-bottom: 1px solid $neutral-4;
+    padding-top: 32px;
+    padding-bottom: 23px;
+
+    > :global(.ant-drawer-header-title) {
+      justify-content: end;
+      :global(.ant-drawer-title) {
+        color: $dark-10;
+        @include h3-semibold-mixin();
+      }
+
+      :global(.ant-drawer-close) {
+        margin: 0;
+        padding: 0;
+        color: $dark-10;
+        display: flex;
+        order: 2;
+      }
+    }
+  }
+
+  .footer {
+    padding: 0;
+  }
+}
+
+.root.top_gap {
+  .modal,
+  :global(.ant-drawer-content-wrapper) {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+}

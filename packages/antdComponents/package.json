@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/antd-components",
-  "version": "0.0.1-beta.0.0.6",
+  "version": "0.0.1-applayout.0.0.8",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -14,29 +14,42 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@oort-digital/lazy-loader": "^0.0.1-alfa.0.0.5",
+    "@oort-digital/logger": "^0.0.1-alfa.0.0.2",
+    "@oort-digital/oort-api-client": "^0.0.1-alfa.0.1.7",
+    "@oort-digital/utils": "^0.0.1-alfa.0.0.6",
+    "@oort-digital/web3-connectors": "^0.0.1-alfa.0.1.3",
     "antd": "^5.10.0",
+    "blockies-ts": "^1.0.0",
     "classnames": "^2.3.2",
+    "ethers": "5.7.2",
+    "mobx": "^6.10.2",
+    "mobx-react-lite": "^4.0.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "typescript-cookie": "^1.0.6"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "7.4.6",
-    "@storybook/addon-interactions": "7.4.6",
-    "@storybook/addon-links": "7.4.6",
+    "@storybook/addon-essentials": "7.5.2",
+    "@storybook/addon-interactions": "7.5.2",
+    "@storybook/addon-links": "7.5.2",
     "@storybook/addon-onboarding": "1.0.8",
-    "@storybook/blocks": "7.4.6",
-    "@storybook/react": "7.4.6",
-    "@storybook/react-vite": "7.4.6",
+    "@storybook/blocks": "7.5.2",
+    "@storybook/react": "7.5.2",
+    "@storybook/react-vite": "7.5.2",
     "@storybook/testing-library": "0.2.2",
     "@types/node": "18.7.14",
     "@types/react": "^18.2.28",
     "@types/react-dom": "^18.2.13",
     "@vitejs/plugin-react": "^4.1.0",
+    "axios": "^1.6.0",
+    "react-router-dom": "^6.18.0",
     "sass": "^1.69.2",
-    "storybook": "7.4.6",
+    "storybook": "7.5.2",
     "typescript": "^5",
     "vite": "^4.4.11",
-    "vite-plugin-dts": "^3.6.0"
+    "vite-plugin-dts": "^3.6.0",
+    "vite-plugin-static-copy": "^0.17.0"
   },
   "license": "UNLICENSED",
   "files": [

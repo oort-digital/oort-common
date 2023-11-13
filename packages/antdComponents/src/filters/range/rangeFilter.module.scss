@@ -1,0 +1,17 @@
+@import "../../styles/typography.scss";
+@import "../../styles/palette.scss";
+
+.range_trigger_btn {
+  .sub_title {
+    .label {
+      color: $dark-10;
+      @include body-14-regular-mixin;
+    }
+
+    .value {
+      margin: 0 5px;
+      color: $dark-10;
+      @include body-14-bold-mixin();
+    }
+  }
+}

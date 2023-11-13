@@ -1,0 +1,35 @@
+@import "../../styles/typography.scss";
+@import "../../styles/palette.scss";
+
+.collection_trigger_btn {
+  :global(.sub-title) {
+    @include body-14-regular-mixin();
+    // color: @btn-default-color;
+    :global(.tag) {
+      background-color: $neutral-5;
+      @include footnote-12-description-mixin();
+      border-radius: 64px;
+      padding: 1px 5px;
+    }
+  }
+}
+
+.collection_popover_content {
+  // max-width: 378px;
+  // width: 378px;
+
+  // .apply {
+  // 	width: 252px;
+  // }
+
+  .title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    /* identical to box height, or 125% */
+    letter-spacing: -0.0045em;
+    color: $dark-9;
+    margin-bottom: 25px;
+  }
+}

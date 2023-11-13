@@ -1,6 +1,12 @@
 import { ConfigProvider, ThemeConfig } from "antd";
 import { ReactNode } from "react";
-import { dark4, dark9, primary6 } from "./styles/palette";
+import { Palette } from "./styles";
+import { InputNumberDesignToken } from "./inputNumber";
+import { PopoverDesignToken } from "./popover";
+import { InputDesignToken } from "./input";
+import { CheckboxDesignToken } from "./checkbox";
+import { RadioDesignToken } from "./radio";
+const { dark13, dark2, dark3, dark4, dark5, dark9, primary6 } = Palette;
 
 const OortAntdThemeConfig: ThemeConfig = {
   token: {
@@ -9,11 +15,51 @@ const OortAntdThemeConfig: ThemeConfig = {
   },
 
   components: {
+    Radio: RadioDesignToken,
+    Checkbox: CheckboxDesignToken,
+    InputNumber: InputNumberDesignToken,
+    Input: InputDesignToken,
+    Popover: PopoverDesignToken,
+
+    Modal: {
+      contentBg: dark3,
+      headerBg: dark3,
+      footerBg: dark2,
+      titleColor: dark13,
+      paddingContentHorizontalLG: 0,
+      // paddingLG: 0,
+      padding: 0,
+      // borderRadius: 8,
+      // borderRadiusOuter: 8,
+    },
+
     Pagination: {
       colorText: dark9,
-      colorBorder: "red",
-      colorBorderSecondary: "red",
+      // colorBorder: "red",
+      // colorBorderSecondary: "red",
       colorBgContainer: dark4,
+    },
+
+    Button: {
+      // Text color of primary button
+      primaryColor: dark3,
+      defaultColor: dark9,
+      defaultBg: dark4,
+      defaultBorderColor: dark5,
+
+      colorBgContainerDisabled: dark3,
+      colorTextDisabled: "rgba(242, 243, 245, 0.25);",
+      borderColorDisabled: dark5,
+
+      fontWeight: 500,
+      fontSizeLG: 16,
+      fontSize: 14,
+
+      borderRadius: 4,
+      borderRadiusLG: 4,
+
+      controlHeightLG: 52,
+      controlHeight: 40,
     },
   },
 };

@@ -1,0 +1,9 @@
+/* reset default browser styles */
+
+iframe {
+    border: none;
+}
+
+a {
+    text-decoration: none;
+}
