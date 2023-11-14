@@ -2,9 +2,9 @@
 
 import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Layout } from "../src";
-import { Web3StoreStub } from "../src/stories/web3StoreStub";
-import { navItems } from "../src/stories/common";
+import { Layout } from "..";
+import { Web3StoreStub } from "../stories/web3StoreStub";
+import { navItems } from "../stories/common";
 import { ReactNode } from "react";
 import React from "react";
 import { ConnectorNames } from "@oort-digital/web3-connectors";

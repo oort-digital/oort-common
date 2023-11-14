@@ -1,16 +1,7 @@
 {
   "extends": "../../tsconfig.json",
-  "exclude": [
-    "**/*.stories.tsx",
-    "node_modules"
-  ],
-  "include": [
-    "src/**/*",
-    "typings.d.ts",
-    "pages",
-    "demoComponents",
-    ".next/types/**/*.ts"
-  ],
+  "exclude": ["**/*.stories.tsx", "node_modules"],
+  "include": ["src/**/*", "typings.d.ts", ".next/types/**/*.ts"],
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "./dist",
