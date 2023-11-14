@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-applayout.0.0.1",
+  "version": "0.0.1-applayout.0.0.2",
   "type": "module",
   "repository": {
     "type": "git",
@@ -21,7 +21,8 @@
     "@walletconnect/ethereum-provider": "^2.10.4",
     "@walletconnect/modal": "^2.6.2",
     "ethers": "5.7.2",
-    "mobx": "^6.9.0"
+    "mobx": "^6.9.0",
+    "pino-pretty": "^10.2.3"
   },
   "devDependencies": {
     "@oort-digital/utils": "^0.0.1-alfa.0.0.2",
