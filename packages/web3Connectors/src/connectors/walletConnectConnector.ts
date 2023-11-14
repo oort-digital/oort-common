@@ -144,7 +144,7 @@ export class WalletConnectConnector
       qrModalOptions: {
         themeMode: "dark",
         themeVariables: {
-          "--wcm-z-index": modalZIndex?.toString(),
+          "--w3m-z-index": modalZIndex?.toString(),
         },
       },
       events: ["chainChanged", "accountsChanged"],
