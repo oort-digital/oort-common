@@ -1,54 +1,72 @@
 import { ConsoleLogger } from "@oort-digital/logger";
-import { InjectedConnectorForTest, TestRawProvider, TestSigner } from "../testStubs";
+import {
+  InjectedConnectorForTest,
+  TestRawProvider,
+  TestSigner,
+} from "../testStubs";
 import { ConnectorProvider } from "./connectorProvider";
 import { ConnectorNames } from "./connectorNames";
-import { IChainInfo } from "../internalTypesAndInterfaces";
+import { IChainInfo } from "../publicTypesAndInterfaces";
 
-const logger = new ConsoleLogger()
+const logger = new ConsoleLogger();
 
 const chainInfo: IChainInfo = {
-  name: 'mumbai',
+  name: "mumbai",
   chainId: 80001,
-  rpcUrl: 'https://rpc-mumbai.maticvigil.com',
-  blockExplorer: 'https://mumbai.polygonscan.com'
-}
+  rpcUrl: "https://rpc-mumbai.maticvigil.com",
+  blockExplorer: "https://mumbai.polygonscan.com",
+};
 
-test('connectorProvider init', async () => {
-  
-  const requestCallback = () => Promise.resolve()
+test("connectorProvider init", async () => {
+  const requestCallback = () => Promise.resolve();
 
-  const chainId = 1
-  const signer = new TestSigner(chainId)
-  const rawProvider = new TestRawProvider(requestCallback)
-  const connector = new InjectedConnectorForTest({rawProvider, signer, logger, chains: [chainInfo]})
+  const chainId = 1;
+  const signer = new TestSigner(chainId);
+  const rawProvider = new TestRawProvider(requestCallback);
+  const connector = new InjectedConnectorForTest({
+    rawProvider,
+    signer,
+    logger,
+    chains: [chainInfo],
+  });
 
-  const connectorProvider = new ConnectorProvider(logger, [connector])
-  await connectorProvider.waitInitialisation
+  const connectorProvider = new ConnectorProvider(logger, [connector]);
+  await connectorProvider.waitInitialisation;
 
-  expect(connectorProvider.connectorsByName[ConnectorNames.Injected]).toBeDefined()
-  expect(connectorProvider.curConnector).toBeUndefined()
-  expect(connectorProvider.canSwitchChain).toBeFalsy()
+  expect(
+    connectorProvider.connectorsByName[ConnectorNames.Injected]
+  ).toBeDefined();
+  expect(connectorProvider.curConnector).toBeUndefined();
+  expect(connectorProvider.canSwitchChain).toBeFalsy();
 });
 
-test('connectorProvider read cur provider from localStorage', async () => {
-  
-  const requestCallback = () => Promise.resolve()
+test("connectorProvider read cur provider from localStorage", async () => {
+  const requestCallback = () => Promise.resolve();
 
-  const lsKey = 'cur_connector'
-  const chainId = 1
-  const signer = new TestSigner(chainId)
-  const rawProvider = new TestRawProvider(requestCallback)
-  const connector = new InjectedConnectorForTest({rawProvider, signer, logger, chains: [chainInfo]})
+  const lsKey = "cur_connector";
+  const chainId = 1;
+  const signer = new TestSigner(chainId);
+  const rawProvider = new TestRawProvider(requestCallback);
+  const connector = new InjectedConnectorForTest({
+    rawProvider,
+    signer,
+    logger,
+    chains: [chainInfo],
+  });
 
-  localStorage.setItem(lsKey, JSON.stringify({ chainId, name: ConnectorNames.Injected }))
+  localStorage.setItem(
+    lsKey,
+    JSON.stringify({ chainId, name: ConnectorNames.Injected })
+  );
 
-  const connectorProvider = new ConnectorProvider(logger, [connector])
-  await connectorProvider.waitInitialisation
+  const connectorProvider = new ConnectorProvider(logger, [connector]);
+  await connectorProvider.waitInitialisation;
 
-  expect(connectorProvider.connectorsByName[ConnectorNames.Injected]).toBeDefined()
-  expect(connectorProvider.curConnector).toBeDefined()
-  expect(connectorProvider.canSwitchChain).toBeTruthy()
+  expect(
+    connectorProvider.connectorsByName[ConnectorNames.Injected]
+  ).toBeDefined();
+  expect(connectorProvider.curConnector).toBeDefined();
+  expect(connectorProvider.canSwitchChain).toBeTruthy();
 
-  localStorage.removeItem(lsKey)
+  localStorage.removeItem(lsKey);
 });
-

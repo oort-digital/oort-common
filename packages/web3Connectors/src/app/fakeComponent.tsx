@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { ConsoleLogger } from "@oort-digital/logger";
+"use client";
+
 import { observer } from "mobx-react";
-import { IFaceWalletCredentials } from "../connectors/faceWalletConnector";
-import { ChainService } from "./chainService";
-import { TestWeb3Store } from "./testWeb3Store";
+import React, { useEffect, useState } from "react";
+import { ChainService } from "../web3Store";
+import { ConnectorNames, IFaceWalletCredentials } from "../connectors";
+import { TestWeb3Store } from "../web3Store/testWeb3Store";
+import { ConsoleLogger } from "@oort-digital/logger";
 import { IChainInfo } from "../publicTypesAndInterfaces";
-import { ConnectorNames } from "../connectors";
 
 const logger = new ConsoleLogger();
 
@@ -48,7 +48,7 @@ const web3Store = new TestWeb3Store({
   chainService,
 });
 
-const FakeComponent = observer(() => {
+export const FakeComponent = observer(() => {
   const {
     isReady,
     account,
@@ -108,19 +108,3 @@ const FakeComponent = observer(() => {
     </div>
   );
 });
-
-export default {
-  title: "web3Connectors/web3Store",
-  component: FakeComponent,
-  parameters: {
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-    layout: "fullscreen",
-  },
-} as ComponentMeta<typeof FakeComponent>;
-
-const Template: ComponentStory<typeof FakeComponent> = (_args: any) => {
-  return <FakeComponent />;
-};
-
-export const Main = Template.bind({});
-Main.args = {};

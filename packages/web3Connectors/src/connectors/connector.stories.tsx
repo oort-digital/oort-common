@@ -5,8 +5,8 @@ import { InjectedConnector } from "./injectedConnector";
 import { BaseConnector } from "./baseConnector";
 import { FaceWalletConnector, IFaceWalletOptions } from "./faceWalletConnector";
 import { ConnectorNames } from "./connectorNames";
-import { IChainInfo } from "../internalTypesAndInterfaces";
 import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
+import { IChainInfo } from "../publicTypesAndInterfaces";
 
 const logger = new ConsoleLogger(LogLevel.Debug);
 const FakeComponent = () => <></>;
