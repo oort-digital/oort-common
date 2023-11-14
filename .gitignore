@@ -42,6 +42,7 @@
 /packages/web3Connectors/dist
 /packages/web3Connectors/package-lock.json
 /packages/web3Connectors/yarn.lock
+/packages/web3Connectors/.next
 
 /packages/urlSearchParams/node_modules
 /packages/urlSearchParams/dist
