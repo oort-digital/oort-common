@@ -60,8 +60,8 @@ const Impl = ({
   className,
   web3,
   supportedWallets,
-  oortTokenAddress,
-}: IProps) => {
+}: /*oortTokenAddress,*/
+IProps) => {
   const [connectModalVisible, setConnectModalVisible] = useState(false);
 
   const [balance, setBalance] = useState<string | undefined>(undefined);

@@ -1,5 +1,5 @@
 import { ConnectorNames } from "@oort-digital/web3-connectors";
-import { IWeb3 } from "../../connectModal";
+import { IWeb3 } from "@oort-digital/antd-components";
 import { INavItems, IStubs } from "../navMenu";
 
 export interface IAsideProps {

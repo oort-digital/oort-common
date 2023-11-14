@@ -3,7 +3,6 @@
   "exclude": ["**/*.stories.tsx", "node_modules"],
   "include": ["src/**/*", "typings.d.ts", ".next/types/**/*.ts"],
   "compilerOptions": {
-    "rootDir": "src",
     "outDir": "./dist",
     "emitDeclarationOnly": true,
     "jsx": "preserve",

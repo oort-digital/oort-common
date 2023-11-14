@@ -1,6 +1,5 @@
 "use client";
 
-import { ConsoleLogger, LogLevel } from "@oort-digital/logger";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Layout } from "..";
 import { Web3StoreStub } from "../stories/web3StoreStub";
@@ -18,8 +17,6 @@ const supportedWallets: ConnectorNames[] = [
   ConnectorNames.Injected,
   ConnectorNames.WalletConnect,
 ];
-
-const logger = new ConsoleLogger(LogLevel.Debug);
 
 export function SiteLayout({ children }: IProps) {
   return (
