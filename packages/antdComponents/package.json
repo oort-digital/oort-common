@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/antd-components",
-  "version": "0.0.1-applayout.0.0.8",
+  "version": "0.0.1-alfa.0.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
@@ -9,7 +9,7 @@
     "clean": "rimraf dist",
     "build:types": "tsc",
     "build": "vite build",
-    "rm": "rimraf node_modules && rimraf yarn.lock",
+    "rm": "rimraf node_modules && rimraf yarn.lock && rimraf package-lock.json",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -47,8 +47,8 @@
     "sass": "^1.69.2",
     "storybook": "7.5.2",
     "typescript": "^5",
-    "vite": "^4.4.11",
-    "vite-plugin-dts": "^3.6.0",
+    "vite": "^4.5.0",
+    "vite-plugin-dts": "^3.6.3",
     "vite-plugin-static-copy": "^0.17.0"
   },
   "license": "UNLICENSED",
