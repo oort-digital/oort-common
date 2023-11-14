@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/web3-connectors",
-  "version": "0.0.1-alfa.0.1.3",
+  "version": "0.0.1-applayout.0.0.1",
   "type": "module",
   "repository": {
     "type": "git",
@@ -18,10 +18,9 @@
     "@haechi-labs/face-sdk": "1.10.8",
     "@haechi-labs/face-types": "1.10.8",
     "@oort-digital/logger": "^0.0.1-alfa.0.0.2",
-    "@walletconnect/ethereum-provider": "^2.9.2",
-    "@walletconnect/modal": "^2.6.1",
+    "@walletconnect/ethereum-provider": "^2.10.4",
+    "@walletconnect/modal": "^2.6.2",
     "ethers": "5.7.2",
-    "lokijs": "^1.5.12",
     "mobx": "^6.9.0"
   },
   "devDependencies": {
