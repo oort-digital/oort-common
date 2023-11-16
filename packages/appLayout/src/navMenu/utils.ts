@@ -45,7 +45,8 @@ export function getChildCaptions(item: INavItemInternal): StringMap {
 }
 
 export function createIsHrefActiveFunc(
-  stubs: IStubs | undefined
+  stubs: IStubs | undefined,
+  isSsr: boolean
 ): IsHrefActiveFunc {
   if (stubs?.isHrefActive) {
     return stubs.isHrefActive;
@@ -57,8 +58,6 @@ export function createIsHrefActiveFunc(
   }
 
   return (href: string) => {
-    return typeof window === "undefined"
-      ? false
-      : isHrefActive(window.location, href);
+    return isSsr ? false : isHrefActive(window.location, href);
   };
 }

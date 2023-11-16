@@ -1,7 +1,6 @@
 "use client";
 import { Collapse } from "antd";
 import { useRef } from "react";
-import { useLocation } from "react-router-dom";
 import {
   DashboardIcon,
   DevelopToolsIcon,
@@ -21,6 +20,7 @@ import {
   NavItemType,
 } from "./typesAndInterfaces";
 import classNames from "classnames";
+import { useEffect, useState } from "react";
 
 const { Panel } = Collapse;
 
@@ -95,6 +95,8 @@ export const NavMenu = ({ className, navItems, _stubs, baseName }: IProps) => {
   // to trigger rerendering on react-router pathchange
   // useLocation();
 
+  const [isSsr, setIsSsr] = useState(true);
+
   const {
     dashboard,
     rent,
@@ -115,7 +117,7 @@ export const NavMenu = ({ className, navItems, _stubs, baseName }: IProps) => {
     collapseNavItemPairs.push([developInternal, developTools]);
   }
 
-  const isActive = createIsHrefActiveFunc(_stubs);
+  const isActive = createIsHrefActiveFunc(_stubs, isSsr);
 
   const hasActiveHref = (hrefs: string[]): boolean => hrefs.some(isActive);
 
@@ -133,7 +135,15 @@ export const NavMenu = ({ className, navItems, _stubs, baseName }: IProps) => {
     return undefined;
   };
 
-  const defaultActiveKey = useRef(getCollapseActiveKey());
+  const defaultActiveKey = useRef<string>();
+
+  if (!isSsr && defaultActiveKey.current === undefined) {
+    defaultActiveKey.current = getCollapseActiveKey();
+  }
+
+  useEffect(() => {
+    setIsSsr(typeof window === "undefined");
+  }, []);
 
   const renderItem = (it: NavItemType, { caption, icon }: INavItemInternal) => {
     let href;
