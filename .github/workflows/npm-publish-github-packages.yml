@@ -12,6 +12,7 @@ on:
         options:
           - antdComponents
           - appLayout
+          - detectDevice
           - lazyLoader
           - lazyLoaderNextJs
           - logger
