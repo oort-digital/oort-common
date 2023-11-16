@@ -1,4 +1,3 @@
-import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
@@ -8,7 +7,6 @@ const external = Object.keys(dependencies);
 
 export default defineConfig({
   plugins: [
-    react(),
     dts({
       insertTypesEntry: true,
     }),
@@ -23,10 +21,6 @@ export default defineConfig({
     rollupOptions: {
       external,
       output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-        },
         sourcemap: true,
       },
     },
