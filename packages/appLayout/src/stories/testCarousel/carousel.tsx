@@ -1,3 +1,4 @@
+"use client";
 import { ReactNode, useRef } from "react";
 import { Carousel as AntCarousel } from "antd";
 import { PrevArrowIcon } from "./prevArrow";
