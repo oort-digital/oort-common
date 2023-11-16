@@ -11,6 +11,12 @@
 /packages/appLayout/dist
 /packages/appLayout/.next
 
+/packages/detectDevice/node_modules
+/packages/detectDevice/yarn.lock
+/packages/detectDevice/package-lock.json
+/packages/detectDevice/dist
+/packages/detectDevice/.next
+
 /packages/lazyLoader/node_modules
 /packages/lazyLoader/yarn.lock
 /packages/lazyLoader/package-lock.json

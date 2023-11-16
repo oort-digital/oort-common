@@ -1,0 +1,35 @@
+{
+  "name": "@oort-digital/detect-device",
+  "version": "0.0.1-applayout.0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oort-digital/oort-common.git"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "clean": "rimraf dist",
+    "build:types": "tsc",
+    "build": "vite build",
+    "next_build": "next build",
+    "rm": "rimraf package-lock.json && rimraf yarn.lock && rimraf node_modules",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@oort-digital/logger": "0.0.1-alfa.0.0.2",
+    "next": "^14.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "18.7.14",
+    "typescript": "^5",
+    "vite": "^4.5.0",
+    "vite-plugin-dts": "^3.6.2"
+  },
+  "license": "UNLICENSED",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts"
+}

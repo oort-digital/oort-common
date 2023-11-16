@@ -1,0 +1,9 @@
+.home {
+  margin-top: 92px;
+  width: 100%;
+  color: red;
+  justify-content: center;
+
+  display: flex;
+  flex-flow: row wrap;
+}
