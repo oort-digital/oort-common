@@ -1,6 +1,3 @@
-"use client";
-
-import { BrowserRouter as Router } from "react-router-dom";
 import { Layout } from "..";
 import { Web3StoreStub } from "../stories/web3StoreStub";
 import { navItems } from "../stories/common";
@@ -20,15 +17,13 @@ const supportedWallets: ConnectorNames[] = [
 
 export function SiteLayout({ children }: IProps) {
   return (
-    <Router>
-      <Layout
-        navItems={navItems}
-        web3={web3}
-        oortTokenAddress={"0xD8341A4978a68Ed0ad558D745af5578e51102725"}
-        supportedWallets={supportedWallets}
-      >
-        {children}
-      </Layout>
-    </Router>
+    <Layout
+      navItems={navItems}
+      web3={web3}
+      oortTokenAddress={"0xD8341A4978a68Ed0ad558D745af5578e51102725"}
+      supportedWallets={supportedWallets}
+    >
+      {children}
+    </Layout>
   );
 }

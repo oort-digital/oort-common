@@ -1,5 +1,6 @@
+"use client";
 import "./styles.scss";
-import { DeviceType, useDeviceType } from "@oort-digital/lazy-loader";
+import { DeviceType, useDeviceType } from "@oort-digital/lazy-loader-next-js";
 import { lazy, Suspense } from "react";
 import { ILayoutProps } from "./typesAndInterfaces";
 
