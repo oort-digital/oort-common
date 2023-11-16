@@ -56,5 +56,9 @@ export function createIsHrefActiveFunc(
     return (href: string) => isHrefActive(location, href);
   }
 
-  return (href: string) => isHrefActive(window.location, href);
+  return (href: string) => {
+    return typeof window === "undefined"
+      ? false
+      : isHrefActive(window.location, href);
+  };
 }
