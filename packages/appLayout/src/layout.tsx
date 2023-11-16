@@ -1,14 +1,16 @@
 "use client";
 import "./styles.scss";
-import { DeviceType, useDeviceType } from "@oort-digital/lazy-loader-next-js";
-import { lazy, Suspense } from "react";
-import { ILayoutProps } from "./typesAndInterfaces";
+import { DeviceType } from "@oort-digital/lazy-loader-next-js";
 
-const Desktop = lazy(() => import("./layoutDesktop"));
-const Mobile = lazy(() => import("./layoutMobile"));
+import { ILayoutProps } from "./typesAndInterfaces";
+import dynamic from "next/dynamic";
+
+const Desktop = dynamic(() => import("./layoutDesktop"));
+const Mobile = dynamic(() => import("./layoutMobile"));
 
 export const Layout = (props: ILayoutProps) => {
-  const deviceType = useDeviceType();
+  // todo: use detect device by cookies
+  const deviceType = DeviceType.Desktop;
 
   const renderDevice = () => {
     if (deviceType === DeviceType.Desktop) {
@@ -19,5 +21,5 @@ export const Layout = (props: ILayoutProps) => {
     }
     return <Mobile {...props} />;
   };
-  return <Suspense fallback={<span />}> {renderDevice()} </Suspense>;
+  return <>{renderDevice()}</>;
 };
