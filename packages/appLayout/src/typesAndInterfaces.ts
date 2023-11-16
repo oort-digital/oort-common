@@ -2,6 +2,7 @@ import { ConnectorNames } from "@oort-digital/web3-connectors";
 import { ReactNode } from "react";
 import { IWeb3 } from "@oort-digital/antd-components";
 import { INavItems, IStubs } from "./navMenu";
+import { DeviceType } from "@oort-digital/detect-device";
 
 export interface ILayoutProps {
   children: ReactNode;
@@ -14,4 +15,5 @@ export interface ILayoutProps {
   _stubs?: IStubs;
   useTopGradient?: boolean;
   baseName?: string;
+  deviceType: DeviceType;
 }
