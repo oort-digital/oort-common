@@ -93,7 +93,7 @@ type NavItemPairType = [INavItemInternal, NavItemMap];
 
 export const NavMenu = ({ className, navItems, _stubs, baseName }: IProps) => {
   // to trigger rerendering on react-router pathchange
-  useLocation();
+  // useLocation();
 
   const {
     dashboard,
