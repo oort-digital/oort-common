@@ -12,7 +12,6 @@ export default function RootLayout({
       <body>
         <SiteLayout>
           <main>{children}</main>
-          {/* <>hello</> */}
         </SiteLayout>
       </body>
     </html>

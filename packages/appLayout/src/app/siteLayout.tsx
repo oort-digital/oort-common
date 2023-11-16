@@ -1,3 +1,4 @@
+"use client";
 import { Layout } from "..";
 import { Web3StoreStub } from "../stories/web3StoreStub";
 import { navItems } from "../stories/common";
