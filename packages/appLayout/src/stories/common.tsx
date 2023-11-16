@@ -20,11 +20,11 @@ export const navItems: INavItems = {
   },
   gameHub: {
     games: {
-      href: "http://game-hub.oort.local/games",
+      href: "http://localhost/games",
       reactRouterLink: true,
     },
     nfts: {
-      href: "http://game-hub.oort.local/nfts",
+      href: "http://localhost/nfts",
       reactRouterLink: true,
     },
   },
