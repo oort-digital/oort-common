@@ -1,2 +1,2 @@
-import Home from "./home";
-export default Home;
+import Games from "./games/page";
+export default Games;
