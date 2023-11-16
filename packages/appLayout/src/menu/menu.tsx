@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import styles from "./menu.module.scss";
-import { Link } from "react-router-dom";
 import { removeBaseName } from "./utils";
+import Link from "next/link";
 
 interface IMenuItemBtnProps {
   className?: string;
@@ -66,7 +66,7 @@ export const MenuItemLink = ({
   if (reactRouterLink) {
     return (
       <li className={className}>
-        <Link to={removeBaseName(baseName, href)}>{captionElement}</Link>
+        <Link href={removeBaseName(baseName, href)}>{captionElement}</Link>
       </li>
     );
   }
