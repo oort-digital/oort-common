@@ -21,7 +21,7 @@
     "@oort-digital/lazy-loader-next-js": "0.0.1-alfa.0.0.5",
     "@oort-digital/logger": "0.0.1-alfa.0.0.2",
     "@oort-digital/utils": "0.0.1-alfa.0.0.6",
-    "@oort-digital/web3-connectors": "0.0.1-applayout.0.0.1",
+    "@oort-digital/web3-connectors": "0.0.1-applayout.0.0.2",
     "antd": "^5.11.1",
     "classnames": "^2.3.2",
     "mobx-react-lite": "^4.0.5",
