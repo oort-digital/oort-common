@@ -1,6 +1,5 @@
 import React from "react";
 import "./reset.css";
-import { SiteLayout } from "./siteLayout";
 
 export default function RootLayout({
   children,
@@ -10,9 +9,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SiteLayout>
-          <main>{children}</main>
-        </SiteLayout>
+        <main>{children}</main>
       </body>
     </html>
   );

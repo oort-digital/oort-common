@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@types/node": "18.7.14",
+    "@types/react": "18.2.37",
     "typescript": "^5",
     "vite": "^4.5.0",
     "vite-plugin-dts": "^3.6.2"
