@@ -1,6 +1,5 @@
 "use client";
 import { Collapse } from "antd";
-import { useRef } from "react";
 import {
   DashboardIcon,
   DevelopToolsIcon,
@@ -135,15 +134,23 @@ export const NavMenu = ({ className, navItems, _stubs, baseName }: IProps) => {
     return undefined;
   };
 
-  const defaultActiveKey = useRef<string>();
-
-  if (!isSsr && defaultActiveKey.current === undefined) {
-    defaultActiveKey.current = getCollapseActiveKey();
+  const [activeCollapseKey, setActiveCollapseKey] = useState(
+    getCollapseActiveKey()
+  );
+  function onCollapse(key: string | string[]) {
+    setActiveCollapseKey(key as string);
   }
 
   useEffect(() => {
-    setIsSsr(typeof window === "undefined");
+    const _isSsr = typeof window === "undefined";
+    setIsSsr(_isSsr);
   }, []);
+
+  useEffect(() => {
+    if (!isSsr) {
+      setActiveCollapseKey(getCollapseActiveKey());
+    }
+  }, [isSsr]);
 
   const renderItem = (it: NavItemType, { caption, icon }: INavItemInternal) => {
     let href;
@@ -183,7 +190,7 @@ export const NavMenu = ({ className, navItems, _stubs, baseName }: IProps) => {
   const renderCollapse = ([rootItem, navItemMap]: NavItemPairType) => {
     const key = rootItem.caption;
 
-    const isPanelActive = key === defaultActiveKey.current;
+    const isPanelActive = key === activeCollapseKey;
     let panelClass = styles.collapse_panel;
 
     if (isPanelActive) {
@@ -214,8 +221,9 @@ export const NavMenu = ({ className, navItems, _stubs, baseName }: IProps) => {
       {renderItem(dashboard, dashboardInternal)}
       <Collapse
         accordion
-        defaultActiveKey={defaultActiveKey.current}
+        activeKey={activeCollapseKey}
         ghost
+        onChange={onCollapse}
         expandIconPosition="end"
       >
         {collapseNavItemPairs.map(renderCollapse)}
