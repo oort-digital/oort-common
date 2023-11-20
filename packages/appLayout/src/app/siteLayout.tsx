@@ -25,6 +25,7 @@ const supportedWallets: ConnectorNames[] = [
 export function SiteLayout({ children, deviceType }: IProps) {
   return (
     <Layout
+      id="site-layout"
       deviceType={deviceType}
       navItems={navItems}
       web3={web3}

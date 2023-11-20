@@ -5,6 +5,7 @@ import { INavItems, IStubs } from "./navMenu";
 import { DeviceType } from "@oort-digital/detect-device";
 
 export interface ILayoutProps {
+  id?: string;
   children: ReactNode;
   navItems: INavItems;
   supportedWallets: ConnectorNames[];

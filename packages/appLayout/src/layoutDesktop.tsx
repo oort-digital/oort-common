@@ -8,7 +8,7 @@ const LayoutDesktop = (props: ILayoutProps) => {
     props.useTopGradient === undefined ? true : props.useTopGradient;
 
   return (
-    <div className={styles.root}>
+    <div id={props.id} className={classNames(styles.root, props.className)}>
       <AsideDesktop {...props} />
       <div
         className={classNames(styles.content, {
