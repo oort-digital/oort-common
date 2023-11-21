@@ -4,10 +4,10 @@ import { ILayoutProps } from "./typesAndInterfaces";
 import dynamic from "next/dynamic";
 
 const Desktop = dynamic(() => import("./layoutDesktop"), {
-  loading: () => <>loading...</>,
+  ssr: true,
 });
 const Mobile = dynamic(() => import("./layoutMobile"), {
-  loading: () => <>loading...</>,
+  ssr: true,
 });
 
 export const Layout = (props: ILayoutProps) => {
@@ -20,5 +20,5 @@ export const Layout = (props: ILayoutProps) => {
     }
     return <Mobile {...props} />;
   };
-  return <>{renderDevice()}</>;
+  return renderDevice();
 };
