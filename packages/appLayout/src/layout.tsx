@@ -1,4 +1,3 @@
-"use client";
 import "./styles.scss";
 
 import { ILayoutProps } from "./typesAndInterfaces";
