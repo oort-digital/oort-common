@@ -1,14 +1,9 @@
 import "./styles.scss";
 
 import { ILayoutProps } from "./typesAndInterfaces";
-import dynamic from "next/dynamic";
 
-const Desktop = dynamic(() => import("./layoutDesktop"), {
-  ssr: true,
-});
-const Mobile = dynamic(() => import("./layoutMobile"), {
-  ssr: true,
-});
+import Desktop from "./layoutDesktop";
+import Mobile from "./layoutMobile";
 
 export const Layout = (props: ILayoutProps) => {
   const renderDevice = () => {
