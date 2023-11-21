@@ -1,6 +1,6 @@
 {
   "name": "@oort-digital/app-layout",
-  "version": "0.0.1-applayout.0.0.6",
+  "version": "0.0.1-applayout.0.0.7",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oort-digital/oort-common.git"
