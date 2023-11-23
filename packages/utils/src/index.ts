@@ -7,3 +7,4 @@ export * from "./error";
 export * from "./string";
 export * from "./vars";
 export * from "./parseLongValue";
+export * from "./isSsr";
