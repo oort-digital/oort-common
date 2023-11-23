@@ -16,7 +16,14 @@ interface IProps {
   deviceType: DeviceType;
 }
 
-const web3 = new Web3StoreStub();
+function isSsr() {
+  return typeof window === "undefined";
+}
+
+// no reason create web3Store on server side
+const web3 = isSsr() ? undefined : new Web3StoreStub();
+// const web3 = new Web3StoreStub();
+
 const supportedWallets: ConnectorNames[] = [
   ConnectorNames.Injected,
   ConnectorNames.WalletConnect,
