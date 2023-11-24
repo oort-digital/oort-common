@@ -1,14 +1,13 @@
-import { lazy } from "react";
+import dynamic from "next/dynamic";
 import {
   ConnectorNames,
   IConnector,
   IChain,
 } from "@oort-digital/web3-connectors";
-import { LazyLoader } from "@oort-digital/lazy-loader";
 import { Signer } from "ethers";
 
-const Desktop = lazy(() => import("./connectModalDesktop"));
-const Mobile = lazy(() => import("./connectModalMobile"));
+const Desktop = dynamic(() => import("./connectModalDesktop"));
+const Mobile = dynamic(() => import("./connectModalMobile"));
 
 export interface IWeb3 {
   canSwitchChain: boolean;
@@ -27,6 +26,7 @@ export interface IConnectModalProps {
   supportedWallets: ConnectorNames[];
   expectedChainId?: number;
   visible: boolean;
+  deviceType: "mobile" | "desktop";
   /**
    * @deprecated Use onClose, afterConnect, afterChainSwitch
    */
@@ -39,8 +39,9 @@ export interface IConnectModalProps {
 }
 
 export const ConnectModal = (props: IConnectModalProps) => {
-  const desktop = <Desktop {...props} />;
-  const mobile = <Mobile {...props} />;
+  if (props.deviceType === "desktop") {
+    return <Desktop {...props} />;
+  }
 
-  return <LazyLoader desktop={desktop} tablet={desktop} mobile={mobile} />;
+  return <Mobile {...props} />;
 };
