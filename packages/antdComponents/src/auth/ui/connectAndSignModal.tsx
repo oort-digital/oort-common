@@ -5,6 +5,7 @@ import { useState } from "react";
 import { IAuthStore } from "../store";
 import { ILogger } from "@oort-digital/logger";
 import { observer } from "mobx-react-lite";
+import { DeviceType } from "../../typesAndInterfaces";
 
 export interface IConnectAndSignProps {
   className?: string;
@@ -15,19 +16,19 @@ export interface IConnectAndSignProps {
   onClose: () => void;
   authStore: IAuthStore;
   logger: ILogger;
+  deviceType: DeviceType;
 }
 
-function Impl(props: IConnectAndSignProps) {
-  const {
-    supportedWallets,
-    expectedChainId,
-    web3Store,
-    visible,
-    onClose,
-    authStore,
-    logger,
-  } = props;
-
+function Impl({
+  supportedWallets,
+  expectedChainId,
+  web3Store,
+  visible,
+  onClose,
+  authStore,
+  logger,
+  deviceType,
+}: IConnectAndSignProps) {
   const [authInProcess, setAuthInProcess] = useState(false);
 
   const { isConnectedToSupportedChain } = web3Store;
@@ -57,6 +58,7 @@ function Impl(props: IConnectAndSignProps) {
         web3={web3Store}
         visible={visible && !isConnectedToSupportedChain}
         onClose={onClose}
+        deviceType={deviceType}
       />
       <SignModal
         loading={authInProcess}

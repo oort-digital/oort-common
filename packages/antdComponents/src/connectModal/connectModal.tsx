@@ -5,6 +5,7 @@ import {
   IChain,
 } from "@oort-digital/web3-connectors";
 import { Signer } from "ethers";
+import { DeviceType } from "../typesAndInterfaces";
 
 const Desktop = dynamic(() => import("./connectModalDesktop"));
 const Mobile = dynamic(() => import("./connectModalMobile"));
@@ -26,7 +27,7 @@ export interface IConnectModalProps {
   supportedWallets: ConnectorNames[];
   expectedChainId?: number;
   visible: boolean;
-  deviceType: "mobile" | "desktop";
+  deviceType: DeviceType;
   /**
    * @deprecated Use onClose, afterConnect, afterChainSwitch
    */
